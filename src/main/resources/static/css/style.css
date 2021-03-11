@@ -1,0 +1,58 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	background-color: #fefbd8;
+}
+
+h1 {
+	text-align: center;
+}
+
+p {
+	font-size: 18pt;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+}
+
+div {
+  padding-top: 30px;
+  padding-right: 150px;
+  padding-left: 150px;
+  text-align:center
+}
+
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-size:18pt;
+}
+
+label{
+	font-size:18pt;
+}
+
+input{
+	width:300px;
+	height:30px;
+}
+
+input[type="submit"]{
+	width:150px;
+}
+
+.column {
+  width: 25%;
+  padding: 90px;
+  display: inline-block;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
