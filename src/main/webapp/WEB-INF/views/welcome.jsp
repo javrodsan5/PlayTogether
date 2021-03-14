@@ -64,35 +64,74 @@ tipos de usuarios, el básico y el premium, donde el premium adquiere un gran n�
 y que está subdividido en dos equipos diferentes: Un subequipo formado por 6 personas especializado en el desarrollo BackEnd y el Testing y que tiene a 
 Carlos Santos Tirado como Team Manager, y un subequipo formado por 6 personas especializado en el FrontEnd y el Testing, con Manuel Bueno Gómez como Team Manager.
 </div>
+<h1>Equipo BackEnd</h1>
 <div class="row">
   <div class="column">
-    <img src="/images/logo.png" alt="Snow" style="width:100%">
-    <p>ey</p>
+    <img src="/images/javiCircle.png" alt="Javier" style="width:100%">
+    <p>Javier Rodríguez Santiago</p>
+    <p>Project Manager</p>
   </div>
   <div class="column">
-    <img src="/images/logo.png" alt="Forest" style="width:100%">
-    <p>ey</p>
+    <img src="/images/carlosCircle.png" alt="Carlos" style="width:100%">
+    <p>Carlos Santos Tirado</p>
+    <p>Team Manager</p>
   </div>
   <div class="column">
-    <img src="/images/logo.png" alt="Mountains" style="width:100%">
-    <p>ey</p>
+    <img src="/images/guerreroCircle.png" alt="Gonzalo" style="width:100%">
+    <p>Gonzalo Guerrero Luna</p>
+    <p>Analista</p>
+  </div>
+   <div class="column">
+    <img src="/images/carolinaCircle.png" alt="Carolina" style="width:100%">
+    <p>Carolina Carrasco Díaz</p>
+    <p>Analista</p>
+  </div>
+    <div class="column">
+    <img src="/images/andresCircle.png" alt="Andrés" style="width:100%">
+    <p>Andrés Fernández Rodríguez</p>
+    <p>Programador</p>
+  </div>
+   <div class="column">
+    <img src="/images/marioCircle.png" alt="Mario" style="width:100%">
+    <p>Mario David Jiménez Hartman</p>
+    <p>Programador</p>
   </div>
 </div>
+<h1>Equipo FrontEnd</h1>
 <div class="row">
   <div class="column">
-    <img src="/images/logo.png" alt="Snow" style="width:100%">
-    <p>ey</p>
+    <img src="/images/manuelCircle.png" alt="Manuel" style="width:100%">
+    <p>Manuel Bueno Gómez</p>
+    <p>Team Manager</p>
   </div>
   <div class="column">
-    <img src="/images/logo.png" alt="Forest" style="width:100%">
-    <p>ey</p>
+    <img src="/images/alejandroCircle.png" alt="Alejandro" style="width:100%">
+    <p>Alejandro Manzano Dorado</p>
+    <p>Analista</p>
   </div>
   <div class="column">
-    <img src="/images/logo.png" alt="Mountains" style="width:100%">
-    <p>ey</p>
+    <img src="/images/cuberoCircle.png" alt="Pablo" style="width:100%">
+    <p>Pablo Cubero Cruz</p>
+    <p>Analista</p>
+  </div>
+  <div class="column">
+    <img src="/images/conchiCircle.png" alt="Concepción" style="width:100%">
+    <p>Concepción Márquez Redondo</p>
+    <p>Programadora</p>
+  </div>
+  <div class="column">
+    <img src="/images/logo.png" alt="Fernando" style="width:100%">
+    <p>Fernando Calvo Durán</p>
+    <p>Programador</p>
+  </div>
+  <div class="column">
+    <img src="/images/pabloCircle.png" alt="PabloG" style="width:100%">
+    <p>Pablo García Cerrejón</p>
+    <p>Programador</p>
   </div>
 </div>
 <h1>¿Te interesa la aplicación? Introduce aquí tu correo</h1>
+<div class="correo">
 <form action="/addUser" method="POST">
 <div>
   <label for="correo">Correo:</label><br><br>
@@ -103,12 +142,17 @@ Carlos Santos Tirado como Team Manager, y un subequipo formado por 6 personas es
 <div>
 ${exit}
 </div>
-<h1>Usuarios registrados</h1>
-<c:forEach items="${usr}" var="item">
-	<div>
-    <c:out value="${item.correo}"/><br>
-    </div>
-</c:forEach>
+<!-- <h1>Usuarios registrados</h1> -->
+<%-- <c:forEach items="${usr}" var="item"> --%>
+<!-- 	<div> -->
+<%--     <c:out value="${item.correo}"/><br> --%>
+<!--     </div> -->
+<%-- </c:forEach> --%>
 <br><br><br>
+</div>
+<div>
 </body>
+<footer>
+  <p>Playtogether</p><br>
+</footer>
 </html>

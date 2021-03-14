@@ -9,7 +9,7 @@ h1 {
 }
 
 p {
-	font-size: 18pt;
+	font-size: 20pt;
 }
 img {
   display: block;
@@ -18,11 +18,22 @@ img {
   width: 15%;
 }
 
-div {
+ div {
+  padding-top: 30px;
+  padding-right: 300px;
+  padding-left: 300px;
+}
+
+h1{
+	padding-top: 30px;
+	font-size: 200%;
+}
+
+.correo  {
   padding-top: 30px;
   padding-right: 150px;
   padding-left: 150px;
-  text-align:center
+  text-align:center;
 }
 
 table, th, td {
@@ -46,8 +57,13 @@ input[type="submit"]{
 
 .column {
   width: 25%;
-  padding: 90px;
+  padding: 45px;
   display: inline-block;
+  text-align:center;
+}
+
+.column p{
+	font-size: 150%;
 }
 
 /* Clearfix (clear floats) */
@@ -55,4 +71,11 @@ input[type="submit"]{
   content: "";
   clear: both;
   display: table;
+}
+
+footer {
+  text-align: center;
+  padding: 3px;
+  background-color: #008080;
+  color: white;
 }
