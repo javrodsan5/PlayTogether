@@ -120,7 +120,7 @@ Carlos Santos Tirado como Team Manager, y un subequipo formado por 6 personas es
     <p>Programadora</p>
   </div>
   <div class="column">
-    <img src="/images/logo.png" alt="Fernando" style="width:100%">
+    <img src="/images/fernandoCircle.png" alt="Fernando" style="width:100%">
     <p>Fernando Calvo Durán</p>
     <p>Programador</p>
   </div>
@@ -150,7 +150,6 @@ ${exit}
 <%-- </c:forEach> --%>
 <br><br><br>
 </div>
-<div>
 </body>
 <footer>
   <p>Playtogether</p><br>

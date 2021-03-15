@@ -62,8 +62,20 @@ input[type="submit"]{
   text-align:center;
 }
 
+@media screen and (max-width: 1700px) {
+.column p{
+	font-size: 100%;
+}
+
+.column {
+	padding-left:38%;
+}
+}
+
+@media screen and (max-width: 1920px) {
 .column p{
 	font-size: 150%;
+}
 }
 
 /* Clearfix (clear floats) */
