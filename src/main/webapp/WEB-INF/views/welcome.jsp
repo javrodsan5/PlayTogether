@@ -151,7 +151,4 @@ ${exit}
 <br><br><br>
 </div>
 </body>
-<footer>
-  <p>Playtogether</p><br>
-</footer>
 </html>
