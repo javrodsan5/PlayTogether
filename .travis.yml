@@ -8,6 +8,5 @@ before_install:
   - mysql -e 'CREATE DATABASE playtogetherdb;'
 install:
   - export CODACY_PROJECT_TOKEN=$CODACY_PROJECT_TOKEN
-  - wget -qO - https://coverage.codacy.com/get.sh | sh
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script: mvn test -Dspring-boot.run.profiles=mysql-travis
