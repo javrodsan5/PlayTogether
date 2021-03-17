@@ -7,5 +7,6 @@ before_install:
   - chmod +x mvnw
   - mysql -e 'CREATE DATABASE playtogetherdb;'
 install:
+  - wget -qO - https://coverage.codacy.com/get.sh | sh
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script: mvn test -Dspring-boot.run.profiles=mysql-travis
