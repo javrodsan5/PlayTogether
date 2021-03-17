@@ -1,11 +1,20 @@
 dist: trusty
 language: java
 jdk: oraclejdk8
+cache:
+	directories:
+		- "$HOME/.m2"
+before_cache:
+	- rm -rf $HOME/.m2/repository/com/autentia/traviscodacy
 services:
   - mysql
 before_install:
   - chmod +x mvnw
   - mysql -e 'CREATE DATABASE playtogetherdb;'
+  - sudo apt-get install jq
+	- wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+after_success:
+	- java -jar ~/codacy-coverage-reporter-assembly-latest.jar report -l Java -r target/jacoco/jacoco.xml
 script: mvn test -Dspring-boot.run.profiles=mysql-travis
