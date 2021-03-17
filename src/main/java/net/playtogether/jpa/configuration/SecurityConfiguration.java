@@ -25,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/**").permitAll()
         .anyRequest().denyAll()
+		
         /*.and()
         .formLogin()
         .and()
