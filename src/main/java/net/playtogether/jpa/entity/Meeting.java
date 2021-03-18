@@ -2,6 +2,7 @@ package net.playtogether.jpa.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -45,7 +46,7 @@ public class Meeting implements Serializable {
     @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
     @Column(name = "date")
-    private LocalDate date;
+    private LocalDateTime date;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "id")
     private List<User> participants;

@@ -38,7 +38,6 @@ public class Championship implements Serializable {
     @Column(name = "sport")
     private Sport sport;
 
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "id")
     private List<Team> teamList;
 
