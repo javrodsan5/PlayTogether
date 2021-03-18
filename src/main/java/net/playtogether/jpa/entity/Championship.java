@@ -1,6 +1,7 @@
 package net.playtogether.jpa.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -31,11 +33,10 @@ public class Championship implements Serializable {
      
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @NotNull
     
-    @Column(name = "sport")
+    @ManyToOne(optional = false)
     private Sport sport;
 
 
@@ -54,12 +55,12 @@ public class Championship implements Serializable {
     private List<Match> match;
     
     @NotNull
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     @Column(name = "startDate")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
     
     @NotNull
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     @Column(name = "finishDate")
-    private LocalDateTime finishDate;
+    private LocalDate finishDate;
 }
