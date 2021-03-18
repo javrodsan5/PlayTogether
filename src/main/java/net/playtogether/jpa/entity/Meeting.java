@@ -25,15 +25,15 @@ import lombok.Setter;
  
 @Entity
 @Table(name = "meetings")
-@Setter
 @Getter
+@Setter
 public class Meeting implements Serializable {
  
     private static final long serialVersionUID = 1L;
      
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @NotNull
     @Column(name = "address")
@@ -42,9 +42,9 @@ public class Meeting implements Serializable {
     @NotNull
     @Column(name = "city")
     private String city;
-
+    
     @NotNull
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @Column(name = "date")
     private LocalDateTime date;
 
@@ -57,5 +57,6 @@ public class Meeting implements Serializable {
 
     @ManyToOne(optional = false)
     private Sport sport;
-
+    
+    
 }

@@ -2,15 +2,16 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 
 
 
 <h2>Crear una quedada.</h2>
 
-<form class="form-horizontal" id="add-meeting-form">
+<form:form action="/meetings/add" method="POST" modelAttribute="meeting">
 	<div>
-		<label for="date">Fecha:</label><br> <br> <input type="datetime-local"
+		<label for="date">Fecha:</label><br> <br> <input type="text"
 			id="date" name="date"><br> <br> 
 			<label for="city">Ciudad:</label><br>
 		<br> <input type="text" id="city" name="city"><br> <br>
@@ -20,5 +21,5 @@
 			type="text" id="description" name="description"><br> <br>
 		<input type="submit" value="Enviar">
 	</div>
-</form>
+</form:form>
 
