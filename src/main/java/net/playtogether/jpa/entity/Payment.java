@@ -8,7 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -30,9 +31,8 @@ public class Payment implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-   
-    @OneToOne(optional = false)
-    @Column(name = "user")
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @NotNull
@@ -44,9 +44,10 @@ public class Payment implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToOne(optional = false)
-    @Column(name = "paymentType")
-    private PaymentType paymentType;
+    @ManyToOne(optional=false)
+	@JoinColumn(name = "type")
+	@NotNull
+	private PaymentType paymentType;
 
     
 }
