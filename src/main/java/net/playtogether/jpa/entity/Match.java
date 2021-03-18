@@ -32,11 +32,13 @@ public class Match implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "team1")
+    @ManyToOne()
+    @JoinColumn(name = "championship", referencedColumnName = "id")
+    private Championship championship;
+
     @ManyToOne(optional = false)
     private Team team1;
 
-    @JoinColumn(name = "team2")
     @ManyToOne(optional = false)
     private Team team2;
 

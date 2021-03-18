@@ -6,13 +6,12 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -48,8 +47,7 @@ public class Meeting implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToMany
-    @JoinColumn(name = "participants")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "id")
     private List<User> participants;
 
     @NotNull
@@ -57,7 +55,6 @@ public class Meeting implements Serializable {
     private String description;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "sport")
     private Sport sport;
 
 }

@@ -1,6 +1,5 @@
 package net.playtogether.jpa.entity;
 
-
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,7 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -31,10 +32,16 @@ public class Team implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "championship", referencedColumnName = "id")
+    private Championship championship;
+
     
-    @JoinColumn(name = "participants")
-    @OneToMany
-    private List<User> participants;
+    @ManyToMany
+	@JoinTable(name = "team_users", joinColumns = @JoinColumn(name = "team_id"),
+			inverseJoinColumns = @JoinColumn(name = "user_id"))
+	private List<User> participants;
+    
 
     @NotNull
     @Column(name = "name")
