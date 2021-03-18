@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -32,7 +33,7 @@ public class Payment implements Serializable {
 
    
     @OneToOne(optional = false)
-    @Column(name = "user")
+    @JoinColumn(name = "user")
     private User user;
 
     @NotNull
@@ -44,7 +45,7 @@ public class Payment implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToOne(optional = false)
+    @NotNull
     @Column(name = "paymentType")
     private PaymentType paymentType;
 

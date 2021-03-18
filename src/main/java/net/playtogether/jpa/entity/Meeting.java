@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -46,8 +48,8 @@ public class Meeting implements Serializable {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToOne(optional = false)
-    @Column(name = "participants")
+    @OneToMany
+    @JoinColumn(name = "participants")
     private List<User> participants;
 
     @NotNull
@@ -55,7 +57,7 @@ public class Meeting implements Serializable {
     private String description;
 
     @ManyToOne(optional = false)
-    @Column(name = "sport")
+    @JoinColumn(name = "sport")
     private Sport sport;
 
 }

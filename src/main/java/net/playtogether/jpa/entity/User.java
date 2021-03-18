@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -65,15 +67,15 @@ public class User implements Serializable {
     @Pattern(regexp = "[0-9]{9}")
     private String phone;
 
-    @ManyToOne(optional = true)
-    @Column(name = "payment")
-    private List<String> payment;
+    @OneToMany
+    @JoinColumn(name = "payments")
+    private List<Payment> payments;
     
     @OneToOne(optional = true)
-    @Column(name = "statistics")
+    @JoinColumn(name = "statistics")
     private Statistic statistics;
     
-    @OneToOne(optional = false)
+    @NotNull
     @Column(name = "type")
     private UserType type;
 

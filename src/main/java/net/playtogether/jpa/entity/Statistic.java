@@ -1,11 +1,12 @@
 package net.playtogether.jpa.entity;
 import java.io.Serializable;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,10 +28,10 @@ public class Statistic implements Serializable {
     private Long id;
 
     @OneToOne(optional = true)
-    @Column(name = "sport")
+    @JoinColumn(name = "sport")
     private Sport sport;
     
     @OneToOne(optional = true)
-    @Column(name = "user")
+    @JoinColumn(name = "user")
     private User user;
 }

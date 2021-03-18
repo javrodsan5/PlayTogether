@@ -9,7 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -31,8 +32,8 @@ public class Team implements Serializable {
     private Long id;
 
     
-    @Column(name = "participants")
-    @OneToOne(optional = false)
+    @JoinColumn(name = "participants")
+    @OneToMany
     private List<User> participants;
 
     @NotNull
