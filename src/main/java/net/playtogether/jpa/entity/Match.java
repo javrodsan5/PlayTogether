@@ -1,13 +1,9 @@
 package net.playtogether.jpa.entity;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -24,14 +20,8 @@ import lombok.Setter;
 @Table(name = "matches")
 @Setter
 @Getter
-public class Match implements Serializable {
- 
-    private static final long serialVersionUID = 1L;
-     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class Match extends BaseEntity {
+    
     @ManyToOne()
     @JoinColumn(name = "championship", referencedColumnName = "id")
     private Championship championship;
