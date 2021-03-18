@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -56,7 +57,8 @@ public class User extends NamedEntity {
 	@OneToOne(optional = true)
 	private Statistic statistics;
 
-	@Column(name = "type")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "type_id")
 	private UserType type;
 
 	@ManyToMany
