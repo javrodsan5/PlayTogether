@@ -24,6 +24,8 @@
 
 		<jacoco.itreportpath>${project.build.directory}/jacoco</jacoco.itreportpath>
 		<jacoco.itreportfile>${jacoco.itreportpath}/jacoco-it.exec</jacoco.itreportfile>
+
+		<sonar.jacoco.reportPath>${jacoco.utreportpath}/jacoco.exec</sonar.jacoco.reportPath>
 	</properties>
 	<dependencies>
 		<dependency>
