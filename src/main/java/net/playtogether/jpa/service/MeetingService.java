@@ -1,7 +1,6 @@
 package net.playtogether.jpa.service;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

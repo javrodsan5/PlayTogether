@@ -1,7 +1,6 @@
 package net.playtogether.jpa.entity;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -14,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -35,15 +35,12 @@ public class Meeting implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotNull
     @Column(name = "address")
     private String address;
 
-    @NotNull
     @Column(name = "city")
     private String city;
     
-    @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @Column(name = "date")
     private LocalDateTime date;
@@ -51,7 +48,6 @@ public class Meeting implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "id")
     private List<User> participants;
 
-    @NotNull
     @Column(name = "description")
     private String description;
 
