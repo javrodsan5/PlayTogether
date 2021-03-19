@@ -41,3 +41,4 @@ INSERT INTO payments VALUES(1, 1, 2.5, '2021/02/15 11:00:00', 1, 1);
 INSERT INTO payments VALUES(2, 1, 5.0, '2021/01/16 11:45:00', 1, 2);
 
 INSERT INTO teams_participants VALUES(1, 1);
+
