@@ -17,15 +17,6 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<jacoco.version>0.8.6</jacoco.version>
-		<jacoco.outputDir>${project.build.directory}</jacoco.outputDir>
-
-		<jacoco.utreportpath>${project.build.directory}/jacoco</jacoco.utreportpath>
-		<jacoco.utreportfile>${jacoco.utreportpath}/jacoco.exec</jacoco.utreportfile>
-
-		<jacoco.itreportpath>${project.build.directory}/jacoco</jacoco.itreportpath>
-		<jacoco.itreportfile>${jacoco.itreportpath}/jacoco-it.exec</jacoco.itreportfile>
-
-		<sonar.jacoco.reportPath>${jacoco.utreportpath}/jacoco.exec</sonar.jacoco.reportPath>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -114,52 +105,18 @@
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>${jacoco.version}</version>
 				<executions>
-						<execution>
-								<id>pre-unit-test</id>
-								<phase>process-test-classes</phase>
-								<goals>
-										<goal>prepare-agent</goal>
-								</goals>
-								<configuration>
-										<propertyName>surefireArgLine</propertyName>
-										<destFile>${jacoco.utreportfile}</destFile>
-										<append>true</append>
-								</configuration>
-						</execution>
-						<execution>
-								<id>post-unit-test</id>
-								<phase>test</phase>
-								<goals>
-										<goal>report</goal>
-								</goals>
-								<configuration>
-										<outputDirectory>${jacoco.utreportpath}</outputDirectory>
-										<dataFile>${jacoco.utreportfile}</dataFile>
-								</configuration>
-						</execution>
-						<execution>
-								<id>pre-integration-test</id>
-								<phase>pre-integration-test</phase>
-								<goals>
-										<goal>prepare-agent-integration</goal>
-								</goals>
-								<configuration>
-										<propertyName>failsafeArgLine</propertyName>
-										<destFile>${jacoco.itreportfile}</destFile>
-										<append>true</append>
-								</configuration>
-						</execution>
-						<execution>
-								<id>post-integration-test</id>
-								<phase>post-integration-test</phase>
-								<goals>
-										<goal>report</goal>
-								</goals>
-								<configuration>
-										<outputDirectory>${jacoco.itreportpath}</outputDirectory>
-										<dataFile>${jacoco.itreportfile}</dataFile>
-								</configuration>
-						</execution>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
