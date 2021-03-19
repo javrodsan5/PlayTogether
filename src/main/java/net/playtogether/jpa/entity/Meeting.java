@@ -37,7 +37,7 @@ public class Meeting extends NamedEntity {
     @Column(name = "date")
     private LocalDate date;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "id")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "meeting")
     private List<User> participants;
 
     @NotNull

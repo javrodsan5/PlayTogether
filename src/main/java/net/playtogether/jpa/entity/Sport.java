@@ -1,8 +1,11 @@
 package net.playtogether.jpa.entity;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -21,5 +24,11 @@ public class Sport extends NamedEntity {
 	@JoinColumn(name = "sportType")
 	@NotNull
     private SportType sportType;
+
+    @OneToMany(mappedBy = "sport")
+    private List<Championship> championships;
+
+    @OneToMany(mappedBy = "sport")
+    private List<Meeting> meetings;
     
 }

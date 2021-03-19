@@ -29,9 +29,8 @@ public class Championship extends NamedEntity {
     @JoinColumn(name = "sport_id")
     private Sport sport;
 
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "id")
-    private List<Team> teamList;
+    @OneToMany(mappedBy = "championship")
+    private List<Team> teams;
 
     @NotNull
     @Column(name = "description")
@@ -41,8 +40,8 @@ public class Championship extends NamedEntity {
     @Column(name = "city")
     private String city;
 
-    @OneToMany(mappedBy = "id")
-    private List<Match> match;
+    @OneToMany(mappedBy = "championship")
+    private List<Match> matches;
     
     @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")

@@ -22,8 +22,8 @@ import lombok.Setter;
 @Getter
 public class Match extends BaseEntity {
     
-    @ManyToOne()
-    @JoinColumn(name = "championship", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "championships_id")
     private Championship championship;
 
     @ManyToOne(optional = false)
