@@ -9,7 +9,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "paymentType")
+@Table(name = "userType")
 @Setter
 @Getter
 public class UserType extends NamedEntity {

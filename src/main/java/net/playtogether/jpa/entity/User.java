@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -50,17 +51,21 @@ public class User extends NamedEntity {
 	@Pattern(regexp = "[0-9]{9}")
 	private String phone;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "id")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Payment> payment;
 
 	@OneToOne(optional = true)
 	private Statistic statistics;
 
-	@Column(name = "type")
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "type_id")
 	private UserType type;
 
-	@ManyToMany
-	@JoinTable(name = "team_users", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "team_id"))
+	@ManyToMany(mappedBy = "participants")
 	private List<Team> teams;
+
+	@ManyToOne
+	@JoinColumn(name = "meetings_id")
+	private Meeting meeting;
 
 }

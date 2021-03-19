@@ -7,8 +7,6 @@ import javax.persistence.MappedSuperclass;
 
 import org.springframework.data.annotation.Version;
 
-import lombok.Builder.Default;
-
 @MappedSuperclass
 public class BaseEntity {
 
