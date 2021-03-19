@@ -11,7 +11,6 @@ import net.playtogether.jpa.entity.Sport;
 @Repository
 public interface SportRepository extends CrudRepository<Sport, Integer> {
  
-	@Query("SELECT s FROM Sport s")
 	Collection<Sport> findAll();
 	
 	@Query("SELECT s FROM Sport s where s.name = ?1")
