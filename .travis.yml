@@ -3,6 +3,11 @@ language: java
 jdk: oraclejdk8
 services:
   - mysql
+cache:
+  directories:
+  - $HOME/.m2
+before_cache:
+  - rm -rf $HOME/.m2/repository/net/playtogether/jpa
 before_install:
   - chmod +x mvnw
   - mysql -e 'CREATE DATABASE playtogetherdb;'
