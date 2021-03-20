@@ -29,7 +29,8 @@ import lombok.Setter;
 @Setter
 public class Meeting implements Serializable {
  
-    private static final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
      
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +42,7 @@ public class Meeting implements Serializable {
     @Column(name = "city")
     private String city;
     
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "date")
     private LocalDateTime date;
 
@@ -53,6 +54,21 @@ public class Meeting implements Serializable {
 
     @ManyToOne(optional = false)
     private Sport sport;
+    
+    public Meeting(int id, String address, String city, LocalDateTime date, List<User> participants, String description, Sport sport) {
+		this.id=id;
+		this.address=address;
+		this.city=city;
+		this.date=date;
+		this.participants=participants;
+		this.description=description;
+		this.sport=sport;
+	}
+    
+    public Meeting () {
+    	
+    }
+
     
     
 }

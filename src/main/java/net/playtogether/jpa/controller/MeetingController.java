@@ -42,9 +42,7 @@ public class MeetingController {
 		if (result.hasErrors()) {
 			return "meetings/addMeeting";
 		} else {
-			Sport sport = new Sport();
-			sport.setId((long) 1);
-			sport.setName("futbol");
+			Sport sport = new Sport(1,"futbol");
 			meeting.setSport(sport);
 			meetingService.save(meeting);
 			return "redirect:/";

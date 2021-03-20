@@ -25,10 +25,21 @@ public class Sport implements Serializable {
      
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @NotNull
     @Column(name = "name")
     private String name;
+    
+    public Sport() {
+    	
+    }
+    
+    public Sport (int id, String name) {
+    	this.id=id;
+    	this.name=name;
+    }
+
+
 
 }
