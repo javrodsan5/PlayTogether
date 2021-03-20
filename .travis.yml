@@ -12,4 +12,4 @@ install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script: mvn test -Dspring-boot.run.profiles=mysql-travis
 after_success:
-  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r target/jacoco/jacoco.xml
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r target/site/jacoco/jacoco.xml
