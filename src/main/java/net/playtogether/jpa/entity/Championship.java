@@ -42,7 +42,6 @@ public class Championship extends NamedEntity {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "sport_id")
-
     private Sport sport;
 
     @OneToMany(mappedBy = "championship")

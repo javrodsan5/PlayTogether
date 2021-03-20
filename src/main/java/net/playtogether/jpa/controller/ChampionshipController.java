@@ -18,18 +18,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.service.ChampionshipService;
+import net.playtogether.jpa.service.SportService;
 
 @Controller
 public class ChampionshipController {
 	
 	 	@Autowired
 	    ChampionshipService championshipService;
+	 	
+		@Autowired
+		SportService sportService;
 	 
 	 	
 	 	@GetMapping("/championships/add")
 		public String initCreationChampionship(ModelMap model) {
 			Championship championship = new Championship();
+			Collection<Sport> listaDeportes = this.sportService.findAll();
 			model.addAttribute("championship",championship);
+			model.put("listaDeportes", listaDeportes);
 			return "championships/createOrUpdateChampionshipForm";
 		}
 
@@ -40,6 +46,8 @@ public class ChampionshipController {
 				
 				return "redirect:/";
 			}else {
+				Collection<Sport> listaDeportes = this.sportService.findAll();
+				model.put("listaDeportes", listaDeportes);
 				return "championships/createOrUpdateChampionshipForm";
 			}
 		}

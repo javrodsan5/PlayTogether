@@ -20,6 +20,7 @@ public class MeetingValidator implements Validator {
 		String address = meeting.getAddress();
 		LocalDateTime date = meeting.getDate();
 
+		
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
 			System.out.println("Entra 1");

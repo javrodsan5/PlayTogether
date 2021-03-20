@@ -45,13 +45,16 @@ public class MeetingController {
 	}
 
 	@PostMapping("/meetings/add")
-	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result) {
-		if (result.hasErrors()) {
+	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model) {
+		if(result.hasErrors()) {
+			Collection<Sport> listaDeportes = this.sportService.findAll();
+			model.put("listaDeportes", listaDeportes);
 			return "meetings/addMeeting";
-		} else {
+		}else{
 			meetingService.save(meeting);
-			return "redirect:/";
+			return "redirect:/meetings";
 		}
+		
 	}
 
 	@GetMapping("/meetings")
