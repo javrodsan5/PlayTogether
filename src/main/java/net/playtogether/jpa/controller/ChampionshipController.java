@@ -36,10 +36,6 @@ public class ChampionshipController {
 		@PostMapping("/championships/add")
 		public String postCreationMeeting(@ModelAttribute("championship") Championship championship, BindingResult result, ModelMap model) {
 			if(!result.hasErrors()) {
-				Sport sport = new Sport();
-				sport.setId((long) 1);
-				sport.setName("futbol");
-				championship.setSport(sport);
 				championshipService.save(championship);
 				
 				return "redirect:/";
