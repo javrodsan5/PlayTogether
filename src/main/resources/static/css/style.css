@@ -24,6 +24,10 @@ img {
   padding-left: 300px;
 }
 
+.boxed {
+  border: 2px solid green ;
+}
+
 h1{
 	padding-top: 30px;
 	font-size: 200%;

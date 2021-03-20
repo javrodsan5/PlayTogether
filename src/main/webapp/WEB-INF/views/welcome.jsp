@@ -2,6 +2,7 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@page isELIgnored="false" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -132,13 +133,13 @@ Carlos Santos Tirado como Team Manager, y un subequipo formado por 6 personas es
 </div>
 <h1>¿Te interesa la aplicación? Introduce aquí tu correo</h1>
 <div class="correo">
-<form action="/addUser" method="POST">
+<form:form action="/addUser" method="POST">
 <div>
   <label for="correo">Correo:</label><br><br>
   <input type="text" id="correo" name="correo"><br><br>
   <input type="submit" value="Enviar">
 </div>
-</form>
+</form:form>
 <div>
 ${exit}
 </div>

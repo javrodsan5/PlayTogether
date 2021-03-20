@@ -40,8 +40,6 @@ public class Championship extends NamedEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    
-
     @ManyToOne(optional = false)
     @JoinColumn(name = "sport_id")
 

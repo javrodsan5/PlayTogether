@@ -16,6 +16,7 @@ import lombok.Setter;
 @Table(name = "sports")
 @Setter
 @Getter
+
 public class Sport extends NamedEntity {
 
     @ManyToOne(optional=false)
@@ -28,5 +29,15 @@ public class Sport extends NamedEntity {
 
     @OneToMany(mappedBy = "sport")
     private List<Meeting> meetings;
+    
+    public Sport() {
+    	
+    }
+    
+    public Sport (int id, String name) {
+    	this.id=id;
+    	this.name=name;
+    }
+    
     
 }
