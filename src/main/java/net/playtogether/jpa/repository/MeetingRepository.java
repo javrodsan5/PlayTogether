@@ -10,6 +10,5 @@ import net.playtogether.jpa.entity.Meeting;
 @Repository
 public interface MeetingRepository extends CrudRepository<Meeting, Integer> {
 	Collection<Meeting> findAll();
-	
  
 }

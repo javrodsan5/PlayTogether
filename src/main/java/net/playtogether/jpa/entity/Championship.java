@@ -1,15 +1,21 @@
 package net.playtogether.jpa.entity;
 
+
 import java.io.Serializable;
+import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -25,21 +31,22 @@ import lombok.Setter;
 @Table(name = "championships")
 @Setter
 @Getter
-public class Championship implements Serializable {
+public class Championship extends NamedEntity {
  
+
     private static final long serialVersionUID = 1L;
      
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
-    @NotNull
-    
-    @Column(name = "sport")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "sport_id")
+
     private Sport sport;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "id")
-    private List<Team> teamList;
+    @OneToMany(mappedBy = "championship")
+    private List<Team> teams;
 
     @NotNull
     @Column(name = "description")
@@ -49,16 +56,16 @@ public class Championship implements Serializable {
     @Column(name = "city")
     private String city;
 
-    @OneToMany(mappedBy = "id")
-    private List<Match> match;
+    @OneToMany(mappedBy = "championship")
+    private List<Match> matches;
     
     @NotNull
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     @Column(name = "startDate")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
     
     @NotNull
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     @Column(name = "finishDate")
-    private LocalDateTime finishDate;
+    private LocalDate finishDate;
 }
