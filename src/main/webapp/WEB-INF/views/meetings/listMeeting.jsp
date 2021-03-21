@@ -5,7 +5,9 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
  <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+ <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <body>
+<playtogether:layout pageName="sports">
 <table id="meetingTable" class="table table-striped">
         <thead>
             <tr>
@@ -34,5 +36,6 @@
         </tbody>
 
     </table>
+</playtogether:layout>
 </body>
 </html>
