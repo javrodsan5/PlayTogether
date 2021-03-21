@@ -1,7 +1,6 @@
 package net.playtogether.jpa.controller;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.validation.Valid;
 
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Meeting;
-import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.service.MeetingService;
 import net.playtogether.jpa.service.SportService;
 
@@ -37,18 +35,15 @@ public class MeetingController {
 
 	@GetMapping("/meetings/add")
 	public String initCreationMeeting(ModelMap model) {
-		Meeting meeting = new Meeting();
-		Collection<Sport> listaDeportes = this.sportService.findAll();
-		model.put("meeting", meeting);
-		model.put("listaDeportes", listaDeportes);
+		model.put("meeting", new Meeting());
+		model.put("listaDeportes", this.sportService.findAll());
 		return "meetings/addMeeting";
 	}
 
 	@PostMapping("/meetings/add")
 	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model) {
 		if(result.hasErrors()) {
-			Collection<Sport> listaDeportes = this.sportService.findAll();
-			model.put("listaDeportes", listaDeportes);
+			model.put("listaDeportes", this.sportService.findAll());
 			return "meetings/addMeeting";
 		}else{
 			meetingService.save(meeting);
