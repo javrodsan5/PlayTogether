@@ -20,31 +20,27 @@ public class MeetingValidator implements Validator {
 		String address = meeting.getAddress();
 		LocalDateTime date = meeting.getDate();
 
-		
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
-			System.out.println("Entra 1");
 		}
 
-		if (!StringUtils.hasLength(address) || address.length() < 3) {
+		if (!StringUtils.hasLength(address) || address == null) {
 			errors.rejectValue("address", REQUIRED, REQUIRED);
-			System.out.println("Entra 2");
+		}
+		if (address.length() > 0 && address.length() < 3) {
+			errors.rejectValue("address", "La dirección debe contener más de 3 caractéres",
+					"La dirección debe contener más de 3 caractéres");
 		}
 
-		if (!StringUtils.hasLength(description)) {
-			errors.rejectValue("description", REQUIRED, REQUIRED);
-			System.out.println("Entra 3");
+		if (!StringUtils.hasLength(description) || description == null) {
+			errors.rejectValue("description", REQUIRED, REQUIRED); 
 		}
 
 		if (date == null) {
 			errors.rejectValue("date", REQUIRED, REQUIRED);
-			System.out.println("Entra 4");
-		}
-
-		if (date.isBefore(LocalDateTime.now())) {
+		} else if (date.isBefore(LocalDateTime.now())) {
 			errors.rejectValue("date", "La fecha debe ser anterior a la actual.",
 					"La fecha debe ser anterior a la actual.");
-			System.out.println("Entra 5");
 		}
 	}
 
