@@ -16,7 +16,7 @@
 	<description>Proyecto del grupo 11 de ISPP</description>
 	<properties>
 		<java.version>1.8</java.version>
-		<jacoco.version>0.8.5</jacoco.version>
+		<jacoco.version>0.8.6</jacoco.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -74,6 +74,12 @@
 
 		<!-- Need this to compile JSP -->
 		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+            <optional>true</optional>
+        </dependency>
+		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
 			<artifactId>tomcat-embed-jasper</artifactId>
 			<scope>provided</scope>
@@ -98,6 +104,11 @@
 			<artifactId>bootstrap</artifactId>
 			<version>4.6.0-1</version>
 		</dependency>
+		<dependency>
+			  <groupId>io.craftsman</groupId>
+			  <artifactId>dozer-jdk8-support</artifactId>
+			  <version>1.0.6</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -107,25 +118,31 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+        <version>${jacoco.version}</version>
+        <configuration>
+            <output>file</output>
+            <append>true</append>
+        </configuration>
+        <executions>
+            <execution>
+                <id>jacoco-initialize</id>
+                <goals>
+                    <goal>prepare-agent</goal>
+                </goals>
+            </execution>
+            <execution>
+                <id>jacoco-site</id>
+                <phase>test</phase>
+                <goals>
+                    <goal>report</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>  
 		</plugins>
 	</build>
+	
 
 </project>

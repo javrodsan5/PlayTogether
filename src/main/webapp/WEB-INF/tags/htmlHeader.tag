@@ -10,10 +10,14 @@
 
     <spring:url value="/resources/images/favicon.png" var="favicon"/>
     <link rel="shortcut icon" type="image/x-icon" href="${favicon}">
+    
+    <%-- CSS generated from LESS --%>
+    <spring:url value="/css/style.css" var="css"/>
+    <link href="${css}" rel="stylesheet"/>
 
     <title>PlayTogether</title>
 
-    <%-- CSS generated from LESS --%>
+    
     <spring:url value="/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css" var="bootstrap"/>
     <link href="${bootstrap}" rel="stylesheet"/>
     <script src="/webjars/bootstrap/4.6.0-1/js/bootstrap.bundle.min.js"></script>

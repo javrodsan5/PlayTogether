@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -23,10 +24,10 @@ import lombok.Setter;
 @Entity
 @Table(name = "meetings")
 @Getter
-
+@Setter
 public class Meeting extends NamedEntity {
  
-    @NotNull
+    
     @Column(name = "address")
     private String address;
 
@@ -44,6 +45,7 @@ public class Meeting extends NamedEntity {
     private String description;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "sport_id")
     private Sport sport;
     
     public Meeting(int id, String address, String city, LocalDateTime date, List<User> participants, String description, Sport sport) {

@@ -6,7 +6,10 @@ services:
 before_install:
   - chmod +x mvnw
   - mysql -e 'CREATE DATABASE playtogetherdb;'
+  - sudo apt-get install jq
+  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
 install:
-  - export CODACY_PROJECT_TOKEN=$CODACY_PROJECT_TOKEN
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script: mvn test -Dspring-boot.run.profiles=mysql-travis
+after_success:
+  - bash <(curl -Ls https://coverage.codacy.com/get.sh) report -r target/site/jacoco/jacoco.xml
