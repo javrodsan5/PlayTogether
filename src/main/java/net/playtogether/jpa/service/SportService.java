@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.playtogether.jpa.entity.Sport;
+import net.playtogether.jpa.entity.SportType;
 import net.playtogether.jpa.repository.SportRepository;
 
 @Service
@@ -21,7 +22,7 @@ public class SportService {
 	}
 
 	@Transactional(readOnly=true)
-	public Collection<Sport> findAll() {
+	public Collection<Sport> findAll() throws DataAccessException{
 		return sportRepository.findAll();
 	}	
 	
@@ -31,7 +32,7 @@ public class SportService {
 	}
 
 	@Transactional(readOnly=true)
-	public Collection<Sport> findAllSportsByType(String sportType) throws DataAccessException {
+	public Collection<Sport> findAllSportsByType(SportType sportType) throws DataAccessException {
 		return sportRepository.findAllSportsByType(sportType);
 
 	}

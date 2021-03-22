@@ -1,4 +1,4 @@
-package net.playtogether.jpa.tests;
+package net.playtogether.jpa.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -28,7 +28,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MeetingTests {
+public class MeetingControllerTests {
 
 	  @Autowired
 	  private MockMvc mockMvc;

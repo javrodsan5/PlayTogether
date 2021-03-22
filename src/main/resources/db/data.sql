@@ -17,6 +17,11 @@ INSERT INTO sports VALUES(10, 1, 'Gimnasio', 2);
 INSERT INTO sports VALUES(11, 1, 'Yoga', 2);
 INSERT INTO sports VALUES(12, 1, 'Senderismo', 2);
 INSERT INTO sports VALUES(13, 1, 'Balonmano', 1);
+INSERT INTO sports VALUES(14, 1, 'Ciclismo', 2);
+INSERT INTO sports VALUES(15, 1, 'Golf', 1);
+INSERT INTO sports VALUES(16, 1, 'Natación', 2);
+INSERT INTO sports VALUES(17, 1, 'Karting', 1);
+INSERT INTO sports VALUES(18, 1, 'Pilates', 2);
 
 INSERT INTO meetings VALUES(1, 1, 'Quedada1', 'Polideportivo Ciudad Jardin', 'Sevilla', '2021/06/15 11:00:00', 'Breve descripcion', 1);
 INSERT INTO meetings VALUES(2, 1, 'Quedada2', 'Pistas Sevilla', 'Sevilla', '2021/04/15 11:20:00', 'Breve descripcion', 3);
