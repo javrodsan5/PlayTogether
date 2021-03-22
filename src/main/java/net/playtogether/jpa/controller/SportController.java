@@ -20,6 +20,11 @@ public class SportController {
 	@Autowired
 	UserService userService;
 
+	@GetMapping("/")
+	public String homePage() {
+		return "redirect:/sports";
+	}
+	
 	
 	@GetMapping("/sports")
 	public String listSports(ModelMap model) {

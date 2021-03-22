@@ -9,15 +9,6 @@
 
 	<body>
 
-		<%-- <div class="sport_type_button">
-			<spring:url value="/sports/1/meetings" var="groupsUrl">
-			</spring:url>
-			<a class="btn btn-1" href="${fn:escapeXml(groupsUrl)}">En grupo</a>
-			<spring:url value="/sports/1/meetings" var="individualUrl">
-			</spring:url>
-			<a class="btn btn-2" href="${fn:escapeXml(individualUrl)}">Individual</a>
-		</div> --%>
-
 		<div id="cards_landscape_wrap-2">
 			<div class="card">
 				<div class="row">
@@ -33,7 +24,6 @@
 												<c:out value="${sport.name}" />
 											</h4>
 											<br> <br> <br> <br>
-											<!-- <div class="text-container"> -->
 											<div class="frame">
 												<spring:url value="/sports/{sportId}/meetings"
 													var="meetingUrl">

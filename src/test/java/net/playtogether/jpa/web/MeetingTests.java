@@ -40,55 +40,55 @@ public class MeetingTests {
 	  @Autowired
 	  private MeetingRepository meetingRepository;
 	  
-	//Test de consultar quedadas
-//	@Test
-//	void listMeetings() throws Exception{
-//		this.mockMvc.perform(get("/meetings"))
-//		.andExpect(status().is2xxSuccessful());
-//		
-//		Collection<Meeting> meetingEntities = meetingRepository.findAll();
-//		assertThat(meetingEntities.size()).isEqualTo(2);
-//	
-//		}
-//	  
-//	 //Test de crear quedada
-//	@Test
-//	void createMeeting() throws Exception {
-//	
-//	this.mockMvc.perform(post("/meetings/add")
-//			.param("address", "Calle 1")
-//			.param("city", "Sevilla")
-//			.param("description", "aaaa")
-//			.param("date", "2021-06-14 14:14")
-//			.param("sport", "1")
-//			.with(csrf()))
-//			.andExpect(status().is3xxRedirection());
-//
-//	Meeting meetingEntity = meetingRepository.findById(3).orElse(null);
-//	assertThat(meetingEntity.getAddress()).isEqualTo("Calle 1");
-//	}
-//
-//	//Test de consultar una quedada
-//	@Test
-//	void getMeeting() throws Exception{
-//		this.mockMvc.perform(get("/meetings/1"))
-//		.andExpect(status().is2xxSuccessful());
-//		
-//		Meeting meetingEntity = meetingRepository.findById(1).orElse(null);
-//		assertThat(meetingEntity.getName()).isEqualTo("Quedada1");
-//		
-//		
-//	}
+	  //Test de consultar quedadas
+	@Test
+	void listMeetings() throws Exception{
+		this.mockMvc.perform(get("/sports/1/meetings"))
+		.andExpect(status().is2xxSuccessful());
+		
+		Collection<Meeting> meetingEntities = meetingRepository.findAll();
+		assertThat(meetingEntities.size()).isEqualTo(3);
+	
+		}
 	  
-//	//Test join meeting controller
-//		@Test
-//		@Transactional
-//		void joinMeeting() throws Exception{
-//			this.mockMvc.perform(get("/meetings/2/join")).andExpect(status().is2xxSuccessful());
-//			
-//			
-//			Meeting meetingEntity = meetingRepository.findById(2).orElse(null);
-//			assertThat(meetingEntity.getParticipants().size()).isEqualTo(1);
-//			
-//		}
+	 //Test de crear quedada
+	@Test
+	void createMeeting() throws Exception {
+	
+	this.mockMvc.perform(post("/sports/1/meetings/add")
+			.param("address", "Calle 1")
+			.param("city", "Sevilla")
+			.param("description", "aaaa")
+			.param("date", "2021-06-14 14:14")
+			.param("sport", "1")
+			.with(csrf()))
+			.andExpect(status().is3xxRedirection());
+
+	Meeting meetingEntity = meetingRepository.findById(3).orElse(null);
+	assertThat(meetingEntity.getAddress()).isEqualTo("Calle 1");
+	}
+
+	//Test de consultar una quedada
+	@Test
+	void getMeeting() throws Exception{
+		this.mockMvc.perform(get("/sports/1/meetings/1"))
+		.andExpect(status().is2xxSuccessful());
+		
+		Meeting meetingEntity = meetingRepository.findById(1).orElse(null);
+		assertThat(meetingEntity.getName()).isEqualTo("Quedada1");
+		
+		
+	}
+	  
+	//Test join meeting controller
+		@Test
+		@Transactional
+		void joinMeeting() throws Exception{
+			this.mockMvc.perform(get("/meetings/2/join")).andExpect(status().is2xxSuccessful());
+			
+			
+			Meeting meetingEntity = meetingRepository.findById(2).orElse(null);
+			assertThat(meetingEntity.getParticipants().size()).isEqualTo(1);
+			
+		}
 }

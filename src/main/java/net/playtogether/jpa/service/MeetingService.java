@@ -30,5 +30,10 @@ public class MeetingService {
 	public Meeting findMeetingById(int id){
 		return meetingRepository.findById(id).orElse(null);
 	}
+	
+	@Transactional(readOnly=true)
+	public Collection<Meeting> listMeetingsBySport(int sportId){
+		return meetingRepository.listMeetingsBySport(sportId);
+	}
 
 }
