@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
-<playtogether:layout pageName="sports">
+<playtogether:layout pageName="meetings">
 	<body>
 		<h2>Detalles de quedada</h2>
 		<div class="boxed">

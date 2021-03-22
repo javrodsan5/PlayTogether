@@ -30,37 +30,37 @@ public class ChampionshipController {
 		SportService sportService;
 	 
 	 	
-	 	@GetMapping("/championships/add")
-		public String initCreationChampionship(ModelMap model) {
+	 	@GetMapping("/sports/{sportId}/championships/add")
+		public String initCreationChampionship(ModelMap model, @PathVariable("sportId") Integer sportId) {
 			Championship championship = new Championship();
-			Collection<Sport> listaDeportes = this.sportService.findAll();
 			model.addAttribute("championship",championship);
-			model.put("listaDeportes", listaDeportes);
+			model.put("deporte", sportId);
 			return "championships/createOrUpdateChampionshipForm";
 		}
 
-		@PostMapping("/championships/add")
-		public String postCreationMeeting(@ModelAttribute("championship") Championship championship, BindingResult result, ModelMap model) {
+		@PostMapping("/sports/{sportId}/championships/add")
+		public String postCreationMeeting(@ModelAttribute("championship") Championship championship, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId) {
 			if(!result.hasErrors()) {
 				championshipService.save(championship);
 				
-				return "redirect:/";
+				return "redirect:/sports/"+sportId+"/championships";
 			}else {
-				Collection<Sport> listaDeportes = this.sportService.findAll();
-				model.put("listaDeportes", listaDeportes);
+			
+				model.put("deporte", sportId);
 				return "championships/createOrUpdateChampionshipForm";
 			}
 		}
 		
 		
-		@GetMapping("/championships")
-		public String listChampionships(ModelMap model) {
-			Collection<Championship>championships= this.championshipService.listChampionship();
+		@GetMapping("/sports/{sportId}/championships")
+		public String listChampionships(ModelMap model,@PathVariable("sportId") Integer sportId) {
+			Collection<Championship>championships= this.championshipService.listChampionshipsBySport(sportId);
 			model.addAttribute("championships",championships);
+			model.addAttribute("deporte",sportId);
 			return "championships/listChampionship";
 		}
 		
-		@GetMapping("/championships/{championshipId}")
+		@GetMapping("/sports/{sportId}/championships/{championshipId}")
 		public String meetingDetails(ModelMap model, @PathVariable ("championshipId") Integer championshipId) {
 			Championship championship= this.championshipService.findChampionshipId(championshipId);
 			model.addAttribute("championship",championship);
