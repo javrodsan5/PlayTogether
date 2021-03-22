@@ -6,7 +6,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="sports">
+<playtogether:layout pageName="meetings">
 
 	<div style="margin-left: 45px">
 		<h2>Crear una quedada.</h2>

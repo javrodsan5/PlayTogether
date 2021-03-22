@@ -26,15 +26,20 @@
                     <td><c:out value="${championship.city}" /></td>
                     <td><c:out value="${championship.description}" /></td>
                     <td><c:out value="${championship.startDate}" /></td>
-                    <td><spring:url value="/championships/{championshipId}"
+                    <td><spring:url value="/sports/{deporte}/championships/{championshipId}"
                             var="championship2Url">
                             <spring:param name="championshipId" value="${championship.id}" />
+                            <spring:param name="deporte" value="${deporte}" />
                         </spring:url> <a href="${fn:escapeXml(championship2Url)}">Ver más</a></td>
                 </tr>
             </c:forEach>
         </tbody>
 
     </table>
+    <spring:url value="/sports/{deporte}/championships/add" var="dateUrl">
+	                         <spring:param name="deporte" value="${deporte}"/>
+	                     </spring:url>
+	<a id="createChampionship" href="${fn:escapeXml(dateUrl)}">Crear torneo</a>
 </body>
 </html>
 </playtogether:layout>
