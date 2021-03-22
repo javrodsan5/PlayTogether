@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-
-
+<%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+ 
+<playtogether:layout pageName="championships">
 
 <h2>Crear un torneo</h2>
 
@@ -29,3 +29,4 @@
 		<input type="submit" value="Enviar">
 	</div>
 </form:form>
+</playtogether:layout>
