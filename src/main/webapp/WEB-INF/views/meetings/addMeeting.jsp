@@ -17,12 +17,8 @@
 				<playtogether:inputField label="Ciudad" name="city" />
 				<playtogether:inputField label="Dirección" name="address" />
 				<playtogether:inputField label="Descripción" name="description" />
-				<label for="deportes">Deportes:</label><br> <br> <select
-					name="sport">
-					<c:forEach var="item" items="${listaDeportes}">
-						<option value="${item.id}">${item.name}</option>
-					</c:forEach>
-				</select> <input type="submit" value="Enviar">
+				<input type="hidden" name="sport" value="${deporte}"/>
+				<input type="submit" value="Enviar">
 			</div>
 		</form:form>
 

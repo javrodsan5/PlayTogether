@@ -38,33 +38,34 @@ public class MeetingController {
 		dataBinder.setValidator(new MeetingValidator());
 	}
 
-	@GetMapping("/meetings/add")
-	public String initCreationMeeting(ModelMap model) {
+	@GetMapping("/sports/{sportId}/meetings/add")
+	public String initCreationMeeting(ModelMap model,@PathVariable("sportId") Integer sportId) {
 		model.put("meeting", new Meeting());
-		model.put("listaDeportes", this.sportService.findAll());
+		model.put("deporte", sportId);
 		return "meetings/addMeeting";
 	}
 
-	@PostMapping("/meetings/add")
-	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model) {
+	@PostMapping("/sports/{sportId}/meetings/add")
+	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId) {
 		if (result.hasErrors()) {
-			model.put("listaDeportes", this.sportService.findAll());
+			model.put("deporte", sportId);
 			return "meetings/addMeeting";
 		} else {
 			meetingService.save(meeting);
-			return "redirect:/meetings";
+			return "redirect:/sports/"+sportId+"/meetings";
 		}
 
 	}
 
-	@GetMapping("/meetings")
-	public String listMeetings(ModelMap model) {
-		Collection<Meeting> meetings = this.meetingService.listMeetings();
+	@GetMapping("/sports/{sportId}/meetings")
+	public String listMeetings(ModelMap model,@PathVariable("sportId") Integer sportId) {
+		Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(sportId);
 		model.addAttribute("meetings", meetings);
+		model.addAttribute("deporte",sportId);
 		return "meetings/listMeeting";
 	}
 
-	@GetMapping("/meetings/{meetingId}")
+	@GetMapping("/sports/{sportId}/meetings/{meetingId}")
 	public String meetingDetails(ModelMap model, @PathVariable("meetingId") Integer meetingId) {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		model.addAttribute("meeting", meeting);

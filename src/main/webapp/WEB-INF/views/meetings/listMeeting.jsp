@@ -27,15 +27,20 @@
                     <td><c:out value="${meeting.description}" /></td>
                     <td><c:out value="${meeting.date}" /></td>
                     <td><c:out value="${meeting.sport.id}" /></td>
-                    <td><spring:url value="/meetings/{meetingId}"
+                    <td><spring:url value="/sports/{deporte}/meetings/{meetingId}"
                             var="meeting2Url">
                             <spring:param name="meetingId" value="${meeting.id}" />
+                            <spring:param name="deporte" value="${deporte}" />
                         </spring:url> <a href="${fn:escapeXml(meeting2Url)}">Ver más</a></td>
                 </tr>
             </c:forEach>
         </tbody>
 
     </table>
+	<spring:url value="/sports/{deporte}/meetings/add" var="dateUrl">
+	                         <spring:param name="deporte" value="${deporte}"/>
+	                     </spring:url>
+	<a id="createMeeting" href="${fn:escapeXml(dateUrl)}">Crear quedada</a>
 </playtogether:layout>
 </body>
 </html>
