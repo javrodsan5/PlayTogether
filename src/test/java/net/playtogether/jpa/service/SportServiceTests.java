@@ -3,27 +3,31 @@ package net.playtogether.jpa.service;
 import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Service;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.SportType;
 
-@DataJpaTest(includeFilters = @ComponentScan.Filter(Service.class))
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 public class SportServiceTests {
 
 	@Autowired
-	protected SportService sportService;
+	private SportService sportService;
 
 	// FIND ALL (COLLECTION SPORT)
 	@Test
 	void shouldFindAllSports() {
 		Collection<Sport> listSports = this.sportService.findAll();
-		assertThat(listSports.size()).isEqualTo(13);
+		assertThat(listSports.size()).isEqualTo(18);
 	}
 
 	// FIND SPORT BY NAME
@@ -46,6 +50,6 @@ public class SportServiceTests {
 			SportType st = new SportType();
 			st.setId(2);
 			Collection<Sport> listSports = this.sportService.findAllSportsByType(st);
-			assertThat(listSports.size()).isEqualTo(4);
+			assertThat(listSports.size()).isEqualTo(7);
 		}
 }
