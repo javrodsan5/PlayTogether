@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -36,7 +37,7 @@ public class Meeting extends NamedEntity {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "meeting")
+    @ManyToMany
     private List<User> participants;
 
     @Column(name = "description")

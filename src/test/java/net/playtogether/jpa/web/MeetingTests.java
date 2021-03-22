@@ -1,4 +1,4 @@
-package net.playtogether.jpa.tests;
+package net.playtogether.jpa.web;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -19,6 +19,7 @@ import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValu
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
@@ -46,7 +47,7 @@ public class MeetingTests {
 //		.andExpect(status().is2xxSuccessful());
 //		
 //		Collection<Meeting> meetingEntities = meetingRepository.findAll();
-//		assertThat(meetingEntities.size()).isEqualTo(3);
+//		assertThat(meetingEntities.size()).isEqualTo(2);
 //	
 //		}
 //	  
@@ -78,5 +79,16 @@ public class MeetingTests {
 //		
 //		
 //	}
-
+	  
+//	//Test join meeting controller
+//		@Test
+//		@Transactional
+//		void joinMeeting() throws Exception{
+//			this.mockMvc.perform(get("/meetings/2/join")).andExpect(status().is2xxSuccessful());
+//			
+//			
+//			Meeting meetingEntity = meetingRepository.findById(2).orElse(null);
+//			assertThat(meetingEntity.getParticipants().size()).isEqualTo(1);
+//			
+//		}
 }
