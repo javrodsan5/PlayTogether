@@ -44,7 +44,7 @@ public class SportServiceTests {
 		assertThat(sport3.getName()).isEqualTo("Futbol sala");
 	}
 	
-	// FIND SPORT BY TYPE
+	// FIND SPORTS BY TYPE
 		@Test
 		void shouldFindSportsWithCorrectType() throws Exception {
 			SportType st = new SportType();
