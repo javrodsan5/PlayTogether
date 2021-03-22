@@ -213,4 +213,21 @@ background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
   width: 100%;
 }
 
+h2{
+	padding-left: 12px;
+}
 
+.boxed{
+	margin-left: 20px;
+	border-style: solid;
+	width:30%;
+}
+
+.boxed p{
+	font-size: 12pt;
+	padding-left:20px;
+}
+
+.imp {
+	background-color:#d2d2d2; 	
+}
