@@ -8,11 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,7 +37,7 @@ public class Meeting extends NamedEntity {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "meeting")
+    @ManyToMany
     private List<User> participants;
 
     @Column(name = "description")

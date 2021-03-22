@@ -64,8 +64,8 @@ public class User extends NamedEntity {
 	@ManyToMany(mappedBy = "participants")
 	private List<Team> teams;
 
-	@ManyToOne
+	@ManyToMany
 	@JoinColumn(name = "meetings_id")
-	private Meeting meeting;
+	private List<Meeting> meetings;
 
 }
