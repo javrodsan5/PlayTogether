@@ -6,9 +6,9 @@ services:
 before_install:
   - chmod +x mvnw
   - mysql -e 'CREATE DATABASE playtogetherdb;'
-  - mysql -e 'CREATE USER 'playtogether-user' IDENTIFIED BY 'playtogetherpassword';'
-  - mysql -e 'GRANT USAGE ON *.* TO 'playtogether-user'@'%' IDENTIFIED BY 'playtogetherpassword';'
-  - mysql -e 'GRANT ALL privileges ON `playtogetherdb`.* TO 'playtogether-user'@'%';'
+  - mysql -e 'CREATE USER "playtogether-user" IDENTIFIED BY "playtogetherpassword";'
+  - mysql -e 'GRANT USAGE ON *.* TO "playtogether-user"@"%" IDENTIFIED BY "playtogetherpassword";'
+  - mysql -e 'GRANT ALL privileges ON `playtogetherdb`.* TO "playtogether-user"@"%";'
   - mysql -e 'FLUSH PRIVILEGES;'
   - sudo apt-get install jq
   - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
