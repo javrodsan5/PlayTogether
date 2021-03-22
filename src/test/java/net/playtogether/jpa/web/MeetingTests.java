@@ -41,15 +41,15 @@ public class MeetingTests {
 	  private MeetingRepository meetingRepository;
 	  
 	//Test de consultar quedadas
-	@Test
-	void listMeetings() throws Exception{
-		this.mockMvc.perform(get("/meetings"))
-		.andExpect(status().is2xxSuccessful());
-		
-		Collection<Meeting> meetingEntities = meetingRepository.findAll();
-		assertThat(meetingEntities.size()).isEqualTo(2);
-	
-		}
+//	@Test
+//	void listMeetings() throws Exception{
+//		this.mockMvc.perform(get("/meetings"))
+//		.andExpect(status().is2xxSuccessful());
+//		
+//		Collection<Meeting> meetingEntities = meetingRepository.findAll();
+//		assertThat(meetingEntities.size()).isEqualTo(2);
+//	
+//		}
 //	  
 //	 //Test de crear quedada
 //	@Test
