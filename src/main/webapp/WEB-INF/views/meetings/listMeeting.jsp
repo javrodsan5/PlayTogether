@@ -7,7 +7,7 @@
  <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
  <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <body>
-<playtogether:layout pageName="sports">
+<playtogether:layout pageName="meetings">
 <table id="meetingTable" class="table table-striped">
         <thead>
             <tr>

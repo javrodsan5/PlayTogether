@@ -9,7 +9,7 @@
 
 <h2>Crear un torneo</h2>
 
-<form:form action="/championships/add" method="POST" modelAttribute="championship">
+<form:form  method="POST" modelAttribute="championship">
 	<div>
 		<label for="startDate">Fecha Inicio:</label><br> <br> 
 		<input type="text" id="startDate" name="startDate"><br> <br> 
@@ -19,13 +19,7 @@
 		<br> <input type="text" id="city" name="city"><br> <br>
 		<label for="description">Description:</label><br> <br> <input
 			type="text" id="description" name="description"><br> <br>
-			
-		<label for="deportes">Deportes:</label><br> <br>
-		<select name="sport">
-          <c:forEach var="item" items="${listaDeportes}">
-            <option value="${item.id}">${item.name}</option>
-          </c:forEach>
-        </select>
+		<input type="hidden" name="sport" value="${deporte}"/>
 		<input type="submit" value="Enviar">
 	</div>
 </form:form>
