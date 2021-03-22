@@ -30,5 +30,4 @@ public class Sport extends NamedEntity {
     @OneToMany(mappedBy = "sport")
     private List<Meeting> meetings;
     
-    
 }
