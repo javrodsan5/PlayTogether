@@ -55,8 +55,10 @@ public class ChampionshipController {
 		@GetMapping("/sports/{sportId}/championships")
 		public String listChampionships(ModelMap model,@PathVariable("sportId") Integer sportId) {
 			Collection<Championship>championships= this.championshipService.listChampionshipsBySport(sportId);
+			Sport sport = this.sportService.findSportById(sportId);
 			model.addAttribute("championships",championships);
 			model.addAttribute("deporte",sportId);
+			model.addAttribute("nombreDeporte", sport.getName());
 			return "championships/listChampionship";
 		}
 		

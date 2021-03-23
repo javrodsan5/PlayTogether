@@ -9,23 +9,25 @@
  
 <playtogether:layout pageName="championships">
 <body>
+<h1><strong>Torneos de ${nombreDeporte}</strong></h1>
+<br/>
 <table id="championshipTable" class="table table-striped">
         <thead>
             <tr>
-                <th style="width: 20%;">Deporte</th>
                 <th style="width: 30%;">Ciudad</th>
                 <th style="width: 30%;">Descripción</th>
                 <th style="width: 20%;">Fecha Inicio</th>
+                <th style="width: 20%;">Fecha Fin</th>
                 <th style="width: 20%">Ver más</th>
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${championships}" var="championship">
                 <tr>
-                    <td><c:out value="${championship.sport.id}" /></td>
                     <td><c:out value="${championship.city}" /></td>
                     <td><c:out value="${championship.description}" /></td>
                     <td><c:out value="${championship.startDate}" /></td>
+                    <td><c:out value="${championship.finishDate}" /></td>
                     <td><spring:url value="/sports/{deporte}/championships/{championshipId}"
                             var="championship2Url">
                             <spring:param name="championshipId" value="${championship.id}" />
