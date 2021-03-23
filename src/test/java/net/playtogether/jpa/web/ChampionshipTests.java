@@ -52,7 +52,7 @@ public class ChampionshipTests {
 	  
 	 //Test de crear torneo
 	@Test
-	void createMeeting() throws Exception {
+	void createChampionship() throws Exception {
 	
 	this.mockMvc.perform(post("/sports/1/championships/add")
 			
@@ -70,7 +70,7 @@ public class ChampionshipTests {
 
 	//Test de consultar un torneo
 	@Test
-	void getMeeting() throws Exception{
+	void getChampionship() throws Exception{
 		this.mockMvc.perform(get("/sports/1/championships/1"))
 		.andExpect(status().is2xxSuccessful());
 		

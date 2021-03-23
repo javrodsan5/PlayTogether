@@ -29,7 +29,7 @@ public class ChampionshipServiceTests {
 
 	// FIND CHAMPIONSHIP BY ID
 	@Test
-	void shouldFindSportWithCorrectId() throws Exception {
+	void shouldFindChampionshipWithCorrectId() throws Exception {
 		Championship championship = this.championshipService.findChampionshipId(3);
 		assertThat(championship.getCity()).isEqualTo("Sevilla");
 	}
