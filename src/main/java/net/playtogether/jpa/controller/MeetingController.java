@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Meeting;
+import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.service.MeetingService;
 import net.playtogether.jpa.service.SportService;
@@ -60,8 +61,10 @@ public class MeetingController {
 	@GetMapping("/sports/{sportId}/meetings")
 	public String listMeetings(ModelMap model,@PathVariable("sportId") Integer sportId) {
 		Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(sportId);
+		Sport sport = this.sportService.findSportById(sportId);
 		model.addAttribute("meetings", meetings);
 		model.addAttribute("deporte",sportId);
+		model.addAttribute("nombreDeporte", sport.getName());
 		return "meetings/listMeeting";
 	}
 

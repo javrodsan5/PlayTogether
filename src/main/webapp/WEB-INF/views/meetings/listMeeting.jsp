@@ -8,6 +8,8 @@
  <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <body>
 <playtogether:layout pageName="meetings">
+<h1><strong>Quedadas de ${nombreDeporte}</strong></h1>
+<br/>
 <table id="meetingTable" class="table table-striped">
         <thead>
             <tr>
@@ -15,7 +17,6 @@
                 <th style="width: 30%;">Ciudad</th>
                 <th style="width: 30%;">Descripción</th>
                 <th style="width: 20%;">Fecha</th>
-                <th style="width: 20%">Deporte</th>
                 <th style="width: 20%">Ver más</th>
             </tr>
         </thead>
@@ -26,7 +27,6 @@
                     <td><c:out value="${meeting.city}" /></td>
                     <td><c:out value="${meeting.description}" /></td>
                     <td><c:out value="${meeting.date}" /></td>
-                    <td><c:out value="${meeting.sport.id}" /></td>
                     <td><spring:url value="/sports/{deporte}/meetings/{meetingId}"
                             var="meeting2Url">
                             <spring:param name="meetingId" value="${meeting.id}" />
