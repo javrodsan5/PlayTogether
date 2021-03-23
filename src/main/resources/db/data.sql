@@ -37,10 +37,11 @@ INSERT INTO matches VALUES(1, 1, '2021/06/15 11:00:00', 1, 1, 2);
 INSERT INTO payment_type VALUES(1, 1, 'Basico');
 INSERT INTO payment_type VALUES(2, 1, 'Premium');
 
-INSERT INTO statistics VALUES(1, 1, 1, 1);
+INSERT INTO users VALUES(1, 1, 'Antonio', '1999-02-20', 'antonio@gmail.com', 'password123', '659659654', 'antonio12', 1);
+INSERT INTO users VALUES(2, 1, 'Maria', '1989-05-21', 'maria1@gmail.com', 'password133', '666555222', 'maria23', 2);
 
-INSERT INTO users VALUES(1, 1, 'Antonio', '1999-02-20', 'antonio@gmail.com', 'password123', '659659654', 'antonio12', 1, 1);
-INSERT INTO users VALUES(2, 1, 'Maria', '1989-05-21', 'maria1@gmail.com', 'password133', '666555222', 'maria23', 2, 2);
+INSERT INTO statistics VALUES(1, 1, 1, 1);
+INSERT INTO statistics VALUES(2, 1, 2, 2);
 
 INSERT INTO payments VALUES(1, 1, 2.5, '2021/02/15 11:00:00', 1, 1);
 INSERT INTO payments VALUES(2, 1, 5.0, '2021/01/16 11:45:00', 1, 2);
