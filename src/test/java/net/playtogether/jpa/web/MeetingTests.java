@@ -47,7 +47,7 @@ public class MeetingTests {
 		.andExpect(status().is2xxSuccessful());
 		
 		Collection<Meeting> meetingEntities = meetingRepository.findAll();
-		assertThat(meetingEntities.size()).isEqualTo(3);
+		assertThat(meetingEntities.size()).isEqualTo(8);
 	
 		}
 	  
@@ -64,7 +64,7 @@ public class MeetingTests {
 			.with(csrf()))
 			.andExpect(status().is3xxRedirection());
 
-	Meeting meetingEntity = meetingRepository.findById(3).orElse(null);
+	Meeting meetingEntity = meetingRepository.findById(8).orElse(null);
 	assertThat(meetingEntity.getAddress()).isEqualTo("Calle 1");
 	}
 
