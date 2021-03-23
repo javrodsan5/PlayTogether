@@ -2,14 +2,16 @@ package net.playtogether.jpa.controller;
 
 import java.util.Collection;
 
-
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,6 +31,10 @@ public class ChampionshipController {
 		@Autowired
 		SportService sportService;
 	 
+		@InitBinder("championship")
+		public void initChampionshipBinder(WebDataBinder dataBinder) {
+			dataBinder.setValidator(new ChampionshipValidator());
+		}
 	 	
 	 	@GetMapping("/sports/{sportId}/championships/add")
 		public String initCreationChampionship(ModelMap model, @PathVariable("sportId") Integer sportId) {
@@ -39,7 +45,7 @@ public class ChampionshipController {
 		}
 
 		@PostMapping("/sports/{sportId}/championships/add")
-		public String postCreationMeeting(@ModelAttribute("championship") Championship championship, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId) {
+		public String postCreationMeeting(@Valid Championship championship, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId) {
 			if(!result.hasErrors()) {
 				championshipService.save(championship);
 				
