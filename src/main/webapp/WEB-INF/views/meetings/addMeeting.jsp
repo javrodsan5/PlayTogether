@@ -9,7 +9,7 @@
 <playtogether:layout pageName="sports">
 
 	<div style="margin-left: 45px">
-		<h2>Crear una quedada.</h2>
+		<h2>Crear una quedada de ${sport.name}</h2>
 
 		<form:form modelAttribute="meeting" commandName="meeting">
 			<div>

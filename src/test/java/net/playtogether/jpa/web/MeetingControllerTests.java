@@ -31,7 +31,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class MeetingTests {
+public class MeetingControllerTests {
 
 	  @Autowired
 	  private MockMvc mockMvc;
@@ -48,6 +48,17 @@ public class MeetingTests {
 		
 		Collection<Meeting> meetingEntities = meetingRepository.findAll();
 		assertThat(meetingEntities.size()).isEqualTo(3);
+	
+		}
+	
+	// Test negativo de consultar quedadas
+	@Test
+	void listMeetingsNegative() throws Exception{
+		this.mockMvc.perform(get("/sports/1/meetings"))
+		.andExpect(status().is2xxSuccessful());
+		
+		Collection<Meeting> meetingEntities = meetingRepository.findAll();
+		assertThat(meetingEntities.size()).isNotEqualTo(4);
 	
 		}
 	  
@@ -67,6 +78,21 @@ public class MeetingTests {
 	Meeting meetingEntity = meetingRepository.findById(3).orElse(null);
 	assertThat(meetingEntity.getAddress()).isEqualTo("Calle 1");
 	}
+	
+	 //Test de crear quedada negativo
+	@Test
+	void createMeetingNegative() throws Exception {
+	
+	this.mockMvc.perform(post("/sports/1/meetings/add")
+			.param("address", "Calle 1")
+			.param("city", "Sevilla")
+			.param("description", "aaaa")
+			.param("date", "2021-01-14 14:14")
+			.param("sport", "1")
+			.with(csrf()))
+			.andExpect(status().is2xxSuccessful());
+
+	}
 
 	//Test de consultar una quedada
 	@Test
@@ -76,6 +102,18 @@ public class MeetingTests {
 		
 		Meeting meetingEntity = meetingRepository.findById(1).orElse(null);
 		assertThat(meetingEntity.getName()).isEqualTo("Quedada1");
+		
+		
+	}
+	
+	//Test de consultar una quedada negative
+	@Test
+	void getMeetingNegative() throws Exception{
+		this.mockMvc.perform(get("/sports/1/meetings/1"))
+		.andExpect(status().is2xxSuccessful());
+		
+		Meeting meetingEntity = meetingRepository.findById(1).orElse(null);
+		assertThat(meetingEntity.getName()).isNotEqualTo("Quedada5");
 		
 		
 	}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Meeting;
+import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.service.MeetingService;
 import net.playtogether.jpa.service.SportService;
@@ -42,6 +43,8 @@ public class MeetingController {
 	public String initCreationMeeting(ModelMap model,@PathVariable("sportId") Integer sportId) {
 		model.put("meeting", new Meeting());
 		model.put("deporte", sportId);
+		Sport sport = sportService.findSportById(sportId);
+		model.put("sport", sport);
 		return "meetings/addMeeting";
 	}
 
