@@ -6,13 +6,10 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -24,7 +21,7 @@ import lombok.Setter;
 @Table(name = "meetings")
 @Getter
 @Setter
-public class Meeting extends NamedEntity {
+public class Meeting extends BaseEntity {
  
     
     @Column(name = "address")
@@ -33,7 +30,7 @@ public class Meeting extends NamedEntity {
     @Column(name = "city")
     private String city;
     
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     @Column(name = "date")
     private LocalDateTime date;
 

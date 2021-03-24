@@ -5,10 +5,7 @@ import java.util.Collection;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,15 +30,15 @@ public class SportServiceTests {
 	// FIND SPORT BY NAME
 	@Test
 	void shouldFindSportWithCorrectName() throws Exception {
-		Sport sport2 = this.sportService.findSportByName("Futbol 11");
-		assertThat(sport2.getName()).isEqualTo("Futbol 11");
+		Sport sport2 = this.sportService.findSportByName("Fútbol 11");
+		assertThat(sport2.getName()).isEqualTo("Fútbol 11");
 	}
 
 	// FIND SPORT BY ID
 	@Test
 	void shouldFindSportWithCorrectId() throws Exception {
 		Sport sport3 = this.sportService.findSportById(3);
-		assertThat(sport3.getName()).isEqualTo("Futbol sala");
+		assertThat(sport3.getName()).isEqualTo("Fútbol sala");
 	}
 	
 	// FIND SPORT BY TYPE

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.repository.ChampionshipRepository;
 
 @Service
@@ -41,4 +42,9 @@ public class ChampionshipService {
 		return championshipRepository.findAll();
 	}
 	
+	@Transactional(readOnly=true)
+	public Collection<Championship> listChampionshipsBySport(int sportId){
+		return championshipRepository.listChampionshipsBySport(sportId);
+	}
+
 }

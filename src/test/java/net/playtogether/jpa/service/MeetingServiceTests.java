@@ -35,21 +35,21 @@ public class MeetingServiceTests {
 	 @Test
 	 void listMeetingTest() {
 		 int numMeetings = this.meetingService.listMeetings().size();
-		 assertThat(numMeetings).isEqualTo(2);
+		 assertThat(numMeetings).isEqualTo(7);
 	 }
 	 
 	 //Test de consultar una quedada por id
 	 @Test
 	 void findMeetingByIdTest() {
 		 Meeting meeting = this.meetingService.findMeetingById(1);
-		 assertThat(meeting.getName()).isEqualTo("Quedada1");
+		 assertThat(meeting.getCity()).isEqualTo("Sevilla");
 	 }
 	 
 	 //Test de consultar quedadas por deporte
 	 @Test
 	 void findMeetingsBySportTest() {
 		 Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(1);
-		 assertThat(meetings.size()).isEqualTo(1);
+		 assertThat(meetings.size()).isEqualTo(6);
 	 }
 
 }

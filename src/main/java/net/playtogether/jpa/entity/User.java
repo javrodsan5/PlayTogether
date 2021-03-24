@@ -54,8 +54,8 @@ public class User extends NamedEntity {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Payment> payment;
 
-	@OneToOne(optional = true)
-	private Statistic statistics;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Statistic> statistics;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "type_id")
