@@ -14,9 +14,6 @@ public class BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
 	
-	@Version
-	private Integer version = 1;
-	
 	public Integer getId() {
 		return id;
 	}
@@ -25,18 +22,6 @@ public class BaseEntity {
 		this.id = id;
 	}
 
-	public Integer getVersion() {
-		return version;
-	}
-	
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
-	
-	public void incrementVersion() {
-		this.version = this.version + 1;
-	}
-	
 	public boolean isNew() {
 		return this.id == null;
 	}

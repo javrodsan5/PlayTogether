@@ -55,18 +55,16 @@
 				</c:forEach>
 		</div>
 
-			
+
 		<c:if test="${existe==false}">
-		<spring:url value="/meetings/${meeting.id}/join" var="joinUrl">
-		</spring:url>
-		<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
-		
+			<spring:url value="/meetings/${meeting.id}/join" var="joinUrl">
+			</spring:url>
+			<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
+
 		</c:if>
-		
+
 		<c:if test="${existe==true}">
-			<p> Ya estás participando en esta quedada! </p>
+			<p>¡Ya estás participando en esta quedada!</p>
 		</c:if>
-		
-	
 </playtogether:layout>
 </body>

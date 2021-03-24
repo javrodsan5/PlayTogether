@@ -75,7 +75,7 @@ public class MeetingTests {
 		.andExpect(status().is2xxSuccessful());
 		
 		Meeting meetingEntity = meetingRepository.findById(1).orElse(null);
-		assertThat(meetingEntity.getName()).isEqualTo("Quedada1");
+		assertThat(meetingEntity.getCity()).isEqualTo("Sevilla");
 		
 		
 	}
