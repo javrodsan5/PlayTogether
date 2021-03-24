@@ -44,7 +44,11 @@ public class MeetingController {
 	public String initCreationMeeting(ModelMap model,@PathVariable("sportId") Integer sportId) {
 		model.put("meeting", new Meeting());
 		model.put("deporte", sportId);
+		Sport sport = sportService.findSportById(sportId);
+		model.put("sport", sport);
+
 		return "meetings/createOrUpdateMeetingForm";
+
 	}
 
 	@PostMapping("/sports/{sportId}/meetings/add")

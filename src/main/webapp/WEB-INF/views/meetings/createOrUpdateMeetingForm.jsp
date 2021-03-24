@@ -10,11 +10,11 @@
 	<body>
 		<h2>
 			<c:if test="${!meeting['new']}">
-				Editar una quedada.</c:if>
+				Editar quedada.</c:if>
 		</h2>
 		<h2>
 			<c:if test="${meeting['new']}">
-				Crear una quedada.</c:if>
+				Crear una quedada de ${sport.name}.</c:if>
 		</h2>
 		<div style="margin-left: 45px">
 			<div class="crearMeeting">
