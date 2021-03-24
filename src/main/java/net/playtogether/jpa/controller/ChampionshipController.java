@@ -1,5 +1,7 @@
 package net.playtogether.jpa.controller;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import javax.validation.Valid;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -18,8 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.service.ChampionshipService;
+import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.SportService;
 
 @Controller
@@ -30,10 +35,18 @@ public class ChampionshipController {
 	 	
 		@Autowired
 		SportService sportService;
+		
+		@Autowired
+		MatchService matchService;
 	 
 		@InitBinder("championship")
 		public void initChampionshipBinder(WebDataBinder dataBinder) {
 			dataBinder.setValidator(new ChampionshipValidator());
+		}
+		
+		@InitBinder("match")
+		public void initMatchBinder(WebDataBinder dataBinder) {
+			dataBinder.setValidator(new MatchValidator());
 		}
 	 	
 	 	@GetMapping("/sports/{sportId}/championships/add")
@@ -45,7 +58,7 @@ public class ChampionshipController {
 		}
 
 		@PostMapping("/sports/{sportId}/championships/add")
-		public String postCreationMeeting(@Valid Championship championship, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId) {
+		public String postCreationChampionship(@Valid Championship championship, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId) {
 			if(!result.hasErrors()) {
 				championshipService.save(championship);
 				
@@ -69,10 +82,77 @@ public class ChampionshipController {
 		}
 		
 		@GetMapping("/sports/{sportId}/championships/{championshipId}")
-		public String meetingDetails(ModelMap model, @PathVariable ("championshipId") Integer championshipId) {
+		public String championshipDetails(ModelMap model,@PathVariable("sportId") Integer sportId, @PathVariable ("championshipId") Integer championshipId) {
 			Championship championship= this.championshipService.findChampionshipId(championshipId);
 			model.addAttribute("championship",championship);
 			return "championships/championshipDetails";
+		}
+		
+		@GetMapping("/sports/{sportId}/championships/{championshipId}/match/add")
+		public String initCreationMatch(ModelMap model, @PathVariable("sportId") Integer sportId, @PathVariable ("championshipId") Integer championshipId) {
+			Match match = new Match();
+			
+			model.addAttribute("match", match);	
+			model.addAttribute("championship", championshipId);
+			return "matches/createOrUpdateMatchForm";
+		}
+		
+		@PostMapping("/sports/{sportId}/championships/{championshipId}/match/add")
+		public String postCreationMatch(@Valid Match match, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId,  @PathVariable ("championshipId") Integer championshipId, Errors errors) {
+			
+			Championship championship = this.championshipService.findChampionshipId(championshipId);
+			
+			if (LocalDate.of(match.getDateTime().getYear(), match.getDateTime().getMonth(), match.getDateTime().getDayOfMonth()).isBefore(championship.getStartDate())) {
+				errors.rejectValue("dateTime", "La fecha debe ser posterior a la de inicio del torneo.",
+						"La fecha debe ser posterior a la de inicio del torneo.");
+			} else if (LocalDate.of(match.getDateTime().getYear(), match.getDateTime().getMonth(), match.getDateTime().getDayOfMonth()).isAfter(championship.getFinishDate())) {
+				errors.rejectValue("dateTime", "La fecha debe ser anterior a la de fin del torneo.",
+						"La fecha debe ser anterior a la de fin del torneo.");
+			}else if (match.getDateTime().isBefore(LocalDateTime.now())) {
+				errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.",
+						"La fecha debe ser posterior a la actual.");
+			}
+			
+			
+			if(!result.hasErrors()) {
+				matchService.save(match);
+				
+				return "redirect:/sports/"+sportId+"/championships/"+championshipId;
+			}else {
+			
+				model.put("championship", championshipId);
+				return  "matches/createOrUpdateMatchForm";
+			}
+		}
+		
+		@GetMapping("/sports/{sportId}/championships/{championshipId}/matches")
+		public String listMatches(ModelMap model,@PathVariable("sportId") Integer sportId,@PathVariable ("championshipId") Integer championshipId) {
+			Collection<Match>matches= this.matchService.listMatchesByChampionship(sportId);
+		
+			model.addAttribute("matches",matches);
+			model.addAttribute("deporte",sportId);
+			model.addAttribute("championship",championshipId);
+
+			return "matches/listMatch";
+		}
+		
+		@GetMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/result")
+		public String matchDetails(ModelMap model,@PathVariable("sportId") Integer sportId, @PathVariable ("championshipId") Integer championshipId,@PathVariable ("matchId") Integer matchId) {
+			Match match= this.matchService.findMatchById(matchId);
+			model.addAttribute("match",match);
+			return "matches/createOrUpdateMatchForm";
+		}
+		
+		@PostMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/result")
+		public String initMatchAddResult(@Valid Match match, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId,  @PathVariable ("championshipId") Integer championshipId, Errors errors) {
+			
+			
+			if (result.hasErrors()) {
+				model.put("match", match);
+				return "matches/createOrUpdateMatchForm";
+			}else {
+				return "redirect:/sports/"+sportId+"/championships/"+championshipId+"/matches";
+			}
 		}
 	 
 

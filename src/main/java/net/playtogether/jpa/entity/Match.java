@@ -34,7 +34,13 @@ public class Match extends BaseEntity {
 
     @NotNull
     @Column(name = "dateTime")
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     private LocalDateTime dateTime;
+    
+    @Column(name = "puntos1")
+    private Integer puntos1;
+    
+    @Column(name = "puntos2")
+    private Integer puntos2;
     
 }

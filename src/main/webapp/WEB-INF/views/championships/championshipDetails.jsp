@@ -36,7 +36,11 @@
         </tr>
     </table>
 </div>
-
+ <spring:url value="/sports/{deporte}/championships/{championshipId}/matches" var="dateUrl">
+	                         <spring:param name="deporte" value="${championship.sport.id}"/>
+	                         <spring:param name="championshipId" value="${championship.id}" />
+	                     </spring:url>
+	<a id="listMatch" href="${fn:escapeXml(dateUrl)}">Ver partidos</a>
 <body>
 
 </html>
