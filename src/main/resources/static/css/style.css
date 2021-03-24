@@ -1,5 +1,8 @@
 @CHARSET "ISO-8859-1";
 
+@import url(https://fonts.googleapis.com/css?family=Ubuntu);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
 #cards_landscape_wrap-2 {
 	text-align: center;
 	background: #F7F7F7;
@@ -95,9 +98,6 @@
 	border-radius: 20px;
 }
 
-body {
-	background: #e0e5ec;
-}
 
 h1 {
 	position: relative;
@@ -242,8 +242,63 @@ h2 {
 }
 
 
+.crearMeeting {
+  width: 100%;
+  margin: 3.125rem auto 0 auto;
+}
 
+@media (min-width: 576px) {
+  .crearMeeting {
+    max-width: 540px;
+  }
+}
 
+@media (min-width: 768px) {
+  .crearMeeting {
+    max-width: 720px;
+  }
+}
 
+:root {
+  --color-white: #ffffff;
+  --color-darkred: #590219;
+  --color-darkgreen: rgba(0, 27, 50, 0.8);
+  --color-green: #37af65;
+}
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+form {
+  background: rgba(0, 27, 50, 0.8);
+  padding: 2.5rem 0.625rem;
+  border-radius: 0.25rem;
+  margin-bottom: 40px;
+}
+.form-group {
+	margin: 0 auto 1.25rem auto;
+	padding: 0.25rem;
+}
+
+.form-group .botonMeeting{
+	display: block;
+  width: 100%;
+  padding: 0.75rem;
+  background: #9DF7C2;
+  color: inherit;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+label {
+	font-family: 'Raleway';
+	color: white;
+}
+
+body{
+    background: #FCD8CA;
+}
 
