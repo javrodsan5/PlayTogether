@@ -7,71 +7,42 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
 <playtogether:layout pageName="meetings">
-	<h2>
-		<c:if test="${!meeting['new']}">
+	<body>
+		<h2>
+			<c:if test="${!meeting['new']}">
 				Editar una quedada.</c:if>
-	</h2>
-	<h2>
-		<c:if test="${meeting['new']}">
+		</h2>
+		<h2>
+			<c:if test="${meeting['new']}">
 				Crear una quedada.</c:if>
-	</h2>
-	<div style="margin-left: 45px">
+		</h2>
+		<div style="margin-left: 45px">
+			<div class="crearMeeting">
+				<form:form modelAttribute="meeting" commandName="meeting"
+					id="survey-form">
+					<playtogether:localDateTime label="Fecha" name="date" id="date"></playtogether:localDateTime>
+					<playtogether:inputField label="Ciudad" name="city">
 
-		<form:form modelAttribute="meeting" commandName="meeting">
-			<div>
-				<playtogether:localDateTime label="Fecha" name="date" id="date"></playtogether:localDateTime>
-				<playtogether:inputField label="Ciudad" name="city" />
-				<playtogether:inputField label="Lugar de encuentro" name="address" />
-				<playtogether:inputField label="Descripción" name="description" />
-				<input type="hidden" name="sport" value="${deporte}" />
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
+					</playtogether:inputField>
+					<playtogether:inputField label="Lugar de encuentro" name="address" />
+					<playtogether:inputField label="Descripción" name="description" />
+					<input type="hidden" name="sport" value="${deporte}" />
+					<center>
+					<div class="form-group">
 						<c:choose>
 							<c:when test="${meeting['new']}">
-								<button class="btn btn-primary" type="submit">Crear</button>
+								<button class="botonMeeting" type="submit">Crear</button>
 							</c:when>
 							<c:otherwise>
-								<button class="btn btn-primary" type="submit">Actualizar
+								<button class="botonMeeting" type="submit">Actualizar
 									datos</button>
 							</c:otherwise>
 						</c:choose>
 					</div>
-				</div>
+					</center>
+				</form:form>
 			</div>
-		</form:form>
-	</div>
+		</div>
 
-	<section class="contact-wrap">
-		<form action="" class="contact-form">
-			<div class="col-sm-6">
-				<div class="input-block">
-					<label for="">First Name</label> <input type="text"
-						class="form-control">
-				</div>
-			</div>
-			<div class="col-sm-6">
-				<div class="input-block">
-					<label for="">Last Name</label> <input type="text"
-						class="form-control">
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<div class="input-block">
-					<label for="">Email</label> <input type="text" class="form-control">
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<div class="input-block">
-					<label for="">Message Subject</label> <input type="text"
-						class="form-control">
-				</div>
-			</div>
-			<div class="col-sm-12">
-				<div class="input-block textarea">
-					<label for="">Drop your message here</label>
-					<textarea rows="3" type="text" class="form-control"></textarea>
-				</div>
-			</div>
-		</form>
-	</section>
+	</body>
 </playtogether:layout>

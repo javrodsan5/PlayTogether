@@ -17,6 +17,8 @@
 	<properties>
 		<java.version>1.8</java.version>
 		<jacoco.version>0.8.6</jacoco.version>
+		<webjars-datetimepicker.version>2.5.20-1</webjars-datetimepicker.version>
+
 	</properties>
 	<dependencies>
 		<dependency>
@@ -105,6 +107,11 @@
 			<version>4.6.0-1</version>
 		</dependency>
 		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>datetimepicker</artifactId>
+			<version>${webjars-datetimepicker.version}</version>
+		</dependency>
+		<dependency>
 			<groupId>io.craftsman</groupId>
 			<artifactId>dozer-jdk8-support</artifactId>
 			<version>1.0.6</version>
@@ -113,29 +120,6 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>revision</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <verbose>true</verbose>
-                    <dateFormat>yyyy-MM-dd'T'HH:mm:ssZ</dateFormat>
-                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
-                    <generateGitPropertiesFilename>${project.build.outputDirectory}/git.properties
-                    </generateGitPropertiesFilename>
-                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
-                </configuration>
-            </plugin>
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
