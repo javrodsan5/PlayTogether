@@ -47,7 +47,7 @@ INSERT INTO teams VALUES(5, 'Equipo5', 2);
 INSERT INTO teams VALUES(6, 'Equipo6', 3);
 INSERT INTO teams VALUES(7, 'Equipo7', 3);
 
-INSERT INTO matches VALUES(1, '2021/06/15 11:00:00', 1, 1, 2);
+INSERT INTO matches VALUES(1, '2021/06/15 11:00:00', 1, 1, 2, 1, 0);
 
 INSERT INTO payment_type VALUES(1, 'Básico');
 INSERT INTO payment_type VALUES(2, 'Premium');
