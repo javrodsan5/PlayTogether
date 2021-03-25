@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Match;
+import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.MatchService;
@@ -127,7 +129,7 @@ public class ChampionshipController {
 		
 		@GetMapping("/sports/{sportId}/championships/{championshipId}/matches")
 		public String listMatches(ModelMap model,@PathVariable("sportId") Integer sportId,@PathVariable ("championshipId") Integer championshipId) {
-			Collection<Match>matches= this.matchService.listMatchesByChampionship(sportId);
+			Collection<Match>matches= this.matchService.listMatchesByChampionship(championshipId);
 		
 			model.addAttribute("matches",matches);
 			model.addAttribute("deporte",sportId);
@@ -144,13 +146,16 @@ public class ChampionshipController {
 		}
 		
 		@PostMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/result")
-		public String initMatchAddResult(@Valid Match match, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId,  @PathVariable ("championshipId") Integer championshipId, Errors errors) {
+		public String initMatchAddResult(@Valid Match match, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId,  @PathVariable ("championshipId") Integer championshipId,  @PathVariable ("matchId") Integer matchId, Errors errors) {
 			
 			
 			if (result.hasErrors()) {
 				model.put("match", match);
 				return "matches/createOrUpdateMatchForm";
 			}else {
+				Match matchToUpdate = this.matchService.findMatchById(matchId);
+				BeanUtils.copyProperties(match, matchToUpdate, "id", "dateTime", "team1", "team2", "championship");
+				this.matchService.save(matchToUpdate);
 				return "redirect:/sports/"+sportId+"/championships/"+championshipId+"/matches";
 			}
 		}

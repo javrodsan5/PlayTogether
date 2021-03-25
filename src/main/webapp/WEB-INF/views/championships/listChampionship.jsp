@@ -9,21 +9,24 @@
  
 <playtogether:layout pageName="championships">
 <body>
-<h1><strong>Torneos de ${nombreDeporte}</strong></h1>
+<div class="cardtitle">
+<h1 ><strong>Torneos de ${nombreDeporte}</strong></h1>
 <br/>
-<table id="championshipTable" class="table table-striped">
+</div>
+<div class="cardlist">
+<table id="championshipTable" class="table ">
         <thead>
-            <tr>
-                <th style="width: 30%;">Ciudad</th>
-                <th style="width: 30%;">Descripción</th>
-                <th style="width: 20%;">Fecha Inicio</th>
-                <th style="width: 20%;">Fecha Fin</th>
-                <th style="width: 20%">Ver más</th>
+            <tr class="rowtable" >
+                <th class="guiz-awards-header-title" style="width: 20%;">Ciudad</th>
+                <th  class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
+                <th class="guiz-awards-header-title" style="width: 20%;">Fecha Inicio</th>
+                <th class="guiz-awards-header-title" style="width: 20%;">Fecha Fin</th>
+                <th class="guiz-awards-header-title" style="width: 20 !important%"></th>
             </tr>
         </thead>
         <tbody>
             <c:forEach items="${championships}" var="championship">
-                <tr>
+                <tr class="rowtable" >
                     <td><c:out value="${championship.city}" /></td>
                     <td><c:out value="${championship.description}" /></td>
                     <td><c:out value="${championship.startDate}" /></td>
@@ -32,16 +35,24 @@
                             var="championship2Url">
                             <spring:param name="championshipId" value="${championship.id}" />
                             <spring:param name="deporte" value="${deporte}" />
-                        </spring:url> <a href="${fn:escapeXml(championship2Url)}">Ver más</a></td>
+                 
+                        </spring:url><div class="botoncito"> <a class="" href="${fn:escapeXml(championship2Url)}">Ver más</a></div></td>
+                        
                 </tr>
             </c:forEach>
         </tbody>
 
     </table>
+    </div>
+    <div class="cardbutton">
     <spring:url value="/sports/{deporte}/championships/add" var="dateUrl">
 	                         <spring:param name="deporte" value="${deporte}"/>
+	   
 	                     </spring:url>
-	<a id="createChampionship" href="${fn:escapeXml(dateUrl)}">Crear torneo</a>
+	              <div class="botoncitocrear">
+	<a id="createChampionship"  href="${fn:escapeXml(dateUrl)}">Crear torneo</a>
+	</div>
+	</div>
 </body>
 </html>
 </playtogether:layout>
