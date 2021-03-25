@@ -41,53 +41,59 @@ public class MeetingController {
 	}
 
 	@GetMapping("/sports/{sportId}/meetings/add")
-	public String initCreationMeeting(ModelMap model,@PathVariable("sportId") Integer sportId) {
+	public String initCreationMeeting(ModelMap model, @PathVariable("sportId") Integer sportId) {
 		model.put("meeting", new Meeting());
-		model.put("deporte", sportId);
-		return "meetings/createOrUpdateMeetingForm";
+		model.put("sportId", sportId);
+		model.put("sport", sportService.findSportById(sportId));
+		return "meetings/createMeetingForm";
 	}
 
 	@PostMapping("/sports/{sportId}/meetings/add")
-	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model,@PathVariable("sportId") Integer sportId) {
+	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model,
+			@PathVariable("sportId") Integer sportId) {
 		if (result.hasErrors()) {
-			model.put("deporte", sportId);
-			return "meetings/createOrUpdateMeetingForm";
+			model.put("sport", sportService.findSportById(sportId));
+			model.put("sportId", sportId);
+			return "meetings/createMeetingForm";
 		} else {
 			meetingService.save(meeting);
-			return "redirect:/sports/"+sportId+"/meetings";
+			return "redirect:/sports/" + sportId + "/meetings";
 		}
 
 	}
-	
+
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}/edit")
-	public String initUpdateMeeting(ModelMap model,@PathVariable("sportId") Integer sportId, @PathVariable("meetingId") Integer meetingId) {
+	public String initUpdateMeeting(ModelMap model, @PathVariable("sportId") Integer sportId,
+			@PathVariable("meetingId") Integer meetingId) {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
+		model.put("sport", sportService.findSportById(sportId));
 		model.put("meeting", meeting);
-		return "meetings/createOrUpdateMeetingForm";
+		return "meetings/updateMeetingForm";
 	}
 
 	@PostMapping("/sports/{sportId}/meetings/{meetingId}/edit")
 	public String postUpdateMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model,
 			@PathVariable("sportId") Integer sportId, @PathVariable("meetingId") Integer meetingId) {
 		if (result.hasErrors()) {
+			model.put("sport", sportService.findSportById(sportId));
 			model.put("meeting", meeting);
-			return "meetings/createOrUpdateMeetingForm";
+			return "meetings/updateMeetingForm";
 		} else {
 			Meeting meetingToUpdate = this.meetingService.findMeetingById(meetingId);
 			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport");
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
-			return "redirect:/sports/"+sportId+"/meetings";
+			return "redirect:/sports/" + sportId + "/meetings";
 		}
 
 	}
 
 	@GetMapping("/sports/{sportId}/meetings")
-	public String listMeetings(ModelMap model,@PathVariable("sportId") Integer sportId) {
+	public String listMeetings(ModelMap model, @PathVariable("sportId") Integer sportId) {
 		Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(sportId);
 		Sport sport = this.sportService.findSportById(sportId);
 		model.addAttribute("meetings", meetings);
-		model.addAttribute("deporte",sportId);
+		model.addAttribute("deporte", sportId);
 		model.addAttribute("nombreDeporte", sport.getName());
 		return "meetings/listMeeting";
 	}
@@ -98,12 +104,14 @@ public class MeetingController {
 		model.addAttribute("meeting", meeting);
 		Boolean b = true;
 		User u = this.userService.findUserById(1);
-		
+
 		if (meeting.getParticipants().stream().noneMatch(x -> x.getId() == u.getId())) {
 			b = false;
 		}
+		model.addAttribute("sport", meeting.getSport());
+
 		model.addAttribute("existe", b);
-		
+
 		return "meetings/meetingDetails";
 	}
 
@@ -111,7 +119,7 @@ public class MeetingController {
 	public String meetingJoin(ModelMap model, @PathVariable("meetingId") Integer meetingId) {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		User u = this.userService.findUserById(1);
-		
+
 		if (meeting.getParticipants().stream().noneMatch(x -> x.getId() == u.getId())) {
 
 			List<User> list = meeting.getParticipants();
@@ -119,10 +127,9 @@ public class MeetingController {
 			meeting.setParticipants(list);
 
 			this.meetingService.save(meeting);
-			
-		
+
 		}
-		
+
 		return meetingDetails(model, meetingId);
 	}
 
