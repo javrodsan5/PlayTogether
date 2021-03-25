@@ -11,6 +11,7 @@
 <spring:url value="/resources/images/favicon.png" var="favicon" />
 <link rel="shortcut icon" type="image/x-icon" href="${favicon}">
 
+
 <%-- CSS generated from LESS --%>
 <spring:url value="/css/style.css" var="css" />
 <link href="${css}" rel="stylesheet" />
@@ -20,10 +21,12 @@
 
 <spring:url value="/webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
 	var="bootstrap" />
+
 <link href="${bootstrap}" rel="stylesheet" />
 <script src="/webjars/bootstrap/4.6.0-1/js/bootstrap.bundle.min.js"></script>
 <script src="/webjars/jquery/3.5.1/jquery.slim.min.js"></script>
 <script src="/webjars/poppers.js/1.16.0/popper.min.js"></script>
+
 <spring:url
 	value="/webjars/datetimepicker/2.5.20-1/build/jquery.datetimepicker.full.min.js"
 	var="DTPjS" />
@@ -32,4 +35,5 @@
 	value="/webjars/datetimepicker/2.5.20-1/jquery.datetimepicker.css"
 	var="jQueryDTPCss" />
 <link href="${jQueryDTPCss}" rel="stylesheet" />
+
 </head>

@@ -24,7 +24,7 @@
 			<c:if test="${status.error}">
 				<span class="glyphicon glyphicon-remove form-control-feedback"
 					aria-hidden="true"></span>
-				<span class="help-inline">${status.errorMessage}</span>
+				<span class="help-inline" style="color: white;">${status.errorMessage}</span>
 			</c:if>
 			<script>
             jQuery.datetimepicker.setLocale('es');
