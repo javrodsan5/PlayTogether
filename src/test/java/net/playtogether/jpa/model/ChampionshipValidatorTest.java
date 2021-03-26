@@ -43,6 +43,7 @@ public class ChampionshipValidatorTest {
 		championship.setFinishDate(LocalDate.of(2022, 3, 4));
 		championship.setStartDate(LocalDate.of(2022, 2, 4));
 		championship.setSport(sport);
+		championship.setMaxTeams(8);
 		championship.setDescription(null);
 
 	
@@ -71,6 +72,7 @@ public class ChampionshipValidatorTest {
 		championship.setFinishDate(null);
 		championship.setStartDate(LocalDate.of(2022, 2, 4));
 		championship.setSport(sport);
+		championship.setMaxTeams(8);
 		championship.setDescription("hola es una prueba");
 
 	
@@ -99,6 +101,7 @@ public class ChampionshipValidatorTest {
 		championship.setFinishDate(LocalDate.of(2022, 3, 4));
 		championship.setStartDate(LocalDate.of(2022, 2, 4));
 		championship.setSport(sport);
+		championship.setMaxTeams(8);
 		championship.setDescription("hola es una prueba");
 
 	
@@ -127,6 +130,7 @@ public class ChampionshipValidatorTest {
 		championship.setFinishDate(LocalDate.of(2022, 3, 4));
 		championship.setStartDate(null);
 		championship.setSport(sport);
+		championship.setMaxTeams(8);
 		championship.setDescription("hola es una prueba");
 
 	
