@@ -51,11 +51,13 @@ public class MeetingController {
 	@PostMapping("/sports/{sportId}/meetings/add")
 	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model,
 			@PathVariable("sportId") Integer sportId) {
+		Sport sport = sportService.findSportById(sportId);
 		if (result.hasErrors()) {
-			model.put("sport", sportService.findSportById(sportId));
+			model.put("sport", sport);
 			model.put("sportId", sportId);
 			return "meetings/createMeetingForm";
 		} else {
+			meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam()*2);
 			meetingService.save(meeting);
 			return "redirect:/sports/" + sportId + "/meetings";
 		}
@@ -103,14 +105,19 @@ public class MeetingController {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		model.addAttribute("meeting", meeting);
 		Boolean b = true;
+		Boolean estaLlena = false;
 		User u = this.userService.findUserById(1);
 
 		if (meeting.getParticipants().stream().noneMatch(x -> x.getId() == u.getId())) {
 			b = false;
 		}
 		model.addAttribute("sport", meeting.getSport());
-
-		model.addAttribute("existe", b);
+		if(meeting.getNumberOfPlayers()<=meeting.getParticipants().size()) {
+			estaLlena=true;
+		}
+			model.addAttribute("existe", b);
+			model.addAttribute("estaLlena", estaLlena);
+			
 
 		return "meetings/meetingDetails";
 	}
@@ -120,7 +127,8 @@ public class MeetingController {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		User u = this.userService.findUserById(1);
 
-		if (meeting.getParticipants().stream().noneMatch(x -> x.getId() == u.getId())) {
+		if (meeting.getParticipants().stream().noneMatch(x -> x.getId() == u.getId()) &&
+				meeting.getNumberOfPlayers()>meeting.getParticipants().size()) {
 
 			List<User> list = meeting.getParticipants();
 			list.add(u);

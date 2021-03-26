@@ -72,6 +72,7 @@ public class MeetingControllerTests {
 		  testMeeting1.setDate(LocalDateTime.of(2021, 06, 12, 12, 00));
 		  testMeeting1.setParticipants(new ArrayList<User>());
 		  testMeeting1.setDescription("Una partidata");
+		  testMeeting1.setNumberOfPlayers(2);
 		  
 		  testMeeting2 = new Meeting();
 		  testMeeting2.setId(2);	 
@@ -89,7 +90,8 @@ public class MeetingControllerTests {
 		  s.setId(1);
 		  s.setMeetings(new ArrayList<Meeting>());
 		  s.setName("Tenis");
-		  s.setSportType(st);		  
+		  s.setSportType(st);	
+		  s.setNumberOfPlayersInTeam(1);
 		  
 		  User u = new User();
 		  u.setId(1);

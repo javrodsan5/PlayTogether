@@ -9,6 +9,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,5 +31,8 @@ public class Sport extends NamedEntity {
 
     @OneToMany(mappedBy = "sport")
     private List<Meeting> meetings;
+    
+    @Value("1")
+    private Integer numberOfPlayersInTeam;
     
 }

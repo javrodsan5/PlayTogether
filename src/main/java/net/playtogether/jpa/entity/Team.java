@@ -8,6 +8,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,5 +27,6 @@ public class Team extends NamedEntity {
     
     @ManyToMany
 	private List<User> participants;
+    
     
 }
