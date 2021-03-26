@@ -2,37 +2,55 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@ attribute name="name" required="true" rtexprvalue="true"
-	description="Opciones del menu: inicio, deportes,iniciar sesión"%>
+	description="Opciones del menu: inicio, deportes,iniciar sesiÃ³n"%>
 
-<style>
-</style>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+	crossorigin="anonymous">
 
-
-<nav class="navbar navbar-expand-lg navbar-light bg-info">
+<div class="navigation-wrap bg start-header start-style">
 	<div class="container">
-		<a href="#" class="navbar-brand mb-0 h1">PlayTogether</a>
-		<!--<span class="navbar-brand mb-0 h1"> Meu navbar</span>-->
-		<!--<a href="#" class="navbar-brand">
-                <img src="assets/star.svg" width="30px" height="30px" class="d-inline-block align-top mr-2" alt="">
-                Meu Navbar
-            </a>-->
+		<div class="row">
+			<div class="col-12">
+				<nav class="navbar navbar-expand-md navbar-lighty">
 
-		<button type="button" data-toggle="collapse" data-target="#meuNavbar"
-			class="navbar-toggler">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+					<a class="navbar-brand"><img src="/images/logo_opt.png"
+						alt="Logo app"></a><b><i class="title_logo">PlayTogether</i></b>
 
-		<div class="collapse navbar-collapse" id="meuNavbar">
-			<ul class="navbar-nav">
-				<li class="nav-item"><a href="#" class="nav-link active">Inicio</a>
-				</li>
-				<li class="nav-item"><a href="#" class="nav-link active">Deportes</a></li>
-				<li class="nav-item"><a href="#" class="nav-link">Regístrate</a>
-				</li>
-				<li class="nav-item"><a href="#" class="nav-link">Iniciar sesión</a>
-				</li>
-			</ul>
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbarSupportedContent"
+						aria-controls="navbarSupportedContent" aria-expanded="false"
+						aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+
+					<div class="collapse navbar-collapse" id="navbarSupportedContent">
+						<ul class="navbar-nav ml-auto py-4 py-md-0">
+
+
+							<li
+								class="${name=='welcome' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4'}">
+								<a class="nav-link" href="/">Inicio <i class="fa fa-home"></i></a>
+							</li>
+							<li
+								class="${name=='sports' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4'}">
+								<a class="nav-link" href="/sports">Deportes <i
+									class="fa fa-futbol-o"></i></a>
+							</li>
+							<li
+								class="${name=='login' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4'}"><a
+								class="nav-link" href="#">Login <i class="fa fa-sign-in"></i></a></li>
+							<li
+								class="${name=='register' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4'}">
+								<a class="nav-link" href="#"> Registro <i
+									class="fa fa-user-plus"></i></a>
+							</li>
+						</ul>
+					</div>
+
+				</nav>
+			</div>
 		</div>
 	</div>
-
-</nav>
+</div>
