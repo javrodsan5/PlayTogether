@@ -214,7 +214,7 @@ public class MeetingControllerTests {
 			.andExpect(model().attribute("meeting", hasProperty("description", is("Una partidata"))))
 			.andExpect(model().attribute("meeting", hasProperty("id", is(1))))
 			.andExpect(model().attribute("meeting", hasProperty("participants", is(testMeeting1.getParticipants()))))
-			.andExpect(view().name("meetings/createOrUpdateMeetingForm"));
+			.andExpect(view().name("meetings/updateMeetingForm"));
 		}
 		
 		@WithMockUser(value = "spring")
@@ -235,6 +235,6 @@ public class MeetingControllerTests {
 					.andExpect(status().isOk())
 					.andExpect(model().attributeHasErrors("meeting"))
 					.andExpect(model().attributeHasFieldErrors("meeting", "date"))
-					.andExpect(view().name("meetings/createOrUpdateMeetingForm"));
+					.andExpect(view().name("meetings/updateMeetingForm"));
 		}
 }
