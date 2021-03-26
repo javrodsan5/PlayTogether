@@ -27,20 +27,22 @@
 				<span class="help-inline" style="color: white;">${status.errorMessage}</span>
 			</c:if>
 			<script>
-            jQuery.datetimepicker.setLocale('es');
+          
+			 jQuery.datetimepicker.setLocale('es');
 
-            jQuery(${name}).datetimepicker({
-            	
-            	i18n:{
-            		  es:{
-            			dayOfWeekShort:[
-            		    "L", "M", "X", "J", 
-            		    "V", "S", "D",
-            		   ]
-            		  }
-            		 },
-            	minDate:'-1970/01/01'
-            	});
+	            jQuery(${name}).datetimepicker({
+	            	timepicker:false,
+	            	format: "Y/m/d",
+	            	i18n:{
+	            		  es:{
+	            			dayOfWeekShort:[
+	            		    "L", "M", "X", "J", 
+	            		    "V", "S", "D",
+	            		   ]
+	            		  }
+	            		 },
+	            	minDate:'-1970/01/01'
+	            	});
             </script>
 		</div>
 	</div>
