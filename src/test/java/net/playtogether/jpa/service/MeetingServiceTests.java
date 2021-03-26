@@ -49,7 +49,7 @@ public class MeetingServiceTests {
 	 @Test
 	 void findMeetingsBySportTest() {
 		 Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(1);
-		 assertThat(meetings.size()).isEqualTo(6);
+		 assertThat(meetings.size()).isEqualTo(7);
 	 }
 
 }

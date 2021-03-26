@@ -44,19 +44,9 @@ public class Meeting extends BaseEntity {
     @JoinColumn(name = "sport_id")
     private Sport sport;
     
-    public Meeting(int id, String address, String city, LocalDateTime date, List<User> participants, String description, Sport sport) {
-		this.id=id;
-		this.address=address;
-		this.city=city;
-		this.date=date;
-		this.participants=participants;
-		this.description=description;
-		this.sport=sport;
-	}
+    @Column(name="numberOfPlayers")
+    private Integer numberOfPlayers;
     
-    public Meeting () {
-    	
-    }
 
     
     

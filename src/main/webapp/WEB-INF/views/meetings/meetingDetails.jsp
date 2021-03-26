@@ -37,7 +37,8 @@
 		<div style="float: right; margin-right: 50px">
 			<h2>
 				Nº participantes:
-				<c:out value="${meeting.participants.size()}" />
+				<c:out value="${meeting.participants.size()}" />/
+				<c:out value="${meeting.numberOfPlayers}" />
 			</h2>
 			<div class="drop" style="float: right; margin-right: 50px">
 
@@ -61,7 +62,7 @@
 			</div>
 		</div>
 
-		<c:if test="${existe==false}">
+		<c:if test="${existe==false && estaLlena==false}">
 			<spring:url value="/meetings/${meeting.id}/join" var="joinUrl">
 			</spring:url>
 			<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
@@ -70,6 +71,9 @@
 
 		<c:if test="${existe==true}">
 			<p>¡Ya estás participando en esta quedada!</p>
+		</c:if>
+		<c:if test="${estaLlena==true}">
+			<p>La quedada a la que intenta unirse está completa.</p>
 		</c:if>
 		<br>
 		<br>
