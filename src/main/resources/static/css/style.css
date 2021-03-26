@@ -978,3 +978,31 @@ th{
 	max-height: 999px;
 	transform: translate3d(0, 0px, 0);
 }
+
+
+.member-card {
+  padding: 30px;
+  background-color: #9ec1c1;
+  color: white;
+  transition: all 0.2s ease-in-out;
+  -webkit-box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.7);
+  -moz-box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.7);
+  -ms-box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.7);
+  align-items: center;
+  letter-spacing: 2px;
+  margin: 10px;
+}
+
+
+.member-card .member-card-details .member-position {
+  font-size: 20px;
+  text-transform: uppercase;
+}
+.member-card .member-card-details .member-name {
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  font-family: 'Recursive', sans-serif;
+ 
+}

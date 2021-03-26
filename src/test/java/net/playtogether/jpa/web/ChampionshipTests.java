@@ -61,6 +61,7 @@ public class ChampionshipTests {
 			.param("startDate", "2021/06/14")
 			.param("finishDate", "2021/07/14")
 			.param("sport", "1")
+			.param("maxTeams", "8")
 			.with(csrf()))
 			.andExpect(status().is3xxRedirection());
 

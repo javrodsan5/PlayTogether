@@ -54,4 +54,8 @@ public class Championship extends NamedEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     @Column(name = "finishDate")
     private LocalDate finishDate;
+    
+    @NotNull
+    @Column(name = "maxTeams")
+    private Integer maxTeams;
 }
