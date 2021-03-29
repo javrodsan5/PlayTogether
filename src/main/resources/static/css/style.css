@@ -730,8 +730,8 @@ th{
 	color:black !important;
 }
 
-.cardform form input{
-	background: rgba(255,255,255,0.1);
+ form input{
+  background: rgba(255,255,255,0.1);
   border: none;
   font-size: 16px;
   height: auto;
@@ -745,7 +745,7 @@ th{
 
 }
 
-.cardform .butona{
+.butona{
 
   padding: 19px 39px 18px 39px;
   color: #FFF;
@@ -1005,4 +1005,9 @@ th{
   text-align: center;
   font-family: 'Recursive', sans-serif;
  
+}
+
+
+.form-control {
+	width: 120% !important;
 }

@@ -6,10 +6,11 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
  
 <playtogether:layout pageName="championships">
-<div class="cardtitle">
-<h1 class="auxcard"><strong>Crear un torneo</strong></h1>
+<div class="thirteen">
+<h1>Crear un torneo</h1>
 </div>
-<div class ="cardform">
+<div style="margin-left: 45px">
+			<div class="crearMeeting">
 <form:form  commandName="championship" modelAttribute="championship">
 	<div>
 
@@ -18,10 +19,13 @@
 		<playtogether:inputField label="Ciudad" name="city" />
 		<playtogether:inputField label="Descripción" name="description" />
 		<input type="hidden" name="sport" value="${deporte}"/>
+
 		<input class="butona" type="submit" value="Crear">
+
 	</div>
 	
 	
 </form:form>
 </div>
+	</div>
 </playtogether:layout>
