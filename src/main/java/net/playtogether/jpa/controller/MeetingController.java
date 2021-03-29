@@ -108,7 +108,7 @@ public class MeetingController {
 		Boolean estaLlena = false;
 		User u = this.userService.findUserById(1);
 
-		if (meeting.getParticipants().stream().noneMatch(x -> x.getId() == u.getId())) {
+		if (!meeting.getParticipants().contains(u)) {
 			b = false;
 		}
 		model.addAttribute("sport", meeting.getSport());
@@ -127,7 +127,7 @@ public class MeetingController {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		User u = this.userService.findUserById(1);
 
-		if (meeting.getParticipants().stream().noneMatch(x -> x.getId() == u.getId()) &&
+		if (!meeting.getParticipants().contains(u) &&
 				meeting.getNumberOfPlayers()>meeting.getParticipants().size()) {
 
 			List<User> list = meeting.getParticipants();
