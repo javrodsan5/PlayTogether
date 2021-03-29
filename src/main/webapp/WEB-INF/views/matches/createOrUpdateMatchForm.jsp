@@ -6,10 +6,11 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
  
 <playtogether:layout pageName="championships">
-<div class="cardtitle">
-<h1 class="auxcard">Crear un Partido</h1>
+<div class="thirteen">
+<h1>Crear un Partido</h1>
 </div>
-<div class ="cardform">
+<div style="margin-left: 45px">
+			<div class="crearMeeting">
 <form:form  commandName="match" modelAttribute="match">
 	<div>
 	 <c:if test="${match['new']}">
@@ -33,5 +34,6 @@
 		<input type="submit" class="butona" value="Enviar">
 	</div>
 </form:form>
+</div>
 </div>
 </playtogether:layout>
