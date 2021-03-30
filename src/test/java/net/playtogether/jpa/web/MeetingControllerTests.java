@@ -179,6 +179,7 @@ public class MeetingControllerTests {
 
 	}
 
+
 	// Test join meeting controller
 	@Test
 	@WithMockUser(value = "spring")
@@ -241,4 +242,5 @@ public class MeetingControllerTests {
 				.andExpect(model().attributeHasFieldErrors("meeting", "date"))
 				.andExpect(view().name("meetings/updateMeetingForm"));
 	}
+
 }

@@ -81,7 +81,8 @@
 	</c:if>
 
 	<c:if test="${participarEquipo==false}">
-		<p>¡Ya estás participando en este torneo!</p>
+		<h5>¡Ya estás participando en este torneo en el equipo <i><b><c:out
+				value="${miEquipo.name}" /></b></i>!</h5>
 	</c:if>
 
 	<spring:url
