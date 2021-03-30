@@ -101,6 +101,7 @@ public class ChampionshipController {
 		if (user.getTeams().stream().anyMatch(x -> x.getChampionship().getId().equals(championshipId))) {
 			b1 = false;
 			b2 = false;
+			model.addAttribute("miEquipo", user.getTeams().stream().filter(x-> x.getChampionship().getId().equals(championshipId)).findFirst().get());
 		}
 
 		if (championship.getTeams().size() >= championship.getMaxTeams()) {
@@ -206,7 +207,6 @@ public class ChampionshipController {
 			team.setParticipants(participants);
 			this.championshipService.save(team);
 
-			//model.put("championship", this.championshipService.findChampionshipId(championshipId));
 			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
 		}
 	}
