@@ -1,3 +1,4 @@
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ page session="false" trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -11,15 +12,21 @@
 
 <playtogether:layout pageName="teams">
 	<body>
-	<h2>Crear un equipo</h2>
-	
-	<form:form modelAttribute="team" commandName="team">
-		<div>
-			<playtogether:inputField label="Nombre de equipo" name="name"/><br> <br>
-				
-			<input type="submit"  value="Crear"/>
+	<div class="thirteen">
+		<h1>Crear un equipo</h1>
+	</div>
+	<div style="margin-left: 45px" >
+		<div class="crearMeeting">
+		<form:form id="survey-form" modelAttribute="team" commandName="team">
+			<playtogether:inputField label="Nombre de equipo" name="name" /><br> <br>
+			<center>
+			<div class="form-group">
+				<input class="button-meeting" type="submit"  value="Crear"/>
+			</div>
+			</center>
+		</form:form>
 		</div>
-	</form:form>
+	</div>
 	</body>
 </playtogether:layout>	
 	

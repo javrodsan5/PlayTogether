@@ -38,17 +38,21 @@
 				<c:otherwise>
 				    <thead>
 				        <tr>				        
+				        	<th style="width: 10%;">Número</th>
 				      		<th style="width: 30%;">Nombre de usuario</th>
 				            <th style="width: 30%;">Nombre</th>
 				            <th style="width: 30%;">Fecha de nacimiento</th>
 				        </tr>
 				    </thead>
 			        <tbody>
+			        	<c:set var="i" value="${1}"/>
 				        <c:forEach items="${team_participants}" var="user">
 				            <tr>
+				            	<td><c:out value="${i}" /></td>
 				            	<td><c:out value="${user.username}" /></td>
 				                <td><c:out value="${user.name}" /></td>		       				            
 				                <td><c:out value="${user.birthdate}" /></td>
+				                <c:set var="i" value="${i+1}"/>
 				            </tr>
 				        </c:forEach>
 				    </tbody>

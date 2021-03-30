@@ -251,6 +251,7 @@ public class ChampionshipController {
 			}
 
 	 		model.put("team_participants", team.getParticipants());
+	 		model.put("teamSize", team.getTeamSize());
 			return "teams/addParticipantsForm";	
 			
 		}

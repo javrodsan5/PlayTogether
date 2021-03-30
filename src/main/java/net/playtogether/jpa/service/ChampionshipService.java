@@ -83,5 +83,10 @@ public class ChampionshipService {
 	public List<Team> findTeamsByChampionshipId(Integer id) throws DataAccessException {
 		return this.teamRepository.findTeamsByChampionshipId(id);
 	}
+	
+	@Transactional
+	public Integer countTeams() {
+		return (int) this.teamRepository.count();
+	}
 
 }
