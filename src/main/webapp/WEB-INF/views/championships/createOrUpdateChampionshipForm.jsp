@@ -13,11 +13,14 @@
 			<div class="crearMeeting">
 <form:form  commandName="championship" modelAttribute="championship">
 	<div>
-
-		<playtogether:localDate label="Fecha inicio" name="startDate" id="startDte" ></playtogether:localDate>
-		<playtogether:localDate label="Fecha fin" name="finishDate" id="finishDate" ></playtogether:localDate>
+		<div style="display: inline-flex;">
+		<playtogether:localDate label="Inicio" name="startDate" id="startDte" ></playtogether:localDate>
+		<playtogether:localDate label="Fin" name="finishDate" id="finishDate" ></playtogether:localDate>
+		</div>
 		<playtogether:inputField label="Ciudad" name="city" />
 		<playtogether:inputField label="Descripción" name="description" />
+		<playtogether:selectField label="Número de equipos" 
+		name="maxTeams" size="3" names="${maximoEquipos}"></playtogether:selectField>
 		<input type="hidden" name="sport" value="${deporte}"/>
 
 		<input class="butona" type="submit" value="Crear">

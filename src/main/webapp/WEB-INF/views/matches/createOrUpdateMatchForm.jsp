@@ -8,6 +8,8 @@
 <playtogether:layout pageName="championships">
 <div class="thirteen">
 <h1>Crear un Partido</h1>
+<br>
+<h2>El torneo comienza el ${championshipObj.startDate} y finaliza el ${championshipObj.finishDate}</h2>
 </div>
 <div style="margin-left: 45px">
 			<div class="crearMeeting">
@@ -15,16 +17,16 @@
 	<div>
 	 <c:if test="${match['new']}">
 		<playtogether:localDateTime label="Fecha realización" name="dateTime" id="dateTime" ></playtogether:localDateTime>
-		<playtogether:inputField label="Equipo 1" name="team1"  />
-		<playtogether:inputField label="Equipo 2" name="team2"  />
+		<playtogether:selectField label="Equipo 1" name="team1" size="8" names="${equipos }"></playtogether:selectField>
+		<playtogether:selectField label="Equipo 2" name="team2" size="8" names="${equipos }"></playtogether:selectField>
 		<input type="hidden" label="Puntos Equipo 1" name="puntos1"  />
 		<input type="hidden" label="Puntos Equipo 2" name="puntos2"  />
 	 </c:if>
 	 <c:if test="${!match['new']}">
 	 	<div class="nomostrar">
 		<playtogether:localDateTime label="Fecha realización" name="dateTime" id="dateTime" ></playtogether:localDateTime>
-		<playtogether:inputField label="Equipo 1" name="team1"  />
-		<playtogether:inputField label="Equipo 2" name="team2"  />
+		<playtogether:selectField label="Equipo 1" name="team1" size="8" names="${equipos }"></playtogether:selectField>
+		<playtogether:selectField label="Equipo 2" name="team2" size="8" names="${equipos }"></playtogether:selectField>
 		</div>
 		<playtogether:inputField label="Puntos Equipo 1" name="puntos1"   />
 		<playtogether:inputField label="Puntos Equipo 2" name="puntos2" />

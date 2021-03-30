@@ -313,6 +313,13 @@ body {
 	display: block;
 }
 
+.thirteen h2 {
+	font-family: 'Crete Round';
+	font-size: 32px;
+	display: block;
+	text-align:center;
+}
+
 .Card1Meeting {
 	position: relative;
 	background: #fff;
@@ -1010,4 +1017,8 @@ th{
 
 .form-control {
 	width: 120% !important;
+}
+
+.inpstartDate{
+	width:100px;
 }

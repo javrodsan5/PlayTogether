@@ -2,6 +2,7 @@ package net.playtogether.jpa.controller;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -62,6 +63,11 @@ public class ChampionshipController {
 		Championship championship = new Championship();
 		model.addAttribute("championship", championship);
 		model.put("deporte", sportId);
+		List<Integer> maximoEquipos = new ArrayList<>();
+		maximoEquipos.add(4);
+		maximoEquipos.add(8);
+		maximoEquipos.add(16);
+		model.put("maximoEquipos", maximoEquipos);
 		return "championships/createOrUpdateChampionshipForm";
 	}
 
@@ -116,9 +122,12 @@ public class ChampionshipController {
 	public String initCreationMatch(ModelMap model, @PathVariable("sportId") Integer sportId,
 			@PathVariable("championshipId") Integer championshipId) {
 		Match match = new Match();
-
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		model.addAttribute("match", match);
 		model.addAttribute("championship", championshipId);
+		model.addAttribute("championshipObj", championship);
+		List<Team> equipos = (List<Team>) this.matchService.findTeams();
+		model.addAttribute("equipos",equipos);
 		return "matches/createOrUpdateMatchForm";
 	}
 
@@ -142,15 +151,19 @@ public class ChampionshipController {
 		} else if (match.getDateTime().isBefore(LocalDateTime.now())) {
 			errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");
+		}else if (match.getTeam1().getId()== match.getTeam2().getId()) {
+			errors.rejectValue("team1", "No puedes seleccionar el mismo equipo dos veces.", "No puedes seleccionar el mismo equipo dos veces.");
+			errors.rejectValue("team2", "No puedes seleccionar el mismo equipo dos veces.", "No puedes seleccionar el mismo equipo dos veces.");
 		}
 
 		if (!result.hasErrors()) {
 			matchService.save(match);
-
 			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
 		} else {
-
+			model.addAttribute("championshipObj", championship);
 			model.put("championship", championshipId);
+			List<Team> equipos = (List<Team>) this.matchService.findTeams();
+			model.addAttribute("equipos",equipos);
 			return "matches/createOrUpdateMatchForm";
 		}
 	}
