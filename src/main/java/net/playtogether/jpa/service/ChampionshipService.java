@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.repository.ChampionshipRepository;
@@ -18,14 +19,12 @@ import net.playtogether.jpa.repository.TeamRepository;
 public class ChampionshipService {
 
 	private ChampionshipRepository championshipRepository;
-
 	private TeamRepository teamRepository;
 
 	@Autowired
 	public ChampionshipService(ChampionshipRepository championshipRepository, TeamRepository teamRepository) {
 		this.championshipRepository = championshipRepository;
 		this.teamRepository = teamRepository;
-
 	}
 
 	@Transactional(readOnly = true)
@@ -49,6 +48,43 @@ public class ChampionshipService {
 	@Transactional(readOnly = true)
 	public Collection<Championship> listChampionshipsBySport(int sportId) {
 		return championshipRepository.listChampionshipsBySport(sportId);
+	}
+	
+	
+	@Transactional(readOnly=true)
+	public Team findTeamId(int id) throws DataAccessException {
+		return this.teamRepository.findById(id).orElse(null);
+	}
+	
+	@Transactional
+	public boolean save(final Team team) throws DataAccessException{
+		this.teamRepository.save(team);
+		return true;
+	}
+	
+	@Transactional(readOnly=true)
+	public Collection<Team> listTeams(){
+		return teamRepository.findAll();
+	}
+	
+	@Transactional(readOnly=true)
+	public List<User> findUserByNameOrUsername(String user) throws DataAccessException {
+		return this.teamRepository.findUserByNameOrUsername(user);
+	}
+	
+	@Transactional(readOnly=true)
+	public User findUsersById(Integer id) throws DataAccessException {
+		return this.teamRepository.findUserById(id);
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Team> findTeamsByChampionshipId(Integer id) throws DataAccessException {
+		return this.teamRepository.findTeamsByChampionshipId(id);
+	}
+	
+	@Transactional
+	public Integer countTeams() {
+		return (int) this.teamRepository.count();
 	}
 
 	@Transactional(readOnly = true)

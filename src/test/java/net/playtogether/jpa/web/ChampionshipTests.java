@@ -4,7 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+import net.playtogether.jpa.repository.ChampionshipRepository;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Meeting;
@@ -44,6 +47,9 @@ public class ChampionshipTests {
 
 	@MockBean
 	private ChampionshipService championshipService;
+  
+  @Autowired
+  private ChampionshipRepository championshipRepository;
 
 	private Championship testChampionship;
 
@@ -106,16 +112,35 @@ public class ChampionshipTests {
 	@WithMockUser(value = "spring")
 
 	void createChampionship() throws Exception {
-
 		this.mockMvc.perform(post("/sports/1/championships/add")
-
 				.param("city", "Sevilla").param("description", "aafdfdfaa").param("startDate", "2021/06/14")
 				.param("finishDate", "2021/07/14").param("sport", "1").param("maxTeams", "8").with(csrf()))
 				.andExpect(status().is3xxRedirection());
 
 	}
 
-	// Test de consultar un torneo
+	//Test de crear equipo
+	@Test
+	void testInitCreationTeamForm() throws Exception {
+		this.mockMvc.perform(get("/championships/1/team/create"))
+		.andExpect(status().isOk())
+		.andExpect(view().name("teams/createOrUpdateTeamForm"))
+		.andExpect(model().attributeExists("team"));
+	}
+	
+	@Test
+	void testPostCreationTeamForm() throws Exception {
+		this.mockMvc.perform(post("/championships/1/team/create")
+				
+				.param("id", "7")
+				.param("name", "Equipo7")
+				
+				
+				.with(csrf()))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/championships/team/7"));
+
+  // Test de consultar un torneo
 	@Test
 	@WithMockUser(value = "spring")
 	void getChampionship() throws Exception {
