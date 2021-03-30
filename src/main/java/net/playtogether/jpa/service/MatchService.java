@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Meeting;
+import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.repository.MatchRepository;
 import net.playtogether.jpa.repository.MeetingRepository;
 
@@ -37,5 +38,11 @@ public class MatchService {
 	public Collection<Match> listMatchesByChampionship(int championshipId){
 		return matchRepository.listMatchesByChampionship(championshipId);
 	}
+	
+	@Transactional(readOnly=true)
+	public Collection<Team> findTeams(){
+		return matchRepository.findTeams();
+	}
+	
 
 }
