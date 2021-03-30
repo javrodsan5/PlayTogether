@@ -70,13 +70,11 @@
 
 	<c:if test="${crearEquipo==true}">
 		<spring:url
-			value="/sports/{deporte}/championships/{championshipId}/teams/create"
+			value="/championships/{championshipId}/team/create"
 			var="createTeam">
-			<spring:param name="deporte" value="${championship.sport.id}" />
 			<spring:param name="championshipId" value="${championship.id}" />
-			<a href="${fn:escapeXml(createTeam)}" class="btn btn-danger">Crear
-				equipo</a>
 		</spring:url>
+		<a href="${fn:escapeXml(createTeam)}" class="btn btn-danger">Crear equipo</a>
 
 	</c:if>
 
