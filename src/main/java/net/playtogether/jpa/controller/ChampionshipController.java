@@ -18,6 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -233,14 +234,14 @@ public class ChampionshipController {
 			List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);			
 			for (Team t: joinedTeams) {
 				if (t.getName().equals(team.getName())) {
-					errors.rejectValue("name", "Ya existe un equipo con ese nombre en este torneo",	"Ya existe un equipo con ese nombre en este torneo");
+					errors.rejectValue("name", "Ya existe un equipo con ese nombre en este torneo.",	"Ya existe un equipo con ese nombre en este torneo.");
 					break;
 				}
 			}			
 			
 			Championship championship =  this.championshipService.findChampionshipId(championshipId);
 			if (team.getParticipants().size() >= championship.getSport().getNumberOfPlayersInTeam()) {
-				errors.rejectValue("name", "El equipo ya está lleno",	"El equipo ya está lleno");
+				errors.rejectValue("name", "El equipo ya está lleno.",	"El equipo ya está lleno.");
 			}
 			
 			if(!result.hasErrors()) {
