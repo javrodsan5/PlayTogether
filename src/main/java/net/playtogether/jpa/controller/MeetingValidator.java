@@ -33,7 +33,12 @@ public class MeetingValidator implements Validator {
 		}
 
 		if (!StringUtils.hasLength(description) || description == null) {
-			errors.rejectValue("description", REQUIRED, REQUIRED); 
+			errors.rejectValue("description", REQUIRED, REQUIRED);
+		}
+
+		if (description.length() >= 300) {
+			errors.rejectValue("description", "El tamaño de la descripción no puede ser superior a 300 caracteres",
+					"El tamaño de la descripción no puede ser superior a 300 caracteres");
 		}
 
 		if (date == null) {

@@ -40,16 +40,14 @@ INSERT INTO championships VALUES(6, 'Torneo6', 'Sevilla', 'Descripcion del torne
 INSERT INTO championships VALUES(7, 'Torneo7', 'Sevilla', 'Descripcion del torneo', '2021/05/15 12:00:00', 16, '2021/04/15 11:00:00', 2);
 INSERT INTO championships VALUES(8, 'Torneo8', 'Sevilla', 'Descripcion del torneo', '2021/05/15 12:00:00', 16, '2021/04/15 11:00:00', 2);
 
-
-INSERT INTO teams VALUES(1, 'Equipo1', 1);
-INSERT INTO teams VALUES(2, 'Equipo2', 1);
-INSERT INTO teams VALUES(3, 'Equipo3', 2);
-INSERT INTO teams VALUES(4, 'Equipo4', 2);
-INSERT INTO teams VALUES(5, 'Equipo5', 2);
-INSERT INTO teams VALUES(6, 'Equipo6', 3);
-INSERT INTO teams VALUES(7, 'Equipo7', 3);
-INSERT INTO teams VALUES(8, 'Equipo8', 8);
-
+INSERT INTO teams VALUES(1, 'Equipo1', 1, 1);
+INSERT INTO teams VALUES(2, 'Equipo2', 1, 1);
+INSERT INTO teams VALUES(3, 'Equipo3', 1, 2);
+INSERT INTO teams VALUES(4, 'Equipo4', 1, 2);
+INSERT INTO teams VALUES(5, 'Equipo5', 1, 2);
+INSERT INTO teams VALUES(6, 'Equipo6', 1, 3);
+INSERT INTO teams VALUES(7, 'Equipo7', 1, 3);
+INSERT INTO teams VALUES(8, 'Equipo8', 1, 8);
 
 INSERT INTO matches VALUES(1, '2021/06/15 11:00:00', 1, 1, 2, 1, 0);
 

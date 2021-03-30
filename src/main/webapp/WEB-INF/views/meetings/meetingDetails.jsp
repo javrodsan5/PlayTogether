@@ -10,7 +10,7 @@
 
 
 <playtogether:layout pageName="meetings">
-	
+
 	<body>
 
 		<div class="Card1Meeting">
@@ -37,7 +37,8 @@
 		<div style="float: right; margin-right: 50px">
 			<h2>
 				Nº participantes:
-				<c:out value="${meeting.participants.size()}" />/
+				<c:out value="${meeting.participants.size()}" />
+				/
 				<c:out value="${meeting.numberOfPlayers}" />
 			</h2>
 			<div class="drop" style="float: right; margin-right: 50px">
@@ -87,5 +88,5 @@
 		<br>
 		<br>
 	</body>
-	
+
 </playtogether:layout>
