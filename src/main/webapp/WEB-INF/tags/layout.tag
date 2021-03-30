@@ -7,13 +7,15 @@
 
 <!doctype html>
 <html>
-<playtogether:htmlHeader />
+<div style="margin-bottom: 90px">
 
+	<playtogether:htmlHeader />
+</div>
 <body>
 	<playtogether:bodyHeader menuName="${pageName}" />
 
-<br>
-<br>
+	<br>
+	<br>
 
 	<div>
 
@@ -23,5 +25,4 @@
 
 
 </body>
-
 </html>

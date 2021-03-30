@@ -6,20 +6,34 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
  
 <playtogether:layout pageName="championships">
-
-<h2>Crear un Partido para el torneo</h2>
-
+<div class="thirteen">
+<h1>Crear un Partido</h1>
+</div>
+<div style="margin-left: 45px">
+			<div class="crearMeeting">
 <form:form  commandName="match" modelAttribute="match">
 	<div>
 	 <c:if test="${match['new']}">
-		<playtogether:inputField label="Fecha realización" name="dateTime" />
-		<playtogether:inputField label="Equipo 1" name="team1" />
-		<playtogether:inputField label="Equipo 2" name="team2" />
+		<playtogether:localDateTime label="Fecha realización" name="dateTime" id="dateTime" ></playtogether:localDateTime>
+		<playtogether:inputField label="Equipo 1" name="team1"  />
+		<playtogether:inputField label="Equipo 2" name="team2"  />
+		<input type="hidden" label="Puntos Equipo 1" name="puntos1"  />
+		<input type="hidden" label="Puntos Equipo 2" name="puntos2"  />
 	 </c:if>
-		<playtogether:inputField label="Puntos Equipo 1" name="puntos1" />
+	 <c:if test="${!match['new']}">
+	 	<div class="nomostrar">
+		<playtogether:localDateTime label="Fecha realización" name="dateTime" id="dateTime" ></playtogether:localDateTime>
+		<playtogether:inputField label="Equipo 1" name="team1"  />
+		<playtogether:inputField label="Equipo 2" name="team2"  />
+		</div>
+		<playtogether:inputField label="Puntos Equipo 1" name="puntos1"   />
 		<playtogether:inputField label="Puntos Equipo 2" name="puntos2" />
+	 </c:if>
+		
 		<input type="hidden" name="championship" value="${championship}"/>
-		<input type="submit" value="Enviar">
+		<input type="submit" class="butona" value="Enviar">
 	</div>
 </form:form>
+</div>
+</div>
 </playtogether:layout>

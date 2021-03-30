@@ -36,5 +36,6 @@ public class Team extends NamedEntity {
     
     private Integer teamSize;
     
+    
 }
 

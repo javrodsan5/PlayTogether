@@ -22,8 +22,6 @@ public class MatchValidator implements Validator {
 		Team team1 = match.getTeam1();
 		Team team2 = match.getTeam2();
 		Championship championship = match.getChampionship();
-		LocalDate startDate = championship.getStartDate();
-		LocalDate finishDate = championship.getStartDate();
 
 		if (team1 == null) {
 			errors.rejectValue("team1", REQUIRED, REQUIRED);

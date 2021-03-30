@@ -9,10 +9,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,8 +36,6 @@ public class ChampionshipServiceTests {
 	private UserService userService;
 
 	
-
-
 	// FIND CHAMPIONSHIP BY ID
 	@Test
 	void shouldFindChampionshipWithCorrectId() throws Exception {
@@ -48,7 +43,13 @@ public class ChampionshipServiceTests {
 		assertThat(championship.getCity()).isEqualTo("Sevilla");
 	}
 	
-	
+	// FIND ALL CHAMPIONSHIPS
+	@Test
+	void shouldFindAllChampionships() throws Exception {
+		Collection<Championship> championships = this.championshipService.listChampionship();
+		assertThat(championships.size()).isEqualTo(8);
+	}
+
 	// FIND TEAM BY ID
 	@Test
 	void shouldFindTeamWithCorrectId() throws Exception {
@@ -96,5 +97,13 @@ public class ChampionshipServiceTests {
 		Integer countAfter = this.championshipService.countTeams();
 		Assertions.assertThat(countBefore).isEqualTo(countAfter);
 	}
+
 	
+	// FIND ALL CHAMPIONSHIPS BY SPORT
+	@Test
+	void shouldFindListChampionshipsBySport() throws Exception {
+		Collection<Championship> championships = this.championshipService.listChampionshipsBySport(1);
+		assertThat(championships.size()).isEqualTo(6);
+	}
+
 }

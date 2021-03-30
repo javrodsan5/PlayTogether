@@ -24,5 +24,5 @@ public interface TeamRepository extends CrudRepository<Team, Integer> {
 	@Query("SELECT t FROM Team t where t.championship.id = ?1")
 	List<Team> findTeamsByChampionshipId(Integer id);
 	
-	
 }
+

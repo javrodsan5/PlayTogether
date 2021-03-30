@@ -6,18 +6,26 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
  
 <playtogether:layout pageName="championships">
-
-<h2>Crear un torneo</h2>
-
+<div class="thirteen">
+<h1>Crear un torneo</h1>
+</div>
+<div style="margin-left: 45px">
+			<div class="crearMeeting">
 <form:form  commandName="championship" modelAttribute="championship">
 	<div>
 
-		<playtogether:inputField label="Fecha inicio" name="startDate" />
-		<playtogether:inputField label="Fecha fin" name="finishDate" />
+		<playtogether:localDate label="Fecha inicio" name="startDate" id="startDte" ></playtogether:localDate>
+		<playtogether:localDate label="Fecha fin" name="finishDate" id="finishDate" ></playtogether:localDate>
 		<playtogether:inputField label="Ciudad" name="city" />
 		<playtogether:inputField label="Descripción" name="description" />
 		<input type="hidden" name="sport" value="${deporte}"/>
-		<input type="submit" value="Enviar">
+
+		<input class="butona" type="submit" value="Crear">
+
 	</div>
+	
+	
 </form:form>
+</div>
+	</div>
 </playtogether:layout>
