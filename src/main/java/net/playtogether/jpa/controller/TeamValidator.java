@@ -26,8 +26,8 @@ public class TeamValidator implements Validator {
 		}
 
 		if (!res && (name.length() > 50 || name.length() < 3)) {
-			errors.rejectValue("name", "El nombre del equipo debe tener entre 3 y 50 carácteres",
-					"El nombre del equipo debe tener entre 3 y 50 carácteres");
+			errors.rejectValue("name", "El nombre del equipo debe tener entre 3 y 50 carácteres.",
+					"El nombre del equipo debe tener entre 3 y 50 carácteres.");
 		}
 
 	}
