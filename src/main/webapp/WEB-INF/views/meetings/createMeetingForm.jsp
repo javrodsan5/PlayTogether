@@ -27,14 +27,15 @@
 
 					<playtogether:inputField label="Dirección" name="address" />
 					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
-					<input type="hidden" name="sport" value="${sportId}" />
-					<center>
-						<div class="form-group">
-							<button class="botonMeeting" type="submit">
-								<b>Crear</b>
-							</button>
-						</div>
-					</center>
+					<input type="hidden" name="sport" value="${sportId}"/>
+
+					<div class="form-group">
+						<button class="botonMeeting" type="submit">
+							<b>Crear</b>
+						</button>
+					</div>
+					<br>
+					<br>
 				</form:form>
 			</div>
 		</div>
