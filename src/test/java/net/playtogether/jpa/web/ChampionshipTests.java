@@ -78,7 +78,7 @@ public class ChampionshipTests {
 		.andExpect(status().is2xxSuccessful());
 		
 		Collection<Championship> championshipEntities = championshipRepository.findAll();
-		assertThat(championshipEntities.size()).isEqualTo(8);
+		assertThat(championshipEntities.size()).isEqualTo(7);
 	
 		}
 	  
@@ -123,13 +123,13 @@ public class ChampionshipTests {
 	void testPostCreationTeamForm() throws Exception {
 		this.mockMvc.perform(post("/championships/1/team/create")
 				
-				.param("id", "8")
-				.param("name", "Equipo8")
+				.param("id", "7")
+				.param("name", "Equipo7")
 				
 				
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/championships/team/8"));
+				.andExpect(view().name("redirect:/championships/team/7"));
 	}
 
 }
