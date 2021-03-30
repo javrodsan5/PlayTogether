@@ -160,17 +160,18 @@ public class ChampionshipController {
 			model.put("championship", championshipId);
 			return "matches/createOrUpdateMatchForm";
 		}
+	}
+	
+	@GetMapping("/sports/{sportId}/championships/{championshipId}/matches")
+	public String listMatches(ModelMap model,@PathVariable("sportId") Integer sportId,@PathVariable ("championshipId") Integer championshipId) {
+		Collection<Match>matches= this.matchService.listMatchesByChampionship(sportId);
+	
+		model.addAttribute("matches",matches);
+		model.addAttribute("deporte",sportId);
+		model.addAttribute("championship",championshipId);
 
-		@GetMapping("/sports/{sportId}/championships/{championshipId}/matches")
-		public String listMatches(ModelMap model,@PathVariable("sportId") Integer sportId,@PathVariable ("championshipId") Integer championshipId) {
-			Collection<Match>matches= this.matchService.listMatchesByChampionship(sportId);
-		
-			model.addAttribute("matches",matches);
-			model.addAttribute("deporte",sportId);
-			model.addAttribute("championship",championshipId);
-
-			return "matches/listMatch";
-		}
+		return "matches/listMatch";
+	}
 		
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/result")
 	public String matchDetails(ModelMap model, @PathVariable("sportId") Integer sportId,

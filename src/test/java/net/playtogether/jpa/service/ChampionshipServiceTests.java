@@ -61,7 +61,7 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindAllTeams() {
 		Collection<Team> listTeams = this.championshipService.listTeams();
-		assertThat(listTeams.size()).isEqualTo(7);
+		assertThat(listTeams.size()).isEqualTo(8);
 	}
 	
 	// FIND USER BY NAME OR USERNAME

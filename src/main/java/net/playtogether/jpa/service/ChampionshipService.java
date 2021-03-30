@@ -50,28 +50,6 @@ public class ChampionshipService {
 		return championshipRepository.listChampionshipsBySport(sportId);
 	}
 	
-	
-	@Transactional(readOnly=true)
-	public Team findTeamId(int id) throws DataAccessException {
-		return this.teamRepository.findById(id).orElse(null);
-	}
-	
-	@Transactional
-	public boolean save(final Team team) throws DataAccessException{
-		this.teamRepository.save(team);
-		return true;
-	}
-	
-	@Transactional(readOnly=true)
-	public Collection<Team> listTeams(){
-		return teamRepository.findAll();
-	}
-	
-	@Transactional(readOnly=true)
-	public List<User> findUserByNameOrUsername(String user) throws DataAccessException {
-		return this.teamRepository.findUserByNameOrUsername(user);
-	}
-	
 	@Transactional(readOnly=true)
 	public User findUsersById(Integer id) throws DataAccessException {
 		return this.teamRepository.findUserById(id);
@@ -106,16 +84,6 @@ public class ChampionshipService {
 	@Transactional(readOnly = true)
 	public List<User> findUserByNameOrUsername(String user) throws DataAccessException {
 		return this.teamRepository.findUserByNameOrUsername(user);
-	}
-
-	@Transactional(readOnly = true)
-	public User findUsersById(Integer id) throws DataAccessException {
-		return this.teamRepository.findUserById(id);
-	}
-
-	@Transactional(readOnly = true)
-	public List<Team> findTeamsByChampionshipId(Integer id) throws DataAccessException {
-		return this.teamRepository.findTeamsByChampionshipId(id);
 	}
 
 }

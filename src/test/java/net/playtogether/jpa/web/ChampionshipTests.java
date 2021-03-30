@@ -47,9 +47,6 @@ public class ChampionshipTests {
 
 	@MockBean
 	private ChampionshipService championshipService;
-  
-  @Autowired
-  private ChampionshipRepository championshipRepository;
 
 	private Championship testChampionship;
 
@@ -90,6 +87,7 @@ public class ChampionshipTests {
 		teams.add(t);
 		testChampionship.setTeams(teams);
 
+		given(this.championshipService.findTeamsByChampionshipId(8)).willReturn(teams);
 		given(this.championshipService.findChampionshipId(8)).willReturn(testChampionship);
 		given(this.sportService.findSportById(1)).willReturn(s);
 		given(this.championshipService.findTeamId(8)).willReturn(t);
@@ -130,16 +128,17 @@ public class ChampionshipTests {
 	
 	@Test
 	void testPostCreationTeamForm() throws Exception {
-		this.mockMvc.perform(post("/championships/1/team/create")
+		this.mockMvc.perform(post("/championships/8/team/create")
 				
-				.param("id", "7")
-				.param("name", "Equipo7")
+				.param("id", "9")
+				.param("name", "Equipo9")
 				
 				
 				.with(csrf()))
 				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/championships/team/7"));
-
+				.andExpect(view().name("redirect:/championships/team/9"));
+	}
+	
   // Test de consultar un torneo
 	@Test
 	@WithMockUser(value = "spring")
