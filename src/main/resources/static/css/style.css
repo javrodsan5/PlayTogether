@@ -595,6 +595,7 @@ body {
 .nomostrar {
 	visibility: hidden;
 	display: flex;
+	height: 1px;
 }
 
 .botoncito {
