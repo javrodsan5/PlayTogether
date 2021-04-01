@@ -1,30 +1,27 @@
+
 package net.playtogether.jpa.web;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
-
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.BDDMockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import net.playtogether.jpa.repository.ChampionshipRepository;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Meeting;
@@ -33,9 +30,8 @@ import net.playtogether.jpa.entity.SportType;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.service.ChampionshipService;
+import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.SportService;
-
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -43,15 +39,19 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 public class ChampionshipTests {
 
 	@Autowired
-	private MockMvc mockMvc;
+	private MockMvc				mockMvc;
 
 	@MockBean
-	private ChampionshipService championshipService;
+	private ChampionshipService	championshipService;
 
-	private Championship testChampionship;
+	private Championship		testChampionship;
 
 	@MockBean
-	private SportService sportService;
+	private SportService		sportService;
+
+	@MockBean
+	private MatchService		matchService;
+
 
 	@BeforeEach
 	void setup() {
@@ -67,83 +67,123 @@ public class ChampionshipTests {
 		s.setSportType(st);
 		s.setNumberOfPlayersInTeam(1);
 
-		testChampionship = new Championship();
-		testChampionship.setName("Torneo8");
-		testChampionship.setCity("Sevilla");
-		testChampionship.setDescription("Descripcion del torneo");
-		testChampionship.setStartDate(LocalDate.of(2021, 06, 15));
-		testChampionship.setFinishDate(LocalDate.of(2021, 06, 25));
-		testChampionship.setId(8);
-		testChampionship.setMaxTeams(16);
-		testChampionship.setMatches(new ArrayList<Match>());
-		testChampionship.setSport(s);
+		this.testChampionship = new Championship();
+		this.testChampionship.setName("Torneo8");
+		this.testChampionship.setCity("Sevilla");
+		this.testChampionship.setDescription("Descripcion del torneo");
+		this.testChampionship.setStartDate(LocalDate.of(2021, 06, 15));
+		this.testChampionship.setFinishDate(LocalDate.of(2021, 06, 25));
+		this.testChampionship.setId(8);
+		this.testChampionship.setMaxTeams(16);
+		this.testChampionship.setMatches(new ArrayList<Match>());
+		this.testChampionship.setSport(s);
 
 		Team t = new Team();
-		t.setChampionship(testChampionship);
+		t.setChampionship(this.testChampionship);
 		t.setId(8);
 		t.setName("Equipo8");
 		t.setParticipants(new ArrayList<User>());
 		List<Team> teams = new ArrayList<Team>();
 		teams.add(t);
-		testChampionship.setTeams(teams);
+		this.testChampionship.setTeams(teams);
 
-		given(this.championshipService.findTeamsByChampionshipId(8)).willReturn(teams);
-		given(this.championshipService.findChampionshipId(8)).willReturn(testChampionship);
-		given(this.sportService.findSportById(1)).willReturn(s);
-		given(this.championshipService.findTeamId(8)).willReturn(t);
+		User u = new User();
+		u.setId(1);
+		u.setName("Usuario1");
+		u.setCorreo("correo@correo.com");
+		u.setUsername("user1");
+		u.setPassword("password");
+		u.setBirthdate(LocalDate.of(1999, 3, 16));
+		u.setPhone("123456789");
+		u.setPayment(null);
+		u.setStatistics(null);
+		u.setType(null);
+		u.setTeams(null);
+		u.setMeetings(null);
+		List<User> users = new ArrayList<>();
+		users.add(u);
+
+		Team team1 = new Team();
+		team1.setChampionship(this.testChampionship);
+		team1.getParticipants().add(u);
+		Team team2 = new Team();
+		team2.setChampionship(this.testChampionship);
+
+		Match match = new Match();
+		match.setId(1);
+		match.setChampionship(this.testChampionship);
+		match.setDateTime(LocalDateTime.now());
+		match.setTeam1(team1);
+		match.setTeam2(team2);
+
+		BDDMockito.given(this.championshipService.findTeamsByChampionshipId(8)).willReturn(teams);
+		BDDMockito.given(this.championshipService.findChampionshipId(8)).willReturn(this.testChampionship);
+		BDDMockito.given(this.sportService.findSportById(1)).willReturn(s);
+		BDDMockito.given(this.championshipService.findTeamId(8)).willReturn(t);
+		BDDMockito.given(this.championshipService.findUserByNameOrUsername("Usuario1")).willReturn(users);
+		BDDMockito.given(this.matchService.findMatchById(1)).willReturn(match);
 
 	}
 
-//	// Test de consultar torneos
-//	@Test
-//	@WithMockUser(value = "spring")
-//	void listChampionships() throws Exception {
-//		this.mockMvc.perform(get("/sports/1/championships")).andExpect(status().is2xxSuccessful());
-//
-//		Collection<Championship> championshipEntities = championshipService.findAllChampionships();
-//		assertThat(championshipEntities.size()).isEqualTo(8);
-//
-//	}
+	//	// Test de consultar torneos
+	//	@Test
+	//	@WithMockUser(value = "spring")
+	//	void listChampionships() throws Exception {
+	//		this.mockMvc.perform(get("/sports/1/championships")).andExpect(status().is2xxSuccessful());
+	//
+	//		Collection<Championship> championshipEntities = championshipService.findAllChampionships();
+	//		assertThat(championshipEntities.size()).isEqualTo(8);
+	//
+	//	}
 
 	// Test de crear torneo
 	@Test
 	@WithMockUser(value = "spring")
 
 	void createChampionship() throws Exception {
-		this.mockMvc.perform(post("/sports/1/championships/add")
-				.param("city", "Sevilla").param("description", "aafdfdfaa").param("startDate", "2021/06/14")
-				.param("finishDate", "2021/07/14").param("sport", "1").param("maxTeams", "8").with(csrf()))
-				.andExpect(status().is3xxRedirection());
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("description", "aafdfdfaa").param("startDate", "2021/06/14").param("finishDate", "2021/07/14").param("sport", "1").param("maxTeams", "8")
+			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 	}
 
 	//Test de crear equipo
 	@Test
 	void testInitCreationTeamForm() throws Exception {
-		this.mockMvc.perform(get("/championships/1/team/create"))
-		.andExpect(status().isOk())
-		.andExpect(view().name("teams/createOrUpdateTeamForm"))
-		.andExpect(model().attributeExists("team"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/1/team/create")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("teams/createOrUpdateTeamForm"))
+			.andExpect(MockMvcResultMatchers.model().attributeExists("team"));
 	}
-	
+
 	@Test
 	void testPostCreationTeamForm() throws Exception {
-		this.mockMvc.perform(post("/championships/8/team/create")
-				
-				.param("id", "9")
-				.param("name", "Equipo9")
-				
-				
-				.with(csrf()))
-				.andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/championships/team/9"));
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/championships/8/team/create")
+
+			.param("id", "9").param("name", "Equipo9")
+
+			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/championships/team/9"));
 	}
-	
-  // Test de consultar un torneo
+
+	//Test de indicar resultado de partido
+	@Test
+	void getMatchDetails() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/1/match/1/result/team1?search=Usuario1")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+			.andExpect(MockMvcResultMatchers.view().name("matches/createOrUpdateMatchForm")).andExpect(MockMvcResultMatchers.model().attributeExists("match"));
+
+	}
+
+	@Test
+	void matchAddResult() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/1/match/1/result/team1?search=Usuario1")
+
+			.param("dateTime", "2022/04/05 12:00").param("team1", "1").param("team2", "2").param("puntos1", "5").param("puntos2", "4").param("puntos3", "5").param("puntos4", "4")
+
+			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/championships/1/matches"));
+	}
+
+	// Test de consultar un torneo
 	@Test
 	@WithMockUser(value = "spring")
 	void getChampionship() throws Exception {
-		this.mockMvc.perform(get("/sports/1/championships/8")).andExpect(status().is2xxSuccessful());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 	}
 
@@ -152,10 +192,10 @@ public class ChampionshipTests {
 	@WithMockUser(value = "spring")
 
 	void initJoin() throws Exception {
-		mockMvc.perform(get("/sports/1/championships/8/join/8")).andExpect(status().is3xxRedirection());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
-		Team team = championshipService.findTeamId(8);
-		assertThat(team.getParticipants().size() == 1);
+		Team team = this.championshipService.findTeamId(8);
+		Assertions.assertThat(team.getParticipants().size() == 1);
 
 	}
 
@@ -164,15 +204,15 @@ public class ChampionshipTests {
 	@WithMockUser(value = "spring")
 
 	void initJoinParticipantAlreadyJoined() throws Exception {
-		mockMvc.perform(get("/sports/1/championships/8/join/8")).andExpect(status().is3xxRedirection());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
-		Team team = championshipService.findTeamId(8);
-		assertThat(team.getParticipants().size() == 1);
+		Team team = this.championshipService.findTeamId(8);
+		Assertions.assertThat(team.getParticipants().size() == 1);
 
-		mockMvc.perform(get("/sports/1/championships/8/join/8")).andExpect(status().is3xxRedirection());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
-		Team teamAgain = championshipService.findTeamId(8);
-		assertThat(teamAgain.getParticipants().size() == 1);
+		Team teamAgain = this.championshipService.findTeamId(8);
+		Assertions.assertThat(teamAgain.getParticipants().size() == 1);
 
 	}
 
