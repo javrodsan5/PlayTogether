@@ -5,8 +5,10 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -88,6 +90,11 @@ public class ChampionshipController {
 			return "redirect:/sports/" + sportId + "/championships";
 		} else {
 			model.put("deporte", sportId);
+			List<Integer> maximoEquipos = new ArrayList<>();
+			maximoEquipos.add(4);
+			maximoEquipos.add(8);
+			maximoEquipos.add(16);
+			model.put("maximoEquipos", maximoEquipos);
 			return "championships/createOrUpdateChampionshipForm";
 		}
 	}
@@ -159,7 +166,7 @@ public class ChampionshipController {
 
 		if (!result.hasErrors()) {
 			this.matchService.save(match);
-			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+            return "redirect:/sports/" + sportId + "/championships/" + championshipId + "/matches";
 		} else {
 			model.addAttribute("championshipObj", championship);
 			model.put("championship", championshipId);
@@ -171,7 +178,7 @@ public class ChampionshipController {
 
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/matches")
 	public String listMatches(final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("championshipId") final Integer championshipId) {
-		Collection<Match> matches = this.matchService.listMatchesByChampionship(sportId);
+		Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
 
 		model.addAttribute("matches", matches);
 		model.addAttribute("deporte", sportId);
@@ -211,9 +218,15 @@ public class ChampionshipController {
 			model.put("noTeam", true);
 			return "matches/listMatch";
 		}
+		
+		List<Integer> listaPuntos = new ArrayList<>();
+		for (int i = 0; i <= 200; i++) {
+			listaPuntos.add(i);
+		}
 
 		model.addAttribute("match", match);
 		model.put("isPuntos1", isPuntos1);
+		model.put("listaPuntos", listaPuntos);
 
 		return "matches/createOrUpdateMatchForm";
 	}
@@ -232,7 +245,7 @@ public class ChampionshipController {
 	@PostMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/result/{team}")
 	public String initMatchAddResult(@Valid final Match match, final BindingResult result, final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("championshipId") final Integer championshipId,
 		@PathVariable("matchId") final Integer matchId, final Errors errors, @PathVariable("team") final String team) {
-
+		
 		if (result.hasErrors()) {
 			model.put("match", match);
 			return "matches/createOrUpdateMatchForm";
@@ -241,7 +254,14 @@ public class ChampionshipController {
 			if (match.getPuntos3() != null && match.getPuntos4() != null) {
 				Match matchToUpdate1 = this.matchService.findMatchById(matchId);
 				BeanUtils.copyProperties(match, matchToUpdate1, "id", "dateTime", "puntos1", "puntos2", "team1", "team2", "championship");
-				this.matchService.save(matchToUpdate1);
+				try {
+					this.matchService.save(matchToUpdate1);
+				} catch(ConstraintViolationException e) {
+					errors.rejectValue("puntos3", "El número debe estar entre 0 y 999", "El número debe estar entre 0 y 999");
+					errors.rejectValue("puntos4", "El número debe estar entre 0 y 999", "El número debe estar entre 0 y 999");
+					model.put("match", match);
+					return "matches/createOrUpdateMatchForm";
+				}
 			} else if (match.getPuntos1() != null && match.getPuntos2() != null) {
 				Match matchToUpdate2 = this.matchService.findMatchById(matchId);
 				BeanUtils.copyProperties(match, matchToUpdate2, "id", "dateTime", "puntos3", "puntos4", "team1", "team2", "championship");
@@ -310,7 +330,7 @@ public class ChampionshipController {
 			team.setChampionship(championship);
 			team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
 			this.championshipService.save(team);
-			return "redirect:/championships/team/" + team.getId();
+			return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; // CAMBIAR PARA EL SEGUNDO SPRINT (MARIO: "redirect:/championships/team/" + team.getId();)
 
 		} else {
 			model.put("team", team);

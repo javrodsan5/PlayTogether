@@ -14,6 +14,12 @@
 <br/>
 </div>
 <div class="cardlist">
+<c:if test="${noUser}">
+	<p>No se encontró al usuario deseado.</p>
+</c:if>
+<c:if test="${noTeam}">
+	<p>¡No perteneces a este equipo!</p>
+</c:if>
 <table id="matchTable" class="table">
         <thead>
             <tr class="rowtable">
@@ -86,12 +92,6 @@
 
     </table>
     </div>
-    <c:if test="${noUser}">
-		<p>No se encontró al usuario deseado.</p>
-	</c:if>
-	<c:if test="${noTeam}">
-		<p>¡No perteneces a este equipo!</p>
-	</c:if>
     <spring:url value="/sports/{deporte}/championships/{championshipId}/match/add" var="dateUrl">
 	                         <spring:param name="deporte" value="${deporte}"/>
 	                         <spring:param name="championshipId" value="${championship}" />
