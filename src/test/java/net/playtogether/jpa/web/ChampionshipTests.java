@@ -157,9 +157,11 @@ public class ChampionshipTests {
 	void testPostCreationTeamForm() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/championships/8/team/create")
 
-			.param("id", "9").param("name", "Equipo9")
+			.param("name", "Equipo9")
 
-			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/championships/team/9"));
+			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/championships/8"));
+
+
 	}
 
 	//Test de indicar resultado de partido
