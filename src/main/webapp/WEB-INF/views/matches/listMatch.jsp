@@ -37,10 +37,10 @@
             <c:forEach items="${matches}" var="match">
                 <tr class="rowtable">
                     <td><c:out value="${match.dateTime}" /></td>
-                    <td><c:out value="${match.team1.id}" /></td>
+                    <td><c:out value="${match.team1.name}" /></td>
                     <td><c:out value="${match.puntos1}" /></td>
                     <td><c:out value="${match.puntos2}" /></td>
-                    <td><c:out value="${match.team2.id}" /></td>
+                    <td><c:out value="${match.team2.name}" /></td>
                     <td><c:out value="${match.puntos3}" /></td>
                  	<td><c:out value="${match.puntos4}" /></td>
                         

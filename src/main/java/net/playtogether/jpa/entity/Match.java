@@ -47,4 +47,6 @@ public class Match extends BaseEntity {
 
 	@Column(name = "puntos4")
 	private Integer			puntos4;
+
+	
 }
