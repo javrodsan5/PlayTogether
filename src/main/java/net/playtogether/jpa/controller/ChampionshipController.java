@@ -153,15 +153,17 @@ public class ChampionshipController {
 
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 
-		if (LocalDate.of(match.getDateTime().getYear(), match.getDateTime().getMonth(), match.getDateTime().getDayOfMonth()).isBefore(championship.getStartDate())) {
-			errors.rejectValue("dateTime", "La fecha debe ser posterior a la de inicio del torneo.", "La fecha debe ser posterior a la de inicio del torneo.");
-		} else if (LocalDate.of(match.getDateTime().getYear(), match.getDateTime().getMonth(), match.getDateTime().getDayOfMonth()).isAfter(championship.getFinishDate())) {
-			errors.rejectValue("dateTime", "La fecha debe ser anterior a la de fin del torneo.", "La fecha debe ser anterior a la de fin del torneo.");
-		} else if (match.getDateTime().isBefore(LocalDateTime.now())) {
-			errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.", "La fecha debe ser posterior a la actual.");
-		} else if (match.getTeam1().getId() == match.getTeam2().getId()) {
-			errors.rejectValue("team1", "No puedes seleccionar el mismo equipo dos veces.", "No puedes seleccionar el mismo equipo dos veces.");
-			errors.rejectValue("team2", "No puedes seleccionar el mismo equipo dos veces.", "No puedes seleccionar el mismo equipo dos veces.");
+		if(match.getDateTime() != null) {
+			if (LocalDate.of(match.getDateTime().getYear(), match.getDateTime().getMonth(), match.getDateTime().getDayOfMonth()).isBefore(championship.getStartDate())) {
+				errors.rejectValue("dateTime", "La fecha debe ser posterior a la de inicio del torneo.", "La fecha debe ser posterior a la de inicio del torneo.");
+			} else if (LocalDate.of(match.getDateTime().getYear(), match.getDateTime().getMonth(), match.getDateTime().getDayOfMonth()).isAfter(championship.getFinishDate())) {
+				errors.rejectValue("dateTime", "La fecha debe ser anterior a la de fin del torneo.", "La fecha debe ser anterior a la de fin del torneo.");
+			} else if (match.getDateTime().isBefore(LocalDateTime.now())) {
+				errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.", "La fecha debe ser posterior a la actual.");
+			} else if (match.getTeam1().getId() == match.getTeam2().getId()) {
+				errors.rejectValue("team1", "No puedes seleccionar el mismo equipo dos veces.", "No puedes seleccionar el mismo equipo dos veces.");
+				errors.rejectValue("team2", "No puedes seleccionar el mismo equipo dos veces.", "No puedes seleccionar el mismo equipo dos veces.");
+			}
 		}
 
 		if (!result.hasErrors()) {
