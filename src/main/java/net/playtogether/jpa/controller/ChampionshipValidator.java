@@ -26,6 +26,10 @@ public class ChampionshipValidator implements Validator {
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
 		}
+		
+		if(isNumeric(city)) {
+			errors.rejectValue("city", "La ciudad introducida no puede tratarse de un número.", "La ciudad introducida no puede tratarse de un número.");
+		}
 
 		if (!StringUtils.hasLength(description) || description == null) {
 			errors.rejectValue("description", REQUIRED, REQUIRED); 
@@ -57,6 +61,15 @@ public class ChampionshipValidator implements Validator {
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Championship.class.isAssignableFrom(clazz);
+	}
+	
+	private static boolean isNumeric(String cadena) {
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		}catch(NumberFormatException nfe){
+			return false;
+		}
 	}
 
 }
