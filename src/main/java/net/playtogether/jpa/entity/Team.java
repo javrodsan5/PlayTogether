@@ -35,6 +35,8 @@ public class Team extends NamedEntity {
 	private List<User> participants = new ArrayList<>();
     
     private Integer teamSize;
+
+    
     
     
 }

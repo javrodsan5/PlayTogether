@@ -1,4 +1,5 @@
 <%@ page session="false" trimDirectiveWhitespaces="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -46,7 +47,7 @@
 													<spring:param name="sportId" value="${sport.id}" />
 												</spring:url>
 												<a href="${fn:escapeXml(statisticUrl)}"
-													class="custom-btn btn-4">Clasificación</a>
+													class="custom-btn btn-4">ClasificaciÃ³n</a>
 
 											</div>
 										</div>
