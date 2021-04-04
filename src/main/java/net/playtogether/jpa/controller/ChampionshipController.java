@@ -138,14 +138,19 @@ public class ChampionshipController {
 
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/add")
 	public String initCreationMatch(final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("championshipId") final Integer championshipId) {
-		Match match = new Match();
-		Championship championship = this.championshipService.findChampionshipId(championshipId);
-		model.addAttribute("match", match);
-		model.addAttribute("championship", championshipId);
-		model.addAttribute("championshipObj", championship);
-		List<Team> equipos = (List<Team>) this.matchService.findTeams();
-		model.addAttribute("equipos", equipos);
-		return "matches/createOrUpdateMatchForm";
+		Integer listChampionships = this.championshipService.listChampionship().size();
+		if(championshipId>0 && championshipId<=listChampionships) {
+			Match match = new Match();
+			Championship championship = this.championshipService.findChampionshipId(championshipId);
+			model.addAttribute("match", match);
+			model.addAttribute("championship", championshipId);
+			model.addAttribute("championshipObj", championship);
+			List<Team> equipos = (List<Team>) this.matchService.findTeams(championshipId);
+			model.addAttribute("equipos", equipos);
+			return "matches/createOrUpdateMatchForm";
+		}else {
+			return "error-500";
+		}
 	}
 
 	@PostMapping("/sports/{sportId}/championships/{championshipId}/match/add")
@@ -160,9 +165,13 @@ public class ChampionshipController {
 				errors.rejectValue("dateTime", "La fecha debe ser anterior a la de fin del torneo.", "La fecha debe ser anterior a la de fin del torneo.");
 			} else if (match.getDateTime().isBefore(LocalDateTime.now())) {
 				errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.", "La fecha debe ser posterior a la actual.");
+			} else if (match.getTeam1()==null || match.getTeam2()==null) {
+				errors.rejectValue("team1", "No hay equipos disponibles para este torneo.", "No hay equipos disponibles para este torneo.");
+				model.addAttribute("errorSelector","No hay equipos disponibles para este torneo.");
+			
 			} else if (match.getTeam1().getId() == match.getTeam2().getId()) {
-				errors.rejectValue("team1", "No puedes seleccionar el mismo equipo dos veces.", "No puedes seleccionar el mismo equipo dos veces.");
-				errors.rejectValue("team2", "No puedes seleccionar el mismo equipo dos veces.", "No puedes seleccionar el mismo equipo dos veces.");
+				errors.rejectValue("team1", "La fecha debe ser posterior a la actual.", "La fecha debe ser posterior a la actual.");
+				model.addAttribute("errorSelector","No puedes seleccionar el mismo equipo dos veces.");
 			}
 		}
 
@@ -172,7 +181,7 @@ public class ChampionshipController {
 		} else {
 			model.addAttribute("championshipObj", championship);
 			model.put("championship", championshipId);
-			List<Team> equipos = (List<Team>) this.matchService.findTeams();
+			List<Team> equipos = (List<Team>) this.matchService.findTeams(championshipId);
 			model.addAttribute("equipos", equipos);
 			return "matches/createOrUpdateMatchForm";
 		}

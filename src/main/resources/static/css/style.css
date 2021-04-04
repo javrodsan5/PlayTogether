@@ -1046,4 +1046,22 @@ form input {
 	color: white;
 }
 
+.selectorPartido{
+	width:49.6%;
+	display:inline-block;
+	padding-top: 5%;
+	padding-bottom: 5%;
+  	text-align:center;
+}
+
+.errorSelector{
+	color:white !important;
+	text-align: center;
+	padding-bottom:2%;
+}
+
+.help-inline{
+	color:white !important;
+}
+
 

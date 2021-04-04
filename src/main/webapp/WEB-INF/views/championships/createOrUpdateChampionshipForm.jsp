@@ -19,8 +19,8 @@
 		<playtogether:localDate label="Fin" name="finishDate" id="finishDate" ></playtogether:localDate>
 		</div>
 		<playtogether:inputField label="Ciudad" name="city" />
-		<playtogether:inputField label="Descripci�n" name="description" />
-		<playtogether:selectField label="N�mero de equipos" 
+		<playtogether:inputField label="Descripción" name="description" />
+		<playtogether:selectField label="Número de equipos" 
 		name="maxTeams" size="3" names="${maximoEquipos}"></playtogether:selectField>
 		<input type="hidden" name="sport" value="${deporte}"/>
 

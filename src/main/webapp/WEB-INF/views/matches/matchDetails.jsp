@@ -20,11 +20,11 @@
         </tr>
         <tr>
             <th>Equipo 1:</th>
-            <td><c:out value="${match.team1.id}"/></td>
+            <td><c:out value="${match.team1.name}"/></td>
         </tr>
         <tr>
             <th>Equipo 2:</th>
-            <td><c:out value="${match.team2.id}"/></td>
+            <td><c:out value="${match.team2.name}"/></td>
         </tr>
        
     </table>
