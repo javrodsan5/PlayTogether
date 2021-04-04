@@ -1,53 +1,71 @@
 package net.playtogether.jpa.entity;
 
-import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
- 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
- 
-    private static final long serialVersionUID = 1L;
-     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-     
-    @Column(name = "correo")
-    private String correo;
+@Setter
+@Getter
+public class User extends NamedEntity {
 
- 
-    public User() {
-        super();
-    }
-     
-    public User(Long id, String correo) {
-        super();
-        this.id = id;
-        this.correo = correo;
-    }
 
-	public Long getId() {
-		return id;
-	}
+	@Email
+	@Column(name = "correo")
+	private String correo;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@NotNull
+	@Column(name = "username")
+	private String username;
 
-	public String getCorreo() {
-		return correo;
-	}
+	@NotNull
+	@Column(name = "password")
+	private String password;
 
-	public void setCorreo(String correo) {
-		this.correo = correo;
-	}
- 
+	@NotNull
+	@Column(name = "birthdate")
+	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	private LocalDate birthdate;
 
- 
+	@NotNull
+	@Column(name = "phone")
+	@Pattern(regexp = "[0-9]{9}")
+	private String phone;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Payment> payment;
+
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private List<Statistic> statistics;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "type_id")
+	private UserType type;
+
+	@ManyToMany(mappedBy = "participants")
+	private List<Team> teams;
+
+	@ManyToMany
+	@JoinColumn(name = "meetings_id")
+	private List<Meeting> meetings;
+
 }
