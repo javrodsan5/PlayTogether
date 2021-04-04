@@ -8,7 +8,12 @@
  
 <playtogether:layout pageName="championships">
 <div class="thirteen">
+<c:if test="${match['new']}">
+<h1>Crear partido</h1>
+</c:if>
+<c:if test="${!match['new']}">
 <h1>Indicar resultado de partido</h1>
+</c:if>
 <br>
 <h2>El torneo comienza el ${championshipObj.startDate} y finaliza el ${championshipObj.finishDate}</h2>
 </div>
@@ -50,7 +55,7 @@
 		<div class="col-sm-10">
 		<select label="Puntos Equipo 1 (Equipo 1)" name="puntos1" >
 		<c:forEach var="puntos" items="${listaPuntos}">
-    		<option value="${puntos}"></option>
+    		<option value="${puntos}">${puntos}</option>
 		</c:forEach>
 		</select>
 		</div><br>
@@ -58,7 +63,12 @@
 		<label for="puntos2">Puntos Equipo 2 (Equipo 1)</label>
 		<div class="${cssGroup}">
 		<div class="col-sm-10">
-		<playtogether:selectField label="Puntos Equipo 2 (Equipo 1)" name="puntos2" size="200" names="${listaPuntos }"></playtogether:selectField>
+	
+		<select label="Puntos Equipo 2 (Equipo 1)" name="puntos2" >
+		<c:forEach var="puntos" items="${listaPuntos}">
+    		<option value="${puntos}">${puntos}</option>
+		</c:forEach>
+		</select>
 		</div>
 		</div>
 		<input type="hidden" label="Equipo 1" name="team1" value="${match.team1.id }" />
