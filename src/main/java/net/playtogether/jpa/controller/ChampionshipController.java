@@ -212,6 +212,8 @@ public class ChampionshipController {
 			model.addAttribute("matches", matches);
 			model.addAttribute("deporte", sportId);
 			model.addAttribute("championship", championshipId);
+			Championship championship = this.championshipService.findChampionshipId(championshipId);
+			model.addAttribute("championshipObj", championship);
 			return "matches/listMatch";
 		}
 
@@ -226,6 +228,8 @@ public class ChampionshipController {
 			model.addAttribute("matches", matches);
 			model.addAttribute("deporte", sportId);
 			model.addAttribute("championship", championshipId);
+			Championship championship = this.championshipService.findChampionshipId(championshipId);
+			model.addAttribute("championshipObj", championship);
 			model.put("noTeam", true);
 			return "matches/listMatch";
 		}
@@ -236,6 +240,8 @@ public class ChampionshipController {
 		}
 
 		model.addAttribute("match", match);
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
+		model.addAttribute("championshipObj", championship);
 		model.put("isPuntos1", isPuntos1);
 		model.put("listaPuntos", listaPuntos);
 

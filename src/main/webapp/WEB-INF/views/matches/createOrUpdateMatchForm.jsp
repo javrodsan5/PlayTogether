@@ -8,7 +8,7 @@
  
 <playtogether:layout pageName="championships">
 <div class="thirteen">
-<h1>Crear un Partido</h1>
+<h1>Indicar resultado de partido</h1>
 <br>
 <h2>El torneo comienza el ${championshipObj.startDate} y finaliza el ${championshipObj.finishDate}</h2>
 </div>
