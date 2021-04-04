@@ -40,8 +40,8 @@ public class MatchService {
 	}
 	
 	@Transactional(readOnly=true)
-	public Collection<Team> findTeams(){
-		return matchRepository.findTeams();
+	public Collection<Team> findTeams(Integer championshipId){
+		return matchRepository.findTeams(championshipId);
 	}
 	
 

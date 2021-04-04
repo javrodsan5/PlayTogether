@@ -42,10 +42,15 @@ public class MeetingController {
 
 	@GetMapping("/sports/{sportId}/meetings/add")
 	public String initCreationMeeting(ModelMap model, @PathVariable("sportId") Integer sportId) {
-		model.put("meeting", new Meeting());
-		model.put("sportId", sportId);
-		model.put("sport", sportService.findSportById(sportId));
-		return "meetings/createMeetingForm";
+		Integer listSports = this.sportService.findAll().size();
+		if(sportId>0 && sportId<=listSports) {
+			model.put("meeting", new Meeting());
+			model.put("sportId", sportId);
+			model.put("sport", sportService.findSportById(sportId));
+			return "meetings/createMeetingForm";
+		}else {
+			return "error-500";
+		}
 	}
 
 	@PostMapping("/sports/{sportId}/meetings/add")

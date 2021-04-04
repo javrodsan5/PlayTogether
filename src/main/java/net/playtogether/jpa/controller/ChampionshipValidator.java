@@ -21,6 +21,7 @@ public class ChampionshipValidator implements Validator {
 
 		LocalDate startDate = championship.getStartDate();
 		LocalDate finishDate = championship.getFinishDate();
+		Integer maxTeams = championship.getMaxTeams();
 
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
@@ -32,6 +33,10 @@ public class ChampionshipValidator implements Validator {
 
 		if (startDate == null) {
 			errors.rejectValue("startDate", REQUIRED, REQUIRED);
+		}
+		
+		if (maxTeams == null) {
+			errors.rejectValue("maxTeams", REQUIRED, REQUIRED);
 		}
 		else if (startDate.isBefore(LocalDate.now())) {
 			errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.",

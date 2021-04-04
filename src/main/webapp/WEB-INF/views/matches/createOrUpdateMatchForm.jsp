@@ -18,8 +18,24 @@
 	<div>
 	 <c:if test="${match['new'] && !noPuntos}">
 		<playtogether:localDateTime label="Fecha realización" name="dateTime" id="dateTime" ></playtogether:localDateTime>
-		<playtogether:selectField label="Equipo 1" name="team1" size="8" names="${equipos }"></playtogether:selectField>
-		<playtogether:selectField label="Equipo 2" name="team2" size="8" names="${equipos }"></playtogether:selectField>
+		<div class="selectorPartido">
+		<label>Equipo 1</label><br>
+		<select name="team1">
+           <c:forEach var="item" items="${equipos}">
+             <option value="${item.id}">${item.name}</option>
+           </c:forEach>
+         </select>
+         </div>
+         <div class="selectorPartido">
+         		<label>Equipo 2</label><br>
+		<select name="team2">
+           <c:forEach var="item" items="${equipos}">
+             <option value="${item.id}">${item.name}</option>
+           </c:forEach>
+         </select>
+         </div>
+         <div class="errorSelector">${errorSelector}</div>
+		
 		<input type="hidden" label="Puntos Equipo 1" name="puntos1"  />
 		<input type="hidden" label="Puntos Equipo 2" name="puntos2"  />
 		<input type="hidden" label="Puntos Equipo 3" name="puntos3"  />
