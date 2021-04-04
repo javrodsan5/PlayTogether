@@ -27,8 +27,8 @@
 						<playtogether:inputField label="Ciudad" name="city" />
 					</div>
 
-					<playtogether:inputField label="Direcci�n" name="address" />
-					<playtogether:inputField label="Descripci�n" name="description"></playtogether:inputField>
+					<playtogether:inputField label="Dirección" name="address" />
+					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
 					<input type="hidden" name="sport" value="${sportId}" />
 					
 					<div class="form-group">
