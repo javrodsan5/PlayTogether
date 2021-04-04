@@ -1,4 +1,5 @@
 <%@ page session="false" trimDirectiveWhitespaces="true"%>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -18,8 +19,8 @@
 		<playtogether:localDate label="Fin" name="finishDate" id="finishDate" ></playtogether:localDate>
 		</div>
 		<playtogether:inputField label="Ciudad" name="city" />
-		<playtogether:inputField label="Descripción" name="description" />
-		<playtogether:selectField label="Número de equipos" 
+		<playtogether:inputField label="Descripciï¿½n" name="description" />
+		<playtogether:selectField label="Nï¿½mero de equipos" 
 		name="maxTeams" size="3" names="${maximoEquipos}"></playtogether:selectField>
 		<input type="hidden" name="sport" value="${deporte}"/>
 

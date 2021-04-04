@@ -1,4 +1,5 @@
 <%@ page session="false" trimDirectiveWhitespaces="true"%>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -26,8 +27,8 @@
 						<playtogether:inputField label="Ciudad" name="city" />
 					</div>
 
-					<playtogether:inputField label="Dirección" name="address" />
-					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
+					<playtogether:inputField label="Direcciï¿½n" name="address" />
+					<playtogether:inputField label="Descripciï¿½n" name="description"></playtogether:inputField>
 					<input type="hidden" name="sport" value="${sportId}" />
 					
 					<div class="form-group">
