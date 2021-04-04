@@ -41,7 +41,7 @@
 														class="custom-btn btn-4">Torneos</a>
 												</c:if>
 
-												<spring:url value="/sports/{sportId}/statistics"
+												<spring:url value="#"
 													var="statisticUrl">
 													<spring:param name="sportId" value="${sport.id}" />
 												</spring:url>
