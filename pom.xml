@@ -106,11 +106,7 @@
 			<artifactId>bootstrap</artifactId>
 			<version>4.6.0-1</version>
 		</dependency>
-		<dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>datetimepicker</artifactId>
-			<version>${webjars-datetimepicker.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>io.craftsman</groupId>
 			<artifactId>dozer-jdk8-support</artifactId>

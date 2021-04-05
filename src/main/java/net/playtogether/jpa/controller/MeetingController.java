@@ -87,7 +87,7 @@ public class MeetingController {
 			return "meetings/updateMeetingForm";
 		} else {
 			Meeting meetingToUpdate = this.meetingService.findMeetingById(meetingId);
-			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport");
+			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "numberOfPlayers");
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
 			return "redirect:/sports/" + sportId + "/meetings";
