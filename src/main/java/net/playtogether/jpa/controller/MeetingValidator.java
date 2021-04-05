@@ -23,6 +23,10 @@ public class MeetingValidator implements Validator {
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
 		}
+		
+		if(isNumeric(city)) {
+			errors.rejectValue("city", "La ciudad introducida no puede tratarse de un número.", "La ciudad introducida no puede tratarse de un número.");
+		}
 
 		if (!StringUtils.hasLength(address) || address == null) {
 			errors.rejectValue("address", REQUIRED, REQUIRED);
@@ -44,14 +48,23 @@ public class MeetingValidator implements Validator {
 		if (date == null) {
 			errors.rejectValue("date", REQUIRED, REQUIRED);
 		} else if (date.isBefore(LocalDateTime.now())) {
-			errors.rejectValue("date", "La fecha debe ser anterior a la actual.",
-					"La fecha debe ser anterior a la actual.");
+			errors.rejectValue("date", "La fecha debe ser posterior a la actual.",
+					"La fecha debe ser posterior a la actual.");
 		}
 	}
 
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Meeting.class.isAssignableFrom(clazz);
+	}
+	
+	private static boolean isNumeric(String cadena) {
+		try {
+			Integer.parseInt(cadena);
+			return true;
+		}catch(NumberFormatException nfe){
+			return false;
+		}
 	}
 
 }
