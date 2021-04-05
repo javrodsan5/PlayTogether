@@ -23,13 +23,13 @@
 <table id="matchTable" class="table">
         <thead>
             <tr class="rowtable">
-                <th style="width: 20%;">Fecha y hora</th>
-                <th style="width: 20%;">Equipo 1</th>
-                <th style="width: 10%;">Puntos equipo 1 (Equipo 1)</th>
-                <th style="width: 10%;">Puntos equipo 2 (Equipo 1)</th>
-                <th style="width: 20%;">Equipo 2</th>
-                <th style="width: 10%;">Puntos equipo 1 (Equipo 2)</th>
-                <th style="width: 10%;">Puntos equipo 2 (Equipo 2)</th>
+                <th style="width: 10%;">Fecha y hora</th>
+                <th style="width: 10%;">Primer equipo</th>
+                <th style="width: 15%;">Puntos 1º equipo (Primer equipo)</th>
+                <th style="width: 15%;">Puntos 2º equipo (Primer equipo)</th>
+                <th style="width: 10%;">Segundo equipo</th>
+                <th style="width: 15%;">Puntos 1º equipo (Segundo equipo)</th>
+                <th style="width: 15%;">Puntos 2º equipo (Segundo equipo)</th>
 
             </tr>
         </thead>

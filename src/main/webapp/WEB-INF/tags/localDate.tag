@@ -16,7 +16,7 @@
 		<label class="col-sm-2 control-label">${label}</label>
 
 		<div class="col-sm-10">
-			<form:input class="form-control" path="${name}" />
+			<form:input class="form-control" path="${name}" placeholder="YYYY/MM/dd"/>
 			<c:if test="${valid}">
 				<span class="glyphicon glyphicon-ok form-control-feedback"
 					aria-hidden="true"></span>
@@ -26,24 +26,6 @@
 					aria-hidden="true"></span>
 				<span class="help-inline" style="color: white;">${status.errorMessage}</span>
 			</c:if>
-			<script>
-          
-			 jQuery.datetimepicker.setLocale('es');
-
-	            jQuery(${name}).datetimepicker({
-	            	timepicker:false,
-	            	format: "Y/m/d",
-	            	i18n:{
-	            		  es:{
-	            			dayOfWeekShort:[
-	            		    "L", "M", "X", "J", 
-	            		    "V", "S", "D",
-	            		   ]
-	            		  }
-	            		 },
-	            	minDate:'-1970/01/01'
-	            	});
-            </script>
 		</div>
 	</div>
 </spring:bind>
