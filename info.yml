@@ -1,0 +1,60 @@
+project:
+  name: 'PlayTogether'
+  owner: 'afternoon'
+  teamId: '11'
+  identities:
+    github:
+      url: 'https://github.com/carsantir99/ISPP-11'
+    heroku:
+      url: 'https://playtogether-sprint-2.herokuapp.com/'
+    travis:
+      url: 'https://www.travis-ci.com/github/carsantir99/ISPP-11'
+  members:
+    member1:
+      name: 'Javier'
+      surname: 'Rodriguez Santiago' 
+      githubUsername: 'javrodsan5'
+    member2:
+      name: 'Carlos'
+      surname: 'Santos Tirado' 
+      githubUsername: 'carsantir99'
+    member3:
+      name: 'Andrés'
+      surname: 'Fernández Rodríguez' 
+      githubUsername: 'andferrod3'
+    member4:
+      name: 'Mario David'
+      surname: 'Jiménez Hartman' 
+      githubUsername: 'marjimhar'
+    member5:
+      name: 'Gonzalo'
+      surname: 'Guerrero Luna' 
+      githubUsername: 'gonguelun'
+    member6:
+      name: 'Alejandro'
+      surname: 'Manzano Dorado' 
+      githubUsername: 'alemandro1'
+    member7:
+      name: 'Fernando'
+      surname: 'Calvo Durán' 
+      githubUsername: 'fercaldur'
+    member8:
+      name: 'Pablo'
+      surname: 'Cubero Cruz' 
+      githubUsername: 'pabcubcru'
+    member9:
+      name: 'Pablo'
+      surname: 'García Cerrejón' 
+      githubUsername: 'pabgarcer'
+    member10:
+      name: 'Concepción'
+      surname: 'Márquez Redondo' 
+      githubUsername: 'conmarred'
+    member11:
+      name: 'Carolina'
+      surname: 'Carrasco Díaz' 
+      githubUsername: 'carcardia'
+    member12:
+      name: 'Manuel'
+      surname: 'Bueno Gómez' 
+      githubUsername: 'manbuegom'
