@@ -315,16 +315,16 @@ body {
 }
 
 .thirteen h1 {
-	font-family: 'Crete Round';
-	font-size: 43px;
-	display: block;
+    font-family: 'Recursive', sans-serif;
+    font-size: 43px;
+    display: block;
 }
 
 .thirteen h2 {
-	font-family: 'Crete Round';
-	font-size: 32px;
-	display: block;
-	text-align:center;
+    font-family: 'Recursive', sans-serif;
+    font-size: 25px;
+    display: block;
+    text-align:center;
 }
 
 .Card1Meeting {
@@ -586,10 +586,10 @@ body {
 }
 
 .cardtitle h1 {
-	color: rgb(58, 58, 58);
-	font-family: Helvetica;
-	padding-top: 1%;
-	color: white;
+    color: rgb(58, 58, 58);
+    padding-top: 1%;
+    color: white;
+    font-family: 'Recursive', sans-serif;
 }
 
 .nomostrar {
