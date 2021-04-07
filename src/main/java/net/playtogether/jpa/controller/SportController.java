@@ -6,7 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import net.playtogether.jpa.service.SportService;
-import net.playtogether.jpa.service.UserService;
+import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
 public class SportController {
@@ -18,7 +18,7 @@ public class SportController {
 	SportService sportService;
 
 	@Autowired
-	UserService userService;
+	UsuarioService userService;
 	
 	
 	@GetMapping("/sports")

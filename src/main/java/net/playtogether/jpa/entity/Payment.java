@@ -24,7 +24,7 @@ public class Payment extends BaseEntity {
   
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Usuario user;
 
     @NotNull
     @Column(name = "amount")
