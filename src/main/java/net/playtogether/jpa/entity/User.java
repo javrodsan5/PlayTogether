@@ -3,6 +3,7 @@ package net.playtogether.jpa.entity;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Table(name = "users")
 public class User{
 	@Id
+	@Column(length = 64)
 	String username;
 	
 	String password;
