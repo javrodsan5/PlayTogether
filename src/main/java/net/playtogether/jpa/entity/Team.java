@@ -32,7 +32,7 @@ public class Team extends NamedEntity {
     
     @ManyToMany
     @JoinColumn(name = "users_id")
-	private List<User> participants = new ArrayList<>();
+	private List<Usuario> participants = new ArrayList<>();
     
     private Integer teamSize;
 

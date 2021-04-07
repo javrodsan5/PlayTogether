@@ -32,11 +32,11 @@ import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.SportType;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.repository.MeetingRepository;
 import net.playtogether.jpa.service.MeetingService;
 import net.playtogether.jpa.service.SportService;
-import net.playtogether.jpa.service.UserService;
+import net.playtogether.jpa.service.UsuarioService;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.*;
 
@@ -57,7 +57,7 @@ public class MeetingControllerTests {
 	private SportService sportService;
 
 	@MockBean
-	private UserService userService;
+	private UsuarioService userService;
 
 	private Meeting testMeeting1;
 
@@ -72,7 +72,7 @@ public class MeetingControllerTests {
 		testMeeting1.setCity("Sevilla");
 		;
 		testMeeting1.setDate(LocalDateTime.of(2021, 06, 12, 12, 00));
-		testMeeting1.setParticipants(new ArrayList<User>());
+		testMeeting1.setParticipants(new ArrayList<Usuario>());
 		testMeeting1.setDescription("Una partidata");
 		testMeeting1.setNumberOfPlayers(2);
 
@@ -83,7 +83,7 @@ public class MeetingControllerTests {
 		testMeeting2.setCity("Sevilla");
 		;
 		testMeeting2.setDate(LocalDateTime.of(2021, 06, 23, 18, 16));
-		testMeeting2.setParticipants(new ArrayList<User>());
+		testMeeting2.setParticipants(new ArrayList<Usuario>());
 		testMeeting2.setDescription("Partido de tenis");
 
 		Sport s = new Sport();
@@ -97,12 +97,10 @@ public class MeetingControllerTests {
 		s.setSportType(st);
 		s.setNumberOfPlayersInTeam(1);
 
-		User u = new User();
+		Usuario u = new Usuario();
 		u.setId(1);
 		u.setName("Usuario 1");
 		u.setCorreo("correo@correo.com");
-		u.setUsername("user1");
-		u.setPassword("password");
 		u.setBirthdate(LocalDate.of(1999, 3, 16));
 		u.setPhone("123456789");
 		u.setPayment(null);

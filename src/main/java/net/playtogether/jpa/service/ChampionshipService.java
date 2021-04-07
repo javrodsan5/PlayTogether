@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.repository.ChampionshipRepository;
 import net.playtogether.jpa.repository.TeamRepository;
 
@@ -51,7 +51,7 @@ public class ChampionshipService {
 	}
 	
 	@Transactional(readOnly=true)
-	public User findUsersById(Integer id) throws DataAccessException {
+	public Usuario findUsersById(Integer id) throws DataAccessException {
 		return this.teamRepository.findUserById(id);
 	}
 	
@@ -82,7 +82,7 @@ public class ChampionshipService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<User> findUserByNameOrUsername(String user) throws DataAccessException {
+	public List<Usuario> findUserByNameOrUsername(String user) throws DataAccessException {
 		return this.teamRepository.findUserByNameOrUsername(user);
 	}
 

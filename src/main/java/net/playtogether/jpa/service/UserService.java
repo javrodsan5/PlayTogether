@@ -1,24 +1,35 @@
 package net.playtogether.jpa.service;
 
-import org.springframework.stereotype.Service;
+import java.util.Optional;
+
 import org.springframework.transaction.annotation.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
 
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.repository.UserRepository;
+import net.playtogether.jpa.repository.UsuarioRepository;
 
 @Service
 public class UserService {
 
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
-	public UserService(UserRepository userRepository){
-		this.userRepository=userRepository;
+	@Autowired
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
 	}
 
-	
-	@Transactional(readOnly=true)
-	public User findUserById(int id){
-		return userRepository.findById(id).orElse(null);
+	@Transactional
+	public void saveUser(User user) throws DataAccessException {
+		user.setEnabled(true);
+		userRepository.save(user);
 	}
 	
+	@Transactional(readOnly = true)
+	public Optional<User> findUser(String username) {
+		return userRepository.findById(username);
+	}
 }
