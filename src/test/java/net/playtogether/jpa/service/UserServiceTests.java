@@ -20,8 +20,8 @@ public class UserServiceTests {
 	// FIND USER BY ID
 		@Test
 		void shouldFindUserWithCorrectId() throws Exception {
-			User user = this.userService.findUserById(1);
-			Assertions.assertThat(user.getUsername()).isEqualTo("admin1");
+			User user = this.userService.findUserByUsername("usuario1");
+			Assertions.assertThat(user.getUsername()).isEqualTo("usuario1");
 		}
 
 }
