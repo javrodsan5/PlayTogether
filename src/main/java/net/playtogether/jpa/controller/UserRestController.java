@@ -7,12 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.repository.UsuarioRepository;
+
  
  
 @Controller
@@ -21,6 +24,10 @@ public class UserRestController {
  
     @Autowired
     UsuarioRepository userRepository;
+    
+	@Autowired
+	UserService userService;
+
     
     @RequestMapping("/")
     public String home(ModelMap model) {
@@ -40,5 +47,14 @@ public class UserRestController {
     	model.addAttribute("usr",usr);
         return "welcome";
     }
+    
+    @GetMapping("/users/{userId}")
+	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId) {
+		User user = this.userService.findUserById(userId);
+		model.addAttribute("user", user);
+
+
+		return "users/userDetails";
+	}
  
 }
