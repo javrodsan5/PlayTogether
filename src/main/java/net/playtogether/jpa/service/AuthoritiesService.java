@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import net.playtogether.jpa.entity.Authorities;
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.repository.AuthoritiesRepository;
-import net.playtogether.jpa.repository.UserRepository;
 
 @Service
 public class AuthoritiesService {

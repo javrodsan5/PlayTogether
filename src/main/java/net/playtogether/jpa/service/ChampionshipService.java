@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.playtogether.jpa.entity.Championship;
-import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.repository.ChampionshipRepository;

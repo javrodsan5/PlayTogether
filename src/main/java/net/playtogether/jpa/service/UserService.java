@@ -10,8 +10,6 @@ import org.springframework.stereotype.Service;
 
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.repository.UserRepository;
-import net.playtogether.jpa.repository.UsuarioRepository;
-
 @Service
 public class UserService {
 

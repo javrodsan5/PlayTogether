@@ -8,13 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.annotation.PersistenceConstructor;
 
-import lombok.AccessLevel;
-import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
 

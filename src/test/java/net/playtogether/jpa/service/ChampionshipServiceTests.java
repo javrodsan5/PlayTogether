@@ -68,7 +68,7 @@ public class ChampionshipServiceTests {
 	// FIND USER BY ID
 	@Test
 	void shouldFindUserWithCorrectId() throws Exception {
-		Usuario user = this.championshipService.findUsersById(3);
+		Usuario user = this.championshipService.findUsersById(1);
 		Assertions.assertThat(user.getName()).isEqualTo("Antonio");
 	}
 
