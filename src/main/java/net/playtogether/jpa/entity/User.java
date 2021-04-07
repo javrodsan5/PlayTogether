@@ -52,7 +52,7 @@ public class User extends NamedEntity {
 	private String phone;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-	private List<Payment> payment;
+	private List<Pay> payment;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Statistic> statistics;

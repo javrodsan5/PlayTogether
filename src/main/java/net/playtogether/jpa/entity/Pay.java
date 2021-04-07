@@ -17,10 +17,10 @@ import lombok.Setter;
 
  
 @Entity
-@Table(name = "payments")
+@Table(name = "pay")
 @Setter
 @Getter
-public class Payment extends BaseEntity {
+public class Pay extends BaseEntity {
   
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -35,10 +35,13 @@ public class Payment extends BaseEntity {
     @Column(name = "date")
     private LocalDate date;
 
-    @ManyToOne(optional=false)
-	@JoinColumn(name = "type")
-	@NotNull
-	private PaymentType paymentType;
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "championship")
+    private Championship championship;
+
+    @NotNull
+    @Column(name = "pay_type")
+    private PayType payType;
 
     
 }

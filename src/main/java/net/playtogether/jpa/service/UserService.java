@@ -20,5 +20,10 @@ public class UserService {
 	public User findUserById(int id){
 		return userRepository.findById(id).orElse(null);
 	}
+
+	@Transactional
+	public User findUserByUsername(String username) {
+		return this.userRepository.findByUsername(username);
+	}
 	
 }
