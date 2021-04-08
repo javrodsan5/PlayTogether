@@ -20,4 +20,8 @@ public interface MatchRepository extends CrudRepository<Match, Integer> {
 	
 	@Query("SELECT t FROM Team t WHERE t.championship.id = ?1")
 	Collection<Team> findTeams(int championshipId);
+	
+
+	@Query("SELECT m FROM Match m WHERE m.team1.id = ?1 or m.team2.id = ?1 ")
+	Collection<Match> findMatchesByTeaId(int teamId);
 }

@@ -47,7 +47,13 @@
 					<div class="member-card">
 						<div class="member-card-details">
 							<div class="member-name">
-								<a style="color: black;" href="#"> <c:out
+							<spring:url
+									value="/championships/{championshipId}/teams/{teamId}"
+									var="teamDetails">
+									<spring:param name="championshipId" value="${championship.id}" />
+									<spring:param name="teamId" value="${team.id}" />
+								</spring:url>
+								<a style="color: black;" href="${fn:escapeXml(teamDetails)}"> <c:out
 										value="${team.name}" />
 								</a>
 								<spring:url
