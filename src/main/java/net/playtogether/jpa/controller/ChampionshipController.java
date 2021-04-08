@@ -1,6 +1,7 @@
 
 package net.playtogether.jpa.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -13,6 +14,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,13 +31,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Match;
+import net.playtogether.jpa.entity.Pay;
+import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.MatchService;
+import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.SportService;
+import net.playtogether.jpa.service.TeamService;
+import net.playtogether.jpa.service.UserService;
 import net.playtogether.jpa.service.UsuarioService;
+
 
 @Controller
 public class ChampionshipController {
@@ -49,6 +59,13 @@ public class ChampionshipController {
 
 	@Autowired
 	UsuarioService userService;
+
+	@Autowired
+	PayService payService;
+  
+  @Autowired
+	TeamService teamService;
+
 
 	private List<Usuario> users;
 
@@ -326,14 +343,22 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/join/{teamId}")
 	public String initJoinChampionship(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId,
-			@PathVariable("teamId") final Integer teamId) {
+			@PathVariable("teamId") final Integer teamId, Principal principal) {
 		Team team = this.championshipService.findTeamId(teamId);
-		Usuario user = this.userService.findUserById(1);
+		Usuario user = this.userService.findByUsername(principal.getName());
 		List<Usuario> participants = team.getParticipants();
+
+		Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium")) && pay == null) {
+    		return "redirect:/pay/championship/"+championshipId+"/team/"+teamId;
+		}
 		if (participants.contains(user)) {
 			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
-
 		} else {
+			pay.setTeam(team);
+			this.payService.save(pay);
 			model.put("esParticipante", false);
 			participants.add(user);
 			team.setParticipants(participants);
@@ -353,7 +378,7 @@ public class ChampionshipController {
 
 	@PostMapping("/championships/{championshipId}/team/create")
 	public String postCreationTeam(@Valid final Team team, final BindingResult result,
-			@PathVariable("championshipId") final int championshipId, final ModelMap model, final Errors errors) {
+			@PathVariable("championshipId") final int championshipId, final ModelMap model, final Errors errors, Principal principal) {
 		List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);
 		for (Team t : joinedTeams) {
 			if (t.getName().equals(team.getName())) {
@@ -369,11 +394,16 @@ public class ChampionshipController {
 		}
 
 		if (!result.hasErrors()) {
-			team.setChampionship(championship);
-			team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
-			this.championshipService.save(team);
-			return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; // CAMBIAR
-																												// PARA
+
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"))){
+				return "redirect:/pay/championship/"+championshipId+"?teamName="+team.getName();
+			} else {
+				team.setChampionship(championship);
+				team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
+				this.championshipService.save(team);
+				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; // CAMBIAR
+			}																									// PARA
 																												// EL
 																												// SEGUNDO
 																												// SPRINT
@@ -453,4 +483,15 @@ public class ChampionshipController {
 //		}
 //	}
 
+	
+	@GetMapping("/championships/{championshipId}/teams/{teamId}")
+	public String teamDetails(ModelMap model, @PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId) {
+		Team team = this.teamService.findTeamById(teamId);
+		model.addAttribute("team", team);
+		Collection<Match> matchesTeam = this.matchService.findMatchesByTeamId(teamId);
+		model.addAttribute("matches", matchesTeam);
+
+		return "teams/teamDetails";
+	}
+	
 }

@@ -31,12 +31,29 @@ public class UsuarioService {
 		return usuarioRepository.findById(id).orElse(null);
 	}
 	
+	public boolean checkCorreoExists(String correo) {
+		return usuarioRepository.findUsuarioByCorreo(correo).isPresent();
+	}
+	public boolean checkUsernameExists(String username) {
+		return usuarioRepository.findUsuarioByUsername(username).isPresent();
+	}
+
+	public boolean checkPhoneExists(String phone) {
+		return usuarioRepository.findUsuarioByPhone(phone).isPresent();
+	}
+
+	
 	@Transactional
 	public void saveUsuario(Usuario usuario) throws DataAccessException {
 		usuarioRepository.save(usuario);
 		userService.saveUser(usuario.getUser());
 		authoritiesService.saveAuthorities(usuario.getUser().getUsername(), "usuario");
 		
+	}
+
+	@Transactional
+	public Usuario findByUsername(String username) {
+		return this.usuarioRepository.findUsuarioByUsername(username).orElse(null);
 	}
 	
 	@Transactional(readOnly=true)

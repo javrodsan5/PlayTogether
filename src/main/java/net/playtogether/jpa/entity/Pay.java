@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -17,28 +16,33 @@ import lombok.Setter;
 
  
 @Entity
-@Table(name = "payments")
+@Table(name = "pay")
 @Setter
 @Getter
-public class Payment extends BaseEntity {
+public class Pay extends BaseEntity {
   
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Usuario user;
 
-    @NotNull
     @Column(name = "amount")
     private double amount;
 
-    @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
     @Column(name = "date")
     private LocalDate date;
 
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "championship_id")
+    private Championship championship;
+
     @ManyToOne(optional=false)
-	@JoinColumn(name = "type")
-	@NotNull
-	private PaymentType paymentType;
+    @JoinColumn(name = "pay_type_id")
+    private PayType payType;
+
+    @ManyToOne(optional=true)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     
 }
