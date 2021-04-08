@@ -1,6 +1,8 @@
 
 package net.playtogether.jpa.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
 
@@ -29,6 +32,9 @@ public class ChampionshipServiceTests {
 	@Autowired
 	private UsuarioService			userService;
 
+  @Autowired
+	private TeamService			teamService;
+
 
 	// FIND CHAMPIONSHIP BY ID
 	@Test
@@ -42,6 +48,7 @@ public class ChampionshipServiceTests {
 	void shouldFindAllChampionships() throws Exception {
 		Collection<Championship> championships = this.championshipService.listChampionship();
 		Assertions.assertThat(championships.size()).isEqualTo(9);
+		
 	}
 
 	// FIND TEAM BY ID
@@ -98,5 +105,13 @@ public class ChampionshipServiceTests {
 		Collection<Championship> championships = this.championshipService.listChampionshipsBySport(2);
 		Assertions.assertThat(championships.size()).isEqualTo(2);
 	}
+	
+	
+	 //Test de consultar un team por id
+	 @Test
+	 void findTeamByIdTest() {
+		 Team team = this.teamService.findTeamById(1);
+		 assertThat(team.getName()).isEqualTo("Equipo1");
+	 }
 
 }

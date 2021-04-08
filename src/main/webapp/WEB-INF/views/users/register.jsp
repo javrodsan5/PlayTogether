@@ -8,24 +8,33 @@
 
 <playtogether:layout pageName="registroPlaytogether">
 	<jsp:body>
-	<h2>
-		Usuario
-	</h2>
+	<div class="thirteen">
+	<h1>
+		Nuevo usuario
+	</h1>
+	</div>
+	<div class="crearMeeting">
 	<form:form modelAttribute="usuario" class="form-horizontal"
-			id="add-usuario-form">
-		<div class="form-group has-feedback">
-			<playtogether:inputField label="Nombre" name="name" />
-			<playtogether:inputField label="Correo" name="correo" />
-			<playtogether:inputField label="Telefono" name="phone" />
-			<playtogether:inputField label="Usuario" name="user.username" />
-			<playtogether:inputField label="Contraseña" name="user.password" />
-			<playtogether:localDate label="Fecha nacimiento" name="birthdate" id="birthdate" />
-			</div>
+				id="add-usuario-form">
+		
+			<playtogether:inputField label="*Nombre" name="name" />
+			<playtogether:inputField label="*Correo" name="correo" />
+			<playtogether:inputField label="*Telefono" name="phone" />
+			<playtogether:inputField label="*Usuario" name="user.username" />
+			<playtogether:inputField label="*Contraseña" name="user.password" />
+			<playtogether:localDate label="*Fecha nacimiento" name="birthdate"
+					id="birthdate" />
+			
+		
 		<div class="form-group">
-			<div class="col-sm-offset-2 col-sm-10">
-			<button class="btn btn-default" type="submit">Registrarme</button>
-			</div>
+			<button class="botonMeeting" type="submit">
+			<b>Registrarme</b>
+			</button>
 		</div>
-	</form:form>
+		<br>
+			
+			</form:form>
+		</div>
+	
 	 </jsp:body>
 </playtogether:layout>
