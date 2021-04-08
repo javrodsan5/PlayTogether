@@ -20,7 +20,7 @@ public class UserTypeService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Optional<UserType> findUserTypeById(Integer id) {
-		return userTypeRepository.findById(id);
+	public UserType findUserTypeById(Integer id) {
+		return userTypeRepository.findById(id).orElse(null);
 	}
 }

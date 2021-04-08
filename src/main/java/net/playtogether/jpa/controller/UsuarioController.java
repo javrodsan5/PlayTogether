@@ -44,7 +44,7 @@ public class UsuarioController {
 		if (result.hasErrors()) {
 			return "users/register";
 		} else {
-			UserType usrType= this.userTypeService.findUserTypeById(1).orElse(null);
+			UserType usrType= this.userTypeService.findUserTypeById(1);
 			usuario.setType(usrType);
 
 			this.usuarioService.saveUsuario(usuario);

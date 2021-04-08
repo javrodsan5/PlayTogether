@@ -1,5 +1,6 @@
 package net.playtogether.jpa.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -38,8 +39,13 @@ public class AuthoritiesService {
 			authority.setAuthority(role);
 			//user.get().getAuthorities().add(authority);
 			authoritiesRepository.save(authority);
-		}else
+		}else 
 			throw new DataAccessException("User '"+username+"' not found!") {};
+	}
+	
+	@Transactional
+	public List<Authorities> findAll() {
+		return (List<Authorities>) authoritiesRepository.findAll();
 	}
 
 
