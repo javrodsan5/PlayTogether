@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.ConstraintViolationException;
@@ -24,7 +23,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Pay;
-import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
@@ -41,7 +38,6 @@ import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.SportService;
 import net.playtogether.jpa.service.TeamService;
-import net.playtogether.jpa.service.UserService;
 import net.playtogether.jpa.service.UsuarioService;
 
 
