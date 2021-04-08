@@ -24,8 +24,12 @@
 		name="maxTeams" size="3" names="${maximoEquipos}"></playtogether:selectField>
 		<input type="hidden" name="sport" value="${deporte}"/>
 
-		<input class="butona" type="submit" value="Crear">
-
+		<div class="form-group">
+			<button class="botonMeeting" type="submit">
+			<b>Crear</b>
+			</button>
+		</div>
+	<br>
 	</div>
 	
 	

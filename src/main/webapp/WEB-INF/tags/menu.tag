@@ -40,10 +40,10 @@
 							</li>
 							<li
 								class="${name=='login' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4'}"><a
-								class="nav-link" href="#">Login <i class="fa fa-sign-in"></i></a></li>
+								class="nav-link" href="/login">Login <i class="fa fa-sign-in"></i></a></li>
 							<li
 								class="${name=='register' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4'}">
-								<a class="nav-link" href="#"> Registro <i
+								<a class="nav-link" href="/usuarios/new"> Registro <i
 									class="fa fa-user-plus"></i></a>
 							</li>
 						</ul>

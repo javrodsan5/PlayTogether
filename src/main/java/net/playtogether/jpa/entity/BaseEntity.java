@@ -5,7 +5,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-import org.springframework.data.annotation.Version;
 
 @MappedSuperclass
 public class BaseEntity {

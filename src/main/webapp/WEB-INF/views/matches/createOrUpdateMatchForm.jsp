@@ -109,7 +109,12 @@
 	 </c:if>
 		
 		<input type="hidden" name="championship" value="${championship}"/>
-		<input type="submit" class="butona" value="Enviar">
+		<div class="form-group">
+			<button class="botonMeeting" type="submit">
+			<b>Enviar</b>
+			</button>
+		</div>
+		<br>
 	</div>
 </form:form>
 </div>
