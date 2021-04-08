@@ -387,15 +387,15 @@ public class ChampionshipController {
 
 		if (!result.hasErrors()) {
 
-			/*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"))){
-				return "redirect:/pay/championship/"+championshipId;
-			} else {*/
-			team.setChampionship(championship);
-			team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
-			this.championshipService.save(team);
-			return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; // CAMBIAR
-			//}																									// PARA
+				return "redirect:/pay/championship/"+championshipId+"?teamName="+team.getName();
+			} else {
+				team.setChampionship(championship);
+				team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
+				this.championshipService.save(team);
+				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; // CAMBIAR
+			}																									// PARA
 																												// EL
 																												// SEGUNDO
 																												// SPRINT

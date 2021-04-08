@@ -151,7 +151,7 @@ public class ChampionshipTests {
 			.andExpect(MockMvcResultMatchers.model().attributeExists("team"));
 	}
 
-	@Test
+	/*@Test
 	void testPostCreationTeamForm() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/championships/8/team/create")
 
@@ -160,7 +160,7 @@ public class ChampionshipTests {
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/championships/8"));
 
 
-	}
+	}*/
 
 	//Test de indicar resultado de partido
 	@Test

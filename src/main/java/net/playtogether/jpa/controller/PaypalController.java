@@ -66,7 +66,7 @@ public class PaypalController {
     }
 
     @GetMapping("/pay/championship/{championshipId}")
-    public String formPaymentCreateTeam(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId) {
+    public String formPaymentCreateTeam(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId, @RequestParam("teamName") String teamName) {
         Order order =  new Order();
         Championship championship = this.championshipService.findChampionshipId(championshipId);
         order.setIntent("sale");
@@ -76,6 +76,7 @@ public class PaypalController {
         order.setDescription("Pago por participar en el torneo " + championship.getName() + ".");
         model.addAttribute("order", order);
         model.addAttribute("championshipId", championshipId);
+        model.addAttribute("teamName", teamName);
 
         return "pay/createPaymentForm";
     }
@@ -94,7 +95,8 @@ public class PaypalController {
     }
 
     @PostMapping("/pay")
-    public String payment(@ModelAttribute("order") Order order, Principal principal, ModelMap model, @RequestParam("championshipId") Integer championshipId, @RequestParam("teamId") Integer teamId) {
+    public String payment(@ModelAttribute("order") Order order, Principal principal, ModelMap model, @RequestParam("championshipId") Integer championshipId, 
+    @RequestParam("teamId") Integer teamId, @RequestParam("teamName") String teamName) {
         try {
             Payment payment = service.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(), order.getMethod(),
                     order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
@@ -110,6 +112,13 @@ public class PaypalController {
                         Championship championship = this.championshipService.findChampionshipId(championshipId);
                         if(teamId != null) {
                             Team team = this.championshipService.findTeamId(teamId);
+                            pay.setTeam(team);
+                        } else if(teamName != "") {
+                            Team team = new Team();
+                            team.setName(teamName);
+                            team.setChampionship(championship);
+                            team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
+                            this.championshipService.save(team);
                             pay.setTeam(team);
                         }
                         pay.setChampionship(championship);
