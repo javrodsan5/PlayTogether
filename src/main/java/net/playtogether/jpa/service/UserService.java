@@ -1,5 +1,6 @@
 package net.playtogether.jpa.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -36,4 +37,8 @@ public class UserService {
 		return userRepository.findById(username);
 	}
 	
+	@Transactional(readOnly = true)
+	public List<User> findAll() {
+		return (List<User>) userRepository.findAll();
+	}
 }
