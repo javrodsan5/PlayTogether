@@ -48,6 +48,7 @@ public class ChampionshipServiceTests {
 	void shouldFindAllChampionships() throws Exception {
 		Collection<Championship> championships = this.championshipService.listChampionship();
 		Assertions.assertThat(championships.size()).isEqualTo(9);
+		
 	}
 
 	// FIND TEAM BY ID
