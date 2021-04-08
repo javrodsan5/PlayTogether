@@ -12,7 +12,7 @@
 </div>
 <div style="margin-left: 45px">
 			<div class="crearMeeting">
-<form:form  commandName="order" modelAttribute="order" method="post"  action="/pay">
+<form:form  commandName="order" modelAttribute="order" method="post"  action="/pay?championshipId=${championshipId}&teamId=${teamId}">
 	<div>
 		<div>
 			<playtogether:inputField label="Precio" name="price"/>

@@ -6,10 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.playtogether.jpa.entity.Match;
-import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.repository.MatchRepository;
-import net.playtogether.jpa.repository.MeetingRepository;
 
 @Service
 public class MatchService {

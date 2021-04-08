@@ -20,11 +20,13 @@ import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Order;
 import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.PayType;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Team;
+import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.PayService;
+import net.playtogether.jpa.service.PayTypeService;
 import net.playtogether.jpa.service.PaypalService;
-import net.playtogether.jpa.service.UserService;
+import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
 public class PaypalController {
@@ -33,7 +35,7 @@ public class PaypalController {
     private PaypalService service;
 
     @Autowired 
-    private UserService userService;
+    private UsuarioService usuarioService;
 
     @Autowired
     private PayService payService;
@@ -41,29 +43,25 @@ public class PaypalController {
     @Autowired
     private ChampionshipService championshipService;
 
-    private Pay pay;
+    @Autowired
+    private PayTypeService payTypeService;
 
     public static final String SUCCESS_URL = "pay/success";
     public static final String CANCEL_URL = "pay/cancel";
 
-    @GetMapping("/pay/{id}/championship")
-    public String formPaymentTournament(ModelMap model, Principal principal, @PathVariable("id") Integer championshipId) {
+    @GetMapping("/pay/championship/{championshipId}/team/{teamId}")
+    public String formPaymentTournament(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId) {
         Order order =  new Order();
+        Championship championship = this.championshipService.findChampionshipId(championshipId);
         order.setIntent("sale");
         order.setCurrency("EUR");
         order.setMethod("paypal");
         order.setPrice(2);
-        order.setDescription("Pago por torneo.");
+        order.setDescription("Pago por participar en el torneo " + championship.getName() + ".");
         model.addAttribute("order", order);
+        model.addAttribute("championshipId", championshipId);
+        model.addAttribute("teamId", teamId);
 
-        pay = new Pay();
-        pay.setAmount(2);
-        pay.setPayType(PayType.CHAMPIONSHIP);
-        //User user = userService.findUserByUsername(principal.getName());
-        User user = userService.findUserById(1);
-        pay.setUser(user);
-        Championship championship = this.championshipService.findChampionshipId(championshipId);
-        pay.setChampionship(championship);
         return "pay/createPaymentForm";
     }
 
@@ -77,23 +75,33 @@ public class PaypalController {
         order.setDescription("Pago por premium.");
         model.addAttribute("order", order);
 
-        pay = new Pay();
-        pay.setAmount(5);
-        pay.setPayType(PayType.PREMIUM);
-        //User user = userService.findUserByUsername(principal.getName());
-        User user = userService.findUserById(1);
-        pay.setUser(user);
         return "pay/createPaymentForm";
     }
 
     @PostMapping("/pay")
-    public String payment(@ModelAttribute("order") Order order) {
+    public String payment(@ModelAttribute("order") Order order, Principal principal, ModelMap model, @RequestParam("championshipId") Integer championshipId, @RequestParam("teamId") Integer teamId) {
         try {
             Payment payment = service.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(), order.getMethod(),
                     order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
                     "http://localhost:8080/" + SUCCESS_URL);
             for(Links link:payment.getLinks()) {
                 if(link.getRel().equals("approval_url")) {
+                    this.payService.deleteAll(this.payService.findIdPaysNotFinishedByUsername(principal.getName()));
+                    Pay pay = new Pay();
+                    pay.setAmount(order.getPrice());
+                    Integer payTypeId = 1; //PREMIUM
+                    if(order.getPrice() == 2.) {
+                        payTypeId = 2; //CHAMPIONSHIP
+                        Championship championship = this.championshipService.findChampionshipId(championshipId);
+                        Team team = this.championshipService.findTeamId(teamId);
+                        pay.setTeam(team);
+                        pay.setChampionship(championship);
+                    }
+                    PayType payType = this.payTypeService.findById(payTypeId);
+                    pay.setPayType(payType);
+                    Usuario usuario = usuarioService.findByUsername(principal.getName());
+                    pay.setUser(usuario);
+                    this.payService.save(pay);
                     return "redirect:"+link.getHref();
                 }
             }
@@ -105,19 +113,26 @@ public class PaypalController {
     }
 
     @GetMapping(value = CANCEL_URL)
-    public String cancelPay() {
+    public String cancelPay(Principal principal) {
+        Pay pay = this.payService.findLastPayByUsername(principal.getName());
+        this.payService.delete(pay);
         return "pay/cancel";
     }
 
     @GetMapping(value = SUCCESS_URL)
-    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId) {
+    public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId, Principal principal) {
         try {
             Payment payment = service.executePayment(paymentId, payerId);
             System.out.println(payment.toJSON());
             if (payment.getState().equals("approved")) {
+                Pay pay = this.payService.findLastPayByUsername(principal.getName());
                 pay.setDate(LocalDate.now());
                 payService.save(pay);
-                return "pay/success";
+                if(pay.getPayType().getName().equals("Premium")) {
+                    return "redirect:/sports";
+                } else if(pay.getPayType().getName().equals("Championship")) {
+                    return "redirect:/sports/"+pay.getChampionship().getSport().getId()+"/championship/"+pay.getChampionship().getId()+"/join/"+pay.getTeam().getId();
+                }
             }
         } catch (PayPalRESTException e) {
             System.out.println(e.getMessage());

@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,24 +23,26 @@ public class Pay extends BaseEntity {
   
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private Usuario user;
 
-    @NotNull
     @Column(name = "amount")
     private double amount;
 
-    @NotNull
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
     @Column(name = "date")
     private LocalDate date;
 
     @ManyToOne(optional = true)
-    @JoinColumn(name = "championship")
+    @JoinColumn(name = "championship_id")
     private Championship championship;
 
-    @NotNull
-    @Column(name = "pay_type")
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "pay_type_id")
     private PayType payType;
+
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "team_id")
+    private Team team;
 
     
 }

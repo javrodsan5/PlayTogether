@@ -1,5 +1,10 @@
 package net.playtogether.jpa.entity;
 
-public enum PayType {
-    PREMIUM, CHAMPIONSHIP;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "pay_type")
+public class PayType extends NamedEntity {
+    
 }

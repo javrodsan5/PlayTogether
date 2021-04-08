@@ -1,5 +1,8 @@
 package net.playtogether.jpa.repository;
 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -7,5 +10,14 @@ import net.playtogether.jpa.entity.Pay;
 
 @Repository
 public interface PayRepository extends CrudRepository<Pay, Integer> {
+
+    @Query("SELECT p FROM Pay p WHERE p.user.user.username = ?1 AND p.id = (SELECT MAX(p.id) FROM Pay p WHERE p.user.user.username = ?1)")
+    public Pay findLastPayByUsername(String username);
+
+    @Query("SELECT p FROM Pay p WHERE p.date = null AND p.user.user.username = ?1")
+    public List<Pay> findPaysNotFinishedByUsername(String username);
+
+    @Query("SELECT p FROM Pay p WHERE p.user.user.username = ?1 AND p.championship.id = ?2 AND p.date != null AND p.id = (SELECT MAX(p.id) FROM Pay p WHERE p.user.user.username = ?1)")
+    public Pay findLastFinishedPayForChampionshipByUsername(String username, Integer championshipId);
  
 }
