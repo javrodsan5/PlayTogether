@@ -50,7 +50,7 @@ public class PaypalController {
     public static final String CANCEL_URL = "pay/cancel";
 
     @GetMapping("/pay/championship/{championshipId}/team/{teamId}")
-    public String formPaymentTournament(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId) {
+    public String formPaymentJoinTeam(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId) {
         Order order =  new Order();
         Championship championship = this.championshipService.findChampionshipId(championshipId);
         order.setIntent("sale");
@@ -61,6 +61,21 @@ public class PaypalController {
         model.addAttribute("order", order);
         model.addAttribute("championshipId", championshipId);
         model.addAttribute("teamId", teamId);
+
+        return "pay/createPaymentForm";
+    }
+
+    @GetMapping("/pay/championship/{championshipId}")
+    public String formPaymentCreateTeam(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId) {
+        Order order =  new Order();
+        Championship championship = this.championshipService.findChampionshipId(championshipId);
+        order.setIntent("sale");
+        order.setCurrency("EUR");
+        order.setMethod("paypal");
+        order.setPrice(2);
+        order.setDescription("Pago por participar en el torneo " + championship.getName() + ".");
+        model.addAttribute("order", order);
+        model.addAttribute("championshipId", championshipId);
 
         return "pay/createPaymentForm";
     }
@@ -93,8 +108,10 @@ public class PaypalController {
                     if(order.getPrice() == 2.) {
                         payTypeId = 2; //CHAMPIONSHIP
                         Championship championship = this.championshipService.findChampionshipId(championshipId);
-                        Team team = this.championshipService.findTeamId(teamId);
-                        pay.setTeam(team);
+                        if(teamId != null) {
+                            Team team = this.championshipService.findTeamId(teamId);
+                            pay.setTeam(team);
+                        }
                         pay.setChampionship(championship);
                     }
                     PayType payType = this.payTypeService.findById(payTypeId);
@@ -130,8 +147,10 @@ public class PaypalController {
                 payService.save(pay);
                 if(pay.getPayType().getName().equals("Premium")) {
                     return "redirect:/sports";
+                }else if(pay.getTeam() == null) {
+                    return "redirect:/sports/"+pay.getChampionship().getSport().getId()+"/championships/"+pay.getChampionship().getId();
                 } else if(pay.getPayType().getName().equals("Championship")) {
-                    return "redirect:/sports/"+pay.getChampionship().getSport().getId()+"/championship/"+pay.getChampionship().getId()+"/join/"+pay.getTeam().getId();
+                    return "redirect:/sports/"+pay.getChampionship().getSport().getId()+"/championships/"+pay.getChampionship().getId()+"/join/"+pay.getTeam().getId();
                 }
             }
         } catch (PayPalRESTException e) {

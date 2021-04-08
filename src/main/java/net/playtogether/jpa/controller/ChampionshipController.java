@@ -348,8 +348,9 @@ public class ChampionshipController {
 		}
 		if (participants.contains(user)) {
 			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
-
 		} else {
+			pay.setTeam(team);
+			this.payService.save(pay);
 			model.put("esParticipante", false);
 			participants.add(user);
 			team.setParticipants(participants);
@@ -385,11 +386,10 @@ public class ChampionshipController {
 		}
 
 		if (!result.hasErrors()) {
-			/*Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);
 
-			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-			if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium")) && pay == null){
-				return "redirect:/pay/championship/"+championshipId+"/team/";
+			/*Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"))){
+				return "redirect:/pay/championship/"+championshipId;
 			} else {*/
 			team.setChampionship(championship);
 			team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());

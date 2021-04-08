@@ -40,7 +40,7 @@ public class Pay extends BaseEntity {
     @JoinColumn(name = "pay_type_id")
     private PayType payType;
 
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=true)
     @JoinColumn(name = "team_id")
     private Team team;
 
