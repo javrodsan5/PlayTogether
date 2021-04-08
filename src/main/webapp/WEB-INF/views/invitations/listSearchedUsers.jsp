@@ -16,7 +16,7 @@
 		</div>
 		<div style="margin-left: 45px">
 			<div class="crearMeeting">
-				<form:form id="survey-form" action="/championships/team/${teamId}/add_partner" method="POST" modelAttribute="searched_users">
+				<form:form id="survey-form" action="/invitations/team/${teamId}/send_invitation" method="POST" modelAttribute="searched_users">
 					<div>
 					<center>
 						<div class="col-sm-10">
@@ -27,15 +27,15 @@
 					          	</c:forEach>
 					        </select>
 					    </div>
-							<div class="form-group">
-								<button class="botonMeeting" type="submit" style="font-size: 0.8em; margin-left: 21.6em; ">
-									<b>Añadir</b>
-								</button>
-							</div>
-							<div class="form-group">
-								<button class="botonMeeting" style="font-size: 0.8em; margin-left: 21.6em; " onclick="location.href='/championships/team/${teamId}';" type="button">
-									<b>Volver</b>
-								</button>
+						<div class="form-group">
+							<button class="botonMeeting" type="submit" style="font-size: 0.8em; margin-left: 21.6em; ">
+								<b>Invitar</b>
+							</button>
+						</div>
+						<div class="form-group">
+							<button class="botonMeeting" style="font-size: 0.8em; margin-left: 21.6em; " onclick="location.href='/invitations/team/${teamId}';" type="button">
+								<b>Volver</b>
+							</button>
 						</div>
 						<br>
 						<br>

@@ -15,7 +15,7 @@ public interface TeamRepository extends CrudRepository<Team, Integer> {
  
 	Collection<Team> findAll();
 	
-	@Query("SELECT u FROM User u where (u.username LIKE CONCAT(?1, '%') OR u.name LIKE CONCAT(?1, '%'))")
+	@Query("SELECT u FROM User u where ((u.type.id = 1 OR u.type.id = 2) AND (u.username LIKE CONCAT(?1, '%') OR u.name LIKE CONCAT(?1, '%')))")
 	List<User> findUserByNameOrUsername(String user);
 
 	@Query("SELECT u FROM User u where u.id = ?1")

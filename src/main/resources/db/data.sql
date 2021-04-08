@@ -71,3 +71,5 @@ INSERT INTO payments VALUES(3, 5.0, '2021/04/07 12:15:00', 1, 3);
 INSERT INTO teams_participants VALUES(1, 2);
 INSERT INTO teams_participants VALUES(2, 4);
 
+INSERT INTO invitations VALUES(1, "", null, 3, 3);
+INSERT INTO invitations VALUES(2, "", 1, 3, null);

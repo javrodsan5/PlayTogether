@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.validation.ConstraintViolationException;
@@ -20,7 +19,6 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -346,7 +344,9 @@ public class ChampionshipController {
 	@GetMapping("/championships/{championshipId}/team/create")
 	public String initCreationTeam(final ModelMap model, @PathVariable("championshipId") final Integer championshipId) {
 		Team team = new Team();
+		Championship championship = championshipService.findChampionshipId(championshipId);
 		model.addAttribute("team", team);
+		model.put("championship", championship);
 
 		return "teams/createOrUpdateTeamForm";
 	}
@@ -354,6 +354,10 @@ public class ChampionshipController {
 	@PostMapping("/championships/{championshipId}/team/create")
 	public String postCreationTeam(@Valid final Team team, final BindingResult result,
 			@PathVariable("championshipId") final int championshipId, final ModelMap model, final Errors errors) {
+		
+		Championship championship = championshipService.findChampionshipId(championshipId);
+		model.put("championship", championship);
+		
 		List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);
 		for (Team t : joinedTeams) {
 			if (t.getName().equals(team.getName())) {
@@ -363,7 +367,6 @@ public class ChampionshipController {
 			}
 		}
 
-		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		if (team.getParticipants().size() >= championship.getSport().getNumberOfPlayersInTeam()) {
 			errors.rejectValue("name", "El equipo ya está lleno.", "El equipo ya está lleno.");
 		}
@@ -372,85 +375,12 @@ public class ChampionshipController {
 			team.setChampionship(championship);
 			team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
 			this.championshipService.save(team);
-			return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; // CAMBIAR
-																												// PARA
-																												// EL
-																												// SEGUNDO
-																												// SPRINT
-																												// (MARIO:
-																												// "redirect:/championships/team/"
-																												// +
-																												// team.getId();)
+			return "redirect:/invitations/team/" + team.getId(); 
 
 		} else {
 			model.put("team", team);
 			return "teams/createOrUpdateTeamForm";
 		}
 	}
-
-//	@GetMapping("/championships/team/{teamId}")
-//	public String searchParticipants(final ModelMap model, @PathVariable("teamId") final Integer teamId) {
-//		Team team = this.championshipService.findTeamId(teamId);
-//		model.put("team_participants", team.getParticipants());
-//		model.put("teamSize", team.getTeamSize());
-//		model.put("search", "");
-//		return "teams/addParticipantsForm";
-//	}
-//
-//	@GetMapping("/championships/team/{teamId}/add_partner")
-//	public String initAddParticipants(@RequestParam(value = "search", required = false) final String search,
-//			final ModelMap model, @PathVariable("teamId") final Integer teamId) {
-//		List<User> searched_users = new ArrayList<>();
-//		Team team = this.championshipService.findTeamId(teamId);
-//		model.put("team_participants", team.getParticipants());
-//
-//		if (team.getParticipants().size() >= team.getTeamSize()) {
-//			model.put("limitedTeamSize", true);
-//			return "teams/addParticipantsForm";
-//		}
-//
-//		try {
-//			searched_users = this.championshipService.findUserByNameOrUsername(search);
-//		} catch (Exception e) {
-//			model.put("noUser", true);
-//			return "teams/addParticipantsForm";
-//		}
-//
-//		this.deleteRepeatedUsers(team, searched_users);
-//		if (searched_users.isEmpty()) {
-//			model.put("notMoreUsers", true);
-//			return "teams/addParticipantsForm";
-//		}
-//
-//		model.put("searched_users", searched_users);
-//		return "teams/listSearchedUsers";
-//	}
-//
-//	@PostMapping("/championships/team/{teamId}/add_partner")
-//	public String postAddParticipants(@ModelAttribute("selected_participant") final String selected_participant,
-//			@PathVariable("teamId") final int teamId, final BindingResult result, final ModelMap model) {
-//		User participant = this.championshipService.findUsersById(Integer.parseInt(selected_participant));
-//		Team team = this.championshipService.findTeamId(teamId);
-//
-//		if (!team.getParticipants().contains(participant)) {
-//			team.getParticipants().add(participant);
-//			this.championshipService.save(team);
-//		}
-//
-//		model.put("team_participants", team.getParticipants());
-//		model.put("teamSize", team.getTeamSize());
-//		return "teams/addParticipantsForm";
-//
-//	}
-
-//	private void deleteRepeatedUsers(final Team team, final List<User> searchedUsers) {
-//
-//		for (int i = 0; i < searchedUsers.size(); i++) {
-//			if (team.getParticipants().contains(searchedUsers.get(i))) {
-//				searchedUsers.remove(i);
-//				i--;
-//			}
-//		}
-//	}
 
 }

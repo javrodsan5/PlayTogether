@@ -59,6 +59,13 @@
 									<spring:param name="teamId" value="${team.id}" />
 								</spring:url>
 								<c:if test="${participarEquipo==true}"><a style="font-size: 17px"href="${fn:escapeXml(joinChampionshipUrl)}">Unirse</a></c:if>
+								
+								<spring:url
+									value="/invitations/team/{teamId}"
+									var="searchPeopleUrl">
+									<spring:param name="teamId" value="${team.id}" />
+								</spring:url>
+								<c:if test="${true}"><a style="font-size: 17px"href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a></c:if>
 							</div>
 						</div>
 					</div>
