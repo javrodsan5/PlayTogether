@@ -1,6 +1,10 @@
 
 package net.playtogether.jpa.web;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,6 +36,7 @@ import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.SportService;
+import net.playtogether.jpa.service.TeamService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -51,6 +56,9 @@ public class ChampionshipTests {
 
 	@MockBean
 	private MatchService		matchService;
+	
+	@MockBean
+	private TeamService		teamService;
 
 
 	@BeforeEach
@@ -108,6 +116,11 @@ public class ChampionshipTests {
 		team1.getParticipants().add(u);
 		Team team2 = new Team();
 		team2.setChampionship(this.testChampionship);
+		
+		Team team3 = new Team();
+		t.setChampionship(this.testChampionship);
+		t.setId(3);
+		team3.setName("lobos");
 
 		Match match = new Match();
 		match.setId(1);
@@ -122,6 +135,7 @@ public class ChampionshipTests {
 		BDDMockito.given(this.championshipService.findTeamId(8)).willReturn(t);
 		BDDMockito.given(this.championshipService.findUserByNameOrUsername("Usuario1")).willReturn(users);
 		BDDMockito.given(this.matchService.findMatchById(1)).willReturn(match);
+		BDDMockito.given(this.teamService.findTeamById(3)).willReturn(team3);
 
 	}
 
@@ -217,5 +231,25 @@ public class ChampionshipTests {
 		Assertions.assertThat(teamAgain.getParticipants().size() == 1);
 
 	}
+	
+	// Test de consultar un equipo
+		@Test
+		void getTeam() throws Exception {
+			this.mockMvc.perform(get("/championships/1/teams/3")).andExpect(status().is2xxSuccessful());
+
+			Team teamEntity = teamService.findTeamById(3);
+			assertThat(teamEntity.getName()).isEqualTo("lobos");
+
+		}
+
+		// Test de consultar un equipo negative
+		@Test
+		void getTeamNegative() throws Exception {
+			this.mockMvc.perform(get("/championships/1/teams/3")).andExpect(status().is2xxSuccessful());
+
+			Team teamEntity = teamService.findTeamById(3);
+			assertThat(teamEntity.getName()).isNotEqualTo("tigres");
+
+		}
 
 }

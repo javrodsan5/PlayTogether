@@ -44,5 +44,11 @@ public class MatchService {
 		return matchRepository.findTeams(championshipId);
 	}
 	
+	@Transactional(readOnly=true)
+	public Collection<Match> findMatchesByTeamId(Integer teamId){
+		return matchRepository.findMatchesByTeaId(teamId);
+	}
+	
+	
 
 }
