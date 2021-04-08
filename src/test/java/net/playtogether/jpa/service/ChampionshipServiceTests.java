@@ -47,7 +47,7 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindAllChampionships() throws Exception {
 		Collection<Championship> championships = this.championshipService.listChampionship();
-		Assertions.assertThat(championships.size()).isEqualTo(8);
+		Assertions.assertThat(championships.size()).isEqualTo(9);
 	}
 
 	// FIND TEAM BY ID
@@ -61,7 +61,7 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindAllTeams() {
 		Collection<Team> listTeams = this.championshipService.listTeams();
-		Assertions.assertThat(listTeams.size()).isEqualTo(8);
+		Assertions.assertThat(listTeams.size()).isEqualTo(10);
 	}
 
 	// FIND USER BY NAME OR USERNAME
