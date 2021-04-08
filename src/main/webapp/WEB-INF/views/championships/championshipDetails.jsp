@@ -9,7 +9,6 @@
 
 <playtogether:layout pageName="championships">
 
-	<h2>Información de torneos</h2>
 
 	<div class="Card1Meeting">
 		<div class="photo"

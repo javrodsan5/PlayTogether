@@ -30,12 +30,14 @@ import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.SportService;
 import net.playtogether.jpa.service.TeamService;
 import net.playtogether.jpa.service.UserService;
+import net.playtogether.jpa.service.UsuarioService;
+
 
 @Controller
 public class ChampionshipController {
@@ -50,13 +52,12 @@ public class ChampionshipController {
 	MatchService matchService;
 
 	@Autowired
-	UserService userService;
-	
-	@Autowired
+	UsuarioService userService;
+
+  @Autowired
 	TeamService teamService;
 
-
-	private List<User> users;
+	private List<Usuario> users;
 
 	@InitBinder("championship")
 	public void initChampionshipBinder(final WebDataBinder dataBinder) {
@@ -124,7 +125,7 @@ public class ChampionshipController {
 			@PathVariable("championshipId") final Integer championshipId) {
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		model.addAttribute("championship", championship);
-		User user = this.userService.findUserById(1);
+		Usuario user = this.userService.findUserById(1);
 		Boolean b1 = true;
 		Boolean b2 = true;
 
@@ -268,9 +269,9 @@ public class ChampionshipController {
 		return "matches/createOrUpdateMatchForm";
 	}
 
-	private Boolean isParticipant(final List<User> users, final String name) {
+	private Boolean isParticipant(final List<Usuario> users, final String name) {
 		Boolean res = Boolean.FALSE;
-		for (User user : users) {
+		for (Usuario user : users) {
 			res = user.getName().equals(name);
 			if (res) {
 				break;
@@ -334,8 +335,8 @@ public class ChampionshipController {
 			@PathVariable("championshipId") final Integer championshipId,
 			@PathVariable("teamId") final Integer teamId) {
 		Team team = this.championshipService.findTeamId(teamId);
-		User user = this.userService.findUserById(1);
-		List<User> participants = team.getParticipants();
+		Usuario user = this.userService.findUserById(1);
+		List<Usuario> participants = team.getParticipants();
 		if (participants.contains(user)) {
 			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
 

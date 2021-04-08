@@ -1,13 +1,10 @@
 package net.playtogether.jpa.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.service.ChampionshipService;
 
 public class TeamValidator implements Validator {
 

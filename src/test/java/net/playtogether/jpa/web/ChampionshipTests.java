@@ -32,7 +32,7 @@ import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.SportType;
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.SportService;
@@ -90,17 +90,15 @@ public class ChampionshipTests {
 		t.setChampionship(this.testChampionship);
 		t.setId(8);
 		t.setName("Equipo8");
-		t.setParticipants(new ArrayList<User>());
+		t.setParticipants(new ArrayList<Usuario>());
 		List<Team> teams = new ArrayList<Team>();
 		teams.add(t);
 		this.testChampionship.setTeams(teams);
 
-		User u = new User();
+		Usuario u = new Usuario();
 		u.setId(1);
 		u.setName("Usuario1");
 		u.setCorreo("correo@correo.com");
-		u.setUsername("user1");
-		u.setPassword("password");
 		u.setBirthdate(LocalDate.of(1999, 3, 16));
 		u.setPhone("123456789");
 		u.setPayment(null);
@@ -108,7 +106,7 @@ public class ChampionshipTests {
 		u.setType(null);
 		u.setTeams(null);
 		u.setMeetings(null);
-		List<User> users = new ArrayList<>();
+		List<Usuario> users = new ArrayList<>();
 		users.add(u);
 
 		Team team1 = new Team();

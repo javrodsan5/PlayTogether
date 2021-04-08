@@ -17,7 +17,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -30,9 +30,9 @@ public class ChampionshipServiceTests {
 	private SportService		sportService;
 
 	@Autowired
-	private UserService			userService;
-	
-	@Autowired
+	private UsuarioService			userService;
+
+  @Autowired
 	private TeamService			teamService;
 
 
@@ -67,14 +67,14 @@ public class ChampionshipServiceTests {
 	// FIND USER BY NAME OR USERNAME
 	@Test
 	void shouldFindUserWithCorrectNameOrUsername() throws Exception {
-		List<User> user = this.championshipService.findUserByNameOrUsername("Antonio");
+		List<Usuario> user = this.championshipService.findUserByNameOrUsername("Antonio");
 		Assertions.assertThat(user.get(0).getName()).isEqualTo("Antonio");
 	}
 
 	// FIND USER BY ID
 	@Test
 	void shouldFindUserWithCorrectId() throws Exception {
-		User user = this.championshipService.findUsersById(3);
+		Usuario user = this.championshipService.findUsersById(1);
 		Assertions.assertThat(user.getName()).isEqualTo("Antonio");
 	}
 
@@ -84,8 +84,8 @@ public class ChampionshipServiceTests {
 		Integer countBefore = this.championshipService.countTeams();
 		countBefore++;
 
-		List<User> users = new ArrayList<>();
-		User user = this.userService.findUserById(1);
+		List<Usuario> users = new ArrayList<>();
+		Usuario user = this.userService.findUserById(1);
 		users.add(user);
 
 		Team team = new Team();

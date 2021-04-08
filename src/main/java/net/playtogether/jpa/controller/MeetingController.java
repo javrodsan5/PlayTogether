@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.MeetingService;
 import net.playtogether.jpa.service.SportService;
-import net.playtogether.jpa.service.UserService;
+import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
 public class MeetingController {
@@ -30,7 +30,7 @@ public class MeetingController {
 	MeetingService meetingService;
 
 	@Autowired
-	UserService userService;
+	UsuarioService userService;
 
 	@Autowired
 	SportService sportService;
@@ -111,7 +111,7 @@ public class MeetingController {
 		model.addAttribute("meeting", meeting);
 		Boolean b = true;
 		Boolean estaLlena = false;
-		User u = this.userService.findUserById(1);
+		Usuario u = this.userService.findUserById(1);
 
 		if (!meeting.getParticipants().contains(u)) {
 			b = false;
@@ -130,12 +130,12 @@ public class MeetingController {
 	@GetMapping("/meetings/{meetingId}/join")
 	public String meetingJoin(ModelMap model, @PathVariable("meetingId") Integer meetingId) {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
-		User u = this.userService.findUserById(1);
+		Usuario u = this.userService.findUserById(1);
 
 		if (!meeting.getParticipants().contains(u) &&
 				meeting.getNumberOfPlayers()>meeting.getParticipants().size()) {
 
-			List<User> list = meeting.getParticipants();
+			List<Usuario> list = meeting.getParticipants();
 			list.add(u);
 			meeting.setParticipants(list);
 
