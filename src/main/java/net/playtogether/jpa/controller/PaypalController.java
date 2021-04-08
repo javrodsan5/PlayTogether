@@ -53,14 +53,18 @@ public class PaypalController {
     public String formPaymentJoinTeam(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId) {
         Order order =  new Order();
         Championship championship = this.championshipService.findChampionshipId(championshipId);
+        String teamName = this.championshipService.findTeamId(teamId).getName();
         order.setIntent("sale");
         order.setCurrency("EUR");
         order.setMethod("paypal");
         order.setPrice(2);
         order.setDescription("Pago por participar en el torneo " + championship.getName() + ".");
         model.addAttribute("order", order);
+        model.addAttribute("payCham",true);
         model.addAttribute("championshipId", championshipId);
         model.addAttribute("teamId", teamId);
+        model.addAttribute("teamName", teamName);
+
 
         return "pay/createPaymentForm";
     }
@@ -76,6 +80,7 @@ public class PaypalController {
         order.setDescription("Pago por participar en el torneo " + championship.getName() + ".");
         model.addAttribute("order", order);
         model.addAttribute("championshipId", championshipId);
+        model.addAttribute("payCham",true);
         model.addAttribute("teamName", teamName);
 
         return "pay/createPaymentForm";
@@ -90,6 +95,8 @@ public class PaypalController {
         order.setPrice(5);
         order.setDescription("Pago por premium.");
         model.addAttribute("order", order);
+        model.addAttribute("premium",true);
+
 
         return "pay/createPaymentForm";
     }
