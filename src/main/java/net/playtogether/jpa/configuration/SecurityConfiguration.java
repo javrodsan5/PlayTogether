@@ -1,7 +1,5 @@
 package net.playtogether.jpa.configuration;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,18 +11,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import net.playtogether.jpa.service.UserLoginService;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
-	DataSource dataSource;
+	private UserLoginService userLoginService;
 
     @Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/resources/**","/webjars/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/","/error").permitAll()
+		.antMatchers("/pay/**").hasAnyAuthority("usuario")
+		//.antMatchers("/sports/**").hasAnyAuthority("usuario")
 		.anyRequest().permitAll()
 		.and()
 		 	.formLogin()
@@ -34,20 +36,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutSuccessUrl("/"); 
     }
 
-
     @Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.jdbcAuthentication()
-	      .dataSource(dataSource)
-	      .usersByUsernameQuery(
-	       "select username,password,enabled "
-	        + "from users "
-	        + "where username = ?")
-	      .authoritiesByUsernameQuery(
-	       "select username, authority "
-	        + "from authorities "
-	        + "where username = ?")	      	      
-	      .passwordEncoder(passwordEncoder());	
+		auth.userDetailsService(userLoginService)      	      
+	    .passwordEncoder(passwordEncoder());	
 	}
 	
 	@Bean

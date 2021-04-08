@@ -48,5 +48,10 @@ public class UsuarioService {
 		authoritiesService.saveAuthorities(usuario.getUser().getUsername(), "usuario");
 		
 	}
+
+	@Transactional
+	public Usuario findByUsername(String username) {
+		return this.usuarioRepository.findUsuarioByUsername(username).orElse(null);
+	}
 	
 }

@@ -59,9 +59,6 @@ INSERT INTO teams VALUES(8, 'Equipo8', 1, 8);
 
 INSERT INTO matches VALUES(1, '2021/06/15 11:00:00', 2, 1, 2, 1, 1, 1, 2);
 
-INSERT INTO payment_type VALUES(1, 'Básico');
-INSERT INTO payment_type VALUES(2, 'Premium');
-
 INSERT INTO usuarios VALUES(1, 'Antonio', '1999-02-20', 'antonio@gmail.com', '654893274', 2,'usuario1');
 INSERT INTO usuarios VALUES(2, 'Fernando', '1995-07-06', 'fernando1@gmail.com', '635897412', 1,'usuario2');
 INSERT INTO usuarios VALUES(3, 'Marta', '1992-03-25', 'marta1@gmail.com', '954785123', 1,'usuario3');
@@ -69,9 +66,12 @@ INSERT INTO usuarios VALUES(3, 'Marta', '1992-03-25', 'marta1@gmail.com', '95478
 INSERT INTO statistics VALUES(1, 1, 1);
 INSERT INTO statistics VALUES(2, 2, 2);
 
-INSERT INTO payments VALUES(1, 2.5, '2021/02/15 11:00:00', 1, 1);
-INSERT INTO payments VALUES(2, 5.0, '2021/01/16 11:45:00', 1, 2);
-INSERT INTO payments VALUES(3, 5.0, '2021/04/07 12:15:00', 1, 3);
+INSERT INTO pay_type VALUES(1, 'Premium');
+INSERT INTO pay_type VALUES(2, 'Championship');
+
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(1, 2, '2021/02/15 11:00:00', 2, 1, 1, 1);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(2, 5.0, '2021/01/16 11:45:00', 1, null, 1, 2);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(3, 5.0, '2021/04/07 12:15:00', 1, null, 1, 3);
 
 INSERT INTO teams_participants VALUES(1, 2);
 INSERT INTO teams_participants VALUES(2, 4);
