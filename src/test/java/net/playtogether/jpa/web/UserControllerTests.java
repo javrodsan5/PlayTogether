@@ -106,16 +106,16 @@ public class UserControllerTests {
 			
 		// Test de PostMapping de crear usuario
 			@Test
-			void createMeeting() throws Exception {
+			void createUser() throws Exception {
 
 				mockMvc.perform(
 						post("/usuarios/new")
 						.with(csrf()).param("name", "Usuario")
 						.param("correo", "usu@usuario.com")
-						.param("birthdate", "2021/06/12")
-						.param("phone", "123456789")
+						.param("birthdate", "1999/06/12")
+						.param("phone", "666555888")
 						.param("user.username", "usuarioPruebas")
-						.param("user.password", "us3r"))
+						.param("user.password", "Usuar1o"))
 						.andExpect(status().is3xxRedirection())
 						.andExpect(view().name("redirect:/"));
 
