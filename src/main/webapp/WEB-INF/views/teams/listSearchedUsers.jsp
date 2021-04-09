@@ -10,6 +10,7 @@
 	rel='stylesheet'>
 
 <playtogether:layout pageName="teams">
+<playtogether:banner></playtogether:banner>
 	<body>
 		<div class="thirteen">
 			<h1>Elegir participante</h1>

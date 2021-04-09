@@ -162,7 +162,7 @@ public class PaypalController {
                 pay.setDate(LocalDate.now());
                 payService.save(pay);
                 if(pay.getPayType().getName().equals("Premium")) {
-                    return "redirect:/sports";
+                    return "pay/success";
                 }else if(pay.getTeam() == null) {
                     return "redirect:/sports/"+pay.getChampionship().getSport().getId()+"/championships/"+pay.getChampionship().getId();
                 } else if(pay.getPayType().getName().equals("Championship")) {

@@ -65,7 +65,7 @@
 							<p>Crear actividades ilimitadas</p>
 						</div>
 						<div class="columnWIV light blank">
-							<i class="material-icons">close</i>
+							<i class="fa fa-times cancel"></i>
 
 						</div>
 						<div class="columnWIV dark">
@@ -80,7 +80,7 @@
 							<p>Crear y unirse a torneos gratuitamente</p>
 						</div>
 						<div class="columnWIV light blank">
-							<i class="material-icons">close</i>
+							<i class="fa fa-times cancel"></i>
 
 						</div>
 						<div class="columnWIV dark">
@@ -95,7 +95,7 @@
 							<p>Invitar usuarios a tu quedada</p>
 						</div>
 						<div class="columnWIV light blank">
-							<i class="material-icons">close</i>
+							<i class="fa fa-times cancel"></i>
 						</div>
 						<div class="columnWIV light">
 							<i class="material-icons text--green">check</i>
@@ -109,7 +109,7 @@
 							<p>Aceptar/rechazar usuarios en tu actividad</p>
 						</div>
 						<div class="columnWIV light blank">
-							<i class="material-icons">close</i>
+							<i class="fa fa-times cancel"></i>
 						</div>
 						<div class="columnWIV dark">
 							<i class="material-icons text--green">check</i>
@@ -123,7 +123,7 @@
 							<p>Participar y ver la clasificación de deportes</p>
 						</div>
 						<div class="columnWIV light blank">
-							<i class="material-icons">close</i>
+							<i class="fa fa-times cancel"></i>
 						</div>
 						<div class="columnWIV light wiivv--last">
 							<i class="material-icons text--green">check</i>
