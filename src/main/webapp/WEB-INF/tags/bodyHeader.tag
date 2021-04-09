@@ -2,6 +2,6 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags" %>
 
 <%@ attribute name="menuName" required="true" rtexprvalue="true"
-              description="Name of the active menu: home, owners, vets or error" %>
+              description="" %>
 
 <playtogether:menu name="${menuName}"/>
