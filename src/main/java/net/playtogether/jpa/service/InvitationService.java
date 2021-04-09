@@ -1,7 +1,6 @@
 package net.playtogether.jpa.service;
 
 import java.util.Collection;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -21,6 +20,11 @@ public class InvitationService {
 	public InvitationService(InvitationRepository invitationRepository) {
 		this.invitationRepository = invitationRepository;
 	}
+	
+	@Transactional
+	public Long countInvitations() {
+		return this.invitationRepository.count();
+	}
 
 	@Transactional
 	public boolean save(final Invitation invitation) throws DataAccessException {
@@ -34,7 +38,7 @@ public class InvitationService {
 		return true;
 	}
 	
-	@Transactional
+	@Transactional(readOnly = true)
 	public Invitation findById(Integer invitationId) {
 		return this.invitationRepository.findById(invitationId).orElse(null);
 	}

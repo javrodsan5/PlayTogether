@@ -4,9 +4,7 @@ package net.playtogether.jpa.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Invitation;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.User;
@@ -68,13 +65,8 @@ public class InvitationController {
 			model.put("limitedTeamSize", true);
 			return "invitations/addParticipantsForm";
 		}
+		searched_users = this.championshipService.findUserByNameOrUsername(search);
 
-		try {
-			searched_users = this.championshipService.findUserByNameOrUsername(search);
-		} catch (Exception e) {
-			model.put("noUser", true);
-			return "invitations/addParticipantsForm";
-		}
 		this.deleteRepeatedUsers(team, searched_users);
 		if (searched_users.isEmpty()) {
 			model.put("notMoreUsers", true);
