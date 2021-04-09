@@ -54,7 +54,7 @@ public class ChampionshipController {
 	MatchService matchService;
 
 	@Autowired
-	UsuarioService userService;
+	UsuarioService usuarioService;
 
 	@Autowired
 	PayService payService;
@@ -131,7 +131,7 @@ public class ChampionshipController {
 			@PathVariable("championshipId") final Integer championshipId) {
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		model.addAttribute("championship", championship);
-		Usuario user = this.userService.findUserById(1);
+		Usuario user = this.usuarioService.findUserById(1);
 		Boolean b1 = true;
 		Boolean b2 = true;
 
@@ -341,7 +341,7 @@ public class ChampionshipController {
 			@PathVariable("championshipId") final Integer championshipId,
 			@PathVariable("teamId") final Integer teamId, Principal principal) {
 		Team team = this.championshipService.findTeamId(teamId);
-		Usuario user = this.userService.findByUsername(principal.getName());
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		List<Usuario> participants = team.getParticipants();
 
 		Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);
@@ -359,6 +359,8 @@ public class ChampionshipController {
 			participants.add(user);
 			team.setParticipants(participants);
 			this.championshipService.save(team);
+			user.setPuntos(user.getPuntos()+5);
+			usuarioService.saveUsuario(user);
 
 			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
 		}
@@ -395,9 +397,12 @@ public class ChampionshipController {
 			if(!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"))){
 				return "redirect:/pay/championship/"+championshipId+"?teamName="+team.getName();
 			} else {
+				Usuario usuario = usuarioService.usuarioLogueado(principal);
+				team.setTeamCreator(usuario);
 				team.setChampionship(championship);
 				team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
 				this.championshipService.save(team);
+				usuario.setPuntos(usuario.getPuntos()+7);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; // CAMBIAR
 			}																									// PARA
 																												// EL

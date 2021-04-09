@@ -55,6 +55,7 @@ public class Championship extends NamedEntity {
     @Column(name = "finishDate")
     private LocalDate finishDate;
     
+    
     @NotNull
     @Column(name = "maxTeams")
     private Integer maxTeams;

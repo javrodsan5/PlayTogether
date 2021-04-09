@@ -57,7 +57,7 @@ public class UsuarioController {
 		} else {
 			UserType usrType= this.userTypeService.findUserTypeById(1);
 			usuario.setType(usrType);
-
+			usuario.setPuntos(0);
 			this.usuarioService.saveUsuario(usuario);
 			return "redirect:/";
 		}
