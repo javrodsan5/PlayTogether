@@ -4,10 +4,12 @@ INSERT INTO user_type VALUES(3, 'Administrador');
 
 INSERT INTO users(username,password,enabled) VALUES ('usuario1','us3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (1,'usuario1','usuario');
+INSERT INTO authorities(id,username,authority) VALUES (2,'usuario1','premium');
 INSERT INTO users(username,password,enabled) VALUES ('usuario2','us3r',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (2,'usuario2','usuario');
+INSERT INTO authorities(id,username,authority) VALUES (3,'usuario2','usuario');
+INSERT INTO authorities(id,username,authority) VALUES (4,'usuario2','premium');
 INSERT INTO users(username,password,enabled) VALUES ('usuario3','us3r',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (3,'usuario3','usuario');
+INSERT INTO authorities(id,username,authority) VALUES (5,'usuario3','usuario');
 
 INSERT INTO sport_type VALUES(1, 'Equipo');
 INSERT INTO sport_type VALUES(2, 'Individual');
@@ -39,14 +41,22 @@ INSERT INTO meetings VALUES(5, 'Pistas Sevilla 4', 'Sevilla', '2021/05/11 17:20:
 INSERT INTO meetings VALUES(6, 'Pistas Sevilla 5', 'Sevilla', '2021/04/20 11:45:00', 'Breve descripcion', 4, 1);
 INSERT INTO meetings VALUES(7, 'Pistas Sevilla 6', 'Sevilla', '2021/04/15 09:20:00', 'Breve descripcion', 4, 1);
 
-INSERT INTO championships VALUES(1, 'Torneo1', 'Sevilla', 'Descripcion del torneo', '2021/06/25 12:00:00', 16, '2021/06/15 11:00:00', 1);
-INSERT INTO championships VALUES(2, 'Torneo2', 'Sevilla', 'Nuevo torneo', '2021/04/12 16:45:00', 16, '2021/04/06 18:45:00', 1);
-INSERT INTO championships VALUES(3, 'Torneo3', 'Sevilla', 'Descripcion del torneo', '2021/05/23 12:00:00', 16, '2021/05/15 14:00:00', 1);
-INSERT INTO championships VALUES(4, 'Torneo4', 'Sevilla', 'Descripcion del torneo', '2021/05/15 12:00:00', 16, '2021/04/15 11:00:00', 1);
-INSERT INTO championships VALUES(5, 'Torneo5', 'Sevilla', 'Descripcion del torneo', '2021/06/15 12:00:00', 16, '2021/05/15 11:00:00', 1);
-INSERT INTO championships VALUES(6, 'Torneo6', 'Sevilla', 'Descripcion del torneo', '2021/04/17 12:00:00', 16, '2021/04/16 11:00:00', 1);
-INSERT INTO championships VALUES(7, 'Torneo7', 'Sevilla', 'Descripcion del torneo', '2021/05/15 12:00:00', 16, '2021/04/15 11:00:00', 2);
-INSERT INTO championships VALUES(8, 'Torneo8', 'Sevilla', 'Descripcion del torneo', '2021/05/15 12:00:00', 16, '2021/04/15 11:00:00', 2);
+INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(1, 'Torneo1', 'Sevilla', 'Descripcion del torneo', '2021/06/25 12:00:00', 16, '2021/06/15 11:00:00', 1, 1);
+INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(2, 'Torneo2', 'Sevilla', 'Nuevo torneo', '2021/04/12 16:45:00', 16, '2021/04/06 18:45:00', 1, 1);
+INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(3, 'Torneo3', 'Sevilla', 'Descripcion del torneo', '2021/05/23 12:00:00', 16, '2021/05/15 14:00:00', 1, 1);
+INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(4, 'Torneo4', 'Sevilla', 'Descripcion del torneo', '2021/05/15 12:00:00', 16, '2021/04/15 11:00:00', 1, 1);
+INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(5, 'Torneo5', 'Sevilla', 'Descripcion del torneo', '2021/06/15 12:00:00', 16, '2021/05/15 11:00:00', 1, 2);
+INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(6, 'Torneo6', 'Sevilla', 'Descripcion del torneo', '2021/04/17 12:00:00', 16, '2021/04/16 11:00:00', 1, 2);
+INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(7, 'Torneo7', 'Sevilla', 'Descripcion del torneo', '2021/05/15 12:00:00', 16, '2021/04/15 11:00:00', 2, 1);
+INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(8, 'Torneo8', 'Sevilla', 'Descripcion del torneo', '2021/05/15 12:00:00', 16, '2021/04/15 11:00:00', 3, 1);
 
 INSERT INTO teams VALUES(1, 'Equipo1', 1, 1);
 INSERT INTO teams VALUES(2, 'Equipo2', 1, 1);
@@ -69,9 +79,9 @@ INSERT INTO statistics VALUES(2, 2, 2);
 INSERT INTO pay_type VALUES(1, 'Premium');
 INSERT INTO pay_type VALUES(2, 'Championship');
 
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(1, 2, '2021/02/15 11:00:00', 2, 1, 1, 1);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(2, 5.0, '2021/01/16 11:45:00', 1, null, 1, 2);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(3, 5.0, '2021/04/07 12:15:00', 1, null, 1, 3);
+
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(2, 5.0, '2021/01/16 11:45:00', 1, null, 1, 1);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(3, 5.0, '2021/04/07 12:15:00', 1, null, 1, 2);
 
 INSERT INTO teams_participants VALUES(1, 2);
 INSERT INTO teams_participants VALUES(2, 4);

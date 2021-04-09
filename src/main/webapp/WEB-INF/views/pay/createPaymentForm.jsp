@@ -11,7 +11,10 @@
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet" />
 	<div class="thirteen">
-		<c:if test="${payCham==true}">
+		<c:if test="${newChampionship==true}">
+			<h1>Pago por crear torneo</h1>
+		</c:if>
+		<c:if test="${newChampionship != true}">
 			<h1>Pago para inscripción en ${teamName}</h1>
 		</c:if>
 		<c:if test="${premium==true}">
@@ -138,7 +141,7 @@
 			<div class="crearMeeting">
 				<form:form style="background-color: white" commandName="order"
 					modelAttribute="order" method="post"
-					action="/pay?championshipId=${championshipId}&teamId=${teamId}&teamName=${teamName}">
+					action="/pay?championshipId=${championshipId}&teamId=${teamId}&teamName=${teamName}&newChampionship=${newChampionship}">
 					<div>
 						<form:input type="hidden" path="price" />
 						<form:input type="hidden" path="currency" />

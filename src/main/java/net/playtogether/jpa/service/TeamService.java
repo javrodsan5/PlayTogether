@@ -22,5 +22,10 @@ public class TeamService {
 	public Team findTeamById(int id){
 		return teamRepository.findById(id).orElse(null);
 	}
+
+	@Transactional
+	public void delete(Team team) {
+		this.teamRepository.delete(team);
+	}
 	
 }

@@ -43,6 +43,11 @@ public class PayService {
         return this.payRepository.findPaysNotFinishedByUsername(username);
     }
 
+    @Transactional
+    public Pay findLastNotFinishedPayForChampionshipByUsername(String username, Integer championshipId) {
+        return this.payRepository.findLastNotFinishedPayForChampionshipByUsername(username, championshipId);
+    }
+
     public void deleteAll(List<Pay> pays) {
         this.payRepository.deleteAll(pays);
     }
