@@ -153,6 +153,7 @@ public class PaypalController {
                             team.setName(teamName);
                             team.setChampionship(championship);
                             team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
+                            team.setUser(usuarioService.findByUsername(principal.getName()));
                             this.championshipService.save(team);
                             pay.setTeam(team);
                         }
