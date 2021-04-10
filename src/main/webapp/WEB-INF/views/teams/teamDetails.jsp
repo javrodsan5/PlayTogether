@@ -27,7 +27,7 @@
 							<td><c:out value="${participant.name}" /></td>
 							
 							<td><spring:url
-									value="/users/{userId}"
+									value="/usuarios/{userId}"
 									var="userDetails">
 									<spring:param name="userId" value="${participant.id}" />
 								
