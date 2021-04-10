@@ -41,7 +41,7 @@ public class AuthoritiesServiceTests {
 		@Test
 		void saveUser2() throws Exception {
 			Integer contador = this.authoritiesService.findAll().size();
-			String username = "usuario1";
+			String username = "antonio98";
 			String rol = "usuario";
 			
 			this.authoritiesService.saveAuthorities(username, rol);

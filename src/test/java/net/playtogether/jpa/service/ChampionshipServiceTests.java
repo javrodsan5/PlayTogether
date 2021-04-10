@@ -55,7 +55,7 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindTeamWithCorrectId() throws Exception {
 		Team team = this.championshipService.findTeamId(1);
-		Assertions.assertThat(team.getName()).isEqualTo("Equipo1");
+		Assertions.assertThat(team.getName()).isEqualTo("West Jamon");
 	}
 
 	// FIND ALL (COLLECTION SPORT)
@@ -111,7 +111,7 @@ public class ChampionshipServiceTests {
 	 @Test
 	 void findTeamByIdTest() {
 		 Team team = this.teamService.findTeamById(1);
-		 assertThat(team.getName()).isEqualTo("Equipo1");
+		 assertThat(team.getName()).isEqualTo("West Jamon");
 	 }
 
 }

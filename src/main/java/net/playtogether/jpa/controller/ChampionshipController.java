@@ -380,33 +380,47 @@ public class ChampionshipController {
 	public String initJoinChampionship(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, @PathVariable("teamId") final Integer teamId,
 			Principal principal) {
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		Team team = this.championshipService.findTeamId(teamId);
 		Usuario user = this.userService.findByUsername(principal.getName());
 		List<Usuario> participants = team.getParticipants();
 
-		Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);
-
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		Boolean isPremium = authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"));
-		if (!isPremium && pay == null) {
-			return "redirect:/pay/championship/" + championshipId + "/team/" + teamId;
+		if(!championship.getTeams().contains(team)) {
+			return "error-404";
+		} else if(championship.getTeams().stream().anyMatch(x -> x.getParticipants().contains(user))){
+			return "error-403";
 		} else {
-			if (participants.contains(user)) {
-				return "redirect:/sports/" + sportId + "/championships/" + championshipId;
-			} else {
-				model.put("esParticipante", false);
-				participants.add(user);
-				team.setParticipants(participants);
-				this.championshipService.save(team);
 
-				return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+			Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);
+
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Boolean isPremium = authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"));
+			if (!isPremium && pay == null) {
+				return "redirect:/pay/championship/" + championshipId + "/team/" + teamId;
+			} else {
+				if (participants.contains(user)) {
+					return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+				} else {
+					model.put("esParticipante", false);
+					participants.add(user);
+					team.setParticipants(participants);
+					this.championshipService.save(team);
+
+					return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+				}
 			}
 		}
 	}
 
 	@GetMapping("/championships/{championshipId}/team/create")
-	public String initCreationTeam(final ModelMap model, @PathVariable("championshipId") final Integer championshipId) {
+	public String initCreationTeam(final ModelMap model, @PathVariable("championshipId") final Integer championshipId, Principal principal) {
 		Team team = new Team();
+		List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);
+		for (Team t : joinedTeams) {
+			if(t.getParticipants().contains(this.userService.findByUsername(principal.getName()))) {
+				return "error-403";
+			}
+		}
 		model.addAttribute("team", team);
 
 		return "teams/createOrUpdateTeamForm";
@@ -418,6 +432,9 @@ public class ChampionshipController {
 			Principal principal) {
 		List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);
 		for (Team t : joinedTeams) {
+			if(t.getParticipants().contains(this.userService.findByUsername(principal.getName()))) {
+				return "error-403";
+			}
 			if (t.getName().equals(team.getName())) {
 				errors.rejectValue("name", "Ya existe un equipo con ese nombre en este torneo.",
 						"Ya existe un equipo con ese nombre en este torneo.");
