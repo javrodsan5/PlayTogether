@@ -24,6 +24,17 @@
 					<h1 class="product_price">
 						<c:out value="${user.birthdate}" />
 					</h1>
+					<h1 class="product_price">
+						<c:out value="${user.phone}" />
+					</h1>
+			
+					<h1 class="product_price">
+						<c:out value="${user.type}" />
+						
+					</h1>
+					<h1 class="product_price">
+						<c:out value="${user.statistics}" />
+					</h1>
 
 				</div>
 				<h2>

@@ -32,7 +32,7 @@ import net.playtogether.jpa.service.UsuarioService;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerTests {
+public class UsuarioControllerTests {
 	
 	@Autowired
 	private MockMvc mockMvc;
@@ -73,28 +73,48 @@ public class UserControllerTests {
 		
 		given(this.userService.findUserByUsername("user1")).willReturn(u);
 		given(this.userTypeService.findUserTypeById(1)).willReturn(userType);
+		given(this.usuarioService.findUserById(1)).willReturn(usuario);
 	}
 	
 	
 	// Test de consultar un usuario externo
-//		@Test
-//		void getUser() throws Exception {
-//			this.mockMvc.perform(get("/users/1")).andExpect(status().is2xxSuccessful());
-//
-//			User userEntity = userService.findUserByUsername("user1");
-//			assertThat(userEntity.getUsername()).isEqualTo("user1");
-//
-//		}
+		@Test
+		void getUser() throws Exception {
+			this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
+
+			Usuario userEntity = usuarioService.findUserById(1);
+			assertThat(userEntity.getName()).isEqualTo("usuarioPr");
+
+	}
 
 		// Test de consultar un usuario negative
-//		@Test
-//		void getUserNegative() throws Exception {
-//			this.mockMvc.perform(get("/users/1")).andExpect(status().is2xxSuccessful());
-//
-//			User userEntity =userService.findUserByUsername("user1");
-//			assertThat(userEntity.getUsername()).isNotEqualTo("user2");
-//
-//		}
+		@Test
+		void getUserNegative() throws Exception {
+			this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
+			Usuario userEntity = usuarioService.findUserById(1);
+			assertThat(userEntity.getName()).isNotEqualTo("usuarioPq");
+
+		}
+		
+		
+	// Test de consultar un usuario externo
+				@Test
+				void getMyProfile() throws Exception {
+					this.mockMvc.perform(get("/myprofile/1")).andExpect(status().is2xxSuccessful());
+
+					Usuario userEntity = usuarioService.findUserById(1);
+					assertThat(userEntity.getName()).isEqualTo("usuarioPr");
+
+			}
+
+	// Test de consultar un usuario negative
+				@Test
+				void getMyProfileNegative() throws Exception {
+					this.mockMvc.perform(get("/myprofile/1")).andExpect(status().is2xxSuccessful());
+					Usuario userEntity = usuarioService.findUserById(1);
+					assertThat(userEntity.getName()).isNotEqualTo("usuarioPq");
+
+				}
 	
 		// Test de GetMapping crear usuario
 			@Test

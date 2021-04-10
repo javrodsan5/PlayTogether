@@ -10,6 +10,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.UserType;
@@ -61,5 +62,23 @@ public class UsuarioController {
 			this.usuarioService.saveUsuario(usuario);
 			return "redirect:/";
 		}
+	}
+	
+    @GetMapping("/usuarios/{userId}")
+	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId) {
+		Usuario usuario = this.usuarioService.findUserById(userId);
+		model.addAttribute("user", usuario);
+
+
+		return "users/userDetails";
+	}
+    
+    @GetMapping("/myprofile/{userId}")
+	public String userProfile(final ModelMap model, @PathVariable("userId") final Integer userId) {
+		Usuario usuario = this.usuarioService.findUserById(userId);
+		model.addAttribute("user", usuario);
+
+
+		return "users/userProfile";
 	}
 }
