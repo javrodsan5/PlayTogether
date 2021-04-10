@@ -21,20 +21,20 @@ public class UserLoginService implements UserDetailsService {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private AuthoritiesService authoritiesService;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userService.findUserByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException("Username "+ username + " not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user.getUsername()));
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getGrantedAuthorities(user));
     }
 
-    private Collection<GrantedAuthority> getGrantedAuthorities(String username) {
+    private Collection<GrantedAuthority> getGrantedAuthorities(User user) {
 		Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        if(user.getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+            grantedAuthorities.add(new SimpleGrantedAuthority("premium"));
+        }
 		grantedAuthorities.add(new SimpleGrantedAuthority("usuario"));
 		return grantedAuthorities;
 	}

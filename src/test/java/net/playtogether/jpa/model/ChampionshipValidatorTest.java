@@ -16,6 +16,7 @@ import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.SportType;
+import net.playtogether.jpa.entity.Usuario;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,12 +40,14 @@ public class ChampionshipValidatorTest {
 		sport.setMeetings(new ArrayList<Meeting>());
 		sport.setChampionships(new ArrayList<Championship>());
 
+		championship.setName("Torneo");
 		championship.setCity("Sevilla");
 		championship.setFinishDate(LocalDate.of(2022, 3, 4));
 		championship.setStartDate(LocalDate.of(2022, 2, 4));
 		championship.setSport(sport);
 		championship.setMaxTeams(8);
 		championship.setDescription(null);
+		championship.setUser(new Usuario());
 
 	
 		Validator validator = createValidator();
@@ -74,6 +77,7 @@ public class ChampionshipValidatorTest {
 		championship.setSport(sport);
 		championship.setMaxTeams(8);
 		championship.setDescription("hola es una prueba");
+		championship.setUser(new Usuario());
 
 	
 		Validator validator = createValidator();
@@ -103,6 +107,7 @@ public class ChampionshipValidatorTest {
 		championship.setSport(sport);
 		championship.setMaxTeams(8);
 		championship.setDescription("hola es una prueba");
+		championship.setUser(new Usuario());
 
 	
 		Validator validator = createValidator();
@@ -132,6 +137,7 @@ public class ChampionshipValidatorTest {
 		championship.setSport(sport);
 		championship.setMaxTeams(8);
 		championship.setDescription("hola es una prueba");
+		championship.setUser(new Usuario());
 
 	
 		Validator validator = createValidator();

@@ -37,10 +37,25 @@ public class PayService {
     public Pay findLastFinishedPayForChampionshipByUsername(String username, Integer championshipId) {
         return this.payRepository.findLastFinishedPayForChampionshipByUsername(username, championshipId);
     }
+    
+    @Transactional
+    public Pay findLastFinishedPayForTeamByUsername(String username, Integer teamId) {
+        return this.payRepository.findLastFinishedPayForTeamByUsername(username, teamId);
+    }
 
     @Transactional
     public List<Pay> findIdPaysNotFinishedByUsername(String username){
         return this.payRepository.findPaysNotFinishedByUsername(username);
+    }
+
+    @Transactional
+    public Pay findLastNotFinishedPayForChampionshipByUsername(String username, Integer championshipId) {
+        return this.payRepository.findLastNotFinishedPayForChampionshipByUsername(username, championshipId);
+    }
+    
+    @Transactional
+    public Pay findLastNotFinishedPayForTeamByUsername(String username, Integer teamId) {
+        return this.payRepository.findLastNotFinishedPayForTeamByUsername(username, teamId);
     }
 
     public void deleteAll(List<Pay> pays) {

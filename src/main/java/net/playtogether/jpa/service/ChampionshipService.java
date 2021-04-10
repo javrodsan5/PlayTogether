@@ -85,4 +85,14 @@ public class ChampionshipService {
 		return this.teamRepository.findUserByNameOrUsername(user);
 	}
 
+	@Transactional
+	public void delete(Championship championship) {
+		this.championshipRepository.delete(championship);
+	}
+
+	@Transactional
+	public void deleteAll(List<Championship> championships) {
+		this.championshipRepository.deleteAll(championships);
+	}
+
 }

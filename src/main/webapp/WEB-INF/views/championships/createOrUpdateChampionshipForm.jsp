@@ -18,6 +18,7 @@
 		<playtogether:localDate label="Inicio" name="startDate" id="startDte" ></playtogether:localDate>
 		<playtogether:localDate label="Fin" name="finishDate" id="finishDate" ></playtogether:localDate>
 		</div>
+		<playtogether:inputField label="Nombre" name="name" />
 		<playtogether:inputField label="Ciudad" name="city" />
 		<playtogether:inputField label="Descripción" name="description" />
 		<playtogether:selectField label="Número de equipos" 

@@ -17,7 +17,16 @@ public interface PayRepository extends CrudRepository<Pay, Integer> {
     @Query("SELECT p FROM Pay p WHERE p.date = null AND p.user.user.username = ?1")
     public List<Pay> findPaysNotFinishedByUsername(String username);
 
-    @Query("SELECT p FROM Pay p WHERE p.user.user.username = ?1 AND p.championship.id = ?2 AND p.date != null AND p.id = (SELECT MAX(p.id) FROM Pay p WHERE p.user.user.username = ?1)")
+    @Query("SELECT p FROM Pay p WHERE p.user.user.username = ?1 AND p.championship.id = ?2 AND p.date != null")
     public Pay findLastFinishedPayForChampionshipByUsername(String username, Integer championshipId);
+    
+    @Query("SELECT p FROM Pay p WHERE p.user.user.username = ?1 AND p.team.id = ?2 AND p.date != null")
+    public Pay findLastFinishedPayForTeamByUsername(String username, Integer teamId);
+
+    @Query("SELECT p FROM Pay p WHERE p.user.user.username = ?1 AND p.championship.id = ?2 AND p.date = null")
+    public Pay findLastNotFinishedPayForChampionshipByUsername(String username, Integer championshipId);
  
+    @Query("SELECT p FROM Pay p WHERE p.user.user.username = ?1 AND p.team.id = ?2 AND p.date = null")
+    public Pay findLastNotFinishedPayForTeamByUsername(String username, Integer teamId);
+    
 }

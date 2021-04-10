@@ -8,6 +8,9 @@ import com.paypal.api.payments.Payment;
 import com.paypal.base.rest.PayPalRESTException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -63,8 +66,8 @@ public class PaypalController {
         model.addAttribute("payCham",true);
         model.addAttribute("championshipId", championshipId);
         model.addAttribute("teamId", teamId);
+        model.addAttribute("newChampionship", false);
         model.addAttribute("teamName", teamName);
-
 
         return "pay/createPaymentForm";
     }
@@ -81,7 +84,29 @@ public class PaypalController {
         model.addAttribute("order", order);
         model.addAttribute("championshipId", championshipId);
         model.addAttribute("payCham",true);
+        model.addAttribute("newChampionship", false);
         model.addAttribute("teamName", teamName);
+
+        return "pay/createPaymentForm";
+    }
+
+    @GetMapping("/pay/championship/add")
+    public String formPaymentCreateChampionship(ModelMap model, Principal principal, @RequestParam("championshipId") Integer championshipId) {
+        Order order =  new Order();
+        Championship championship = this.championshipService.findChampionshipId(championshipId);
+        order.setIntent("sale");
+        order.setCurrency("EUR");
+        order.setMethod("paypal");
+        order.setPrice(2);
+        order.setDescription("Pago por la creación del torneo: " + championship.getName() + ".");
+        model.addAttribute("order", order);
+        model.addAttribute("payCham",true);
+        model.addAttribute("championshipId", championship.getId());
+        model.addAttribute("newChampionship", true);
+        Pay pay = new Pay();
+        pay.setUser(this.usuarioService.findByUsername(principal.getName()));
+        pay.setChampionship(championship);
+        this.payService.save(pay);
 
         return "pay/createPaymentForm";
     }
@@ -97,21 +122,24 @@ public class PaypalController {
         model.addAttribute("order", order);
         model.addAttribute("premium",true);
 
-
         return "pay/createPaymentForm";
     }
 
     @PostMapping("/pay")
     public String payment(@ModelAttribute("order") Order order, Principal principal, ModelMap model, @RequestParam("championshipId") Integer championshipId, 
-    @RequestParam("teamId") Integer teamId, @RequestParam("teamName") String teamName) {
+    @RequestParam("teamId") Integer teamId, @RequestParam("teamName") String teamName, @RequestParam("newChampionship") Boolean newChampionship) {
         try {
             Payment payment = service.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(), order.getMethod(),
                     order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
                     "http://localhost:8080/" + SUCCESS_URL);
             for(Links link:payment.getLinks()) {
                 if(link.getRel().equals("approval_url")) {
-                    this.payService.deleteAll(this.payService.findIdPaysNotFinishedByUsername(principal.getName()));
                     Pay pay = new Pay();
+                    if(!newChampionship) {
+                        this.payService.deleteAll(this.payService.findIdPaysNotFinishedByUsername(principal.getName()));
+                    } else {
+                        pay = this.payService.findLastPayByUsername(principal.getName());
+                    }
                     pay.setAmount(order.getPrice());
                     Integer payTypeId = 1; //PREMIUM
                     if(order.getPrice() == 2.) {
@@ -125,6 +153,7 @@ public class PaypalController {
                             team.setName(teamName);
                             team.setChampionship(championship);
                             team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
+                            team.setUser(usuarioService.findByUsername(principal.getName()));
                             this.championshipService.save(team);
                             pay.setTeam(team);
                         }
@@ -147,8 +176,7 @@ public class PaypalController {
 
     @GetMapping(value = CANCEL_URL)
     public String cancelPay(Principal principal) {
-        Pay pay = this.payService.findLastPayByUsername(principal.getName());
-        this.payService.delete(pay);
+
         return "pay/cancel";
     }
 

@@ -23,7 +23,7 @@
 					
 					<c:forEach items="${team.participants}" var="participant">
 						<tr class="rowtable">
-							<td><c:out value="${participant.username}" /></td>
+							<td><c:out value="${participant.user.username}" /></td>
 							<td><c:out value="${participant.name}" /></td>
 							
 							<td><spring:url

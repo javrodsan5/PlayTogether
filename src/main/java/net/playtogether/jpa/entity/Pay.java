@@ -36,7 +36,7 @@ public class Pay extends BaseEntity {
     @JoinColumn(name = "championship_id")
     private Championship championship;
 
-    @ManyToOne(optional=false)
+    @ManyToOne(optional=true)
     @JoinColumn(name = "pay_type_id")
     private PayType payType;
 

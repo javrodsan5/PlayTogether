@@ -47,7 +47,7 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindAllChampionships() throws Exception {
 		Collection<Championship> championships = this.championshipService.listChampionship();
-		Assertions.assertThat(championships.size()).isEqualTo(9);
+		Assertions.assertThat(championships.size()).isEqualTo(8);
 		
 	}
 
@@ -55,14 +55,14 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindTeamWithCorrectId() throws Exception {
 		Team team = this.championshipService.findTeamId(1);
-		Assertions.assertThat(team.getName()).isEqualTo("Equipo1");
+		Assertions.assertThat(team.getName()).isEqualTo("West Jamon");
 	}
 
 	// FIND ALL (COLLECTION SPORT)
 	@Test
 	void shouldFindAllTeams() {
 		Collection<Team> listTeams = this.championshipService.listTeams();
-		Assertions.assertThat(listTeams.size()).isEqualTo(10);
+		Assertions.assertThat(listTeams.size()).isEqualTo(8);
 	}
 
 	// FIND USER BY NAME OR USERNAME
@@ -103,7 +103,7 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindListChampionshipsBySport() throws Exception {
 		Collection<Championship> championships = this.championshipService.listChampionshipsBySport(2);
-		Assertions.assertThat(championships.size()).isEqualTo(2);
+		Assertions.assertThat(championships.size()).isEqualTo(1);
 	}
 	
 	
@@ -111,7 +111,7 @@ public class ChampionshipServiceTests {
 	 @Test
 	 void findTeamByIdTest() {
 		 Team team = this.teamService.findTeamById(1);
-		 assertThat(team.getName()).isEqualTo("Equipo1");
+		 assertThat(team.getName()).isEqualTo("West Jamon");
 	 }
 
 }

@@ -9,11 +9,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 import lombok.Getter;
 import lombok.Setter;
-
-
  
 @Entity
 @Table(name = "teams")
@@ -31,6 +28,9 @@ public class Team extends NamedEntity {
     
     private Integer teamSize;
 
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "owner")
+    private Usuario user;
     
     
     
