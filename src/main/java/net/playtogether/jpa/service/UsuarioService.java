@@ -1,6 +1,5 @@
 package net.playtogether.jpa.service;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,12 +23,6 @@ public class UsuarioService {
 
 	public UsuarioService(UsuarioRepository userRepository){
 		this.usuarioRepository=userRepository;
-	}
-	
-	public Usuario usuarioLogueado(Principal principal) {
-		String username = principal.getName();
-		Usuario usuario = findByUsername(username);
-		return usuario;
 	}
 
 	
