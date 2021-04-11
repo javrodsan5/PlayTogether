@@ -93,5 +93,6 @@ INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(8, 3);
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 1);
 
-
+INSERT INTO invitations VALUES(1, "", null, 3, 3);
+INSERT INTO invitations VALUES(2, "", 1, 3, null);
 
