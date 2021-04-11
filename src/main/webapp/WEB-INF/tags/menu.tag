@@ -3,6 +3,7 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Opciones del menu: inicio, deportes,iniciar sesión"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -46,6 +47,15 @@
 								<a class="nav-link" href="/usuarios/new"> Registro <i
 									class="fa fa-user-plus"></i></a>
 							</li>
+							<security:authorize access="isAuthenticated()">
+    							 <security:authentication property="principal.username" var="principal" />
+    							 <li
+								class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4'}">
+								<a class="nav-link" href="/principal/${principal}"> Mi perfil <i
+									class="fa fa-profile"></i></a>
+							</li>
+							</security:authorize>
+							
 						</ul>
 					</div>
 
