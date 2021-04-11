@@ -11,28 +11,55 @@
 
 <playtogether:layout pageName="users">
 
+	<div class="thirteen">
+		<h1>Datos de mi perfil</h1>
+	</div>
+
 	<body>
+		<div class="body-container">
 
-			<div class="description">
-				<div class="line">
-					<h1 class="product_name">
-						<c:out value="${user.name}" />
-					</h1>
-					<h1 class="product_name">
-						<c:out value="${user.user.username}" />
-					</h1>
-					<h1 class="product_price">
-						<c:out value="${user.birthdate}" />
-					</h1>
+			<div class="dashboard">
+				<div class="grid-container">
+					<div class="profile grid-area">
+						<div class="img">
+							<img src="/images/avatar.png">
 
+							<h3>
+								<c:out value="${user.name}" />
+							</h3>
+							<h5 class="username">
+								<c:out value="${user.user.username}" />
+							</h5>
+							<div class="button">
+								<i class="fa fa-pencil"></i>
+							</div>
+						</div>
+						<div class="profile-data">
+							<div class="data-details">
+								<h5>Fecha de nacimiento</h5>
+								<h4>
+									<c:out value="${user.birthdate}" />
+								</h4>
+							</div>
+							<div class="data-details">
+								<h5>Correo electrónico</h5>
+								<h4>
+									<c:out value="${user.correo}"></c:out>
+								</h4>
+
+							</div>
+						</div>
+						<div class="profile-data">
+							<div class="data-details">
+								<h5>Teléfono</h5>
+								<h4>
+									<c:out value="${user.phone}" />
+								</h4>
+							</div>
+						</div>
+					</div>
 				</div>
-				<h2>
-					<c:out value="${user.correo}" />
-				</h2>
-
 			</div>
-
-
 	</body>
 
 </playtogether:layout>
