@@ -1,7 +1,10 @@
 package net.playtogether.jpa.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.UserTypeService;
@@ -73,12 +77,71 @@ public class UsuarioController {
 		return "users/userDetails";
 	}
     
+    @GetMapping("/principal/{username}")
+	public String showProfileByUsername(@PathVariable("username") final String username,  ModelMap model)  {
+
+		int userId = this.usuarioService.findByUsername(username).getId();
+
+		return "redirect:/myprofile/" + userId;
+
+	}
+    
     @GetMapping("/myprofile/{userId}")
-	public String userProfile(final ModelMap model, @PathVariable("userId") final Integer userId) {
+	public String userProfile(final ModelMap model, @PathVariable("userId") final Integer userId, Principal principal) {
 		Usuario usuario = this.usuarioService.findUserById(userId);
 		model.addAttribute("user", usuario);
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		
+		if(usuario.getId().equals(user.getId())) {
 
+			return "users/userProfile";
+		}else {
+			return "error-403";
+		}
+	}
+    
+	@GetMapping("/myprofile/{userId}/edit")
+	public String initUpdateUsuario(ModelMap model, @PathVariable("userId") Integer userId, Principal principal) {
+		Usuario usuario = this.usuarioService.findUserById(userId);
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		model.put("usuario", usuario);
+		if(usuario.getId().equals(user.getId())) {
 
-		return "users/userProfile";
+			return "users/updateUser";
+		}else {
+			return "error-403";
+		}
+	}
+
+	@PostMapping("/myprofile/{userId}/edit")
+	public String postUpdateMeeting(@Valid Usuario usuario, BindingResult result, ModelMap model,
+			@PathVariable("userId") Integer userId) {
+		Usuario usuarioToUpdate = this.usuarioService.findUserById(userId);
+		
+		
+		if (!usuario.getCorreo().equals(usuarioToUpdate.getCorreo()) && usuarioService.checkCorreoExists(usuario.getCorreo())) {
+			result.addError(new FieldError("usuario", "correo", "El correo ya está registrado"));
+		}
+		
+
+		if (!usuario.getPhone().equals(usuarioToUpdate.getPhone()) && usuarioService.checkCorreoExists(usuario.getPhone())) {
+			result.addError(new FieldError("usuario", "correo", "El teléfono ya está registrado"));
+		}
+		
+
+		
+		
+		if (result.hasErrors()) {
+		
+			model.put("usuario", usuario);
+			return "users/updateUser";
+		} else {
+			
+			BeanUtils.copyProperties(usuario, usuarioToUpdate, "id", "user.username", "meetings", "teams", "type", "statistics", "payment");
+			this.usuarioService.saveUsuario(usuarioToUpdate);
+			model.addAttribute("message", "¡Cuenta actualizada correctamente!");
+			return "redirect:/myprofile/" + userId;
+		}
+
 	}
 }

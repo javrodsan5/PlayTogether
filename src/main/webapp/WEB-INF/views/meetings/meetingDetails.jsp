@@ -50,7 +50,7 @@
 								<div>
 									<h2 class="drop__name">
 										<spring:url
-									value="/users/{userId}"
+									value="/usuarios/{userId}"
 									var="userdetails">
 									<spring:param name="userId" value="${participant.id}" />
 
