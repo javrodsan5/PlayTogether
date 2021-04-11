@@ -11,9 +11,9 @@ INSERT INTO authorities(id,username,authority) VALUES (4,'fernando98','premium')
 INSERT INTO users(username,password,enabled) VALUES ('marta98','us3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'marta98','usuario');
 
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id, username) VALUES(1, 'Antonio', '1999-02-20', 'antonio@gmail.com', '654893274', 2,'antonio98');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id, username) VALUES(2, 'Fernando', '1995-07-06', 'fernando1@gmail.com', '635897412', 1,'fernando98');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id, username) VALUES(3, 'Marta', '1992-03-25', 'marta1@gmail.com', '954785123', 1,'marta98');
+INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(1, 'Antonio', '1999-02-20', 'antonio@gmail.com', '654893274', 2,0,'antonio98');
+INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(2, 'Fernando', '1995-07-06', 'fernando1@gmail.com', '635897412', 1,10,'fernando98');
+INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(3, 'Marta', '1992-03-25', 'marta1@gmail.com', '954785123', 1,0,'marta98');
 
 INSERT INTO sport_type(id, name) VALUES(1, 'Equipo');
 INSERT INTO sport_type(id, name) VALUES(2, 'Individual');
@@ -37,20 +37,20 @@ INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(16, '
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(17, 'Karting', 1, 1);
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(18, 'Pilates', 1, 2);
 
-INSERT INTO meetings(id, address, city, date, description, number_of_players, sport_id) 
-VALUES(1, 'Polideportivo Ciudad Jardin', 'Sevilla', '2021/06/15 11:00:00', 'Nos lo vamos a pasar genial! Apuntarse!', 2, 1);
-INSERT INTO meetings(id, address, city, date, description, number_of_players, sport_id) 
-VALUES(2, 'Polideportivo San Pablo', 'Sevilla', '2021/04/15 11:20:00', 'Vamos a realizar mucho deporte.', 2, 1);
-INSERT INTO meetings(id, address, city, date, description, number_of_players, sport_id) 
-VALUES(3, 'Tenis Betis', 'Sevilla', '2021/05/23 13:30:00', 'No dudéis en apuntarse!!', 4, 1);
-INSERT INTO meetings(id, address, city, date, description, number_of_players, sport_id) 
-VALUES(4, 'Club Santa Clara', 'Sevilla', '2021/04/30 11:20:00', 'Lo vamos a pasar increible!!', 2, 1);
-INSERT INTO meetings(id, address, city, date, description, number_of_players, sport_id) 
-VALUES(5, 'SADUS Bermejales', 'Sevilla', '2021/05/11 17:20:00', 'Apúntense amigos! Lo vamos a pasar muy bien!', 2, 1);
-INSERT INTO meetings(id, address, city, date, description, number_of_players, sport_id) 
-VALUES(6, 'Polideportivo Marbella Vice', 'Sevilla', '2021/04/20 11:45:00', 'Quedada para pasar un buen rato!', 4, 1);
-INSERT INTO meetings(id, address, city, date, description, number_of_players, sport_id) 
-VALUES(7, 'Polideportivo Los Caños', 'Sevilla', '2021/04/15 09:20:00', 'Mientras más seamos mejor! No dudéis en venir!', 4, 1);
+INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id) 
+VALUES(1, 'Polideportivo Ciudad Jardin', 'Sevilla', '2021/06/15 11:00:00', 'Nos lo vamos a pasar genial! Apuntarse!', 2,1, 1);
+INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id) 
+VALUES(2, 'Polideportivo San Pablo', 'Sevilla', '2021/04/15 11:20:00', 'Vamos a realizar mucho deporte.', 2,1, 1);
+INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id) 
+VALUES(3, 'Tenis Betis', 'Sevilla', '2021/05/23 13:30:00', 'No dudéis en apuntarse!!', 4,2, 1);
+INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id) 
+VALUES(4, 'Club Santa Clara', 'Sevilla', '2021/04/30 11:20:00', 'Lo vamos a pasar increible!!', 2,3, 1);
+INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id) 
+VALUES(5, 'SADUS Bermejales', 'Sevilla', '2021/05/11 17:20:00', 'Apúntense amigos! Lo vamos a pasar muy bien!', 2,1, 1);
+INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id) 
+VALUES(6, 'Polideportivo Marbella Vice', 'Sevilla', '2021/04/20 11:45:00', 'Quedada para pasar un buen rato!', 4,2, 1);
+INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id) 
+VALUES(7, 'Polideportivo Los Caños', 'Sevilla', '2021/04/15 09:20:00', 'Mientras más seamos mejor! No dudéis en venir!', 4,3, 1);
 
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(1, 'Torneo ATP', 'Sevilla', 'Torneo oficial de la ATP', '2021/06/25 12:00:00', 8, '2021/06/15 11:00:00', 1, 1);
@@ -92,4 +92,6 @@ INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id
 
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(8, 3);
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 1);
+
+
 
