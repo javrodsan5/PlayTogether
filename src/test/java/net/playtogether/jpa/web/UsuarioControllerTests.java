@@ -257,11 +257,12 @@ public class UsuarioControllerTests {
 					.andExpect(model().attributeHasFieldErrors("usuario", "correo"))
 					.andExpect(view().name("users/updateUser"));
 
-			
+		}
 		// Test de GetMapping de historial de torneos de un usuario
-		@WithMockUser(username = "user1", authorities = {
-			"usuario"
-		}, password = "password")
+		@WithMockUser(username = "user1", authorities = 
+
+			"usuario",
+		 password = "password")
 		@Test
 		void getChampionshipRecord() throws Exception {
 			this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/1/championshipsRecord")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful()).andExpect(MockMvcResultMatchers.view().name("users/championshipRecord"))
