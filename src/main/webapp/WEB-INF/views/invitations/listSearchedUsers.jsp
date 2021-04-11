@@ -10,6 +10,7 @@
 	rel='stylesheet'>
 
 <playtogether:layout pageName="teams">
+<playtogether:banner></playtogether:banner>
 	<body>
 		<div class="thirteen">
 			<h1>Elegir participante</h1>
@@ -23,7 +24,7 @@
 							<h5 style="color: white;">Nombre - Usuario:</h5> 	
 							<select name="selected_participant" style="border-radius:20px; overflow:hidden; margin: 0.5em; background:#F6F6F6; border:1px solid #cccccc;">
 					          	<c:forEach var="item" items="${searched_users}">
-					            	<option value="${item.id}">${item.name} - ${item.username}</option>
+					            	<option value="${item.id}">${item.name} - ${item.user.username}</option>
 					          	</c:forEach>
 					        </select>
 					    </div>
@@ -66,7 +67,7 @@
 						        <c:forEach items="${team_participants}" var="user">
 						            <tr class="rowtable">
 						            	<td><c:out value="${i}" /></td>
-						            	<td><c:out value="${user.username}" /></td>
+						            	<td><c:out value="${user.user.username}" /></td>
 						                <td><c:out value="${user.name}" /></td>		       				            
 						                <td><c:out value="${user.birthdate}" /></td>
 						                <c:set var="i" value="${i+1}"/>

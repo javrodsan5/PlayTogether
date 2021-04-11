@@ -16,15 +16,15 @@ public interface InvitationRepository extends CrudRepository<Invitation, Integer
 	@Query("SELECT i FROM Invitation i WHERE i.id = ?1")
 	Collection<Invitation> findInvitationById(int invitationId);
 	
-	@Query("SELECT i FROM Invitation i WHERE (i.receiver.name LIKE ?1 AND i.team.id IS NOT NULL)")
-	Collection<Invitation> findChampionshipInvitationsByUserName(String name);
+	@Query("SELECT i FROM Invitation i WHERE (i.team.id IS NOT NULL AND i.receiver.user.username LIKE ?1)")
+	Collection<Invitation> findChampionshipInvitationsByUsername(String username);
 
 	@Query("SELECT COUNT(i) = 0 from Invitation i WHERE (i.team.id = ?1 AND i.receiver.id = ?2)")
 	Boolean isNotInvitedYetToChampionshipTeam(int teamId, Integer receiverId);
 	
 	
-	@Query("SELECT i FROM Invitation i WHERE (i.receiver.name LIKE ?1 AND i.meeting.id IS NOT NULL)")
-	Collection<Invitation> findMeetingInvitationsByUserName(String name);
+	@Query("SELECT i FROM Invitation i WHERE (i.meeting.id IS NOT NULL AND i.receiver.user.username LIKE ?1)")
+	Collection<Invitation> findMeetingInvitationsByUsername(String username);
 	
 	@Query("SELECT COUNT(i) = 0 from Invitation i WHERE (i.meeting.id = ?1 AND i.receiver.id = ?2)")
 	Boolean isNotInvitedYetToMeeting(int meetingId, Integer receiverId);

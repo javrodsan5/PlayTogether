@@ -23,7 +23,10 @@
 					<c:if test="${joined}"><p>Ha aceptado la invitación</p></c:if>
 					<c:if test="${teamIsFull}"><p>La invitación ha sido rechazada y eliminada debido a que el equipo ha alcanzado el límite de jugadores</p></c:if>
 					<c:if test="${notJoined}"><p>Ha rechazado la invitación</p></c:if>
-					<c:if test="${isInChampionshipTeam}"><p>La invitación ha sido rechazada y eliminada debido a que ya participa en un equipo del torneo</p></c:if>
+					<c:if test="${isInChampionshipTeam}"><p>La invitación ha sido rechazada y eliminada debido a que ya participa en un equipo del mismo torneo</p></c:if>
+					<c:if test="${noPermission}"><p>No puede modificar una invitación que no le pertenece </p></c:if>
+					<c:if test="${noInvitation}"><p>No existe la invitación </p></c:if>
+					
 					<thead>
 						<tr class="rowtable">
 							<th class="" >Nombre de torneo</th>

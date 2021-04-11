@@ -1,6 +1,8 @@
 
 package net.playtogether.jpa.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,8 +15,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -27,7 +30,10 @@ public class ChampionshipServiceTests {
 	private SportService		sportService;
 
 	@Autowired
-	private UserService			userService;
+	private UsuarioService			userService;
+
+  @Autowired
+	private TeamService			teamService;
 
 
 	// FIND CHAMPIONSHIP BY ID
@@ -41,34 +47,35 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindAllChampionships() throws Exception {
 		Collection<Championship> championships = this.championshipService.listChampionship();
-		Assertions.assertThat(championships.size()).isEqualTo(9);
+		Assertions.assertThat(championships.size()).isEqualTo(8);
+		
 	}
 
 	// FIND TEAM BY ID
 	@Test
 	void shouldFindTeamWithCorrectId() throws Exception {
 		Team team = this.championshipService.findTeamId(1);
-		Assertions.assertThat(team.getName()).isEqualTo("Equipo1");
+		Assertions.assertThat(team.getName()).isEqualTo("West Jamon");
 	}
 
 	// FIND ALL (COLLECTION SPORT)
 	@Test
 	void shouldFindAllTeams() {
 		Collection<Team> listTeams = this.championshipService.listTeams();
-		Assertions.assertThat(listTeams.size()).isEqualTo(10);
+		Assertions.assertThat(listTeams.size()).isEqualTo(8);
 	}
 
 	// FIND USER BY NAME OR USERNAME
 	@Test
 	void shouldFindUserWithCorrectNameOrUsername() throws Exception {
-		List<User> user = this.championshipService.findUserByNameOrUsername("Antonio");
+		List<Usuario> user = this.championshipService.findUserByNameOrUsername("Antonio");
 		Assertions.assertThat(user.get(0).getName()).isEqualTo("Antonio");
 	}
 
 	// FIND USER BY ID
 	@Test
 	void shouldFindUserWithCorrectId() throws Exception {
-		User user = this.championshipService.findUsersById(3);
+		Usuario user = this.championshipService.findUsersById(1);
 		Assertions.assertThat(user.getName()).isEqualTo("Antonio");
 	}
 
@@ -78,8 +85,8 @@ public class ChampionshipServiceTests {
 		Integer countBefore = this.championshipService.countTeams();
 		countBefore++;
 
-		List<User> users = new ArrayList<>();
-		User user = this.userService.findUserById(1);
+		List<Usuario> users = new ArrayList<>();
+		Usuario user = this.userService.findUserById(1);
 		users.add(user);
 
 		Team team = new Team();
@@ -96,7 +103,15 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindListChampionshipsBySport() throws Exception {
 		Collection<Championship> championships = this.championshipService.listChampionshipsBySport(2);
-		Assertions.assertThat(championships.size()).isEqualTo(2);
+		Assertions.assertThat(championships.size()).isEqualTo(1);
 	}
+	
+	
+	 //Test de consultar un team por id
+	 @Test
+	 void findTeamByIdTest() {
+		 Team team = this.teamService.findTeamById(1);
+		 assertThat(team.getName()).isEqualTo("West Jamon");
+	 }
 
 }

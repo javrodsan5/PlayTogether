@@ -8,6 +8,7 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
 <playtogether:layout pageName="meetings">
+<playtogether:banner></playtogether:banner>
 <body>
 <div class="cardtitle">
 <h1><strong>Quedadas de ${nombreDeporte}</strong></h1>
@@ -17,12 +18,12 @@
 		<table id="meetingTable" class="table ">
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 15%;">Dirección</th>
-						<th class="guiz-awards-header-title" style="width: 15%;">Ciudad</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Dirección</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
+						<th class="guiz-awards-header-title" style="width: 25%;">Descripción</th>
 						<th class="guiz-awards-header-title" style="width: 15%;">Fecha</th>
-						<th class="guiz-awards-header-title" style="width: 20%;"></th>
-						<th class="guiz-awards-header-title" style="width: 15%;"></th>
+						<th class="guiz-awards-header-title" style="width: 10%;"></th>
+						<th class="guiz-awards-header-title" style="width: 10%;"></th>
 					</tr>
 				</thead>
 				<tbody>

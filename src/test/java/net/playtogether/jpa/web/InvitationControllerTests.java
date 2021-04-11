@@ -33,6 +33,7 @@ import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.SportType;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.InvitationService;
 
@@ -80,12 +81,17 @@ public class InvitationControllerTests {
 		this.testChampionship.setMatches(new ArrayList<Match>());
 		this.testChampionship.setSport(s);
 
-		User u = new User();
+		
+		User user = new User();
+		user.setUsername("user1");
+		user.setPassword("password");
+		user.setEnabled(true);
+		
+		Usuario u = new Usuario();
 		u.setId(1);
 		u.setName("Usuario1");
 		u.setCorreo("correo@correo.com");
-		u.setUsername("user1");
-		u.setPassword("password");
+		u.setUser(user);
 		u.setBirthdate(LocalDate.of(1999, 3, 16));
 		u.setPhone("123456789");
 		u.setPayment(null);
@@ -93,7 +99,8 @@ public class InvitationControllerTests {
 		u.setType(null);
 		u.setTeams(null);
 		u.setMeetings(null);
-		List<User> users = new ArrayList<>();
+		
+		List<Usuario> users = new ArrayList<>();
 		users.add(u);
 
 		Team team1 = new Team();
@@ -101,11 +108,13 @@ public class InvitationControllerTests {
 		team1.setChampionship(this.testChampionship);
 		team1.getParticipants().add(u);
 		team1.setTeamSize(2);
+		team1.setUser(u);
 		
 		Team team2 = new Team();
 		team2.setId(2);
 		team2.setTeamSize(1);
 		team2.setChampionship(this.testChampionship);
+		team2.setUser(u);
 		
 		
 		Championship testChampionship2 = new Championship();
@@ -123,6 +132,7 @@ public class InvitationControllerTests {
 		team3.setId(3);
 		team3.setTeamSize(1);
 		team3.setChampionship(testChampionship2);
+		team3.setUser(u);
 		
 		Championship testChampionship3 = new Championship();
 		testChampionship3.setName("Torneo8");
@@ -139,6 +149,7 @@ public class InvitationControllerTests {
 		team4.setId(4);
 		team4.setTeamSize(1);
 		team4.setChampionship(testChampionship3);
+		team4.setUser(u);
 		
 		this.testInvitation = new Invitation();
 		this.testInvitation.setId(1);
@@ -159,8 +170,8 @@ public class InvitationControllerTests {
 		BDDMockito.given(this.championshipService.findTeamId(3)).willReturn(team3);
 		BDDMockito.given(this.championshipService.findTeamId(4)).willReturn(team4);
 		BDDMockito.given(this.championshipService.findUserByNameOrUsername(u.getName())).willReturn(users);
-		BDDMockito.given(this.invitationService.findChampionshipInvitationsByUserName(u.getName())).willReturn(invitations);
-		BDDMockito.given(this.invitationService.findChampionshipInvitationsByUserName("Antonio")).willReturn(invitations);   // CAMBIAR CUANDO ESTÉ EL LOGIN IMPLEMENTADO
+		BDDMockito.given(this.invitationService.findChampionshipInvitationsByUsername(u.getUser().getUsername())).willReturn(invitations);
+		BDDMockito.given(this.invitationService.findChampionshipInvitationsByUsername("Antonio")).willReturn(invitations);   // CAMBIAR CUANDO ESTÉ EL LOGIN IMPLEMENTADO
 		BDDMockito.given(this.championshipService.findUsersById(Integer.parseInt(u.getId().toString()))).willReturn(u);
 		BDDMockito.given(this.invitationService.isNotInvitedYetToChampionshipTeam(3, u.getId())).willReturn(true);
 		BDDMockito.given(this.invitationService.isNotInvitedYetToChampionshipTeam(4, u.getId())).willReturn(true);
@@ -172,7 +183,7 @@ public class InvitationControllerTests {
 	
 	// Test de mostrar formulario de búsqueda de participantes
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void listChampionships() throws Exception {
 		this.mockMvc.perform(get("/invitations/team/1")).andExpect(status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/addParticipantsForm"));
@@ -181,7 +192,7 @@ public class InvitationControllerTests {
 	
 	// Test de intentar invitar a alguien a un equipo lleno 
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testSendInvitationTeamIsFull() throws Exception {
 		this.mockMvc.perform(get("/invitations/team/1/send_invitation")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/addParticipantsForm"));
@@ -190,7 +201,7 @@ public class InvitationControllerTests {
 	
 	// Test de intentar invitar a alguien que ya está en el equipo
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testSendInvitationAlreadyInTeam() throws Exception {
 		this.mockMvc.perform(get("/invitations/team/1/send_invitation?search=Usuario1")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/addParticipantsForm"));
@@ -199,7 +210,7 @@ public class InvitationControllerTests {
 	
 	// Test de mandar una invitación correcto
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testSendInvitationSuccess() throws Exception {
 		this.mockMvc.perform(get("/invitations/team/1/send_invitation?search=Usuario2")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/addParticipantsForm"));
@@ -208,7 +219,7 @@ public class InvitationControllerTests {
 	
 	// Test de mandar una invitación de equipo a alguien 
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testPostSendInvitationSuccess() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/invitations/team/3/send_invitation")
 
@@ -219,9 +230,10 @@ public class InvitationControllerTests {
 		
 	}
 	
+	
 	// Test de mandar una invitación de equipo a alguien que ya está en el equipo
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testPostSendInvitationUserWasAlreadyInvitedToTeam() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/invitations/team/1/send_invitation")
 
@@ -234,7 +246,7 @@ public class InvitationControllerTests {
 	
 	// Test de mandar una invitación de equipo a alguien a un torneo finalizado
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testPostSendInvitationToFinishedChampionship() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/invitations/team/4/send_invitation")
 
@@ -248,7 +260,7 @@ public class InvitationControllerTests {
 	
 	// Test de listar invitaciones
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testListInvitations() throws Exception {
 		this.mockMvc.perform(get("/invitations/championshipInvitations")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
@@ -257,7 +269,7 @@ public class InvitationControllerTests {
 
 	// Test de introducir mal la url de aceptar o rechazar una invitación
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testIncorrectAcceptInvitation() throws Exception {
 		this.mockMvc.perform(get("/invitations/1/?accepted=")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
@@ -265,7 +277,7 @@ public class InvitationControllerTests {
 	
 	// Test de rechazar una invitación
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testDeclineInvitation() throws Exception {
 		this.mockMvc.perform(get("/invitations/1/?accepted=false")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
@@ -274,7 +286,7 @@ public class InvitationControllerTests {
 	
 	// Test de aceptar invitación
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "user1", authorities="usuario")
 	void testAcceptInvitation() throws Exception {
 		this.mockMvc.perform(get("/invitations/1/?accepted=true")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));

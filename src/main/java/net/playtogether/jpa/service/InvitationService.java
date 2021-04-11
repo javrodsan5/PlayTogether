@@ -44,8 +44,8 @@ public class InvitationService {
 	}
 
 	@Transactional(readOnly = true)
-	public Collection<Invitation> findChampionshipInvitationsByUserName(String name) {
-		return this.invitationRepository.findChampionshipInvitationsByUserName(name);
+	public Collection<Invitation> findChampionshipInvitationsByUsername(String username) {
+		return this.invitationRepository.findChampionshipInvitationsByUsername(username);
 	}
 
 	@Transactional(readOnly = true)
@@ -56,8 +56,8 @@ public class InvitationService {
 
 	
 	@Transactional(readOnly = true)
-	public Collection<Invitation> findMeetingInvitationsByUserName(String name) {
-		return this.invitationRepository.findMeetingInvitationsByUserName(name);
+	public Collection<Invitation> findMeetingInvitationsByUserName(String username) {
+		return this.invitationRepository.findMeetingInvitationsByUsername(username);
 	}
 	
 	@Transactional(readOnly = true)

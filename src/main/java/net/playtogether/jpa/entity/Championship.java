@@ -58,4 +58,9 @@ public class Championship extends NamedEntity {
     @NotNull
     @Column(name = "maxTeams")
     private Integer maxTeams;
+
+    @NotNull
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "owner")
+    private Usuario user;
 }

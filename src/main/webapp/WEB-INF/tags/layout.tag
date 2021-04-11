@@ -15,12 +15,12 @@
 	<playtogether:bodyHeader menuName="${pageName}" />
 
 	<br>
-	<br>
 
 	<div>
 
 		<jsp:doBody />
-
+	<br>
+	<br>
 	</div>
 
 

@@ -49,9 +49,16 @@
 							<c:forEach items="${meeting.participants}" var="participant">
 								<div>
 									<h2 class="drop__name">
-										<c:out value="${participant.name}" />
-										<a style="margin-left: 200px;" href="#"><span
-											class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
+										<spring:url
+									value="/users/{userId}"
+									var="userdetails">
+									<spring:param name="userId" value="${participant.id}" />
+
+								</spring:url>
+								
+									
+										<a style="margin-left: 60px;" href="${fn:escapeXml(userdetails)}"><span
+											class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
 									</h2>
 
 

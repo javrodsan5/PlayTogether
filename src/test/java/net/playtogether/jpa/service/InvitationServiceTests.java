@@ -2,10 +2,7 @@
 package net.playtogether.jpa.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,9 +12,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.playtogether.jpa.entity.Invitation;
-import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -72,12 +69,16 @@ public class InvitationServiceTests {
 	// FIND CHAMPIONSHIP INVITATION BY USER_NAME
 	@Test
 	void shouldFindChampionshipInvitationByUserName() throws Exception {
-		User u = new User();
+		User user = new User();
+		user.setUsername("user1");
+		user.setPassword("password");
+		user.setEnabled(true);
+		
+		Usuario u = new Usuario();
 		u.setId(1);
 		u.setName("Usuario1");
 		u.setCorreo("correo@correo.com");
-		u.setUsername("user1");
-		u.setPassword("password");
+		u.setUser(user);
 		u.setBirthdate(LocalDate.of(1999, 3, 16));
 		u.setPhone("123456789");
 		u.setPayment(null);
@@ -91,7 +92,7 @@ public class InvitationServiceTests {
 		
 		this.invitationService.save(invitation);
 		
-		Collection<Invitation> invitations = this.invitationService.findChampionshipInvitationsByUserName(u.getName());
+		Collection<Invitation> invitations = this.invitationService.findChampionshipInvitationsByUsername(u.getUser().getUsername());
 		Assertions.assertThat(invitations.contains(invitation));
 
 	}
@@ -99,12 +100,16 @@ public class InvitationServiceTests {
 	// BOOLEAN USER IS NOT INVITED TO TEAM YET
 	@Test
 	void shouldValidateUserIsNotInvitedToTeamYet() throws Exception {
-		User u = new User();
+		User user = new User();
+		user.setUsername("user1");
+		user.setPassword("password");
+		user.setEnabled(true);
+		
+		Usuario u = new Usuario();
 		u.setId(1);
 		u.setName("Usuario1");
 		u.setCorreo("correo@correo.com");
-		u.setUsername("user1");
-		u.setPassword("password");
+		u.setUser(user);
 		u.setBirthdate(LocalDate.of(1999, 3, 16));
 		u.setPhone("123456789");
 		u.setPayment(null);
@@ -131,12 +136,16 @@ public class InvitationServiceTests {
 	// FIND MEETING INVITATION BY USER_NAME
 	@Test
 	void shouldFindMeetingInvitationByUserName() throws Exception {
-		User u = new User();
+		User user = new User();
+		user.setUsername("user1");
+		user.setPassword("password");
+		user.setEnabled(true);
+		
+		Usuario u = new Usuario();
 		u.setId(1);
 		u.setName("Usuario1");
 		u.setCorreo("correo@correo.com");
-		u.setUsername("user1");
-		u.setPassword("password");
+		u.setUser(user);
 		u.setBirthdate(LocalDate.of(1999, 3, 16));
 		u.setPhone("123456789");
 		u.setPayment(null);
@@ -159,12 +168,16 @@ public class InvitationServiceTests {
 	// BOOLEAN USER IS NOT INVITED TO MEETING YET
 	@Test
 	void shouldValidateUserIsNotInvitedToMeetingYet() throws Exception {
-		User u = new User();
+		User user = new User();
+		user.setUsername("user1");
+		user.setPassword("password");
+		user.setEnabled(true);
+		
+		Usuario u = new Usuario();
 		u.setId(1);
 		u.setName("Usuario1");
 		u.setCorreo("correo@correo.com");
-		u.setUsername("user1");
-		u.setPassword("password");
+		u.setUser(user);
 		u.setBirthdate(LocalDate.of(1999, 3, 16));
 		u.setPhone("123456789");
 		u.setPayment(null);

@@ -4,7 +4,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import net.playtogether.jpa.entity.Invitation;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 
 public class InvitationValidator implements Validator {
 
@@ -12,7 +12,7 @@ public class InvitationValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Invitation invitation = (Invitation) target;
 		
-		User receiver = invitation.getReceiver();
+		Usuario receiver = invitation.getReceiver();
 
 	    if (receiver == null) {
 	    	errors.rejectValue("selected_participant", "Debe elegir un usuario al que invitar", "Debe elegir un usuario al que invitar");

@@ -18,7 +18,7 @@ public class Invitation extends NamedEntity {
 
     @ManyToOne	
     @JoinColumn(name = "receiver_id")
-	private User receiver;
+	private Usuario receiver;
     
     @ManyToOne
     @JoinColumn(name = "team_id")

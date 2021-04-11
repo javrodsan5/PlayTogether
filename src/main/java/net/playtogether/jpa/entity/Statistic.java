@@ -19,5 +19,5 @@ public class Statistic extends BaseEntity {
     private Sport sport;
     
     @OneToOne(optional = true)
-    private User user;
+    private Usuario user;
 }

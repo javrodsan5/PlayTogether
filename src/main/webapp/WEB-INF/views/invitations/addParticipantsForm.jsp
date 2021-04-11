@@ -16,6 +16,7 @@
 		</div>
 		<div style="margin-left: 45px">
 			<div class="crearMeeting">
+			
 				<c:if test="${limitedTeamSize==true}">
 					<p>No queda hueco en el equipo</p>
 				</c:if>
@@ -23,7 +24,7 @@
 					<p>No se encontró al usuario</p>
 				</c:if>
 				<c:if test="${notMoreUsers==true}">
-					<p>No se encontraron usuarios</p>
+					<p>No se encontraron más usuarios</p>
 				</c:if>
 				<c:if test="${alreadyInvited==true}">
 					<p>Ya invitó al usuario</p>
@@ -34,6 +35,13 @@
 				<c:if test="${championshipIsFinished==true}">
 					<p>El torneo ha finalizado, no se pueden mandar invitaciones</p>
 				</c:if>
+				<c:if test="${cantSelfInvite==true}">
+					<p>No te puedes mandar una invitación a tí mismo</p>
+				</c:if>
+				<c:if test="${loggedUserIsNotTheTeamOwner==true}">
+					<p>No puedes enviar invitaciones si no eres el creador del equipo</p>
+				</c:if>
+				
 				<form:form id="survey-form" action="/invitations/team/${teamId}/send_invitation" method="GET">
 					<div>
 						<br>
@@ -78,7 +86,7 @@
 						        <c:forEach items="${team_participants}" var="user">
 						            <tr class="rowtable">
 						            	<td><c:out value="${i}" /></td>
-						            	<td><c:out value="${user.username}" /></td>
+						            	<td><c:out value="${user.user.username}" /></td>
 						                <td><c:out value="${user.name}" /></td>		       				            
 						                <td><c:out value="${user.birthdate}" /></td>
 						                <c:set var="i" value="${i+1}"/>

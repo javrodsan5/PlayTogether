@@ -18,14 +18,19 @@
 		<playtogether:localDate label="Inicio" name="startDate" id="startDte" ></playtogether:localDate>
 		<playtogether:localDate label="Fin" name="finishDate" id="finishDate" ></playtogether:localDate>
 		</div>
+		<playtogether:inputField label="Nombre" name="name" />
 		<playtogether:inputField label="Ciudad" name="city" />
 		<playtogether:inputField label="Descripción" name="description" />
 		<playtogether:selectField label="Número de equipos" 
 		name="maxTeams" size="3" names="${maximoEquipos}"></playtogether:selectField>
 		<input type="hidden" name="sport" value="${deporte}"/>
 
-		<input class="butona" type="submit" value="Crear">
-
+		<div class="form-group">
+			<button class="botonMeeting" type="submit">
+			<b>Crear</b>
+			</button>
+		</div>
+	<br>
 	</div>
 	
 	

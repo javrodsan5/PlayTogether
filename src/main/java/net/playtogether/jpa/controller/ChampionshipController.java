@@ -1,6 +1,7 @@
 
 package net.playtogether.jpa.controller;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -25,13 +29,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Match;
+import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.entity.User;
+import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.MatchService;
+import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.SportService;
-import net.playtogether.jpa.service.UserService;
+import net.playtogether.jpa.service.TeamService;
+import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
 public class ChampionshipController {
@@ -46,9 +53,15 @@ public class ChampionshipController {
 	MatchService matchService;
 
 	@Autowired
-	UserService userService;
+	UsuarioService userService;
 
-	private List<User> users;
+	@Autowired
+	PayService payService;
+
+	@Autowired
+	TeamService teamService;
+
+	private List<Usuario> users;
 
 	@InitBinder("championship")
 	public void initChampionshipBinder(final WebDataBinder dataBinder) {
@@ -81,9 +94,15 @@ public class ChampionshipController {
 
 	@PostMapping("/sports/{sportId}/championships/add")
 	public String postCreationChampionship(@Valid final Championship championship, final BindingResult result,
-			final ModelMap model, @PathVariable("sportId") final Integer sportId) {
+			final ModelMap model, @PathVariable("sportId") final Integer sportId, Principal principal) {
 		if (!result.hasErrors()) {
+			Usuario user = this.userService.findByUsername(principal.getName());
+			championship.setUser(user);
 			this.championshipService.save(championship);
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"))) {
+				return "redirect:/pay/championship/add?championshipId=" + championship.getId();
+			}
 
 			return "redirect:/sports/" + sportId + "/championships";
 		} else {
@@ -98,9 +117,25 @@ public class ChampionshipController {
 	}
 
 	@GetMapping("/sports/{sportId}/championships")
-	public String listChampionships(final ModelMap model, @PathVariable("sportId") final Integer sportId) {
-		Collection<Championship> championships = this.championshipService.listChampionshipsBySport(sportId);
+	public String listChampionships(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			Principal principal) {
+		List<Championship> championships = new ArrayList<>(this.championshipService.listChampionshipsBySport(sportId));
 		Sport sport = this.sportService.findSportById(sportId);
+		List<Championship> championshipsToRemove = new ArrayList<>();
+
+		for (Championship c : championships) {
+			Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(c.getUser().getUser().getUsername(),
+					c.getId());
+			if (pay == null && !c.getUser().getUser().getAuthorities().stream()
+					.anyMatch(x -> x.getAuthority().equals("premium"))) {
+				this.payService.delete(this.payService.findLastNotFinishedPayForChampionshipByUsername(
+						c.getUser().getUser().getUsername(), c.getId()));
+				championshipsToRemove.add(c);
+			}
+		}
+		this.championshipService.deleteAll(championshipsToRemove);
+		championships.removeAll(championshipsToRemove);
+
 		if (sport.getSportType().getName().equals("Equipo")) {
 			model.addAttribute("championships", championships);
 			model.addAttribute("deporte", sportId);
@@ -113,10 +148,30 @@ public class ChampionshipController {
 
 	@GetMapping("/sports/{sportId}/championships/{championshipId}")
 	public String championshipDetails(final ModelMap model, @PathVariable("sportId") final Integer sportId,
-			@PathVariable("championshipId") final Integer championshipId) {
+			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
+		List<Team> teams = this.championshipService.findTeamsByChampionshipId(championshipId);
+		List<Team> teamsToRemove = new ArrayList<>();
+		Usuario user = this.userService.findByUsername(principal.getName());
+		if (!championship.getUser().equals(user)) {
+			for (Team t : teams) {
+				if(!t.getUser().equals(championship.getUser())) {
+				
+					Pay pay = this.payService.findLastFinishedPayForTeamByUsername(t.getUser().getUser().getUsername(),
+							t.getId());
+					if (pay == null && !t.getUser().getUser().getAuthorities().stream()
+							.anyMatch(x -> x.getAuthority().equals("premium"))) {
+						this.payService.delete(this.payService
+								.findLastNotFinishedPayForTeamByUsername(t.getUser().getUser().getUsername(), t.getId()));
+						teamsToRemove.add(t);
+					}
+				}
+			}
+		}
+
+		this.teamService.deleteAll(teamsToRemove);
+		teams.removeAll(teamsToRemove);
 		model.addAttribute("championship", championship);
-		User user = this.userService.findUserById(1);
 		Boolean b1 = true;
 		Boolean b2 = true;
 
@@ -260,9 +315,9 @@ public class ChampionshipController {
 		return "matches/createOrUpdateMatchForm";
 	}
 
-	private Boolean isParticipant(final List<User> users, final String name) {
+	private Boolean isParticipant(final List<Usuario> users, final String name) {
 		Boolean res = Boolean.FALSE;
-		for (User user : users) {
+		for (Usuario user : users) {
 			res = user.getName().equals(name);
 			if (res) {
 				break;
@@ -323,28 +378,51 @@ public class ChampionshipController {
 
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/join/{teamId}")
 	public String initJoinChampionship(final ModelMap model, @PathVariable("sportId") final Integer sportId,
-			@PathVariable("championshipId") final Integer championshipId,
-			@PathVariable("teamId") final Integer teamId) {
+			@PathVariable("championshipId") final Integer championshipId, @PathVariable("teamId") final Integer teamId,
+			Principal principal) {
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		Team team = this.championshipService.findTeamId(teamId);
-		User user = this.userService.findUserById(1);
-		List<User> participants = team.getParticipants();
-		if (participants.contains(user)) {
-			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+		Usuario user = this.userService.findByUsername(principal.getName());
+		List<Usuario> participants = team.getParticipants();
 
+		if(!championship.getTeams().contains(team)) {
+			return "error-404";
+		} else if(championship.getTeams().stream().anyMatch(x -> x.getParticipants().contains(user))){
+			return "error-403";
 		} else {
-			model.put("esParticipante", false);
-			participants.add(user);
-			team.setParticipants(participants);
-			this.championshipService.save(team);
 
-			return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+			Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);
+
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Boolean isPremium = authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"));
+			if (!isPremium && pay == null) {
+				return "redirect:/pay/championship/" + championshipId + "/team/" + teamId;
+			} else {
+				if (participants.contains(user)) {
+					return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+				} else {
+					model.put("esParticipante", false);
+					participants.add(user);
+					team.setParticipants(participants);
+					this.championshipService.save(team);
+
+					return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+				}
+			}
 		}
 	}
 
 	@GetMapping("/championships/{championshipId}/team/create")
-	public String initCreationTeam(final ModelMap model, @PathVariable("championshipId") final Integer championshipId) {
+	public String initCreationTeam(final ModelMap model, @PathVariable("championshipId") final Integer championshipId, Principal principal) {
 		Team team = new Team();
 		Championship championship = championshipService.findChampionshipId(championshipId);
+
+		List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);
+		for (Team t : joinedTeams) {
+			if(t.getParticipants().contains(this.userService.findByUsername(principal.getName()))) {
+				return "error-403";
+			}
+		}
 		model.addAttribute("team", team);
 		model.put("championship", championship);
 
@@ -353,13 +431,15 @@ public class ChampionshipController {
 
 	@PostMapping("/championships/{championshipId}/team/create")
 	public String postCreationTeam(@Valid final Team team, final BindingResult result,
-			@PathVariable("championshipId") final int championshipId, final ModelMap model, final Errors errors) {
-		
+			@PathVariable("championshipId") final int championshipId, final ModelMap model, final Errors errors, Principal principal) {
 		Championship championship = championshipService.findChampionshipId(championshipId);
 		model.put("championship", championship);
-		
+
 		List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);
 		for (Team t : joinedTeams) {
+			if(t.getParticipants().contains(this.userService.findByUsername(principal.getName()))) {
+				return "error-403";
+			}
 			if (t.getName().equals(team.getName())) {
 				errors.rejectValue("name", "Ya existe un equipo con ese nombre en este torneo.",
 						"Ya existe un equipo con ese nombre en este torneo.");
@@ -372,15 +452,40 @@ public class ChampionshipController {
 		}
 
 		if (!result.hasErrors()) {
-			team.setChampionship(championship);
-			team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
-			this.championshipService.save(team);
-			return "redirect:/invitations/team/" + team.getId(); 
+
+			Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);
+
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+			team.setUser(this.userService.findByUsername(principal.getName()));
+			if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium")) && pay == null) {
+				return "redirect:/pay/championship/" + championshipId + "?teamName=" + team.getName();
+			} else {
+
+				team.setChampionship(championship);
+				team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
+				this.championshipService.save(team);
+				initJoinChampionship(model, championship.getSport().getId(), championshipId, team.getId(), principal);
+				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; 
+			} 
 
 		} else {
 			model.put("team", team);
 			return "teams/createOrUpdateTeamForm";
 		}
+	}
+
+	@GetMapping("/championships/{championshipId}/teams/{teamId}")
+	public String teamDetails(ModelMap model, @PathVariable("championshipId") Integer championshipId,
+			@PathVariable("teamId") Integer teamId) {
+		Team team = this.teamService.findTeamById(teamId);
+
+		model.addAttribute("team", team);
+		Collection<Match> matchesTeam = this.matchService.findMatchesByTeamId(teamId);
+
+		model.addAttribute("matches", matchesTeam);
+
+		return "teams/teamDetails";
 	}
 
 }
