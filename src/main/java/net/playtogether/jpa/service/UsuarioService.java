@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import java.security.Principal;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.repository.UsuarioRepository;
 
@@ -23,6 +23,11 @@ public class UsuarioService {
 
 	public UsuarioService(UsuarioRepository userRepository){
 		this.usuarioRepository=userRepository;
+	}
+	
+	public Usuario usuarioLogueado(String username) {
+		Usuario usuario = findByUsername(username);
+		return usuario;
 	}
 
 	
@@ -60,5 +65,6 @@ public class UsuarioService {
 	public List<Usuario>findAll(){
 		return usuarioRepository.findAll();
 	}
+	
 	
 }

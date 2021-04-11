@@ -405,6 +405,8 @@ public class ChampionshipController {
 					participants.add(user);
 					team.setParticipants(participants);
 					this.championshipService.save(team);
+					user.setPuntos(user.getPuntos()+5);
+					userService.saveUsuario(user);
 
 					return "redirect:/sports/" + sportId + "/championships/" + championshipId;
 				}
@@ -457,10 +459,12 @@ public class ChampionshipController {
 			if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium")) && pay == null) {
 				return "redirect:/pay/championship/" + championshipId + "?teamName=" + team.getName();
 			} else {
-
+				Usuario usuario = userService.usuarioLogueado(principal.getName());
+				team.setUser(usuario);
 				team.setChampionship(championship);
 				team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
 				this.championshipService.save(team);
+				usuario.setPuntos(usuario.getPuntos()+2);
 				initJoinChampionship(model, championship.getSport().getId(), championshipId, team.getId(), principal);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId; // CAMBIAR
 			} // PARA
