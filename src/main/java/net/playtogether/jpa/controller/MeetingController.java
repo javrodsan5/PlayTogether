@@ -1,5 +1,7 @@
 package net.playtogether.jpa.controller;
 
+import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -30,7 +32,7 @@ public class MeetingController {
 	MeetingService meetingService;
 
 	@Autowired
-	UsuarioService userService;
+	UsuarioService usuarioService;
 
 	@Autowired
 	SportService sportService;
@@ -55,15 +57,26 @@ public class MeetingController {
 
 	@PostMapping("/sports/{sportId}/meetings/add")
 	public String postCreationMeeting(@Valid Meeting meeting, BindingResult result, ModelMap model,
-			@PathVariable("sportId") Integer sportId) {
+			@PathVariable("sportId") Integer sportId, Principal principal) {
 		Sport sport = sportService.findSportById(sportId);
 		if (result.hasErrors()) {
 			model.put("sport", sport);
 			model.put("sportId", sportId);
 			return "meetings/createMeetingForm";
 		} else {
+			Usuario usuario =usuarioService.usuarioLogueado(principal);
+			meeting.setMeetingCreator(usuario);
+			
+			List<Usuario> participants = new ArrayList<>();
+			participants.add(usuario);
+			meeting.setParticipants(participants);
+
 			meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam()*2);
 			meetingService.save(meeting);
+			
+			usuario.setPuntos(usuario.getPuntos()+7);
+			usuarioService.saveUsuario(usuario);
+
 			return "redirect:/sports/" + sportId + "/meetings";
 		}
 
@@ -87,7 +100,7 @@ public class MeetingController {
 			return "meetings/updateMeetingForm";
 		} else {
 			Meeting meetingToUpdate = this.meetingService.findMeetingById(meetingId);
-			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "numberOfPlayers");
+			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "numberOfPlayers", "meetingCreator");
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
 			return "redirect:/sports/" + sportId + "/meetings";
@@ -111,7 +124,7 @@ public class MeetingController {
 		model.addAttribute("meeting", meeting);
 		Boolean b = true;
 		Boolean estaLlena = false;
-		Usuario u = this.userService.findUserById(1);
+		Usuario u = this.usuarioService.findUserById(1);
 
 		if (!meeting.getParticipants().contains(u)) {
 			b = false;
@@ -128,9 +141,9 @@ public class MeetingController {
 	}
 
 	@GetMapping("/meetings/{meetingId}/join")
-	public String meetingJoin(ModelMap model, @PathVariable("meetingId") Integer meetingId) {
+	public String meetingJoin(ModelMap model, @PathVariable("meetingId") Integer meetingId, Principal principal) {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
-		Usuario u = this.userService.findUserById(1);
+		Usuario u = usuarioService.usuarioLogueado(principal);
 
 		if (!meeting.getParticipants().contains(u) &&
 				meeting.getNumberOfPlayers()>meeting.getParticipants().size()) {
@@ -140,8 +153,11 @@ public class MeetingController {
 			meeting.setParticipants(list);
 
 			this.meetingService.save(meeting);
-
+			
+			u.setPuntos(u.getPuntos()+5);
+			usuarioService.saveUsuario(u);
 		}
+		
 
 		return meetingDetails(model, meetingId);
 	}

@@ -27,6 +27,10 @@ public class Team extends NamedEntity {
 	private List<Usuario> participants = new ArrayList<>();
     
     private Integer teamSize;
+    
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "team_creator")
+    private Usuario teamCreator;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "owner")

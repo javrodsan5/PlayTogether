@@ -150,6 +150,8 @@ public class PaypalController {
                             pay.setTeam(team);
                         } else if(teamName != "") {
                             Team team = new Team();
+                          	Usuario usuario = usuarioService.usuarioLogueado(principal);
+							              team.setTeamCreator(usuario);
                             team.setName(teamName);
                             team.setChampionship(championship);
                             team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
@@ -202,4 +204,5 @@ public class PaypalController {
         }
         return "redirect:/";
     }
+
 }
