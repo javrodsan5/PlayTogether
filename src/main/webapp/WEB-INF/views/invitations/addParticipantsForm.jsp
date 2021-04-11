@@ -12,33 +12,56 @@
 <playtogether:layout pageName="teams">
 	<body>
 		<div class="thirteen">
-			<h1>Incluir participantes en equipo (Máximo ${teamSize} participantes)</h1>
+			<h1>Invitar participantes al equipo (Máximo ${teamSize} participantes)</h1>
 		</div>
 		<div style="margin-left: 45px">
 			<div class="crearMeeting">
-				<form:form id="survey-form" action="/championships/team/${teamId}/add_partner" method="GET">
+			
+				<c:if test="${limitedTeamSize==true}">
+					<p>No queda hueco en el equipo</p>
+				</c:if>
+				<c:if test="${noUser==true}">
+					<p>No se encontró al usuario</p>
+				</c:if>
+				<c:if test="${notMoreUsers==true}">
+					<p>No se encontraron más usuarios</p>
+				</c:if>
+				<c:if test="${alreadyInvited==true}">
+					<p>Ya invitó al usuario</p>
+				</c:if>
+				<c:if test="${alreadyInChampionshipTeam==true}">
+					<p>El usuario ya se encuentra en un equipo de este torneo</p>
+				</c:if>
+				<c:if test="${championshipIsFinished==true}">
+					<p>El torneo ha finalizado, no se pueden mandar invitaciones</p>
+				</c:if>
+				<c:if test="${cantSelfInvite==true}">
+					<p>No te puedes mandar una invitación a tí mismo</p>
+				</c:if>
+				<c:if test="${loggedUserIsNotTheTeamOwner==true}">
+					<p>No puedes enviar invitaciones si no eres el creador del equipo</p>
+				</c:if>
+				
+				<form:form id="survey-form" action="/invitations/team/${teamId}/send_invitation" method="GET">
 					<div>
+						<br>
 						<div class="col-sm-10">	
 		            		<input type="text" class="form-control" name="search" required><br> <br>
-		            	</div>	
-		            	<c:if test="${limitedTeamSize==true}">
-							<p>No queda hueco en el equipo</p>
-						</c:if>
-						<c:if test="${noUser==true}">
-							<p>No se encontró al usuario</p>
-						</c:if>
-						<c:if test="${notMoreUsers==true}">
-							<p>No se encontraron usuarios</p>
-						</c:if>
-		            							
+		            	</div>		            							
 						<div class="form-group">
 							<button class="botonMeeting" type="submit">
 								<b>Buscar</b>
 							</button>
 						</div>
+						<div class="form-group">
+							<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${team.championship.sport.id}/championships/${team.championship.id}';" type="button">
+								<b>Volver a torneo</b>
+							</button>
+						</div>
 						<br>
 						<br>
-					</div>
+						<br>
+					</div><br>
 				</form:form>
 			</div>
 		
@@ -46,7 +69,7 @@
 				<table id="meetingTable" class="table table-striped">
 				    <c:choose>
 					    <c:when test="${team_participants.isEmpty()}">
-						    <p>Debe incluir participantes en el equipo</p>
+						    <p>Aún no hay participantes en el equipo</p>
 						</c:when>
 						
 						<c:otherwise>
@@ -63,7 +86,7 @@
 						        <c:forEach items="${team_participants}" var="user">
 						            <tr class="rowtable">
 						            	<td><c:out value="${i}" /></td>
-						            	<td><c:out value="${user.username}" /></td>
+						            	<td><c:out value="${user.user.username}" /></td>
 						                <td><c:out value="${user.name}" /></td>		       				            
 						                <td><c:out value="${user.birthdate}" /></td>
 						                <c:set var="i" value="${i+1}"/>

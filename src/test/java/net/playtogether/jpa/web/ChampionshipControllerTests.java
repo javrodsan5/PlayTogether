@@ -171,7 +171,8 @@ public class ChampionshipControllerTests {
 
 			.param("name", "Equipo9")
 
-			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/championships/8"));
+			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+		.andExpect(MockMvcResultMatchers.view().name("redirect:/invitations/team/null"));
 
 
 	}*/

@@ -1,11 +1,17 @@
 package net.playtogether.jpa.controller;
 
+
 import java.security.Principal;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -16,7 +22,10 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import net.playtogether.jpa.entity.Meeting;
+
+
+import net.playtogether.jpa.entity.Championship;
+
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.UserTypeService;
@@ -62,7 +71,7 @@ public class UsuarioController {
 		} else {
 			UserType usrType= this.userTypeService.findUserTypeById(1);
 			usuario.setType(usrType);
-
+			usuario.setPuntos(0);
 			this.usuarioService.saveUsuario(usuario);
 			return "redirect:/";
 		}
@@ -143,5 +152,19 @@ public class UsuarioController {
 			return "redirect:/myprofile/" + userId;
 		}
 
+	}
+    
+    @GetMapping("/myprofile/{userId}/championshipsRecord")
+	public String championshipsRecord(final ModelMap model, @PathVariable("userId") final Integer userId) {
+		Usuario usuario = this.usuarioService.findUserById(userId);
+		List<Championship> championships = usuario.getTeams().stream().map(t -> t.getChampionship()).distinct().collect(Collectors.toList());
+		if(!SecurityContextHolder.getContext().getAuthentication().getName().equals(usuario.getUser().getUsername())) {
+			model.addAttribute("isNotAuthor", true);
+		} else {
+			model.addAttribute("isAuthor", true);
+			model.addAttribute("usuario", usuario);
+			model.addAttribute("championships", championships);
+		}
+		return "users/championshipRecord";
 	}
 }

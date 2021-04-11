@@ -32,7 +32,5 @@ public class Team extends NamedEntity {
     @JoinColumn(name = "owner")
     private Usuario user;
     
-    
-    
 }
 

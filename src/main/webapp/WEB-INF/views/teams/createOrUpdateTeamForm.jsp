@@ -25,6 +25,13 @@
 							<b>Crear</b>
 						</button>
 					</div>
+					<div class="form-group">
+						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${championship.sport.id}/championships/${championship.id}';" type="button">
+							<b>Volver a torneo</b>
+						</button>
+					</div>
+					<br>
+					<br>
 					<br>
 					<br>
 				</form:form>

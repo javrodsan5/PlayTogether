@@ -62,5 +62,8 @@ public class Usuario extends NamedEntity {
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
+	
+	@Column(name = "puntos")
+	private Integer puntos;
 
 }

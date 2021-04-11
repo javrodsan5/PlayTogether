@@ -48,6 +48,10 @@ public class Meeting extends BaseEntity {
     @Column(name="numberOfPlayers")
     private Integer numberOfPlayers;
     
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "meeting_creator")
+    private Usuario meetingCreator;
+    
 
     
     
