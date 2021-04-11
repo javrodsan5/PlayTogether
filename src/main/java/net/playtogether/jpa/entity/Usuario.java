@@ -63,7 +63,4 @@ public class Usuario extends NamedEntity {
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
 
-	@Column(name = "puntos")
-	private Integer puntos;
-	
 }
