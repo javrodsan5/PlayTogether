@@ -12,7 +12,8 @@
 <playtogether:layout pageName="teams">
 	<body>
 		<div class="thirteen">
-			<h1>Invitar participantes al equipo (Máximo ${teamSize} participantes)</h1>
+			<h1>Invitar participantes al equipo</h1> 
+			<h2>(Máximo ${teamSize} participantes)</h2>
 		</div>
 		<div style="margin-left: 45px">
 			<div class="crearMeeting">
@@ -46,7 +47,7 @@
 					<div>
 						<br>
 						<div class="col-sm-10">	
-		            		<input type="text" class="form-control" name="search" required><br> <br>
+		            		<input type="text" class="form-control" name="search" required placeholder="Introduzca el nombre"><br> <br>
 		            	</div>		            							
 						<div class="form-group">
 							<button class="botonMeeting" type="submit">
@@ -58,7 +59,6 @@
 								<b>Volver a torneo</b>
 							</button>
 						</div>
-						<br>
 						<br>
 						<br>
 					</div><br>
