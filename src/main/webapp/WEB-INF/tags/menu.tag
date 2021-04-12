@@ -3,12 +3,12 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@ attribute name="name" required="true" rtexprvalue="true"
 	description="Opciones del menu: inicio, deportes,iniciar sesión"%>
+
 <%@ taglib prefix="sec"
     uri="http://www.springframework.org/security/tags"%>
 	
 	<link
-	rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+	rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
 	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 	crossorigin="anonymous">
 

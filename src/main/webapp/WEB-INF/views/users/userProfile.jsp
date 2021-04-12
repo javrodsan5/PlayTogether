@@ -40,6 +40,21 @@
 				<h2>
 					<c:out value="${user.correo}" />
 				</h2>
+				
+				<td><spring:url value="/myprofile/{usuarioId}/edit"
+	                            var="editUser2Url">
+	                            <spring:param name="usuarioId" value="${user.id}" />
+	                 
+	                        </spring:url><div class="botoncito"> <a class="" href="${fn:escapeXml(editUser2Url)}">Editar</a></div></td>
+				
+				
+				<a href="/invitations/championshipInvitations" class="btn btn-danger">Ver invitaciones a equipo de torneo</a>
+				
+				<td><spring:url value="/myprofile/{usuarioId}/championshipsRecord"
+	                            var="championshipRecord2Url">
+	                            <spring:param name="usuarioId" value="${user.id}" />
+	                 
+	                        </spring:url><div class="botoncito"> <a class="" href="${fn:escapeXml(championshipRecord2Url)}">Historial de torneos</a></div></td>
 
 			</div>
 

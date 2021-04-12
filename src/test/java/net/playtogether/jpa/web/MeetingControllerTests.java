@@ -12,6 +12,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -55,9 +56,9 @@ public class MeetingControllerTests {
 
 	@MockBean
 	private SportService sportService;
-
+	
 	@MockBean
-	private UsuarioService userService;
+	private UsuarioService usuarioService;
 
 	private Meeting testMeeting1;
 
@@ -103,16 +104,18 @@ public class MeetingControllerTests {
 		u.setCorreo("correo@correo.com");
 		u.setBirthdate(LocalDate.of(1999, 3, 16));
 		u.setPhone("123456789");
+		u.setPuntos(5);
 		u.setPayment(null);
 		u.setStatistics(null);
 		u.setType(null);
 		u.setTeams(null);
 		u.setMeetings(null);
-
+		
 		given(this.meetingService.findMeetingById(1)).willReturn(testMeeting1);
 		given(this.sportService.findSportById(1)).willReturn(s);
 		given(this.meetingService.findMeetingById(2)).willReturn(testMeeting2);
-		given(this.userService.findUserById(1)).willReturn(null);
+		given(this.usuarioService.findUserById(1)).willReturn(null);
+		given(this.usuarioService.usuarioLogueado("antonio98")).willReturn(u);
 	}
 
 	// Test de consultar quedadas
@@ -126,6 +129,7 @@ public class MeetingControllerTests {
 	}
 
 	// Test negativo de consultar quedadas
+	@WithMockUser(value = "antonio98")
 	@Test
 	void listMeetingsNegative() throws Exception {
 		this.mockMvc.perform(get("/sports/1/meetings")).andExpect(status().is2xxSuccessful());
@@ -136,7 +140,7 @@ public class MeetingControllerTests {
 	}
 
 	// Test de crear quedada
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "antonio98")
 	@Test
 	void createMeeting() throws Exception {
 
@@ -158,6 +162,7 @@ public class MeetingControllerTests {
 	}
 
 	// Test de consultar una quedada
+	@WithMockUser(value = "antonio98")
 	@Test
 	void getMeeting() throws Exception {
 		this.mockMvc.perform(get("/sports/1/meetings/1")).andExpect(status().is2xxSuccessful());
@@ -168,6 +173,7 @@ public class MeetingControllerTests {
 	}
 
 	// Test de consultar una quedada negative
+	@WithMockUser(value = "antonio98")
 	@Test
 	void getMeetingNegative() throws Exception {
 		this.mockMvc.perform(get("/sports/1/meetings/1")).andExpect(status().is2xxSuccessful());
@@ -180,7 +186,7 @@ public class MeetingControllerTests {
 
 	// Test join meeting controller
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(username = "antonio98")
 	void joinMeeting() throws Exception {
 		this.mockMvc.perform(get("/meetings/1/join")).andExpect(status().is2xxSuccessful());
 
@@ -191,7 +197,7 @@ public class MeetingControllerTests {
 	
 	// Test join meeting controller
 	@Test
-	@WithMockUser(value = "spring")
+	@WithMockUser(value = "antonio98")
 	void joinMeetingAlreadyExistsParticipant() throws Exception {
 		this.mockMvc.perform(get("/meetings/1/join")).andExpect(status().is2xxSuccessful());
 

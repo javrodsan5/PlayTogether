@@ -17,26 +17,26 @@
 		</div>
 		<div style="margin-left: 45px">
 			<div class="crearMeeting">
-				<form:form id="survey-form" action="/championships/team/${teamId}/add_partner" method="POST" modelAttribute="searched_users">
+				<form:form id="survey-form" action="/invitations/team/${teamId}/send_invitation" method="POST" modelAttribute="searched_users">
 					<div>
 					<center>
 						<div class="col-sm-10">
 							<h5 style="color: white;">Nombre - Usuario:</h5> 	
 							<select name="selected_participant" style="border-radius:20px; overflow:hidden; margin: 0.5em; background:#F6F6F6; border:1px solid #cccccc;">
 					          	<c:forEach var="item" items="${searched_users}">
-					            	<option value="${item.id}">${item.name} - ${item.username}</option>
+					            	<option value="${item.id}">${item.name} - ${item.user.username}</option>
 					          	</c:forEach>
 					        </select>
 					    </div>
-							<div class="form-group">
-								<button class="botonMeeting" type="submit" style="font-size: 0.8em; margin-left: 21.6em; ">
-									<b>Añadir</b>
-								</button>
-							</div>
-							<div class="form-group">
-								<button class="botonMeeting" style="font-size: 0.8em; margin-left: 21.6em; " onclick="location.href='/championships/team/${teamId}';" type="button">
-									<b>Volver</b>
-								</button>
+						<div class="form-group">
+							<button class="botonMeeting" type="submit" style="font-size: 0.8em; margin-left: 21.6em; ">
+								<b>Invitar</b>
+							</button>
+						</div>
+						<div class="form-group">
+							<button class="botonMeeting" style="font-size: 0.8em; margin-left: 21.6em; " onclick="location.href='/invitations/team/${teamId}';" type="button">
+								<b>Volver</b>
+							</button>
 						</div>
 						<br>
 						<br>
@@ -67,7 +67,7 @@
 						        <c:forEach items="${team_participants}" var="user">
 						            <tr class="rowtable">
 						            	<td><c:out value="${i}" /></td>
-						            	<td><c:out value="${user.username}" /></td>
+						            	<td><c:out value="${user.user.username}" /></td>
 						                <td><c:out value="${user.name}" /></td>		       				            
 						                <td><c:out value="${user.birthdate}" /></td>
 						                <c:set var="i" value="${i+1}"/>
