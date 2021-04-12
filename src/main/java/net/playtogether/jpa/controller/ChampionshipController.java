@@ -128,7 +128,7 @@ public class ChampionshipController {
 					c.getId());
 			if (pay == null && !c.getUser().getUser().getAuthorities().stream()
 					.anyMatch(x -> x.getAuthority().equals("premium"))) {
-				this.payService.delete(this.payService.findLastNotFinishedPayForChampionshipByUsername(
+				this.payService.deleteAll(this.payService.findLastNotFinishedPayForChampionshipByUsername(
 						c.getUser().getUser().getUsername(), c.getId()));
 				championshipsToRemove.add(c);
 			}
@@ -161,8 +161,13 @@ public class ChampionshipController {
 							t.getId());
 					if (pay == null && !t.getUser().getUser().getAuthorities().stream()
 							.anyMatch(x -> x.getAuthority().equals("premium"))) {
-						this.payService.delete(this.payService
-								.findLastNotFinishedPayForTeamByUsername(t.getUser().getUser().getUsername(), t.getId()));
+						Pay incompleto = this.payService
+						.findLastNotFinishedPayForTeamByUsername(t.getUser().getUser().getUsername(), t.getId());
+						
+						if (incompleto != null) {
+							this.payService.delete(incompleto);
+						}
+						
 						teamsToRemove.add(t);
 					}
 				}

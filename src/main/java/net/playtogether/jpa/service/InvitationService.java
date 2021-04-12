@@ -52,6 +52,9 @@ public class InvitationService {
 	public Boolean isNotInvitedYetToChampionshipTeam(int teamId, Integer receiverId) {
 		return this.invitationRepository.isNotInvitedYetToChampionshipTeam(teamId, receiverId);
 	}
+	
+
+
 
 
 	
