@@ -14,7 +14,7 @@
 		<c:if test="${newChampionship==true}">
 			<h1>Pago por crear torneo</h1>
 		</c:if>
-		<c:if test="${newChampionship != true}">
+		<c:if test="${newTeam == true}">
 			<h1>Pago para inscripción en ${teamName}</h1>
 		</c:if>
 		<c:if test="${premium==true}">

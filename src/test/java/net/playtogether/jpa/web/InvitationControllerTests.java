@@ -36,6 +36,7 @@ import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.InvitationService;
+import net.playtogether.jpa.service.UsuarioService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -47,6 +48,9 @@ public class InvitationControllerTests {
 
 	@MockBean
 	private ChampionshipService	championshipService;
+	
+	@MockBean
+	private UsuarioService	userService;
 
 	private Championship		testChampionship;
 	
@@ -97,7 +101,7 @@ public class InvitationControllerTests {
 		u.setPayment(null);
 		u.setStatistics(null);
 		u.setType(null);
-		u.setTeams(null);
+		u.setTeams(new ArrayList<>());
 		u.setMeetings(null);
 		
 		List<Usuario> users = new ArrayList<>();
@@ -175,6 +179,9 @@ public class InvitationControllerTests {
 		BDDMockito.given(this.championshipService.findUsersById(Integer.parseInt(u.getId().toString()))).willReturn(u);
 		BDDMockito.given(this.invitationService.isNotInvitedYetToChampionshipTeam(3, u.getId())).willReturn(true);
 		BDDMockito.given(this.invitationService.isNotInvitedYetToChampionshipTeam(4, u.getId())).willReturn(true);
+		
+		BDDMockito.given(this.userService.findByUsername(u.getUser().getUsername())).willReturn(u);
+		
 		
 		BDDMockito.given(this.invitationService.findById(1)).willReturn(testInvitation);
 		BDDMockito.given(this.invitationService.findById(2)).willReturn(invitation2);

@@ -181,9 +181,6 @@ ${exit}
 		</div>
 	</body>
 
-	<footer class="footerLanding"> <a class="navbar-brand"><img
-		style="display: inline-block" src="/images/logo_opt.png"
-		alt="Logo app"></a> <b><i style="display: inline-block"
-		class="title_logo">PlayTogether</i></b> </footer>
+	
 </playtogether:layout>
 </html>
