@@ -143,25 +143,25 @@ public class UsuarioControllerTests {
 	}
 
 	// Test de consultar un usuario externo
-	@WithMockUser(authorities = "usuario")
-	@Test
-	void getUser() throws Exception {
-		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
-
-		Usuario userEntity = usuarioService.findUserById(1);
-		assertThat(userEntity.getName()).isEqualTo("usuarioPr");
-
-	}
-
-	// Test de consultar un usuario negative
-	@WithMockUser(authorities = "usuario")
-	@Test
-	void getUserNegative() throws Exception {
-		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
-		Usuario userEntity = usuarioService.findUserById(1);
-		assertThat(userEntity.getName()).isNotEqualTo("usuarioPq");
-
-	}
+//	@Test
+//	@WithMockUser(value = "user1", authorities="usuario")
+//	void getUser() throws Exception {
+//		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
+//
+//		Usuario userEntity = usuarioService.findUserById(1);
+//		assertThat(userEntity.getName()).isEqualTo("usuarioPr");
+//
+//	}
+//
+//	// Test de consultar un usuario negative
+//	@Test
+//	@WithMockUser(value = "user1", authorities="usuario")
+//	void getUserNegative() throws Exception {
+//		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
+//		Usuario userEntity = usuarioService.findUserById(1);
+//		assertThat(userEntity.getName()).isNotEqualTo("usuarioPq");
+//
+//	}
 
 	// Test de consultar un usuario propio
 	@WithMockUser(username = "user1", password = "password", authorities = "usuario")
