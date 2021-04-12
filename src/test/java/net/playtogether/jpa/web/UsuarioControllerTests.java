@@ -140,28 +140,26 @@ public class UsuarioControllerTests {
 		given(this.usuarioService.findUserById(1)).willReturn(usuario);
 		given(this.usuarioService.findByUsername("user1")).willReturn(usuario);
 		given(this.usuarioService.findUserById(2)).willReturn(usuario2);
+		given(this.usuarioService.findByUsername("user2")).willReturn(usuario2);
 	}
 
 	// Test de consultar un usuario externo
-//	@Test
-//	@WithMockUser(value = "user1", authorities="usuario")
-//	void getUser() throws Exception {
-//		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
-//
-//		Usuario userEntity = usuarioService.findUserById(1);
-//		assertThat(userEntity.getName()).isEqualTo("usuarioPr");
-//
-//	}
-//
-//	// Test de consultar un usuario negative
-//	@Test
-//	@WithMockUser(value = "user1", authorities="usuario")
-//	void getUserNegative() throws Exception {
-//		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
-//		Usuario userEntity = usuarioService.findUserById(1);
-//		assertThat(userEntity.getName()).isNotEqualTo("usuarioPq");
-//
-//	}
+	@Test
+	@WithMockUser(value = "user2", authorities="usuario")
+	void getUser() throws Exception {
+		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
+
+
+	}
+
+	// Test de consultar un usuario negative
+	@Test
+	@WithMockUser(value = "user1", authorities="usuario")
+	void getUserNegative() throws Exception {
+		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/myprofile/1"));
+
+	}
 
 	// Test de consultar un usuario propio
 	@WithMockUser(username = "user1", password = "password", authorities = "usuario")
