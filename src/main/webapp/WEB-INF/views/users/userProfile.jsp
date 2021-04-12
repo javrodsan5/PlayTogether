@@ -11,54 +11,77 @@
 
 <playtogether:layout pageName="users">
 
+<div class="thirteen">
+		<h1>Datos de mi perfil</h1>
+	</div>
+
 	<body>
+		<div class="body-container">
 
-			<div class="description">
-				<div class="line">
-					<h1 class="product_name">
-						<c:out value="${user.name}" />
-					</h1>
-					<h1 class="product_name">
-						<c:out value="${user.user.username}" />
-					</h1>
-					<h1 class="product_price">
-						<c:out value="${user.birthdate}" />
-					</h1>
-					<h1 class="product_price">
-						<c:out value="${user.phone}" />
-					</h1>
-			
-					<h1 class="product_price">
-						<c:out value="${user.type}" />
-						
-					</h1>
-					<h1 class="product_price">
-						<c:out value="${user.statistics}" />
-					</h1>
+			<div class="dashboard">
+				<div class="grid-container">
+					<div class="profile grid-area">
+						<div class="img">
+							<img src="/images/avatar.png">
 
-				</div>
-				<h2>
-					<c:out value="${user.correo}" />
-				</h2>
-				
-				<td><spring:url value="/myprofile/{usuarioId}/edit"
+							<h3>
+								<c:out value="${user.name}" />
+							</h3>
+							<h5 class="username">
+								<c:out value="${user.user.username}" />
+							</h5>
+						</div>
+						<div class="profile-data">
+							<div class="data-details">
+								<h5>Fecha de nacimiento</h5>
+								<h4>
+									<c:out value="${user.birthdate}" />
+								</h4>
+							</div>
+							<div class="data-details">
+								<h5>Correo electrónico</h5>
+								<h4>
+									<c:out value="${user.correo}"></c:out>
+								</h4>
+
+							</div>
+						</div>
+						<div class="profile-data">
+							<div class="data-details">
+								<h5>Teléfono</h5>
+								<h4>
+									<c:out value="${user.phone}" />
+								</h4>
+							</div>
+						</div>
+						<div class="profile-data">
+							<div class="data-details">
+								<h5>Tipo de usuario</h5>
+								<h4>
+									<c:out value="${user.type}" />
+								</h4>
+							</div>
+						</div>
+						<td><spring:url value="/myprofile/{usuarioId}/edit"
 	                            var="editUser2Url">
 	                            <spring:param name="usuarioId" value="${user.id}" />
 	                 
-	                        </spring:url><div class="botoncito"> <a class="" href="${fn:escapeXml(editUser2Url)}">Editar</a></div></td>
+	                        </spring:url><a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a></td>
 				
 				
-				<a href="/invitations/championshipInvitations" class="btn btn-danger">Ver invitaciones a equipo de torneo</a>
-				
-				<td><spring:url value="/myprofile/{usuarioId}/championshipsRecord"
+						
+						<a href="/invitations/championshipInvitations" class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
+						
+						<td><spring:url value="/myprofile/{usuarioId}/championshipsRecord"
 	                            var="championshipRecord2Url">
 	                            <spring:param name="usuarioId" value="${user.id}" />
 	                 
-	                        </spring:url><div class="botoncito"> <a class="" href="${fn:escapeXml(championshipRecord2Url)}">Historial de torneos</a></div></td>
+	                        </spring:url> <a class="btn btn-primary" href="${fn:escapeXml(championshipRecord2Url)}">Historial de torneos</a></div></td>
 
+					</div>
+				</div>
 			</div>
-
-
 	</body>
+	
 
 </playtogether:layout>

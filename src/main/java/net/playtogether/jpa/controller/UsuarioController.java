@@ -78,12 +78,17 @@ public class UsuarioController {
 	}
 	
     @GetMapping("/usuarios/{userId}")
-	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId) {
+	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId, Principal principal) {
 		Usuario usuario = this.usuarioService.findUserById(userId);
 		model.addAttribute("user", usuario);
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
 
+		if(usuario.getId().equals(user.getId())) {
 
-		return "users/userDetails";
+            return "redirect:/myprofile/" + userId;
+        }else {
+            return "users/userDetails";
+        }
 	}
     
     @GetMapping("/principal/{username}")
