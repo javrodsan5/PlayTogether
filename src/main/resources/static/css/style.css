@@ -1629,8 +1629,8 @@ body {
  .dashboard .grid-container {
 	 display: grid;
 	 grid-template-columns: 1.3fr 1fr 1.2fr;
-	 grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-	 grid-template-areas: "profile last-view last-view" "edit-profile edit-profile matchs" "edit-profile edit-profile matchs" "edit-profile edit-profile matchs";
+	 grid-template-rows: 1fr ;
+	 grid-template-areas: "profile last-view last-view" ;
 	 grid-gap: 0 20px;
 }
  .dashboard .grid-container .grid-area {
@@ -1732,12 +1732,7 @@ body {
 	 display: flex;
 	 justify-content: flex-end;
 }
- .dashboard .grid-container .profile .profile-data .data-details {
-	 display: flex;
-	 flex-direction: column;
-	 align-items: center;
-	 margin-left: 55px;
-}
+
  .dashboard .grid-container .profile .profile-data .data-details h5 {
 	 position: initial;
 }
@@ -1760,17 +1755,7 @@ body {
 	 color: #e83114;
 	 opacity: 1;
 }
- .dashboard .grid-container .last-view {
-	 grid-area: last-view;
-}
- .dashboard .grid-container .last-like {
-	 grid-area: last-like;
-}
- .dashboard .grid-container .edit-profile {
-	 grid-area: edit-profile;
-	 height: 800px;
-	 padding-bottom: 20px;
-}
+
  .dashboard .grid-container .edit-profile h3 {
 	 font-size: 20px;
 	 color: #363b6d;
@@ -1791,95 +1776,10 @@ body {
 	 color: #363b6d;
 	 margin-left: 20px;
 }
- .dashboard .grid-container .matchs {
-	 grid-area: matchs;
-	 height: max-content;
-	 max-height: 800px;
-	 min-height: 300px;
-}
- .dashboard .grid-container .matchs .header {
-	 color: white;
-	 position: relative;
-	 margin-bottom: 20px;
-}
- .dashboard .grid-container .matchs .header h1 {
-	 color: white;
-	 text-align: center;
-	 font-size: 19px;
-	 padding: 20px 10px;
-	 font-weight: 100;
-	 letter-spacing: 0.5px;
-	 z-index: 3;
-	 position: absolute;
-	 width: 100%;
-}
- .dashboard .grid-container .matchs .header:after {
-	 z-index: 2;
-	 background-color: #e83114;
-	 width: 110%;
-	 transform: rotate(10deg) skewX(0deg);
-	 opacity: 0.8;
-	 content: "";
-	 position: absolute;
-	 top: -105px;
-	 left: -10px;
-	 height: 200px;
-	 border-radius: 400px 0px 239px 0px / 123px 0px 121px 0px;
-}
- .dashboard .grid-container .matchs .header:before {
-	 z-index: 2;
-	 background-color: white;
-	 width: 110%;
-	 transform: rotate(10deg) skewX(0deg);
-	 opacity: 1;
-	 content: "";
-	 position: absolute;
-	 top: -105px;
-	 left: -10px;
-	 height: 200px;
-	 border-radius: 400px 0px 239px 0px / 123px 0px 121px 0px;
-}
- .dashboard .grid-container .last-view, .dashboard .grid-container .last-like {
-	 padding: 20px;
-	 overflow: hidden;
-}
- .dashboard .grid-container .last-view img, .dashboard .grid-container .last-like img {
-	 width: 120px;
-	 height: 120px;
-	 border-radius: 50%;
-	 object-fit: cover;
-}
- .dashboard .grid-container .last-view .img, .dashboard .grid-container .last-like .img {
-	 position: relative;
-	 border-radius: 50%;
-	 overflow: hidden;
-	 margin: 0 10px;
-	 transition: all 0.3s;
-	 box-shadow: 0px 2px 12px -4px rgba(0, 0, 0, 0.5);
-}
- .dashboard .grid-container .last-view .img:after, .dashboard .grid-container .last-like .img:after {
-	 background-color: #363b6d;
-	 width: 130px;
-	 transform: rotate(-8deg) skewX(0deg);
-	 opacity: 0.6;
-	 content: "";
-	 position: absolute;
-	 bottom: 0px;
-	 left: 0;
-	 height: 20px;
-	 border-radius: 400px 0px 239px 0px / 123px 0px 121px 0px;
-}
- .dashboard .grid-container .last-view .img:before, .dashboard .grid-container .last-like .img:before {
-	 background-color: #e83114;
-	 width: 130px;
-	 transform: rotate(-14deg) skewX(0deg);
-	 opacity: 0.6;
-	 content: "";
-	 position: absolute;
-	 bottom: 0px;
-	 height: 30px;
-	 border-radius: 400px 0px 239px 0px / 123px 0px 121px 0px;
-}
+
+ 
+
+
  @media screen and (max-width: 1000px) {
 	 .body-container {
 		 width: 100%;
