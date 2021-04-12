@@ -44,14 +44,14 @@ public class UsuarioController {
 		dataBinder.setValidator(new UsuarioValidator());
 	}
 
-	@GetMapping(value = "/usuarios/new")
+	@GetMapping(value = "/registro")
 	public String initCreationForm(ModelMap model) {
 		Usuario usuario = new Usuario();
 		model.put("usuario", usuario);
 		return "users/register";
 	}
 
-	@PostMapping(value = "/usuarios/new")
+	@PostMapping(value = "/registro")
 	public String processCreationForm(@Valid Usuario usuario, BindingResult result) {
 		
 		if (usuarioService.checkCorreoExists(usuario.getCorreo())) {

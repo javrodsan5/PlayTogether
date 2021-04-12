@@ -8,7 +8,7 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
 <playtogether:layout pageName="sports">
-<playtogether:banner></playtogether:banner>
+
 <head>
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 </head>

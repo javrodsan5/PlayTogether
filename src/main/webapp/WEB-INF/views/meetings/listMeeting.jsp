@@ -8,7 +8,6 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
 <playtogether:layout pageName="meetings">
-<playtogether:banner></playtogether:banner>
 <body>
 <div class="cardtitle">
 <h1><strong>Quedadas de ${nombreDeporte}</strong></h1>

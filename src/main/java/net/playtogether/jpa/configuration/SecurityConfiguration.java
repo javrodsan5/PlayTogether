@@ -25,13 +25,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 		.antMatchers("/resources/**","/webjars/**").permitAll()
 		.antMatchers(HttpMethod.GET, "/","/error").permitAll()
-		.antMatchers("/pay/**").hasAnyAuthority("usuario")
-
-		.antMatchers("/usuarios/new").permitAll()
+		.antMatchers("**/pay/**").hasAnyAuthority("usuario")
+		.antMatchers("/usuarios/**").hasAnyAuthority("usuario")
 		.antMatchers("/invitations/**").hasAnyAuthority("usuario")
-		
+		.antMatchers("/sports/*/meetings/**").hasAnyAuthority("usuario", "premium")
+		.antMatchers("/sports/*/championships/**").hasAnyAuthority("usuario", "premium")
 
-		//.antMatchers("/sports/**").hasAnyAuthority("usuario", "premium")
 		.anyRequest().permitAll()
 		.and()
 		 	.formLogin()

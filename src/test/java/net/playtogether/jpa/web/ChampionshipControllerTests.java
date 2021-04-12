@@ -150,8 +150,7 @@ public class ChampionshipControllerTests {
 
 	// Test de crear torneo
 	@Test
-	@WithMockUser(value = "spring")
-
+	@WithMockUser(value = "user1", authorities="usuario")
 	void createChampionship() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("description", "aafdfdfaa").param("startDate", "2021/06/14").param("finishDate", "2021/07/14").param("sport", "1").param("maxTeams", "8")
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
@@ -179,6 +178,7 @@ public class ChampionshipControllerTests {
 
 	//Test de indicar resultado de partido
 	@Test
+	@WithMockUser(value = "user1", authorities="usuario")
 	void getMatchDetails() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/1/match/1/result/team1?search=Usuario1")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 			.andExpect(MockMvcResultMatchers.view().name("matches/createOrUpdateMatchForm")).andExpect(MockMvcResultMatchers.model().attributeExists("match"));
@@ -186,6 +186,7 @@ public class ChampionshipControllerTests {
 	}
 
 	@Test
+	@WithMockUser(value = "user1", authorities="usuario")
 	void matchAddResult() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/1/match/1/result/team1?search=Usuario1")
 
@@ -204,8 +205,7 @@ public class ChampionshipControllerTests {
 
 	// Test de participar torneo
 	@Test
-	@WithMockUser(value = "spring")
-
+	@WithMockUser(value = "user1", authorities="usuario")
 	void initJoin() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
@@ -216,8 +216,7 @@ public class ChampionshipControllerTests {
 
 	// Test de participar torneo con participante ya unido anteriormente
 	@Test
-	@WithMockUser(value = "spring")
-
+	@WithMockUser(value = "user1", authorities="usuario")
 	void initJoinParticipantAlreadyJoined() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
