@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Invitation;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
@@ -153,13 +154,18 @@ public class InvitationController {
 	
 	@GetMapping("/invitations/championshipInvitations")
 	public String listChampionshipInvitations(final ModelMap model, Principal principal) {	
-		Collection<Invitation> invitations = this.invitationService.findChampionshipInvitationsByUsername(principal.getName());		
-		List<Invitation> expiredInvitations = invitations.stream().filter(i -> i.getTeam().getChampionship().getFinishDate().isBefore(LocalDate.now())).collect(Collectors.toList());
+		Collection<Invitation> invitations = this.invitationService.findChampionshipInvitationsByUsername(principal.getName());	
 		
-		if (expiredInvitations.size() > 0) {
-			expiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
-			invitations.removeAll(expiredInvitations);
-		}
+		List<Invitation> expiredInvitations = invitations.stream().filter(i -> i.getTeam().getChampionship().getFinishDate().isBefore(LocalDate.now())).collect(Collectors.toList());		
+		expiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
+		invitations.removeAll(expiredInvitations);
+		
+		Usuario usuario = this.userService.findByUsername(principal.getName());
+		List<Championship> participating = usuario.getTeams().stream().map(t -> t.getChampionship()).distinct().collect(Collectors.toList());
+		
+		expiredInvitations = invitations.stream().filter(i -> participating.contains(i.getTeam().getChampionship())).collect(Collectors.toList());		
+		expiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
+		invitations.removeAll(expiredInvitations);
 		
 		model.addAttribute("invitations", invitations);
 		model.addAttribute("areTeamInvitations", true);

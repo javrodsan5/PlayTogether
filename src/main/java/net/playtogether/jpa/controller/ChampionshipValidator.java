@@ -42,13 +42,19 @@ public class ChampionshipValidator implements Validator {
 		if (maxTeams == null) {
 			errors.rejectValue("maxTeams", REQUIRED, REQUIRED);
 		}
+		
+		if (startDate == null) {
+			errors.rejectValue("startDate", "No ha introducido la fecha correctamente.",
+					"No ha introducido la fecha correctamente.");
+			
+		}
 		else if (startDate.isBefore(LocalDate.now())) {
 			errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");
 		}
 		
 		if (finishDate == null) {
-			errors.rejectValue("finishDate", REQUIRED, REQUIRED);
+			errors.rejectValue("finishDate", "No ha introducido la fecha correctamente", "No ha introducido la fecha correctamente");
 		} else if (finishDate.isBefore(LocalDate.now())) {
 			errors.rejectValue("finishDate", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");

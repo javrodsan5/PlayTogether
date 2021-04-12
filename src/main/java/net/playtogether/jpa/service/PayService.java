@@ -1,5 +1,6 @@
 package net.playtogether.jpa.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -49,7 +50,7 @@ public class PayService {
     }
 
     @Transactional
-    public Pay findLastNotFinishedPayForChampionshipByUsername(String username, Integer championshipId) {
+    public List<Pay> findLastNotFinishedPayForChampionshipByUsername(String username, Integer championshipId) {
         return this.payRepository.findLastNotFinishedPayForChampionshipByUsername(username, championshipId);
     }
     

@@ -22,11 +22,12 @@ public interface InvitationRepository extends CrudRepository<Invitation, Integer
 	@Query("SELECT COUNT(i) = 0 from Invitation i WHERE (i.team.id = ?1 AND i.receiver.id = ?2)")
 	Boolean isNotInvitedYetToChampionshipTeam(int teamId, Integer receiverId);
 	
-	
 	@Query("SELECT i FROM Invitation i WHERE (i.meeting.id IS NOT NULL AND i.receiver.user.username LIKE ?1)")
 	Collection<Invitation> findMeetingInvitationsByUsername(String username);
 	
 	@Query("SELECT COUNT(i) = 0 from Invitation i WHERE (i.meeting.id = ?1 AND i.receiver.id = ?2)")
 	Boolean isNotInvitedYetToMeeting(int meetingId, Integer receiverId);
+
+
 	
 }
