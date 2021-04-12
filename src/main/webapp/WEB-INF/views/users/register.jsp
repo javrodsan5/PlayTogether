@@ -21,7 +21,7 @@
 			<playtogether:inputField label="*Correo" name="correo" />
 			<playtogether:inputField label="*Telefono" name="phone" />
 			<playtogether:inputField label="*Usuario" name="user.username" />
-			<playtogether:inputField label="*Contraseña" name="user.password" />
+			<playtogether:inputField label="*Contraseña" name="user.password"/>
 			<playtogether:localDate label="*Fecha nacimiento" name="birthdate"
 					id="birthdate" />
 			

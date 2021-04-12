@@ -3,7 +3,6 @@ INSERT INTO user_type VALUES(2, 'Premium');
 INSERT INTO user_type VALUES(3, 'Administrador');
 
 INSERT INTO users(username,password,enabled) VALUES ('antonio98','us3r',TRUE);
-INSERT INTO authorities(id,username,authority) VALUES (1,'antonio98','usuario');
 INSERT INTO authorities(id,username,authority) VALUES (2,'antonio98','premium');
 INSERT INTO users(username,password,enabled) VALUES ('fernando98','us3r',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'fernando98','usuario');

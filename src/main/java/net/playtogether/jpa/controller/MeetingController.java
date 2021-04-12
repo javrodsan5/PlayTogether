@@ -72,6 +72,7 @@ public class MeetingController {
 			
 			List<Usuario> participants = new ArrayList<>();
 			participants.add(usuario);
+			System.out.println(usuario.getName());
 			meeting.setParticipants(participants);
 			meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam()*2);
 			meetingService.save(meeting);

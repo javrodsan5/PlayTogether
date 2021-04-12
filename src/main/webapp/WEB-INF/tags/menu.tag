@@ -50,12 +50,12 @@
 					class="nav-link" href="/login"> <i class="fa fa-sign-in"></i></a></li>
 				<li
 					class="${name=='register' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
-					<a class="nav-link" href="/usuarios/new"> Registro <i
+					<a class="nav-link" href="/registro"> Registro <i
 						class="fa fa-user-plus"></i></a>
 				</li>
 				<li
 					class="${name=='register' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}">
-					<a class="nav-link" href="/usuarios/new">  <i
+					<a class="nav-link" href="/registro">  <i
 						class="fa fa-user-plus"></i></a>
 				</li>
 			</sec:authorize>
