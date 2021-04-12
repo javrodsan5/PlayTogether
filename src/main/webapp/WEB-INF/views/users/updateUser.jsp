@@ -17,13 +17,12 @@
 	<form:form modelAttribute="usuario" class="form-horizontal"
 				id="add-usuario-form">
 		
-			<playtogether:inputField label="*Nombre" name="name" />
-			
-			<playtogether:inputField label="*Correo" name="correo" />
-			<playtogether:inputField label="*Telefono" name="phone" />
+			<playtogether:inputField label="Nombre" name="name" />
+			<playtogether:inputField label="Correo" name="correo" />
+			<playtogether:inputField label="Telefono" name="phone" />
 			<input type="hidden" name="user.username" value="${usuario.user.username}"/>
-			<playtogether:inputField label="*Contraseña" name="user.password" />
-			<playtogether:localDate label="*Fecha nacimiento" name="birthdate"
+			<playtogether:inputField label="Contraseña" name="user.password" />
+			<playtogether:localDate label="Fecha nacimiento" name="birthdate"
 					id="birthdate" />
 			
 		

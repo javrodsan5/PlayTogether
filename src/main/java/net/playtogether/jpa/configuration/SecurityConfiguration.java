@@ -32,9 +32,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sports/*/championships/**").hasAnyAuthority("usuario", "premium")
 
 		.anyRequest().permitAll()
-		.and()
-		 	.formLogin()
-		 	.failureUrl("/error")
+		.and().csrf().disable()
+			.formLogin()
+			.loginPage("/login")
+			.failureUrl("/login?error=true")
 		.and()
 			.logout()
 				.logoutSuccessUrl("/"); 
