@@ -192,6 +192,7 @@ public class ChampionshipController {
 		}
 		model.addAttribute("crearEquipo", b1);
 		model.addAttribute("participarEquipo", b2);
+		model.addAttribute("logged_user", user);
 
 		return "championships/championshipDetails";
 	}
