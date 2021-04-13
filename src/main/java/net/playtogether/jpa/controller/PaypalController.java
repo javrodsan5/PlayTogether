@@ -86,6 +86,7 @@ public class PaypalController {
         model.addAttribute("payCham",true);
         model.addAttribute("newTeam", true);
         model.addAttribute("teamName", teamName);
+        model.addAttribute("newChampionship", false);
 
         return "pay/createPaymentForm";
     }
