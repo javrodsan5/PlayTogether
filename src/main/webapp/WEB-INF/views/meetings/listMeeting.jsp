@@ -55,6 +55,9 @@
 				<a id="createMeeting" href="${fn:escapeXml(dateUrl)}">Crear
 					quedada</a>
 			</div>
+			<c:if test="${limiteMes}">
+	<p>Has llegado al límite de quedadas por mes para usuario básico <a class="cta-button" href="/pay/premium">Suscríbete</a> </p>
+</c:if>
 		</div>
 </playtogether:layout>
 

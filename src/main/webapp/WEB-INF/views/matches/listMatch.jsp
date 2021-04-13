@@ -99,6 +99,9 @@
 	                     <div class="botoncitocrear">
 	<a id="createMatch"  href="${fn:escapeXml(dateUrl)}">Añadir partido</a></div>
 	<div class="form-group">
+	<c:if test="${noParticipa}">
+	<p>¡No participas en el torneo para poder crear partidos!</p>
+</c:if>
 						<button class="botonMeeting" style="display:block; font-size: 0.8em; width: 17%; " onclick="location.href='/sports/${deporte}/championships/${championship}';" type="button">
 							<b>Volver a torneo</b>
 						</button>
