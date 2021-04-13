@@ -104,6 +104,12 @@
 	<a style="margin-left: 20px;" id="listMatch" class="btn btn-warning"
 		href="${fn:escapeXml(dateUrl)}">Ver partidos</a>
 
+<div class="form-group">
+						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${championship.sport.id}/championships';" type="button">
+							<b>Volver a listado</b>
+						</button>
+					</div>
 	<body>
+	
 	</html>
 </playtogether:layout>
