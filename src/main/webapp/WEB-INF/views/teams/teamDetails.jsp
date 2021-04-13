@@ -7,55 +7,65 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-
-
 <playtogether:layout pageName="users">
 
 	<body>
+		<div class="cardtitle">
+			<h1>
+				<strong>Detalles del equipo ${team.name}</strong>
+			</h1>
+			<br/>
+		</div>
+		<div class="cardlist">
+			<table id="championshipTable" class="table ">
 
-			<div class="description">
-				<div class="line">
-					<h1 class="product_name">
-						<c:out value="${team.teamSize}" />
-					</h1>
-					
-					<h2>Lista de componentes del equipo</h2>
-					
-					<c:forEach items="${team.participants}" var="participant">
-						<tr class="rowtable">
-							<td><c:out value="${participant.user.username}" /></td>
-							<td><c:out value="${participant.name}" /></td>
-							
-							<td><spring:url
-									value="/usuarios/{userId}"
-									var="userDetails">
-									<spring:param name="userId" value="${participant.id}" />
-								
-								</spring:url>
-								<div class="boto">
-									<a href="${fn:escapeXml(userDetails)}">Ver detalles jugador</a>
-								</div></td>
-							
-						</tr>
-					</c:forEach>
-					<h2>Lista de partidos del equipo</h2>
-						<c:forEach items="${matches}" var="match">
-						<tr class="rowtable">
+				<h2>
+					Lista de componentes del equipo (
+					<c:out value="${team.teamSize}" />
+					)
+				</h2>
+				<thead>
+					<tr class="rowtable">
+						<th class="guiz-awards-header-title" style="width: 20%;">Nombre</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Nombre
+							de usuario</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Detalles del jugador</th>
+					</tr>
+				</thead>
+				<c:forEach items="${team.participants}" var="participant">
+					<tr class="rowtable">
+						<td><c:out value="${participant.name}" /></td>
+						<td><c:out value="${participant.user.username}" /></td>
+						<td><spring:url value="/usuarios/{userId}" var="userDetails">
+								<spring:param name="userId" value="${participant.id}" />
+							</spring:url>
+							<div class="boto">
+								<a href="${fn:escapeXml(userDetails)}">Ver detalles</a>
+							</div></td>
+					</tr>
+				</c:forEach>
+			</table>
+			<table id="championshipTable" class="table ">
+				<h2>Lista de partidos del equipo</h2>
+				<thead>
+					<tr class="rowtable">
+						<th class="guiz-awards-header-title" style="width: 20%;">Equipo
+							1</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Equipo
+							2</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Fecha
+							del partido</th>
+					</tr>
+				</thead>
+				<c:forEach items="${matches}" var="match">
+					<tr class="rowtable">
+						<td><c:out value="${match.team1}" /></td>
+						<td><c:out value="${match.team2}" /></td>
 						<td><c:out value="${match.dateTime}" /></td>
-							<td><c:out value="${match.team1}" /></td>
-							<td><c:out value="${match.team2}" /></td>
-							
-							
-							
-						</tr>
-					</c:forEach>
-
-
-				</div>
-
-			</div>
-
-
+					</tr>
+				</c:forEach>
+			</table>
+		</div>
 	</body>
 
 </playtogether:layout>
