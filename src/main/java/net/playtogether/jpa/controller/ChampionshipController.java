@@ -199,9 +199,14 @@ public class ChampionshipController {
 
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/add")
 	public String initCreationMatch(final ModelMap model, @PathVariable("sportId") final Integer sportId,
-			@PathVariable("championshipId") final Integer championshipId) {
+			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		
 		Integer listChampionships = this.championshipService.listChampionship().size();
+		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
+		Usuario user = this.userService.findByUsername(principal.getName());
+		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
 		if (championshipId > 0 && championshipId <= listChampionships) {
+			if(participa) {
 			Match match = new Match();
 			Championship championship = this.championshipService.findChampionshipId(championshipId);
 			model.addAttribute("match", match);
@@ -210,6 +215,15 @@ public class ChampionshipController {
 			List<Team> equipos = (List<Team>) this.matchService.findTeams(championshipId);
 			model.addAttribute("equipos", equipos);
 			return "matches/createOrUpdateMatchForm";
+			}else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noParticipa", true);
+				return "matches/listMatch";
+			}
 		} else {
 			return "error-500";
 		}
