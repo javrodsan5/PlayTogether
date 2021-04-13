@@ -47,6 +47,6 @@ public class SportServiceTests {
 			SportType st = new SportType();
 			st.setId(2);
 			Collection<Sport> listSports = this.sportService.findAllSportsByType(st);
-			assertThat(listSports.size()).isEqualTo(7);
+			assertThat(listSports.size()).isEqualTo(8);
 		}
 }

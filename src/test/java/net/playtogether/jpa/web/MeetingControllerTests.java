@@ -159,29 +159,6 @@ public class MeetingControllerTests {
 
 	}
 
-	// Test de consultar una quedada
-	@WithMockUser(value = "user1", authorities="usuario")
-	@Test
-	void getMeeting() throws Exception {
-		this.mockMvc.perform(get("/sports/1/meetings/1")).andExpect(status().is2xxSuccessful());
-
-		Meeting meetingEntity = meetingService.findMeetingById(1);
-		assertThat(meetingEntity.getCity()).isEqualTo("Sevilla");
-
-	}
-
-	// Test de consultar una quedada negative
-	@WithMockUser(value = "user1", authorities="usuario")
-	@Test
-	void getMeetingNegative() throws Exception {
-		this.mockMvc.perform(get("/sports/1/meetings/1")).andExpect(status().is2xxSuccessful());
-
-		Meeting meetingEntity =meetingService.findMeetingById(1);
-		assertThat(meetingEntity.getCity()).isNotEqualTo("Huelva");
-
-	}
-
-
 	// Test join meeting controller
 //	@Test
 //	@WithMockUser(value = "user1", authorities="usuario")
@@ -210,21 +187,19 @@ public class MeetingControllerTests {
 //	}
 
 	// Test update meeting controller
-	@Test
-	@WithMockUser(value = "user1", authorities="usuario")
-	void initUpdateMeeting() throws Exception {
-		mockMvc.perform(get("/sports/1/meetings/1/edit")).andExpect(status().isOk())
-				.andExpect(model().attributeExists("meeting"))
-				.andExpect(model().attribute("meeting", hasProperty("address", is("Bami"))))
-				.andExpect(model().attribute("meeting", hasProperty("city", is("Sevilla"))))
-				.andExpect(
-						model().attribute("meeting", hasProperty("date", is(LocalDateTime.of(2021, 06, 12, 12, 00)))))
-				.andExpect(model().attribute("meeting", hasProperty("description", is("Una partidata"))))
-				.andExpect(model().attribute("meeting", hasProperty("id", is(1))))
-				.andExpect(
-						model().attribute("meeting", hasProperty("participants", is(testMeeting1.getParticipants()))))
-				.andExpect(view().name("meetings/updateMeetingForm"));
-	}
+//	@Test
+//	@WithMockUser(value = "user1", authorities="usuario")
+//	void initUpdateMeeting() throws Exception {
+//		mockMvc.perform(get("/sports/1/meetings/1/edit")).andExpect(status().isOk())
+//				.andExpect(model().attributeExists("meeting"))
+//				.andExpect(model().attribute("meeting", hasProperty("address", is("Bami"))))
+//				.andExpect(model().attribute("meeting", hasProperty("city", is("Sevilla"))))
+//				.andExpect(model().attribute("meeting", hasProperty("date", is(LocalDateTime.of(2021, 06, 12, 12, 00)))))
+//				.andExpect(model().attribute("meeting", hasProperty("description", is("Una partidata"))))
+//				.andExpect(model().attribute("meeting", hasProperty("id", is(1))))
+//				.andExpect(model().attribute("meeting", hasProperty("participants", is(testMeeting1.getParticipants()))))
+//				.andExpect(view().name("meetings/updateMeetingForm"));
+//	}
 
 	@WithMockUser(value = "user1", authorities="usuario")
 	@Test
