@@ -85,11 +85,17 @@ public class MeetingController {
 
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}/edit")
 	public String initUpdateMeeting(ModelMap model, @PathVariable("sportId") Integer sportId,
-			@PathVariable("meetingId") Integer meetingId) {
+			@PathVariable("meetingId") Integer meetingId, Principal principal) {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
-		model.put("sport", sportService.findSportById(sportId));
-		model.put("meeting", meeting);
-		return "meetings/updateMeetingForm";
+		Usuario usuario =usuarioService.usuarioLogueado(principal.getName());
+		if(meeting.getMeetingCreator().equals(usuario)) {
+			model.put("sport", sportService.findSportById(sportId));
+			model.put("meeting", meeting);
+			return "meetings/updateMeetingForm";
+		}else {
+			return "error-403"; 
+		}
+		
 	}
 
 	@PostMapping("/sports/{sportId}/meetings/{meetingId}/edit")
@@ -101,7 +107,7 @@ public class MeetingController {
 			return "meetings/updateMeetingForm";
 		} else {
 			Meeting meetingToUpdate = this.meetingService.findMeetingById(meetingId);
-			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "numberOfPlayers","meetingCreator");
+			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "numberOfPlayers","meetingCreator", "participants");
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
 			return "redirect:/sports/" + sportId + "/meetings";
@@ -126,6 +132,10 @@ public class MeetingController {
 		Boolean b = true;
 		Boolean estaLlena = false;
 		Usuario u = usuarioService.usuarioLogueado(principal.getName());
+		
+		if(meeting.getMeetingCreator().equals(u)) {
+			model.put("esCreador", true);
+		}
 
 		if (!meeting.getParticipants().contains(u)) {
 			b = false;

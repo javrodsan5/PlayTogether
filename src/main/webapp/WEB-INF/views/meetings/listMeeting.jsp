@@ -41,15 +41,6 @@
 								<div class="botoncito">
 									<a href="${fn:escapeXml(meeting2Url)}">Ver más</a>
 								</div></td>
-							<td><spring:url
-									value="/sports/{deporte}/meetings/{meetingId}/edit"
-									var="meetingUpdateUrl">
-									<spring:param name="meetingId" value="${meeting.id}" />
-									<spring:param name="deporte" value="${deporte}" />
-								</spring:url>
-								<div class="botoncito">
-									<a class="" href="${fn:escapeXml(meetingUpdateUrl)}">Editar</a>
-								</div></td>
 						</tr>
 					</c:forEach>
 				</tbody>
