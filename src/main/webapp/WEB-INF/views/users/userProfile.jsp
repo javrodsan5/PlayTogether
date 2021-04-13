@@ -38,20 +38,20 @@
 									<c:out value="${user.birthdate}" />
 								</h4>
 							</div>
-							<div class="data-details">
-								<h5>Correo electrónico</h5>
-								<h4>
-									<c:out value="${user.correo}"></c:out>
-								</h4>
-
-							</div>
 						</div>
 						<div class="profile-data">
 							<div class="data-details">
-								<h5>Teléfono</h5>
-								<h4>
+								<h5 style="margin-right:50px">Teléfono</h5>
+								<h4 style="margin-right:50px">
 									<c:out value="${user.phone}" />
 								</h4>
+							</div>
+							<div class="data-details">
+								<h5 style="margin-left:20px">Correo electrónico</h5>
+								<h4 style="margin-left:20px">
+									<c:out value="${user.correo}"></c:out>
+								</h4>
+
 							</div>
 						</div>
 						<div class="profile-data">

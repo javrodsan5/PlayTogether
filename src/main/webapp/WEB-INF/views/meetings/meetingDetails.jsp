@@ -44,28 +44,22 @@
 			<div class="drop" style="float: right; margin-right: 50px">
 
 				<div class="drop__container" id="drop-items">
-					<div class="drop__card">
-						<div class="drop__data">
-							<c:forEach items="${meeting.participants}" var="participant">
+					<c:forEach items="${meeting.participants}" var="participant">
+						<div class="drop__card">
+							<div class="drop__data">
 								<div>
 									<h2 class="drop__name">
-										<spring:url
-									value="/usuarios/{userId}"
-									var="userdetails">
-									<spring:param name="userId" value="${participant.id}" />
-
-								</spring:url>
-								
-									
-										<a style="margin-left: 60px;" href="${fn:escapeXml(userdetails)}"><span
+										<spring:url value="/usuarios/{userId}" var="userdetails">
+											<spring:param name="userId" value="${participant.id}" />
+										</spring:url>
+										<a style="margin-left: 60px;"
+											href="${fn:escapeXml(userdetails)}"><span
 											class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
 									</h2>
-
-
 								</div>
-							</c:forEach>
+							</div>
 						</div>
-					</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>
@@ -75,6 +69,14 @@
 			</spring:url>
 			<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
 
+		</c:if>
+		<c:if test="${esCreador==true}">
+			<td><spring:url
+					value="/sports/{sportId}/meetings/{meetingId}/edit"
+					var="meetingUpdateUrl">
+					<spring:param name="meetingId" value="${meeting.id}" />
+					<spring:param name="sportId" value="${sport.id}" />
+				</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(meetingUpdateUrl)}">Editar</a>
 		</c:if>
 
 		<c:if test="${existe==true}">
