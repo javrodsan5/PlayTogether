@@ -293,7 +293,14 @@ public class InvitationControllerTests {
 	// Test de aceptar invitación
 	@Test
 	@WithMockUser(value = "user1", authorities="usuario")
-	void testAcceptInvitation() throws Exception {
+	void testAcceptInvitationBasicUser() throws Exception {
+		this.mockMvc.perform(get("/invitations/1/?accepted=true")).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+		.andExpect(MockMvcResultMatchers.view().name("redirect:/pay/championship/8/team/2?invitationId=1"));
+	}
+
+	@Test
+	@WithMockUser(value = "user1", authorities={"premium", "usuario"})
+	void testAcceptInvitationPremiumUser() throws Exception {
 		this.mockMvc.perform(get("/invitations/1/?accepted=true")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
