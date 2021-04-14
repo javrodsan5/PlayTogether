@@ -52,14 +52,10 @@ public class InvitationService {
 	public Boolean isNotInvitedYetToChampionshipTeam(int teamId, Integer receiverId) {
 		return this.invitationRepository.isNotInvitedYetToChampionshipTeam(teamId, receiverId);
 	}
-	
-
-
-
 
 	
 	@Transactional(readOnly = true)
-	public Collection<Invitation> findMeetingInvitationsByUserName(String username) {
+	public Collection<Invitation> findMeetingInvitationsByUsername(String username) {
 		return this.invitationRepository.findMeetingInvitationsByUsername(username);
 	}
 	
