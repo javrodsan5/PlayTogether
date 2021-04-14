@@ -1,7 +1,7 @@
 package net.playtogether.jpa.controller;
 
 import java.security.Principal;
-
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -168,5 +168,17 @@ public class UsuarioController {
 		model.addAttribute("meetings", meetings);
 
 		return "users/meetingsRecord";
+	}
+	
+	@GetMapping(value = "/myprofile/stats")
+	public String getStats(ModelMap model,Principal principal) {
+		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
+		model.addAttribute("puntos",usuario.getPuntos());
+		Integer quedadas = usuario.getMeetings().size();
+		Integer torneos = usuario.getTeams().size();
+		int[] datos = {quedadas,torneos};
+		String datos1 = Arrays.toString(datos);
+		model.addAttribute("quedadasTorneos",datos1);
+		return "users/charts";
 	}
 }
