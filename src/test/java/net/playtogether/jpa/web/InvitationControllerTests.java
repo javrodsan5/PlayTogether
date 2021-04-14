@@ -382,6 +382,7 @@ public class InvitationControllerTests {
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
 	
+	/*
 	// Test de rechazar una invitación a quedada
 	@Test
 	@WithMockUser(value = "user1", authorities="usuario")
@@ -406,7 +407,7 @@ public class InvitationControllerTests {
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
   
-
+	 */
 	
 	
 }
