@@ -55,8 +55,7 @@ public class Usuario extends NamedEntity {
 	@ManyToMany(mappedBy = "participants")
 	private List<Team> teams;
 
-	@ManyToMany
-	@JoinColumn(name = "meetings_id")
+	@ManyToMany(mappedBy = "participants")
 	private List<Meeting> meetings;
 	
 	@OneToOne(cascade = CascadeType.ALL, optional = false)

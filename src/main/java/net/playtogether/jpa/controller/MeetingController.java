@@ -144,10 +144,9 @@ public class MeetingController {
 		if(meeting.getNumberOfPlayers()<=meeting.getParticipants().size()) {
 			estaLlena=true;
 		}
-			model.addAttribute("existe", b);
-			model.addAttribute("estaLlena", estaLlena);
-			
-
+		model.addAttribute("existe", b);
+		model.addAttribute("estaLlena", estaLlena);
+		model.addAttribute("logged_user", u);
 		return "meetings/meetingDetails";
 	}
 

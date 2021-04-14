@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -36,6 +37,7 @@ public class Meeting extends BaseEntity {
     private LocalDateTime date;
 
     @ManyToMany
+    @JoinColumn(name = "users_id")
     private List<Usuario> participants;
 
     @Column(name = "description")

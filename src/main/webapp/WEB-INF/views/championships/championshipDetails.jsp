@@ -37,7 +37,10 @@
 		<h2>
 			Nº equipos inscritos:
 			<c:out
-				value="${championship.teams.size()} / ${championship.maxTeams}" />
+				value="${championship.teams.size()} / ${championship.maxTeams}" />				 
+		</h2>
+		<h2>
+			<c:out value="${championship.sport.numberOfPlayersInTeam} jugadores por equipo" />
 		</h2>
 
 		<c:forEach items="${championship.teams}" var="team">
@@ -70,7 +73,7 @@
 									var="searchPeopleUrl">
 									<spring:param name="teamId" value="${team.id}" />
 								</spring:url>
-								<c:if test="${team.user == logged_user}"><a style="font-size: 17px"href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a></c:if>
+								<c:if test="${team.user == logged_user && team.participants.size() < team.teamSize}"><a style="font-size: 17px"href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a></c:if>
 							</div>
 						</div>
 					</div>
