@@ -10,7 +10,7 @@ INSERT INTO authorities(id,username,authority) VALUES (4,'fernando98','premium')
 INSERT INTO users(username,password,enabled) VALUES ('marta98','Usuar10',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (5,'marta98','usuario');
 
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(1, 'Antonio', '1999-02-20', 'antonio@gmail.com', '654893274', 2,0,'antonio98');
+INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(1, 'Antonio', '1999-02-20', 'antonio@gmail.com', '654893274', 2,5,'antonio98');
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(2, 'Fernando', '1995-07-06', 'fernando1@gmail.com', '635897412', 1,10,'fernando98');
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(3, 'Marta', '1992-03-25', 'marta1@gmail.com', '954785123', 1,0,'marta98');
 

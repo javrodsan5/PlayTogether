@@ -12,16 +12,18 @@
 <playtogether:layout pageName="charts">
 	
 	<body>
+	<h2> Puntos conseguidos: <c:out value="${puntos}" /></h2>
 		<div id="chart" style="width:20%;"></div>
 		<input type="hidden" id="myvar" value="${quedadasTorneos}">
 		<script type = "text/javascript">
 		var datos = document.getElementById("myvar").value;
 		var datos2 = datos.replace('[',"");
 		var datos3 = datos2.replace(']',"");
-		var datos4 = datos3.split(',');
-		alert(datos3);
+		var datos4 = datos3.replace(',',"");
+		var datos5 = datos4.replace(' ',"");
+		var datos6 = Array.from(datos5)
         var options = {
-                series: datos3,
+                series: datos6,
                 chart: {
                 width: 380,
                 type: 'pie',

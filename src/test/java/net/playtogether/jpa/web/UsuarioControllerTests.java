@@ -274,4 +274,15 @@ public class UsuarioControllerTests {
 				.andExpect(MockMvcResultMatchers.model().attributeExists("meetings"));
 
 	}
+	
+	// Test de GetMapping de estadisticas de un usuario
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getStats() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("quedadasTorneos"));
+
+	}
 }
