@@ -159,7 +159,7 @@ public class InvitationServiceTests {
 		
 		this.invitationService.save(invitation);
 		
-		Collection<Invitation> invitations = this.invitationService.findMeetingInvitationsByUserName(u.getName());
+		Collection<Invitation> invitations = this.invitationService.findMeetingInvitationsByUsername(u.getName());
 		Assertions.assertThat(invitations.contains(invitation));
 
 	}
