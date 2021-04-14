@@ -85,15 +85,11 @@ public class MeetingController {
 			
 			List<Usuario> participants = new ArrayList<>();
 			participants.add(usuario);
-			System.out.println(usuario.getName());
 			meeting.setParticipants(participants);
 			meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam()*2);
 			meeting.setCreationDate(LocalDate.now());
 			meetingService.save(meeting);
 			usuario.setPuntos(usuario.getPuntos()+7);
-			List<Meeting> meetings = usuario.getMeetings();
-			meetings.add(meeting);
-			usuario.setMeetings(meetings);
 			usuarioService.saveUsuario(usuario);
 		
 			return "redirect:/sports/" + sportId + "/meetings";
@@ -182,9 +178,6 @@ public class MeetingController {
 			meeting.setParticipants(list);
 
 			this.meetingService.save(meeting);
-			List<Meeting> meetings = u.getMeetings();
-			meetings.add(meeting);
-			u.setMeetings(meetings);
 			
 			u.setPuntos(u.getPuntos()+5);
 			usuarioService.saveUsuario(u);

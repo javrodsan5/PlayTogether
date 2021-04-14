@@ -134,16 +134,16 @@ public class MeetingControllerTests {
 
 	// Test de crear quedada
 
-//	@Test
-//	@WithMockUser(username = "antonio98", authorities = "usuario")
-//	void createMeeting() throws Exception {
-//
-//		mockMvc.perform(post("/sports/1/meetings/add").with(csrf()).param("address", "Charco la Pava")
-//				.param("city", "Sevilla").param("date", "2021/06/12 12:00").param("id", "1")
-//				.param("description", "Cambio de planes").param("creationDate", "2021/06/12"))
-//				.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/sports/1/meetings"));
-//
-//	}
+	@Test
+	@WithMockUser(username = "antonio98", authorities = "usuario")
+	void createMeeting() throws Exception {
+
+		mockMvc.perform(post("/sports/1/meetings/add").with(csrf()).param("address", "Charco la Pava")
+				.param("city", "Sevilla").param("date", "2021/06/12 12:00").param("id", "1")
+				.param("description", "Cambio de planes").param("creationDate", "2021/06/12"))
+				.andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/sports/1/meetings"));
+
+	}
 
 	// Test de crear quedada negativo
 	@Test

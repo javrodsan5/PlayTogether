@@ -37,6 +37,7 @@ public class Meeting extends BaseEntity {
     private LocalDateTime date;
 
     @ManyToMany
+    @JoinColumn(name = "users_id")
     private List<Usuario> participants;
 
     @Column(name = "description")

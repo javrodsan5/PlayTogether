@@ -1,4 +1,3 @@
-
 package net.playtogether.jpa.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

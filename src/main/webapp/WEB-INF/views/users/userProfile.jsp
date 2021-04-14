@@ -11,7 +11,7 @@
 
 <playtogether:layout pageName="users">
 
-<div class="thirteen">
+	<div class="thirteen">
 		<h1>Datos de mi perfil</h1>
 	</div>
 
@@ -41,14 +41,14 @@
 						</div>
 						<div class="profile-data">
 							<div class="data-details">
-								<h5 style="margin-right:50px">Teléfono</h5>
-								<h4 style="margin-right:50px">
+								<h5 style="margin-right: 50px">Teléfono</h5>
+								<h4 style="margin-right: 50px">
 									<c:out value="${user.phone}" />
 								</h4>
 							</div>
 							<div class="data-details">
-								<h5 style="margin-left:20px">Correo electrónico</h5>
-								<h4 style="margin-left:20px">
+								<h5 style="margin-left: 20px">Correo electrónico</h5>
+								<h4 style="margin-left: 20px">
 									<c:out value="${user.correo}"></c:out>
 								</h4>
 
@@ -63,25 +63,28 @@
 							</div>
 						</div>
 						<td><spring:url value="/myprofile/{usuarioId}/edit"
-	                            var="editUser2Url">
-	                            <spring:param name="usuarioId" value="${user.id}" />
-	                 
-	                        </spring:url><a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a></td>
-				
-				
-						
-						<a href="/invitations/championshipInvitations" class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
-						
-						<td><spring:url value="/myprofile/{usuarioId}/championshipsRecord"
-	                            var="championshipRecord2Url">
-	                            <spring:param name="usuarioId" value="${user.id}" />
-	                 
-	                        </spring:url> <a class="btn btn-primary" href="${fn:escapeXml(championshipRecord2Url)}">Historial de torneos</a></div></td>
+								var="editUser2Url">
+								<spring:param name="usuarioId" value="${user.id}" />
 
+							</spring:url><a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a></td>
+
+
+
+						<a href="/invitations/championshipInvitations"
+							class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
+
+						<td><spring:url value="/myprofile/championshipsRecord"
+								var="championshipRecord2Url">
+							</spring:url> <a class="btn btn-primary"
+							href="${fn:escapeXml(championshipRecord2Url)}">Historial de
+								torneos</a>
 					</div>
+					</td>
+
 				</div>
 			</div>
+		</div>
 	</body>
-	
+
 
 </playtogether:layout>

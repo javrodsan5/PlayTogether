@@ -153,6 +153,7 @@ public class UsuarioControllerTests {
 		given(this.usuarioService.findByUsername("user1")).willReturn(usuario);
 		given(this.usuarioService.findUserById(2)).willReturn(usuario2);
 		given(this.usuarioService.findByUsername("user2")).willReturn(usuario2);
+		given( this.usuarioService.usuarioLogueado("user1")).willReturn(usuario);
 	}
 
 	// Test de consultar un usuario externo
@@ -252,25 +253,25 @@ public class UsuarioControllerTests {
 
 	}
 
-//	// Test de GetMapping de historial de torneos de un usuario
-//	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
-//	@Test
-//	void getChampionshipRecord() throws Exception {
-//		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/championshipsRecord"))
-//				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-//				.andExpect(MockMvcResultMatchers.view().name("users/championshipRecord"))
-//				.andExpect(MockMvcResultMatchers.model().attributeExists("championships"));
-//
-//	}
-//	
-//	// Test de GetMapping de historial de quedadas de un usuario
-//	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
-//	@Test
-//	void getMeetingsRecord() throws Exception {
-//		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/meetingsRecord"))
-//				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-//				.andExpect(MockMvcResultMatchers.view().name("users/meetingsRecord"))
-//				.andExpect(MockMvcResultMatchers.model().attributeExists("meetings"));
-//
-//	}
+	// Test de GetMapping de historial de torneos de un usuario
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getChampionshipRecord() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/championshipsRecord"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/championshipRecord"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("championships"));
+
+	}
+	
+	// Test de GetMapping de historial de quedadas de un usuario
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getMeetingsRecord() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/meetingsRecord"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/meetingsRecord"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("meetings"));
+
+	}
 }
