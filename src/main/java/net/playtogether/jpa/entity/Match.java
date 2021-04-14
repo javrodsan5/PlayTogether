@@ -31,7 +31,7 @@ public class Match extends BaseEntity {
 	@ManyToOne(optional = false)
 	private Team			team2;
 
-	@NotNull
+
 	@Column(name = "dateTime")
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
 	private LocalDateTime	dateTime;
