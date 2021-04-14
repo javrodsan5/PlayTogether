@@ -89,6 +89,7 @@ INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(2, 5.0, '2021/01/16 11:45:00', 1, null, 1, 1);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(3, 5.0, '2021/04/07 12:15:00', 1, null, 1, 2);
 
+
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(8, 3);
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 1);
 
