@@ -14,6 +14,9 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
 
 	@Query("SELECT u FROM Usuario u")
 	List<Usuario> findAll();
+	
+	@Query("SELECT u FROM Usuario u ORDER BY -u.puntos")
+	List<Usuario> findTopUsuarios();
 
 	@Query("SELECT u FROM Usuario u where u.correo = ?1")
 	Optional<Usuario> findUsuarioByCorreo(String correo);

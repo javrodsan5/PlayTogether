@@ -1,6 +1,7 @@
 package net.playtogether.jpa.entity;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -54,6 +55,10 @@ public class Meeting extends BaseEntity {
     @JoinColumn(name = "meeting_creator")
     private Usuario meetingCreator;
     
+    
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @Column(name = "creationDate")
+    private LocalDate creationDate;
 
     
     

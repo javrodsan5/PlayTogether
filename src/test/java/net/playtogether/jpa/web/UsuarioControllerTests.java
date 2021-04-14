@@ -1,6 +1,5 @@
 package net.playtogether.jpa.web;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.BDDMockito.given;
@@ -12,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.time.LocalDate;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,6 +133,19 @@ public class UsuarioControllerTests {
 		List<Team> teams = new ArrayList<Team>();
 		teams.add(t);
 		this.usuario.setTeams(teams);
+		
+		Meeting m = new Meeting();
+		m.setAddress("CD San pablo");
+		m.setCity("Madrid");
+		m.setCreationDate(LocalDate.of(2021, 06, 15));
+		m.setDate(LocalDateTime.of(2021, 06, 15, 10, 40));
+		m.setId(45);
+		m.setMeetingCreator(usuario);
+		m.setSport(s);
+		
+		List<Meeting> meetings  = new ArrayList<>();
+		meetings.add(m);
+		usuario.setMeetings(meetings);
 
 		given(this.userService.findUserByUsername("user1")).willReturn(u);
 		given(this.userTypeService.findUserTypeById(1)).willReturn(userType);
@@ -141,23 +153,23 @@ public class UsuarioControllerTests {
 		given(this.usuarioService.findByUsername("user1")).willReturn(usuario);
 		given(this.usuarioService.findUserById(2)).willReturn(usuario2);
 		given(this.usuarioService.findByUsername("user2")).willReturn(usuario2);
+		given( this.usuarioService.usuarioLogueado("user1")).willReturn(usuario);
 	}
 
 	// Test de consultar un usuario externo
 	@Test
-	@WithMockUser(value = "user2", authorities="usuario")
+	@WithMockUser(value = "user2", authorities = "usuario")
 	void getUser() throws Exception {
 		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
-
 
 	}
 
 	// Test de consultar un usuario negative
 	@Test
-	@WithMockUser(value = "user1", authorities="usuario")
+	@WithMockUser(value = "user1", authorities = "usuario")
 	void getUserNegative() throws Exception {
 		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is3xxRedirection())
-		.andExpect(view().name("redirect:/myprofile/1"));
+				.andExpect(view().name("redirect:/myprofile/1"));
 
 	}
 
@@ -242,15 +254,35 @@ public class UsuarioControllerTests {
 	}
 
 	// Test de GetMapping de historial de torneos de un usuario
-	@WithMockUser(username = "user1", authorities =
-
-	"usuario", password = "password")
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
 	@Test
 	void getChampionshipRecord() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/1/championshipsRecord"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/championshipsRecord"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 				.andExpect(MockMvcResultMatchers.view().name("users/championshipRecord"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("championships"));
+
+	}
+	
+	// Test de GetMapping de historial de quedadas de un usuario
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getMeetingsRecord() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/meetingsRecord"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/meetingsRecord"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("meetings"));
+
+	}
+	
+	// Test de clasificación de usuarios
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getClasification() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clasification"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/clasification"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("topUsuarios"));
 
 	}
 }

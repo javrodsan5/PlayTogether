@@ -35,6 +35,11 @@
 						<button class="botonMeeting" type="submit">
 							<b>Editar</b>
 						</button>
+						<div class="form-group">
+						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${sportId}/meetings/${meeting.id}';" type="button">
+							<b>Volver a quedada</b>
+						</button>
+					</div>
 					</div>
 					<br>
 					<br>

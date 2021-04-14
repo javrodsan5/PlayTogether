@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import net.playtogether.jpa.entity.Meeting;
@@ -46,13 +47,25 @@ public class MeetingController {
 	}
 
 	@GetMapping("/sports/{sportId}/meetings/add")
-	public String initCreationMeeting(ModelMap model, @PathVariable("sportId") Integer sportId) {
+	public String initCreationMeeting(ModelMap model, @PathVariable("sportId") Integer sportId, Principal principal) {
 		Integer listSports = this.sportService.findAll().size();
+		Usuario usuario = this.userService.findByUsername(principal.getName());
 		if(sportId>0 && sportId<=listSports) {
-			model.put("meeting", new Meeting());
-			model.put("sportId", sportId);
-			model.put("sport", sportService.findSportById(sportId));
-			return "meetings/createMeetingForm";
+			Collection<Meeting> meetingMonth = this.meetingService.findMeetingThisMonthToUser(usuario.getId());
+			if(usuario.getType().getId()==1 && meetingMonth.size()>0) {
+				Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(sportId);
+				Sport sport = this.sportService.findSportById(sportId);
+				model.addAttribute("meetings", meetings);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("nombreDeporte", sport.getName());
+				model.addAttribute("limiteMes", true);
+				return "meetings/listMeeting";
+			}else {
+				model.put("meeting", new Meeting());
+				model.put("sportId", sportId);
+				model.put("sport", sportService.findSportById(sportId));
+				return "meetings/createMeetingForm";
+			}
 		}else {
 			return "error-500";
 		}
@@ -72,12 +85,13 @@ public class MeetingController {
 			
 			List<Usuario> participants = new ArrayList<>();
 			participants.add(usuario);
-			System.out.println(usuario.getName());
 			meeting.setParticipants(participants);
 			meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam()*2);
+			meeting.setCreationDate(LocalDate.now());
 			meetingService.save(meeting);
 			usuario.setPuntos(usuario.getPuntos()+7);
 			usuarioService.saveUsuario(usuario);
+		
 			return "redirect:/sports/" + sportId + "/meetings";
 		}
 
@@ -107,7 +121,7 @@ public class MeetingController {
 			return "meetings/updateMeetingForm";
 		} else {
 			Meeting meetingToUpdate = this.meetingService.findMeetingById(meetingId);
-			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "numberOfPlayers","meetingCreator", "participants");
+			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "numberOfPlayers","meetingCreator", "participants", "creationDate");
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
 			return "redirect:/sports/" + sportId + "/meetings";

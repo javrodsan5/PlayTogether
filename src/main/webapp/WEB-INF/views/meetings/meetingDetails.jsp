@@ -87,6 +87,11 @@
 			</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
 		</c:if>
 							
+		<div class="form-group">
+						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${meeting.sport.id}/meetings';" type="button">
+							<b>Volver a listado</b>
+						</button>
+					</div>
 
 		<c:if test="${existe==true}">
 			<p>¡Ya estás participando en esta quedada!</p>

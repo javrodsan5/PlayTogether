@@ -1,4 +1,3 @@
-
 package net.playtogether.jpa.web;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -312,10 +311,18 @@ public class InvitationControllerTests {
 	}
 	
 	
-	// Test de aceptar invitación
+	// Test de aceptar invitación error usuario básico
 	@Test
 	@WithMockUser(value = "user1", authorities="usuario")
-	void testAcceptInvitation() throws Exception {
+	void testAcceptInvitationBasicUser() throws Exception {
+		this.mockMvc.perform(get("/invitations/championshipInvitations/1/?accepted=true")).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+		.andExpect(MockMvcResultMatchers.view().name("redirect:/pay/championship/8/team/2?invitationId=1"));
+	}
+
+  // Test de aceptar invitación correcto usuario premium
+	@Test
+	@WithMockUser(value = "user1", authorities={"premium", "usuario"})
+	void testAcceptInvitationPremiumUser() throws Exception {
 		this.mockMvc.perform(get("/invitations/championshipInvitations/1/?accepted=true")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
@@ -383,13 +390,22 @@ public class InvitationControllerTests {
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}	
 	
-	// Test de aceptar invitación a quedada
+  // Test de aceptar invitación a quedada error usuario básico
 	@Test
 	@WithMockUser(value = "user1", authorities="usuario")
-	void testAcceptInvitationMeeting() throws Exception {
-		this.mockMvc.perform(get("/invitations/championshipInvitations/8/?accepted=true")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+	void testAcceptInvitationMeetingBasicUser() throws Exception {
+		this.mockMvc.perform(get("/invitations/meetingInvitations/8/?accepted=true")).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+		.andExpect(MockMvcResultMatchers.view().name("redirect:/pay/championship/8/team/2?invitationId=1"));
+	}
+
+  // Test de aceptar invitación a quedada correcto usuario premium
+	@Test
+	@WithMockUser(value = "user1", authorities={"premium", "usuario"})
+	void testAcceptInvitationMeetingPremiumUser() throws Exception {
+		this.mockMvc.perform(get("/invitations/meetingInvitations/8/?accepted=true")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
+  
 
 	
 	

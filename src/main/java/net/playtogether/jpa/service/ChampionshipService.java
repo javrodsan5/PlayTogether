@@ -95,4 +95,9 @@ public class ChampionshipService {
 		this.championshipRepository.deleteAll(championships);
 	}
 
+	@Transactional(readOnly = true)
+	public Collection<Usuario> findParticipantsChampionship(int championshipId) throws DataAccessException {
+		return this.championshipRepository.findParticipantsChampionship(championshipId);
+	}
+
 }
