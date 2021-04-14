@@ -9,6 +9,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -190,20 +193,19 @@ public class InvitationController {
 			
 		if (hasPermission && invitation != null && accepted.equals("true")) {
 			
-//			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//			if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"))) {
-//				return "redirect:/pay/championship/add?championshipId=" + championship.getId();
-//			}
-			
 			if (invitation.getTeam().getParticipants().size() < invitation.getTeam().getTeamSize()) {
 				Boolean isNotInChampionshipTeam =isNotInChampionshipTeam(invitation.getTeam().getChampionship().getId(), invitation.getReceiver());
 				
 				if (isNotInChampionshipTeam) {
-					invitation.getTeam().getParticipants().add(invitation.getReceiver());			
-					this.championshipService.save(invitation.getTeam());
-					this.invitationService.delete(invitationId);
-					model.put("joined", true);
-					
+					Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+					if (!authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"))) {
+						return "redirect:/pay/championship/" + invitation.getTeam().getChampionship().getId() + "/team/"+invitation.getTeam().getId()+"?invitationId="+invitationId;
+					} else {
+						invitation.getTeam().getParticipants().add(invitation.getReceiver());			
+						this.championshipService.save(invitation.getTeam());
+						this.invitationService.delete(invitationId);
+						model.put("joined", true);
+					}		
 				} else {
 					this.invitationService.delete(invitationId);
 					model.put("isInChampionshipTeam", true);
