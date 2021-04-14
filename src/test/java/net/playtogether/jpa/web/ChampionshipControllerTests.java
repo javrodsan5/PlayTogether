@@ -180,8 +180,8 @@ public class ChampionshipControllerTests {
 	@Test
 	@WithMockUser(value = "user1", authorities="usuario")
 	void getMatchDetails() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/1/match/1/result/team1?search=Usuario1")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-			.andExpect(MockMvcResultMatchers.view().name("matches/createOrUpdateMatchForm")).andExpect(MockMvcResultMatchers.model().attributeExists("match"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/1/match/1/result/team1")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+			.andExpect(MockMvcResultMatchers.view().name("matches/listMatch"));
 
 	}
 

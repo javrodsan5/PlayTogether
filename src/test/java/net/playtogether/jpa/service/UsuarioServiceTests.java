@@ -48,7 +48,7 @@ public class UsuarioServiceTests {
 	void saveUser() throws Exception {
 		Integer contador = this.usuarioService.findAll().size();
 		Usuario usuario = new Usuario();
-		usuario.setId(10);
+		usuario.setId(19);
 		usuario.setName("usuarioPr");
 		usuario.setCorreo("correo@cor.com");
 		usuario.setBirthdate(LocalDate.of(1999, 2, 14));
@@ -69,7 +69,7 @@ public class UsuarioServiceTests {
 	@Test
 	void shouldFindAllUsuarios() throws Exception {
 		Collection<Usuario> usuarios = this.usuarioService.findAll();
-		Assertions.assertThat(usuarios.size()).isEqualTo(4);
+		Assertions.assertThat(usuarios.size()).isEqualTo(19);
 
 	}
 
@@ -114,7 +114,7 @@ public class UsuarioServiceTests {
 	//CHECK PHONE EXISTS
 	@Test
 	void shouldFindUsuarioWithPhone() throws Exception {
-		Assertions.assertThat(this.usuarioService.checkPhoneExists("654893274")).isEqualTo(true);
+		Assertions.assertThat(this.usuarioService.checkPhoneExists("654893275")).isEqualTo(true);
 	}
 
 	//CHECK PHONE DOES NOT EXISTS

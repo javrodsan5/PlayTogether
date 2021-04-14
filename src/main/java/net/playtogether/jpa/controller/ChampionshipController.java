@@ -6,7 +6,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
@@ -282,6 +284,10 @@ public class ChampionshipController {
 	public String listMatches(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId) {
 		Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
+
+
 		
 		List<Team> equipos = this.championshipService.findTeamsByChampionshipId(championshipId);
 		Boolean crearPartido = false;
@@ -289,9 +295,11 @@ public class ChampionshipController {
 			crearPartido = true;
 		}
 		model.addAttribute("crearPartido", crearPartido);
+
 		model.addAttribute("matches", matches);
 		model.addAttribute("deporte", sportId);
 		model.addAttribute("championship", championshipId);
+		model.addAttribute("championshipObj", championship);
 
 		return "matches/listMatch";
 	}
@@ -300,7 +308,7 @@ public class ChampionshipController {
 	public String matchDetails(@RequestParam(value = "search", required = false) final String search,
 			final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId,
-			@PathVariable("matchId") final Integer matchId, @PathVariable("team") final String team) {
+			@PathVariable("matchId") final Integer matchId, @PathVariable("team") final String team, Principal principal) {
 		Boolean isPuntos1 = null;
 
 		try {
@@ -317,12 +325,42 @@ public class ChampionshipController {
 		}
 
 		Match match = this.matchService.findMatchById(matchId);
+		List<Usuario> participantes1 = new ArrayList<>();
+		List<Usuario> participantes2 = new ArrayList<>();
+		participantes1.addAll(match.getTeam1().getParticipants());
+		participantes2.addAll(match.getTeam2().getParticipants());
+	
+		Usuario user = this.userService.findByUsername(principal.getName());
+		
+		boolean  participa1 = participantes1.stream().anyMatch(p -> p.equals(user));
+		boolean  participa2 = participantes2.stream().anyMatch(p -> p.equals(user));
+		
+		List<Integer> listaPuntos = new ArrayList<>();
+		for (int i = 0; i <= 200; i++) {
+			listaPuntos.add(i);
+		}
+		
+		if(participa1 && team.equals("team1")) {
+			
+			model.addAttribute("match", match);
+			Championship championship = this.championshipService.findChampionshipId(championshipId);
+			model.addAttribute("championshipObj", championship);
+			model.put("isPuntos1", true);
+			model.put("listaPuntos", listaPuntos);
 
-		if (team.equals("team1") && this.isParticipant(match.getTeam1().getParticipants(), search.toString())) {
-			isPuntos1 = true;
-		} else if (team.equals("team2") && this.isParticipant(match.getTeam2().getParticipants(), search.toString())) {
-			isPuntos1 = false;
-		} else {
+			return "matches/createOrUpdateMatchForm";
+			
+		}else if(participa2 && team.equals("team2")) {
+			
+			model.addAttribute("match", match);
+			Championship championship = this.championshipService.findChampionshipId(championshipId);
+			model.addAttribute("championshipObj", championship);
+			model.put("isPuntos1", false);
+			model.put("listaPuntos", listaPuntos);
+
+			return "matches/createOrUpdateMatchForm";
+			
+		}else {
 			Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
 			model.addAttribute("matches", matches);
 			model.addAttribute("deporte", sportId);
@@ -333,30 +371,9 @@ public class ChampionshipController {
 			return "matches/listMatch";
 		}
 
-		List<Integer> listaPuntos = new ArrayList<>();
-		for (int i = 0; i <= 200; i++) {
-			listaPuntos.add(i);
-		}
-
-		model.addAttribute("match", match);
-		Championship championship = this.championshipService.findChampionshipId(championshipId);
-		model.addAttribute("championshipObj", championship);
-		model.put("isPuntos1", isPuntos1);
-		model.put("listaPuntos", listaPuntos);
-
-		return "matches/createOrUpdateMatchForm";
+		
 	}
 
-	private Boolean isParticipant(final List<Usuario> users, final String name) {
-		Boolean res = Boolean.FALSE;
-		for (Usuario user : users) {
-			res = user.getName().equals(name);
-			if (res) {
-				break;
-			}
-		}
-		return res;
-	}
 
 	@PostMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/result/{team}")
 	public String initMatchAddResult(@Valid final Match match, final BindingResult result, final ModelMap model,
@@ -524,6 +541,1116 @@ public class ChampionshipController {
 		model.addAttribute("matches", matchesTeam);
 
 		return "teams/teamDetails";
+	}
+	
+	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/generate1")
+	public String initGenerateFirst(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		
+		Integer listChampionships = this.championshipService.listChampionship().size();
+		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
+		Usuario user = this.userService.findByUsername(principal.getName());
+		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
+		
+		if (championshipId > 0 && championshipId <= listChampionships) {
+			if(participa) {
+			if(championship.getMatches().size()>0){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("yagenerado", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}
+			else if((Integer)championship.getTeams().size() == championship.getMaxTeams()) {
+				
+					
+					for(int i = 0; i<championship.getMaxTeams(); i=i+2) {
+						Match m = new Match();
+						m.setChampionship(championship);
+						m.setTeam1(championship.getTeams().get(i));
+						m.setTeam2(championship.getTeams().get(i+1));
+						this.matchService.save(m);
+					}
+					Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+					model.addAttribute("matches", matches);
+					model.addAttribute("deporte", sportId);
+					model.addAttribute("championship", championshipId);
+					model.addAttribute("championshipObj", championship);
+					return "matches/listMatch";
+				
+			} 
+			
+			else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("faltaEquipos", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}
+			}else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noParticipa", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}
+		} else {
+			return "error-500";
+		}
+	}
+	
+	
+	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/generate2")
+	public String initGenerateSecond(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		
+		Integer listChampionships = this.championshipService.listChampionship().size();
+		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
+		Usuario user = this.userService.findByUsername(principal.getName());
+		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
+		
+		if (championshipId > 0 && championshipId <= listChampionships) {
+			if(participa) {
+			if(championship.getMatches().size()==0){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noprimera", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}else if((Integer)championship.getTeams().size() != championship.getMaxTeams()){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("faltaEquipos", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+				
+			}else if(championship.getMatches().stream().allMatch(m -> m.getPuntos1()!=null && m.getPuntos2()!=null && m.getPuntos3() != null && m.getPuntos4()!=null && m.getDateTime()!=null)) {
+				
+				
+				
+				//PARA EQUIPOS DE 4
+				
+				if(championship.getMaxTeams()==4 && championship.getMatches().size()==2) {
+					
+					
+					Collection<Match> matches1rondaRaw = this.matchService.listMatchesByChampionship(championshipId);
+					List<Match> matches1ronda = matches1rondaRaw.stream().collect(Collectors.toList());
+					
+					Match partido1 = matches1ronda.get(0);
+					Match partido2 = matches1ronda.get(1);
+					Team ganadorPartido2;
+					Team ganadorPartido1;
+					if(partido1.getPuntos1()== partido1.getPuntos3() && partido1.getPuntos2() == partido1.getPuntos4()) {
+						
+						
+						if(partido1.getPuntos1()>partido1.getPuntos2()) {
+							 ganadorPartido1 = partido1.getTeam1();
+						}else {
+							 ganadorPartido1 = partido1.getTeam2();
+						}
+						
+						
+						if(partido2.getPuntos1()== partido2.getPuntos3() && partido2.getPuntos2() == partido2.getPuntos4()) {
+							
+							
+							if(partido1.getPuntos1()>partido1.getPuntos2()) {
+								 ganadorPartido2 = partido2.getTeam1();
+							}else {
+								 ganadorPartido2 = partido2.getTeam2();
+							}
+							
+							Match m = new Match();
+							m.setChampionship(championship);
+							m.setTeam1(ganadorPartido1);
+							m.setTeam2(ganadorPartido2);
+							this.matchService.save(m);
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+							
+							
+						}else {
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("nocoinc", true);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+						}
+						
+						
+					}else {
+						Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+						model.addAttribute("matches", matches);
+						model.addAttribute("deporte", sportId);
+						model.addAttribute("championship", championshipId);
+						model.addAttribute("nocoinc", true);
+						model.addAttribute("championshipObj", championship);
+						return "matches/listMatch";
+					}
+					
+					
+					
+					
+				}
+				
+				
+				
+				//PARA EQUIPOS DE 8
+				
+				else if(championship.getMaxTeams()==8 && championship.getMatches().size()==4) {
+					
+					
+					Collection<Match> matches1rondaRaw = this.matchService.listMatchesByChampionship(championshipId);
+					List<Match> matches1ronda = matches1rondaRaw.stream().collect(Collectors.toList());
+					
+					Match partido1 = matches1ronda.get(0);
+					Match partido2 = matches1ronda.get(1);
+					Team ganadorPartido2;
+					Team ganadorPartido1;
+					Match partido3 = matches1ronda.get(2);
+					Match partido4 = matches1ronda.get(3);
+					Team ganadorPartido3;
+					Team ganadorPartido4;
+					
+					if(partido1.getPuntos1()== partido1.getPuntos3() && partido1.getPuntos2() == partido1.getPuntos4()) {
+						
+						
+						if(partido1.getPuntos1()>partido1.getPuntos2()) {
+							 ganadorPartido1 = partido1.getTeam1();
+						}else {
+							 ganadorPartido1 = partido1.getTeam2();
+						}
+						
+						
+						if(partido2.getPuntos1()== partido2.getPuntos3() && partido2.getPuntos2() == partido2.getPuntos4()) {
+							
+							
+							if(partido1.getPuntos1()>partido1.getPuntos2()) {
+								 ganadorPartido2 = partido2.getTeam1();
+							}else {
+								 ganadorPartido2 = partido2.getTeam2();
+							}
+							
+							if(partido3.getPuntos1()== partido3.getPuntos3() && partido3.getPuntos2() == partido3.getPuntos4()) {
+								
+								
+								if(partido3.getPuntos1()>partido3.getPuntos2()) {
+									 ganadorPartido3 = partido3.getTeam1();
+								}else {
+									 ganadorPartido3 = partido3.getTeam2();
+								}
+								
+								if(partido4.getPuntos1()== partido4.getPuntos3() && partido4.getPuntos2() == partido4.getPuntos4()) {
+									
+									
+									if(partido4.getPuntos1()>partido4.getPuntos2()) {
+										 ganadorPartido4 = partido4.getTeam1();
+									}else {
+										 ganadorPartido4 = partido4.getTeam2();
+									}
+									
+									Match m = new Match();
+									m.setChampionship(championship);
+									m.setTeam1(ganadorPartido1);
+									m.setTeam2(ganadorPartido2);
+									this.matchService.save(m);
+									Match m2 = new Match();
+									m2.setChampionship(championship);
+									m2.setTeam1(ganadorPartido3);
+									m2.setTeam2(ganadorPartido4);
+									this.matchService.save(m2);
+									Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+									model.addAttribute("matches", matches);
+									model.addAttribute("deporte", sportId);
+									model.addAttribute("championship", championshipId);
+									model.addAttribute("championshipObj", championship);
+									return "matches/listMatch";
+									
+									
+								}else {
+									Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+									model.addAttribute("matches", matches);
+									model.addAttribute("deporte", sportId);
+									model.addAttribute("championship", championshipId);
+									model.addAttribute("nocoinc", true);
+									model.addAttribute("championshipObj", championship);
+									return "matches/listMatch";
+								}
+								
+								
+							}else {
+								Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+								model.addAttribute("matches", matches);
+								model.addAttribute("deporte", sportId);
+								model.addAttribute("championship", championshipId);
+								model.addAttribute("nocoinc", true);
+								model.addAttribute("championshipObj", championship);
+								return "matches/listMatch";
+							}
+							
+							
+						}else {
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("nocoinc", true);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+						}
+						
+						
+					}else {
+						Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+						model.addAttribute("matches", matches);
+						model.addAttribute("deporte", sportId);
+						model.addAttribute("championship", championshipId);
+						model.addAttribute("nocoinc", true);
+						model.addAttribute("championshipObj", championship);
+						return "matches/listMatch";
+					}
+					
+					
+					
+					
+				}
+				
+				
+				
+				//PARA EQUIPOS DE 16
+				
+				else if(championship.getMaxTeams()==16 && championship.getMatches().size()==8) {
+					
+					
+					Collection<Match> matches1rondaRaw = this.matchService.listMatchesByChampionship(championshipId);
+					List<Match> matches1ronda = matches1rondaRaw.stream().collect(Collectors.toList());
+					
+					Match partido1 = matches1ronda.get(0);
+					Match partido2 = matches1ronda.get(1);
+					Team ganadorPartido2;
+					Team ganadorPartido1;
+					Match partido3 = matches1ronda.get(2);
+					Match partido4 = matches1ronda.get(3);
+					Team ganadorPartido3;
+					Team ganadorPartido4;
+					Match partido5 = matches1ronda.get(4);
+					Match partido6 = matches1ronda.get(5);
+					Team ganadorPartido5;
+					Team ganadorPartido6;
+					Match partido7 = matches1ronda.get(6);
+					Match partido8 = matches1ronda.get(7);
+					Team ganadorPartido7;
+					Team ganadorPartido8;
+					
+					if(partido1.getPuntos1()== partido1.getPuntos3() && partido1.getPuntos2() == partido1.getPuntos4()) {
+						
+						
+						if(partido1.getPuntos1()>partido1.getPuntos2()) {
+							 ganadorPartido1 = partido1.getTeam1();
+						}else {
+							 ganadorPartido1 = partido1.getTeam2();
+						}
+						
+						
+						if(partido2.getPuntos1()== partido2.getPuntos3() && partido2.getPuntos2() == partido2.getPuntos4()) {
+							
+							
+							if(partido1.getPuntos1()>partido1.getPuntos2()) {
+								 ganadorPartido2 = partido2.getTeam1();
+							}else {
+								 ganadorPartido2 = partido2.getTeam2();
+							}
+							
+							if(partido3.getPuntos1()== partido3.getPuntos3() && partido3.getPuntos2() == partido3.getPuntos4()) {
+								
+								
+								if(partido3.getPuntos1()>partido3.getPuntos2()) {
+									 ganadorPartido3 = partido3.getTeam1();
+								}else {
+									 ganadorPartido3 = partido3.getTeam2();
+								}
+								
+								if(partido4.getPuntos1()== partido4.getPuntos3() && partido4.getPuntos2() == partido4.getPuntos4()) {
+									
+									
+									if(partido4.getPuntos1()>partido4.getPuntos2()) {
+										 ganadorPartido4 = partido4.getTeam1();
+									}else {
+										 ganadorPartido4 = partido4.getTeam2();
+									}
+									
+									if(partido5.getPuntos1()== partido5.getPuntos3() && partido5.getPuntos2() == partido5.getPuntos4()) {
+										
+										
+										if(partido5.getPuntos1()>partido5.getPuntos2()) {
+											 ganadorPartido5 = partido5.getTeam1();
+										}else {
+											 ganadorPartido5 = partido5.getTeam2();
+										}
+										
+										if(partido6.getPuntos1()== partido6.getPuntos3() && partido6.getPuntos2() == partido6.getPuntos4()) {
+											
+											
+											if(partido6.getPuntos1()>partido6.getPuntos2()) {
+												 ganadorPartido6 = partido6.getTeam1();
+											}else {
+												 ganadorPartido6 = partido6.getTeam2();
+											}
+											
+											if(partido7.getPuntos1()== partido7.getPuntos3() && partido7.getPuntos2() == partido7.getPuntos4()) {
+												
+												
+												if(partido7.getPuntos1()>partido7.getPuntos2()) {
+													 ganadorPartido7 = partido7.getTeam1();
+												}else {
+													 ganadorPartido7 = partido7.getTeam2();
+												}
+												
+												if(partido8.getPuntos1()== partido8.getPuntos3() && partido8.getPuntos2() == partido8.getPuntos4()) {
+													
+													
+													if(partido8.getPuntos1()>partido8.getPuntos2()) {
+														 ganadorPartido8 = partido8.getTeam1();
+													}else {
+														 ganadorPartido8 = partido8.getTeam2();
+													}
+													
+													Match m = new Match();
+													m.setChampionship(championship);
+													m.setTeam1(ganadorPartido1);
+													m.setTeam2(ganadorPartido2);
+													this.matchService.save(m);
+													Match m2 = new Match();
+													m2.setChampionship(championship);
+													m2.setTeam1(ganadorPartido3);
+													m2.setTeam2(ganadorPartido4);
+													this.matchService.save(m2);
+													Match m3 = new Match();
+													m3.setChampionship(championship);
+													m3.setTeam1(ganadorPartido5);
+													m3.setTeam2(ganadorPartido6);
+													this.matchService.save(m3);
+													Match m4 = new Match();
+													m4.setChampionship(championship);
+													m4.setTeam1(ganadorPartido7);
+													m4.setTeam2(ganadorPartido8);
+													this.matchService.save(m4);
+													Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+													model.addAttribute("matches", matches);
+													model.addAttribute("deporte", sportId);
+													model.addAttribute("championship", championshipId);
+													model.addAttribute("championshipObj", championship);
+													return "matches/listMatch";
+													
+													
+												}else {
+													Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+													model.addAttribute("matches", matches);
+													model.addAttribute("deporte", sportId);
+													model.addAttribute("championship", championshipId);
+													model.addAttribute("nocoinc", true);
+													model.addAttribute("championshipObj", championship);
+													return "matches/listMatch";
+												}
+												
+												
+											}else {
+												Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+												model.addAttribute("matches", matches);
+												model.addAttribute("deporte", sportId);
+												model.addAttribute("championship", championshipId);
+												model.addAttribute("nocoinc", true);
+												model.addAttribute("championshipObj", championship);
+												return "matches/listMatch";
+											}
+											
+											
+										}else {
+											Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+											model.addAttribute("matches", matches);
+											model.addAttribute("deporte", sportId);
+											model.addAttribute("championship", championshipId);
+											model.addAttribute("nocoinc", true);
+											model.addAttribute("championshipObj", championship);
+											return "matches/listMatch";
+										}
+										
+										
+									}else {
+										Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+										model.addAttribute("matches", matches);
+										model.addAttribute("deporte", sportId);
+										model.addAttribute("championship", championshipId);
+										model.addAttribute("nocoinc", true);
+										model.addAttribute("championshipObj", championship);
+										return "matches/listMatch";
+									}
+									
+									
+								}else {
+									Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+									model.addAttribute("matches", matches);
+									model.addAttribute("deporte", sportId);
+									model.addAttribute("championship", championshipId);
+									model.addAttribute("nocoinc", true);
+									model.addAttribute("championshipObj", championship);
+									return "matches/listMatch";
+								}
+								
+								
+							}else {
+								Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+								model.addAttribute("matches", matches);
+								model.addAttribute("deporte", sportId);
+								model.addAttribute("championship", championshipId);
+								model.addAttribute("nocoinc", true);
+								model.addAttribute("championshipObj", championship);
+								return "matches/listMatch";
+							}
+							
+							
+						}else {
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("nocoinc", true);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+						}
+						
+						
+					}else {
+						Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+						model.addAttribute("matches", matches);
+						model.addAttribute("deporte", sportId);
+						model.addAttribute("championship", championshipId);
+						model.addAttribute("nocoinc", true);
+						model.addAttribute("championshipObj", championship);
+						return "matches/listMatch";
+					}
+					
+					
+					
+					
+				}else {
+					Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+					model.addAttribute("matches", matches);
+					model.addAttribute("deporte", sportId);
+					model.addAttribute("championship", championshipId);
+					model.addAttribute("yagenerada2", true);
+					model.addAttribute("championshipObj", championship);
+					return "matches/listMatch";
+				}
+				
+				
+				
+			}
+			else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("faltaresultados", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+				
+				
+				
+			} 
+			
+			}else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noParticipa", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}
+		} else {
+			return "error-500";
+		}
+	}
+	
+	
+	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/generate3")
+	public String initGenerateThird(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		
+		Integer listChampionships = this.championshipService.listChampionship().size();
+		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
+		Usuario user = this.userService.findByUsername(principal.getName());
+		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
+		
+		if (championshipId > 0 && championshipId <= listChampionships) {
+			if(participa) {
+			if(championship.getMatches().size()==0){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noprimera", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}else if(championship.getMaxTeams()==8 && championship.getMatches().size()==4){
+					Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+					model.addAttribute("matches", matches);
+					model.addAttribute("deporte", sportId);
+					model.addAttribute("championship", championshipId);
+					model.addAttribute("nosegunda", true);
+					model.addAttribute("championshipObj", championship);
+					return "matches/listMatch";
+			}
+			else if(championship.getMaxTeams()==16 && championship.getMatches().size()==8){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("nosegunda", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}else if((Integer)championship.getTeams().size() != championship.getMaxTeams()){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("faltaEquipos", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+				
+			}else if(championship.getMatches().stream().allMatch(m -> m.getPuntos1()!=null && m.getPuntos2()!=null && m.getPuntos3() != null && m.getPuntos4()!=null && m.getDateTime()!=null)) {
+				
+				
+				
+				//PARA EQUIPOS DE 8
+				
+				if(championship.getMaxTeams()==8 && championship.getMatches().size()==6) {
+					
+					
+					Collection<Match> matches1rondaRaw = this.matchService.listMatchesByChampionship(championshipId);
+					List<Match> matches1ronda = matches1rondaRaw.stream().collect(Collectors.toList());
+					
+					Match partido1 = matches1ronda.get(4);
+					Match partido2 = matches1ronda.get(5);
+					Team ganadorPartido2;
+					Team ganadorPartido1;
+					if(partido1.getPuntos1()== partido1.getPuntos3() && partido1.getPuntos2() == partido1.getPuntos4()) {
+						
+						
+						if(partido1.getPuntos1()>partido1.getPuntos2()) {
+							 ganadorPartido1 = partido1.getTeam1();
+						}else {
+							 ganadorPartido1 = partido1.getTeam2();
+						}
+						
+						
+						if(partido2.getPuntos1()== partido2.getPuntos3() && partido2.getPuntos2() == partido2.getPuntos4()) {
+							
+							
+							if(partido1.getPuntos1()>partido1.getPuntos2()) {
+								 ganadorPartido2 = partido2.getTeam1();
+							}else {
+								 ganadorPartido2 = partido2.getTeam2();
+							}
+							
+							Match m = new Match();
+							m.setChampionship(championship);
+							m.setTeam1(ganadorPartido1);
+							m.setTeam2(ganadorPartido2);
+							this.matchService.save(m);
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+							
+							
+						}else {
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("nocoinc", true);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+						}
+						
+						
+					}else {
+						Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+						model.addAttribute("matches", matches);
+						model.addAttribute("deporte", sportId);
+						model.addAttribute("championship", championshipId);
+						model.addAttribute("nocoinc", true);
+						model.addAttribute("championshipObj", championship);
+						return "matches/listMatch";
+					}
+					
+					
+					
+					
+				}
+				
+				
+				
+				//PARA EQUIPOS DE 16
+				
+				else if(championship.getMaxTeams()==16 && championship.getMatches().size()==12) {
+					
+					
+					Collection<Match> matches1rondaRaw = this.matchService.listMatchesByChampionship(championshipId);
+					List<Match> matches1ronda = matches1rondaRaw.stream().collect(Collectors.toList());
+					
+					Match partido1 = matches1ronda.get(8);
+					Match partido2 = matches1ronda.get(9);
+					Team ganadorPartido2;
+					Team ganadorPartido1;
+					Match partido3 = matches1ronda.get(10);
+					Match partido4 = matches1ronda.get(11);
+					Team ganadorPartido3;
+					Team ganadorPartido4;
+					
+					if(partido1.getPuntos1()== partido1.getPuntos3() && partido1.getPuntos2() == partido1.getPuntos4()) {
+						
+						
+						if(partido1.getPuntos1()>partido1.getPuntos2()) {
+							 ganadorPartido1 = partido1.getTeam1();
+						}else {
+							 ganadorPartido1 = partido1.getTeam2();
+						}
+						
+						
+						if(partido2.getPuntos1()== partido2.getPuntos3() && partido2.getPuntos2() == partido2.getPuntos4()) {
+							
+							
+							if(partido1.getPuntos1()>partido1.getPuntos2()) {
+								 ganadorPartido2 = partido2.getTeam1();
+							}else {
+								 ganadorPartido2 = partido2.getTeam2();
+							}
+							
+							if(partido3.getPuntos1()== partido3.getPuntos3() && partido3.getPuntos2() == partido3.getPuntos4()) {
+								
+								
+								if(partido3.getPuntos1()>partido3.getPuntos2()) {
+									 ganadorPartido3 = partido3.getTeam1();
+								}else {
+									 ganadorPartido3 = partido3.getTeam2();
+								}
+								
+								if(partido4.getPuntos1()== partido4.getPuntos3() && partido4.getPuntos2() == partido4.getPuntos4()) {
+									
+									
+									if(partido4.getPuntos1()>partido4.getPuntos2()) {
+										 ganadorPartido4 = partido4.getTeam1();
+									}else {
+										 ganadorPartido4 = partido4.getTeam2();
+									}
+									
+									Match m = new Match();
+									m.setChampionship(championship);
+									m.setTeam1(ganadorPartido1);
+									m.setTeam2(ganadorPartido2);
+									this.matchService.save(m);
+									Match m2 = new Match();
+									m2.setChampionship(championship);
+									m2.setTeam1(ganadorPartido3);
+									m2.setTeam2(ganadorPartido4);
+									this.matchService.save(m2);
+									Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+									model.addAttribute("matches", matches);
+									model.addAttribute("deporte", sportId);
+									model.addAttribute("championship", championshipId);
+									model.addAttribute("championshipObj", championship);
+									return "matches/listMatch";
+									
+									
+								}else {
+									Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+									model.addAttribute("matches", matches);
+									model.addAttribute("deporte", sportId);
+									model.addAttribute("championship", championshipId);
+									model.addAttribute("nocoinc", true);
+									model.addAttribute("championshipObj", championship);
+									return "matches/listMatch";
+								}
+								
+								
+							}else {
+								Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+								model.addAttribute("matches", matches);
+								model.addAttribute("deporte", sportId);
+								model.addAttribute("championship", championshipId);
+								model.addAttribute("nocoinc", true);
+								model.addAttribute("championshipObj", championship);
+								return "matches/listMatch";
+							}
+							
+							
+						}else {
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("nocoinc", true);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+						}
+						
+						
+					}else {
+						Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+						model.addAttribute("matches", matches);
+						model.addAttribute("deporte", sportId);
+						model.addAttribute("championship", championshipId);
+						model.addAttribute("nocoinc", true);
+						model.addAttribute("championshipObj", championship);
+						return "matches/listMatch";
+					}
+					
+					
+					
+					
+				}
+				
+				
+				
+				else {
+					Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+					model.addAttribute("matches", matches);
+					model.addAttribute("deporte", sportId);
+					model.addAttribute("championship", championshipId);
+					model.addAttribute("yagenerada2", true);
+					model.addAttribute("championshipObj", championship);
+					return "matches/listMatch";
+				}
+				
+				
+				
+			}
+			else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("faltaresultados", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+				
+				
+				
+			} 
+			
+			}else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noParticipa", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}
+		} else {
+			return "error-500";
+		}
+	}
+	
+	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/generate4")
+	public String initGenerateFourth(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		
+		Integer listChampionships = this.championshipService.listChampionship().size();
+		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
+		Usuario user = this.userService.findByUsername(principal.getName());
+		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
+		
+		if (championshipId > 0 && championshipId <= listChampionships) {
+			if(participa) {
+			if(championship.getMatches().size()==0){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noprimera", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}else if(championship.getMaxTeams()==16 && championship.getMatches().size()==8){
+					Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+					model.addAttribute("matches", matches);
+					model.addAttribute("deporte", sportId);
+					model.addAttribute("championship", championshipId);
+					model.addAttribute("nosegunda", true);
+					model.addAttribute("championshipObj", championship);
+					return "matches/listMatch";
+			}else if(championship.getMaxTeams()==16 && championship.getMatches().size()==12){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("notercera", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}else if((Integer)championship.getTeams().size() != championship.getMaxTeams()){
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("faltaEquipos", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+				
+			}else if(championship.getMatches().stream().allMatch(m -> m.getPuntos1()!=null && m.getPuntos2()!=null && m.getPuntos3() != null && m.getPuntos4()!=null && m.getDateTime()!=null)) {
+				
+				
+				
+				//PARA EQUIPOS DE 16
+				
+				if(championship.getMaxTeams()==16 && championship.getMatches().size()==14) {
+					
+					
+					Collection<Match> matches1rondaRaw = this.matchService.listMatchesByChampionship(championshipId);
+					List<Match> matches1ronda = matches1rondaRaw.stream().collect(Collectors.toList());
+					
+					Match partido1 = matches1ronda.get(12);
+					Match partido2 = matches1ronda.get(13);
+					Team ganadorPartido2;
+					Team ganadorPartido1;
+					if(partido1.getPuntos1()== partido1.getPuntos3() && partido1.getPuntos2() == partido1.getPuntos4()) {
+						
+						
+						if(partido1.getPuntos1()>partido1.getPuntos2()) {
+							 ganadorPartido1 = partido1.getTeam1();
+						}else {
+							 ganadorPartido1 = partido1.getTeam2();
+						}
+						
+						
+						if(partido2.getPuntos1()== partido2.getPuntos3() && partido2.getPuntos2() == partido2.getPuntos4()) {
+							
+							
+							if(partido1.getPuntos1()>partido1.getPuntos2()) {
+								 ganadorPartido2 = partido2.getTeam1();
+							}else {
+								 ganadorPartido2 = partido2.getTeam2();
+							}
+							
+							Match m = new Match();
+							m.setChampionship(championship);
+							m.setTeam1(ganadorPartido1);
+							m.setTeam2(ganadorPartido2);
+							this.matchService.save(m);
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+							
+							
+						}else {
+							Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+							model.addAttribute("matches", matches);
+							model.addAttribute("deporte", sportId);
+							model.addAttribute("championship", championshipId);
+							model.addAttribute("nocoinc", true);
+							model.addAttribute("championshipObj", championship);
+							return "matches/listMatch";
+						}
+						
+						
+					}else {
+						Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+						model.addAttribute("matches", matches);
+						model.addAttribute("deporte", sportId);
+						model.addAttribute("championship", championshipId);
+						model.addAttribute("nocoinc", true);
+						model.addAttribute("championshipObj", championship);
+						return "matches/listMatch";
+					}
+					
+					
+					
+					
+				}
+				
+				
+				
+				
+				else {
+					Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+					model.addAttribute("matches", matches);
+					model.addAttribute("deporte", sportId);
+					model.addAttribute("championship", championshipId);
+					model.addAttribute("yagenerada2", true);
+					model.addAttribute("championshipObj", championship);
+					return "matches/listMatch";
+				}
+				
+				
+				
+			}
+			else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("faltaresultados", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+				
+				
+				
+			} 
+			
+			}else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noParticipa", true);
+				model.addAttribute("championshipObj", championship);
+				return "matches/listMatch";
+			}
+		} else {
+			return "error-500";
+		}
+	}
+	
+	
+	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/date")
+	public String initAddDateMatch(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			@PathVariable("championshipId") final Integer championshipId, @PathVariable("matchId") final Integer matchId, Principal principal) {
+		
+		Integer listChampionships = this.championshipService.listChampionship().size();
+		Match match = this.matchService.findMatchById(matchId);
+		List<Usuario> participantes = new ArrayList<>();
+		participantes.addAll(match.getTeam1().getParticipants());
+		participantes.addAll(match.getTeam2().getParticipants());
+	
+		Usuario user = this.userService.findByUsername(principal.getName());
+		
+		boolean  participa = participantes.stream().anyMatch(p -> p.equals(user));
+		
+		if (championshipId > 0 && championshipId <= listChampionships) {
+			if(participa) {
+		
+			Championship championship = this.championshipService.findChampionshipId(championshipId);
+			model.addAttribute("match", match);
+			model.addAttribute("championshipObj", championship);
+			return "matches/addDateForm";
+			}else {
+				Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
+
+				model.addAttribute("matches", matches);
+				model.addAttribute("deporte", sportId);
+				model.addAttribute("championship", championshipId);
+				model.addAttribute("noParticipaDate", true);
+				return "matches/listMatch";
+			}
+		} else {
+			return "error-500";
+		}
+	}
+	
+	@PostMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/date")
+	public String postAddDateMatch(@Valid final Match match, final BindingResult result, final ModelMap model,
+			@PathVariable("sportId") final Integer sportId,
+			@PathVariable("championshipId") final Integer championshipId, @PathVariable("matchId") final Integer matchId, final Errors errors) {
+
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
+
+		if (match.getDateTime() != null) {
+			if (LocalDate.of(match.getDateTime().getYear(), match.getDateTime().getMonth(),
+					match.getDateTime().getDayOfMonth()).isBefore(championship.getStartDate())) {
+				errors.rejectValue("dateTime", "La fecha debe ser posterior a la de inicio del torneo.",
+						"La fecha debe ser posterior a la de inicio del torneo.");
+			} else if (LocalDate.of(match.getDateTime().getYear(), match.getDateTime().getMonth(),
+					match.getDateTime().getDayOfMonth()).isAfter(championship.getFinishDate())) {
+				errors.rejectValue("dateTime", "La fecha debe ser anterior a la de fin del torneo.",
+						"La fecha debe ser anterior a la de fin del torneo.");
+			} else if (match.getDateTime().isBefore(LocalDateTime.now())) {
+				errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.",
+						"La fecha debe ser posterior a la actual.");
+			} 
+		}
+
+		if (!result.hasErrors()) {
+			Match matchToUpdate = this.matchService.findMatchById(matchId);
+			BeanUtils.copyProperties(match, matchToUpdate, "id", "team1", "team2","championship", "puntos1", "puntos2", "puntos3", "puntos4");
+			this.matchService.save(matchToUpdate);
+			return "redirect:/sports/" + sportId + "/championships/" + championshipId + "/matches";
+		} else {
+			model.addAttribute("championshipObj", championship);
+			model.put("championship", championshipId);
+			List<Team> equipos = (List<Team>) this.matchService.findTeams(championshipId);
+			model.addAttribute("equipos", equipos);
+			return "matches/addDateForm";
+		}
 	}
 
 }

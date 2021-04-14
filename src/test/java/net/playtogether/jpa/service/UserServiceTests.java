@@ -64,7 +64,7 @@ public class UserServiceTests {
 	@Test
 	void shouldFindAllUsers() throws Exception {
 		Collection<User> users = this.userService.findAll();
-		Assertions.assertThat(users.size()).isEqualTo(4);
+		Assertions.assertThat(users.size()).isEqualTo(19);
 
 	}
 
