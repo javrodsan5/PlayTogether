@@ -84,11 +84,11 @@ INSERT INTO statistics(id, sport_id, user_id) VALUES(2, 2, 2);
 
 INSERT INTO pay_type(id, name) VALUES(1, 'Premium');
 INSERT INTO pay_type(id, name) VALUES(2, 'Championship');
+INSERT INTO pay_type(id, name) VALUES(3, 'Invitation');
 
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(1, 2.0, '2021/01/16 11:45:00', 2, 8, 8, 3);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(2, 5.0, '2021/01/16 11:45:00', 1, null, 1, 1);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id) VALUES(3, 5.0, '2021/04/07 12:15:00', 1, null, 1, 2);
-
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(1, 2.0, '2021/01/16 11:45:00', 2, 8, 8, 3, null);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(2, 5.0, '2021/01/16 11:45:00', 1, null, 1, 1, null);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(3, 5.0, '2021/04/07 12:15:00', 1, null, 1, 2, null);
 
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(8, 3);
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 1);

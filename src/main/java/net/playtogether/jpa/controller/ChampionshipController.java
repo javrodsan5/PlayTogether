@@ -416,7 +416,7 @@ public class ChampionshipController {
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			Boolean isPremium = authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"));
 			if (!isPremium && pay == null) {
-				return "redirect:/pay/championship/" + championshipId + "/team/" + teamId;
+				return "redirect:/pay/championship/" + championshipId + "/team/" + teamId + "?invitationId=";
 			} else {
 				if (participants.contains(user)) {
 					return "redirect:/sports/" + sportId + "/championships/" + championshipId;
