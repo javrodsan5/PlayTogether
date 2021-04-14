@@ -169,4 +169,21 @@ public class UsuarioController {
 
 		return "users/meetingsRecord";
 	}
+	
+	@GetMapping("/clasification")
+	public String usersClasification(ModelMap model, Principal principal) {
+		List<Usuario> topUsuarios = usuarioService.findTopUsuarios().stream().limit(10).collect(Collectors.toList());
+		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
+		Integer posicion = 0;
+		for(int i = 0; i< topUsuarios.size(); i++) {
+			if(topUsuarios.get(i).equals(usuario)) {
+				posicion = i+1;
+				break;
+			}
+		}
+		model.addAttribute("puntos", usuario.getPuntos());
+		model.addAttribute("posicion", posicion);
+		model.addAttribute("topUsuarios", topUsuarios);
+		return "users/clasification";
+	}
 }

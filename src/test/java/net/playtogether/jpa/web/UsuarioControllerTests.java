@@ -274,4 +274,15 @@ public class UsuarioControllerTests {
 				.andExpect(MockMvcResultMatchers.model().attributeExists("meetings"));
 
 	}
+	
+	// Test de clasificación de usuarios
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getClasification() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clasification"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/clasification"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("topUsuarios"));
+
+	}
 }
