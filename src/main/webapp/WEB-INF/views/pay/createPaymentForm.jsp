@@ -141,7 +141,7 @@
 			<div class="crearMeeting">
 				<form:form style="background-color: white" commandName="order"
 					modelAttribute="order" method="post"
-					action="/pay?championshipId=${championshipId}&teamId=${teamId}&teamName=${teamName}&newChampionship=${newChampionship}">
+					action="/pay?championshipId=${championshipId}&teamId=${teamId}&teamName=${teamName}&newChampionship=${newChampionship}&invitationId=${invitationId}&isInvitation=${isInvitation}">
 					<div>
 						<form:input type="hidden" path="price" />
 						<form:input type="hidden" path="currency" />

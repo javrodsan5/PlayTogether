@@ -17,27 +17,23 @@
 
 			<br />
 		</div>
-		<h1>
-			Tu posición:
-			<c:out value="${posicion}" />º
-		</h1>
-		<h1>
-			Tienes
-			<c:out value="${puntos}" />
-			puntos
-		</h1>
+
 		<div class="cardlist">
 			<table class="table ">
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 20%;">Usuario</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Nombre</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Nombre
+							de usuario</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Puntos</th>
-						<th class="guiz-awards-header-title" style="width: 20 !important%"></th>
+						<th class="guiz-awards-header-title" style="width: 20%">Detalles
+							del jugador</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${topUsuarios}" var="usuario">
 						<tr class="rowtable">
+							<td><c:out value="${usuario.name}" /></td>
 							<td><c:out value="${usuario.user.username}" /></td>
 							<td><c:out value="${usuario.puntos}" /></td>
 							<td><spring:url value="/usuarios/{usuarioId}"
@@ -45,7 +41,7 @@
 									<spring:param name="usuarioId" value="${usuario.id}" />
 
 								</spring:url>
-								<div class="botoncito">
+								<div class="boto">
 									<a class="" href="${fn:escapeXml(usuario2Url)}">Ver
 										detalles</a>
 								</div></td>

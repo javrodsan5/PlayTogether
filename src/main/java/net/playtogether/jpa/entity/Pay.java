@@ -44,5 +44,8 @@ public class Pay extends BaseEntity {
     @JoinColumn(name = "team_id")
     private Team team;
 
+    @Column(name = "invitation_id")
+    private Integer invitationId;
+
     
 }

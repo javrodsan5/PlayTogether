@@ -41,6 +41,9 @@
 				<c:if test="${loggedUserIsNotTheTeamOwner==true}">
 					<p>No puedes enviar invitaciones si no eres el creador del equipo</p>
 				</c:if>
+        <c:if test="${invited==true}">
+						<p>Se ha invitado al usuario</p>
+					</c:if>
 				
 				<form:form id="survey-form" action="/invitations/team/${teamId}/send_invitation" method="GET" style="padding:0rem 0rem; width:60%; margin-left:15%">
 					<center>
@@ -96,3 +99,4 @@
 			</div>
 	</body>
 </playtogether:layout>	
+
