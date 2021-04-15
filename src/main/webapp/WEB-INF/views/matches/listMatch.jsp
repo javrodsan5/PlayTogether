@@ -14,12 +14,7 @@
 <br/>
 </div>
 <div class="cardlist">
-<c:if test="${noUser}">
-	<p>No se encontró al usuario deseado.</p>
-</c:if>
-<c:if test="${noTeam}">
-	<p>¡No perteneces a este equipo!</p>
-</c:if>
+
 <table id="matchTable" class="table">
         <thead>
              <tr class="rowtable">
@@ -49,31 +44,37 @@
                      <td><c:out value="${match.team2.name}" /></td>
                      <td><c:out value="${match.puntos3}" /></td>
                   	<td><c:out value="${match.puntos4}" /></td>
-                  	<td><spring:url value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
+                  	 
+                  	<td><c:if test="${match.dateTime == null}">
+                  	<spring:url value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
                              var="date2Url">
                              <spring:param name="championshipId" value="${championship}" />
                              <spring:param name="deporte" value="${deporte}" />
                              <spring:param name="matchId" value="${match.id}" />
                          </spring:url>
                          <div class="botoncitores1"> <a href="${fn:escapeXml(date2Url)}">Añadir fecha realización</a></div>
-
+						</c:if>
+						<c:if test="${match.dateTime != null}">
+                  	<spring:url value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
+                             var="date2Url">
+                             <spring:param name="championshipId" value="${championship}" />
+                             <spring:param name="deporte" value="${deporte}" />
+                             <spring:param name="matchId" value="${match.id}" />
+                         </spring:url>
+                         <div class="botoncitores1"> <a href="${fn:escapeXml(date2Url)}">Modificar fecha realización</a></div>
+						</c:if>
 
                          </td>
                          </tr>
                          <tr>
                          <td>
                          <c:if test="${match.dateTime != null}">
+                      
+                  
                       <td><spring:url value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
                              var="result2Url">
                              <spring:param name="championshipId" value="${championship}" />
                              <spring:param name="deporte" value="${deporte}" />
-
-    
-        
-          
-        
-
-  
                             <spring:param name="matchId" value="${match.id}" />
                             <spring:param name="team" value="team1" />
                          </spring:url>
@@ -89,6 +90,8 @@
                          <div class="botoncitores2"> <a href="${fn:escapeXml(result2Url)}">Añadir resultados de Equipo 2</a></div>
                          </td>
                          </c:if>
+                         
+                       
                          </tr>
                          <tr>
                          <td>
@@ -108,10 +111,10 @@
 								&& match.puntos4 != null && match.puntos1 == match.puntos3 && match.puntos2 == match.puntos4}">
 		                			<c:choose>
 										<c:when test="${match.puntos1 > match.puntos2 && match.puntos3 > match.puntos4}">
-											<p> ¡Equipo 1 ganador! </p>
+											<p> ¡${match.team1.name}  ganador! </p>
 										</c:when>
 										<c:when test="${match.puntos1 < match.puntos2 && match.puntos3 < match.puntos4 }">
-											<p> ¡Equipo 2 ganador! </p>
+											<p> ¡${match.team2.name} ganador! </p>
 										</c:when>
 										<c:when test="${match.puntos1 == match.puntos2 && match.puntos3 == match.puntos4 }">
 											<p> ¡El resultado del partido no debe ser empate! </p>
@@ -130,34 +133,61 @@
 
      </table>
      </div>
+     
+      	<c:if test="${championshipObj.matches.size() == 0 }">
+     
      <spring:url value="/sports/{deporte}/championships/{championshipId}/match/generate1" var="dateUrl">
  	                         <spring:param name="deporte" value="${deporte}"/>
  	                         <spring:param name="championshipId" value="${championship}" />
  	                     </spring:url>
  	                     <div class="botoncitocrear">
  	<a id="createMatch"  href="${fn:escapeXml(dateUrl)}">Generar primera ronda partidos</a></div>
+ 	
+ 	</c:if>
+ 	
+ 	<c:if test="${  championshipObj.maxTeams == 4 && championshipObj.matches.size() ==2 || 
+ 					championshipObj.maxTeams == 8 && championshipObj.matches.size() ==4 ||
+ 					championshipObj.maxTeams == 16 && championshipObj.matches.size() == 8   }">
+ 	
  	<spring:url value="/sports/{deporte}/championships/{championshipId}/match/generate2" var="dateUrl">
  	                         <spring:param name="deporte" value="${deporte}"/>
  	                         <spring:param name="championshipId" value="${championship}" />
  	                     </spring:url>
  	                     <div class="botoncitocrear">
  	<a id="createMatch"  href="${fn:escapeXml(dateUrl)}">Generar segunda ronda partidos</a></div>
+ 	
+ 		</c:if>
+ 	
  <c:if test="${championshipObj.maxTeams>4}">
+ 	<c:if test="${	
+ 					championshipObj.maxTeams == 8 && championshipObj.matches.size() == 6 ||
+ 					championshipObj.maxTeams == 16 && championshipObj.matches.size() == 12	}">
  	<spring:url value="/sports/{deporte}/championships/{championshipId}/match/generate3" var="dateUrl">
  	                         <spring:param name="deporte" value="${deporte}"/>
  	                         <spring:param name="championshipId" value="${championship}" />
  	                     </spring:url>
  	                     <div class="botoncitocrear">
  	<a id="createMatch"  href="${fn:escapeXml(dateUrl)}">Generar tercera ronda partidos</a></div>
+ 	</c:if>
+ 	
+ 
+ 	
  	<c:if test="${championshipObj.maxTeams>8}">
+ 		<c:if test="${	championshipObj.maxTeams == 16 && championshipObj.matches.size() == 14	}">
  	<spring:url value="/sports/{deporte}/championships/{championshipId}/match/generate4" var="dateUrl">
  	                         <spring:param name="deporte" value="${deporte}"/>
  	                         <spring:param name="championshipId" value="${championship}" />
  	                     </spring:url>
  	                     <div class="botoncitocrear">
  	<a id="createMatch"  href="${fn:escapeXml(dateUrl)}">Generar cuarta ronda partidos</a></div>
+ 		</c:if>
  			</c:if>
  	</c:if>
+ 	
+ 	
+ 	
+ 	
+ 	
  	<div class="form-group">
 
  	<c:if test="${noParticipa}">
@@ -202,6 +232,16 @@
  	<c:if test="${notercera}">
  	<p>¡Aún no se ha generado la tercera ronda!</p>
  </c:if>
+ <c:if test="${noUser}">
+	<p>No se encontró al usuario deseado.</p>
+</c:if>
+<c:if test="${noTeam}">
+	<p>¡No perteneces a este equipo!</p>
+</c:if>
+<c:if test="${faltaParticipantes}">
+	<p>¡Los equipos no están completos (Faltan jugadores)!</p>
+</c:if>
+
 
 
  						<button class="botonMeeting" style="display:block; font-size: 0.8em; width: 17%; " onclick="location.href='/sports/${deporte}/championships/${championship}';" type="button">
