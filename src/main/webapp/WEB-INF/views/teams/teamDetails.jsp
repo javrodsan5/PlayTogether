@@ -20,8 +20,8 @@
 			<table id="championshipTable" class="table ">
 
 				<h2>
-					Lista de componentes del equipo (
-					<c:out value="${team.teamSize}" />
+					Lista de componentes del equipo (Nº participantes: 
+					<c:out value="${team.participants.size()}" />
 					)
 				</h2>
 				<thead>

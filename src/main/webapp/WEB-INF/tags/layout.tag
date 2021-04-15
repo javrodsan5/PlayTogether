@@ -16,8 +16,10 @@
 </div>
 <body>
 	<sec:authorize access="!hasAuthority('premium')">
+	<c:if test="${pageName!='welcome'}">
 
 		<playtogether:banner></playtogether:banner>
+		</c:if>
 	</sec:authorize>
 	<playtogether:bodyHeader menuName="${pageName}" />
 
@@ -35,5 +37,6 @@
 	<a class="navbar-brand"><img style="display: inline-block"
 		src="/images/logo_opt.png" alt="Logo app"></a> <b><i
 		style="display: inline-block" class="title_logo">PlayTogether</i></b>
+	<a href="/about-us" style="padding-left: 200px; display: inline-block; color: white"><b>Acerca de nosotros</b></a>
 </footer>
 </html>

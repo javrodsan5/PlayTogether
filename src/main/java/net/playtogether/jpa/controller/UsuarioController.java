@@ -91,6 +91,22 @@ public class UsuarioController {
 	public String userProfile(final ModelMap model, Principal principal) {
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
+		model.addAttribute("puntos",user.getPuntos());
+		Integer quedadas = user.getMeetings().size();
+		Integer torneos = user.getTeams().size();
+		int[] datos = {quedadas,torneos};
+		String datos1 = Arrays.toString(datos);
+		model.addAttribute("quedadasTorneos",datos1.replace(" ",""));
+		Calendar cal = Calendar.getInstance();
+		Integer year = cal.get(Calendar.YEAR);
+		List<Integer> quedadasPorMesList = this.usuarioService.findMeetingByMonth(user.getId(),year);
+		List<Integer> torneosPorMesList = this.usuarioService.findChampionshipByMonth(user.getId(),year);
+		int[] quedadasPorMes = getEventoPorMes(quedadasPorMesList);
+		int[] torneosPorMes = getEventoPorMes(torneosPorMesList);
+		String datos2 = Arrays.toString(quedadasPorMes);
+		String datos3 = Arrays.toString(torneosPorMes);
+		model.addAttribute("quedadasPorMes",datos2.replace(" ",""));
+		model.addAttribute("torneosPorMes",datos3.replace(" ",""));
 		return "users/userProfile";
 	}
 

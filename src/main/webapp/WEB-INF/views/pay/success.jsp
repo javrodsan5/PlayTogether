@@ -9,9 +9,11 @@
 
 <playtogether:layout pageName="pay">
 		<center>
-		<h1 style= "font-size: 75px">¡GRACIAS!</h1>
+		<h1 style= "font-size: 65px">¡GRACIAS!</h1>
 		<i class="fa fa-check success" style="font-size: 10rem"></i>
 		<br>
-		<h3>¡Sólo un paso más! Cierre e inicie sesión para disfrutar de sus nuevas ventajas.</h3>
+		<div class="alert alert-warning" style="margin: 0% 20% 5% 20%">
+			<h3>¡Sólo un paso más! <a href="/logout">Cierre</a> e inicie sesión para disfrutar de sus nuevas ventajas.</h3>
+		</div>
 	</center>
 </playtogether:layout>
