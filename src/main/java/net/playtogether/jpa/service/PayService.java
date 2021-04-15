@@ -1,6 +1,5 @@
 package net.playtogether.jpa.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -64,7 +63,12 @@ public class PayService {
     }
     
     @Transactional
-    public Pay findLastPayByUsernamePremium(String username) {
+    public List<Pay> findLastPayByUsernamePremium(String username) {
         return this.payRepository.findLastPayByUsernamePremium(username);
+    }
+
+    @Transactional
+    public Pay findById(Integer id) {
+        return this.payRepository.findById(id).orElse(null);
     }
 }

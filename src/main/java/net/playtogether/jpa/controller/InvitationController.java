@@ -232,7 +232,7 @@ public class InvitationController {
             
             Usuario usuario = invitation.getReceiver();
 		        usuario.setPuntos(usuario.getPuntos() + 5); 
-		        this.userService.saveUsuario(usuario);
+		        this.userService.saveUsuarioAlreadyRegistered(usuario);
 		            
 						this.invitationService.delete(invitationId);
 						model.put("joined", true);
@@ -425,7 +425,7 @@ public class InvitationController {
 					
 					Usuario usuario = invitation.getReceiver();
 		            usuario.setPuntos(usuario.getPuntos() + 5); 
-		            this.userService.saveUsuario(usuario);
+		            this.userService.saveUsuarioAlreadyRegistered(usuario);
 		            
 					
 					this.invitationService.delete(invitationId);

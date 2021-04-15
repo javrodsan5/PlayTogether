@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import net.playtogether.jpa.entity.Authorities;
 
-public interface AuthoritiesRepository extends  CrudRepository<Authorities, String>{
+public interface AuthoritiesRepository extends  CrudRepository<Authorities, Integer>{
 	
 	@Query("select a from Authorities a where a.user.username=?1")
 	public List<Authorities> findByUsername(String username);

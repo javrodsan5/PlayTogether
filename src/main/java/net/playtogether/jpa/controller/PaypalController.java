@@ -35,6 +35,8 @@ import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.PayTypeService;
 import net.playtogether.jpa.service.PaypalService;
+import net.playtogether.jpa.service.UserLoginService;
+import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
@@ -60,6 +62,12 @@ public class PaypalController {
 
 	@Autowired
 	private InvitationService invitationService;
+
+	@Autowired
+	private UserTypeService userTypeService;
+
+	@Autowired
+	private UserLoginService userLoginService;
 
 	public static final String SUCCESS_URL = "pay/success";
 	public static final String CANCEL_URL = "pay/cancel";
@@ -150,12 +158,11 @@ public class PaypalController {
 		order.setPrice(5);
 		order.setDescription("Pago por premium.");
 		if (principal != null) {
-
-			List<Authorities> au = this.authoritiesService.findByUsername(principal.getName());
-			if (au.stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			Boolean isPremium = authentication.getAuthorities().contains(new SimpleGrantedAuthority("premium"));
+			if (isPremium) {
 				return "error-403";
 			}
-
 		} else {
 			return "redirect:/login";
 		}
@@ -241,10 +248,15 @@ public class PaypalController {
 				payService.save(pay);
 				if (pay.getPayType().getName().equals("Premium")) {
 					Usuario user = this.usuarioService.findByUsername(principal.getName());
-					Authorities au = new Authorities();
-					au.setAuthority("premium");
-					au.setUser(user.getUser());
-					this.authoritiesService.save(au);
+					user.setType(this.userTypeService.findUserTypeById(2)); //PREMIUM
+					this.usuarioService.saveUsuarioAlreadyRegistered(user);
+					if(!user.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+						Authorities au = new Authorities();
+						au.setAuthority("premium");
+						au.setUser(user.getUser());
+						this.authoritiesService.save(au);
+					}
+					this.userLoginService.loadUserByUsername(principal.getName());
 					return "pay/success";
 				} else if (pay.getTeam() == null) {
 					return "redirect:/sports/" + pay.getChampionship().getSport().getId() + "/championships/"

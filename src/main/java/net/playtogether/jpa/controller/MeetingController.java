@@ -90,7 +90,7 @@ public class MeetingController {
 			meeting.setCreationDate(LocalDate.now());
 			meetingService.save(meeting);
 			usuario.setPuntos(usuario.getPuntos()+7);
-			usuarioService.saveUsuario(usuario);
+			usuarioService.saveUsuarioAlreadyRegistered(usuario);
 		
 			return "redirect:/sports/" + sportId + "/meetings";
 		}
@@ -179,7 +179,7 @@ public class MeetingController {
 			this.meetingService.save(meeting);
 			
 			u.setPuntos(u.getPuntos()+5);
-			usuarioService.saveUsuario(u);
+			usuarioService.saveUsuarioAlreadyRegistered(u);
 
 		}
 

@@ -12,6 +12,6 @@
 		<h1 style= "font-size: 75px">¡GRACIAS!</h1>
 		<i class="fa fa-check success" style="font-size: 10rem"></i>
 		<br>
-		<h4>Disfrute de su plan premium.</h4>
+		<h3>¡Sólo un paso más! Cierre e inicie sesión para disfrutar de sus nuevas ventajas.</h3>
 	</center>
 </playtogether:layout>

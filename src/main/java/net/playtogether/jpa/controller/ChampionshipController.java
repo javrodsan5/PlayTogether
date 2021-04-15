@@ -455,7 +455,7 @@ public class ChampionshipController {
 					team.setParticipants(participants);
 					this.championshipService.save(team);
 					user.setPuntos(user.getPuntos() + 5);
-					userService.saveUsuario(user);
+					userService.saveUsuarioAlreadyRegistered(user);
 
 					return "redirect:/sports/" + sportId + "/championships/" + championshipId;
 				}

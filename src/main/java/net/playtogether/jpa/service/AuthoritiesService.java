@@ -57,12 +57,11 @@ public class AuthoritiesService {
 	@Transactional
 	public void save(Authorities au) {
 		this.authoritiesRepository.save(au);
-		
 	}
 	
 	@Transactional
-	public void delete(Authorities au) {
-		this.authoritiesRepository.delete(au);
+	public void delete(Integer id) {
+		this.authoritiesRepository.deleteById(id);
 		
 	}
 	
