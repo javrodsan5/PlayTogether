@@ -21,34 +21,29 @@
 			<table id="userChampionshipTable" class="table ">
 				<thead>
 					<tr class="rowtable">
+						<th class="guiz-awards-header-title" style="width: 20%;">Torneo</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Ciudad</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Fecha
 							Inicio</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Fecha
 							Fin</th>
-						<th class="guiz-awards-header-title" style="width: 20 !important%"></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${championships}" var="championship">
+						<spring:url
+								value="/sports/{sportId}/championships/{championshipId}"
+								var="championshipDetail2Url">
+							<spring:param name="sportId"
+									value="${championship.sport.id}" />
+							<spring:param name="championshipId"
+									value="${championship.id}" />
+						</spring:url>
 						<tr class="rowtable">
+							<td><a href="${fn:escapeXml(championshipDetail2Url)}"><b>${championship.name}</b></a></td>
 							<td><c:out value="${championship.city}" /></td>
-							<td><c:out value="${championship.description}" /></td>
 							<td><c:out value="${championship.startDate}" /></td>
 							<td><c:out value="${championship.finishDate}" /></td>
-							<td><spring:url
-									value="/sports/{deporte}/championships/{championshipId}"
-									var="championship2Url">
-									<spring:param name="championshipId" value="${championship.id}" />
-									<spring:param name="deporte" value="${championship.sport.id}" />
-
-								</spring:url>
-								<div class="botoncito">
-									<a class="" href="${fn:escapeXml(championship2Url)}">Ver
-										más</a>
-								</div></td>
-
 						</tr>
 					</c:forEach>
 				</tbody>
