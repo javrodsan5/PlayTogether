@@ -63,42 +63,40 @@
 							</div>
 						</div>
 						<td><spring:url value="/myprofile/{usuarioId}/edit"
-	                            var="editUser2Url">
-	                            <spring:param name="usuarioId" value="${user.id}" />
-	                 
-	                        </spring:url><a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a></td>
-				
-				
-						
-						<a href="/invitations/championshipInvitations" class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
-						
-						<a href="/invitations/meetingInvitations" class="btn btn-primary">Ver invitaciones a quedadas</a>
-						
-						<td><spring:url value="/myprofile/{usuarioId}/championshipsRecord"
-	                            var="championshipRecord2Url">
-	                            <spring:param name="usuarioId" value="${user.id}" />
-	                 
-	                        </spring:url> <a class="btn btn-primary" href="${fn:escapeXml(championshipRecord2Url)}">Historial de torneos</a></div></td>
-	                        
-	                       
+								var="editUser2Url">
+								<spring:param name="usuarioId" value="${user.id}" />
 
 							</spring:url><a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a></td>
 
 
 
 						<a href="/invitations/championshipInvitations"
-							class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
+							class="btn btn-primary">Ver invitaciones a equipo de torneo</a> <a
+							href="/invitations/meetingInvitations" class="btn btn-primary">Ver
+							invitaciones a quedadas</a>
 
-						<td><spring:url value="/myprofile/championshipsRecord"
+						<td><spring:url
+								value="/myprofile/{usuarioId}/championshipsRecord"
 								var="championshipRecord2Url">
+								<spring:param name="usuarioId" value="${user.id}" />
+
 							</spring:url> <a class="btn btn-primary"
 							href="${fn:escapeXml(championshipRecord2Url)}">Historial de
 								torneos</a>
 					</div>
-					</td>
+					</td> <a href="/invitations/championshipInvitations"
+						class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
 
+					<td><spring:url value="/myprofile/championshipsRecord"
+							var="championshipRecord2Url">
+						</spring:url> <a class="btn btn-primary"
+						href="${fn:escapeXml(championshipRecord2Url)}">Historial de
+							torneos</a>
 				</div>
+				</td>
+
 			</div>
+		</div>
 		</div>
 	</body>
 
