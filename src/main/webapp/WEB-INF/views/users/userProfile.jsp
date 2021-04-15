@@ -85,14 +85,12 @@
 								torneos</a>
 							
 					</div>
-					</td>
 
 					</div>
 				</div>
 
 
 			</div>
-		</div>
 	</body>
 
 
