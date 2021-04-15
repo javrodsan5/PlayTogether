@@ -66,6 +66,15 @@ public class UsuarioService {
 	}
 	
 	@Transactional(readOnly=true)
+	public List<Integer>findMeetingByMonth(Integer id, Integer year){
+		return usuarioRepository.findMeetingByMonth(id,year);
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Integer>findChampionshipByMonth(Integer id, Integer year){
+		return usuarioRepository.findChampionshipByMonth(id,year);
+	}
+
 	public List<Usuario> findTopUsuarios(){
 		return usuarioRepository.findTopUsuarios();
 	}

@@ -1,7 +1,8 @@
 package net.playtogether.jpa.controller;
 
 import java.security.Principal;
-
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -152,6 +153,76 @@ public class UsuarioController {
 		model.addAttribute("meetings", meetings);
 
 		return "users/meetingsRecord";
+	}
+	
+	@GetMapping(value = "/myprofile/stats")
+	public String getStats(ModelMap model,Principal principal) {
+		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
+		model.addAttribute("puntos",usuario.getPuntos());
+		Integer quedadas = usuario.getMeetings().size();
+		Integer torneos = usuario.getTeams().size();
+		int[] datos = {quedadas,torneos};
+		String datos1 = Arrays.toString(datos);
+		model.addAttribute("quedadasTorneos",datos1.replace(" ",""));
+		Calendar cal = Calendar.getInstance();
+		Integer year = cal.get(Calendar.YEAR);
+		List<Integer> quedadasPorMesList = this.usuarioService.findMeetingByMonth(usuario.getId(),year);
+		List<Integer> torneosPorMesList = this.usuarioService.findChampionshipByMonth(usuario.getId(),year);
+		int[] quedadasPorMes = getEventoPorMes(quedadasPorMesList);
+		int[] torneosPorMes = getEventoPorMes(torneosPorMesList);
+		String datos2 = Arrays.toString(quedadasPorMes);
+		String datos3 = Arrays.toString(torneosPorMes);
+		model.addAttribute("quedadasPorMes",datos2.replace(" ",""));
+		model.addAttribute("torneosPorMes",datos3.replace(" ",""));
+		return "users/charts";
+	}
+	
+	public int[] getEventoPorMes(List<Integer> eventoList) {
+		int contadorEnero=0;
+		int contadorFebrero=0;
+		int contadorMarzo=0;
+		int contadorAbril=0;
+		int contadorMayo=0;
+		int contadorJunio=0;
+		int contadorJulio=0;
+		int contadorAgosto=0;
+		int contadorSeptiembre=0;
+		int contadorOctubre=0;
+		int contadorNoviembre=0;
+		int contadorDiciembre=0;
+		
+		for (Integer i:eventoList) {
+			System.out.println(i);
+		    if(i==1) {
+		    	contadorEnero++;
+		    }else if(i==2) {
+		    	contadorFebrero++;
+		    }else if(i==3) {
+		    	contadorMarzo++;
+		    }else if(i==4) {
+		    	contadorAbril++;
+		    }else if(i==5) {
+		    	contadorMayo++;
+		    }else if(i==6) {
+		    	contadorJunio++;
+		    }else if(i==7) {
+		    	contadorJulio++;
+		    }else if(i==8) {
+		    	contadorAgosto++;
+		    }else if(i==9) {
+		    	contadorSeptiembre++;
+		    }else if(i==10) {
+		    	contadorOctubre++;
+		    }else if(i==11) {
+		    	contadorNoviembre++;
+		    }else if(i==12) {
+		    	contadorDiciembre++;
+		    }
+		}
+		
+		int[] arr =  {contadorEnero,contadorFebrero,contadorMarzo,contadorAbril,contadorMayo,contadorJunio,contadorJulio,contadorAgosto,contadorSeptiembre,contadorOctubre,contadorNoviembre,contadorDiciembre};
+		
+		return arr;
 	}
 
 	@GetMapping("/clasification")

@@ -78,7 +78,11 @@
 						</spring:url>
 						<a class="btn btn-primary"
 							href="${fn:escapeXml(championshipRecord2Url)}">Historial de
-							torneos</a>
+								torneos</a>
+							<a href="/myprofile/stats"
+							class="btn btn-primary">Ver estadísticas</a>
+					</div>
+					</td>
 
 					</div>
 				</div>
