@@ -18,7 +18,8 @@
 		<img class="logoLanding" src="<s:url value="/images/logo.png" />" />
 		<h1>Descripción del proyecto</h1>
 		<div class="divLandingPage">
-			<p>El objetivo principal del proyecto es desarrollar un sistema
+			<p style="text-align: justify; text-justify: inter-word">
+				El objetivo principal del proyecto es desarrollar un sistema
 				de información que permita a los usuarios encontrar personas con
 				gustos similares a estos en relación a la actividad física y poder
 				realizar encuentros para practicar deporte conjuntamente u organizar
@@ -72,7 +73,8 @@
 			<div class="divInicial">
 				<h1>¿Quiénes somos?</h1>
 				<div>
-					<p>Somos un equipo formado por 12 personas con distintas
+					<p style="text-align: justify; text-justify: inter-word">
+						Somos un equipo formado por 12 personas con distintas
 						habilidades en el ámbito de la programación, cuyo Project Manager
 						es Javier Rodríguez Santiago y que está subdividido en dos equipos
 						diferentes: Un subequipo formado por 6 personas especializado en
@@ -118,7 +120,6 @@
 						<p>Programador</p>
 					</div>
 				</div>
-				<h1>Equipo FrontEnd</h1>
 				<div class="row">
 					<div class="column">
 						<img class="logoInicial" src="/images/manuelCircle.png"
@@ -138,26 +139,28 @@
 						<p>Pablo Cubero Cruz</p>
 						<p>Analista</p>
 					</div>
-					<div class="column">
-						<img class="logoInicial" src="/images/conchiCircle.png"
-							alt="Concepción">
-						<p>Concepción Márquez Redondo</p>
-						<p>Programadora</p>
-					</div>
-					<div class="column">
-						<img class="logoInicial" src="/images/fernandoCircle.png"
-							alt="Fernando">
-						<p>Fernando Calvo Durán</p>
-						<p>Programador</p>
-					</div>
-					<div class="column">
-						<img class="logoInicial" src="/images/pabloCircle.png"
-							alt="PabloG">
-						<p>Pablo García Cerrejón</p>
-						<p>Programador</p>
-					</div>
 				</div>
-			</div>
+				<h1>Equipo FrontEnd</h1>
+					<div class="row">
+						<div class="column">
+							<img class="logoInicial" src="/images/conchiCircle.png"
+								alt="Concepción">
+							<p>Concepción Márquez Redondo</p>
+							<p>Programadora</p>
+						</div>
+						<div class="column">
+							<img class="logoInicial" src="/images/fernandoCircle.png"
+								alt="Fernando">
+							<p>Fernando Calvo Durán</p>
+							<p>Programador</p>
+						</div>
+						<div class="column">
+							<img class="logoInicial" src="/images/pabloCircle.png"
+								alt="PabloG">
+							<p>Pablo García Cerrejón</p>
+							<p>Programador</p>
+						</div>
+					</div>
 			<%-- <h1>¿Te interesa la aplicación? Introduce aquí tu correo</h1>
 <div class="correo">
 <form:form action="/addUser" method="POST">
