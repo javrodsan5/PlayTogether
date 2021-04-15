@@ -67,7 +67,7 @@
 									value="${invitation.team.championship.id}" />
 							</spring:url>
 							<tr class="rowtable">
-								<td><a href="${fn:escapeXml(championshipDetail2Url)}">${invitation.team.championship.name}</a>
+								<td><a href="${fn:escapeXml(championshipDetail2Url)}"><b>${invitation.team.championship.name}</b></a></td>
 								<td><c:out value="${invitation.team.name}" /></td>
 								<td><c:out value="${invitation.team.user.user.username}" /></td>
 
