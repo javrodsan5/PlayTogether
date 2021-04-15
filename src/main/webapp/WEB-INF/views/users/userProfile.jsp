@@ -62,13 +62,11 @@
 								</h4>
 							</div>
 						</div>
-						<td><spring:url value="/myprofile/{usuarioId}/edit"
+						<td>
+						<spring:url value="/myprofile/{usuarioId}/edit"
 								var="editUser2Url">
 								<spring:param name="usuarioId" value="${user.id}" />
-
-							
-
-
+								</spring:url>
 
 						<a href="/invitations/championshipInvitations"
 							class="btn btn-primary">Ver invitaciones a equipo de torneo</a> <a

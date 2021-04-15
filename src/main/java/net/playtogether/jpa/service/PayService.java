@@ -63,4 +63,8 @@ public class PayService {
         this.payRepository.deleteAll(pays);
     }
     
+    @Transactional
+    public Pay findLastPayByUsernamePremium(String username) {
+        return this.payRepository.findLastPayByUsernamePremium(username);
+    }
 }

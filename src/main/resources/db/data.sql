@@ -3,6 +3,7 @@ INSERT INTO user_type VALUES(2, 'Premium');
 INSERT INTO user_type VALUES(3, 'Administrador');
 
 INSERT INTO users(username,password,enabled) VALUES ('antonio98','Usuar10',TRUE);
+INSERT INTO authorities(id,username,authority) VALUES (1,'antonio98','usuario');
 INSERT INTO authorities(id,username,authority) VALUES (2,'antonio98','premium');
 INSERT INTO users(username,password,enabled) VALUES ('fernando98','Usuar10',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (3,'fernando98','usuario');
@@ -136,8 +137,9 @@ INSERT INTO pay_type(id, name) VALUES(2, 'Championship');
 INSERT INTO pay_type(id, name) VALUES(3, 'Invitation');
 
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(1, 2.0, '2021/01/16 11:45:00', 2, 8, 8, 3, null);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(2, 5.0, '2021/01/16 11:45:00', 1, null, 1, 1, null);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(3, 5.0, '2021/04/07 12:15:00', 1, null, 1, 2, null);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(2, 5.0, '2021/01/16 11:45:00', 1, null, null, 1, null);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(3, 5.0, '2021/03/07 12:15:00', 1, null, null, 2, null);
+
 
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(8, 3);
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 1);
