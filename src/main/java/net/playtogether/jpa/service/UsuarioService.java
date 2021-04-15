@@ -52,7 +52,11 @@ public class UsuarioService {
 		usuarioRepository.save(usuario);
 		userService.saveUser(usuario.getUser());
 		authoritiesService.saveAuthorities(usuario.getUser().getUsername(), "usuario");
-		
+	}
+
+	@Transactional
+	public void saveUsuarioAlreadyRegistered(Usuario usuario) {
+		usuarioRepository.save(usuario);
 	}
 
 	@Transactional

@@ -62,6 +62,7 @@
 								</h4>
 							</div>
 						</div>
+
 						<spring:url value="/myprofile/{usuarioId}/edit" var="editUser2Url">
 							<spring:param name="usuarioId" value="${user.id}" />
 
