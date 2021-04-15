@@ -64,12 +64,16 @@
 						</div>
 						<spring:url value="/myprofile/{usuarioId}/edit" var="editUser2Url">
 							<spring:param name="usuarioId" value="${user.id}" />
-
 						</spring:url>
+						<a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a>
+
+						<a href="/myprofile/stats"
+							class="btn btn-primary">Ver estadísticas</a>
 
 						<a href="/invitations/championshipInvitations"
-							class="btn btn-primary">Ver invitaciones a equipo de torneo</a> <a
-							href="/invitations/meetingInvitations" class="btn btn-primary">Ver
+							class="btn btn-primary">Ver invitaciones a equipo de torneo</a> 
+							
+						<a href="/invitations/meetingInvitations" class="btn btn-primary">Ver
 							invitaciones a quedadas</a>
 
 						<spring:url value="/myprofile/championshipsRecord"
@@ -79,8 +83,7 @@
 						<a class="btn btn-primary"
 							href="${fn:escapeXml(championshipRecord2Url)}">Historial de
 								torneos</a>
-							<a href="/myprofile/stats"
-							class="btn btn-primary">Ver estadísticas</a>
+							
 					</div>
 					</td>
 
