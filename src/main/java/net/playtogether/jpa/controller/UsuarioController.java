@@ -152,20 +152,26 @@ public class UsuarioController {
 		}
 
 	}
-
+	
 	@GetMapping("/myprofile/championshipsRecord")
 	public String championshipsRecord(final ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Championship> championships = usuario.getTeams().stream().map(t -> t.getChampionship()).distinct()
 				.collect(Collectors.toList());
+		if (championships.size() <= 0) {
+			model.put("noRecords", true);
+		}
 		model.addAttribute("championships", championships);
 		return "users/championshipRecord";
 	}
-
+	
 	@GetMapping("/myprofile/meetingsRecord")
 	public String meetingsRecord(final ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Meeting> meetings = usuario.getMeetings().stream().limit(10).collect(Collectors.toList());
+		if (meetings.size() <= 0) {
+			model.put("noRecords", true);
+		}
 		model.addAttribute("meetings", meetings);
 
 		return "users/meetingsRecord";

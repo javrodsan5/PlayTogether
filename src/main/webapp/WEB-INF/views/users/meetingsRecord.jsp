@@ -17,6 +17,10 @@
 			<br />
 		</div>
 		<div class="cardlist">
+			<c:if test="${noRecords}">
+				<p>Todavía no has participado en ninguna quedada.</p>
+			</c:if>
+			<c:if test="${noRecords == null}">
 			<table id="userMeetingsTable" class="table ">
 				<thead>
 					<tr class="rowtable">
@@ -46,6 +50,7 @@
 				</tbody>
 
 			</table>
+			</c:if>
 		</div>
 	</body>
 	</html>

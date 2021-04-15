@@ -18,6 +18,10 @@
 
 		</div>
 		<div class="cardlist">
+		<c:if test="${noRecords}">
+			<p>Todavía no has participado en ningún torneo.</p>
+		</c:if>
+		<c:if test="${noRecords == null}">
 			<table id="userChampionshipTable" class="table ">
 				<thead>
 					<tr class="rowtable">
@@ -49,6 +53,7 @@
 				</tbody>
 
 			</table>
+			</c:if>
 		</div>
 	</body>
 	</html>

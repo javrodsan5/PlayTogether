@@ -17,6 +17,8 @@
 			<br/>
 		</div>
 		<div class="cardlist">
+				<c:if test="${userToDeleteIsTeamOwner}"><p>No se puede eliminar al creador del equipo</p></c:if>
+				<c:if test="${loggedUserIsNotTheTeamOwner}"><p>No tienes permisos para hacer esto.</p></c:if>
 			<table id="championshipTable" class="table ">
 
 				<h2>
@@ -42,9 +44,32 @@
 							<div class="boto">
 								<a href="${fn:escapeXml(userDetails)}">Ver detalles</a>
 							</div></td>
+							
+							<td><spring:url
+									value="/championships/{championshipId}/teams/{teamId}/{userId}/delete"
+									var="deleteUser">
+									<spring:param name="championshipId" value="${championship.id}" />
+									<spring:param name="teamId" value="${team.id}" />
+									<spring:param name="userId" value="${participant.id}" />
+								
+								</spring:url>
+								
+								<div class="boto">
+									<a href="${fn:escapeXml(deleteUser)}">Eliminar jugador</a>
+								</div></td>
 					</tr>
 				</c:forEach>
 			</table>
+			
+			<spring:url	value="/championships/{championshipId}/teams/{teamId}/leave" var="leaveTeam">
+				<spring:param name="championshipId" value="${championship.id}" />
+				<spring:param name="teamId" value="${team.id}" />
+			</spring:url>
+					
+			<div class="boto">
+				<c:if test="${leave}"><a href="${fn:escapeXml(leaveTeam)}">Abandonar equipo</a></c:if>
+			</div>
+					
 			<table id="championshipTable" class="table ">
 				<h2>Lista de partidos del equipo</h2>
 				<thead>
