@@ -42,11 +42,9 @@ INSERT INTO authorities(id,username,authority) VALUES (19,'antonio14','premium')
 INSERT INTO users(username,password,enabled) VALUES ('antonio15','Usuar10',TRUE);
 INSERT INTO authorities(id,username,authority) VALUES (20,'antonio15','premium');
 
-
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(1, 'Antonio', '1999-02-20', 'antonio@gmail.com', '654893274', 1, 0,'antonio98');
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(2, 'Fernando', '1995-07-06', 'fernando1@gmail.com', '635897412', 2, 10,'fernando98');
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(3, 'Marta', '1992-03-25', 'marta1@gmail.com', '954785123', 1, 0,'marta98');
-
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(4, 'Antonio', '1999-02-20', 'antonio1@gmail.com', '654893270', 2,0,'antonio01');
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(5, 'Antonio', '1999-02-20', 'antonio2@gmail.com', '654893271', 2,0,'antonio02');
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(6, 'Antonio', '1999-02-20', 'antonio3@gmail.com', '654893272', 2,0,'antonio03');
@@ -62,7 +60,6 @@ INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, usernam
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(16, 'Antonio', '1999-02-20', 'antonio13@gmail.com', '654893234', 2,0,'antonio13');
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(17, 'Antonio', '1999-02-20', 'antonio14@gmail.com', '654893244', 2,0,'antonio14');
 INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(18, 'Antonio', '1999-02-20', 'antonio15@gmail.com', '654893254', 2,0,'antonio15');
-
 
 INSERT INTO sport_type(id, name) VALUES(1, 'Equipo');
 INSERT INTO sport_type(id, name) VALUES(2, 'Individual');

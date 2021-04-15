@@ -26,5 +26,10 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Integer> {
 
 	@Query("SELECT u FROM Usuario u where u.phone = ?1")
 	Optional<Usuario> findUsuarioByPhone(String telefono);
-
+	
+	@Query("SELECT MONTH(date) FROM Meeting m WHERE m.meetingCreator.id=?1 AND YEAR(m.date)=?2")
+	List<Integer> findMeetingByMonth(Integer id,Integer year);
+	
+	@Query("SELECT MONTH(startDate) FROM Championship c WHERE c.user.id=?1 AND YEAR(c.startDate)=?2")
+	List<Integer> findChampionshipByMonth(Integer id,Integer year);
 }

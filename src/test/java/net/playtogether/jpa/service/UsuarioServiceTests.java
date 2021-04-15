@@ -3,6 +3,7 @@ package net.playtogether.jpa.service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -121,6 +122,20 @@ public class UsuarioServiceTests {
 	@Test
 	void shouldFindUsuarioWithIncorrectPhone() throws Exception {
 		Assertions.assertThat(this.usuarioService.checkPhoneExists("458943894")).isEqualTo(false);
+	}
+	
+	//CHECK FIND MEETING BY USER ID AND YEAR
+	@Test
+	void shouldFindMeetingByIdUserAndYear() throws Exception {
+		List<Integer> meetings = this.usuarioService.findMeetingByMonth(1, 2021);
+		Assertions.assertThat(meetings.size()).isEqualTo(3);
+	}
+	
+	//CHECK FIND CHAMPIONSHIPS BY USER ID AND YEAR
+	@Test
+	void shouldFindChampionShipByIdUserAndYear() throws Exception {
+		List<Integer> championship = this.usuarioService.findChampionshipByMonth(1, 2021);
+		Assertions.assertThat(championship.size()).isEqualTo(6);
 	}
 
 }

@@ -267,6 +267,39 @@ public class UsuarioControllerTests {
 
 	}
 	
+	// Test de GetMapping de estadisticas de un usuario quedadas y torneos
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getStatsQuedadasyTorneos() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("quedadasTorneos"));
+
+	}
+	
+	// Test de GetMapping de estadisticas de un usuario en quedadas por mes
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getStatsQuedadasPorMes() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("quedadasPorMes"));
+
+	}
+	
+	// Test de GetMapping de estadisticas de un usuario en torneos por mes
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getStatsTorneoPorMes() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("torneosPorMes"));
+
+	}
+	
 	// Test de clasificación de usuarios
 	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
 	@Test
