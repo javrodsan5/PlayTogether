@@ -63,13 +63,13 @@
 			<sec:authentication property="principal.username" var="principal" />
 				<li
 					class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
-					<a class="nav-link" href="/principal/${principal}"> Perfil <i
+					<a class="nav-link" href="/myprofile"> Perfil <i
 						class="fa fa-user"></i></a>
 						
 				</li>
 				<li
 					class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}">
-					<a class="nav-link" href="/principal/${principal}"><i
+					<a class="nav-link" href="/myprofile"><i
 						class="fa fa-user"></i></a>
 				</li>
 				<li
