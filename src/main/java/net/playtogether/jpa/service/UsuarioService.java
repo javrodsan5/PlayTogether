@@ -64,6 +64,16 @@ public class UsuarioService {
 	public List<Usuario>findAll(){
 		return usuarioRepository.findAll();
 	}
+	
+	@Transactional(readOnly=true)
+	public List<Integer>findMeetingByMonth(Integer id, Integer year){
+		return usuarioRepository.findMeetingByMonth(id,year);
+	}
+	
+	@Transactional(readOnly=true)
+	public List<Integer>findChampionshipByMonth(Integer id, Integer year){
+		return usuarioRepository.findChampionshipByMonth(id,year);
+	}
 
 	
 	
