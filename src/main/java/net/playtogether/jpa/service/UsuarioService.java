@@ -75,6 +75,9 @@ public class UsuarioService {
 		return usuarioRepository.findChampionshipByMonth(id,year);
 	}
 
+	public List<Usuario> findTopUsuarios(){
+		return usuarioRepository.findTopUsuarios();
+	}
 	
 	
 }

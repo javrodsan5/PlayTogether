@@ -12,7 +12,7 @@
 <playtogether:layout pageName="meetings">
 
 	<body>
-
+		<c:if test="${loggedUserIsNotTheChampionshipTeamOwner}"><p>Ha aceptado la invitación</p></c:if>
 		<div class="Card1Meeting">
 			<div class="photo"
 				style="background-image: url(/images/sportsImages/${sport.id}.jpg);"></div>
@@ -78,6 +78,15 @@
 					<spring:param name="sportId" value="${sport.id}" />
 				</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(meetingUpdateUrl)}">Editar</a>
 		</c:if>
+		
+		<c:if test="${meeting.meetingCreator == logged_user && !estaLlena}">			
+			<td><spring:url
+				value="/invitations/meeting/{meetingId}"
+				var="searchPeopleUrl">
+				<spring:param name="meetingId" value="${meeting.id}" />
+			</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
+		</c:if>
+							
 		<div class="form-group">
 						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${meeting.sport.id}/meetings';" type="button">
 							<b>Volver a listado</b>

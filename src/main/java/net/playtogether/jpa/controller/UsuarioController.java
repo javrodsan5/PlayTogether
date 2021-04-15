@@ -81,33 +81,17 @@ public class UsuarioController {
 
 		if (usuario.getId().equals(user.getId())) {
 
-			return "redirect:/myprofile/" + userId;
+			return "redirect:/myprofile";
 		} else {
 			return "users/userDetails";
 		}
 	}
 
-	@GetMapping("/principal/{username}")
-	public String showProfileByUsername(@PathVariable("username") final String username, ModelMap model) {
-
-		int userId = this.usuarioService.findByUsername(username).getId();
-
-		return "redirect:/myprofile/" + userId;
-
-	}
-
-	@GetMapping("/myprofile/{userId}")
-	public String userProfile(final ModelMap model, @PathVariable("userId") final Integer userId, Principal principal) {
-		Usuario usuario = this.usuarioService.findUserById(userId);
-		model.addAttribute("user", usuario);
+	@GetMapping("/myprofile")
+	public String userProfile(final ModelMap model, Principal principal) {
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
-
-		if (usuario.getId().equals(user.getId())) {
-
-			return "users/userProfile";
-		} else {
-			return "error-403";
-		}
+		model.addAttribute("user", user);
+		return "users/userProfile";
 	}
 
 	@GetMapping("/myprofile/{userId}/edit")
@@ -239,6 +223,21 @@ public class UsuarioController {
 		int[] arr =  {contadorEnero,contadorFebrero,contadorMarzo,contadorAbril,contadorMayo,contadorJunio,contadorJulio,contadorAgosto,contadorSeptiembre,contadorOctubre,contadorNoviembre,contadorDiciembre};
 		
 		return arr;
-		
+
+	@GetMapping("/clasification")
+	public String usersClasification(ModelMap model, Principal principal) {
+		List<Usuario> topUsuarios = usuarioService.findTopUsuarios().stream().limit(10).collect(Collectors.toList());
+		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
+		Integer posicion = 0;
+		for (int i = 0; i < topUsuarios.size(); i++) {
+			if (topUsuarios.get(i).equals(usuario)) {
+				posicion = i + 1;
+				break;
+			}
+		}
+		model.addAttribute("puntos", usuario.getPuntos());
+		model.addAttribute("posicion", posicion);
+		model.addAttribute("topUsuarios", topUsuarios);
+		return "users/clasification";
 	}
 }

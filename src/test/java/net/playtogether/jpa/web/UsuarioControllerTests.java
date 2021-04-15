@@ -169,7 +169,7 @@ public class UsuarioControllerTests {
 	@WithMockUser(value = "user1", authorities = "usuario")
 	void getUserNegative() throws Exception {
 		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/myprofile/1"));
+				.andExpect(view().name("redirect:/myprofile"));
 
 	}
 
@@ -177,17 +177,9 @@ public class UsuarioControllerTests {
 	@WithMockUser(username = "user1", password = "password", authorities = "usuario")
 	@Test
 	void getMyProfile() throws Exception {
-		this.mockMvc.perform(get("/myprofile/1")).andExpect(status().is2xxSuccessful())
+		this.mockMvc.perform(get("/myprofile")).andExpect(status().is2xxSuccessful())
 				.andExpect(MockMvcResultMatchers.view().name("users/userProfile"));
 
-	}
-
-	// Test de consultar un usuario negative
-	@WithMockUser(username = "user1", password = "password", authorities = "usuario")
-	@Test
-	void getMyProfileNegative() throws Exception {
-		this.mockMvc.perform(get("/myprofile/2")).andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.view().name("error-403"));
 	}
 
 	// Test de GetMapping crear usuario
@@ -308,4 +300,14 @@ public class UsuarioControllerTests {
 
 	}
 	
+	// Test de clasificación de usuarios
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getClasification() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clasification"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/clasification"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("topUsuarios"));
+
+	}
 }

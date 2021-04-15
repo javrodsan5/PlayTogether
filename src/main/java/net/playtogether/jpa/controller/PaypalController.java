@@ -20,12 +20,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Invitation;
 import net.playtogether.jpa.entity.Order;
 import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.PayType;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
+import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.PayTypeService;
 import net.playtogether.jpa.service.PaypalService;
@@ -49,11 +51,15 @@ public class PaypalController {
     @Autowired
     private PayTypeService payTypeService;
 
+    @Autowired
+    private InvitationService invitationService;
+
     public static final String SUCCESS_URL = "pay/success";
     public static final String CANCEL_URL = "pay/cancel";
 
     @GetMapping("/pay/championship/{championshipId}/team/{teamId}")
-    public String formPaymentJoinTeam(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId) {
+    public String formPaymentJoinTeam(ModelMap model, Principal principal, @PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId,
+    @RequestParam("invitationId") Integer invitationId) {
         Order order =  new Order();
         Championship championship = this.championshipService.findChampionshipId(championshipId);
         String teamName = this.championshipService.findTeamId(teamId).getName();
@@ -68,6 +74,19 @@ public class PaypalController {
         model.addAttribute("teamId", teamId);
         model.addAttribute("newChampionship", false);
         model.addAttribute("teamName", teamName);
+        if(invitationId != null) {
+            Invitation invitation = this.invitationService.findById(invitationId);
+            if(invitation == null) {
+                return "error-404";
+            } else if(!invitation.getReceiver().getUser().getUsername().equals(principal.getName())) {
+                return "error-403";
+            }
+            model.put("invitationId", invitationId);
+            model.put("isInvitation", true);
+        } else {
+            model.put("isInvitation", false);
+            model.put("invitationId", -1);
+        }
 
         return "pay/createPaymentForm";
     }
@@ -128,7 +147,8 @@ public class PaypalController {
 
     @PostMapping("/pay")
     public String payment(@ModelAttribute("order") Order order, Principal principal, ModelMap model, @RequestParam("championshipId") Integer championshipId, 
-    @RequestParam("teamId") Integer teamId, @RequestParam("teamName") String teamName, @RequestParam("newChampionship") Boolean newChampionship) {
+    @RequestParam("teamId") Integer teamId, @RequestParam("teamName") String teamName, @RequestParam("newChampionship") Boolean newChampionship, 
+    @RequestParam("invitationId") Integer invitationId, @RequestParam("isInvitation") Boolean isInvitation) {
         try {
             Payment payment = service.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(), order.getMethod(),
                     order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
@@ -149,6 +169,10 @@ public class PaypalController {
                         if(teamId != null) {
                             Team team = this.championshipService.findTeamId(teamId);
                             pay.setTeam(team);
+                            if(isInvitation) {
+                                payTypeId = 3; //INVITATION
+                                pay.setInvitationId(invitationId);
+                            }
                         } else if(teamName != "") {
                             Team team = new Team();
                             team.setName(teamName);
@@ -196,6 +220,12 @@ public class PaypalController {
                     return "redirect:/sports/"+pay.getChampionship().getSport().getId()+"/championships/"+pay.getChampionship().getId();
                 } else if(pay.getPayType().getName().equals("Championship")) {
                     return "redirect:/sports/"+pay.getChampionship().getSport().getId()+"/championships/"+pay.getChampionship().getId()+"/join/"+pay.getTeam().getId();
+                } else if(pay.getPayType().getName().equals("Invitation")) {
+                    Invitation invitation = this.invitationService.findById(pay.getInvitationId());
+                    invitation.getTeam().getParticipants().add(invitation.getReceiver());			
+                    this.championshipService.save(invitation.getTeam());
+                    this.invitationService.delete(pay.getInvitationId());
+                    return "redirect:/sports/"+pay.getChampionship().getSport().getId()+"/championships/"+pay.getChampionship().getId();
                 }
             }
         } catch (PayPalRESTException e) {
