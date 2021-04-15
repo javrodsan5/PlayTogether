@@ -1373,7 +1373,7 @@ public class ChampionshipController {
 					model.addAttribute("matches", matches);
 					model.addAttribute("deporte", sportId);
 					model.addAttribute("championship", championshipId);
-					model.addAttribute("yagenerada2", true);
+					model.addAttribute("yagenerada3", true);
 					model.addAttribute("championshipObj", championship);
 					return "matches/listMatch";
 				}
@@ -1544,7 +1544,7 @@ public class ChampionshipController {
 					model.addAttribute("matches", matches);
 					model.addAttribute("deporte", sportId);
 					model.addAttribute("championship", championshipId);
-					model.addAttribute("yagenerada2", true);
+					model.addAttribute("yagenerada4", true);
 					model.addAttribute("championshipObj", championship);
 					return "matches/listMatch";
 				}
@@ -1595,11 +1595,11 @@ public class ChampionshipController {
 		Usuario user = this.userService.findByUsername(principal.getName());
 		
 		boolean  participa = participantes.stream().anyMatch(p -> p.equals(user));
-		
+		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		if (championshipId > 0 && championshipId <= listChampionships) {
 			if(participa) {
 		
-			Championship championship = this.championshipService.findChampionshipId(championshipId);
+
 			model.addAttribute("match", match);
 			model.addAttribute("championshipObj", championship);
 			return "matches/addDateForm";
@@ -1610,6 +1610,7 @@ public class ChampionshipController {
 				model.addAttribute("deporte", sportId);
 				model.addAttribute("championship", championshipId);
 				model.addAttribute("noParticipaDate", true);
+				model.addAttribute("championshipObj", championship);
 				return "matches/listMatch";
 			}
 		} else {
