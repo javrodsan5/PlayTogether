@@ -66,7 +66,7 @@
 								var="editUser2Url">
 								<spring:param name="usuarioId" value="${user.id}" />
 
-							</spring:url><a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a></td>
+							
 
 
 
@@ -92,6 +92,7 @@
 						</spring:url> <a class="btn btn-primary"
 						href="${fn:escapeXml(championshipRecord2Url)}">Historial de
 							torneos</a>
+
 				</div>
 				</td>
 
