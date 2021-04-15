@@ -12,11 +12,10 @@
 <playtogether:layout pageName="teams">
 	<body>
 		<div class="thirteen">
-			<h1>Invitar participantes al equipo</h1> 
+			<h1>Invitar participantes al equipo ${team.name}</h1> 
 			<h2>(Máximo ${teamSize} participantes)</h2>
 		</div>
-		<div style="margin-left: 45px">
-			<div class="crearMeeting">
+			<div class="crearMeeting" style="display: inline-block">
 			
 				<c:if test="${limitedTeamSize==true}">
 					<p>No queda hueco en el equipo</p>
@@ -43,30 +42,28 @@
 					<p>No puedes enviar invitaciones si no eres el creador del equipo</p>
 				</c:if>
 				
-				<form:form id="survey-form" action="/invitations/team/${teamId}/send_invitation" method="GET">
+				<form:form id="survey-form" action="/invitations/team/${teamId}/send_invitation" method="GET" style="padding:0rem 0rem; width:60%; margin-left:15%">
+					<center>
 					<div>
 						<br>
 						<div class="col-sm-10">	
-		            		<input type="text" class="form-control" name="search" required placeholder="Introduzca el nombre"><br> <br>
-		            	</div>		            							
+		            		<input type="text" class="form-control" name="search" required placeholder="Introduzca el nombre" style= "width: 90%"><br> <br>
+		            	</div>
 						<div class="form-group">
-							<button class="botonMeeting" type="submit">
+							<button class="btn btn-success" type="submit" style= "margin-right: 10%">
 								<b>Buscar</b>
 							</button>
-						</div>
-						<div class="form-group">
-							<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${team.championship.sport.id}/championships/${team.championship.id}';" type="button">
+							<button class="btn btn-success" onclick="location.href='/sports/${team.championship.sport.id}/championships/${team.championship.id}';" type="button">
 								<b>Volver a torneo</b>
 							</button>
 						</div>
 						<br>
-						<br>
-					</div><br>
+					</div></center>
 				</form:form>
 			</div>
 		
-			<div class="cardlist">
-				<table id="meetingTable" class="table table-striped">
+			<div style="display: inline-block">
+				<table id="meetingTable" width= 40% class="table table-striped">
 				    <c:choose>
 					    <c:when test="${team_participants.isEmpty()}">
 						    <p>Aún no hay participantes en el equipo</p>
@@ -97,6 +94,5 @@
 					</c:choose>
 				</table>
 			</div>
-		</div>
 	</body>
 </playtogether:layout>	
