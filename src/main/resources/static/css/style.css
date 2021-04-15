@@ -14,6 +14,8 @@
 	url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,700')
 	;
 
+/* Set all containers to 100% of the viewport height */
+
 select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -1643,7 +1645,7 @@ body {
 
 .body-container {
 	width: 1000px;
-	margin: auto;
+	margin: 5%;
 	min-height: 200px;
 }
 
@@ -1684,11 +1686,8 @@ body {
 }
 
 .dashboard .grid-container {
-	display: grid;
-	grid-template-columns: 1.3fr 1fr 1.2fr;
-	grid-template-rows: 1fr;
-	grid-template-areas: "profile last-view last-view";
-	grid-gap: 0 20px;
+	display: block;
+    width: 40%;
 }
 
 .dashboard .grid-container .grid-area {

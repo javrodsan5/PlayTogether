@@ -153,6 +153,14 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${invitations}" var="invitation">
+							<spring:url
+								value="/sports/{sportId}/meetings/{meetingId}"
+								var="meetingDetail2Url">
+								<spring:param name="sportId"
+									value="${invitation.meeting.sport.id}" />
+								<spring:param name="meetingId"
+									value="${invitation.meeting.id}" />
+							</spring:url>
 
 							<tr class="rowtable">
 								<td><c:out

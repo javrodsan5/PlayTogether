@@ -17,5 +17,11 @@ public class UserRestController {
         return "welcome";
     }
     
+    @RequestMapping("/about-us")
+    public String aboutUs(ModelMap model) {
+    	
+        return "about-us";
+    }
+    
  
 }
