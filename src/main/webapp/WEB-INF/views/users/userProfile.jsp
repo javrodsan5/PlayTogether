@@ -76,6 +76,8 @@
 							
 						<a href="/invitations/meetingInvitations" class="btn btn-primary">Ver
 							invitaciones a quedadas</a>
+						
+						<a href="/myprofile/meetingsRecord" class="btn btn-primary">Historial de quedadas</a>
 
 						<spring:url value="/myprofile/championshipsRecord"
 							var="championshipRecord2Url">
