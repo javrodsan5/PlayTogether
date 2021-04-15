@@ -72,8 +72,7 @@
         
           
         
-    
-    @@ -53,15 +66,16 @@
+
   
                             <spring:param name="matchId" value="${match.id}" />
                             <spring:param name="team" value="team1" />
@@ -102,7 +101,7 @@
             
           
     
-    @@ -92,16 +106,71 @@
+
   
 	                        <div>
 		                        <c:if test="${match.puntos1 != null && match.puntos2 != null && match.puntos3 != null
@@ -187,6 +186,15 @@
  	<c:if test="${yagenerada2}">
  	<p>¡La segunda ronda ya está generada!</p>
  </c:if>
+ 
+  	<c:if test="${yagenerada3}">
+ 	<p>¡La tercera ronda ya está generada!</p>
+ </c:if>
+ 
+  	<c:if test="${yagenerada4}">
+ 	<p>¡La cuarta ronda ya está generada!</p>
+ </c:if>
+ 
 
  	<c:if test="${nosegunda}">
  	<p>¡Aún no se ha generado la segunda ronda!</p>
