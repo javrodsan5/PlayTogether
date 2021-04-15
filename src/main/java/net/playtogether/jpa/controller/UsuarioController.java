@@ -223,6 +223,7 @@ public class UsuarioController {
 		int[] arr =  {contadorEnero,contadorFebrero,contadorMarzo,contadorAbril,contadorMayo,contadorJunio,contadorJulio,contadorAgosto,contadorSeptiembre,contadorOctubre,contadorNoviembre,contadorDiciembre};
 		
 		return arr;
+	}
 
 	@GetMapping("/clasification")
 	public String usersClasification(ModelMap model, Principal principal) {
