@@ -532,13 +532,21 @@ public class ChampionshipController {
 
 	@GetMapping("/championships/{championshipId}/teams/{teamId}")
 	public String teamDetails(ModelMap model, @PathVariable("championshipId") Integer championshipId,
-			@PathVariable("teamId") Integer teamId) {
+			@PathVariable("teamId") Integer teamId, Principal principal) {
 		Team team = this.teamService.findTeamById(teamId);
 
 		model.addAttribute("team", team);
 		Collection<Match> matchesTeam = this.matchService.findMatchesByTeamId(teamId);
 
 		model.addAttribute("matches", matchesTeam);
+		model.addAttribute("championship", team.getChampionship());
+
+		Usuario usuario = userService.usuarioLogueado(principal.getName());
+		List<Usuario> usuarios = team.getParticipants();
+
+		if (usuarios.stream().anyMatch(u -> usuario.equals(u))) {
+			model.put("leave", true);
+		}
 
 		return "teams/teamDetails";
 	}
@@ -1653,5 +1661,77 @@ public class ChampionshipController {
 			return "matches/addDateForm";
 		}
 	}
+	
+	@GetMapping("/championships/{championshipId}/teams/{teamId}/leave")
+	public String leaveTeam(ModelMap model, @PathVariable("championshipId") Integer championshipId,
+			@PathVariable("teamId") Integer teamId, Principal principal) {
+		Championship championship = championshipService.findChampionshipId(championshipId);
+		Team team = this.teamService.findTeamById(teamId);
+		Collection<Match> matchesTeam = this.matchService.findMatchesByTeamId(teamId);
+
+		model.addAttribute("championship", championship);
+		model.addAttribute("team", team);
+		model.addAttribute("matches", matchesTeam);
+
+		List<Usuario> usuarios = team.getParticipants();
+		Usuario usuario = userService.usuarioLogueado(principal.getName());
+
+		usuarios.remove(usuario);
+		this.championshipService.save(team);
+		if (team.getUser().equals(usuario)) {
+			Integer puntos = usuario.getPuntos() - 7;
+			usuario.setPuntos(puntos);
+			this.userService.saveUsuario(usuario);
+		} else {
+			Integer puntos = usuario.getPuntos() - 5;
+			usuario.setPuntos(puntos);
+			this.userService.saveUsuario(usuario);
+		}
+		return "redirect:/championships/" + championshipId + "/teams/" + teamId;
+
+	}
+
+	@GetMapping("/championships/{championshipId}/teams/{teamId}/{userId}/delete")
+	public String deleteTeamPlayer(ModelMap model, @PathVariable("championshipId") Integer championshipId,
+			@PathVariable("teamId") Integer teamId, @PathVariable("userId") Integer userId, Principal principal) {
+		Championship championship = championshipService.findChampionshipId(championshipId);
+		Team team = this.teamService.findTeamById(teamId);
+
+		Collection<Match> matchesTeam = this.matchService.findMatchesByTeamId(teamId);
+
+		List<Usuario> usuarios = team.getParticipants();
+		Usuario usuario = userService.usuarioLogueado(principal.getName());
+		Usuario deletedUser = this.userService.findUserById(userId);
+
+
+		model.addAttribute("championship", championship);
+		model.addAttribute("team", team);
+		model.addAttribute("matches", matchesTeam);
+
+		if (usuarios.stream().anyMatch(u -> usuario.equals(u))) {
+			model.put("leave", true);
+		}
+
+		if (!team.getUser().getUser().getUsername().equals(principal.getName())) {
+			model.put("loggedUserIsNotTheTeamOwner", true);
+			return "teams/teamDetails";
+		} else {
+			if (!deletedUser.equals(team.getUser())) {
+				usuarios.removeIf(u -> deletedUser.equals(u));
+				this.championshipService.save(team);
+				Integer puntos = deletedUser.getPuntos() - 5;
+				deletedUser.setPuntos(puntos);
+				this.userService.saveUsuario(deletedUser);
+				return "teams/teamDetails";
+			} else {
+				model.put("userToDeleteIsTeamOwner", true);
+				return "teams/teamDetails";
+			}
+
+		}
+
+	}
+	
+	
 
 }

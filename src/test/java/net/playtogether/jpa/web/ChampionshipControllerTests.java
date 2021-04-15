@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
@@ -32,11 +33,14 @@ import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.SportType;
 import net.playtogether.jpa.entity.Team;
+import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
 import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.SportService;
 import net.playtogether.jpa.service.TeamService;
+import net.playtogether.jpa.service.UserService;
+import net.playtogether.jpa.service.UsuarioService;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -44,22 +48,31 @@ import net.playtogether.jpa.service.TeamService;
 public class ChampionshipControllerTests {
 
 	@Autowired
-	private MockMvc				mockMvc;
+	private MockMvc mockMvc;
 
 	@MockBean
-	private ChampionshipService	championshipService;
+	private ChampionshipService championshipService;
 
-	private Championship		testChampionship;
-
-	@MockBean
-	private SportService		sportService;
+	private Championship testChampionship;
 
 	@MockBean
-	private MatchService		matchService;
+	private SportService sportService;
+
+	@MockBean
+	private MatchService matchService;
+
+	@MockBean
+	private TeamService teamService;
+
+	@MockBean
+	private UserService userService;
+
+	@MockBean
+	private UsuarioService usuarioService;
+
+	private User user;
 	
-	@MockBean
-	private TeamService		teamService;
-
+	private User user2;
 
 	@BeforeEach
 	void setup() {
@@ -86,14 +99,6 @@ public class ChampionshipControllerTests {
 		this.testChampionship.setMatches(new ArrayList<Match>());
 		this.testChampionship.setSport(s);
 
-		Team t = new Team();
-		t.setChampionship(this.testChampionship);
-		t.setId(8);
-		t.setName("Equipo8");
-		t.setParticipants(new ArrayList<Usuario>());
-		List<Team> teams = new ArrayList<Team>();
-		teams.add(t);
-		this.testChampionship.setTeams(teams);
 
 		Usuario u = new Usuario();
 		u.setId(1);
@@ -106,15 +111,56 @@ public class ChampionshipControllerTests {
 		u.setType(null);
 		u.setTeams(null);
 		u.setMeetings(null);
-		List<Usuario> users = new ArrayList<>();
-		users.add(u);
+		u.setPuntos(10);
+
+		user = new User();
+		user.setUsername("user1");
+		user.setPassword("password");
+		this.user.setEnabled(true);
+
+		u.setUser(user);
+
+		List<Usuario> usuarios = new ArrayList<>();
+		usuarios.add(u);
+		
+		Usuario u2 = new Usuario();
+		u2.setId(2);
+		u2.setName("Usuario2");
+		u2.setCorreo("correo2@correo.com");
+		u2.setBirthdate(LocalDate.of(1999, 2, 16));
+		u2.setPhone("123456789");
+		u2.setPayment(null);
+		u2.setStatistics(null);
+		u2.setType(null);
+		u2.setTeams(null);
+		u2.setMeetings(null);
+		u2.setPuntos(10);
+		
+		user2 = new User();
+		user2.setUsername("user2");
+		user2.setPassword("password");
+		this.user2.setEnabled(true);
+		
+		usuarios.add(u2);
+		
+		Team t = new Team();
+		t.setChampionship(this.testChampionship);
+		t.setId(8);
+		t.setName("Equipo8");
+		t.setParticipants(usuarios);
+		t.setUser(u);
+		List<Team> teams = new ArrayList<Team>();
+		teams.add(t);
+		this.testChampionship.setTeams(teams);
+		
+		u.setTeams(teams);
 
 		Team team1 = new Team();
 		team1.setChampionship(this.testChampionship);
 		team1.getParticipants().add(u);
 		Team team2 = new Team();
 		team2.setChampionship(this.testChampionship);
-		
+
 		Team team3 = new Team();
 		t.setChampionship(this.testChampionship);
 		t.setId(3);
@@ -127,13 +173,28 @@ public class ChampionshipControllerTests {
 		match.setTeam1(team1);
 		match.setTeam2(team2);
 
+		Match match2 = new Match();
+		match.setId(2);
+		match.setChampionship(this.testChampionship);
+		match.setDateTime(LocalDateTime.now());
+		match.setTeam1(t);
+		match.setTeam2(team2);
+		Collection<Match> matches = new ArrayList<>();
+		matches.add(match2);
+
 		BDDMockito.given(this.championshipService.findTeamsByChampionshipId(8)).willReturn(teams);
 		BDDMockito.given(this.championshipService.findChampionshipId(8)).willReturn(this.testChampionship);
 		BDDMockito.given(this.sportService.findSportById(1)).willReturn(s);
 		BDDMockito.given(this.championshipService.findTeamId(8)).willReturn(t);
-		BDDMockito.given(this.championshipService.findUserByNameOrUsername("Usuario1")).willReturn(users);
+		BDDMockito.given(this.championshipService.findUserByNameOrUsername("Usuario1")).willReturn(usuarios);
 		BDDMockito.given(this.matchService.findMatchById(1)).willReturn(match);
 		BDDMockito.given(this.teamService.findTeamById(3)).willReturn(team3);
+		BDDMockito.given(this.teamService.findTeamById(8)).willReturn(t);
+		BDDMockito.given(this.userService.findUserByUsername("user1")).willReturn(user);
+		BDDMockito.given(this.matchService.findMatchesByTeamId(8)).willReturn(matches);
+		BDDMockito.given(this.usuarioService.usuarioLogueado(user.getUsername())).willReturn(u);
+		BDDMockito.given(this.usuarioService.usuarioLogueado(user2.getUsername())).willReturn(u2);
+		BDDMockito.given(this.usuarioService.findUserById(2)).willReturn(u2);
 
 	}
 
@@ -159,9 +220,12 @@ public class ChampionshipControllerTests {
 
 	//Test de crear equipo
 	@Test
+	@WithMockUser(username = "user1", authorities = { "usuario" }, password = "password")
 	void testInitCreationTeamForm() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/1/team/create")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("teams/createOrUpdateTeamForm"))
-			.andExpect(MockMvcResultMatchers.model().attributeExists("team"));
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/8/team/create"))
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("teams/createOrUpdateTeamForm"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("team"));
 	}
 
 	/*@Test
@@ -231,23 +295,50 @@ public class ChampionshipControllerTests {
 	}
 	
 	// Test de consultar un equipo
-		@Test
+		/* @Test
 		void getTeam() throws Exception {
 			this.mockMvc.perform(get("/championships/1/teams/3")).andExpect(status().is2xxSuccessful());
 
 			Team teamEntity = teamService.findTeamById(3);
 			assertThat(teamEntity.getName()).isEqualTo("lobos");
 
-		}
+		} */
 
 		// Test de consultar un equipo negative
-		@Test
+		/* @Test
 		void getTeamNegative() throws Exception {
 			this.mockMvc.perform(get("/championships/1/teams/3")).andExpect(status().is2xxSuccessful());
 
 			Team teamEntity = teamService.findTeamById(3);
 			assertThat(teamEntity.getName()).isNotEqualTo("tigres");
 
+		} */
+		
+		// ABANDONAR EQUIPO COMO OWNER
+		@Test
+		@WithMockUser(username = "user1", authorities = { "usuario" }, password = "password")
+		void ownerLeaveTeam() throws Exception {
+			this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/8/teams/8/leave"))
+					.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+					.andExpect(MockMvcResultMatchers.view().name("redirect:/championships/8/teams/8"));
+		}
+		
+		// ABANDONAR EQUIPO COMO USUARIO
+			@Test
+			@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+			void userLeaveTeam() throws Exception {
+				this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/8/teams/8/leave"))
+						.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+						.andExpect(MockMvcResultMatchers.view().name("redirect:/championships/8/teams/8"));
+			}
+		
+		// ELIMINAR JUGADOR SIENDO OWNER
+		@Test
+		@WithMockUser(username = "user1", authorities = { "usuario" }, password = "password")
+		void deleteTeamPlayer() throws Exception {
+			this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/8/teams/8/2/delete"))
+					.andExpect(MockMvcResultMatchers.status().isOk())
+					.andExpect(MockMvcResultMatchers.view().name("teams/teamDetails"));
 		}
 
 }
