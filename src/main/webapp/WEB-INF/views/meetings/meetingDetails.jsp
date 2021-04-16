@@ -55,16 +55,21 @@
 										<a style="margin-left: 60px;"
 											href="${fn:escapeXml(userdetails)}"><span
 											class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
-											
-										<spring:url value="/sports/{sportId}/meetings/{meetingId}/{userId}/delete" var="deleteUserMeeting">
+										<c:if test="${puedeEliminar == true}">
+										<c:if test="${participant.id!=meeting.meetingCreator.id}">
+										<spring:url
+											value="/sports/{sportId}/meetings/{meetingId}/{userId}/delete"
+											var="deleteUserMeeting">
 											<spring:param name="sportId" value="${meeting.sport.id}" />
 											<spring:param name="meetingId" value="${meeting.id}" />
 											<spring:param name="userId" value="${participant.id}" />
 										</spring:url>
-								
-										<div class="boto">
-											<a style="margin-left: 60px;" href="${fn:escapeXml(deleteUserMeeting)}">Eliminar jugador</a>
-										</div>
+										
+										<a style="margin-left: 60px"
+											href="${fn:escapeXml(deleteUserMeeting)}"> <i
+											class="fa fa-trash" style="color: red"></i></a>
+									</c:if>
+									</c:if>
 									</h2>
 								</div>
 							</div>
@@ -113,10 +118,12 @@
 						</button>
 					</div>
 
+		<br>
+		<c:out value="${eliminado}" />
 		<c:if test="${existe==true}">
 			<p>¡Ya estás participando en esta quedada!</p>
 		</c:if>
-		<c:if test="${estaLlena==true}">
+		<c:if test="${estaLlena==true && existe==false}">
 			<p>La quedada a la que intenta unirse está completa.</p>
 		</c:if>
 		<c:if test="${userToDeleteIsMeetingCreator}"><p>No se puede eliminar al creador de la quedada.</p></c:if>

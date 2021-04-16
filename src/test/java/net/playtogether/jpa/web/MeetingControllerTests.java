@@ -5,7 +5,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import net.playtogether.jpa.entity.Authorities;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
@@ -111,6 +114,13 @@ public class MeetingControllerTests {
 		this.user = new User();
 		this.user.setUsername("user1");
 		this.user.setPassword("password");
+		Set<Authorities> au = new HashSet<>();
+		Authorities aut = new Authorities();
+		aut.setId(1);
+		aut.setUser(user);
+		aut.setAuthority("premium");
+		au.add(aut);
+		this.user.setAuthorities(au);
 		this.user.setEnabled(true);
 
 		u.setUser(this.user);
@@ -286,7 +296,7 @@ public class MeetingControllerTests {
 	@WithMockUser(username = "user1", authorities = {
 		"usuario"
 	}, password = "password")
-	void deleteTeamPlayer() throws Exception {
+	void deleteMeetingUser() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/meetings/3/2/delete")).andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("meetings/meetingDetails"));
 	}
 
