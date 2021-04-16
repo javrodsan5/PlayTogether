@@ -1,26 +1,19 @@
 package net.playtogether.jpa.service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Collection;
 import java.util.List;
+
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Service;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.playtogether.jpa.entity.Championship;
-import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.PayType;
-import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
 
@@ -86,28 +79,27 @@ public class PayServiceTests {
 			 Usuario usuario = this.usuarioService.findUserById(3);
 			 Pay pay = this.payService.findLastPayByUsername(usuario.getUser().getUsername());
 			 
-			 assertThat(pay.getId()).isEqualTo(20);
+			 assertThat(pay.getId()).isEqualTo(21);
 		 }
 		 
 	//Find last finished pay for championship by username
-//	 @Test
-//	 void shouldFindLastFinishedPayForChampionshipByUsername() {
-//		 Usuario usuario = this.usuarioService.findUserById(3);
-//		 Championship ch = this.championshipService.findChampionshipId(7);
-//		 Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), ch.getId());
-//		 
-//		 assertThat(pay.getId()).isEqualTo(20);
-//	 }
+	 @Test
+	 void shouldFindLastFinishedPayForChampionshipByUsername() {
+		 Usuario usuario = this.usuarioService.findUserById(3);
+		 Championship ch = this.championshipService.findChampionshipId(7);
+		 Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), ch.getId());
+		 
+		 assertThat(pay.getId()).isEqualTo(20);
+	 }
 		 
 	//Find last finished pay for team by username
-//		 @Test
-//		 void shouldFindLastFinishedPayForTeamByUsername() {
-//			 Usuario usuario = this.usuarioService.findUserById(3);
-//			 Team t = this.teamService.findTeamById(8);
-//			 Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), t.getId());
-//			 
-//			 assertThat(pay.getId()).isEqualTo(1);
-//		 }
+		 @Test
+		 void shouldFindLastFinishedPayForTeamByUsername() {
+			 Usuario usuario = this.usuarioService.findUserById(3);
+			 Pay pay = this.payService.findLastFinishedPayForTeamByUsername(usuario.getUser().getUsername(),7);
+			 
+			 assertThat(pay.getId()).isEqualTo(20);
+		 }
 		 
 	//Find last finished pay for championship by username
 		 @Test
@@ -115,11 +107,58 @@ public class PayServiceTests {
 			 Usuario usuario = this.usuarioService.findUserById(3);
 			 List<Pay> lp = this.payService.findIdPaysNotFinishedByUsername(usuario.getUser().getUsername());
 			 
-			 assertThat(lp.size()).isEqualTo(1);
+			 assertThat(lp.size()).isEqualTo(2);
+		 }
+		 
+	//Find last NOT finished pay for championship by username
+		 @Test
+		 void shouldfindLastNotFinishedPayForChampionshipByUsername() {
+			 Usuario usuario = this.usuarioService.findUserById(3);
+			 Championship ch = this.championshipService.findChampionshipId(7);
+
+			 List<Pay> p = this.payService.findLastNotFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), ch.getId());
+			 
+			 assertThat(p.size()).isEqualTo(1);
+		 }
+		 
+	//Find last NOT finished pay for team by username
+		 @Test
+		 void shouldfindLastNotFinishedPayForTeamByUsername() {
+			 Usuario usuario = this.usuarioService.findUserById(3);
+			 Team t = this.teamService.findTeamById(7);
+
+			 List<Pay> p = this.payService.findLastNotFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), t.getId());
+			 
+			 assertThat(p.size()).isEqualTo(1);
+		 }
+
+		 
+	//Delete all pays test
+		 @Test
+		 void shouldDeleteAllPays() {
+			 this.payService.deleteAll(this.payService.findAll());
+			 List<Pay> lista2 = this.payService.findAll();
+			 
+			 assertThat(lista2.size()).isEqualTo(0);
 		 }
 		 
 		 
-		 
-	
+	//Find last PREMIUM pay by Username
+		 @Test
+		 void shouldfindLastPayByUsernamePremium() {
+			 Usuario usuario = this.usuarioService.findUserById(4);
+			 List<Pay> p = this.payService.findLastPayByUsernamePremium(usuario.getUser().getUsername());
+			 
+			 assertThat(p.size()).isEqualTo(1);
+		 }
+
+	//Find pay by id test
+		 @Test
+		 void shouldfindById() {
+			 Pay p = this.payService.findById(3);
+			 
+			 assertThat(p.getId()).isEqualTo(3);
+		 }
+
 
 }

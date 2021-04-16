@@ -139,9 +139,8 @@ INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(17, 5.0, CURRENT_TIMESTAMP, 1, null, null, 17, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(18, 5.0, CURRENT_TIMESTAMP, 1, null, null, 18, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(19, 5.0, null, 1, null, null, 3, null);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(20, 2.0, '2021/02/05', 2, 7, null, 3, null);
-
-
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(20, 2.0, '2021/03/05', 2, 7, 7, 3, null);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(21, 2.0, null, 2, 7, 7, 3, null);
 
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(1, 'West Jamon', 1, 1, 10);
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(2, 'Shalcke Temeto', 1, 1,11);
