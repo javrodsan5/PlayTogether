@@ -48,8 +48,7 @@
 												<spring:url value="#" var="statisticUrl">
 													<spring:param name="sportId" value="${sport.id}" />
 												</spring:url>
-												<a href="${fn:escapeXml(statisticUrl)}"
-													class="custom-btn btn-4">Clasificación</a>
+												
 
 											</div>
 										</div>

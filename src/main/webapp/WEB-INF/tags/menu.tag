@@ -36,11 +36,19 @@
 				<a class="nav-link" href="/sports">Deportes <i
 					class="fa fa-futbol-o"></i></a>
 			</li>
+			
 			<li
 				class="${name=='sports' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}">
 				<a class="nav-link" href="/sports"> <i
 					class="fa fa-futbol-o"></i></a>
 			</li>
+			
+			<li
+				class="${name=='clasifications' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
+				<a class="nav-link" href="/clasification">Clasificación <i
+					class="fa fa-futbol-o"></i></a>
+			</li>
+
 			<sec:authorize access="!isAuthenticated()">
 				<li
 					class="${name=='login' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}"><a

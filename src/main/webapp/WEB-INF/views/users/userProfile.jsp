@@ -16,10 +16,10 @@
 	</div>
 
 	<body>
-		<div class="body-container" style="display:inline-block; width:25%">
+		<div class="body-container" style="display: inline-block; width: 25%">
 
-			<div class="dashboard" style="width:100%">
-				<div class="grid-container" style="width:100%">
+			<div class="dashboard" style="width: 100%">
+				<div class="grid-container" style="width: 100%">
 					<div class="profile grid-area" style="border: grey 1px solid">
 						<div class="img">
 							<img src="/images/avatar.png">
@@ -67,48 +67,46 @@
 							<spring:param name="usuarioId" value="${user.id}" />
 						</spring:url>
 						<center>
-						<a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a>
-						<br><br>
-						<a href="/invitations/championshipInvitations"
-							class="btn btn-primary">Ver invitaciones a equipo de torneo</a> 
-						<br>	<br>
-						<a href="/invitations/meetingInvitations" class="btn btn-primary">Ver
-							invitaciones a quedadas</a>
-						<br><br>
-						<a href="/myprofile/meetingsRecord" class="btn btn-primary">Historial de quedadas</a>
+							<a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a>
+							<br>
+							<br> <a href="/invitations/championshipInvitations"
+								class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
+							<br> <br> <a href="/invitations/meetingInvitations"
+								class="btn btn-primary">Ver invitaciones a quedadas</a> <br>
+							<br> <a href="/myprofile/meetingsRecord"
+								class="btn btn-primary">Historial de quedadas</a>
 
-						<spring:url value="/myprofile/championshipsRecord"
-							var="championshipRecord2Url">
+							<spring:url value="/myprofile/championshipsRecord"
+								var="championshipRecord2Url">
 
-						</spring:url>
-						<br>
-						<br>
-						<a class="btn btn-primary"
-							href="${fn:escapeXml(championshipRecord2Url)}">Historial de
-								torneos</a>
-								<br><br>
+							</spring:url>
+							<br> <br> <a class="btn btn-primary"
+								href="${fn:escapeXml(championshipRecord2Url)}">Historial de
+								torneos</a> <br>
+							<br>
 						</center>
-							
-					</div>
 
 					</div>
+
 				</div>
-
-
 			</div>
-			<div class="charts" style="width:50%; display:inline-block; margin-left: 5%; margin-right: 5%; float: right">
+
+
+		</div>
+		<div class="charts"
+			style="width: 50%; display: inline-block; margin-left: 5%; margin-right: 5%; float: right">
 			<br>
 			<center>
-				<div id="chart1" style="width:400px; text-align:center"></div>
-				</center>
-				<br>
-				<div id="chart2"></div>
-				<div id="chart3"></div>
-				<input type="hidden" id="myvar" value="${quedadasTorneos}">
-				<input type="hidden" id="myvar2" value="${quedadasPorMes}">
-				<input type="hidden" id="myvar3" value="${torneosPorMes}">
-			</div>
-			<script type = "text/javascript">
+				<div id="chart1" style="width: 400px; text-align: center"></div>
+			</center>
+			<br>
+			<div id="chart2"></div>
+			<div id="chart3"></div>
+			<input type="hidden" id="myvar" value="${quedadasTorneos}"> <input
+				type="hidden" id="myvar2" value="${quedadasPorMes}"> <input
+				type="hidden" id="myvar3" value="${torneosPorMes}">
+		</div>
+		<script type="text/javascript">
 				var datos = document.getElementById("myvar").value;	
 				var datos2 = datos.replace('[',"");
 				var datos3 = datos2.replace(']',"");
