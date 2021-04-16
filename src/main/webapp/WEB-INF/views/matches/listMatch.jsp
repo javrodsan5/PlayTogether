@@ -24,6 +24,1552 @@
 			</h1>
 		</c:if>
 
+
+		<c:if test="${championshipObj.maxTeams==4}">
+			<div class="container">
+				<div class="tournament-bracket tournament-bracket--rounded">
+					<div
+						class="tournament-bracket__round tournament-bracket__round--semifinals">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[0].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+											</c:if>
+											${matches[0].dateTime}
+										</caption>
+
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[0].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[0].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[0].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[0].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[0].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[0].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[0].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[0].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[1].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+											</c:if>
+											${matches[1].dateTime}
+										</caption>
+
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[1].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[1].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[1].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[1].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[1].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[1].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[1].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[1].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+
+						</ul>
+					</div>
+
+					<div
+						class="tournament-bracket__round tournament-bracket__round--gold">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=2}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>2}">
+												<c:if test="${empty matches[2].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[2].dateTime}
+												</c:if>
+
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[2].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[2].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[2].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[2].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[2].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[2].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[2].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[2].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div
+						class="tournament-bracket__round tournament-bracket__round--gold"
+						style="display: none"></div>
+				</div>
+			</div>
+		</c:if>
+		<c:if test="${championshipObj.maxTeams==8}">
+			<br>
+			<div class="container" style="margin-left: 4%">
+				<div class="tournament-bracket tournament-bracket--rounded">
+					<div
+						class="tournament-bracket__round tournament-bracket__round--quarterfinals">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Cuartos
+							de final</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[0].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[0].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[0].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[0].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[0].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[0].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[0].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[0].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[0].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[0].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[1].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[1].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[1].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[1].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[1].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[1].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[1].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[1].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[1].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[1].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[2].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[2].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[2].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[2].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[2].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[2].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[2].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[2].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[2].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[2].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[3].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[3].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[3].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[3].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[3].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[3].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[3].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[3].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[3].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[3].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div
+						class="tournament-bracket__round tournament-bracket__round--semifinals">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=4}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>4}">
+												<c:if test="${empty matches[4].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[4].dateTime}
+												</c:if>
+										</caption>
+
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[4].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[4].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[4].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[4].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[4].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[4].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[4].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[4].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=4}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>4}">
+												<c:if test="${empty matches[5].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[5].dateTime}
+												</c:if>
+										</caption>
+
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[5].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[5].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[5].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[5].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[5].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[5].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[5].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[5].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+
+						</ul>
+					</div>
+
+					<div
+						class="tournament-bracket__round tournament-bracket__round--gold">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=6}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>6}">
+												<c:if test="${empty matches[6].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[6].dateTime}
+												</c:if>
+
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[6].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[6].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[6].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[6].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[6].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[6].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[6].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[6].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div
+						class="tournament-bracket__round tournament-bracket__round--gold"
+						style="display: none"></div>
+				</div>
+			</div>
+		</c:if>
+
+		<c:if test="${championshipObj.maxTeams==16}">
+			<br>
+			<div class="container" style="margin-left: 4%">
+				<div class="tournament-bracket tournament-bracket--rounded">
+
+					<div
+						class="tournament-bracket__round tournament-bracket__round--roundOf16">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Octavos
+							de final de final</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[0].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[0].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[0].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[0].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[0].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[0].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[0].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[0].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[0].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[0].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[1].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[1].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[1].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[1].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[1].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[1].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[1].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[1].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[1].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[1].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[2].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[2].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[2].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[2].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[2].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[2].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[2].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[2].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[2].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[2].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[3].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[3].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[3].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[3].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[3].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[3].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[3].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[3].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[3].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[3].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[4].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[4].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[4].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[4].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[4].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[4].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[4].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[4].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[4].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[4].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[5].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[5].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[5].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[5].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[5].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[5].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[5].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[5].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[5].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[5].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[6].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[6].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[6].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[6].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[6].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[6].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[6].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[6].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[6].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[6].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()==0}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()!=0}">
+												<c:if test="${empty matches[7].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[7].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[7].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[7].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[7].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[7].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[7].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[7].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[7].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[7].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+						</ul>
+					</div>
+
+					<div
+						class="tournament-bracket__round tournament-bracket__round--quarterfinals">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Cuartos
+							de final</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=8}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>8}">
+												<c:if test="${empty matches[8].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[8].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[8].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[8].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[8].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[8].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[8].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[8].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[8].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[8].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=8}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>8}">
+												<c:if test="${empty matches[9].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[9].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[9].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[9].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[9].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[9].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[9].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[9].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[9].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[9].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=8}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>8}">
+												<c:if test="${empty matches[10].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[10].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[10].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[10].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[10].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[10].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[10].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[10].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[10].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[10].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=8}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>8}">
+												<c:if test="${empty matches[11].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[11].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[11].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[11].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[11].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[11].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[11].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[11].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[11].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[11].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+						</ul>
+					</div>
+					<div
+						class="tournament-bracket__round tournament-bracket__round--semifinals">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=12}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>12}">
+												<c:if test="${empty matches[12].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[12].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[12].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[12].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[12].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[12].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[12].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[12].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[12].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[12].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+
+
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=12}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>12}">
+												<c:if test="${empty matches[13].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[13].dateTime}
+												</c:if>
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[13].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[13].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[13].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[13].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[13].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[13].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[13].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[13].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+						</ul>
+					</div>
+
+					<div
+						class="tournament-bracket__round tournament-bracket__round--gold">
+						<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+						<ul class="tournament-bracket__list">
+							<li class="tournament-bracket__item">
+								<div class="tournament-bracket__match" tabindex="0">
+									<table class="tournament-bracket__table">
+										<caption class="tournament-bracket__caption">
+											<c:if test="${matches.size()<=14}">
+												No existe partido aún.
+												</c:if>
+											<c:if test="${matches.size()>14}">
+												<c:if test="${empty matches[14].dateTime}">
+												Todavía no se ha fijado fecha para el partido. 
+												</c:if>
+												${matches[14].dateTime}
+												</c:if>
+
+										</caption>
+										<thead class="sr-only">
+											<tr>
+												<th>Equipo</th>
+												<th>Puntuación</th>
+											</tr>
+										</thead>
+										<tbody class="tournament-bracket__content">
+											<tr class="tournament-bracket__team">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">
+														${matches[14].team1} </abbr> <span
+													class="tournament-bracket__flag flag-icon flag-icon-ca"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[14].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[14].puntos1}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[14].puntos1}</span></td>
+												</c:if>
+
+											</tr>
+											<tr
+												class="tournament-bracket__team tournament-bracket__team--winner">
+												<td class="tournament-bracket__country"><abbr
+													class="tournament-bracket__code">${matches[14].team2}</abbr>
+													<span
+													class="tournament-bracket__flag flag-icon flag-icon-cz"
+													aria-label="Flag"></span></td>
+												<c:if test="${empty matches[14].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">-</span></td>
+												</c:if>
+												<c:if test="${not empty matches[14].puntos2}">
+													<td class="tournament-bracket__score"><span
+														class="tournament-bracket__number">${matches[14].puntos2}</span></td>
+												</c:if>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</li>
+						</ul>
+					</div>
+					<div
+						class="tournament-bracket__round tournament-bracket__round--gold"
+						style="display: none"></div>
+				</div>
+			</div>
+		</c:if>
+
+
+		<br>
+		<br>
 		<div class="cardlist">
 
 			<table id="matchTable" class="table">
@@ -43,11 +1589,6 @@
 
 					</tr>
 				</thead>
-
-
-
-
-
 
 				<tbody>
 					<c:forEach items="${matches}" var="match">
