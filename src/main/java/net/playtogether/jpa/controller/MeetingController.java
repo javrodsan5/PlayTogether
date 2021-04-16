@@ -149,6 +149,9 @@ public class MeetingController {
 
 		if (meeting.getMeetingCreator().equals(u)) {
 			model.put("esCreador", true);
+			if(u.getUser().getAuthorities().stream().anyMatch(x->x.getAuthority().equals("premium"))) {
+				model.put("puedeEliminar", true);
+			}
 		}
 
 		if (!meeting.getParticipants().contains(u)) {
@@ -237,6 +240,7 @@ public class MeetingController {
 				Integer puntos = deletedUser.getPuntos() - 5;
 				deletedUser.setPuntos(puntos);
 				this.userService.saveUsuario(deletedUser);
+				model.addAttribute("sport", sportService.findSportById(sportId));
 				return "meetings/meetingDetails";
 			} else {
 				model.put("userToDeleteIsMeetingCreator", true);
