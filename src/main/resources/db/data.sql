@@ -101,7 +101,7 @@ VALUES(7, 'Polideportivo Los Caños', 'Sevilla', '2021/04/15 09:20:00', 'Mientra
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(1, 'Torneo ATP', 'Sevilla', 'Torneo oficial de la ATP', '2021/06/25 12:00:00', 8, '2021/06/15 11:00:00', 1, 1);
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(2, 'Torneo entre amigos', 'Sevilla', 'Torneo disputado entre amigos! Nos falta gente!', '2021/04/12 16:45:00', 4, '2021/04/06 18:45:00', 1, 1);
+VALUES(2, 'Torneo entre amigos', 'Sevilla', 'Torneo disputado entre amigos! Nos falta gente!', '2021/07/06 18:45:00', 4, '2021/04/06 18:45:00', 1, 1);
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(3, 'Torneo Oficial', 'Sevilla', 'Torneo con jugadores semiprofesionales. Apuntarse sólo jugadores con ranking ATP.', '2021/05/23 12:00:00', 16, '2021/05/15 14:00:00', 1, 1);
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
@@ -115,23 +115,21 @@ VALUES(7, 'Torneo Antonio SL', 'Sevilla', 'Torneo patrocinado por Antonio SL! Ap
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(8, 'Torneo US', 'Sevilla', 'Torneo para estudiantes de la US.', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 3, 1);
 
-INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(1, 'West Jamon', 1, 1, 1);
-INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(2, 'Shalcke Temeto', 1, 1, 2);
-INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(3, 'Vodka Juniors', 1, 2, 1);
-INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(4, 'Yayo Vallecano', 1, 2, 3);
-INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(5, 'Jugadores de barrio', 1, 2, 1);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(1, 'West Jamon', 1, 2, 4);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(2, 'Shalcke Temeto', 1, 2, 5);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(3, 'Vodka Juniors', 1, 2, 6);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(4, 'Yayo Vallecano', 1, 2, 7);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(5, 'Jugadores de barrio', 1, 3, 1);
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(6, 'Unión Penosa', 1, 3, 1);
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(7, 'Nottingham Miedo', 1, 8, 1);
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(8, 'Equipazo', 1, 8, 4);
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(9, 'Equipito', 1, 8, 5);
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(10, 'Árbitro penalty', 1, 8, 2);
 
-INSERT INTO teams_participants(teams_id, participants_id) VALUES(7, 1);
-INSERT INTO teams_participants(teams_id, participants_id) VALUES(8, 4);
-INSERT INTO teams_participants(teams_id, participants_id) VALUES(9, 3);
-INSERT INTO teams_participants(teams_id, participants_id) VALUES(10, 2);
-
-INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 1); 
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(1, 4); 
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 5); 
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(3, 6); 
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(4, 7); 
 
 
 INSERT INTO statistics(id, sport_id, user_id) VALUES(1, 1, 1);
@@ -142,7 +140,7 @@ INSERT INTO pay_type(id, name) VALUES(2, 'Championship');
 INSERT INTO pay_type(id, name) VALUES(3, 'Invitation');
 
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(1, 2.0, '2021/01/16', 2, 8, 8, 3, null);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(2, 5.0, '2021/01/16', 1, null, null, 1, null);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(2, 5.0, CURRENT_TIMESTAMP, 1, null, null, 1, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(3, 5.0, CURRENT_TIMESTAMP, 1, null, null, 2, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(4, 5.0, CURRENT_TIMESTAMP, 1, null, null, 4, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(5, 5.0, CURRENT_TIMESTAMP, 1, null, null, 5, null);

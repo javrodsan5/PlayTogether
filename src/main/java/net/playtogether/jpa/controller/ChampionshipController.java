@@ -306,7 +306,7 @@ public class ChampionshipController {
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()
 						&& ultPartido.getPuntos2() == ultPartido.getPuntos4()) {
-					if (ultPartido.getPuntos1() == ultPartido.getPuntos2()) {
+					if (ultPartido.getPuntos1() > ultPartido.getPuntos2()) {
 						model.addAttribute("nombreGanador", ultPartido.getTeam1().getName());
 					} else {
 						model.addAttribute("nombreGanador", ultPartido.getTeam2().getName());
@@ -367,6 +367,8 @@ public class ChampionshipController {
 			model.addAttribute("championship", championshipId);
 			Championship championship = this.championshipService.findChampionshipId(championshipId);
 			model.addAttribute("championshipObj", championship);
+			model.addAttribute("rondaActual", championship.getMatches().stream().max(Comparator.comparing(Match::getRonda))
+				.map(x -> x.getRonda()).orElse(null));
 			return "matches/listMatch";
 		}
 
@@ -414,6 +416,8 @@ public class ChampionshipController {
 			Championship championship = this.championshipService.findChampionshipId(championshipId);
 			model.addAttribute("championshipObj", championship);
 			model.put("noTeam", true);
+			model.addAttribute("rondaActual", championship.getMatches().stream().max(Comparator.comparing(Match::getRonda))
+				.map(x -> x.getRonda()).orElse(null));
 			return "matches/listMatch";
 		}
 
@@ -639,7 +643,7 @@ public class ChampionshipController {
 						model.addAttribute("rondaActual", championship.getMatches().stream()
 								.max(Comparator.comparing(Match::getRonda)).map(x -> x.getRonda()).orElse(null));
 
-						return "matches/listMatch";
+						return "redirect:/sports/"+championship.getSport().getId()+"/championships/"+championshipId+"/matches";
 					} else {
 
 						Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
@@ -773,7 +777,7 @@ public class ChampionshipController {
 										championship.getMatches().stream().max(Comparator.comparing(Match::getRonda))
 												.map(x -> x.getRonda()).orElse(null));
 
-								return "matches/listMatch";
+								return "redirect:/sports/"+championship.getSport().getId()+"/championships/"+championshipId+"/matches";
 
 							} else {
 								Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
@@ -882,7 +886,7 @@ public class ChampionshipController {
 														.max(Comparator.comparing(Match::getRonda))
 														.map(x -> x.getRonda()).orElse(null));
 
-										return "matches/listMatch";
+										return "redirect:/sports/"+championship.getSport().getId()+"/championships/"+championshipId+"/matches";
 
 									} else {
 										Collection<Match> matches = this.matchService
@@ -1078,7 +1082,7 @@ public class ChampionshipController {
 														model.addAttribute("championshipObj", championship);
 														model.addAttribute("rondaActual", championship.getMatches().stream().max(Comparator.comparing(Match::getRonda)).map(x -> x.getRonda()).orElse(null));
 
-														return "matches/listMatch";
+														return "redirect:/sports/"+championship.getSport().getId()+"/championships/"+championshipId+"/matches";
 
 													} else {
 														Collection<Match> matches = this.matchService
@@ -1330,7 +1334,7 @@ public class ChampionshipController {
 								model.addAttribute("deporte", sportId);
 								model.addAttribute("championship", championshipId);
 								model.addAttribute("championshipObj", championship);
-								return "matches/listMatch";
+								return "redirect:/sports/"+championship.getSport().getId()+"/championships/"+championshipId+"/matches";
 
 							} else {
 								Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
@@ -1427,7 +1431,7 @@ public class ChampionshipController {
 										model.addAttribute("deporte", sportId);
 										model.addAttribute("championship", championshipId);
 										model.addAttribute("championshipObj", championship);
-										return "matches/listMatch";
+										return "redirect:/sports/"+championship.getSport().getId()+"/championships/"+championshipId+"/matches";
 
 									} else {
 										Collection<Match> matches = this.matchService
@@ -1608,7 +1612,7 @@ public class ChampionshipController {
 								model.addAttribute("deporte", sportId);
 								model.addAttribute("championship", championshipId);
 								model.addAttribute("championshipObj", championship);
-								return "matches/listMatch";
+								return "redirect:/sports/"+championship.getSport().getId()+"/championships/"+championshipId+"/matches";
 
 							} else {
 								Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
