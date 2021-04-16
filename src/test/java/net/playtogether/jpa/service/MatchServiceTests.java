@@ -30,11 +30,11 @@ public class MatchServiceTests {
 	private SportService sportService;
 
 	// FIND MATCH BY ID
-	@Test
-	void shouldFindMatchWithCorrectId() throws Exception {
-		Match match = this.matchService.findMatchById(1);
-		assertThat(match.getChampionship().getId()).isEqualTo(1);
-	}
+//	@Test
+//	void shouldFindMatchWithCorrectId() throws Exception {
+//		Match match = this.matchService.findMatchById(1);
+//		assertThat(match.getChampionship().getId()).isEqualTo(1);
+//	}
 	
 	/*@Test
 	void shouldSaveMatch() throws Exception {
