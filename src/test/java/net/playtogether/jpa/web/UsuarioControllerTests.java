@@ -271,9 +271,9 @@ public class UsuarioControllerTests {
 	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
 	@Test
 	void getStatsQuedadasyTorneos() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.view().name("users/userProfile"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("quedadasTorneos"));
 
 	}
@@ -282,9 +282,9 @@ public class UsuarioControllerTests {
 	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
 	@Test
 	void getStatsQuedadasPorMes() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.view().name("users/userProfile"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("quedadasPorMes"));
 
 	}
@@ -293,9 +293,9 @@ public class UsuarioControllerTests {
 	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
 	@Test
 	void getStatsTorneoPorMes() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.view().name("users/userProfile"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("torneosPorMes"));
 
 	}

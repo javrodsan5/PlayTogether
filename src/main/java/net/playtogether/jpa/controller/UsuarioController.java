@@ -96,6 +96,7 @@ public class UsuarioController {
 		Integer torneos = user.getTeams().size();
 		int[] datos = {quedadas,torneos};
 		String datos1 = Arrays.toString(datos);
+		System.out.println(datos1);
 		model.addAttribute("quedadasTorneos",datos1.replace(" ",""));
 		Calendar cal = Calendar.getInstance();
 		Integer year = cal.get(Calendar.YEAR);
@@ -175,28 +176,6 @@ public class UsuarioController {
 		model.addAttribute("meetings", meetings);
 
 		return "users/meetingsRecord";
-	}
-	
-	@GetMapping(value = "/myprofile/stats")
-	public String getStats(ModelMap model,Principal principal) {
-		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
-		model.addAttribute("puntos",usuario.getPuntos());
-		Integer quedadas = usuario.getMeetings().size();
-		Integer torneos = usuario.getTeams().size();
-		int[] datos = {quedadas,torneos};
-		String datos1 = Arrays.toString(datos);
-		model.addAttribute("quedadasTorneos",datos1.replace(" ",""));
-		Calendar cal = Calendar.getInstance();
-		Integer year = cal.get(Calendar.YEAR);
-		List<Integer> quedadasPorMesList = this.usuarioService.findMeetingByMonth(usuario.getId(),year);
-		List<Integer> torneosPorMesList = this.usuarioService.findChampionshipByMonth(usuario.getId(),year);
-		int[] quedadasPorMes = getEventoPorMes(quedadasPorMesList);
-		int[] torneosPorMes = getEventoPorMes(torneosPorMesList);
-		String datos2 = Arrays.toString(quedadasPorMes);
-		String datos3 = Arrays.toString(torneosPorMes);
-		model.addAttribute("quedadasPorMes",datos2.replace(" ",""));
-		model.addAttribute("torneosPorMes",datos3.replace(" ",""));
-		return "users/charts";
 	}
 	
 	public int[] getEventoPorMes(List<Integer> eventoList) {

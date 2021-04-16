@@ -97,6 +97,7 @@
 			style="width: 50%; display: inline-block; margin-left: 5%; margin-right: 5%; float: right">
 			<br>
 			<center>
+				<div id="mensaje"></div>
 				<div id="chart1" style="width: 400px; text-align: center"></div>
 			</center>
 			<br>
@@ -230,11 +231,17 @@
 		                categories: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ags', 'Sep','Oct','Nov','Dic'],
 		              }
 		              };
-		
-		              var chart = new ApexCharts(document.querySelector("#chart1"), options1);
+
+					if(datos=="[0,0]"){
+						document.getElementById("mensaje").innerHTML="Quedadas y torneos en los que he participado";
+						document.getElementById("chart1").innerHTML="No hay datos";
+					}else{
+						document.getElementById("mensaje").innerHTML="Quedadas y torneos en los que he participado";
+						var chart = new ApexCharts(document.querySelector("#chart1"), options1);
+						chart.render();
+					}
 		              var chart2 = new ApexCharts(document.querySelector("#chart2"), options2);
 		              var chart3 = new ApexCharts(document.querySelector("#chart3"), options3);
-		              chart.render();
 		              chart2.render();
 		              chart3.render();
 	</script>
