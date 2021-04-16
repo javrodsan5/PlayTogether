@@ -131,7 +131,6 @@ INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 5);
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(3, 6); 
 INSERT INTO teams_participants(teams_id, participants_id) VALUES(4, 7); 
 
-INSERT INTO matches VALUES(1, '2021/06/15 11:00:00', 2, 1, 2, 1, 1, 1, 2);
 
 INSERT INTO statistics(id, sport_id, user_id) VALUES(1, 1, 1);
 INSERT INTO statistics(id, sport_id, user_id) VALUES(2, 2, 2);
@@ -141,7 +140,7 @@ INSERT INTO pay_type(id, name) VALUES(2, 'Championship');
 INSERT INTO pay_type(id, name) VALUES(3, 'Invitation');
 
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(1, 2.0, '2021/01/16', 2, 8, 8, 3, null);
-INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(2, 5.0, '2021/01/16', 1, null, null, 1, null);
+INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(2, 5.0, CURRENT_TIMESTAMP, 1, null, null, 1, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(3, 5.0, CURRENT_TIMESTAMP, 1, null, null, 2, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(4, 5.0, CURRENT_TIMESTAMP, 1, null, null, 4, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(5, 5.0, CURRENT_TIMESTAMP, 1, null, null, 5, null);
