@@ -263,6 +263,17 @@ p {
 	color: #676767;
 }
 
+#mensaje{
+    display: flex;
+    font-family: Helvetica, Arial, sans-serif;
+    opacity: 1;
+    text-anchor: start;
+    dominant-baseline: auto;
+    font-size: 14px;
+    font-weight: 900;
+    fill: rgb(55, 61, 63);
+}
+
 .frame {
 	width: 100%;
 	margin: 40px auto;
