@@ -14,7 +14,13 @@
 	url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto:300,700')
 	;
 
-/* Set all containers to 100% of the viewport height */
+.carousel-caption h3{
+	text-shadow: 2px 2px black;
+}
+
+.carousel-caption p{
+	color: black;
+}
 
 select {
 	-webkit-appearance: none;
