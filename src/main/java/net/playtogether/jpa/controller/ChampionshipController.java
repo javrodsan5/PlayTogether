@@ -492,8 +492,8 @@ public class ChampionshipController {
 		} else if (championship.getTeams().stream().anyMatch(x -> x.getParticipants().contains(user))) {
 			return "error-403";
 		} else {
-			if(team.getTeamSize()>=participants.size()) {
-				return "redirect:/sports/" + sportId + "/championships/" + championshipId;
+			if(participants.size() >= team.getTeamSize()) {
+				return "error-403";
 			}
 		
 			Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);

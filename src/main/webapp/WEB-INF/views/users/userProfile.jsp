@@ -63,8 +63,7 @@
 							</div>
 						</div>
 
-						<spring:url value="/myprofile/{usuarioId}/edit" var="editUser2Url">
-							<spring:param name="usuarioId" value="${user.id}" />
+						<spring:url value="/myprofile/edit" var="editUser2Url">
 						</spring:url>
 						<center>
 							<a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a>
