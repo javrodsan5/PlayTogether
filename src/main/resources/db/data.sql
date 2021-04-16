@@ -158,8 +158,6 @@ INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(17, 5.0, CURRENT_TIMESTAMP, 1, null, null, 17, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(18, 5.0, CURRENT_TIMESTAMP, 1, null, null, 18, null);
 
-
-
 INSERT INTO invitations VALUES(1, "", null, 3, 3);
 INSERT INTO invitations VALUES(2, "", 1, 3, null);
 

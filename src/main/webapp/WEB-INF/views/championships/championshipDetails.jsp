@@ -66,7 +66,7 @@
 									<spring:param name="championshipId" value="${championship.id}" />
 									<spring:param name="teamId" value="${team.id}" />
 								</spring:url>
-								<c:if test="${participarEquipo==true}"><a style="font-size: 17px"href="${fn:escapeXml(joinChampionshipUrl)}">Unirse</a></c:if>
+								<c:if test="${participarEquipo==true && team.participants.size() < team.teamSize }"><a style="font-size: 17px"href="${fn:escapeXml(joinChampionshipUrl)}">Unirse</a></c:if>
 								
 								<spring:url
 									value="/invitations/team/{teamId}"

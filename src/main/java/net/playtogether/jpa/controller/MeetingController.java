@@ -153,7 +153,6 @@ public class MeetingController {
 				model.put("puedeEliminar", true);
 			}
 		}
-
 		if (!meeting.getParticipants().contains(u)) {
 			b = false;
 		}
@@ -161,9 +160,14 @@ public class MeetingController {
 		if (meeting.getNumberOfPlayers() <= meeting.getParticipants().size()) {
 			estaLlena = true;
 		}
+		if (meeting.getNumberOfPlayers() <= meeting.getParticipants().size() && meeting.getParticipants().contains(u)) {
+			estaLlena = true;
+			b = true;
+		}
 		model.addAttribute("existe", b);
 		model.addAttribute("estaLlena", estaLlena);
 		model.addAttribute("logged_user", u);
+		
 
 		if (usuarios.stream().anyMatch(x -> u.equals(x))) {
 			model.put("leave", true);
@@ -232,19 +236,26 @@ public class MeetingController {
 
 		if (!meeting.getMeetingCreator().getUser().getUsername().equals(principal.getName())) {
 			model.put("loggedUserIsNotTheMeetingCreator", true);
-			return "meetings/meetingDetails";
+			return "error-403";
+			
 		} else {
 			if (!deletedUser.equals(meeting.getMeetingCreator())) {
+				if(!usuario.getUser().getAuthorities().stream()
+							.anyMatch(x -> x.getAuthority().equals("premium"))) {
+					return "error-403";
+				}
 				usuarios.removeIf(u -> deletedUser.equals(u));
 				this.meetingService.save(meeting);
 				Integer puntos = deletedUser.getPuntos() - 5;
 				deletedUser.setPuntos(puntos);
 				this.userService.saveUsuario(deletedUser);
-				model.addAttribute("sport", sportService.findSportById(sportId));
+				model.put("sport", sportService.findSportById(sportId));
+				model.put("eliminado", "Se ha eliminado el jugador correctamente.");
 				return "meetings/meetingDetails";
 			} else {
+				
 				model.put("userToDeleteIsMeetingCreator", true);
-				return "meetings/meetingDetails";
+				return "error-403";
 			}
 
 		}
