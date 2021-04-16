@@ -55,12 +55,32 @@
 										<a style="margin-left: 60px;"
 											href="${fn:escapeXml(userdetails)}"><span
 											class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
+											
+										<spring:url value="/sports/{sportId}/meetings/{meetingId}/{userId}/delete" var="deleteUserMeeting">
+											<spring:param name="sportId" value="${meeting.sport.id}" />
+											<spring:param name="meetingId" value="${meeting.id}" />
+											<spring:param name="userId" value="${participant.id}" />
+										</spring:url>
+								
+										<div class="boto">
+											<a style="margin-left: 60px;" href="${fn:escapeXml(deleteUserMeeting)}">Eliminar jugador</a>
+										</div>
 									</h2>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 				</div>
+				
+				<spring:url	value="/sports/{sportId}/meetings/{meetingId}/leave" var="leaveMeeting">
+					<spring:param name="sportId" value="${meeting.sport.id}" />
+					<spring:param name="meetingId" value="${meeting.id}" />
+				</spring:url>
+					
+			<div class="boto">
+				<c:if test="${leave}"><a href="${fn:escapeXml(leaveMeeting)}">Abandonar equipo</a></c:if>
+			</div>
+				
 			</div>
 		</div>
 
@@ -99,6 +119,8 @@
 		<c:if test="${estaLlena==true}">
 			<p>La quedada a la que intenta unirse está completa.</p>
 		</c:if>
+		<c:if test="${userToDeleteIsMeetingCreator}"><p>No se puede eliminar al creador de la quedada.</p></c:if>
+		<c:if test="${loggedUserIsNotTheMeetingCreator}"><p>No tienes permisos para hacer esto.</p></c:if>
 		<br>
 		<br>
 		<br>
