@@ -121,10 +121,18 @@ INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(3, 'Vodka
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(4, 'Yayo Vallecano', 1, 2, 3);
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(5, 'Jugadores de barrio', 1, 2, 1);
 INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(6, 'Unión Penosa', 1, 3, 1);
-INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(7, 'Nottingham Miedo', 1, 3, 1);
-INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(8, 'Árbitro penalty', 1, 8, 2);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(7, 'Nottingham Miedo', 1, 8, 1);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(8, 'Equipazo', 1, 8, 4);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(9, 'Equipito', 1, 8, 5);
+INSERT INTO teams(id, name, team_size, championships_id, owner) VALUES(10, 'Árbitro penalty', 1, 8, 2);
 
-INSERT INTO matches VALUES(1, '2021/06/15 11:00:00', 2, 1, 2, 1, 1, 1, 2);
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(7, 1);
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(8, 4);
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(9, 3);
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(10, 2);
+
+INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 1); 
+
 
 INSERT INTO statistics(id, sport_id, user_id) VALUES(1, 1, 1);
 INSERT INTO statistics(id, sport_id, user_id) VALUES(2, 2, 2);
@@ -152,8 +160,7 @@ INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(17, 5.0, CURRENT_TIMESTAMP, 1, null, null, 17, null);
 INSERT INTO pay(id, amount, date, pay_type_id, championship_id, team_id, user_id, invitation_id) VALUES(18, 5.0, CURRENT_TIMESTAMP, 1, null, null, 18, null);
 
-INSERT INTO teams_participants(teams_id, participants_id) VALUES(8, 3);
-INSERT INTO teams_participants(teams_id, participants_id) VALUES(2, 1);
+
 
 INSERT INTO invitations VALUES(1, "", null, 3, 3);
 INSERT INTO invitations VALUES(2, "", 1, 3, null);
