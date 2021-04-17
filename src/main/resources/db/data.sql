@@ -199,25 +199,3 @@ INSERT INTO teams_participants(teams_id, participants_id) VALUES(28, 16);
 
 INSERT INTO invitations VALUES(1, "", null, 3, 3);
 INSERT INTO invitations VALUES(2, "", 1, 3, null);
-
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 1);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 2);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 3);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 4);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 5);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 6);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 7);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 8);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 9);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 10);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 11);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 12);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 13);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 14);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 15);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 16);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 17);
-INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(8, 18);
-INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id, creation_date) 
-VALUES(8, 'Polideportivo Los Caños', 'Sevilla', '2021/04/15 09:20:00', 'Mientras más seamos mejor! No dudéis en venir!', 22,1,2, '2021/03/25');
-
