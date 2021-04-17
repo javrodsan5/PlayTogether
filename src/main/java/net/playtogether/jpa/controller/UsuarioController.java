@@ -76,13 +76,29 @@ public class UsuarioController {
 	@GetMapping("/usuarios/{userId}")
 	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId, Principal principal) {
 		Usuario usuario = this.usuarioService.findUserById(userId);
-		model.addAttribute("user", usuario);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
-
 		if (usuario.getId().equals(user.getId())) {
 
 			return "redirect:/myprofile";
 		} else {
+			model.addAttribute("user", usuario);
+			if (user.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+				Integer quedadas = user.getMeetings().size();
+				Integer torneos = user.getTeams().size();
+				int[] datos = { quedadas, torneos };
+				String datos1 = Arrays.toString(datos);
+				model.addAttribute("quedadasTorneos", datos1.replace(" ", ""));
+				Calendar cal = Calendar.getInstance();
+				Integer year = cal.get(Calendar.YEAR);
+				List<Integer> quedadasPorMesList = this.usuarioService.findMeetingByMonth(user.getId(), year);
+				List<Integer> torneosPorMesList = this.usuarioService.findChampionshipByMonth(user.getId(), year);
+				int[] quedadasPorMes = getEventoPorMes(quedadasPorMesList);
+				int[] torneosPorMes = getEventoPorMes(torneosPorMesList);
+				String datos2 = Arrays.toString(quedadasPorMes);
+				String datos3 = Arrays.toString(torneosPorMes);
+				model.addAttribute("quedadasPorMes", datos2.replace(" ", ""));
+				model.addAttribute("torneosPorMes", datos3.replace(" ", ""));
+			}
 			return "users/userDetails";
 		}
 	}
@@ -91,41 +107,38 @@ public class UsuarioController {
 	public String userProfile(final ModelMap model, Principal principal) {
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
-		model.addAttribute("puntos",user.getPuntos());
 		Integer quedadas = user.getMeetings().size();
 		Integer torneos = user.getTeams().size();
-		int[] datos = {quedadas,torneos};
+		int[] datos = { quedadas, torneos };
 		String datos1 = Arrays.toString(datos);
-		System.out.println(datos1);
-		model.addAttribute("quedadasTorneos",datos1.replace(" ",""));
+		model.addAttribute("quedadasTorneos", datos1.replace(" ", ""));
 		Calendar cal = Calendar.getInstance();
 		Integer year = cal.get(Calendar.YEAR);
-		List<Integer> quedadasPorMesList = this.usuarioService.findMeetingByMonth(user.getId(),year);
-		List<Integer> torneosPorMesList = this.usuarioService.findChampionshipByMonth(user.getId(),year);
+		List<Integer> quedadasPorMesList = this.usuarioService.findMeetingByMonth(user.getId(), year);
+		List<Integer> torneosPorMesList = this.usuarioService.findChampionshipByMonth(user.getId(), year);
 		int[] quedadasPorMes = getEventoPorMes(quedadasPorMesList);
 		int[] torneosPorMes = getEventoPorMes(torneosPorMesList);
 		String datos2 = Arrays.toString(quedadasPorMes);
 		String datos3 = Arrays.toString(torneosPorMes);
-		model.addAttribute("quedadasPorMes",datos2.replace(" ",""));
-		model.addAttribute("torneosPorMes",datos3.replace(" ",""));
+		model.addAttribute("quedadasPorMes", datos2.replace(" ", ""));
+		model.addAttribute("torneosPorMes", datos3.replace(" ", ""));
 		return "users/userProfile";
 	}
 
 	@GetMapping("/myprofile/edit")
 	public String initUpdateUsuario(ModelMap model, Principal principal) {
-	
+
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.put("usuario", user);
-	
 
-			return "users/updateUser";
-	
+		return "users/updateUser";
+
 	}
 
 	@PostMapping("/myprofile/edit")
 	public String postUpdateMeeting(@Valid Usuario usuario, BindingResult result, ModelMap model, Principal principal) {
 		Usuario usuarioToUpdate = this.usuarioService.findByUsername(principal.getName());
-		
+
 		if (!usuario.getCorreo().equals(usuarioToUpdate.getCorreo())
 				&& usuarioService.checkCorreoExists(usuario.getCorreo())) {
 			result.addError(new FieldError("usuario", "correo", "El correo ya está registrado"));
@@ -150,7 +163,7 @@ public class UsuarioController {
 		}
 
 	}
-	
+
 	@GetMapping("/myprofile/championshipsRecord")
 	public String championshipsRecord(final ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
@@ -162,7 +175,7 @@ public class UsuarioController {
 		model.addAttribute("championships", championships);
 		return "users/championshipRecord";
 	}
-	
+
 	@GetMapping("/myprofile/meetingsRecord")
 	public String meetingsRecord(final ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
@@ -174,52 +187,54 @@ public class UsuarioController {
 
 		return "users/meetingsRecord";
 	}
-	
+
 	public int[] getEventoPorMes(List<Integer> eventoList) {
-		int contadorEnero=0;
-		int contadorFebrero=0;
-		int contadorMarzo=0;
-		int contadorAbril=0;
-		int contadorMayo=0;
-		int contadorJunio=0;
-		int contadorJulio=0;
-		int contadorAgosto=0;
-		int contadorSeptiembre=0;
-		int contadorOctubre=0;
-		int contadorNoviembre=0;
-		int contadorDiciembre=0;
-		
-		for (Integer i:eventoList) {
+		int contadorEnero = 0;
+		int contadorFebrero = 0;
+		int contadorMarzo = 0;
+		int contadorAbril = 0;
+		int contadorMayo = 0;
+		int contadorJunio = 0;
+		int contadorJulio = 0;
+		int contadorAgosto = 0;
+		int contadorSeptiembre = 0;
+		int contadorOctubre = 0;
+		int contadorNoviembre = 0;
+		int contadorDiciembre = 0;
+
+		for (Integer i : eventoList) {
 			System.out.println(i);
-		    if(i==1) {
-		    	contadorEnero++;
-		    }else if(i==2) {
-		    	contadorFebrero++;
-		    }else if(i==3) {
-		    	contadorMarzo++;
-		    }else if(i==4) {
-		    	contadorAbril++;
-		    }else if(i==5) {
-		    	contadorMayo++;
-		    }else if(i==6) {
-		    	contadorJunio++;
-		    }else if(i==7) {
-		    	contadorJulio++;
-		    }else if(i==8) {
-		    	contadorAgosto++;
-		    }else if(i==9) {
-		    	contadorSeptiembre++;
-		    }else if(i==10) {
-		    	contadorOctubre++;
-		    }else if(i==11) {
-		    	contadorNoviembre++;
-		    }else if(i==12) {
-		    	contadorDiciembre++;
-		    }
+			if (i == 1) {
+				contadorEnero++;
+			} else if (i == 2) {
+				contadorFebrero++;
+			} else if (i == 3) {
+				contadorMarzo++;
+			} else if (i == 4) {
+				contadorAbril++;
+			} else if (i == 5) {
+				contadorMayo++;
+			} else if (i == 6) {
+				contadorJunio++;
+			} else if (i == 7) {
+				contadorJulio++;
+			} else if (i == 8) {
+				contadorAgosto++;
+			} else if (i == 9) {
+				contadorSeptiembre++;
+			} else if (i == 10) {
+				contadorOctubre++;
+			} else if (i == 11) {
+				contadorNoviembre++;
+			} else if (i == 12) {
+				contadorDiciembre++;
+			}
 		}
-		
-		int[] arr =  {contadorEnero,contadorFebrero,contadorMarzo,contadorAbril,contadorMayo,contadorJunio,contadorJulio,contadorAgosto,contadorSeptiembre,contadorOctubre,contadorNoviembre,contadorDiciembre};
-		
+
+		int[] arr = { contadorEnero, contadorFebrero, contadorMarzo, contadorAbril, contadorMayo, contadorJunio,
+				contadorJulio, contadorAgosto, contadorSeptiembre, contadorOctubre, contadorNoviembre,
+				contadorDiciembre };
+
 		return arr;
 	}
 

@@ -188,7 +188,6 @@ public class MeetingController {
 			meeting.setParticipants(list);
 
 			this.meetingService.save(meeting);
-
 			u.setPuntos(u.getPuntos() + 5);
 			this.usuarioService.saveUsuarioAlreadyRegistered(u);
 

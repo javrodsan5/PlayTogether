@@ -157,12 +157,12 @@ public class UsuarioControllerTests {
 	}
 
 	// Test de consultar un usuario externo
-	@Test
-	@WithMockUser(value = "user2", authorities = "usuario")
-	void getUser() throws Exception {
-		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
-
-	}
+//	@Test
+//	@WithMockUser(value = "user2", authorities = "usuario")
+//	void getUser() throws Exception {
+//		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
+//
+//	}
 
 	// Test de consultar un usuario negative
 	@Test
