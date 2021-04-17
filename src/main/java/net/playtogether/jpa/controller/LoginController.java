@@ -1,5 +1,7 @@
 package net.playtogether.jpa.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,7 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class LoginController {
 	
 	@GetMapping(value = "/login")
-	public String login(){
-        return "users/login";
+	public String login(Principal principal){
+        if(principal != null) {
+            return "redirect:/sports";
+        } else {
+            return "users/login";
+        }
     }
 }
