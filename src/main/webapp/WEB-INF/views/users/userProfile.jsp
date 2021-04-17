@@ -13,8 +13,9 @@
 
 	<div class="thirteen">
 		<h1>Datos de mi perfil</h1>
+		<h2>Tienes <c:out value="${user.puntos}" /> puntos</h2>
+		
 	</div>
-
 	<body>
 		<div class="body-container" style="display: inline-block; width: 25%">
 

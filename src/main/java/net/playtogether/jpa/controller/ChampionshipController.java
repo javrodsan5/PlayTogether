@@ -116,7 +116,6 @@ public class ChampionshipController {
 			return "championships/createOrUpdateChampionshipForm";
 		}
 	}
-
 	@GetMapping("/sports/{sportId}/championships")
 	public String listChampionships(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			Principal principal) {
