@@ -67,7 +67,9 @@
 					<table id="meetingTable" class="table table-striped">
 						<c:choose>
 							<c:when test="${team_participants.isEmpty()}">
-								<p>Debe incluir participantes en el equipo</p>
+								<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
+									<p>Debe incluir participantes en el equipo</p>
+								</div>
 							</c:when>
 
 							<c:otherwise>
@@ -143,7 +145,9 @@
 					<table id="meetingTable" class="table table-striped">
 						<c:choose>
 							<c:when test="${meeting_participants.isEmpty()}">
-								<p>Debe incluir participantes en el equipo</p>
+								<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
+									<p>Debe incluir participantes en el equipo</p>
+								</div>
 							</c:when>
 
 							<c:otherwise>

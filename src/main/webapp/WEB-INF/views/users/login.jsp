@@ -16,18 +16,21 @@
 		<div class="crearMeeting">
 		<form:form class="form-horizontal" id="add-usuario-form"
 				action="/login" method="post">
-			 	<label for="username" style= "margin-left:5%"><b>Usuario</b></label>
-                <input type="text" id="username" name="username" style="width: 90%; padding: 5px; margin-left: 5%;
-                 margin-right: 5%"/>
+			 	<label for="username" style="margin-left: 5%"><b>Usuario</b></label>
+                <input type="text" id="username" name="username"
+					style="width: 90%; padding: 5px; margin-left: 5%; margin-right: 5%" />
                  <br>
                  <br>
-                <label for="password" style= "margin-left:5%"><b>Contraseña</b></label>
-                <input type="password" id="password" name="password" style="width: 90%; padding: 5px; margin-left: 5%;
-                 margin-right: 5%"/>
+                <label for="password" style="margin-left: 5%"><b>Contraseña</b></label>
+                <input type="password" id="password" name="password"
+					style="width: 90%; padding: 5px; margin-left: 5%; margin-right: 5%" />
                  <br>
                 <br>
                 <c:if test="${param.error == 'true'}">
-               		<h5 style="color:white; margin-left: 5%"> Usuario o contraseña incorrectos. </h5>
+                	<div class="alert alert-danger"
+						style="margin: 0% 20% 1% 20%">
+               		<h5 style="color: white; margin-left: 5%"> Usuario o contraseña incorrectos. </h5>
+               		</div>
                 </c:if>
                 
 			
