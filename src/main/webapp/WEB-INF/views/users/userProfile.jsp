@@ -20,7 +20,7 @@
 		<div class="body-container" style="display: inline-block; width: 25%">
 
 			<div class="dashboard" style="width: 100%">
-				<div class="grid-container" style="width: 100%">
+				<div class="grid-container" style="width: 360px">
 					<div class="profile grid-area" style="border: grey 1px solid">
 						<div class="img">
 							<img src="/images/avatar.png">

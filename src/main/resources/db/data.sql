@@ -199,4 +199,3 @@ INSERT INTO teams_participants(teams_id, participants_id) VALUES(28, 16);
 
 INSERT INTO invitations VALUES(1, "", null, 3, 3);
 INSERT INTO invitations VALUES(2, "", 1, 3, null);
-

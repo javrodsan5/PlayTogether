@@ -7,7 +7,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="users">
+<playtogether:layout pageName="clasifications">
 	<body>
 		<div class="cardtitle">
 
@@ -15,9 +15,12 @@
 				<strong>Top 10 usuarios de PlayTogether </strong>
 			</h1>
 
-			<br />
-		</div>
 
+		</div>
+		<br>
+		<h2 class="alert alert-primary"
+			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la
+			posición ${posicion}!</h2>
 		<div class="cardlist">
 			<table class="table ">
 				<thead>
