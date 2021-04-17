@@ -78,7 +78,7 @@ INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(11, '
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(12, 'Senderismo', 1, 2);
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(13, 'Balonmano', 7, 1);
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(14, 'Ciclismo', 1, 2);
-INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(15, 'Golf', 1, 1);
+INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(15, 'Golf', 1, 2);
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(16, 'Natación', 1, 2);
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(17, 'Karting', 1, 2);
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(18, 'Pilates', 1, 2);

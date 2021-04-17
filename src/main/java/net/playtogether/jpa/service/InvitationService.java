@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -63,6 +64,19 @@ public class InvitationService {
 	public Boolean isNotInvitedYetToMeeting(int meetingId, Integer receiverId) {
 		return this.invitationRepository.isNotInvitedYetToMeeting(meetingId, receiverId);
 	}
+	
+	@Transactional
+	public void deleteInvitationsByTeamId(Integer teamId) {
+		this.invitationRepository.deleteInvitationsByTeamId(teamId);
+		
+	}
+
+	@Transactional
+	public void deleteInvitationsByMeetingId(Integer meetingId) {
+		this.invitationRepository.deleteInvitationsByMeetingId(meetingId);
+		
+	}
+
 
 
 	

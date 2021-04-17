@@ -139,7 +139,7 @@
 				</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(meetingUpdateUrl)}">Editar</a>
 		</c:if>
 
-		<c:if test="${meeting.meetingCreator == logged_user && !estaLlena}">
+		<c:if test="${meeting.meetingCreator == logged_user && !estaLlena && puedeEliminar}">
 			<td><spring:url value="/invitations/meeting/{meetingId}"
 					var="searchPeopleUrl">
 					<spring:param name="meetingId" value="${meeting.id}" />

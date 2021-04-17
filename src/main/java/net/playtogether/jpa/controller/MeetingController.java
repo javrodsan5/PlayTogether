@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Usuario;
+import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.MeetingService;
 import net.playtogether.jpa.service.SportService;
 import net.playtogether.jpa.service.UsuarioService;
@@ -41,6 +42,9 @@ public class MeetingController {
 
 	@Autowired
 	UsuarioService	usuarioService;
+	
+	@Autowired
+	InvitationService	invitationService;
 
 
 	@InitBinder("meeting")
@@ -211,6 +215,18 @@ public class MeetingController {
 			Integer puntos = usuario.getPuntos() - 7;
 			usuario.setPuntos(puntos);
 			this.userService.saveUsuario(usuario);
+			
+			if (usuarios.size() == 0) {
+				invitationService.deleteInvitationsByMeetingId(meetingId);
+				return "redirect:/sports/" + meeting.getSport().getId() + "/championships/" + meetingId;
+			} else {
+				meeting.setMeetingCreator(usuarios.get(0));
+				this.meetingService.save(meeting);
+				Integer puntos2 = usuarios.get(0).getPuntos() + 2;
+				usuarios.get(0).setPuntos(puntos2);
+				userService.saveUsuario(usuarios.get(0));
+			}
+			
 		} else {
 			Integer puntos = usuario.getPuntos() - 5;
 			usuario.setPuntos(puntos);

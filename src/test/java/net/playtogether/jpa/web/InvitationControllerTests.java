@@ -8,7 +8,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import net.playtogether.jpa.entity.Authorities;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Invitation;
 import net.playtogether.jpa.entity.Match;
@@ -95,6 +98,12 @@ public class InvitationControllerTests {
 		user.setUsername("user1");
 		user.setPassword("password");
 		user.setEnabled(true);
+		Set<Authorities> setAuthorities = new HashSet<Authorities>();
+		Authorities authorities = new Authorities();
+		authorities.setAuthority("premium");
+		authorities.setUser(user);
+		setAuthorities.add(authorities);
+		user.setAuthorities(setAuthorities);
 		
 		Usuario u = new Usuario();
 		u.setId(1);
@@ -205,6 +214,8 @@ public class InvitationControllerTests {
 		BDDMockito.given(this.invitationService.findById(2)).willReturn(invitation2);
 		
 		BDDMockito.given(this.meetingService.findMeetingById(this.testMeeting.getId())).willReturn(this.testMeeting);
+		BDDMockito.given(this.userService.usuarioLogueado(u.getUser().getUsername())).willReturn(u);
+		
 		
 	}
 
@@ -382,7 +393,6 @@ public class InvitationControllerTests {
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
 	
-	/*
 	// Test de rechazar una invitación a quedada
 	@Test
 	@WithMockUser(value = "user1", authorities="usuario")
@@ -391,14 +401,6 @@ public class InvitationControllerTests {
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}	
 	
-  // Test de aceptar invitación a quedada error usuario básico
-	@Test
-	@WithMockUser(value = "user1", authorities="usuario")
-	void testAcceptInvitationMeetingBasicUser() throws Exception {
-		this.mockMvc.perform(get("/invitations/meetingInvitations/8/?accepted=true")).andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-		.andExpect(MockMvcResultMatchers.view().name("redirect:/pay/championship/8/team/2?invitationId=1"));
-	}
-
   // Test de aceptar invitación a quedada correcto usuario premium
 	@Test
 	@WithMockUser(value = "user1", authorities={"premium", "usuario"})
@@ -407,7 +409,6 @@ public class InvitationControllerTests {
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
   
-	 */
 	
 	
 }

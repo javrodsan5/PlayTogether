@@ -59,9 +59,14 @@ public class InvitationController {
 	@GetMapping("/invitations/team/{teamId}")
 	public String searchParticipants(final ModelMap model, @PathVariable("teamId") final Integer teamId, Principal principal) {
 		Team team = this.championshipService.findTeamId(teamId);
+		Usuario usuario = userService.usuarioLogueado(principal.getName());
 		
 		if (!team.getUser().getUser().getUsername().equals(principal.getName()) || (team.getParticipants().size() >= team.getTeamSize())) {
 			return "redirect:/sports/" + team.getChampionship().getSport().getId() + "/championships/" + team.getChampionship().getId();
+		}
+		
+		if (!usuario.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+			return "error-403";
 		}
 		
 		model.put("team_participants", team.getParticipants());
@@ -77,6 +82,7 @@ public class InvitationController {
 			final ModelMap model, @PathVariable("teamId") final Integer teamId, Principal principal) {
 		List<Usuario> searched_users = new ArrayList<>();
 		Team team = this.championshipService.findTeamId(teamId);
+		Usuario usuario = userService.usuarioLogueado(principal.getName());
 		
 		if (!team.getUser().getUser().getUsername().equals(principal.getName()) || (team.getParticipants().size() >= team.getTeamSize())) {
 			return "redirect:/sports/" + team.getChampionship().getSport().getId() + "/championships/" + team.getChampionship().getId();
@@ -90,6 +96,10 @@ public class InvitationController {
 		if (!team.getUser().getUser().getUsername().equals(principal.getName())) {
 			model.put("loggedUserIsNotTheTeamOwner", true);
 			return "invitations/addParticipantsForm";
+		}
+		
+		if (!usuario.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+			return "error-403";
 		}
 		
 		if (search == null || search.equals("")) {
@@ -265,9 +275,14 @@ public class InvitationController {
 	@GetMapping("/invitations/meeting/{meetingId}")
 	public String searchParticipantsMeeting(final ModelMap model, @PathVariable("meetingId") final Integer meetingId, Principal principal) {
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
+		Usuario usuario = userService.usuarioLogueado(principal.getName());
 		
 		if (!meeting.getMeetingCreator().getUser().getUsername().equals(principal.getName()) || (meeting.getParticipants().size() >= meeting.getNumberOfPlayers())) {
 			return "redirect:/sports/" + meeting.getSport().getId() + "/meetings/" + meetingId;
+		}
+		
+		if (!usuario.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+			return "error-403";
 		}
 		
 		model.put("meeting_participants", meeting.getParticipants());
@@ -283,6 +298,7 @@ public class InvitationController {
 			final ModelMap model, @PathVariable("meetingId") final Integer meetingId, Principal principal) {
 		List<Usuario> searched_users = new ArrayList<>();
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
+		Usuario usuario = userService.usuarioLogueado(principal.getName());
 		model.put("meeting_participants", meeting.getParticipants());
 		model.put("meetingSize", meeting.getNumberOfPlayers());
 		model.put("meeting", meeting);
@@ -290,6 +306,10 @@ public class InvitationController {
 		
 		if (!meeting.getMeetingCreator().getUser().getUsername().equals(principal.getName()) || (meeting.getParticipants().size() >= meeting.getNumberOfPlayers())) {
 			return "redirect:/sports/" + meeting.getSport().getId() + "/meetings/" + meetingId;
+		}
+		
+		if (!usuario.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+			return "error-403";
 		}
 		
 		if (search == null || search.equals("")) {

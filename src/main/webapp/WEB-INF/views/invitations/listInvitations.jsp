@@ -21,6 +21,7 @@
 					o en progreso. Las invitaciones a torneos pasados se descartarán
 					automáticamente</p>
 			</div>
+
 			<c:if test="${invitations.size()==0}">
 				<h3 class="alert alert-warning"
 					style="margin: 0px 35% 0px 35%; text-align: center">No tienes
@@ -73,6 +74,7 @@
 								<th class="">Aceptar</th>
 								<th class="">Rechazar</th>
 							</tr>
+
 						</thead>
 						<tbody>
 							<c:forEach items="${invitations}" var="invitation">
@@ -136,6 +138,7 @@
 					o en progreso. Las invitaciones a torneos pasados se descartarán
 					automáticamente</p>
 			</div>
+
 			<c:if test="${invitations.size()==0}">
 				<h3 class="alert alert-warning"
 					style="margin: 0px 35% 0px 35%; text-align: center">No tienes

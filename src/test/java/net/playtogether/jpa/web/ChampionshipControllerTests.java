@@ -9,7 +9,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +29,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import net.playtogether.jpa.entity.Authorities;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Meeting;
@@ -336,6 +339,14 @@ public class ChampionshipControllerTests {
 		@Test
 		@WithMockUser(username = "user1", authorities = { "usuario" }, password = "password")
 		void deleteTeamPlayer() throws Exception {
+			User user = this.user;
+			Set<Authorities> setAuthorities = new HashSet<Authorities>();
+			Authorities authorities = new Authorities();
+			authorities.setAuthority("premium");
+			authorities.setUser(user);
+			setAuthorities.add(authorities);
+			user.setAuthorities(setAuthorities);
+			
 			this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/8/teams/8/2/delete"))
 					.andExpect(MockMvcResultMatchers.status().isOk())
 					.andExpect(MockMvcResultMatchers.view().name("teams/teamDetails"));

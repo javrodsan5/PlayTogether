@@ -81,13 +81,12 @@
 											<a style="font-size: 17px"
 												href="${fn:escapeXml(joinChampionshipUrl)}">Unirse</a>
 										</c:if>
-
 										<spring:url value="/invitations/team/{teamId}"
 											var="searchPeopleUrl">
 											<spring:param name="teamId" value="${team.id}" />
 										</spring:url>
 										<c:if
-											test="${team.user == logged_user && team.participants.size() < team.teamSize}">
+											test="${team.user == logged_user && team.participants.size() < team.teamSize && premium}">
 											<a style="font-size: 17px"
 												href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
 										</c:if>
