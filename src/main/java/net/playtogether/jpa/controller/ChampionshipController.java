@@ -120,7 +120,6 @@ public class ChampionshipController {
 			return "championships/createOrUpdateChampionshipForm";
 		}
 	}
-
 	@GetMapping("/sports/{sportId}/championships")
 	public String listChampionships(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			Principal principal) {
@@ -194,6 +193,11 @@ public class ChampionshipController {
 
 		if (championship.getTeams().size() >= championship.getMaxTeams()) {
 			b1 = false;
+		}
+		for(Team t:teams) {
+			if(t.getUser().equals(user)) {
+				b1 = false;
+			}
 		}
 		model.addAttribute("crearEquipo", b1);
 		model.addAttribute("participarEquipo", b2);
@@ -496,7 +500,10 @@ public class ChampionshipController {
 		} else if (championship.getTeams().stream().anyMatch(x -> x.getParticipants().contains(user))) {
 			return "error-403";
 		} else {
-
+			if(participants.size() >= team.getTeamSize()) {
+				return "error-403";
+			}
+		
 			Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(principal.getName(), championshipId);
 
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -525,14 +532,15 @@ public class ChampionshipController {
 			Principal principal) {
 		Team team = new Team();
 		Championship championship = championshipService.findChampionshipId(championshipId);
-
+		Usuario userPrincipal = this.userService.findByUsername(principal.getName());
 		List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);
 		for (Team t : joinedTeams) {
-			if (t.getParticipants().contains(this.userService.findByUsername(principal.getName()))) {
+			if (t.getParticipants().contains(userPrincipal) || t.getUser().equals(userPrincipal)) {
 				return "error-403";
 			}
 		}
 		model.addAttribute("team", team);
+		model.put("principal", userPrincipal);
 		model.put("championship", championship);
 
 		return "teams/createOrUpdateTeamForm";
@@ -544,7 +552,7 @@ public class ChampionshipController {
 			Principal principal) {
 		Championship championship = championshipService.findChampionshipId(championshipId);
 		model.put("championship", championship);
-
+		
 		List<Team> joinedTeams = this.championshipService.findTeamsByChampionshipId(championshipId);
 		for (Team t : joinedTeams) {
 			if (t.getParticipants().contains(this.userService.findByUsername(principal.getName()))) {

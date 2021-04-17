@@ -16,16 +16,33 @@
 <playtogether:layout pageName="meetings">
 
 	<body>
+		<c:if test="${existe==true}">
+			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+				<p>¡Ya estás participando en esta quedada!</p>
+			</div>
+		</c:if>
+		<c:if test="${estaLlena==true && existe==false}">
+			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+				<p>La quedada a la que intenta unirse está completa.</p>
+			</div>
+		</c:if>
+		<c:if test="${userToDeleteIsMeetingCreator}">
+			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+				<p>No se puede eliminar al creador de la quedada.</p>
+			</div>
+		</c:if>
 
 		<c:if test="${loggedUserIsNotTheMeetingCreator}">
-			<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
 				<p style="color: black; font-size: 20px; font-weight: bolder;">No
 					tienes permisos para hacer esto.</p>
 			</div>
 		</c:if>
 
 		<c:if test="${loggedUserIsNotTheChampionshipTeamOwner}">
-			<p>Ha aceptado la invitación</p>
+			<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
+				<p>Ha aceptado la invitación</p>
+			</div>
 		</c:if>
 		<div class="Card1Meeting">
 			<div class="photo"
@@ -48,46 +65,50 @@
 				</p>
 			</div>
 		</div>
-		<div style="float: right; margin-right: 50px">
+		<div style="float: right; margin-right: 5%; width: 35%">
 			<h2>
 				Nº participantes:
 				<c:out value="${meeting.participants.size()}" />
 				/
 				<c:out value="${meeting.numberOfPlayers}" />
 			</h2>
-			<div class="drop" style="float: right; margin-right: 50px">
+			<div class="drop">
 
 				<div class="drop__container" id="drop-items">
-					<c:forEach items="${meeting.participants}" var="participant">
-						<div class="drop__card">
-							<div class="drop__data">
-								<div>
-									<h2 class="drop__name">
-										<spring:url value="/usuarios/{userId}" var="userdetails">
-											<spring:param name="userId" value="${participant.id}" />
-										</spring:url>
-										<a style="margin-left: 60px;"
-											href="${fn:escapeXml(userdetails)}"><span
-											class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
-										<c:if test="${puedeEliminar == true}">
-										<c:if test="${participant.id!=meeting.meetingCreator.id}">
-										<spring:url
-											value="/sports/{sportId}/meetings/{meetingId}/{userId}/delete"
-											var="deleteUserMeeting">
-											<spring:param name="sportId" value="${meeting.sport.id}" />
-											<spring:param name="meetingId" value="${meeting.id}" />
-											<spring:param name="userId" value="${participant.id}" />
-										</spring:url>
-										<a style="margin-left: 60px"
-											href="${fn:escapeXml(deleteUserMeeting)}"> <i
-											class="fa fa-trash" style="color: red"></i></a>
-									</c:if>
-									</c:if>
-									</h2>
+					<div class="scroll_vertical" id="style_scroll">
+						<c:forEach items="${meeting.participants}" var="participant">
+							<center>
+								<div class="drop__card">
+									<div class="drop__data">
+										<div>
+											<h2 class="drop__name">
+												<spring:url value="/usuarios/{userId}" var="userdetails">
+													<spring:param name="userId" value="${participant.id}" />
+												</spring:url>
+												<a style="margin-left: 60px;"
+													href="${fn:escapeXml(userdetails)}"><span
+													class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
+												<c:if test="${puedeEliminar == true}">
+													<c:if test="${participant.id!=meeting.meetingCreator.id}">
+														<spring:url
+															value="/sports/{sportId}/meetings/{meetingId}/{userId}/delete"
+															var="deleteUserMeeting">
+															<spring:param name="sportId" value="${meeting.sport.id}" />
+															<spring:param name="meetingId" value="${meeting.id}" />
+															<spring:param name="userId" value="${participant.id}" />
+														</spring:url>
+														<a style="margin-left: 60px"
+															href="${fn:escapeXml(deleteUserMeeting)}"> <i
+															class="fa fa-trash" style="color: red"></i></a>
+													</c:if>
+												</c:if>
+											</h2>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-					</c:forEach>
+							</center>
+						</c:forEach>
+					</div>
 				</div>
 
 				<spring:url value="/sports/{sportId}/meetings/{meetingId}/leave"
@@ -109,12 +130,6 @@
 			</div>
 		</div>
 
-		<c:if test="${existe==false && estaLlena==false}">
-			<spring:url value="/meetings/${meeting.id}/join" var="joinUrl">
-			</spring:url>
-			<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
-
-		</c:if>
 		<c:if test="${esCreador==true}">
 			<td><spring:url
 					value="/sports/{sportId}/meetings/{meetingId}/edit"
@@ -132,8 +147,13 @@
 		</c:if>
 
 		<div class="form-group">
+			<c:if test="${existe==false && estaLlena==false}">
+				<spring:url value="/meetings/${meeting.id}/join" var="joinUrl">
+				</spring:url>
+				<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
+			</c:if>
 			<button class="botonMeeting"
-				style="font-size: 0.8em; margin-left: 22.72em;"
+				style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
 				onclick="location.href='/sports/${meeting.sport.id}/meetings';"
 				type="button">
 				<b>Volver a listado</b>
@@ -142,15 +162,6 @@
 
 		<br>
 		<c:out value="${eliminado}" />
-		<c:if test="${existe==true}">
-			<p>¡Ya estás participando en esta quedada!</p>
-		</c:if>
-		<c:if test="${estaLlena==true && existe==false}">
-			<p>La quedada a la que intenta unirse está completa.</p>
-		</c:if>
-		<c:if test="${userToDeleteIsMeetingCreator}">
-			<p>No se puede eliminar al creador de la quedada.</p>
-		</c:if>
 
 		<br>
 		<br>

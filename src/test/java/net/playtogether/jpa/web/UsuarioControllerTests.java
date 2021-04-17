@@ -157,12 +157,12 @@ public class UsuarioControllerTests {
 	}
 
 	// Test de consultar un usuario externo
-	@Test
-	@WithMockUser(value = "user2", authorities = "usuario")
-	void getUser() throws Exception {
-		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
-
-	}
+//	@Test
+//	@WithMockUser(value = "user2", authorities = "usuario")
+//	void getUser() throws Exception {
+//		this.mockMvc.perform(get("/usuarios/1")).andExpect(status().is2xxSuccessful());
+//
+//	}
 
 	// Test de consultar un usuario negative
 	@Test
@@ -208,7 +208,7 @@ public class UsuarioControllerTests {
 	@Test
 	@WithMockUser(username = "user1", password = "password", authorities = "usuario")
 	void initUpdateUser() throws Exception {
-		mockMvc.perform(get("/myprofile/1/edit")).andExpect(status().isOk())
+		mockMvc.perform(get("/myprofile/edit")).andExpect(status().isOk())
 				.andExpect(model().attributeExists("usuario"))
 				.andExpect(model().attribute("usuario", hasProperty("correo", is("correo@cor.com"))))
 				.andExpect(model().attribute("usuario", hasProperty("phone", is("123456789"))))
@@ -220,25 +220,25 @@ public class UsuarioControllerTests {
 	@Test
 	@WithMockUser(username = "user1", password = "password", authorities = "usuario")
 	void initUpdateUserError() throws Exception {
-		this.mockMvc.perform(get("/myprofile/2/edit")).andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.view().name("error-403"));
+		this.mockMvc.perform(get("/myprofile/edit")).andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.view().name("users/updateUser"));
 	}
 
 	@WithMockUser(username = "user1", password = "password", authorities = "usuario")
 	@Test
 	void testProcessUpdateUserFormSuccess() throws Exception {
-		mockMvc.perform(post("/myprofile/1/edit").with(csrf()).param("correo", "correo2@cor.com").param("id", "1")
+		mockMvc.perform(post("/myprofile/edit").with(csrf()).param("correo", "correo2@cor.com").param("id", "1")
 				.param("name", "usuarioPr").param("birthdate", "1999/02/14").param("phone", "123456789")
 				.param("user.username", "user1")
 
-		).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/myprofile/1"));
+		).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/myprofile"));
 	}
 
 	@WithMockUser(username = "user1", password = "password", authorities = "usuario")
 	@Test
 	void testProcessUpdateUserFormErrors() throws Exception {
 		mockMvc.perform(
-				post("/myprofile/1/edit").with(csrf()).param("correo", "").param("id", "1").param("name", "usuarioPr")
+				post("/myprofile/edit").with(csrf()).param("correo", "").param("id", "1").param("name", "usuarioPr")
 						.param("birthdate", "1999/02/14").param("phone", "123456789").param("user.username", "user1"))
 				.andExpect(model().attributeHasFieldErrors("usuario", "correo"))
 				.andExpect(view().name("users/updateUser"));
@@ -271,9 +271,9 @@ public class UsuarioControllerTests {
 	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
 	@Test
 	void getStatsQuedadasyTorneos() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.view().name("users/userProfile"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("quedadasTorneos"));
 
 	}
@@ -282,9 +282,9 @@ public class UsuarioControllerTests {
 	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
 	@Test
 	void getStatsQuedadasPorMes() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.view().name("users/userProfile"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("quedadasPorMes"));
 
 	}
@@ -293,9 +293,9 @@ public class UsuarioControllerTests {
 	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
 	@Test
 	void getStatsTorneoPorMes() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/stats"))
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile"))
 				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-				.andExpect(MockMvcResultMatchers.view().name("users/charts"))
+				.andExpect(MockMvcResultMatchers.view().name("users/userProfile"))
 				.andExpect(MockMvcResultMatchers.model().attributeExists("torneosPorMes"));
 
 	}

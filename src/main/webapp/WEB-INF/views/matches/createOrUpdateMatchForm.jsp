@@ -82,7 +82,9 @@
 						<br>
 						<br>
 						<c:if test="${noPuntos}">
-							<p>Faltan campos por rellenar.</p>
+							<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+								<p>Faltan campos por rellenar.</p>
+							</div>
 						</c:if>
 					</c:if>
 					<c:if test="${isPuntos1==false}">
@@ -118,7 +120,9 @@
 						<br>
 						<br>
 						<c:if test="${noPuntos}">
-							<p>Faltan campos por rellenar.</p>
+							<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+								<p>Faltan campos por rellenar.</p>
+							</div>
 						</c:if>
 					</c:if>
 

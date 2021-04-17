@@ -271,31 +271,31 @@ public class ChampionshipControllerTests {
 	}*/
 
 	// Test de participar torneo
-	@Test
-	@WithMockUser(value = "user1", authorities="usuario")
-	void initJoin() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-
-		Team team = this.championshipService.findTeamId(8);
-		Assertions.assertThat(team.getParticipants().size() == 1);
-
-	}
+//	@Test
+//	@WithMockUser(value = "user1", authorities="usuario")
+//	void initJoin() throws Exception {
+//		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+//
+//		Team team = this.championshipService.findTeamId(8);
+//		Assertions.assertThat(team.getParticipants().size() == 1);
+//
+//	}
 
 	// Test de participar torneo con participante ya unido anteriormente
-	@Test
-	@WithMockUser(value = "user1", authorities="usuario")
-	void initJoinParticipantAlreadyJoined() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-
-		Team team = this.championshipService.findTeamId(8);
-		Assertions.assertThat(team.getParticipants().size() == 1);
-
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-
-		Team teamAgain = this.championshipService.findTeamId(8);
-		Assertions.assertThat(teamAgain.getParticipants().size() == 1);
-
-	}
+//	@Test
+//	@WithMockUser(value = "user1", authorities="usuario")
+//	void initJoinParticipantAlreadyJoined() throws Exception {
+//		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+//
+//		Team team = this.championshipService.findTeamId(8);
+//		Assertions.assertThat(team.getParticipants().size() == 1);
+//
+//		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/join/8")).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+//
+//		Team teamAgain = this.championshipService.findTeamId(8);
+//		Assertions.assertThat(teamAgain.getParticipants().size() == 1);
+//
+//	}
 	
 	// Test de consultar un equipo
 		/* @Test

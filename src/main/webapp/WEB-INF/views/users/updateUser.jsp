@@ -20,12 +20,14 @@
 			<playtogether:inputField label="Nombre" name="name" />
 			<playtogether:inputField label="Correo" name="correo" />
 			<playtogether:inputField label="Telefono" name="phone" />
-			<playtogether:inputField label="*Contraseña" name="user.password"/>
-			<playtogether:inputField label="Contraseña" name="user.password" />
+			
+			<playtogether:inputField label="*Contraseña" name="user.password" />
+	
 			<playtogether:localDate label="Fecha nacimiento" name="birthdate"
 					id="birthdate" />
-			
-		
+					<div class="ocultar">
+			<playtogether:inputField label="Usuario" name="user" />
+				</div>
 		<div class="form-group">
 			<button class="botonMeeting" type="submit">
 			<b>Modificar</b>

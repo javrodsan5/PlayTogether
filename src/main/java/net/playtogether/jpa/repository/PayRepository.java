@@ -32,4 +32,6 @@ public interface PayRepository extends CrudRepository<Pay, Integer> {
     @Query("SELECT p FROM Pay p WHERE p.user.user.username = ?1 AND p.payType.id=1 AND p.date != null")
     public List<Pay> findLastPayByUsernamePremium(String username);
     
+    List<Pay> findAll();
+    
 }

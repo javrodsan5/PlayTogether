@@ -19,6 +19,11 @@ public class PayService {
     }
 
     @Transactional
+    public List<Pay> findAll() {
+        return this.payRepository.findAll();
+    }
+    
+    @Transactional
     public void save(Pay pay) {
         this.payRepository.save(pay);
     }

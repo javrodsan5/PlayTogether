@@ -1,5 +1,6 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
@@ -8,13 +9,23 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
 <playtogether:layout pageName="meetings">
-<body>
-<div class="cardtitle">
-<h1><strong>Quedadas de ${nombreDeporte}</strong></h1>
-<br/>
-</div>
-<div class="cardlist">
-		<table id="meetingTable" class="table ">
+	<body>
+		<div class="cardtitle">
+			<h1>
+				<strong>Quedadas de ${nombreDeporte}</strong>
+			</h1>
+			<br />
+		</div>
+		<c:if test="${limiteMes}">
+			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+				<p>
+					Has llegado al límite de quedadas por mes para usuario básico. <a
+						class="cta-button" href="/pay/premium">Suscríbete</a>
+				</p>
+			</div>
+		</c:if>
+		<div class="cardlist">
+			<table id="meetingTable" class="table ">
 				<thead>
 					<tr class="rowtable">
 						<th class="guiz-awards-header-title" style="width: 20%;">Dirección</th>
@@ -55,9 +66,6 @@
 				<a id="createMeeting" href="${fn:escapeXml(dateUrl)}">Crear
 					quedada</a>
 			</div>
-			<c:if test="${limiteMes}">
-	<p>Has llegado al límite de quedadas por mes para usuario básico <a class="cta-button" href="/pay/premium">Suscríbete</a> </p>
-</c:if>
 		</div>
 </playtogether:layout>
 

@@ -39,6 +39,10 @@
                 chart: {
                 type: 'donut',
               },
+              title: {
+                  text: 'Quedadas creadas por mes',
+                  align: 'left'
+                },
               responsive: [{
                 breakpoint: 480,
                 options: {
