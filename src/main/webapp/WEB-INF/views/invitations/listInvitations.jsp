@@ -47,6 +47,10 @@
 						<p>No existe la invitación</p>
 					</c:if>
 
+					<c:if test="${invitations.size() == 0}">
+						<p>No hay invitaciones pendientes</p>
+					</c:if>
+					<c:if test="${invitations.size() > 0}">
 					<thead>
 						<tr class="rowtable">
 							<th class="">Nombre de torneo</th>
@@ -96,6 +100,7 @@
 							</tr>
 						</c:forEach>
 					</tbody>
+					</c:if>
 
 				</table>
 			</div>
@@ -143,6 +148,11 @@
 						<p>No existe la invitación</p>
 					</c:if>
 
+
+					<c:if test="${invitations.size() == 0}">
+						<p>No hay invitaciones pendientes</p>
+					</c:if>
+					<c:if test="${invitations.size() > 0}">
 					<thead>
 						<tr class="rowtable">
 							<th class="">Anfitrión</th>
@@ -190,6 +200,7 @@
 							</tr>
 						</c:forEach>
 					</tbody>
+					</c:if>
 
 				</table>
 			</div>

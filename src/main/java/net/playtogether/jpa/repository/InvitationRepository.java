@@ -2,6 +2,7 @@ package net.playtogether.jpa.repository;
 
 import java.util.Collection;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,14 @@ public interface InvitationRepository extends CrudRepository<Invitation, Integer
 	
 	@Query("SELECT COUNT(i) = 0 from Invitation i WHERE (i.meeting.id = ?1 AND i.receiver.id = ?2)")
 	Boolean isNotInvitedYetToMeeting(int meetingId, Integer receiverId);
+
+	@Modifying
+	@Query("DELETE FROM Invitation i WHERE i.team.id = ?1")
+	void deleteInvitationsByTeamId(Integer teamId);
+	
+	@Modifying
+	@Query("DELETE FROM Invitation i WHERE i.meeting.id = ?1")
+	void deleteInvitationsByMeetingId(Integer meetingId);
 
 
 	
