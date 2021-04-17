@@ -111,24 +111,21 @@ public class UsuarioController {
 		return "users/userProfile";
 	}
 
-	@GetMapping("/myprofile/{userId}/edit")
-	public String initUpdateUsuario(ModelMap model, @PathVariable("userId") Integer userId, Principal principal) {
-		Usuario usuario = this.usuarioService.findUserById(userId);
+	@GetMapping("/myprofile/edit")
+	public String initUpdateUsuario(ModelMap model, Principal principal) {
+	
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
-		model.put("usuario", usuario);
-		if (usuario.getId().equals(user.getId())) {
+		model.put("usuario", user);
+	
 
 			return "users/updateUser";
-		} else {
-			return "error-403";
-		}
+	
 	}
 
-	@PostMapping("/myprofile/{userId}/edit")
-	public String postUpdateMeeting(@Valid Usuario usuario, BindingResult result, ModelMap model,
-			@PathVariable("userId") Integer userId) {
-		Usuario usuarioToUpdate = this.usuarioService.findUserById(userId);
-
+	@PostMapping("/myprofile/edit")
+	public String postUpdateMeeting(@Valid Usuario usuario, BindingResult result, ModelMap model, Principal principal) {
+		Usuario usuarioToUpdate = this.usuarioService.findByUsername(principal.getName());
+		
 		if (!usuario.getCorreo().equals(usuarioToUpdate.getCorreo())
 				&& usuarioService.checkCorreoExists(usuario.getCorreo())) {
 			result.addError(new FieldError("usuario", "correo", "El correo ya está registrado"));
@@ -149,7 +146,7 @@ public class UsuarioController {
 					"statistics", "payment", "puntos");
 			this.usuarioService.saveUsuario(usuarioToUpdate);
 			model.addAttribute("message", "¡Cuenta actualizada correctamente!");
-			return "redirect:/myprofile/" + userId;
+			return "redirect:/myprofile";
 		}
 
 	}
