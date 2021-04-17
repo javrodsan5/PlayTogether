@@ -241,10 +241,11 @@ public class UsuarioController {
 	@GetMapping("/clasification")
 	public String usersClasification(ModelMap model, Principal principal) {
 		List<Usuario> topUsuarios = usuarioService.findTopUsuarios().stream().limit(10).collect(Collectors.toList());
+		List<Usuario> todosUsuarios = usuarioService.findAll();
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
-		for (int i = 0; i < topUsuarios.size(); i++) {
-			if (topUsuarios.get(i).equals(usuario)) {
+		for (int i = 0; i < todosUsuarios.size(); i++) {
+			if (todosUsuarios.get(i).equals(usuario)) {
 				posicion = i + 1;
 				break;
 			}

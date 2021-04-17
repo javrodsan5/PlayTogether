@@ -395,11 +395,11 @@ public class ChampionshipController {
 		boolean participa1 = participantes1.stream().anyMatch(p -> p.equals(user));
 		boolean participa2 = participantes2.stream().anyMatch(p -> p.equals(user));
 
-/*		List<Integer> listaPuntos = new ArrayList<>();
+		List<Integer> listaPuntos = new ArrayList<>();
 		for (int i = 0; i <= 200; i++) {
 			listaPuntos.add(i);
 		}
-*/
+
 
 		if (participa1 && team.equals("team1")) {
 
@@ -407,7 +407,7 @@ public class ChampionshipController {
 			Championship championship = this.championshipService.findChampionshipId(championshipId);
 			model.addAttribute("championshipObj", championship);
 			model.put("isPuntos1", true);
-//			model.put("listaPuntos", listaPuntos);
+			model.put("listaPuntos", listaPuntos);
 
 			return "matches/createOrUpdateMatchForm";
 
@@ -417,7 +417,7 @@ public class ChampionshipController {
 			Championship championship = this.championshipService.findChampionshipId(championshipId);
 			model.addAttribute("championshipObj", championship);
 			model.put("isPuntos1", false);
-//			model.put("listaPuntos", listaPuntos);
+			model.put("listaPuntos", listaPuntos);
 
 			return "matches/createOrUpdateMatchForm";
 

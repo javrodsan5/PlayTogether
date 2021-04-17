@@ -111,6 +111,11 @@ public class InvitationController {
 			return "invitations/addParticipantsForm";
 		}
 		searched_users = this.championshipService.findUserByNameOrUsername(search);
+		
+		if (searched_users.isEmpty()) {
+			model.put("noUser", true);
+			return "invitations/addParticipantsForm";
+		}
 
 		this.deleteRepeatedUsers(team, searched_users);
 		if (searched_users.isEmpty()) {
@@ -322,6 +327,11 @@ public class InvitationController {
 		}
 		searched_users = this.championshipService.findUserByNameOrUsername(search);
 
+		if (searched_users.isEmpty()) {
+			model.put("noUser", true);
+			return "invitations/addParticipantsForm";
+		}
+		
 		this.deleteRepeatedUsersMeeting(meeting, searched_users);
 		if (searched_users.isEmpty()) {
 			model.put("notMoreUsers", true);
