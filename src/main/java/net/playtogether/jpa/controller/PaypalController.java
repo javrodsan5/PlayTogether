@@ -256,7 +256,6 @@ public class PaypalController {
 						au.setUser(user.getUser());
 						this.authoritiesService.save(au);
 					}
-					this.userLoginService.loadUserByUsername(principal.getName());
 					return "pay/success";
 				} else if (pay.getTeam() == null) {
 					return "redirect:/sports/" + pay.getChampionship().getSport().getId() + "/championships/"
