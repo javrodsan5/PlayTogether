@@ -34,7 +34,7 @@
 			</button>
 		</div>
 		<div class="form-group">
-						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/myprofile/${usuario.id}';" type="button">
+						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/myprofile';" type="button">
 							<b>Volver a perfil</b>
 						</button>
 					</div>

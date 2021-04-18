@@ -363,14 +363,14 @@ public class ChampionshipController {
 	}
 
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/{matchId}/result/{team}")
-	public String matchDetails(@RequestParam(value = "search", required = false) final String search,
+	public String matchDetails(
 			final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId,
 			@PathVariable("matchId") final Integer matchId, @PathVariable("team") final String team,
 			Principal principal) {
 
 		try {
-			this.users = this.championshipService.findUserByNameOrUsername(search);
+			this.users = this.championshipService.findUserByNameOrUsername(principal.getName());
 		} catch (Exception e) {
 			Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
 			model.put("noUser", true); // No se encontró al usuario
