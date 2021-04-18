@@ -78,27 +78,32 @@ public class UsuarioController {
 	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId, Principal principal) {
 		Usuario usuario = this.usuarioService.findUserById(userId);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		boolean premium = false;
 		if (usuario.getId().equals(user.getId())) {
 
 			return "redirect:/myprofile";
 		} else {
 			model.addAttribute("user", usuario);
 			if (user.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
-				Integer quedadas = user.getMeetings().size();
-				Integer torneos = user.getTeams().size();
+				Integer quedadas = usuario.getMeetings().size();
+				Integer torneos = usuario.getTeams().size();
 				int[] datos = { quedadas, torneos };
 				String datos1 = Arrays.toString(datos);
 				model.addAttribute("quedadasTorneos", datos1.replace(" ", ""));
 				Calendar cal = Calendar.getInstance();
 				Integer year = cal.get(Calendar.YEAR);
-				List<Integer> quedadasPorMesList = this.usuarioService.findMeetingByMonth(user.getId(), year);
-				List<Integer> torneosPorMesList = this.usuarioService.findChampionshipByMonth(user.getId(), year);
+				List<Integer> quedadasPorMesList = this.usuarioService.findMeetingByMonth(usuario.getId(), year);
+				List<Integer> torneosPorMesList = this.usuarioService.findChampionshipByMonth(usuario.getId(), year);
 				int[] quedadasPorMes = getEventoPorMes(quedadasPorMesList);
 				int[] torneosPorMes = getEventoPorMes(torneosPorMesList);
 				String datos2 = Arrays.toString(quedadasPorMes);
 				String datos3 = Arrays.toString(torneosPorMes);
+				premium=true;
 				model.addAttribute("quedadasPorMes", datos2.replace(" ", ""));
 				model.addAttribute("torneosPorMes", datos3.replace(" ", ""));
+				model.addAttribute("tipoUsuario",premium);
+			}else {
+				model.addAttribute("tipoUsuario",premium);
 			}
 			return "users/userDetails";
 		}

@@ -55,6 +55,7 @@
 			</div>
 			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>
+		<c:if test="${tipoUsuario==true }">
 		<div class="charts"
 			style="width: 50%; display: inline-block; margin-left: 5%; margin-right: 5%; float: right">
 			<br>
@@ -69,6 +70,10 @@
 				type="hidden" id="myvar2" value="${quedadasPorMes}"> <input
 				type="hidden" id="myvar3" value="${torneosPorMes}">
 		</div>
+		</c:if>
+		<c:if test="${tipoUsuario==false}">
+			<h3>No eres premium</h3>
+		</c:if>
 		<script type="text/javascript">
 				var datos = document.getElementById("myvar").value;	
 				var datos2 = datos.replace('[',"");
