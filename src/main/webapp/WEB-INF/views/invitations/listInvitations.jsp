@@ -150,7 +150,7 @@
 					<table class="table">
 
 						<c:if test="${joined}">
-							<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+							<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
 								<p>Ha aceptado la invitación</p>
 							</div>
 						</c:if>
