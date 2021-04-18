@@ -314,7 +314,9 @@ public class ChampionshipController {
 		// GANADOR 16 EQUIPOS
 		if (championship.getMatches().size() == 3 && championship.getMaxTeams() == 4) {
 			List<Match> partidos = new ArrayList<>(championship.getMatches());
-			Match ultPartido = partidos.get(partidos.size()-1);
+			Match ultPartido1 = partidos.get(2);
+			partidos.add(3, ultPartido1);
+			Match ultPartido = partidos.get(3);
 			System.out.println(ultPartido.getId());
 			System.out.println(partidos.size());
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
