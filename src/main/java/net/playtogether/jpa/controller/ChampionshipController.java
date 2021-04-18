@@ -313,7 +313,7 @@ public class ChampionshipController {
 				.map(x -> x.getRonda()).orElse(null));
 		// GANADOR 16 EQUIPOS
 		if (championship.getMatches().size() == 3 && championship.getMaxTeams() == 4) {
-			Match ultPartido = championship.getMatches().stream().reduce((first, second) -> second).orElse(null);
+			Match ultPartido = championship.getMatches().get(3);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()
@@ -328,7 +328,7 @@ public class ChampionshipController {
 		}
 		// GANADOR 8 EQUIPOS
 		if (championship.getMatches().size() == 7 && championship.getMaxTeams() == 8) {
-			Match ultPartido = championship.getMatches().stream().reduce((first, second) -> second).orElse(null);
+			Match ultPartido = championship.getMatches().get(7);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()
@@ -344,7 +344,7 @@ public class ChampionshipController {
 
 		// GANADOR 16 EQUIPOS
 		if (championship.getMatches().size() == 15 && championship.getMaxTeams() == 16) {
-			Match ultPartido = championship.getMatches().stream().reduce((first, second) -> second).orElse(null);
+			Match ultPartido = championship.getMatches().get(15);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()
