@@ -197,7 +197,7 @@ public class MeetingControllerTests {
 	@WithMockUser(username = "antonio98", authorities = "usuario")
 	void createMeeting() throws Exception {
 
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/meetings/add").with(SecurityMockMvcRequestPostProcessors.csrf()).param("address", "Charco la Pava").param("city", "Sevilla").param("date", "2021/06/12 12:00").param("id", "1")
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/meetings/add").with(SecurityMockMvcRequestPostProcessors.csrf()).param("address", "Charco la Pava").param("city", "Sevilla").param("date", "2021-06-12T12:00").param("id", "1")
 			.param("description", "Cambio de planes").param("creationDate", "2021/06/12")).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/meetings"));
 
 	}
@@ -259,7 +259,7 @@ public class MeetingControllerTests {
 	@WithMockUser(value = "user1", authorities = "usuario")
 	@Test
 	void testProcessUpdateMeetingFormSuccess() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/meetings/1/edit").with(SecurityMockMvcRequestPostProcessors.csrf()).param("address", "Charco la Pava").param("city", "Sevilla").param("date", "2021/06/12 12:00").param("id", "1")
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/meetings/1/edit").with(SecurityMockMvcRequestPostProcessors.csrf()).param("address", "Charco la Pava").param("city", "Sevilla").param("date", "2021-06-12T12:00").param("id", "1")
 			.param("description", "Cambio de planes")).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/meetings"));
 	}
 

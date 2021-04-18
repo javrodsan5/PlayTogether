@@ -30,7 +30,7 @@ public class Match extends BaseEntity {
 	private Team team2;
 
 	@Column(name = "dateTime")
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	private LocalDateTime dateTime;
 
 	@Column(name = "puntos1")

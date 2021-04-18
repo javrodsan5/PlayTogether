@@ -198,7 +198,7 @@ public class UsuarioControllerTests {
 	@Test
 	void createUser() throws Exception {
 		mockMvc.perform(post("/registro").with(csrf()).param("name", "Usuario").param("correo", "usu@usuario.com")
-				.param("birthdate", "1999/06/12").param("phone", "666555888").param("user.username", "usuarioPruebas")
+				.param("birthdate", "1999-06-12").param("phone", "666555888").param("user.username", "usuarioPruebas")
 				.param("user.password", "Usuar1o")).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/"));
 
@@ -228,7 +228,7 @@ public class UsuarioControllerTests {
 	@Test
 	void testProcessUpdateUserFormSuccess() throws Exception {
 		mockMvc.perform(post("/myprofile/edit").with(csrf()).param("correo", "correo2@cor.com").param("id", "1")
-				.param("name", "usuarioPr").param("birthdate", "1999/02/14").param("phone", "123456789")
+				.param("name", "usuarioPr").param("birthdate", "1999-02-14").param("phone", "123456789")
 				.param("user.username", "user1")
 
 		).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/myprofile"));

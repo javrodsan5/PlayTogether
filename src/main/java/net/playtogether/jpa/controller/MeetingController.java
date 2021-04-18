@@ -218,7 +218,7 @@ public class MeetingController {
 			
 			if (usuarios.size() == 0) {
 				invitationService.deleteInvitationsByMeetingId(meetingId);
-				return "redirect:/sports/" + meeting.getSport().getId() + "/championships/" + meetingId;
+				return "redirect:/sports/" + meeting.getSport().getId() + "/meetings/" + meetingId;
 			} else {
 				meeting.setMeetingCreator(usuarios.get(0));
 				this.meetingService.save(meeting);

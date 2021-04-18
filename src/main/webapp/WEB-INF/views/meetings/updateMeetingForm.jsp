@@ -23,7 +23,7 @@
 				<form:form modelAttribute="meeting" commandName="meeting"
 					id="survey-form">
 					<div style="display: inline-flex;">
-						<playtogether:localDateTime label="Fecha" name="date" id="date"></playtogether:localDateTime>
+						<playtogether:inputField label="Fecha y hora" name="date" />
 						<playtogether:inputField label="Ciudad" name="city" />
 					</div>
 

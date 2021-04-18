@@ -23,8 +23,8 @@
 			
 			<playtogether:inputField label="*Contraseña" name="user.password" />
 	
-			<playtogether:localDate label="Fecha nacimiento" name="birthdate"
-					id="birthdate" />
+			<playtogether:inputField label="Fecha Nacimiento" name="birthdate"
+				 />
 					<div class="ocultar">
 			<playtogether:inputField label="Usuario" name="user" />
 				</div>

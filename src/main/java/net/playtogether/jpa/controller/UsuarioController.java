@@ -3,6 +3,7 @@ package net.playtogether.jpa.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -241,7 +242,7 @@ public class UsuarioController {
 	@GetMapping("/clasification")
 	public String usersClasification(ModelMap model, Principal principal) {
 		List<Usuario> topUsuarios = usuarioService.findTopUsuarios().stream().limit(10).collect(Collectors.toList());
-		List<Usuario> todosUsuarios = usuarioService.findAll();
+		List<Usuario> todosUsuarios = usuarioService.findAll().stream().sorted(Comparator.comparing(Usuario::getPuntos).reversed()).collect(Collectors.toList());
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
 		for (int i = 0; i < todosUsuarios.size(); i++) {

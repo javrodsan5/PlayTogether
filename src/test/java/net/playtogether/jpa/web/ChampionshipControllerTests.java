@@ -216,7 +216,7 @@ public class ChampionshipControllerTests {
 	@Test
 	@WithMockUser(value = "user1", authorities="usuario")
 	void createChampionship() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("description", "aafdfdfaa").param("startDate", "2021/06/14").param("finishDate", "2021/07/14").param("sport", "1").param("maxTeams", "8")
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("name", "nombrecito").param("description", "aafdfdfaa").param("startDate", "2021-06-14").param("finishDate", "2021-07-14").param("sport", "1").param("maxTeams", "8")
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 	}
@@ -257,7 +257,7 @@ public class ChampionshipControllerTests {
 	void matchAddResult() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/1/match/1/result/team1?search=Usuario1")
 
-			.param("dateTime", "2022/04/05 12:00").param("team1", "1").param("team2", "2").param("puntos1", "5").param("puntos2", "4").param("puntos3", "5").param("puntos4", "4")
+			.param("dateTime", "2022-04-05T12:00").param("team1", "1").param("team2", "2").param("puntos1", "5").param("puntos2", "4").param("puntos3", "5").param("puntos4", "4")
 
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/championships/1/matches"));
 	}
