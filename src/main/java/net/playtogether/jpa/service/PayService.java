@@ -76,4 +76,10 @@ public class PayService {
     public Pay findById(Integer id) {
         return this.payRepository.findById(id).orElse(null);
     }
+
+    @Transactional
+	public void deleteTeamUser(String username, Integer id2) {
+		 this.payRepository.deleteTeamUser( username,  id2);
+		
+	}
 }
