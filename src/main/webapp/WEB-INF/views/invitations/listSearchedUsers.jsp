@@ -111,7 +111,7 @@
 					<form:form id="survey-form"
 						action="/invitations/meeting/${meetingId}/send_invitation"
 						method="POST" modelAttribute="searched_users"
-						style="padding:0rem 0rem; width:60%">>
+						style="padding:0rem 0rem; width:60%">
 						<center>
 							<div class="col-sm-10">
 								<h5 style="color: white;">Nombre - Usuario:</h5>
