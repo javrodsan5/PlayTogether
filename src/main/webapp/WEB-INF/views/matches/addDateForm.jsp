@@ -22,7 +22,7 @@
 <form:form  commandName="match" modelAttribute="match">
 	<div>
 	 
-		<playtogether:localDateTime label="Fecha realización" name="dateTime" id="dateTime" ></playtogether:localDateTime>
+		<playtogether:inputField label="Fecha y hora" name="dateTime"  />
 		
 		<input type="hidden" label="Puntos Equipo 1" name="puntos1"  />
 		<input type="hidden" label="Puntos Equipo 2" name="puntos2"  />

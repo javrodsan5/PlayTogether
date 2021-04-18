@@ -15,8 +15,9 @@
 <form:form  commandName="championship" modelAttribute="championship">
 	<div>
 		<div style="display: inline-flex;">
-		<playtogether:localDate label="Inicio" name="startDate" id="startDte" ></playtogether:localDate>
-		<playtogether:localDate label="Fin" name="finishDate" id="finishDate" ></playtogether:localDate>
+		<playtogether:inputField label="Fecha Inicio" name="startDate" />
+		<playtogether:inputField label="Fecha Fin" name="finishDate" />
+		
 		</div>
 		<playtogether:inputField label="Nombre" name="name" />
 		<playtogether:inputField label="Ciudad" name="city" />

@@ -33,7 +33,7 @@ public class Meeting extends BaseEntity {
     @Column(name = "city")
     private String city;
     
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "date")
     private LocalDateTime date;
 

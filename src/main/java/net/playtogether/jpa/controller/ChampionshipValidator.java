@@ -1,7 +1,7 @@
 package net.playtogether.jpa.controller;
 
 import java.time.LocalDate;
-
+import java.util.regex.Pattern;
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -12,6 +12,10 @@ import net.playtogether.jpa.entity.Championship;
 public class ChampionshipValidator implements Validator {
 
 	private static final String REQUIRED = "Campo requerido.";
+	
+	private static final Pattern DATE_PATTERN = Pattern
+			.compile("/[0-9]{4}\\/(0[1-9]|1[0-2])\\/(0[1-9]|[1-2][0-9]|3[0-1])/");
+
 
 	@Override
 	public void validate(Object target, Errors errors) {
@@ -22,9 +26,14 @@ public class ChampionshipValidator implements Validator {
 		LocalDate startDate = championship.getStartDate();
 		LocalDate finishDate = championship.getFinishDate();
 		Integer maxTeams = championship.getMaxTeams();
+		String name = championship.getName();
 
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
+		}
+		
+		if (!StringUtils.hasLength(name)) {
+			errors.rejectValue("name", REQUIRED, REQUIRED);
 		}
 		
 		if(isNumeric(city)) {
@@ -48,14 +57,17 @@ public class ChampionshipValidator implements Validator {
 					"No ha introducido la fecha correctamente.");
 			
 		}
+		if (finishDate == null) {
+			errors.rejectValue("finishDate", "No ha introducido la fecha correctamente", "No ha introducido la fecha correctamente");
+		}
+		
+
 		else if (startDate.isBefore(LocalDate.now())) {
 			errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");
 		}
 		
-		if (finishDate == null) {
-			errors.rejectValue("finishDate", "No ha introducido la fecha correctamente", "No ha introducido la fecha correctamente");
-		} else if (finishDate.isBefore(LocalDate.now())) {
+		 else if (finishDate.isBefore(LocalDate.now())) {
 			errors.rejectValue("finishDate", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");
 		} else if (finishDate.isBefore(startDate)) {

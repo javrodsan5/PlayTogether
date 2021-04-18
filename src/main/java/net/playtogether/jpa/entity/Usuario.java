@@ -34,7 +34,7 @@ public class Usuario extends NamedEntity {
 
 	@NotNull
 	@Column(name = "birthdate")
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthdate;
 
 	@NotNull
