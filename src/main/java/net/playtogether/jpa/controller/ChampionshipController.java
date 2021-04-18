@@ -315,7 +315,7 @@ public class ChampionshipController {
 		if (championship.getMatches().size() == 3 && championship.getMaxTeams() == 4) {
 			List<Match> partidos = new ArrayList<>(championship.getMatches());
 			Match ultPartido = partidos.get(2);
-			System.out.println(ultPartido);
+			System.out.println(ultPartido.getId());
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()
