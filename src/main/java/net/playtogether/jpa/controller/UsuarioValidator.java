@@ -20,12 +20,14 @@ public class UsuarioValidator implements Validator {
 
 	public UsuarioService usuarioService;
 
-	private static boolean soloLetrasNumeros(String username) {
-		boolean soloLetrasNumeros = Pattern.compile("[A-Za-z0-9]").matcher(username).find();
-		if (soloLetrasNumeros) {
-			return true;
-		}
-		return false;
+	private static boolean nombreValidator(String username) {
+		boolean cesp = Pattern.compile("^[A-Za-zÑñáéíóúÁÉÍÓÚ\s]+$").matcher(username).matches();
+		return cesp;
+	}
+
+	private static boolean username(String username) {
+		boolean cesp = Pattern.compile("^[A-Za-z0-9ÑñáéíóúÁÉÍÓÚçÇ]+$").matcher(username).matches();
+		return cesp;
 	}
 
 	private static boolean checkPassword(String password) {
@@ -50,7 +52,7 @@ public class UsuarioValidator implements Validator {
 		return false;
 
 	}
-	
+
 	private static boolean isNumeric(String cadena) {
 		try {
 			Integer.parseInt(cadena);
@@ -78,19 +80,23 @@ public class UsuarioValidator implements Validator {
 		String password = usuario.getUser().getPassword();
 		LocalDate fechaNac = usuario.getBirthdate();
 
-		if (!StringUtils.hasLength(nombre) || nombre.length() > 50) {
+		if (nombre == null || !StringUtils.hasLength(nombre) || nombre.length() > 50) {
 			errors.rejectValue("name", REQUIRED + " Debe contener entre 1 y 50 caracteres",
 					REQUIRED + " Debe contener entre 1 y 50 caracteres");
 		}
 
-		if (!StringUtils.hasLength(correo)) {
+		if (nombre == null || !nombreValidator(nombre)) {
+			errors.rejectValue("name", "Solo puede contener letras", "Solo puede contener letras");
+		}
+
+		if (correo == null || !StringUtils.hasLength(correo)) {
 			errors.rejectValue("correo", REQUIRED, REQUIRED);
 
 		} else if (!EMAIL_ADDRESS_PATTERN.matcher(correo).matches()) {
 			errors.rejectValue("correo", "Tu email debe tener un formato correcto",
 					"Tu email debe tener un formato correcto");
 		}
-		
+
 		if (!StringUtils.hasLength(phone)) {
 			errors.rejectValue("phone", REQUIRED, REQUIRED);
 		}
@@ -118,13 +124,14 @@ public class UsuarioValidator implements Validator {
 			}
 		}
 
-		if (!StringUtils.hasLength(username)) {
+		if (username == null || !StringUtils.hasLength(username)) {
 			errors.rejectValue("user.username", REQUIRED, REQUIRED);
 		}
 
-		if (!soloLetrasNumeros(username)) {
-			errors.rejectValue("user.username", "El nombre de usuario solo puede contener letras o números",
-					"El nombre de usuario solo puede contener letras o números");
+		if (!username(username)) {
+			errors.rejectValue("user.username",
+					"Solo puede contener los siguientes caracteres: 'A-Za-zÑñáéíóúÁÉÍÓÚçÇ' ni espacios ",
+					"Solo puede contener los siguientes caracteres: 'A-Za-zÑñáéíóúÁÉÍÓÚçÇ' ni espacios");
 		}
 
 		if (password != null) {

@@ -13,9 +13,16 @@ public class ChampionshipValidator implements Validator {
 
 	private static final String REQUIRED = "Campo requerido.";
 	
-	private static final Pattern DATE_PATTERN = Pattern
-			.compile("/[0-9]{4}\\/(0[1-9]|1[0-2])\\/(0[1-9]|[1-2][0-9]|3[0-1])/");
-
+	private static boolean ciudad(String username) {
+		boolean cesp = Pattern.compile("^[A-Za-zÑñáéíóúÁÉÍÓÚ\s]+$").matcher(username).matches();
+		return cesp;
+	}
+	
+	private static boolean direccion(String username) {
+		boolean cesp = Pattern.compile("^[A-Za-z0-9ÑñáéíóúÁÉÍÓÚºª/\s]+$").matcher(username).matches();
+		return cesp;
+	}
+	
 
 	@Override
 	public void validate(Object target, Errors errors) {
@@ -28,20 +35,31 @@ public class ChampionshipValidator implements Validator {
 		Integer maxTeams = championship.getMaxTeams();
 		String name = championship.getName();
 
+	
+		
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
+		} else if (ciudad(city)) {
+			errors.rejectValue("city", "Solo puede contener letras", "Solo puede contener letras");
 		}
 		
-		if (!StringUtils.hasLength(name)) {
+		if (!(StringUtils.hasLength(name))) {
 			errors.rejectValue("name", REQUIRED, REQUIRED);
+		}else if ( name.length() > 50 || name.length() < 3) {
+			errors.rejectValue("name", "Debe tener entre 3 y 50 caracteres", "Debe tener entre 3 y 50 caracteres");
 		}
 		
-		if(isNumeric(city)) {
-			errors.rejectValue("city", "La ciudad introducida no puede tratarse de un número.", "La ciudad introducida no puede tratarse de un número.");
+		if (ciudad(name)) {
+			errors.rejectValue("name", "Solo puede contener letras y números", "Solo puede contener letras y números");
 		}
-
+		
+	
 		if (!StringUtils.hasLength(description) || description == null) {
 			errors.rejectValue("description", REQUIRED, REQUIRED); 
+		}
+		
+		if (direccion(description) || description == null) {
+			errors.rejectValue("description", "Debe contener solo letras y números", "Debe contener solo letras y números"); 
 		}
 
 		if (startDate == null) {
@@ -81,13 +99,4 @@ public class ChampionshipValidator implements Validator {
 		return Championship.class.isAssignableFrom(clazz);
 	}
 	
-	private static boolean isNumeric(String cadena) {
-		try {
-			Integer.parseInt(cadena);
-			return true;
-		}catch(NumberFormatException nfe){
-			return false;
-		}
-	}
-
 }

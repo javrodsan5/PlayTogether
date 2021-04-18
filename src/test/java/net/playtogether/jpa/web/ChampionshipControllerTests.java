@@ -217,7 +217,7 @@ public class ChampionshipControllerTests {
 	@WithMockUser(value = "user1", authorities="usuario")
 	void createChampionship() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("name", "nombrecito").param("description", "aafdfdfaa").param("startDate", "2021-06-14").param("finishDate", "2021-07-14").param("sport", "1").param("maxTeams", "8")
-			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 	}
 
