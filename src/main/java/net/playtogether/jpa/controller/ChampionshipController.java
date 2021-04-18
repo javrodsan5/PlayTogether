@@ -1798,7 +1798,7 @@ public class ChampionshipController {
 			}
 			// PARA 4 EQUIPOS
 			else if (championship.getTeams().size() == 4 && championship.getMatches().size() == 3) {
-				if (championship.getMatches().get(0).getDateTime().isAfter(match.getDateTime())
+				if (championship.getMatches().get(2).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(1).getDateTime().isAfter(match.getDateTime()))
 					errors.rejectValue("dateTime",
 							"La fecha debe ser posterior a las de los partidos de la ronda previa",
