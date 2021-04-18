@@ -14,6 +14,10 @@
 			</h1>
 		</div>
 		<div class="crearMeeting">
+		<c:if test="${param.error == 'true'}">
+              <h5 class="alert alert-danger"
+					style="text-align:center;margin: 0% 25% 5% 25%"> Usuario o contraseña incorrectos. </h5>
+                </c:if>
 		<form:form class="form-horizontal" id="add-usuario-form"
 				action="/login" method="post">
 			 	<label for="username" style="margin-left: 5%"><b>Usuario</b></label>
@@ -26,16 +30,8 @@
 					style="width: 90%; padding: 5px; margin-left: 5%; margin-right: 5%" />
                  <br>
                 <br>
-                <c:if test="${param.error == 'true'}">
-                	<div class="alert alert-danger"
-						style="margin: 0% 20% 1% 20%">
-               		<h5 style="color: white; margin-left: 5%"> Usuario o contraseña incorrectos. </h5>
-               		</div>
-                </c:if>
                 
-			
-
-			<div class="form-group">
+    	<div class="form-group">
 				<button class="botonMeeting" type="submit">
 						<b>Entrar</b>
 					</button>

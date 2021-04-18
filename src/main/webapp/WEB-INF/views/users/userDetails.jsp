@@ -17,6 +17,7 @@
 			Datos del perfil de
 			<c:out value="${user.name}" />
 		</h1>
+
 		<h2>
 			Tiene
 			<c:out value="${user.puntos}" />
@@ -26,10 +27,17 @@
 	</div>
 
 	<body>
-		<div class="body-container"  style="display: inline-block; width: 25%">
+		<c:if test="${tipoUsuario==false}">
+			<h3 class="alert alert-warning"
+				style="text-align: center; margin: 2% 15% 0px 15%">
+				<a href="/pay/premium">Suscríbete</a> al plan premium para poder visualizar las estadísticas de
+				<c:out value="${user.name}" />
+			</h3>
+		</c:if>
+		<div class="body-container" style="display: inline-block; width: 25%">
 
 			<div class="dashboard" style="width: 100%">
-				<div class="grid-container" style="width: 100%">
+				<div class="grid-container" style="width: 360px">
 					<div class="profile grid-area" style="border: grey 1px solid">
 						<div class="img">
 							<img src="/images/avatar.png">
@@ -53,26 +61,23 @@
 					</div>
 				</div>
 			</div>
-			<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 		</div>
+
 		<c:if test="${tipoUsuario==true }">
-		<div class="charts"
-			style="width: 50%; display: inline-block; margin-left: 5%; margin-right: 5%; float: right">
-			<br>
-			<center>
-				<div id="mensaje"></div>
-				<div id="chart1" style="width: 400px; text-align: center"></div>
-			</center>
-			<br>
-			<div id="chart2"></div>
-			<div id="chart3"></div>
-			<input type="hidden" id="myvar" value="${quedadasTorneos}"> <input
-				type="hidden" id="myvar2" value="${quedadasPorMes}"> <input
-				type="hidden" id="myvar3" value="${torneosPorMes}">
-		</div>
-		</c:if>
-		<c:if test="${tipoUsuario==false}">
-			<h3>No eres premium</h3>
+			<div class="charts"
+				style="width: 50%; display: inline-block; margin-left: 5%; margin-right: 5%; float: right">
+				<br>
+				<center>
+					<div id="mensaje"></div>
+					<div id="chart1" style="width: 400px; text-align: center"></div>
+				</center>
+				<br>
+				<div id="chart2"></div>
+				<div id="chart3"></div>
+				<input type="hidden" id="myvar" value="${quedadasTorneos}">
+				<input type="hidden" id="myvar2" value="${quedadasPorMes}">
+				<input type="hidden" id="myvar3" value="${torneosPorMes}">
+			</div>
 		</c:if>
 		<script type="text/javascript">
 				var datos = document.getElementById("myvar").value;	

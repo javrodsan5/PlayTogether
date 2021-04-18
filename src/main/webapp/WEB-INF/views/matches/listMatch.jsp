@@ -103,7 +103,7 @@
 
 
 		<c:if test="${nombreGanador != null}">
-			<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-success" style="margin: 1% 20% 1% 20%">
 				<h1>
 					<b> ¡ <c:out value="${nombreGanador}" /> ha ganado el torneo!
 						¡Enhorabuena!
