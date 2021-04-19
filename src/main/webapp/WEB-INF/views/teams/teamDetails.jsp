@@ -96,7 +96,7 @@
 			
 			<c:if test="${leave && championship.matches.size() != 0}">
 				<div class="alert alert-danger" style="margin: 1% 20% 5% 20%">
-					<p style="color: black; font-size: 10px; font-weight: bolder;">El torneo ha comenzado, no se puede abandonar el equipo.</p>
+					<p style="color: black; font-size: 15px; font-weight: bolder;">El torneo ha comenzado, no se puede abandonar el equipo.</p>
 				</div>
 			</c:if>
     
