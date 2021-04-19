@@ -144,7 +144,7 @@
 		</c:if>
 
 		<c:if
-			test="${meeting.meetingCreator == logged_user && !estaLlena && puedeEliminar}">
+			test="${meeting.meetingCreator == logged_user && !estaLlena && puedeEliminar && meeting.participants.contains(meeting.meetingCreator)}">
 			<td><spring:url value="/invitations/meeting/{meetingId}"
 					var="searchPeopleUrl">
 					<spring:param name="meetingId" value="${meeting.id}" />

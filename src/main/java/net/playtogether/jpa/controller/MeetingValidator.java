@@ -46,7 +46,7 @@ public class MeetingValidator implements Validator {
 			errors.rejectValue("description", REQUIRED, REQUIRED);
 		} 
 		
-		if (!description.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.' ']*$")) {
+		if (!description.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.,;+!¡¿?' ']*$")) {
 			errors.rejectValue("description", "Debe contener solo letras y números", "Debe contener solo letras y números");
 		}
 

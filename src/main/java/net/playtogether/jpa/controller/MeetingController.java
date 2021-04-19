@@ -120,6 +120,7 @@ public class MeetingController {
 	public String postUpdateMeeting(@Valid final Meeting meeting, final BindingResult result, final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("meetingId") final Integer meetingId) {
 		if (result.hasErrors()) {
 			model.put("sport", this.sportService.findSportById(sportId));
+			meeting.setId(meetingId);
 			model.put("meeting", meeting);
 			return "meetings/updateMeetingForm";
 		} else {
@@ -191,6 +192,10 @@ public class MeetingController {
 			list.add(u);
 			meeting.setParticipants(list);
 
+			if (!meeting.getParticipants().contains(meeting.getMeetingCreator())) {
+				meeting.setMeetingCreator(u);
+			}
+			
 			this.meetingService.save(meeting);
 			u.setPuntos(u.getPuntos() + 5);
 			this.usuarioService.saveUsuarioAlreadyRegistered(u);
