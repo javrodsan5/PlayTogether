@@ -17,6 +17,12 @@
 			<br />
 		</div>
 		
+		<c:if test="${leave && team.matches.size() != 0}">
+			<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+				<p style="color: black; font-size: 20px; font-weight: bolder;">El torneo ha comenzado, no se puede abandonar el equipo.</p>
+			</div>
+		</c:if>
+		
 		<c:if test="${loggedUserIsNotTheMeetingCreator}">
 			<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
 				<p style="color: black; font-size: 20px; font-weight: bolder;">No
