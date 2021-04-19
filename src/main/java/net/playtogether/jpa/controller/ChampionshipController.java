@@ -1909,8 +1909,8 @@ public class ChampionshipController {
 			this.userService.saveUsuario(usuario);
 
 			if (usuarios.size() == 0) {
+				payService.deleteTeamUser(usuario.getUser().getUsername(), teamId);
 				invitationService.deleteInvitationsByTeamId(teamId);
-				payService.deleteTeamUser(principal.getName(), team.getId());
 				teamService.delete(team);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
 				
