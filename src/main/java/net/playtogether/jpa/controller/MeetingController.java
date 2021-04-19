@@ -120,6 +120,7 @@ public class MeetingController {
 	public String postUpdateMeeting(@Valid final Meeting meeting, final BindingResult result, final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("meetingId") final Integer meetingId) {
 		if (result.hasErrors()) {
 			model.put("sport", this.sportService.findSportById(sportId));
+			meeting.setId(meetingId);
 			model.put("meeting", meeting);
 			return "meetings/updateMeetingForm";
 		} else {
