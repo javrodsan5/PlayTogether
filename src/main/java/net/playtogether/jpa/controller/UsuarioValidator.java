@@ -17,7 +17,9 @@ public class UsuarioValidator implements Validator {
 
 	private static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@"
 			+ "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
-
+	
+	private static final Pattern TELEPHONE_PATTERN = Pattern.compile("[0-9]{9}");
+	
 	public UsuarioService usuarioService;
 
 
@@ -91,14 +93,17 @@ public class UsuarioValidator implements Validator {
 		if (!StringUtils.hasLength(phone)) {
 			errors.rejectValue("phone", REQUIRED, REQUIRED);
 		}
-
+		
+		if(phone.length()>9) {
+			errors.rejectValue("phone", "El teléfono debe tener 9 caracteres.", "El teléfono debe tener 9 caracteres.");
+		}
+		
 		if (!isNumeric(phone)) {
 			errors.rejectValue("phone", " El teléfono debe ser númerico", " El teléfono debe ser númerico");
 		}
 
-		if (phone.length() > 15 || phone.length() < 9) {
-			errors.rejectValue("phone", REQUIRED + " Debe contener entre 9 y 15 caracteres",
-					REQUIRED + " Debe contener entre 9 y 15 caracteres");
+		if (!TELEPHONE_PATTERN.matcher(phone).matches()) {
+			errors.rejectValue("phone","El teléfono introducido no es válido", "El teléfono introducido no es válido");
 		}
 
 		if (fechaNac == null) {
