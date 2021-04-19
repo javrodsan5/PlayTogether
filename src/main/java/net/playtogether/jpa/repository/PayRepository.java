@@ -2,6 +2,7 @@ package net.playtogether.jpa.repository;
 
 import java.util.List;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -33,5 +34,9 @@ public interface PayRepository extends CrudRepository<Pay, Integer> {
     public List<Pay> findLastPayByUsernamePremium(String username);
     
     List<Pay> findAll();
+    
+    @Modifying
+    @Query("DELETE FROM Pay p WHERE p.user.id = ?1 AND p.team.id=?2")
+	void deleteTeamUser(Integer userId, Integer teamId);
     
 }

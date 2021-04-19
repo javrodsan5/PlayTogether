@@ -97,7 +97,7 @@ INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(17, '
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(18, 'Pilates', 1, 2);
 
 INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id, creation_date) 
-VALUES(1, 'Polideportivo Ciudad Jardin', 'Sevilla', '2021/06/15 11:00:00', 'Nos lo vamos a pasar genial! Apuntarse!', 2,1, 1, '2021/03/15');
+VALUES(1, 'Polideportivo Ciudad Jardin', 'Sevilla', '2021/06/15 11:00:00', 'Nos lo vamos a pasar genial! Apuntaos!', 2,1, 1, '2021/03/15');
 INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id, creation_date) 
 VALUES(2, 'Polideportivo San Pablo', 'Sevilla', '2021/04/15 11:20:00', 'Vamos a realizar mucho deporte.', 2,1, 1, '2021/04/13');
 INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id, creation_date) 
@@ -125,7 +125,7 @@ VALUES(5, 'Torneo para jugadores avanzados', 'Sevilla', 'Torneo organizado para 
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(6, 'Torneo Profesional', 'Sevilla', 'Sólo jugadores profesionales!', '2021/04/17 12:00:00', 16, '2021/04/16 11:00:00', 1, 2);
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(7, 'Torneo Antonio SL', 'Sevilla', 'Torneo patrocinado por Antonio SL! Apuntarse!', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 2, 1);
+VALUES(7, 'Torneo Antonio SL', 'Sevilla', 'Torneo patrocinado por Antonio SL! Apuntaos!', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 2, 1);
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(8, 'Torneo US', 'Sevilla', 'Torneo para estudiantes de la US.', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 3, 1);
 
