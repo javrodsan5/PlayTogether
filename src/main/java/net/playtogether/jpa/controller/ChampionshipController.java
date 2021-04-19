@@ -313,7 +313,7 @@ public class ChampionshipController {
 				.map(x -> x.getRonda()).orElse(null));
 		// GANADOR 4 EQUIPOS
 		if (championship.getMatches().size() == 3 && championship.getMaxTeams() == 4) {
-			Match ultPartido = championship.getMatches().get(2);
+			Match ultPartido = championship.getMatches().get(0);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()
@@ -328,7 +328,7 @@ public class ChampionshipController {
 		}
 		// GANADOR 8 EQUIPOS
 		if (championship.getMatches().size() == 7 && championship.getMaxTeams() == 8) {
-			Match ultPartido = championship.getMatches().stream().reduce((first, second) -> second).orElse(null);
+			Match ultPartido = championship.getMatches().get(0);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()
@@ -344,7 +344,7 @@ public class ChampionshipController {
 
 		// GANADOR 16 EQUIPOS
 		if (championship.getMatches().size() == 15 && championship.getMaxTeams() == 16) {
-			Match ultPartido = championship.getMatches().stream().reduce((first, second) -> second).orElse(null);
+			Match ultPartido = championship.getMatches().get(0);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()
@@ -1793,7 +1793,7 @@ public class ChampionshipController {
 			}
 			// PARA 4 EQUIPOS
 			else if (championship.getTeams().size() == 4 && championship.getMatches().size() == 3) {
-				if (championship.getMatches().get(0).getDateTime().isAfter(match.getDateTime())
+				if (championship.getMatches().get(2).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(1).getDateTime().isAfter(match.getDateTime()))
 					errors.rejectValue("dateTime",
 							"La fecha debe ser posterior a las de los partidos de la ronda previa",
@@ -1804,10 +1804,10 @@ public class ChampionshipController {
 
 			else if (championship.getMaxTeams() == 8 && championship.getMatches().size() == 6) {
 
-				if (championship.getMatches().get(0).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(1).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(2).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(3).getDateTime().isAfter(match.getDateTime()))
+				if (championship.getMatches().get(2).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(3).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(4).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(5).getDateTime().isAfter(match.getDateTime()))
 					;
 				errors.rejectValue("dateTime", "La fecha debe ser posterior a las de los partidos de la ronda previa",
 						"La fecha debe ser posterior a las de los partidos de la ronda previa");
@@ -1815,12 +1815,12 @@ public class ChampionshipController {
 
 			else if (championship.getMaxTeams() == 8 && championship.getMatches().size() == 7) {
 
-				if (championship.getMatches().get(0).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(1).getDateTime().isAfter(match.getDateTime())
+				if (championship.getMatches().get(1).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(2).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(3).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(4).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(5).getDateTime().isAfter(match.getDateTime()))
+						|| championship.getMatches().get(5).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(6).getDateTime().isAfter(match.getDateTime()))
 					;
 				errors.rejectValue("dateTime", "La fecha debe ser posterior a las de los partidos de la ronda previa",
 						"La fecha debe ser posterior a las de los partidos de la ronda previa");
@@ -1830,22 +1830,11 @@ public class ChampionshipController {
 
 			else if (championship.getMaxTeams() == 16 && championship.getMatches().size() == 12) {
 
-				if (championship.getMatches().get(0).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(1).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(2).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(3).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(4).getDateTime().isAfter(match.getDateTime())
+				if (championship.getMatches().get(4).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(5).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(6).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(7).getDateTime().isAfter(match.getDateTime()))
-					;
-				errors.rejectValue("dateTime", "La fecha debe ser posterior a las de los partidos de la ronda previa",
-						"La fecha debe ser posterior a las de los partidos de la ronda previa");
-			}
-
-			else if (championship.getMaxTeams() == 16 && championship.getMatches().size() == 14) {
-
-				if (championship.getMatches().get(8).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(7).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(8).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(9).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(10).getDateTime().isAfter(match.getDateTime())
 						|| championship.getMatches().get(11).getDateTime().isAfter(match.getDateTime()))
@@ -1854,10 +1843,21 @@ public class ChampionshipController {
 						"La fecha debe ser posterior a las de los partidos de la ronda previa");
 			}
 
+			else if (championship.getMaxTeams() == 16 && championship.getMatches().size() == 14) {
+
+				if (championship.getMatches().get(10).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(11).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(12).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(13).getDateTime().isAfter(match.getDateTime()))
+					;
+				errors.rejectValue("dateTime", "La fecha debe ser posterior a las de los partidos de la ronda previa",
+						"La fecha debe ser posterior a las de los partidos de la ronda previa");
+			}
+
 			else if (championship.getMaxTeams() == 16 && championship.getMatches().size() == 15) {
 
-				if (championship.getMatches().get(12).getDateTime().isAfter(match.getDateTime())
-						|| championship.getMatches().get(13).getDateTime().isAfter(match.getDateTime()))
+				if (championship.getMatches().get(13).getDateTime().isAfter(match.getDateTime())
+						|| championship.getMatches().get(14).getDateTime().isAfter(match.getDateTime()))
 					;
 				errors.rejectValue("dateTime", "La fecha debe ser posterior a las de los partidos de la ronda previa",
 						"La fecha debe ser posterior a las de los partidos de la ronda previa");
