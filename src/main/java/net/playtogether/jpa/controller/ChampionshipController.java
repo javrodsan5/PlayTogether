@@ -1901,6 +1901,7 @@ public class ChampionshipController {
 
 		payService.deleteTeamUser(usuario.getUser().getUsername(), teamId);
 		usuarios.remove(usuario);
+		usuario.getPayment().forEach(p -> System.out.println(p.getTeam().getName()));
 		
 		this.payService.deleteTeamUser(usuario.getUser().getUsername(), team.getId());
 		this.championshipService.save(team);
