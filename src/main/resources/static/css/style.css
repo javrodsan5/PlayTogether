@@ -2448,3 +2448,11 @@ body {
 .ocultar {
 	display: none
 }
+
+.pointsuser{
+    border-radius: 0.2rem;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    padding: 0.2rem;
+    background-color: darkseagreen;
+    color: white;
+}

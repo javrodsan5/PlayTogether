@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
@@ -19,7 +20,7 @@
 		</h1>
 		<h2>
 			Tiene
-			<c:out value="${user.puntos}" />
+			<span class="pointsuser"><c:out value="${user.puntos}" /></span>
 			puntos
 		</h2>
 

@@ -313,7 +313,7 @@ public class ChampionshipController {
 				.map(x -> x.getRonda()).orElse(null));
 		// GANADOR 4 EQUIPOS
 		if (championship.getMatches().size() == 3 && championship.getMaxTeams() == 4) {
-			Match ultPartido = championship.getMatches().stream().reduce((first, second) -> second).orElse(null);
+			Match ultPartido = championship.getMatches().get(2);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
 					&& ultPartido.getPuntos4() != null) {
 				if (ultPartido.getPuntos1() == ultPartido.getPuntos3()

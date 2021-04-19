@@ -5,12 +5,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
 
 <playtogether:layout pageName="login">
 	<jsp:body>
 		<div class="thirteen">
 			<h1>
-				Inicie sesión
+				Inicie sesiÃ³n
 			</h1>
 		</div>
 		<div class="crearMeeting">
@@ -21,7 +22,7 @@
 					style="width: 90%; padding: 5px; margin-left: 5%; margin-right: 5%" />
                  <br>
                  <br>
-                <label for="password" style="margin-left: 5%"><b>Contraseña</b></label>
+                <label for="password" style="margin-left: 5%"><b>ContraseÃ±a</b></label>
                 <input type="password" id="password" name="password"
 					style="width: 90%; padding: 5px; margin-left: 5%; margin-right: 5%" />
                  <br>
@@ -29,7 +30,7 @@
                 <c:if test="${param.error == 'true'}">
                 	<div class="alert alert-danger"
 						style="margin: 0% 20% 1% 20%">
-               		<h5 style="color: white; margin-left: 5%"> Usuario o contraseña incorrectos. </h5>
+               		<h5 style="color: white; margin-left: 5%"> Usuario o contraseÃ±a incorrectos. </h5>
                		</div>
                 </c:if>
                 
