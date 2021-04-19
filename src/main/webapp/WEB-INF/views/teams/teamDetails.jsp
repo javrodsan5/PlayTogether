@@ -89,10 +89,18 @@
 			</spring:url>
 
 			<div class="boto">
-				<c:if test="${leave}">
+				<c:if test="${leave && championship.matches.size() == 0}">
+				<center>
 					<a class="btn btn-danger" href="${fn:escapeXml(leaveTeam)}">Abandonar equipo</a>
+				</center>
 				</c:if>
 			</div>
+			
+			<c:if test="${leave && championship.matches.size() != 0}">
+				<div class="alert alert-danger" style="margin: 1% 20% 5% 20%">
+					<p style="color: black; font-size: 15px; font-weight: bolder;">El torneo ha comenzado, no se puede abandonar el equipo.</p>
+				</div>
+			</c:if>
     
 			<table id="championshipTable" class="table ">
 				<h2>Lista de partidos del equipo</h2>

@@ -1898,15 +1898,16 @@ public class ChampionshipController {
 
 		List<Usuario> usuarios = team.getParticipants();
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
+		payService.deleteTeamUser(usuario.getId(), teamId);
+		usuarios.remove(usuario);		
 
-		usuarios.remove(usuario);
 		this.championshipService.save(team);
 		if (team.getUser().equals(usuario)) {
 			Integer puntos = usuario.getPuntos() - 7;
 			usuario.setPuntos(puntos);
 			this.userService.saveUsuario(usuario);
 
-			if (usuarios.size() == 0) {
+			if (usuarios.size() == 0) {			
 				teamService.delete(team);
 				invitationService.deleteInvitationsByTeamId(teamId);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
