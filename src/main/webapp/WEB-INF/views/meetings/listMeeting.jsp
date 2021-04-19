@@ -32,8 +32,8 @@
 						<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
 						<th class="guiz-awards-header-title" style="width: 25%;">Descripción</th>
 						<th class="guiz-awards-header-title" style="width: 15%;">Fecha</th>
-						<th class="guiz-awards-header-title" style="width: 10%;"></th>
-						<th class="guiz-awards-header-title" style="width: 10%;"></th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Nº participantes</th>
+						<th class="guiz-awards-header-title" style="width: 20%;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,6 +43,7 @@
 							<td><c:out value="${meeting.city}" /></td>
 							<td><c:out value="${meeting.description}" /></td>
 							<td><c:out value="${meeting.date}" /></td>
+							<td><c:out value="${meeting.participants.size()}/${meeting.numberOfPlayers}" /></td>
 							<td><spring:url
 									value="/sports/{deporte}/meetings/{meetingId}"
 									var="meeting2Url">

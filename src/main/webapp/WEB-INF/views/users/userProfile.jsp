@@ -13,8 +13,15 @@
 <playtogether:layout pageName="profile">
 	<div class="thirteen">
 		<h1>Datos de mi perfil</h1>
-		<h2>Tienes <span class="pointsuser"><c:out value="${user.puntos}" /></span> puntos</h2>
-		
+		<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
+			<h2>
+				Tienes
+				<c:out value="${user.puntos}" />
+				puntos
+			</h2>
+		</div>
+
+
 	</div>
 	<body>
 		<div class="body-container" style="display: inline-block; width: 25%">
@@ -68,8 +75,8 @@
 						</spring:url>
 						<center>
 							<a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a>
-							<br>
-							<br> <a href="/invitations/championshipInvitations"
+							<br> <br> <a
+								href="/invitations/championshipInvitations"
 								class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
 							<br> <br> <a href="/invitations/meetingInvitations"
 								class="btn btn-primary">Ver invitaciones a quedadas</a> <br>
@@ -82,8 +89,7 @@
 							</spring:url>
 							<br> <br> <a class="btn btn-primary"
 								href="${fn:escapeXml(championshipRecord2Url)}">Historial de
-								torneos</a> <br>
-							<br>
+								torneos</a> <br> <br>
 						</center>
 
 					</div>
