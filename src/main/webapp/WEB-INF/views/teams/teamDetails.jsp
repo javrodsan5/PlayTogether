@@ -89,7 +89,7 @@
 			</spring:url>
 
 			<div class="boto">
-				<c:if test="${leave}">
+				<c:if test="${leave && team.matches.size() == 0}">
 					<a href="${fn:escapeXml(leaveTeam)}">Abandonar equipo</a>
 				</c:if>
 			</div>

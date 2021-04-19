@@ -1898,9 +1898,6 @@ public class ChampionshipController {
 
 		List<Usuario> usuarios = team.getParticipants();
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
-
-		System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		usuario.getPayment().forEach(p -> System.out.println(p.getTeam().getName()));
 		payService.deleteTeamUser(usuario.getId(), teamId);
 		usuarios.remove(usuario);		
 
