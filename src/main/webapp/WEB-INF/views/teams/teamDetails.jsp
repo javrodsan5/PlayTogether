@@ -17,12 +17,6 @@
 			<br />
 		</div>
 		
-		<c:if test="${leave && championship.matches.size() != 0}">
-			<div class="alert alert-danger" style="margin: 2% 20% 5% 20%">
-				<p style="color: black; font-size: 20px; font-weight: bolder;">El torneo ha comenzado, no se puede abandonar el equipo.</p>
-			</div>
-		</c:if>
-		
 		<c:if test="${loggedUserIsNotTheMeetingCreator}">
 			<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
 				<p style="color: black; font-size: 20px; font-weight: bolder;">No
@@ -99,6 +93,12 @@
 					<a href="${fn:escapeXml(leaveTeam)}">Abandonar equipo</a>
 				</c:if>
 			</div>
+			
+			<c:if test="${leave && championship.matches.size() != 0}">
+				<div class="alert alert-danger" style="margin: 1% 20% 5% 20%">
+					<p style="color: black; font-size: 10px; font-weight: bolder;">El torneo ha comenzado, no se puede abandonar el equipo.</p>
+				</div>
+			</c:if>
     
 			<table id="championshipTable" class="table ">
 				<h2>Lista de partidos del equipo</h2>
