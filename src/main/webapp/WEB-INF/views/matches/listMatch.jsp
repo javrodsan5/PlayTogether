@@ -1754,9 +1754,9 @@
 					<tr class="rowtable">
 						<th style="width: 15%;">Fecha y hora</th>
 						<th style="width: 20%;">Equipo local</th>
-						<th style="width: 15%;">Resultado equipo local (Según local)</th>
+						<th style="width: 15%;">Resultado (Según equipo local)</th>
 						<th style="width: 20%;">Equipo visitante</th>
-						<th style="width: 20%;">Resultado equipo visitante (Según
+						<th style="width: 20%;">Resultado (Según equipo
 							visitante)</th>
 						<th style="width: 5%;">Añadir/editar fecha</th>
 						<th style="width: 5%;">Añadir/editar resultado</th>

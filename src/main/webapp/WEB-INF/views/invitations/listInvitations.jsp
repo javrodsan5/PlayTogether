@@ -134,8 +134,8 @@
 					<strong>Invitaciones de quedadas</strong>
 				</h1>
 				<br />
-				<p>Aquí se muestran las invitaciones recibidas a futuros torneos
-					o en progreso. Las invitaciones a torneos pasados se descartarán
+				<p>Aquí se muestran las invitaciones recibidas a futuras quedadas. 
+				Las invitaciones a quedadas pasadas se descartarán
 					automáticamente</p>
 			</div>
 
