@@ -1,9 +1,6 @@
 
 package net.playtogether.jpa.web;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,7 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -214,10 +210,28 @@ public class ChampionshipControllerTests {
 
 	// Test de crear torneo
 	@Test
-	@WithMockUser(value = "user1", authorities="usuario")
+	@WithMockUser(username = "user", authorities = { "premium" }, password = "Usuar10")
 	void createChampionship() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("name", "nombrecito").param("description", "aafdfdfaa").param("startDate", "2021-06-14").param("finishDate", "2021-07-14").param("sport", "1").param("maxTeams", "8")
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
+			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+
+	}
+	
+	// Test de crear torneo con ciudad con numero
+	@Test
+	@WithMockUser(username = "user", authorities = { "premium" }, password = "password")
+	void createChampionshipWithErrors() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla1").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+
+	}
+	
+	// Test de crear torneo con ciudad con numero
+	@Test
+	@WithMockUser(username = "user", authorities = { "usuario" }, password = "password")
+	void createChampionshipPaying() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
+			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 	}
 

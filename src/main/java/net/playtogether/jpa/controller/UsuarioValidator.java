@@ -20,15 +20,6 @@ public class UsuarioValidator implements Validator {
 
 	public UsuarioService usuarioService;
 
-	private static boolean nombreValidator(String username) {
-		boolean cesp = Pattern.compile("^[A-Za-zÑñáéíóúÁÉÍÓÚ\s]+$").matcher(username).matches();
-		return cesp;
-	}
-
-	private static boolean username(String username) {
-		boolean cesp = Pattern.compile("^[A-Za-z0-9ÑñáéíóúÁÉÍÓÚçÇ]+$").matcher(username).matches();
-		return cesp;
-	}
 
 	private static boolean checkPassword(String password) {
 		boolean tieneMayus = false;
@@ -85,7 +76,7 @@ public class UsuarioValidator implements Validator {
 					REQUIRED + " Debe contener entre 1 y 50 caracteres");
 		}
 
-		if (nombre == null || !nombreValidator(nombre)) {
+		if (nombre == null || !nombre.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ.' ']*$")) {
 			errors.rejectValue("name", "Solo puede contener letras", "Solo puede contener letras");
 		}
 
@@ -128,10 +119,10 @@ public class UsuarioValidator implements Validator {
 			errors.rejectValue("user.username", REQUIRED, REQUIRED);
 		}
 
-		if (!username(username)) {
+		if ((!username.matches("^[a-zA-Z0-9ñÑ.' ']*$"))) {
 			errors.rejectValue("user.username",
-					"Solo puede contener los siguientes caracteres: 'A-Za-zÑñáéíóúÁÉÍÓÚçÇ' ni espacios ",
-					"Solo puede contener los siguientes caracteres: 'A-Za-zÑñáéíóúÁÉÍÓÚçÇ' ni espacios");
+					"Solo puede contener letras sin tildes y números",
+					"Solo puede contener letras sin tildes y números");
 		}
 
 		if (password != null) {

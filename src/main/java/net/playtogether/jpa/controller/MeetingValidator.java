@@ -1,7 +1,6 @@
 package net.playtogether.jpa.controller;
 
-import java.time.LocalDateTime;
-import java.util.regex.Pattern;
+import java.time.LocalDateTime; 
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -12,16 +11,6 @@ import net.playtogether.jpa.entity.Meeting;
 public class MeetingValidator implements Validator {
 
 	private static final String REQUIRED = "Campo requerido.";
-	
-	private static boolean ciudad(String username) {
-		boolean cesp = Pattern.compile("^[A-Za-zÑñáéíóúÁÉÍÓÚ\s]+$").matcher(username).matches();
-		return cesp;
-	}
-	
-	private static boolean direccion(String username) {
-		boolean cesp = Pattern.compile("^[A-Za-z0-9ÑñáéíóúÁÉÍÓÚºª/\s]+$").matcher(username).matches();
-		return cesp;
-	}
 	
 
 	@Override
@@ -36,7 +25,7 @@ public class MeetingValidator implements Validator {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
 		}
 		
-		if (!ciudad(city)) {
+		if (!city.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ.' ']*$")) {
 			errors.rejectValue("city", "La ciudad introducida no puede contener caracteres especiales ni números", "La ciudad introducida no puede contener caracteres especiales ni números.");
 		}
 
@@ -48,7 +37,7 @@ public class MeetingValidator implements Validator {
 					"La dirección debe contener más de 3 caractéres");
 		}
 		
-		if (!direccion(address)) {
+		if (!address.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.' 'º/]*$")) {
 			errors.rejectValue("address", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'");
 		}
 		
@@ -57,7 +46,7 @@ public class MeetingValidator implements Validator {
 			errors.rejectValue("description", REQUIRED, REQUIRED);
 		} 
 		
-		if (!direccion(description)) {
+		if (!description.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.' ']*$")) {
 			errors.rejectValue("description", "Debe contener solo letras y números", "Debe contener solo letras y números");
 		}
 

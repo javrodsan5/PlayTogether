@@ -1,7 +1,6 @@
 package net.playtogether.jpa.controller;
 
-import java.time.LocalDate;
-import java.util.regex.Pattern;
+import java.time.LocalDate; 
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -12,18 +11,7 @@ import net.playtogether.jpa.entity.Championship;
 public class ChampionshipValidator implements Validator {
 
 	private static final String REQUIRED = "Campo requerido.";
-	
-	private static boolean ciudad(String username) {
-		boolean cesp = Pattern.compile("^[A-Za-zÑñáéíóúÁÉÍÓÚ\s]+$").matcher(username).matches();
-		return cesp;
-	}
-	
-	private static boolean direccion(String username) {
-		boolean cesp = Pattern.compile("^[A-Za-z0-9ÑñáéíóúÁÉÍÓÚºª/\s]+$").matcher(username).matches();
-		return cesp;
-	}
-	
-
+		
 	@Override
 	public void validate(Object target, Errors errors) {
 		Championship championship = (Championship) target;
@@ -39,7 +27,7 @@ public class ChampionshipValidator implements Validator {
 		
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
-		} else if (ciudad(city)) {
+		} else if (!city.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ.' ']*$")) {
 			errors.rejectValue("city", "Solo puede contener letras", "Solo puede contener letras");
 		}
 		
@@ -49,7 +37,7 @@ public class ChampionshipValidator implements Validator {
 			errors.rejectValue("name", "Debe tener entre 3 y 50 caracteres", "Debe tener entre 3 y 50 caracteres");
 		}
 		
-		if (ciudad(name)) {
+		if (!name.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.' ']*$")) {
 			errors.rejectValue("name", "Solo puede contener letras y números", "Solo puede contener letras y números");
 		}
 		
@@ -58,8 +46,8 @@ public class ChampionshipValidator implements Validator {
 			errors.rejectValue("description", REQUIRED, REQUIRED); 
 		}
 		
-		if (direccion(description) || description == null) {
-			errors.rejectValue("description", "Debe contener solo letras y números", "Debe contener solo letras y números"); 
+		if (!description.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.!¡¿?' ']*$") || description == null) {
+			errors.rejectValue("description", "Solo puede contener letras y números", "Solo puede contener letras y números"); 
 		}
 
 		if (startDate == null) {
