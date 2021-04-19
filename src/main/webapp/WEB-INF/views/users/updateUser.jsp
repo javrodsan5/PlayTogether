@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
 
 <playtogether:layout pageName="registroPlaytogether">
 	<jsp:body>
@@ -21,7 +22,7 @@
 			<playtogether:inputField label="Correo" name="correo" />
 			<playtogether:inputField label="Telefono" name="phone" />
 			
-			<playtogether:inputField label="*Contraseña" name="user.password" />
+			<playtogether:inputField label="*ContraseÃ±a" name="user.password" />
 	
 			<playtogether:inputField label="Fecha Nacimiento" name="birthdate"
 				 />

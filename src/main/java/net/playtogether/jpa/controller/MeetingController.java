@@ -259,13 +259,38 @@ public class MeetingController {
 							.anyMatch(x -> x.getAuthority().equals("premium"))) {
 					return "error-403";
 				}
+				
+				if (meeting.getMeetingCreator().equals(usuario)) {
+					model.put("esCreador", true);
+					if(usuario.getUser().getAuthorities().stream().anyMatch(x->x.getAuthority().equals("premium"))) {
+						model.put("puedeEliminar", true);
+					}
+				}
+				Boolean b = true;
+				Boolean estaLlena = false;
+				if (!meeting.getParticipants().contains(usuario)) {
+					b = false;
+				}
+				model.addAttribute("sport", meeting.getSport());
+				if (meeting.getNumberOfPlayers() <= meeting.getParticipants().size()) {
+					estaLlena = true;
+				}
+				if (meeting.getNumberOfPlayers() <= meeting.getParticipants().size() && meeting.getParticipants().contains(usuario)) {
+					estaLlena = true;
+					b = true;
+				}
+				model.addAttribute("existe", b);
+				model.addAttribute("estaLlena", estaLlena);
+				model.addAttribute("logged_user", usuario);
+				
+				
 				usuarios.removeIf(u -> deletedUser.equals(u));
 				this.meetingService.save(meeting);
 				Integer puntos = deletedUser.getPuntos() - 5;
 				deletedUser.setPuntos(puntos);
 				this.userService.saveUsuario(deletedUser);
 				model.put("sport", sportService.findSportById(sportId));
-				model.put("eliminado", "Se ha eliminado el jugador correctamente.");
+				model.put("eliminado", true);
 				return "meetings/meetingDetails";
 			} else {
 				
