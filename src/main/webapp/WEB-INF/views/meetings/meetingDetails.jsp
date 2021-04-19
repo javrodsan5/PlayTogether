@@ -21,6 +21,11 @@
 				<p>¡Ya estás participando en esta quedada!</p>
 			</div>
 		</c:if>
+		<c:if test="${eliminado==true}">
+			<div class="alert alert-primary" style="margin: 1% 35% 1% 35%">
+				<p>Has eliminado a este jugador correctamente.</p>
+			</div>
+		</c:if>
 		<c:if test="${estaLlena==true && existe==false}">
 			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
 				<p>La quedada a la que intenta unirse está completa.</p>
@@ -161,7 +166,6 @@
 		</div>
 
 		<br>
-		<c:out value="${eliminado}" />
 
 		<br>
 		<br>

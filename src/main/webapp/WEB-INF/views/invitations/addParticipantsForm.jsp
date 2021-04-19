@@ -207,7 +207,7 @@
 										<b>Buscar</b>
 									</button>
 									<button class="btn btn-success"
-										onclick="location.href='/sports/${meeting.sport.id}/meetings';"
+										onclick="location.href='/sports/${meeting.sport.id}/meetings/${meeting.id}';"
 										type="button">
 										<b>Volver a quedada</b>
 									</button>
