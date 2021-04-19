@@ -293,10 +293,12 @@ public class ChampionshipController {
 
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/matches")
 	public String listMatches(final ModelMap model, @PathVariable("sportId") final Integer sportId,
-			@PathVariable("championshipId") final Integer championshipId) {
+			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
 		Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
 
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
+		
+		
 
 		List<Team> equipos = this.championshipService.findTeamsByChampionshipId(championshipId);
 		Boolean crearPartido = false;
@@ -304,6 +306,9 @@ public class ChampionshipController {
 			crearPartido = true;
 		}
 		model.addAttribute("crearPartido", crearPartido);
+		
+		Usuario user = this.userService.findByUsername(principal.getName());
+		model.addAttribute("usuarioLog", user);
 
 		model.addAttribute("matches", matches);
 		model.addAttribute("deporte", sportId);
@@ -1744,12 +1749,12 @@ public class ChampionshipController {
 		participantes.addAll(match.getTeam2().getParticipants());
 
 		Usuario user = this.userService.findByUsername(principal.getName());
+		model.addAttribute("usuarioLog", user);
 
 		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		model.addAttribute("rondaActual", championship.getMatches().stream().max(Comparator.comparing(Match::getRonda))
 				.map(x -> x.getRonda()).orElse(null));
-
 		if (championshipId > 0 && championshipId <= listChampionships) {
 			if (participa) {
 
