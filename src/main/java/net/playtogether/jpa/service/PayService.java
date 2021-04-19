@@ -78,8 +78,8 @@ public class PayService {
     }
 
     @Transactional
-	public void deleteTeamUser(String username, Integer id2) {
-		 this.payRepository.deleteTeamUser( username,  id2);
+	public void deleteTeamUser(String username, Integer teamId) {
+		 this.payRepository.deleteTeamUser(username,  teamId);
 		
 	}
 }
