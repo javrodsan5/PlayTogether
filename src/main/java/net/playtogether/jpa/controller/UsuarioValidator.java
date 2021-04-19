@@ -17,16 +17,11 @@ public class UsuarioValidator implements Validator {
 
 	private static final Pattern EMAIL_ADDRESS_PATTERN = Pattern.compile("[a-zA-Z0-9\\+\\.\\_\\%\\-\\+]{1,256}" + "\\@"
 			+ "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" + "(" + "\\." + "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" + ")+");
-
+	
+	private static final Pattern TELEPHONE_PATTERN = Pattern.compile("[0-9]{9}");
+	
 	public UsuarioService usuarioService;
 
-	private static boolean soloLetrasNumeros(String username) {
-		boolean soloLetrasNumeros = Pattern.compile("[A-Za-z0-9]").matcher(username).find();
-		if (soloLetrasNumeros) {
-			return true;
-		}
-		return false;
-	}
 
 	private static boolean checkPassword(String password) {
 		boolean tieneMayus = false;
@@ -50,7 +45,7 @@ public class UsuarioValidator implements Validator {
 		return false;
 
 	}
-	
+
 	private static boolean isNumeric(String cadena) {
 		try {
 			Integer.parseInt(cadena);
@@ -78,30 +73,37 @@ public class UsuarioValidator implements Validator {
 		String password = usuario.getUser().getPassword();
 		LocalDate fechaNac = usuario.getBirthdate();
 
-		if (!StringUtils.hasLength(nombre) || nombre.length() > 50) {
+		if (nombre == null || !StringUtils.hasLength(nombre) || nombre.length() > 50) {
 			errors.rejectValue("name", REQUIRED + " Debe contener entre 1 y 50 caracteres",
 					REQUIRED + " Debe contener entre 1 y 50 caracteres");
 		}
 
-		if (!StringUtils.hasLength(correo)) {
+		if (nombre == null || !nombre.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ.' ']*$")) {
+			errors.rejectValue("name", "Solo puede contener letras", "Solo puede contener letras");
+		}
+
+		if (correo == null || !StringUtils.hasLength(correo)) {
 			errors.rejectValue("correo", REQUIRED, REQUIRED);
 
 		} else if (!EMAIL_ADDRESS_PATTERN.matcher(correo).matches()) {
 			errors.rejectValue("correo", "Tu email debe tener un formato correcto",
 					"Tu email debe tener un formato correcto");
 		}
-		
+
 		if (!StringUtils.hasLength(phone)) {
 			errors.rejectValue("phone", REQUIRED, REQUIRED);
 		}
-
+		
+		if(phone.length()>9) {
+			errors.rejectValue("phone", "El teléfono debe tener 9 caracteres.", "El teléfono debe tener 9 caracteres.");
+		}
+		
 		if (!isNumeric(phone)) {
 			errors.rejectValue("phone", " El teléfono debe ser númerico", " El teléfono debe ser númerico");
 		}
 
-		if (phone.length() > 15 || phone.length() < 9) {
-			errors.rejectValue("phone", REQUIRED + " Debe contener entre 9 y 15 caracteres",
-					REQUIRED + " Debe contener entre 9 y 15 caracteres");
+		if (!TELEPHONE_PATTERN.matcher(phone).matches()) {
+			errors.rejectValue("phone","El teléfono introducido no es válido", "El teléfono introducido no es válido");
 		}
 
 		if (fechaNac == null) {
@@ -118,13 +120,14 @@ public class UsuarioValidator implements Validator {
 			}
 		}
 
-		if (!StringUtils.hasLength(username)) {
+		if (username == null || !StringUtils.hasLength(username)) {
 			errors.rejectValue("user.username", REQUIRED, REQUIRED);
 		}
 
-		if (!soloLetrasNumeros(username)) {
-			errors.rejectValue("user.username", "El nombre de usuario solo puede contener letras o números",
-					"El nombre de usuario solo puede contener letras o números");
+		if ((!username.matches("^[a-zA-Z0-9ñÑ.' ']*$"))) {
+			errors.rejectValue("user.username",
+					"Solo puede contener letras sin tildes y números",
+					"Solo puede contener letras sin tildes y números");
 		}
 
 		if (password != null) {

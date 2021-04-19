@@ -209,7 +209,6 @@ public class UsuarioController {
 		int contadorDiciembre = 0;
 
 		for (Integer i : eventoList) {
-			System.out.println(i);
 			if (i == 1) {
 				contadorEnero++;
 			} else if (i == 2) {

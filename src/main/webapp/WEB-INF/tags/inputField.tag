@@ -31,7 +31,7 @@
 			<c:if test="${label!='*Contraseña' && label !='Fecha Inicio' && label != 'Fecha Fin' && label!='Fecha Nacimiento' && label!='*Fecha Nacimiento'
 			
 			&& label!='Fecha y hora' && label!='Fecha' && label!='Hora' }">
-				<form:input class="form-control" path="${name}" />
+				<form:input class="form-control" path="${name}"/>
 			</c:if>
 			<c:if test="${label=='Fecha Inicio'}">
 				<form:input class="form-control" path="${name}" type="date" style="width: 115%;" />
@@ -46,7 +46,7 @@
 				<form:input class="form-control" path="${name}" type="date" />
 			</c:if>
 			<c:if test="${label=='Fecha y hora'}">
-				<form:input class="form-control" name="${name}" path="${name}" type="datetime-local" />
+				<form:input class="form-control" name="${name}" path="${name}" type="datetime-local" style="width:110%;"/>
 			</c:if>
 			<c:if test="${label=='Fecha'}">
 				<form:input class="form-control" path="${name}" type="date" />

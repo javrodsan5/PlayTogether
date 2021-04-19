@@ -17,8 +17,13 @@
 
 	<body>
 		<c:if test="${existe==true}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-primary" style="margin: 1% 35% 1% 35%">
 				<p>¡Ya estás participando en esta quedada!</p>
+			</div>
+		</c:if>
+		<c:if test="${eliminado==true}">
+			<div class="alert alert-primary" style="margin: 1% 35% 1% 35%">
+				<p>Has eliminado a este jugador correctamente.</p>
 			</div>
 		</c:if>
 		<c:if test="${estaLlena==true && existe==false}">
@@ -117,15 +122,14 @@
 					<spring:param name="meetingId" value="${meeting.id}" />
 				</spring:url>
 
-				<center>
-					<c:if test="${leave}">
-						<a href="${fn:escapeXml(leaveMeeting)}" style="color: white">
-							<button class="btn btn-danger" style="margin-top: 5%">
-								<b>Abandonar equipo</b>
-						</a>
-					</c:if>
-					</button>
-				</center>
+				<c:if test="${leave}">
+					<a href="${fn:escapeXml(leaveMeeting)}" style="color: white">
+						<button class="btn btn-danger" style="margin-top: 5%">
+							<b>Abandonar quedada</b>
+						</button>
+
+					</a>
+				</c:if>
 
 			</div>
 		</div>
@@ -139,7 +143,8 @@
 				</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(meetingUpdateUrl)}">Editar</a>
 		</c:if>
 
-		<c:if test="${meeting.meetingCreator == logged_user && !estaLlena && puedeEliminar}">
+		<c:if
+			test="${meeting.meetingCreator == logged_user && !estaLlena && puedeEliminar}">
 			<td><spring:url value="/invitations/meeting/{meetingId}"
 					var="searchPeopleUrl">
 					<spring:param name="meetingId" value="${meeting.id}" />
@@ -161,18 +166,7 @@
 		</div>
 
 		<br>
-		<c:out value="${eliminado}" />
 
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
 		<br>
 	</body>
 

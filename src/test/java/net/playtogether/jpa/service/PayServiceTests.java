@@ -79,7 +79,7 @@ public class PayServiceTests {
 			 Usuario usuario = this.usuarioService.findUserById(3);
 			 Pay pay = this.payService.findLastPayByUsername(usuario.getUser().getUsername());
 			 
-			 assertThat(pay.getId()).isEqualTo(21);
+			 assertThat(pay.getId()).isEqualTo(20);
 		 }
 		 
 	//Find last finished pay for championship by username
@@ -89,7 +89,7 @@ public class PayServiceTests {
 		 Championship ch = this.championshipService.findChampionshipId(7);
 		 Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), ch.getId());
 		 
-		 assertThat(pay.getId()).isEqualTo(20);
+		 assertThat(pay.getId()).isEqualTo(19);
 	 }
 		 
 	//Find last finished pay for team by username
@@ -98,7 +98,7 @@ public class PayServiceTests {
 			 Usuario usuario = this.usuarioService.findUserById(3);
 			 Pay pay = this.payService.findLastFinishedPayForTeamByUsername(usuario.getUser().getUsername(),7);
 			 
-			 assertThat(pay.getId()).isEqualTo(20);
+			 assertThat(pay.getId()).isEqualTo(19);
 		 }
 		 
 	//Find last finished pay for championship by username

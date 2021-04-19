@@ -134,8 +134,8 @@
 					<strong>Invitaciones de quedadas</strong>
 				</h1>
 				<br />
-				<p>Aquí se muestran las invitaciones recibidas a futuros torneos
-					o en progreso. Las invitaciones a torneos pasados se descartarán
+				<p>Aquí se muestran las invitaciones recibidas a futuras quedadas. 
+				Las invitaciones a quedadas pasadas se descartarán
 					automáticamente</p>
 			</div>
 
@@ -150,7 +150,7 @@
 					<table class="table">
 
 						<c:if test="${joined}">
-							<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+							<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
 								<p>Ha aceptado la invitación</p>
 							</div>
 						</c:if>

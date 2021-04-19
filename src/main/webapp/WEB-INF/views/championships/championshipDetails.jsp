@@ -10,7 +10,7 @@
 <playtogether:layout pageName="championships">
 
 	<c:if test="${participarEquipo==false}">
-		<div class="alert alert-danger" style="margin: 0% 20% 1% 20%">
+		<div class="alert alert-primary" style="margin: 0% 20% 1% 20%">
 			<h5>
 				¡Ya estás participando en este torneo en el equipo <i><b><c:out
 							value="${miEquipo.name}" /></b></i>!
