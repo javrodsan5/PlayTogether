@@ -6,14 +6,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
-<playtogether:layout pageName="users">
-
+<playtogether:layout pageName="profile">
 	<div class="thirteen">
 		<h1>Datos de mi perfil</h1>
-		<h2>Tienes <c:out value="${user.puntos}" /> puntos</h2>
+		<h2>Tienes <span class="pointsuser"><c:out value="${user.puntos}" /></span> puntos</h2>
 		
 	</div>
 	<body>

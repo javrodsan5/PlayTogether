@@ -90,7 +90,7 @@
 
 			<div class="boto">
 				<c:if test="${leave}">
-					<a href="${fn:escapeXml(leaveTeam)}">Abandonar equipo</a>
+					<a class="btn btn-danger" href="${fn:escapeXml(leaveTeam)}">Abandonar equipo</a>
 				</c:if>
 			</div>
     
