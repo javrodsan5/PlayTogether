@@ -1901,9 +1901,10 @@ public class ChampionshipController {
 
 		payService.deleteTeamUser(usuario.getUser().getUsername(), teamId);
 		usuarios.remove(usuario);
+		System.out.println("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+		System.out.println(team.getName());
 		usuario.getPayment().forEach(p -> System.out.println(p.getTeam().getName()));
-		
-		this.payService.deleteTeamUser(usuario.getUser().getUsername(), team.getId());
+
 		this.championshipService.save(team);
 		if (team.getUser().equals(usuario)) {
 			Integer puntos = usuario.getPuntos() - 7;
