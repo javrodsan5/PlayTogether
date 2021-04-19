@@ -36,7 +36,7 @@ public interface PayRepository extends CrudRepository<Pay, Integer> {
     List<Pay> findAll();
 
     @Modifying
-    @Query("DELETE FROM Pay p WHERE p.user.user.username = ?1 AND p.team.id=?2")
-	void deleteTeamUser(String username, Integer teamId);
+    @Query("DELETE FROM Pay p WHERE p.user.id = ?1 AND p.team.id=?2")
+	void deleteTeamUser(Integer userId, Integer teamId);
     
 }
