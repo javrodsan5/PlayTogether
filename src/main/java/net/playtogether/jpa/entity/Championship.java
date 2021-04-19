@@ -46,16 +46,21 @@ public class Championship extends NamedEntity {
     private List<Match> matches;
     
     @NotNull
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "startDate")
     private LocalDate startDate;
     
     @NotNull
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "finishDate")
     private LocalDate finishDate;
     
     @NotNull
     @Column(name = "maxTeams")
     private Integer maxTeams;
+
+    @NotNull
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "owner")
+    private Usuario user;
 }

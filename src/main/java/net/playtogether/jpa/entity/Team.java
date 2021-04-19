@@ -8,17 +8,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.annotation.PersistenceConstructor;
-
-import lombok.AccessLevel;
-import lombok.Builder.Default;
 import lombok.Getter;
 import lombok.Setter;
-
-
  
 @Entity
 @Table(name = "teams")
@@ -32,12 +24,13 @@ public class Team extends NamedEntity {
     
     @ManyToMany
     @JoinColumn(name = "users_id")
-	private List<User> participants = new ArrayList<>();
+	private List<Usuario> participants = new ArrayList<>();
     
     private Integer teamSize;
 
-    
-    
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "owner")
+    private Usuario user;
     
 }
 

@@ -17,10 +17,11 @@
 <table id="championshipTable" class="table ">
         <thead>
             <tr class="rowtable" >
-                <th class="guiz-awards-header-title" style="width: 20%;">Ciudad</th>
+                <th class="guiz-awards-header-title" style="width: 15%;">Ciudad</th>
                 <th  class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
-                <th class="guiz-awards-header-title" style="width: 20%;">Fecha Inicio</th>
-                <th class="guiz-awards-header-title" style="width: 20%;">Fecha Fin</th>
+                <th class="guiz-awards-header-title" style="width: 15%;">Fecha Inicio</th>
+                <th class="guiz-awards-header-title" style="width: 15%;">Fecha Fin</th>
+                <th class="guiz-awards-header-title" style="width: 20%;">Equipos inscritos</th>
                 <th class="guiz-awards-header-title" style="width: 20 !important%"></th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                     <td><c:out value="${championship.description}" /></td>
                     <td><c:out value="${championship.startDate}" /></td>
                     <td><c:out value="${championship.finishDate}" /></td>
+                    <td><c:out value="${championship.teams.size()} / ${championship.maxTeams}" /></td>
                     <td><spring:url value="/sports/{deporte}/championships/{championshipId}"
                             var="championship2Url">
                             <spring:param name="championshipId" value="${championship.id}" />

@@ -35,5 +35,10 @@ public class MeetingService {
 	public Collection<Meeting> listMeetingsBySport(int sportId){
 		return meetingRepository.listMeetingsBySport(sportId);
 	}
+	
+	@Transactional(readOnly=true)
+	public Collection<Meeting> findMeetingThisMonthToUser(int userId){
+		return meetingRepository.findMeetingThisMonthToUser(userId);
+	}
 
 }

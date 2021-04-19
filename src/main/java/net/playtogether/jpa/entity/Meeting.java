@@ -1,6 +1,7 @@
 package net.playtogether.jpa.entity;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -9,8 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -32,12 +33,13 @@ public class Meeting extends BaseEntity {
     @Column(name = "city")
     private String city;
     
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     @Column(name = "date")
     private LocalDateTime date;
 
     @ManyToMany
-    private List<User> participants;
+    @JoinColumn(name = "users_id")
+    private List<Usuario> participants;
 
     @Column(name = "description")
     private String description;
@@ -49,6 +51,14 @@ public class Meeting extends BaseEntity {
     @Column(name="numberOfPlayers")
     private Integer numberOfPlayers;
     
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "meeting_creator")
+    private Usuario meetingCreator;
+    
+    
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    @Column(name = "creationDate")
+    private LocalDate creationDate;
 
     
     

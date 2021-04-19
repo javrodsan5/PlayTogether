@@ -1,6 +1,6 @@
 package net.playtogether.jpa.controller;
 
-import java.time.LocalDateTime;
+import java.time.LocalDateTime; 
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -11,6 +11,7 @@ import net.playtogether.jpa.entity.Meeting;
 public class MeetingValidator implements Validator {
 
 	private static final String REQUIRED = "Campo requerido.";
+	
 
 	@Override
 	public void validate(Object target, Errors errors) {
@@ -24,8 +25,8 @@ public class MeetingValidator implements Validator {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
 		}
 		
-		if(isNumeric(city)) {
-			errors.rejectValue("city", "La ciudad introducida no puede tratarse de un número.", "La ciudad introducida no puede tratarse de un número.");
+		if (!city.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ.' ']*$")) {
+			errors.rejectValue("city", "La ciudad introducida no puede contener caracteres especiales ni números", "La ciudad introducida no puede contener caracteres especiales ni números.");
 		}
 
 		if (!StringUtils.hasLength(address) || address == null) {
@@ -35,9 +36,18 @@ public class MeetingValidator implements Validator {
 			errors.rejectValue("address", "La dirección debe contener más de 3 caractéres",
 					"La dirección debe contener más de 3 caractéres");
 		}
-
+		
+		if (!address.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.' 'º/]*$")) {
+			errors.rejectValue("address", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'");
+		}
+		
+		
 		if (!StringUtils.hasLength(description) || description == null) {
 			errors.rejectValue("description", REQUIRED, REQUIRED);
+		} 
+		
+		if (!description.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.,;+!¡¿?' ']*$")) {
+			errors.rejectValue("description", "Debe contener solo letras y números", "Debe contener solo letras y números");
 		}
 
 		if (description.length() >= 300) {
@@ -58,13 +68,4 @@ public class MeetingValidator implements Validator {
 		return Meeting.class.isAssignableFrom(clazz);
 	}
 	
-	private static boolean isNumeric(String cadena) {
-		try {
-			Integer.parseInt(cadena);
-			return true;
-		}catch(NumberFormatException nfe){
-			return false;
-		}
-	}
-
 }

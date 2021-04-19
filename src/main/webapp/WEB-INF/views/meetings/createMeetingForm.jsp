@@ -22,10 +22,10 @@
 				<form:form modelAttribute="meeting" commandName="meeting"
 					id="survey-form">
 					<div style="display: inline-flex;">
-						<playtogether:localDateTime label="Fecha" name="date" id="date"></playtogether:localDateTime>
+						<playtogether:inputField label="Fecha y hora" name="date" />
 						<playtogether:inputField label="Ciudad" name="city" />
 					</div>
-
+					
 					<playtogether:inputField label="Dirección" name="address" />
 					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
 					<input type="hidden" name="sport" value="${sportId}"/>
@@ -33,6 +33,11 @@
 					<div class="form-group">
 						<button class="botonMeeting" type="submit">
 							<b>Crear</b>
+						</button>
+					</div>
+								<div class="form-group">
+						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${sport.id}/meetings';" type="button">
+							<b>Volver a listado</b>
 						</button>
 					</div>
 					<br>

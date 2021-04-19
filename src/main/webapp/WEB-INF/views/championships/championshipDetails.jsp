@@ -9,7 +9,14 @@
 
 <playtogether:layout pageName="championships">
 
-	<h2>Información de torneos</h2>
+	<c:if test="${participarEquipo==false}">
+		<div class="alert alert-primary" style="margin: 0% 20% 1% 20%">
+			<h5>
+				¡Ya estás participando en este torneo en el equipo <i><b><c:out
+							value="${miEquipo.name}" /></b></i>!
+			</h5>
+		</div>
+	</c:if>
 
 	<div class="Card1Meeting">
 		<div class="photo"
@@ -40,47 +47,65 @@
 			<c:out
 				value="${championship.teams.size()} / ${championship.maxTeams}" />
 		</h2>
+		<h2>
+			<c:out
+				value="${championship.sport.numberOfPlayersInTeam} jugadores por equipo" />
+		</h2>
+		<div class="scroll_vertical" id="style_scroll">
+			<c:forEach items="${championship.teams}" var="team">
 
-		<c:forEach items="${championship.teams}" var="team">
-
-			<div class="row">
-				<div class="col-md-12 col-lg-6">
-					<div class="member-card">
-						<div class="member-card-details">
-							<div class="member-name">
-								<a style="color: black;" href="#"> <c:out
-										value="${team.name}" />
-								</a>
-								<spring:url
-									value="/sports/{deporte}/championships/{championshipId}/join/{teamId}"
-									var="joinChampionshipUrl">
-									<spring:param name="deporte" value="${championship.sport.id}" />
-									<spring:param name="championshipId" value="${championship.id}" />
-									<spring:param name="teamId" value="${team.id}" />
-								</spring:url>
-								<c:if test="${participarEquipo==true}"><a style="font-size: 17px"href="${fn:escapeXml(joinChampionshipUrl)}">Unirse</a></c:if>
+						<center>
+							<div class="member-card">
+								<div class="member-card-details">
+									<div class="member-name">
+										<spring:url
+											value="/championships/{championshipId}/teams/{teamId}"
+											var="teamDetails">
+											<spring:param name="championshipId"
+												value="${championship.id}" />
+											<spring:param name="teamId" value="${team.id}" />
+										</spring:url>
+										<a style="color: black;" href="${fn:escapeXml(teamDetails)}">
+											<c:out value="${team.name}" />
+										</a>
+										<spring:url
+											value="/sports/{deporte}/championships/{championshipId}/join/{teamId}"
+											var="joinChampionshipUrl">
+											<spring:param name="deporte" value="${championship.sport.id}" />
+											<spring:param name="championshipId"
+												value="${championship.id}" />
+											<spring:param name="teamId" value="${team.id}" />
+										</spring:url>
+										<c:if
+											test="${participarEquipo==true && team.participants.size() < team.teamSize }">
+											<a style="font-size: 17px"
+												href="${fn:escapeXml(joinChampionshipUrl)}">Unirse</a>
+										</c:if>
+										<spring:url value="/invitations/team/{teamId}"
+											var="searchPeopleUrl">
+											<spring:param name="teamId" value="${team.id}" />
+										</spring:url>
+										<c:if
+											test="${team.user == logged_user && team.participants.size() < team.teamSize && premium}">
+											<a style="font-size: 17px"
+												href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
+										</c:if>
+									</div>
+								</div>
 							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</c:forEach>
-
+						</center>
+			</c:forEach>
+		</div>
 	</div>
 
 	<c:if test="${crearEquipo==true}">
-		<spring:url
-			value="/championships/{championshipId}/team/create"
+		<spring:url value="/championships/{championshipId}/team/create"
 			var="createTeam">
 			<spring:param name="championshipId" value="${championship.id}" />
 		</spring:url>
-		<a href="${fn:escapeXml(createTeam)}" class="btn btn-danger">Crear equipo</a>
+		<a href="${fn:escapeXml(createTeam)}" class="btn btn-danger">Crear
+			equipo</a>
 
-	</c:if>
-
-	<c:if test="${participarEquipo==false}">
-		<h5>¡Ya estás participando en este torneo en el equipo <i><b><c:out
-				value="${miEquipo.name}" /></b></i>!</h5>
 	</c:if>
 
 	<spring:url
@@ -92,6 +117,14 @@
 	<a style="margin-left: 20px;" id="listMatch" class="btn btn-warning"
 		href="${fn:escapeXml(dateUrl)}">Ver partidos</a>
 
+	<div class="form-group">
+		<button class="botonMeeting"
+			style="font-size: 0.8em; margin-left: 22.72em;"
+			onclick="location.href='/sports/${championship.sport.id}/championships';"
+			type="button">
+			<b>Volver a listado</b>
+		</button>
+	</div>
 	<body>
 	</html>
 </playtogether:layout>

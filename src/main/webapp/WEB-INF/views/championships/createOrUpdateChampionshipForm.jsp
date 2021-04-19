@@ -15,17 +15,28 @@
 <form:form  commandName="championship" modelAttribute="championship">
 	<div>
 		<div style="display: inline-flex;">
-		<playtogether:localDate label="Inicio" name="startDate" id="startDte" ></playtogether:localDate>
-		<playtogether:localDate label="Fin" name="finishDate" id="finishDate" ></playtogether:localDate>
+		<playtogether:inputField label="Fecha Inicio" name="startDate" />
+		<playtogether:inputField label="Fecha Fin" name="finishDate" />
+		
 		</div>
+		<playtogether:inputField label="Nombre" name="name" />
 		<playtogether:inputField label="Ciudad" name="city" />
 		<playtogether:inputField label="Descripción" name="description" />
 		<playtogether:selectField label="Número de equipos" 
 		name="maxTeams" size="3" names="${maximoEquipos}"></playtogether:selectField>
 		<input type="hidden" name="sport" value="${deporte}"/>
 
-		<input class="butona" type="submit" value="Crear">
-
+		<div class="form-group">
+			<button class="botonMeeting" type="submit">
+			<b>Crear</b>
+			</button>
+		</div>
+				<div class="form-group">
+						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${deporte}/championships';" type="button">
+							<b>Volver a listado</b>
+						</button>
+					</div>
+	<br>
 	</div>
 	
 	

@@ -28,7 +28,7 @@ public class MatchValidatorTest {
 		localValidatorFactoryBean.afterPropertiesSet();
 		return localValidatorFactoryBean;
 	}
-
+/*
 	@Test
 	void shouldNotValidateWhenDateNull() {
 		LocaleContextHolder.setLocale(Locale.ENGLISH);
@@ -59,7 +59,7 @@ public class MatchValidatorTest {
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("dateTime");
 		assertThat(violation.getMessage()).isEqualTo("must not be null");
 		
-	}
+	}*/
 	
 
 	void shouldNotValidateWhenFinishDateNull() {
