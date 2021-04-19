@@ -192,6 +192,10 @@ public class MeetingController {
 			list.add(u);
 			meeting.setParticipants(list);
 
+			if (!meeting.getParticipants().contains(meeting.getMeetingCreator())) {
+				meeting.setMeetingCreator(u);
+			}
+			
 			this.meetingService.save(meeting);
 			u.setPuntos(u.getPuntos() + 5);
 			this.usuarioService.saveUsuarioAlreadyRegistered(u);
