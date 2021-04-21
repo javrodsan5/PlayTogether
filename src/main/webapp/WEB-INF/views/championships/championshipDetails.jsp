@@ -32,8 +32,9 @@
 
 			</div>
 			<h2>
-				<c:out
-					value="Inicio: ${championship.startDate} Fin: ${championship.finishDate}" />
+				<c:out value="Inicio: ${championship.startDate}" />
+				<br>
+				<c:out value="Fin: ${championship.finishDate}" />
 			</h2>
 			<p class="summary">
 				<c:out value="${championship.description}" />
@@ -41,59 +42,57 @@
 		</div>
 	</div>
 
-	<div style="float: right; margin-right: 50px">
-		<h2>
+	<div class="equiposTorneo">
+		<h3 class="espacioIzqMovil">
 			Nº equipos inscritos:
 			<c:out
 				value="${championship.teams.size()} / ${championship.maxTeams}" />
-		</h2>
-		<h2>
+		</h3>
+		<h3 class="espacioIzqMovil">
 			<c:out
 				value="${championship.sport.numberOfPlayersInTeam} jugadores por equipo" />
-		</h2>
+		</h3>
 		<div class="scroll_vertical" id="style_scroll">
 			<c:forEach items="${championship.teams}" var="team">
 
-						<center>
-							<div class="member-card">
-								<div class="member-card-details">
-									<div class="member-name">
-										<spring:url
-											value="/championships/{championshipId}/teams/{teamId}"
-											var="teamDetails">
-											<spring:param name="championshipId"
-												value="${championship.id}" />
-											<spring:param name="teamId" value="${team.id}" />
-										</spring:url>
-										<a style="color: black;" href="${fn:escapeXml(teamDetails)}">
-											<c:out value="${team.name}" />
-										</a>
-										<spring:url
-											value="/sports/{deporte}/championships/{championshipId}/join/{teamId}"
-											var="joinChampionshipUrl">
-											<spring:param name="deporte" value="${championship.sport.id}" />
-											<spring:param name="championshipId"
-												value="${championship.id}" />
-											<spring:param name="teamId" value="${team.id}" />
-										</spring:url>
-										<c:if
-											test="${participarEquipo==true && team.participants.size() < team.teamSize }">
-											<a style="font-size: 17px"
-												href="${fn:escapeXml(joinChampionshipUrl)}">Unirse</a>
-										</c:if>
-										<spring:url value="/invitations/team/{teamId}"
-											var="searchPeopleUrl">
-											<spring:param name="teamId" value="${team.id}" />
-										</spring:url>
-										<c:if
-											test="${team.user == logged_user && team.participants.size() < team.teamSize && premium}">
-											<a style="font-size: 17px"
-												href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
-										</c:if>
-									</div>
-								</div>
+				<center>
+					<div class="member-card">
+						<div class="member-card-details">
+							<div class="member-name">
+								<spring:url
+									value="/championships/{championshipId}/teams/{teamId}"
+									var="teamDetails">
+									<spring:param name="championshipId" value="${championship.id}" />
+									<spring:param name="teamId" value="${team.id}" />
+								</spring:url>
+								<a style="color: black;" href="${fn:escapeXml(teamDetails)}">
+									<c:out value="${team.name}" />
+								</a>
+								<spring:url
+									value="/sports/{deporte}/championships/{championshipId}/join/{teamId}"
+									var="joinChampionshipUrl">
+									<spring:param name="deporte" value="${championship.sport.id}" />
+									<spring:param name="championshipId" value="${championship.id}" />
+									<spring:param name="teamId" value="${team.id}" />
+								</spring:url>
+								<c:if
+									test="${participarEquipo==true && team.participants.size() < team.teamSize }">
+									<a style="font-size: 17px"
+										href="${fn:escapeXml(joinChampionshipUrl)}">Unirse</a>
+								</c:if>
+								<spring:url value="/invitations/team/{teamId}"
+									var="searchPeopleUrl">
+									<spring:param name="teamId" value="${team.id}" />
+								</spring:url>
+								<c:if
+									test="${team.user == logged_user && team.participants.size() < team.teamSize && premium}">
+									<a style="font-size: 17px"
+										href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
+								</c:if>
 							</div>
-						</center>
+						</div>
+					</div>
+				</center>
 			</c:forEach>
 		</div>
 	</div>
@@ -114,15 +113,14 @@
 		<spring:param name="deporte" value="${championship.sport.id}" />
 		<spring:param name="championshipId" value="${championship.id}" />
 	</spring:url>
-	<a style="margin-left: 20px;" id="listMatch" class="btn btn-warning"
-		href="${fn:escapeXml(dateUrl)}">Ver partidos</a>
+	<a  class="botonPartidosTorneo"
+		href="${fn:escapeXml(dateUrl)}">Partidos</a>
 
 	<div class="form-group">
-		<button class="botonMeeting"
-			style="font-size: 0.8em; margin-left: 22.72em;"
+		<button class="botonTorneos"
 			onclick="location.href='/sports/${championship.sport.id}/championships';"
 			type="button">
-			<b>Volver a listado</b>
+			<b>Torneos</b>
 		</button>
 	</div>
 	<body>
