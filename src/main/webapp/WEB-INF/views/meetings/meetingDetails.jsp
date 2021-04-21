@@ -163,6 +163,13 @@
 				type="button">
 				<b>Volver a listado</b>
 			</button>
+			<button class="botonMeeting"
+				style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
+				onclick="location.href='/chat/${chatId}/messages';"
+				type="button">
+				<b>Ver chat</b>
+			</button>
+
 		</div>
 
 		<br>

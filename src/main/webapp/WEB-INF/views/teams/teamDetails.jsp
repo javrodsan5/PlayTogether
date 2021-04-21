@@ -94,6 +94,12 @@
 					<a class="btn btn-danger" href="${fn:escapeXml(leaveTeam)}">Abandonar equipo</a>
 				</center>
 				</c:if>
+				<button class="botonMeeting"
+				style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
+				onclick="location.href='/chat/${chatId}/messages';"
+				type="button">
+				<b>Ver chat</b>
+				</button>
 			</div>
 			
 			<c:if test="${leave && championship.matches.size() != 0}">

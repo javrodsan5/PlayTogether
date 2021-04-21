@@ -29,12 +29,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
+import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.PayService;
@@ -65,6 +67,9 @@ public class ChampionshipController {
 	
 	@Autowired
 	InvitationService invitationService;
+
+	@Autowired
+	ChatService chatService;
 
 	private List<Usuario> users;
 
@@ -589,6 +594,14 @@ public class ChampionshipController {
 				team.setChampionship(championship);
 				team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
 				this.championshipService.save(team);
+
+				if(team.getTeamSize() > 1) {
+					Chat chat = new Chat();
+					chat.setChatType(this.chatService.findChatTypeById(2)); //TEAM
+					chat.setTeam(team);
+					this.chatService.saveChat(chat);
+				}
+
 				usuario.setPuntos(usuario.getPuntos() + 2);
 				initJoinChampionship(model, championship.getSport().getId(), championshipId, team.getId(), principal);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
@@ -610,6 +623,7 @@ public class ChampionshipController {
 
 		model.addAttribute("matches", matchesTeam);
 		model.addAttribute("championship", team.getChampionship());
+		model.addAttribute("chatId", this.chatService.findChatIdByTeam1Id(teamId));
 
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
 		List<Usuario> usuarios = team.getParticipants();

@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Usuario;
+import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.MeetingService;
 import net.playtogether.jpa.service.SportService;
@@ -46,6 +48,8 @@ public class MeetingController {
 	@Autowired
 	InvitationService	invitationService;
 
+	@Autowired
+	ChatService 	chatService;
 
 	@InitBinder("meeting")
 	public void initMeetingBinder(final WebDataBinder dataBinder) {
@@ -96,6 +100,10 @@ public class MeetingController {
 			this.meetingService.save(meeting);
 			usuario.setPuntos(usuario.getPuntos() + 7);
 			this.usuarioService.saveUsuarioAlreadyRegistered(usuario);
+
+			Chat chat = new Chat();
+			chat.setChatType(this.chatService.findChatTypeById(1)); //MEETING
+			chat.setMeeting(meeting);
 
 			return "redirect:/sports/" + sportId + "/meetings";
 		}
@@ -172,6 +180,7 @@ public class MeetingController {
 		model.addAttribute("existe", b);
 		model.addAttribute("estaLlena", estaLlena);
 		model.addAttribute("logged_user", u);
+		model.addAttribute("chatId", this.chatService.findChatIdByMeetingId(meetingId));
 		
 
 		if (usuarios.stream().anyMatch(x -> u.equals(x))) {

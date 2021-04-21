@@ -27,7 +27,6 @@ import lombok.Setter;
 @Getter
 public class Usuario extends NamedEntity {
 
-
 	@Email
 	@Column(name = "correo")
 	private String correo;

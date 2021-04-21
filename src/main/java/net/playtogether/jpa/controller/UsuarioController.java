@@ -22,9 +22,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
+import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
 
@@ -35,6 +37,9 @@ public class UsuarioController {
 
 	@Autowired
 	UserTypeService userTypeService;
+
+	@Autowired
+	ChatService chatService;
 
 	@InitBinder("usuario")
 	public void initUsuariotBinder(WebDataBinder dataBinder) {
