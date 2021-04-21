@@ -52,6 +52,15 @@
 			<c:out
 				value="${championship.sport.numberOfPlayersInTeam} jugadores por equipo" />
 		</h3>
+			<c:if test="${crearEquipo==true}">
+		<spring:url value="/championships/{championshipId}/team/create"
+			var="createTeam">
+			<spring:param name="championshipId" value="${championship.id}" />
+		</spring:url>
+		<a href="${fn:escapeXml(createTeam)}" class="btn btn-danger rightDesktop">Crear
+			equipo</a>
+	</c:if>
+		<c:if test="${hayEquipos==true}">
 		<div class="scroll_vertical" id="style_scroll">
 			<c:forEach items="${championship.teams}" var="team">
 
@@ -95,17 +104,10 @@
 				</center>
 			</c:forEach>
 		</div>
+		</c:if>
 	</div>
 
-	<c:if test="${crearEquipo==true}">
-		<spring:url value="/championships/{championshipId}/team/create"
-			var="createTeam">
-			<spring:param name="championshipId" value="${championship.id}" />
-		</spring:url>
-		<a href="${fn:escapeXml(createTeam)}" class="btn btn-danger">Crear
-			equipo</a>
 
-	</c:if>
 
 	<spring:url
 		value="/sports/{deporte}/championships/{championshipId}/matches"

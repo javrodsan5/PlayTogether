@@ -1399,6 +1399,47 @@ form input {
 		float: right;
 		margin-right: 50px;
 	}
+	.equiposTorneo {
+		float: bottom;
+	}
+	.espacioIzqMovil{
+	margin-left: 2%;
+	}
+	.botonTorneos{
+	padding: 10px 10px 10px 15px;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 80%;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-bottom: 10px;
+	margin-left: 42%;
+	width: 20%;
+	}
+	.botonPartidosTorneo{
+	padding: 10px 10px 10px 15px;
+	float: left;
+	color: #FFF;
+	background-color: #FF7F50;
+	font-size: 80%;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+	margin-left: 42%;
+	width: 20%;
+	}
+	.rightDesktop {
+	float:bottom;
+	}
 }
 
 @media ( max-width : 1499px) and (min-width: 992px) {
@@ -1498,6 +1539,61 @@ form input {
 	.mobile {
 		display: none;
 	}
+		.Card1Meeting {
+		width: 90%;
+		height: 400px;
+		height: auto;
+	}
+	.Card1Meeting .photo {
+		float: none;
+		height: 400px;
+		width: 100%;
+	}
+	.Card1Meeting .description {
+		float: inherit;
+		width: 100%;
+	}
+	.Card1Meeting .description p {
+		margin-bottom: 1em;
+	}
+	.equiposTorneo {
+		float: bottom;
+	}
+	.espacioIzqMovil{
+	margin-left: 2%;
+	}
+	.botonTorneos{
+	padding: 10px 10px 10px 15px;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 80%;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-bottom: 10px;
+	margin-left: 42%;
+	width: 20%;
+	}
+	.botonPartidosTorneo{
+	padding: 10px 10px 10px 15px;
+	float: left;
+	color: #FFF;
+	background-color: #FF7F50;
+	font-size: 80%;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+	margin-left: 42%;
+	width: 20%;
+	}
 }
 
 @media ( max-width : 991px) and (min-width: 768px) {
@@ -1595,9 +1691,119 @@ form input {
 	.mobile {
 		display: none;
 	}
+		.Card1Meeting {
+		width: 90%;
+		height: 400px;
+		height: auto;
+	}
+	.Card1Meeting .photo {
+		float: none;
+		height: 400px;
+		width: 100%;
+	}
+	.Card1Meeting .description {
+		float: inherit;
+		width: 100%;
+	}
+	.Card1Meeting .description p {
+		margin-bottom: 1em;
+	}
+	.equiposTorneo {
+		float: bottom;
+	}
+	.espacioIzqMovil{
+	margin-left: 2%;
+	}
+	.botonTorneos{
+	padding: 10px 10px 10px 15px;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 80%;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-bottom: 10px;
+	margin-left: 42%;
+	width: 20%;
+	}
+	.botonPartidosTorneo{
+	padding: 10px 10px 10px 15px;
+	float: left;
+	color: #FFF;
+	background-color: #FF7F50;
+	font-size: 80%;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+	margin-left: 42%;
+	width: 20%;
+	}
 }
 
 @media ( max-width : 767px) and (min-width: 511px) {
+		.Card1Meeting {
+		width: 90%;
+		height: 400px;
+		height: auto;
+	}
+	.Card1Meeting .photo {
+		float: none;
+		height: 400px;
+		width: 100%;
+	}
+	.Card1Meeting .description {
+		float: inherit;
+		width: 100%;
+	}
+	.Card1Meeting .description p {
+		margin-bottom: 1em;
+	}
+	.equiposTorneo {
+		float: bottom;
+	}
+	.espacioIzqMovil{
+	margin-left: 2%;
+	}
+	.botonTorneos{
+	padding: 10px 10px 10px 15px;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 80%;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-bottom: 10px;
+	margin-left: 42%;
+	width: 20%;
+	}
+	.botonPartidosTorneo{
+	padding: 10px 10px 10px 15px;
+	float: left;
+	color: #FFF;
+	background-color: #FF7F50;
+	font-size: 80%;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5px;
+	width: 100%;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+	margin-left: 42%;
+	width: 20%;
+	}
 	.table-container {
 		padding: 15px;
 		max-width: 600px;

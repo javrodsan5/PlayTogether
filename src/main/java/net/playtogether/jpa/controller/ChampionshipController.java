@@ -9,7 +9,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.ConstraintViolationException;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -201,6 +200,7 @@ public class ChampionshipController {
 		}
 		model.addAttribute("crearEquipo", b1);
 		model.addAttribute("participarEquipo", b2);
+		model.addAttribute("hayEquipos", championship.getTeams().size()>0);
 		model.addAttribute("logged_user", user);
 		
 		if (user.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
