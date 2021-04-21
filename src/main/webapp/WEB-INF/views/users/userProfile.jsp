@@ -31,43 +31,42 @@
 					<div class="profile grid-area" style="border: grey 1px solid">
 						<div class="img">
 							<img src="/images/avatar.png">
-
-							<h3>
-								<c:out value="${user.name}" />
-							</h3>
-							<h5 class="username">
+							<h5 class="username" style="font-size: 24px">
 								<c:out value="${user.user.username}" />
 							</h5>
 						</div>
+						<center>
+							<h3>
+								<c:out value="${user.name}" />
+							</h3>
+						</center>
 						<div class="profile-data">
-							<div class="data-details">
+							<div class="data-details" style="margin-right: 22%">
 								<h5>Fecha de nacimiento</h5>
 								<h4>
 									<c:out value="${user.birthdate}" />
 								</h4>
 							</div>
-						</div>
-						<div class="profile-data">
-							<div class="data-details">
-								<h5 style="margin-right: 50px">Teléfono</h5>
-								<h4 style="margin-right: 50px">
-									<c:out value="${user.phone}" />
-								</h4>
-							</div>
-							<div class="data-details">
-								<h5 style="margin-left: 20px">Correo electrónico</h5>
-								<h4 style="margin-left: 20px">
-									<c:out value="${user.correo}"></c:out>
-								</h4>
-
-							</div>
-						</div>
-						<div class="profile-data">
 							<div class="data-details">
 								<h5>Tipo de usuario</h5>
 								<h4>
 									<c:out value="${user.type}" />
 								</h4>
+							</div>
+						</div>
+						<div class="profile-data">
+							<div class="data-details" style="margin-right: 15%">
+								<h5>Teléfono</h5>
+								<h4>
+									<c:out value="${user.phone}" />
+								</h4>
+							</div>
+							<div class="data-details">
+								<h5>Correo electrónico</h5>
+								<h4>
+									<c:out value="${user.correo}"></c:out>
+								</h4>
+
 							</div>
 						</div>
 
@@ -99,8 +98,7 @@
 
 
 		</div>
-		<div class="charts"
-			style="width: 50%; display: inline-block; margin-left: 5%; margin-right: 5%; float: right">
+		<div class="charts">
 			<br>
 			<center>
 				<div id="mensaje"></div>
