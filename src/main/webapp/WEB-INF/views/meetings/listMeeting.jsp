@@ -30,9 +30,10 @@
 					<tr class="rowtable">
 						<th class="guiz-awards-header-title" style="width: 20%;">Dirección</th>
 						<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
-						<th class="guiz-awards-header-title" style="width: 25%;">Descripción</th>
-						<th class="guiz-awards-header-title" style="width: 15%;">Fecha</th>
-						<th class="guiz-awards-header-title" style="width: 10%;">Nº participantes</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Fecha</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Participantes</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
 						<th class="guiz-awards-header-title" style="width: 20%;"></th>
 					</tr>
 				</thead>
@@ -43,7 +44,12 @@
 							<td><c:out value="${meeting.city}" /></td>
 							<td><c:out value="${meeting.description}" /></td>
 							<td><c:out value="${meeting.date}" /></td>
-							<td><c:out value="${meeting.participants.size()}/${meeting.numberOfPlayers}" /></td>
+							<td><center><c:out value="${meeting.participants.size()}/${meeting.numberOfPlayers}" /></center></td>
+							<td><spring:url value="/usuarios/{userId}" var="userdetails">
+													<spring:param name="userId" value="${meeting.meetingCreator.id}" />
+												</spring:url>
+												<a href="${fn:escapeXml(userdetails)}">
+								<c:out value="${meeting.meetingCreator.user.username}" /></a></td>
 							<td><spring:url
 									value="/sports/{deporte}/meetings/{meetingId}"
 									var="meeting2Url">

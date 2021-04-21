@@ -1280,6 +1280,12 @@ form input {
 
 /* === Responsive === */
 @media ( min-width : 1500px) {
+	.charts {
+		width: 50%; 
+		display: inline-block; 
+		margin-left: 5%; margin-right: 5%; 
+		float: right;
+	}
 	.navigation-wrap {
 		position: fixed;
 		width: 100%;
@@ -1360,6 +1366,12 @@ form input {
 
 @media ( max-width : 1499px) and (min-width: 992px) {
 	/* === Estandar === */
+	.charts {
+		width: 50%; 
+		display: inline-block; 
+		margin-left: 5%; margin-right: 5%; 
+		float: right;
+	}
 	.navigation-wrap {
 		position: fixed;
 		width: 100%;
@@ -1458,6 +1470,11 @@ form input {
 }
 
 @media ( max-width : 991px) and (min-width: 768px) {
+	.charts {
+		width: 100%; 
+		display: inline-block; 
+		margin-left: 5%; margin-right: 5%; 
+	}
 	.end {
 		display: none;
 	}
@@ -1891,75 +1908,6 @@ body {
 	margin-top: 100px;
 	color: #363b6d;
 	margin-left: 20px;
-}
-
-@media screen and (max-width: 1000px) {
-	.body-container {
-		width: 100%;
-		padding: 50px 10px 0 10px;
-	}
-	.dashboard .grid-container {
-		grid-gap: 0 10px;
-	}
-	.dashboard .grid-container .grid-area {
-		margin-bottom: 10px;
-	}
-	.dashboard .grid-container .edit-profile .header h1 {
-		width: 100%;
-		text-align: left;
-		margin-left: 10px;
-	}
-	.dashboard .grid-container .matchs .display-matchs {
-		margin: 70px 10px 20px 10px;
-	}
-	.dashboard .grid-container .profile .profile-data {
-		margin-top: 0;
-	}
-	.dashboard .grid-container .profile .profile-data .data-details {
-		margin-left: 20%;
-	}
-}
-
-@media screen and (max-width: 750px) {
-	.dashboard .grid-container {
-		display: flex;
-		flex-direction: column;
-	}
-	.dashboard .grid-container .profile {
-		height: 532px;
-	}
-	.dashboard .grid-container .profile .img:before {
-		width: 200%;
-		top: 50%;
-		height: 50%;
-	}
-	.dashboard .grid-container .profile .img:after {
-		width: 200%;
-		top: 71%;
-		height: 50%;
-	}
-	.dashboard .grid-container .matchs .header:before {
-		transform: rotate(4deg) skewX(0deg);
-	}
-	.dashboard .grid-container .matchs .header:after {
-		transform: rotate(4deg) skewX(0deg);
-	}
-	.dashboard .grid-container .edit-profile {
-		height: auto;
-	}
-}
-
-@media screen and (max-width: 550px) {
-	.dashboard .grid-container .profile .img:before {
-		width: 200%;
-		top: 60%;
-		height: 50%;
-	}
-	.dashboard .grid-container .profile .img:after {
-		width: 200%;
-		top: 80%;
-		height: 50%;
-	}
 }
 
 *, *::before, *::after {
