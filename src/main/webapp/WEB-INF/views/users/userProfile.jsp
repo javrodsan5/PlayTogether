@@ -141,13 +141,12 @@
 						<spring:url value="/myprofile/edit" var="editUser2Url">
 						</spring:url>
 						<center>
-							<a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a>
+							<br><a class="btn btn-primary" href="${fn:escapeXml(editUser2Url)}">Editar</a>
 							<br> <br> <a
-								href="/invitations/championshipInvitations"
-								class="btn btn-primary">Ver invitaciones a equipo de torneo</a>
-							<br> <br> <a href="/invitations/meetingInvitations"
-								class="btn btn-primary">Ver invitaciones a quedadas</a> <br>
-							<br> <a href="/myprofile/meetingsRecord"
+								href="/invitations/listInvitations"
+								class="btn btn-primary">Ver invitaciones</a>
+
+							<br> <br> <a href="/myprofile/meetingsRecord"
 								class="btn btn-primary">Historial de quedadas</a>
 
 							<spring:url value="/myprofile/championshipsRecord"

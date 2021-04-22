@@ -199,30 +199,7 @@ public class InvitationController {
 			}
 		}
 	}
-	
-	
-	@GetMapping("/invitations/championshipInvitations")
-	public String listChampionshipInvitations(final ModelMap model, Principal principal) {	
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
-		Collection<Invitation> invitations = this.invitationService.findChampionshipInvitationsByUsername(principal.getName());	
-		
-		List<Invitation> expiredInvitations = invitations.stream().filter(i -> i.getTeam().getChampionship().getFinishDate().isBefore(LocalDate.now())).collect(Collectors.toList());		
-		expiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
-		invitations.removeAll(expiredInvitations);
-		
-		Usuario usuario = this.userService.findByUsername(principal.getName());
-		List<Championship> participating = usuario.getTeams().stream().map(t -> t.getChampionship()).distinct().collect(Collectors.toList());
-		
-		expiredInvitations = invitations.stream().filter(i -> participating.contains(i.getTeam().getChampionship())).collect(Collectors.toList());		
-		expiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
-		invitations.removeAll(expiredInvitations);
-		
-		model.addAttribute("invitations", invitations);
-		model.addAttribute("areTeamInvitations", true);
-		return "invitations/listInvitations";
-	}
+
 
 	@GetMapping("/invitations/championshipInvitations/{invitationId}/")
 	public String initAcceptInvitation(@RequestParam(value = "accepted", required = true) final String accepted,
@@ -230,6 +207,7 @@ public class InvitationController {
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		
 		Boolean hasPermission = false;
 		Invitation invitation = this.invitationService.findById(invitationId);
 		
@@ -280,9 +258,10 @@ public class InvitationController {
 			model.put("notJoined", true);
 		} 
 		
-		Collection<Invitation> invitations = this.invitationService.findChampionshipInvitationsByUsername(principal.getName());	
-		model.addAttribute("invitations", invitations);
-		model.addAttribute("areTeamInvitations", true);
+		Collection<Invitation> championshipInvitations = this.invitationService.findChampionshipInvitationsByUsername(principal.getName());	
+		Collection<Invitation> meetingInvitations = this.invitationService.findMeetingInvitationsByUsername(principal.getName());	
+		model.addAttribute("meetingInvitations", meetingInvitations);
+		model.addAttribute("championshipInvitations", championshipInvitations);
 		return "invitations/listInvitations";
 	}
 
@@ -425,29 +404,6 @@ public class InvitationController {
 		return isNotInChampionshipTeam;
 	}
 
-	
-	@GetMapping("/invitations/meetingInvitations")
-	public String listMeetingInvitations(final ModelMap model, Principal principal) {	
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
-		Collection<Invitation> invitations = this.invitationService.findMeetingInvitationsByUsername(principal.getName());	
-		
-		List<Invitation> expiredInvitations = invitations.stream().filter(i -> i.getMeeting().getDate().isBefore(LocalDateTime.now())).collect(Collectors.toList());		
-		expiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
-		invitations.removeAll(expiredInvitations);
-		
-		Usuario usuario = this.userService.findByUsername(principal.getName());
-		List<Meeting> participating = usuario.getMeetings(); 
-		
-		expiredInvitations = invitations.stream().filter(i -> participating.contains(i.getMeeting())).collect(Collectors.toList());		
-		expiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
-		invitations.removeAll(expiredInvitations);
-		
-		model.addAttribute("invitations", invitations);
-		model.addAttribute("areMeetingInvitations", true);
-		return "invitations/listInvitations";
-	}
 
 	@GetMapping("/invitations/meetingInvitations/{invitationId}/")
 	public String initAcceptMeetingInvitation(@RequestParam(value = "accepted", required = true) final String accepted,
@@ -455,6 +411,7 @@ public class InvitationController {
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		
 		Boolean hasPermission = false;
 		Invitation invitation = this.invitationService.findById(invitationId);
 		
@@ -500,14 +457,48 @@ public class InvitationController {
 			model.put("notJoined", true);
 		} 
 		
-		Collection<Invitation> invitations = this.invitationService.findMeetingInvitationsByUsername(principal.getName());	
-		model.addAttribute("invitations", invitations);
-		model.addAttribute("areMeetingInvitations", true);
+		Collection<Invitation> championshipInvitations = this.invitationService.findChampionshipInvitationsByUsername(principal.getName());	
+		Collection<Invitation> meetingInvitations = this.invitationService.findMeetingInvitationsByUsername(principal.getName());	
+		model.addAttribute("meetingInvitations", meetingInvitations);
+		model.addAttribute("championshipInvitations", championshipInvitations);
 		return "invitations/listInvitations";
 	}
 
 
 	
+	
+	@GetMapping("/invitations/listInvitations")
+	public String listInvitations(final ModelMap model, Principal principal) {	
+		Collection<Invitation> invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName());
+		Collection<Invitation> invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName());
+		model.addAttribute("invitaciones",invitacionesQuedadas.size() + invitacionesTorneos.size());
+		Usuario usuario = this.userService.findByUsername(principal.getName());
+		
+		// Championships
+		List<Invitation> championshipExpiredInvitations = invitacionesTorneos.stream().filter(i -> i.getTeam().getChampionship().getFinishDate().isBefore(LocalDate.now())).collect(Collectors.toList());		
+		championshipExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
+		invitacionesTorneos.removeAll(championshipExpiredInvitations);
+		
+		List<Championship> championshipParticipating = usuario.getTeams().stream().map(t -> t.getChampionship()).distinct().collect(Collectors.toList());		
+		championshipExpiredInvitations = invitacionesTorneos.stream().filter(i -> championshipParticipating.contains(i.getTeam().getChampionship())).collect(Collectors.toList());		
+		championshipExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
+		invitacionesTorneos.removeAll(championshipExpiredInvitations);
+		
+		// Meetings
+		List<Invitation> meetingExpiredInvitations = invitacionesQuedadas.stream().filter(i -> i.getMeeting().getDate().isBefore(LocalDateTime.now())).collect(Collectors.toList());		
+		meetingExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
+		invitacionesQuedadas.removeAll(meetingExpiredInvitations);
+		
+		List<Meeting> meetingParticipating = usuario.getMeetings(); 
+		meetingExpiredInvitations = invitacionesQuedadas.stream().filter(i -> meetingParticipating.contains(i.getMeeting())).collect(Collectors.toList());		
+		meetingExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
+		invitacionesQuedadas.removeAll(meetingExpiredInvitations);
+	
+		// Model
+		model.addAttribute("meetingInvitations", invitacionesQuedadas);
+		model.addAttribute("championshipInvitations", invitacionesTorneos);
+		return "invitations/listInvitations";
+	}
 	
 	
 }
