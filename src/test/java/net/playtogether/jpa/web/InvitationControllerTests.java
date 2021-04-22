@@ -300,7 +300,7 @@ public class InvitationControllerTests {
 	@Test
 	@WithMockUser(value = "user1", authorities="usuario")
 	void testListInvitations() throws Exception {
-		this.mockMvc.perform(get("/invitations/championshipInvitations")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+		this.mockMvc.perform(get("/invitations/listInvitations")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
 		
@@ -375,14 +375,6 @@ public class InvitationControllerTests {
 
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
 		.andExpect(MockMvcResultMatchers.view().name("invitations/addParticipantsForm"));
-	}
-	
-	// Test de listar invitaciones a quedada
-	@Test
-	@WithMockUser(value = "user1", authorities="usuario")
-	void testListInvitationsMeeting() throws Exception {
-		this.mockMvc.perform(get("/invitations/meetingInvitations")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-		.andExpect(MockMvcResultMatchers.view().name("invitations/listInvitations"));
 	}
 	
 	// Test de introducir mal la url de aceptar o rechazar una invitación a quedada

@@ -12,10 +12,12 @@
 	href="https://fonts.googleapis.com/css2?family=Caveat&display=swap"
 	rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com">
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
 
-<playtogether:layout pageName="users">
+
+<playtogether:layout pageName="users" invitaciones="${invitaciones}">
 
 	<div class="thirteen">
 		<h1>
@@ -59,10 +61,18 @@
 							<div class="data-details">
 								<h5>Fecha de nacimiento</h5>
 								<h4>
-									<c:out value="${user.birthdate}" />
+									<fmt:parseDate value="${user.birthdate }" pattern="yyyy-MM-dd" var="parsedDateStart" type="both" />
+         			 <fmt:formatDate value = "${parsedDateStart}" pattern = "dd-MM-yyyy"  />
 								</h4>
 							</div>
 						</div>
+						<button class="btn btn-success"
+							style="    margin-left: 25%; margin-bottom:3%;"
+							onclick="location.href='/chat/0/${user.user.username}';"
+							type="button">
+							Ir al chat privado <i class="fa fa-weixin" aria-hidden="true"></i>
+					
+						</button>
 					</div>
 				</div>
 			</div>

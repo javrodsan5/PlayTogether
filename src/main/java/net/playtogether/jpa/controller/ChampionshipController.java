@@ -28,12 +28,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChampionshipService;
+import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.MatchService;
 import net.playtogether.jpa.service.PayService;
@@ -65,6 +67,9 @@ public class ChampionshipController {
 	@Autowired
 	InvitationService invitationService;
 
+	@Autowired
+	ChatService chatService;
+
 	private List<Usuario> users;
 
 	@InitBinder("championship")
@@ -84,7 +89,10 @@ public class ChampionshipController {
 	}
 
 	@GetMapping("/sports/{sportId}/championships/add")
-	public String initCreationChampionship(final ModelMap model, @PathVariable("sportId") final Integer sportId) {
+	public String initCreationChampionship(final ModelMap model, @PathVariable("sportId") final Integer sportId,Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Championship championship = new Championship();
 		model.addAttribute("championship", championship);
 		model.put("deporte", sportId);
@@ -99,6 +107,9 @@ public class ChampionshipController {
 	@PostMapping("/sports/{sportId}/championships/add")
 	public String postCreationChampionship(@Valid final Championship championship, final BindingResult result,
 			final ModelMap model, @PathVariable("sportId") final Integer sportId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		if (!result.hasErrors()) {
 			Usuario user = this.userService.findByUsername(principal.getName());
 			championship.setUser(user);
@@ -122,6 +133,9 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships")
 	public String listChampionships(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		List<Championship> championships = new ArrayList<>(this.championshipService.listChampionshipsBySport(sportId));
 		Sport sport = this.sportService.findSportById(sportId);
 		List<Championship> championshipsToRemove = new ArrayList<>();
@@ -152,6 +166,9 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}")
 	public String championshipDetails(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		List<Team> teams = this.championshipService.findTeamsByChampionshipId(championshipId);
 		List<Team> teamsToRemove = new ArrayList<>();
@@ -213,7 +230,9 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/add")
 	public String initCreationMatch(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
-
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Integer listChampionships = this.championshipService.listChampionship().size();
 		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
 		Usuario user = this.userService.findByUsername(principal.getName());
@@ -294,6 +313,9 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/matches")
 	public String listMatches(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Collection<Match> matches = this.matchService.listMatchesByChampionship(championshipId);
 
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
@@ -357,7 +379,9 @@ public class ChampionshipController {
 			@PathVariable("championshipId") final Integer championshipId,
 			@PathVariable("matchId") final Integer matchId, @PathVariable("team") final String team,
 			Principal principal) {
-
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		try {
 			this.users = this.championshipService.findUserByNameOrUsername(principal.getName());
 		} catch (Exception e) {
@@ -479,6 +503,9 @@ public class ChampionshipController {
 	public String initJoinChampionship(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, @PathVariable("teamId") final Integer teamId,
 			Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		Team team = this.championshipService.findTeamId(teamId);
 		Usuario user = this.userService.findByUsername(principal.getName());
@@ -519,6 +546,9 @@ public class ChampionshipController {
 	@GetMapping("/championships/{championshipId}/team/create")
 	public String initCreationTeam(final ModelMap model, @PathVariable("championshipId") final Integer championshipId,
 			Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Team team = new Team();
 		Championship championship = championshipService.findChampionshipId(championshipId);
 		Usuario userPrincipal = this.userService.findByUsername(principal.getName());
@@ -573,6 +603,12 @@ public class ChampionshipController {
 				team.setChampionship(championship);
 				team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
 				this.championshipService.save(team);
+
+				Chat chat = new Chat();
+				chat.setChatType(this.chatService.findChatTypeById(2)); //TEAM
+				chat.setTeam(team);
+				this.chatService.saveChat(chat);
+
 				usuario.setPuntos(usuario.getPuntos() + 2);
 				initJoinChampionship(model, championship.getSport().getId(), championshipId, team.getId(), principal);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
@@ -587,6 +623,9 @@ public class ChampionshipController {
 	@GetMapping("/championships/{championshipId}/teams/{teamId}")
 	public String teamDetails(ModelMap model, @PathVariable("championshipId") Integer championshipId,
 			@PathVariable("teamId") Integer teamId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Team team = this.teamService.findTeamById(teamId);
 
 		model.addAttribute("team", team);
@@ -594,6 +633,7 @@ public class ChampionshipController {
 
 		model.addAttribute("matches", matchesTeam);
 		model.addAttribute("championship", team.getChampionship());
+		model.addAttribute("chatId", this.chatService.findChatIdByTeam1Id(teamId));
 
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
 		List<Usuario> usuarios = team.getParticipants();
@@ -613,8 +653,11 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/generate1")
 	public String initGenerateFirst(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer listChampionships = this.championshipService.listChampionship().size();
 
-	
 		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
 		Usuario user = this.userService.findByUsername(principal.getName());
 		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
@@ -673,8 +716,11 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/generate2")
 	public String initGenerateSecond(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer listChampionships = this.championshipService.listChampionship().size();
 
-		
 		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
 		Usuario user = this.userService.findByUsername(principal.getName());
 		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
@@ -895,8 +941,11 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/match/generate3")
 	public String initGenerateThird(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer listChampionships = this.championshipService.listChampionship().size();
 
-		
 		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
 		Usuario user = this.userService.findByUsername(principal.getName());
 		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
@@ -1044,7 +1093,11 @@ public class ChampionshipController {
 	public String initGenerateFourth(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
 
-		
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer listChampionships = this.championshipService.listChampionship().size();
+
 		Collection<Usuario> participantes = this.championshipService.findParticipantsChampionship(championshipId);
 		Usuario user = this.userService.findByUsername(principal.getName());
 		boolean participa = participantes.stream().anyMatch(p -> p.equals(user));
@@ -1143,6 +1196,10 @@ public class ChampionshipController {
 	public String initAddDateMatch(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId,
 			@PathVariable("matchId") final Integer matchId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer listChampionships = this.championshipService.listChampionship().size();
 
 		Boolean existeChampionship = this.championshipService.existeChampionship(championshipId);
 		Match match = this.matchService.findMatchById(matchId);
@@ -1291,6 +1348,9 @@ public class ChampionshipController {
 	@GetMapping("/championships/{championshipId}/teams/{teamId}/leave")
 	public String leaveTeam(ModelMap model, @PathVariable("championshipId") Integer championshipId,
 			@PathVariable("teamId") Integer teamId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Championship championship = championshipService.findChampionshipId(championshipId);
 		Team team = this.teamService.findTeamById(teamId);
 		Collection<Match> matchesTeam = this.matchService.findMatchesByTeamId(teamId);
@@ -1310,7 +1370,9 @@ public class ChampionshipController {
 			usuario.setPuntos(puntos);
 			this.userService.saveUsuario(usuario);
 
-			if (usuarios.size() == 0) {			
+			if (usuarios.size() == 0) {		
+				Integer chatId = this.chatService.findChatIdByTeam1Id(teamId);	
+				this.chatService.deleteById(chatId);
 				teamService.delete(team);
 				invitationService.deleteInvitationsByTeamId(teamId);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
@@ -1335,6 +1397,9 @@ public class ChampionshipController {
 	@GetMapping("/championships/{championshipId}/teams/{teamId}/{userId}/delete")
 	public String deleteTeamPlayer(ModelMap model, @PathVariable("championshipId") Integer championshipId,
 			@PathVariable("teamId") Integer teamId, @PathVariable("userId") Integer userId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Championship championship = championshipService.findChampionshipId(championshipId);
 		Team team = this.teamService.findTeamById(teamId);
 

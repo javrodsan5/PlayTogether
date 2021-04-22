@@ -6,8 +6,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<playtogether:layout pageName="championships">
+<playtogether:layout pageName="championships" invitaciones="${invitaciones}">
 	<body>
 		<div class="cardtitle">
 			<h1>
@@ -1766,7 +1767,9 @@
 				<tbody style="text-align: center">
 					<c:forEach items="${matches}" var="match">
 						<tr class="rowtable">
-							<td><c:out value="${match.dateTime}" /></td>
+						
+							<td><fmt:parseDate value="${match.dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+         			 <fmt:formatDate value = "${parsedDateTime}" pattern = "dd-MM-yyyy HH:mm"  /></td>
 							<td><c:out value="${match.team1.name}" /></td>
 							<td><c:out value="${match.puntos1} - ${match.puntos2}" /></td>
 							<td><c:out value="${match.team2.name}" /></td>
