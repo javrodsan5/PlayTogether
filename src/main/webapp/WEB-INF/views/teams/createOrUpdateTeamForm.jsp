@@ -11,7 +11,7 @@
 
 
 
-<playtogether:layout pageName="teams">
+<playtogether:layout pageName="teams" invitaciones="${invitaciones}">
 	<body>
 		<div class="thirteen">
 			<h1>Crear un equipo</h1>

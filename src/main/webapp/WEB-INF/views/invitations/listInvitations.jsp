@@ -9,7 +9,7 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
 <c:if test="${areTeamInvitations==true}">
-	<playtogether:layout pageName="invitations">
+	<playtogether:layout pageName="invitations" invitaciones="${invitaciones}">
 		<body>
 
 			<div class="">
@@ -126,7 +126,7 @@
 
 <c:if test="${areMeetingInvitations==true}">
 	<!-- Para diferencia invitaciones a torneo y a quedadas cuando se implementen las de quedadas -->
-	<playtogether:layout pageName="invitations">
+	<playtogether:layout pageName="invitations" invitaciones="${invitaciones}">
 		<body>
 
 			<div class="">

@@ -6,6 +6,7 @@
 
 
 <%@ attribute name="pageName" required="true"%>
+<%@ attribute name="invitaciones" required="false" rtexprvalue="true" %>
 <%@ attribute name="customScript" required="false" fragment="true"%>
 
 <!doctype html>
@@ -21,7 +22,7 @@
 		<playtogether:banner></playtogether:banner>
 		</c:if>
 	</sec:authorize>
-	<playtogether:bodyHeader menuName="${pageName}" />
+	<playtogether:bodyHeader menuName="${pageName}" invitaciones="${invitaciones}"/>
 
 	<br>
 

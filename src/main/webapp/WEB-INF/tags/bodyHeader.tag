@@ -3,5 +3,7 @@
 
 <%@ attribute name="menuName" required="true" rtexprvalue="true"
               description="" %>
+<%@ attribute name="invitaciones" required="false" rtexprvalue="true"
+              description="" %>
 
-<playtogether:menu name="${menuName}"/>
+<playtogether:menu name="${menuName}" invitaciones="${invitaciones}"/>

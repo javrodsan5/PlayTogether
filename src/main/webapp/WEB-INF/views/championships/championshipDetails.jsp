@@ -7,7 +7,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="championships">
+<playtogether:layout pageName="championships" invitaciones="${invitaciones}">
 
 	<c:if test="${participarEquipo==false}">
 		<div class="alert alert-primary" style="margin: 0% 20% 1% 20%">
