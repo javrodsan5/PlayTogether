@@ -58,6 +58,9 @@ public class InvitationController {
 
 	@GetMapping("/invitations/team/{teamId}")
 	public String searchParticipants(final ModelMap model, @PathVariable("teamId") final Integer teamId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Team team = this.championshipService.findTeamId(teamId);
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
 		
@@ -80,6 +83,9 @@ public class InvitationController {
 	@GetMapping("/invitations/team/{teamId}/send_invitation")
 	public String initSendInvitation(@RequestParam(value = "search", required = false) final String search,
 			final ModelMap model, @PathVariable("teamId") final Integer teamId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		List<Usuario> searched_users = new ArrayList<>();
 		Team team = this.championshipService.findTeamId(teamId);
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
@@ -197,6 +203,9 @@ public class InvitationController {
 	
 	@GetMapping("/invitations/championshipInvitations")
 	public String listChampionshipInvitations(final ModelMap model, Principal principal) {	
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Collection<Invitation> invitations = this.invitationService.findChampionshipInvitationsByUsername(principal.getName());	
 		
 		List<Invitation> expiredInvitations = invitations.stream().filter(i -> i.getTeam().getChampionship().getFinishDate().isBefore(LocalDate.now())).collect(Collectors.toList());		
@@ -218,6 +227,9 @@ public class InvitationController {
 	@GetMapping("/invitations/championshipInvitations/{invitationId}/")
 	public String initAcceptInvitation(@RequestParam(value = "accepted", required = true) final String accepted,
 			final ModelMap model, @PathVariable("invitationId") final Integer invitationId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Boolean hasPermission = false;
 		Invitation invitation = this.invitationService.findById(invitationId);
 		
@@ -279,6 +291,9 @@ public class InvitationController {
 
 	@GetMapping("/invitations/meeting/{meetingId}")
 	public String searchParticipantsMeeting(final ModelMap model, @PathVariable("meetingId") final Integer meetingId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
 		
@@ -301,6 +316,9 @@ public class InvitationController {
 	@GetMapping("/invitations/meeting/{meetingId}/send_invitation")
 	public String initSendInvitationMeeting(@RequestParam(value = "search", required = false) final String search,
 			final ModelMap model, @PathVariable("meetingId") final Integer meetingId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		List<Usuario> searched_users = new ArrayList<>();
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
@@ -410,6 +428,9 @@ public class InvitationController {
 	
 	@GetMapping("/invitations/meetingInvitations")
 	public String listMeetingInvitations(final ModelMap model, Principal principal) {	
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Collection<Invitation> invitations = this.invitationService.findMeetingInvitationsByUsername(principal.getName());	
 		
 		List<Invitation> expiredInvitations = invitations.stream().filter(i -> i.getMeeting().getDate().isBefore(LocalDateTime.now())).collect(Collectors.toList());		
@@ -431,6 +452,9 @@ public class InvitationController {
 	@GetMapping("/invitations/meetingInvitations/{invitationId}/")
 	public String initAcceptMeetingInvitation(@RequestParam(value = "accepted", required = true) final String accepted,
 			final ModelMap model, @PathVariable("invitationId") final Integer invitationId, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Boolean hasPermission = false;
 		Invitation invitation = this.invitationService.findById(invitationId);
 		

@@ -11,7 +11,7 @@
 
 <center>
 	<c:if test="${teamView == true}">
-		<playtogether:layout pageName="teams">
+		<playtogether:layout pageName="teams" invitaciones="${invitaciones}">
 			<body>
 				<div class="thirteen">
 					<h1>Invitar participantes al equipo ${team.name}</h1>
@@ -134,7 +134,7 @@
 
 
 	<c:if test="${meetingView == true}">
-		<playtogether:layout pageName="meetings">
+		<playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 			<body>
 				<div class="thirteen">
 					<h1>Invitar participantes a quedada</h1>

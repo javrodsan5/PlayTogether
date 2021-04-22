@@ -10,9 +10,75 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
 
-<playtogether:layout pageName="profile">
+<playtogether:layout pageName="profile" invitaciones="${invitaciones}" >
 	<div class="thirteen">
 		<h1>Datos de mi perfil</h1>
+		<c:if test="${invitacionesQuedadas!=0 or invitacionesTorneos !=0}">
+				<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
+			<c:if test="${invitacionesQuedadas!=0 and invitacionesTorneos ==0}">
+			<c:if test="${invitacionesQuedadas==1}">
+			<h2>
+				Tienes
+				<c:out value="${invitacionesQuedadas}" />
+				invitación a una quedada nueva
+			</h2>
+			</c:if>
+			<c:if test="${invitacionesQuedadas!=1}">
+			<h2>
+				Tienes
+				<c:out value="${invitacionesQuedadas}" />
+				invitaciones a quedadas nuevas
+			</h2>
+			</c:if>
+			</c:if>
+					<c:if test="${invitacionesQuedadas==0 and invitacionesTorneos !=0}">
+			<c:if test="${invitacionesTorneos==1}">
+			<h2>
+				Tienes
+				<c:out value="${invitacionesTorneos}" />
+				invitación a un torneo nuevo
+			</h2>
+			</c:if>
+			<c:if test="${invitacionesTorneos!=1}">
+			<h2>
+				Tienes
+				<c:out value="${invitacionesTorneos}" />
+				invitaciones a torneos nuevos
+			</h2>
+			</c:if>
+			</c:if>
+			<c:if test="${invitacionesQuedadas!=0 and invitacionesTorneos !=0}">
+			<c:if test="${invitacionesTorneos==1 and invitacionesQuedadas==1}">
+			<h2>
+				Tienes
+				<c:out value="${invitacionesQuedadas}" />
+				invitación a una quedada nueva y <c:out value="${invitacionesTorneos}" /> invitación a un torneo nuevo
+			</h2>
+			</c:if>
+			<c:if test="${invitacionesTorneos!=1 and invitacionesQuedadas==1}">
+			<h2>
+				Tienes
+				<c:out value="${invitacionesQuedadas}" />
+				invitación a una quedada nueva y <c:out value="${invitacionesTorneos}" /> invitaciones a torneos nuevos
+			</h2>
+			</c:if>
+			<c:if test="${invitacionesTorneos==1 and invitacionesQuedadas!=1}">
+			<h2>
+				Tienes
+				<c:out value="${invitacionesQuedadas}" />
+				invitaciones a quedadas nuevas y <c:out value="${invitacionesTorneos}" /> invitación a un torneo nuevo
+			</h2>
+			</c:if>
+			<c:if test="${invitacionesTorneos!=1 and invitacionesQuedadas!=1}">
+			<h2>
+				Tienes
+				<c:out value="${invitacionesQuedadas}" />
+				invitaciones a quedadas nuevas y <c:out value="${invitacionesTorneos}" /> invitaciones a torneos nuevos
+			</h2>
+			</c:if>
+			</c:if>
+		</div>
+		</c:if>
 		<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
 			<h2>
 				Tienes

@@ -14,7 +14,7 @@
 </style>
 
 <html>
-<playtogether:layout pageName="welcome">
+<playtogether:layout pageName="welcome" invitaciones="${invitaciones}">
 	<head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta charset="utf-8">

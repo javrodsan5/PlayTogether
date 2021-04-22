@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Crete Round'
 	rel='stylesheet'>
 
-<playtogether:layout pageName="meetings">
+<playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 	<body>
 		<div class="thirteen">
 			<h1>
