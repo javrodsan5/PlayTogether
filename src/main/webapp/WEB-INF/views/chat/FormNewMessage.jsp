@@ -31,7 +31,18 @@
 						</button>
 					</div>
 					<br>
+					<br><br>
 					<br>
+					<c:if test="${vacio}">
+				<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+					<p>El mensaje no puede estar vacío.</p>
+				</div>
+			</c:if>
+					<c:if test="${spam}">
+				<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+					<p>No puedes enviar mensajes con palabras malsonantes.</p>
+				</div>
+			</c:if>
 					<br>
 					<br>
 				</form:form>
