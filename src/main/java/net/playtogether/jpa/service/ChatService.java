@@ -66,5 +66,10 @@ public class ChatService {
     public Integer findIndividualChatIdBetweenTwoUsers(Integer idUser1, Integer idUser2) {
         return this.chatRepository.findIndividualChatIdBetweenTwoUsers(idUser1, idUser2);
     }
+
+    @Transactional
+    public void deleteById(Integer id) {
+        this.chatRepository.deleteById(id);
+    }
     
 }

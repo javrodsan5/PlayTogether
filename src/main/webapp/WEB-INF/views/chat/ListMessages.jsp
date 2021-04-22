@@ -37,10 +37,34 @@
 
 			</table>
 		</div>
-		<div class="form-group">
-			<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/chat/${chatId}/messages/new';" type="button">
-				<b>Añadir mensaje</b>
-			</button>
+		<div style="margin-left: 45px" >
+			<div class="crearMeeting">
+				<form:form id="survey-form" modelAttribute="message" commandName="message" action="/chat/${message.chat.id}/messages/new" method="post">
+					<playtogether:inputField label="Mensaje" name="message" />
+					<c:if test="${vacio}">
+						<br>
+						<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+							<p>El mensaje no puede estar vacío.</p>
+						</div>
+					</c:if>
+					<c:if test="${spam}">
+						<br>
+						<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+							<p>No puedes enviar mensajes con palabas malsonantes.</p>
+						</div>
+					</c:if>
+					<div class="form-group">
+						<button class="botonMeeting" type="submit" >
+							<b>Enviar</b>
+						</button>
+					</div>
+				</form:form>
+			</div>
+			<div class="form-group">
+				<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='${urlBack}';" type="button">
+					<b>Volver</b>
+				</button>
+			</div>
 		</div>
 </playtogether:layout>
 

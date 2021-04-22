@@ -595,12 +595,10 @@ public class ChampionshipController {
 				team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
 				this.championshipService.save(team);
 
-				if(team.getTeamSize() > 1) {
-					Chat chat = new Chat();
-					chat.setChatType(this.chatService.findChatTypeById(2)); //TEAM
-					chat.setTeam(team);
-					this.chatService.saveChat(chat);
-				}
+				Chat chat = new Chat();
+				chat.setChatType(this.chatService.findChatTypeById(2)); //TEAM
+				chat.setTeam(team);
+				this.chatService.saveChat(chat);
 
 				usuario.setPuntos(usuario.getPuntos() + 2);
 				initJoinChampionship(model, championship.getSport().getId(), championshipId, team.getId(), principal);
@@ -1921,7 +1919,9 @@ public class ChampionshipController {
 			usuario.setPuntos(puntos);
 			this.userService.saveUsuario(usuario);
 
-			if (usuarios.size() == 0) {			
+			if (usuarios.size() == 0) {		
+				Integer chatId = this.chatService.findChatIdByTeam1Id(teamId);	
+				this.chatService.deleteById(chatId);
 				teamService.delete(team);
 				invitationService.deleteInvitationsByTeamId(teamId);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;

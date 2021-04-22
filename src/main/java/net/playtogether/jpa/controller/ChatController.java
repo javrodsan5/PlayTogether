@@ -42,13 +42,18 @@ public class ChatController {
 		Chat chat = this.chatService.findChatById(id);
 
 		Boolean isAuthorized = false;
+		String urlBack = "";
 
 		if (chat.getChatType().getId() == 1) { // MEETING
 			isAuthorized = chat.getMeeting().getParticipants().contains(usuario);
+			urlBack = "/sports/"+chat.getMeeting().getSport().getId()+"/meetings/"+chat.getMeeting().getId();
 		} else if (chat.getChatType().getId() == 2) { // TEAM
 			isAuthorized = chat.getTeam().getParticipants().contains(usuario);
+			urlBack = "/championships/"+chat.getTeam().getChampionship().getId()+"/teams/"+chat.getTeam().getId();
 		} else { // INDIVIDUAL
 			isAuthorized = chat.getUser1().equals(usuario) || chat.getUser2().equals(usuario);
+			Integer idUser = chat.getUser1().getUser().getUsername().equals(principal.getName()) ? chat.getUser2().getId() : chat.getUser1().getId();
+			urlBack = "/usuarios/"+ idUser;
 		}
 
 		if (!isAuthorized) {
@@ -56,6 +61,10 @@ public class ChatController {
 		} else {
 			model.addAttribute("messages", chat.getMessages());
 			model.addAttribute("chatId", id);
+			model.addAttribute("urlBack", urlBack);
+			ChatMessage message = new ChatMessage();
+			message.setChat(chat);
+			model.addAttribute("message", message);
 			return "chat/ListMessages";
 		}
 	}
@@ -77,32 +86,6 @@ public class ChatController {
 
 		return "redirect:/chat/" + chatId + "/messages";
 
-	}
-
-	@GetMapping(value = "/messages/new")
-	public String formNewMessage(@PathVariable("id") Integer id, ModelMap model, Principal principal) {
-
-		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
-		Chat chat = this.chatService.findChatById(id);
-
-		Boolean isAuthorized = false;
-
-		if (chat.getChatType().getId() == 1) { // MEETING
-			isAuthorized = chat.getMeeting().getParticipants().contains(usuario);
-		} else if (chat.getChatType().getId() == 2) { // TEAM
-			isAuthorized = chat.getTeam().getParticipants().contains(usuario);
-		} else { // INDIVIDUAL
-			isAuthorized = chat.getUser1().equals(usuario) || chat.getUser2().equals(usuario);
-		}
-
-		if (!isAuthorized) {
-			return "error-403";
-		} else {
-			ChatMessage message = new ChatMessage();
-			message.setChat(chat);
-			model.addAttribute("message", message);
-			return "chat/FormNewMessage";
-		}
 	}
 
 	private String htmlEntities(String s) {
@@ -154,28 +137,42 @@ public class ChatController {
 				x.add(l.get(i));
 			}
 		}
+		Chat chat = this.chatService.findChatById(id);
+		chatMessage.setChat(chat);
+		String urlBack = "";
+		if (chat.getChatType().getId() == 1) { // MEETING
+			urlBack = "/sports/"+chat.getMeeting().getSport().getId()+"/meetings/"+chat.getMeeting().getId();
+		} else if (chat.getChatType().getId() == 2) { // TEAM
+			urlBack = "/championships/"+chat.getTeam().getChampionship().getId()+"/teams/"+chat.getTeam().getId();
+		} else { // INDIVIDUAL
+			Integer idUser = chat.getUser1().getUser().getUsername().equals(principal.getName()) ? chat.getUser2().getId() : chat.getUser1().getId();
+			urlBack = "/usuarios/"+ idUser;
+		}
 		if (p) {
+			model.addAttribute("messages", chat.getMessages());
 			model.put("message", chatMessage);
+			model.put("urlBack", urlBack);
 			model.put("spam", true);
-			return "chat/FormNewMessage";
+			return "chat/ListMessages";
 		}
 		if (chatMessage.getMessage().isEmpty() || chatMessage.getMessage().trim().isEmpty() ) {
+			model.addAttribute("messages", chat.getMessages());
 			model.put("message", chatMessage);
+			model.put("urlBack", urlBack);
 			model.put("vacio", true);
-			return "chat/FormNewMessage";
+			return "chat/ListMessages";
 		}
 
 		if (result.hasErrors()) {
-
+			model.addAttribute("messages", chat.getMessages());
 			model.put("message", chatMessage);
+			model.put("urlBack", urlBack);
 
-			return "chat/FormNewMessage";
+			return "chat/ListMessages";
 
 		} else {
 			Usuario usuario = this.usuarioService.findByUsername(principal.getName());
-			Chat chat = this.chatService.findChatById(id);
 			chatMessage.setDate(LocalDateTime.now());
-			chatMessage.setChat(chat);
 			chatMessage.setUsuario(usuario);
 			Integer lastMessageId = this.chatService.findLastMessageId();
 			Integer messageId = lastMessageId != null ? lastMessageId + 1 : 1;
