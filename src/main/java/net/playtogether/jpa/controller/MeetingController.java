@@ -37,22 +37,22 @@ import net.playtogether.jpa.service.UsuarioService;
 public class MeetingController {
 
 	@Autowired
-	MeetingService	meetingService;
+	MeetingService meetingService;
 
 	@Autowired
-	UsuarioService	userService;
+	UsuarioService userService;
 
 	@Autowired
-	SportService	sportService;
+	SportService sportService;
 
 	@Autowired
-	UsuarioService	usuarioService;
-	
-	@Autowired
-	InvitationService	invitationService;
+	UsuarioService usuarioService;
 
 	@Autowired
-	ChatService 	chatService;
+	InvitationService invitationService;
+
+	@Autowired
+	ChatService chatService;
 
 	@InitBinder("meeting")
 	public void initMeetingBinder(final WebDataBinder dataBinder) {
@@ -60,10 +60,13 @@ public class MeetingController {
 	}
 
 	@GetMapping("/sports/{sportId}/meetings/add")
-	public String initCreationMeeting(final ModelMap model, @PathVariable("sportId") final Integer sportId, final Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String initCreationMeeting(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			final Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Integer listSports = this.sportService.findAll().size();
 		Usuario usuario = this.userService.findByUsername(principal.getName());
 		if (sportId > 0 && sportId <= listSports) {
@@ -89,7 +92,8 @@ public class MeetingController {
 	}
 
 	@PostMapping("/sports/{sportId}/meetings/add")
-	public String postCreationMeeting(@Valid final Meeting meeting, BindingResult result, final ModelMap model, @PathVariable("sportId") final Integer sportId, final Principal principal) {
+	public String postCreationMeeting(@Valid final Meeting meeting, BindingResult result, final ModelMap model,
+			@PathVariable("sportId") final Integer sportId, final Principal principal) {
 		Sport sport = this.sportService.findSportById(sportId);
 		if (result.hasErrors()) {
 			model.put("sport", sport);
@@ -103,14 +107,14 @@ public class MeetingController {
 			List<Usuario> participants = new ArrayList<>();
 			participants.add(usuario);
 			meeting.setParticipants(participants);
-			//meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam() * 2);
+			// meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam() * 2);
 			meeting.setCreationDate(LocalDate.now());
 			this.meetingService.save(meeting);
 			usuario.setPuntos(usuario.getPuntos() + 7);
 			this.usuarioService.saveUsuarioAlreadyRegistered(usuario);
 
 			Chat chat = new Chat();
-			chat.setChatType(this.chatService.findChatTypeById(1)); //MEETING
+			chat.setChatType(this.chatService.findChatTypeById(1)); // MEETING
 			chat.setMeeting(meeting);
 
 			return "redirect:/sports/" + sportId + "/meetings";
@@ -119,10 +123,13 @@ public class MeetingController {
 	}
 
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}/edit")
-	public String initUpdateMeeting(final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("meetingId") final Integer meetingId, final Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String initUpdateMeeting(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			@PathVariable("meetingId") final Integer meetingId, final Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		if (meeting.getMeetingCreator().equals(usuario)) {
@@ -138,10 +145,12 @@ public class MeetingController {
 	}
 
 	@PostMapping("/sports/{sportId}/meetings/{meetingId}/edit")
-	public String postUpdateMeeting(@Valid final Meeting meeting, final BindingResult result, final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("meetingId") final Integer meetingId) {
+	public String postUpdateMeeting(@Valid final Meeting meeting, final BindingResult result, final ModelMap model,
+			@PathVariable("sportId") final Integer sportId, @PathVariable("meetingId") final Integer meetingId) {
 		Meeting meetingToUpdate = this.meetingService.findMeetingById(meetingId);
-		if(meeting.getNumberOfPlayers() < meetingToUpdate.getParticipants().size()) {
-			result.rejectValue("numberOfPlayers", "Actualmente se encuentra un número mayor de participantes.", "Actualmente se encuentra un número mayor de participantes.");
+		if (meeting.getNumberOfPlayers() < meetingToUpdate.getParticipants().size()) {
+			result.rejectValue("numberOfPlayers", "Actualmente se encuentra un número mayor de participantes.",
+					"Actualmente se encuentra un número mayor de participantes.");
 			model.put("errorPlayers", "Actualmente se encuentra un número mayor de participantes.");
 		}
 		if (result.hasErrors()) {
@@ -152,8 +161,9 @@ public class MeetingController {
 			model.put("numberPlayers", meeting.getNumberOfPlayers());
 			return "meetings/updateMeetingForm";
 		} else {
-			
-			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "meetingCreator", "participants", "creationDate");
+
+			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "meetingCreator", "participants",
+					"creationDate");
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
 			return "redirect:/sports/" + sportId + "/meetings";
@@ -162,10 +172,13 @@ public class MeetingController {
 	}
 
 	@GetMapping("/sports/{sportId}/meetings")
-	public String listMeetings(final ModelMap model, @PathVariable("sportId") final Integer sportId,Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String listMeetings(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(sportId);
 		Sport sport = this.sportService.findSportById(sportId);
 		model.addAttribute("meetings", meetings);
@@ -206,6 +219,7 @@ public class MeetingController {
 		model.addAttribute("existe", b);
 		model.addAttribute("estaLlena", estaLlena);
 		model.addAttribute("logged_user", u);
+		model.addAttribute("hayParticipantes", meeting.getParticipants().size() >0);
 		model.addAttribute("chatId", this.chatService.findChatIdByMeetingId(meetingId));
 		
 
@@ -217,10 +231,13 @@ public class MeetingController {
 	}
 
 	@GetMapping("/meetings/{meetingId}/join")
-	public String meetingJoin(final ModelMap model, @PathVariable("meetingId") final Integer meetingId, final Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String meetingJoin(final ModelMap model, @PathVariable("meetingId") final Integer meetingId,
+			final Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		Usuario u = this.usuarioService.usuarioLogueado(principal.getName());
 
@@ -233,7 +250,7 @@ public class MeetingController {
 			if (!meeting.getParticipants().contains(meeting.getMeetingCreator())) {
 				meeting.setMeetingCreator(u);
 			}
-			
+
 			this.meetingService.save(meeting);
 			u.setPuntos(u.getPuntos() + 5);
 			this.usuarioService.saveUsuarioAlreadyRegistered(u);
@@ -244,10 +261,13 @@ public class MeetingController {
 	}
 
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}/leave")
-	public String leaveMeeting(final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("meetingId") final Integer meetingId, final Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String leaveMeeting(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			@PathVariable("meetingId") final Integer meetingId, final Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 
 		model.addAttribute("meeting", meeting);
@@ -261,7 +281,7 @@ public class MeetingController {
 			Integer puntos = usuario.getPuntos() - 7;
 			usuario.setPuntos(puntos);
 			this.userService.saveUsuario(usuario);
-			
+
 			if (usuarios.size() == 0) {
 				invitationService.deleteInvitationsByMeetingId(meetingId);
 				return "redirect:/sports/" + meeting.getSport().getId() + "/meetings/" + meetingId;
@@ -272,7 +292,7 @@ public class MeetingController {
 				usuarios.get(0).setPuntos(puntos2);
 				userService.saveUsuario(usuarios.get(0));
 			}
-			
+
 		} else {
 			Integer puntos = usuario.getPuntos() - 5;
 			usuario.setPuntos(puntos);
@@ -283,10 +303,14 @@ public class MeetingController {
 	}
 
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}/{userId}/delete")
-	public String deleteMeetingPlayer(final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("meetingId") final Integer meetingId, @PathVariable("userId") final Integer userId, final Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String deleteMeetingPlayer(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+			@PathVariable("meetingId") final Integer meetingId, @PathVariable("userId") final Integer userId,
+			final Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 
 		List<Usuario> usuarios = meeting.getParticipants();
@@ -301,17 +325,16 @@ public class MeetingController {
 		if (!meeting.getMeetingCreator().getUser().getUsername().equals(principal.getName())) {
 			model.put("loggedUserIsNotTheMeetingCreator", true);
 			return "error-403";
-			
+
 		} else {
 			if (!deletedUser.equals(meeting.getMeetingCreator())) {
-				if(!usuario.getUser().getAuthorities().stream()
-							.anyMatch(x -> x.getAuthority().equals("premium"))) {
+				if (!usuario.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
 					return "error-403";
 				}
-				
+
 				if (meeting.getMeetingCreator().equals(usuario)) {
 					model.put("esCreador", true);
-					if(usuario.getUser().getAuthorities().stream().anyMatch(x->x.getAuthority().equals("premium"))) {
+					if (usuario.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
 						model.put("puedeEliminar", true);
 					}
 				}
@@ -324,15 +347,15 @@ public class MeetingController {
 				if (meeting.getNumberOfPlayers() <= meeting.getParticipants().size()) {
 					estaLlena = true;
 				}
-				if (meeting.getNumberOfPlayers() <= meeting.getParticipants().size() && meeting.getParticipants().contains(usuario)) {
+				if (meeting.getNumberOfPlayers() <= meeting.getParticipants().size()
+						&& meeting.getParticipants().contains(usuario)) {
 					estaLlena = true;
 					b = true;
 				}
 				model.addAttribute("existe", b);
 				model.addAttribute("estaLlena", estaLlena);
 				model.addAttribute("logged_user", usuario);
-				
-				
+
 				usuarios.removeIf(u -> deletedUser.equals(u));
 				this.meetingService.save(meeting);
 				Integer puntos = deletedUser.getPuntos() - 5;
@@ -342,7 +365,7 @@ public class MeetingController {
 				model.put("eliminado", true);
 				return "meetings/meetingDetails";
 			} else {
-				
+
 				model.put("userToDeleteIsMeetingCreator", true);
 				return "error-403";
 			}

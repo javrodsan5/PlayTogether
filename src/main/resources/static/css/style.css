@@ -462,24 +462,12 @@ form {
 	margin: 0 auto 1.25rem auto;
 	padding: 0.25rem;
 }
-
-.form-group .botonMeeting {
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #4bc970;
-	font-size: 18px;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border: 1px solid #3ac162;
-	border-width: 1px 1px 3px;
-	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+.botonesMeeting{
+	margin: 0 auto 1.25rem auto;
+	padding: 0.25rem;
 }
+
+
 
 label {
 	font-family: 'Raleway';
@@ -576,7 +564,7 @@ body {
 	padding: 1em;
 	position: relative;
 	float: right;
-	height: 100%;
+	height: auto;
 	width: 60%;
 	z-index: 0;
 }
@@ -685,42 +673,41 @@ body {
 	.equiposTorneo {
 		float: bottom;
 	}
-	.espacioIzqMovil{
-	margin-left: 2%;
+	.espacioIzqMovil {
+		margin-left: 2%;
 	}
-	.botonTorneos{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #4bc970;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border: 1px solid #3ac162;
-	border-width: 1px 1px 3px;
-	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
 	}
-	.botonPartidosTorneo{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #FF7F50;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border-width: 1px 1px 3px;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
 	}
-
 }
 
 .drop {
@@ -728,12 +715,6 @@ body {
 	align-items: center;
 	justify-content: center;
 	margin-top: 5%;
-}
-
-.drop__container {
-	row-gap: 1rem;
-	padding: 2rem;
-	box-shadow: 4px 4px 16px #e1e1e1;
 }
 
 .drop__info {
@@ -1004,30 +985,30 @@ form input {
 	padding-right: 0;
 }
 
-.perfilNotif{
-    display:inline;
-    color:red;
+.perfilNotif {
+	display: inline;
+	color: red;
 }
 
-.wrapperNotif{
-    display:inline-block;
+.wrapperNotif {
+	display: inline-block;
 }
 
-.numeroNotif{
-	display:inline;
+.numeroNotif {
+	display: inline;
 }
 
-.circulo {     
-	background: #ff0000;    
-	border-radius: 0.8em;     
-	-moz-border-radius: 0.8em;     
-	-webkit-border-radius: 0.8em;     
-	color: #ffffff;        
-	line-height: 1.6em;     
-	margin-right: 5px;     
-	text-align: center;     
-	width: 1.6em; 
-	}
+.circulo {
+	background: #ff0000;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	line-height: 1.6em;
+	margin-right: 5px;
+	text-align: center;
+	width: 1.6em;
+}
 
 .navbar-toggler:active, .navbar-toggler:focus {
 	outline: none;
@@ -1344,10 +1325,27 @@ form input {
 
 /* === Responsive === */
 @media ( min-width : 1500px) {
+	.botonesMeeting .botonMeeting {
+	padding: 5px 5px 5px 5px;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5%;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-left: 52%;
+	width: 15%;
+}
 	.charts {
-		width: 50%; 
-		display: inline-block; 
-		margin-left: 5%; margin-right: 5%; 
+		width: 50%;
+		display: inline-block;
+		margin-left: 5%;
+		margin-right: 5%;
 		float: right;
 	}
 	.navigation-wrap {
@@ -1433,52 +1431,72 @@ form input {
 	.equiposTorneo {
 		float: bottom;
 	}
-	.espacioIzqMovil{
-	margin-left: 2%;
+	.espacioIzqMovil {
+		margin-left: 2%;
 	}
-	.botonTorneos{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #4bc970;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border: 1px solid #3ac162;
-	border-width: 1px 1px 3px;
-	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
 	}
-	.botonPartidosTorneo{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #FF7F50;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border-width: 1px 1px 3px;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
 	}
 	.rightDesktop {
-	float:bottom;
+		float: bottom;
+	}
+	.editarInvitar {
+	margin-bottom:1%;
 	}
 }
 
 @media ( max-width : 1499px) and (min-width: 992px) {
 	/* === Estandar === */
+	.botonesMeeting .botonMeeting {
+	padding: 5px 5px 5px 5px;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5%;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-left: 52%;
+	width: 15%;
+}
 	.charts {
-		width: 50%; 
-		display: inline-block; 
-		margin-left: 5%; margin-right: 5%; 
+		width: 50%;
+		display: inline-block;
+		margin-left: 5%;
+		margin-right: 5%;
 		float: right;
 	}
 	.navigation-wrap {
@@ -1576,7 +1594,7 @@ form input {
 	.mobile {
 		display: none;
 	}
-		.Card1Meeting {
+	.Card1Meeting {
 		width: 90%;
 		height: 400px;
 		height: auto;
@@ -1596,48 +1614,69 @@ form input {
 	.equiposTorneo {
 		float: bottom;
 	}
-	.espacioIzqMovil{
-	margin-left: 2%;
+	.espacioIzqMovil {
+		margin-left: 2%;
 	}
-	.botonTorneos{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #4bc970;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border: 1px solid #3ac162;
-	border-width: 1px 1px 3px;
-	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
 	}
-	.botonPartidosTorneo{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #FF7F50;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border-width: 1px 1px 3px;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.editarInvitar {
+	margin-top:1%;
+	margin-bottom:1%;
 	}
 }
 
 @media ( max-width : 991px) and (min-width: 768px) {
+	.botonesMeeting .botonMeeting {
+	padding: 1% 1% 1% 1%;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5%;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-left: 52%;
+	width: 20%;
+}
 	.charts {
-		width: 100%; 
-		display: inline-block; 
-		margin-left: 5%; margin-right: 5%; 
+		width: 100%;
+		display: inline-block;
+		margin-left: 5%;
+		margin-right: 5%;
 	}
 	.end {
 		display: none;
@@ -1733,7 +1772,7 @@ form input {
 	.mobile {
 		display: none;
 	}
-		.Card1Meeting {
+	.Card1Meeting {
 		width: 90%;
 		height: 400px;
 		height: auto;
@@ -1753,45 +1792,65 @@ form input {
 	.equiposTorneo {
 		float: bottom;
 	}
-	.espacioIzqMovil{
-	margin-left: 2%;
+	.espacioIzqMovil {
+		margin-left: 2%;
 	}
-	.botonTorneos{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #4bc970;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border: 1px solid #3ac162;
-	border-width: 1px 1px 3px;
-	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
 	}
-	.botonPartidosTorneo{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #FF7F50;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border-width: 1px 1px 3px;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.editarInvitar {
+	margin-top:1%;
+	margin-bottom:1%;
 	}
 }
 
 @media ( max-width : 767px) and (min-width: 511px) {
-		.Card1Meeting {
+	.botonesMeeting .botonMeeting {
+	padding: 2% 2% 2% 2%;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5%;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 1px 1px 3px;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-left: 52%;
+	width: 20%;
+}
+	.Card1Meeting {
 		width: 90%;
 		height: 400px;
 		height: auto;
@@ -1811,40 +1870,40 @@ form input {
 	.equiposTorneo {
 		float: bottom;
 	}
-	.espacioIzqMovil{
-	margin-left: 2%;
+	.espacioIzqMovil {
+		margin-left: 2%;
 	}
-	.botonTorneos{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #4bc970;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border: 1px solid #3ac162;
-	border-width: 1px 1px 3px;
-	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
 	}
-	.botonPartidosTorneo{
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #FF7F50;
-	font-size: 80%;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border-width: 1px 1px 3px;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
 	}
 	.table-container {
 		padding: 15px;
@@ -1925,9 +1984,33 @@ form input {
 		font-weight: 500;
 		transition: all 200ms linear;
 	}
+	.editarInvitar {
+	margin-top:2%;
+	margin-bottom:2%;
+	}
 }
 
 @media ( max-width : 510px) {
+.botonesMeeting .botonMeeting {
+	padding: 2% 2% 2% 2%;
+	float: left;
+	color: #FFF;
+	background-color: #4bc970;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	border-radius: 5%;
+	width: 100%;
+	border: 1px solid #3ac162;
+	border-width: 5%;
+	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+	margin-left: 52%;
+	width: 20%;
+}
+	.editarInvitar {
+	margin-top:2%;
+	margin-bottom:1%;
+	}
 	.rowWIV {
 		border-bottom: 1px solid #d9d9d9;
 	}
