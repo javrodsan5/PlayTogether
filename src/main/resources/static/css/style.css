@@ -97,6 +97,52 @@ select {
 	color: #ffffff;
 }
 
+:root {
+  --tape-gray: #dbd8be;
+  --tape-edge-gray: #b7b49d;
+  --transparent: rgba(255, 255, 255, 0);
+}
+
+.blue {
+  --paper-color: #d5e0f9;
+  --paper-dark: #c2d0ea;
+  --shadow-size: 3px;
+  --transparent: rgba(213, 224, 249, 0);
+}
+
+
+.paper {
+  position: relative;
+  background: linear-gradient(
+      to bottom right,
+      var(--paper-dark),
+      20%,
+      var(--transparent)
+    ),
+     #cadcdc;
+  min-width: 250px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Caveat", cursive;
+  font-size: 2rem;
+  box-shadow: var(--shadow-size) var(--shadow-size) 2px var(--paper-dark);
+  margin: 0% 10% 5% 10%;
+}
+
+
+.top-tape {
+  position: absolute;
+  height: 4vmin;
+  top: -5px;
+  width: 110%;
+  background-color: #f1f0f0;
+  border-right: 1px dotted var(--tape-edge-gray);
+  border-left: 1px dotted var(--tape-edge-gray);
+  opacity: 0.5;
+}
+
 .promo-box-container {
 	position: relative;
 	margin: auto;
@@ -284,6 +330,14 @@ p {
 	text-align: center;
 	font-size: 18px;
 	color: #676767;
+}
+
+.paper p{
+	font-family: 'Caveat', cursive;
+	text-align: center;
+	font-size: 25px;
+	color: black;
+	
 }
 
 #mensaje {
@@ -1952,7 +2006,7 @@ body {
 
 .body-container {
 	width: 1000px;
-	margin: 5%;
+	margin: 2% 2% 0% 8%;
 	min-height: 200px;
 }
 

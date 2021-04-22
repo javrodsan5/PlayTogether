@@ -8,6 +8,10 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Caveat&display=swap"
+	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
 
 
 <playtogether:layout pageName="profile">
@@ -95,11 +99,29 @@
 
 				</div>
 			</div>
-
-
 		</div>
+
+
 		<div class="charts">
 			<br>
+			<c:if test="${user.description==null || user.description==''}">
+				<center><button onclick="location.href='/myprofile/description'" style="font-size: 30px" class="btn btn-info" type="button"><b>Añadir descripción</b></button>
+				</center> <br>
+			</c:if>
+			<c:if test="${user.description!=null && user.description!=''}">
+			<div class="paper blue">
+				<div class="top-tape"></div>
+					<p>
+						<c:out value="${user.description}" />
+					</p>
+				<spring:url value="/myprofile/description" var="descriptionUrl">
+				</spring:url>
+				<a style="color: #206b77; position: absolute; bottom: 0; right: 0;"
+					href="${fn:escapeXml(descriptionUrl)}"><i class="fa fa-edit"></i></a>
+			</div>
+			</c:if>
+
+
 			<center>
 				<div id="mensaje"></div>
 				<div id="chart1" style="width: 400px; text-align: center"></div>

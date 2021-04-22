@@ -11,21 +11,21 @@
 	<jsp:body>
 	<div class="thirteen">
 	<h1>
-		Editar el usuario <c:out value="${usuario.user.username}" />
+		Editar mi descripción
 	</h1>
 	</div>
 	<div class="crearMeeting">
 	<form:form modelAttribute="usuario" class="form-horizontal"
 				id="add-usuario-form">
 		
-			<playtogether:inputField label="Descripción" name="description" />
+			<textarea placeholder="Defínete para el resto de usuarios..."  name="description" maxlength="150" style="width:100%"/></textarea>
 			
 					<div class="ocultar">
 			<playtogether:inputField label="Usuario" name="user" />
 				</div>
 		<div class="form-group">
 			<button class="botonMeeting" type="submit">
-			<b>Modificar</b>
+			<b>Guardar</b>
 			</button>
 		</div>
 		<div class="form-group">

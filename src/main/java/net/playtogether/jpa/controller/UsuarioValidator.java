@@ -71,6 +71,7 @@ public class UsuarioValidator implements Validator {
 		String phone = usuario.getPhone();
 		String username = usuario.getUser().getUsername();
 		String password = usuario.getUser().getPassword();
+		String description = usuario.getDescription();
 		LocalDate fechaNac = usuario.getBirthdate();
 
 		if (nombre == null || !StringUtils.hasLength(nombre) || nombre.length() > 50) {
@@ -123,6 +124,11 @@ public class UsuarioValidator implements Validator {
 		if (username == null || !StringUtils.hasLength(username)) {
 			errors.rejectValue("user.username", REQUIRED, REQUIRED);
 		}
+		
+		if (username.length() > 15) {
+			errors.rejectValue("user.username", "El nombre de usuario no puede contener más de 15 caracteres",
+					"El nombre de usuario no puede contener más de 15 caracteres");
+		}
 
 		if ((!username.matches("^[a-zA-Z0-9ñÑ.' ']*$"))) {
 			errors.rejectValue("user.username",
@@ -146,7 +152,7 @@ public class UsuarioValidator implements Validator {
 						"La contraseña debe tener al menos una mayúscula, un número y una minúscula");
 			}
 		}
-
+		
 	}
 
 	@Override
