@@ -59,6 +59,12 @@
 								</h4>
 							</div>
 						</div>
+						<button class="botonMeeting"
+							style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
+							onclick="location.href='/chat/0/${user.user.username}';"
+							type="button">
+							<b>Ver chat</b>
+						</button>
 					</div>
 				</div>
 			</div>

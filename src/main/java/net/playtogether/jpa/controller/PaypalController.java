@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import net.playtogether.jpa.entity.Authorities;
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Invitation;
 import net.playtogether.jpa.entity.Order;
 import net.playtogether.jpa.entity.Pay;
@@ -31,6 +32,7 @@ import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.AuthoritiesService;
 import net.playtogether.jpa.service.ChampionshipService;
+import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.PayTypeService;
@@ -68,6 +70,9 @@ public class PaypalController {
 
 	@Autowired
 	private UserLoginService userLoginService;
+
+	@Autowired
+	private ChatService chatService;
 
 	public static final String SUCCESS_URL = "pay/success";
 	public static final String CANCEL_URL = "pay/cancel";
@@ -210,6 +215,12 @@ public class PaypalController {
 							team.setTeamSize(championship.getSport().getNumberOfPlayersInTeam());
 							team.setUser(usuarioService.findByUsername(principal.getName()));
 							this.championshipService.save(team);
+
+							Chat chat = new Chat();
+							chat.setChatType(this.chatService.findChatTypeById(2)); //TEAM
+							chat.setTeam(team);
+							this.chatService.saveChat(chat);
+
 							pay.setTeam(team);
 						}
 						pay.setChampionship(championship);

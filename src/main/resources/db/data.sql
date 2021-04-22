@@ -111,6 +111,8 @@ VALUES(6, 'Polideportivo Marbella Vice', 'Sevilla', '2021/04/20 11:45:00', 'Qued
 INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id, creation_date) 
 VALUES(7, 'Polideportivo Los Caños', 'Sevilla', '2021/04/15 09:20:00', 'Mientras más seamos mejor! No dudéis en venir!', 4,3, 1, '2020/10/15');
 
+INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(1, 1);
+
 
 INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(1, 'Torneo ATP', 'Sevilla', 'Torneo oficial de la ATP', '2021/06/25 12:00:00', 8, '2021/06/15 11:00:00', 1, 1);
@@ -210,3 +212,42 @@ INSERT INTO teams_participants(teams_id, participants_id) VALUES(24, 16);
 
 INSERT INTO invitations(id, name, meeting_id, receiver_id, team_id) VALUES(1, "", null, 3, 3);
 INSERT INTO invitations(id, name, meeting_id, receiver_id, team_id) VALUES(2, "", 1, 3, null);
+
+INSERT INTO chat_type(id, name) VALUES(1, "Meeting");
+INSERT INTO chat_type(id, name) VALUES(2, "Team");
+INSERT INTO chat_type(id, name) VALUES(3, "Individual");
+
+-- Chats para quedadas -->
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(1, 1, 1, null, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(2, 1, 2, null, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(3, 1, 3, null, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(4, 1, 4, null, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(5, 1, 5, null, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(6, 1, 6, null, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(7, 1, 7, null, null, null);
+
+-- Chats para equipos -->
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(8, 2, null, 1, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(9, 2, null, 2, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(10, 2, null, 3, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(11, 2, null, 4, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(12, 2, null, 5, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(13, 2, null, 6, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(14, 2, null, 7, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(15, 2, null, 8, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(16, 2, null, 9, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(17, 2, null, 10, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(18, 2, null, 11, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(19, 2, null, 12, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(20, 2, null, 13, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(21, 2, null, 14, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(22, 2, null, 15, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(23, 2, null, 16, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(24, 2, null, 17, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(25, 2, null, 18, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(26, 2, null, 19, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(27, 2, null, 20, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(28, 2, null, 21, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(29, 2, null, 22, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(30, 2, null, 23, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(31, 2, null, 24, null, null);
