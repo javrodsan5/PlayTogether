@@ -7,7 +7,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="clasifications" invitaciones="${invitaciones}">
+<playtogether:layout pageName="clasifications"
+	invitaciones="${invitaciones}">
 	<body>
 		<div class="cardtitle">
 
@@ -25,30 +26,23 @@
 			<table class="table ">
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 20%;">Nombre</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Nombre
+						<th class="guiz-awards-header-title" style="width: 33%;">Nombre</th>
+						<th class="guiz-awards-header-title" style="width: 33%;">Nombre
 							de usuario</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Puntos</th>
-						<th class="guiz-awards-header-title" style="width: 20%">Detalles
-							del jugador</th>
+						<th class="guiz-awards-header-title" style="width: 33%;">Puntos</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${topUsuarios}" var="usuario">
 						<tr class="rowtable">
 							<td><c:out value="${usuario.name}" /></td>
-							<td><c:out value="${usuario.user.username}" /></td>
-							<td><c:out value="${usuario.puntos}" /></td>
 							<td><spring:url value="/usuarios/{usuarioId}"
 									var="usuario2Url">
 									<spring:param name="usuarioId" value="${usuario.id}" />
 
-								</spring:url>
-								<div class="boto">
-									<a class="" href="${fn:escapeXml(usuario2Url)}">Ver
-										detalles</a>
-								</div></td>
-
+								</spring:url><a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
+										value="${usuario.user.username}" /></a></td>
+							<td><c:out value="${usuario.puntos}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
