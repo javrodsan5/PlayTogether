@@ -2679,3 +2679,64 @@ body {
 	background-color: darkseagreen;
 	color: white;
 }
+
+
+@media ( min-width : 59.4em) and (max-width: 78.2em) {
+	.sports-general-container {
+		width: 33% !important;
+		min-width: 33% !important;
+		flex: 33% !important;
+	}
+}
+
+@media ( min-width : 37.5em) and (max-width: 59.4em) {
+	.sports-general-container {
+		width: 50% !important;
+		min-width: 50% !important;
+		flex: 50% !important;
+	}
+}
+
+@media ( min-width : 12.5em) and (max-width: 37.5em) {
+	.sports-general-container {
+		width: 100% !important;
+		min-width: 100% !important;
+		flex: 100% !important;
+	}
+}
+
+@media ( max-width : 768px) and (min-width: 12.5em) {
+	.navigation-wrap {
+		position: absolute !important;
+		width: 100% !important;
+		height: 120px !important;
+		top: 0 !important;
+		left: 0 !important;
+		z-index: 1000 !important;
+		-webkit-transition: all 0.3s ease-out !important;
+		transition: all 0.3s ease-out !important;
+	}
+	
+	.navbar-nav {
+		position: relative !important;
+	}
+}	
+	
+@media ( max-width : 692px) and (min-width: 510px) {
+	.promo-box-container .title {
+		font-size: 20px !important;
+	}
+	
+
+}
+
+@media ( max-width : 510px) and (min-width: 12.5em) {
+	.promo-box-container .title {
+		font-size: 15px !important;
+	}
+	
+
+}
+
+
+
