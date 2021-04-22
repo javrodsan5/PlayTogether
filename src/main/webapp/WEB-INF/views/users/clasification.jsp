@@ -19,41 +19,35 @@
 		</div>
 		<br>
 		<h2 class="alert alert-primary"
-			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la
-			posición ${posicion}!</h2>
+			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la posición ${posicion}!</h2>
 		<div class="cardlist">
-			<table class="table ">
+		<center>
+			<table class="table" style="width:50%">
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 20%;">Nombre</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Nombre
+						<th class="guiz-awards-header-title" style="width: 33%;">Nombre</th>
+						<th class="guiz-awards-header-title" style="width: 33%;">Nombre
 							de usuario</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Puntos</th>
-						<th class="guiz-awards-header-title" style="width: 20%">Detalles
-							del jugador</th>
+						<th class="guiz-awards-header-title" style="width: 33%;">Puntos</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${topUsuarios}" var="usuario">
 						<tr class="rowtable">
 							<td><c:out value="${usuario.name}" /></td>
-							<td><c:out value="${usuario.user.username}" /></td>
-							<td><c:out value="${usuario.puntos}" /></td>
 							<td><spring:url value="/usuarios/{usuarioId}"
 									var="usuario2Url">
 									<spring:param name="usuarioId" value="${usuario.id}" />
+								</spring:url> <a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
+										value="${usuario.user.username}" /></a></td>
+							<td><c:out value="${usuario.puntos}" /></td>
 
-								</spring:url>
-								<div class="boto">
-									<a class="" href="${fn:escapeXml(usuario2Url)}">Ver
-										detalles</a>
-								</div></td>
 
 						</tr>
 					</c:forEach>
 				</tbody>
-
 			</table>
+			</center>
 		</div>
 	</body>
 	</html>
