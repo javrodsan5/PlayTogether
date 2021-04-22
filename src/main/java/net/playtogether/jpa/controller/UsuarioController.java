@@ -26,6 +26,7 @@ import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
+import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
@@ -37,6 +38,9 @@ public class UsuarioController {
 
 	@Autowired
 	UserTypeService userTypeService;
+	
+	@Autowired
+	InvitationService invitationService;
 
 	@Autowired
 	ChatService chatService;
@@ -83,6 +87,9 @@ public class UsuarioController {
 	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId, Principal principal) {
 		Usuario usuario = this.usuarioService.findUserById(userId);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		boolean premium = false;
 		if (usuario.getId().equals(user.getId())) {
 
@@ -116,6 +123,11 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile")
 	public String userProfile(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		model.addAttribute("invitacionesQuedadas",invitacionesQuedadas);
+		model.addAttribute("invitacionesTorneos",invitacionesTorneos);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
 		Integer quedadas = user.getMeetings().size();
@@ -138,7 +150,9 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/edit")
 	public String initUpdateUsuario(ModelMap model, Principal principal) {
-
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.put("usuario", user);
 
@@ -177,6 +191,9 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/championshipsRecord")
 	public String championshipsRecord(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Championship> championships = usuario.getTeams().stream().map(t -> t.getChampionship()).distinct()
 				.collect(Collectors.toList());
@@ -189,6 +206,9 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/meetingsRecord")
 	public String meetingsRecord(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Meeting> meetings = usuario.getMeetings().stream().limit(10).collect(Collectors.toList());
 		if (meetings.size() <= 0) {
@@ -250,6 +270,9 @@ public class UsuarioController {
 
 	@GetMapping("/clasification")
 	public String usersClasification(ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		List<Usuario> topUsuarios = usuarioService.findTopUsuarios().stream().limit(10).collect(Collectors.toList());
 		List<Usuario> todosUsuarios = usuarioService.findAll().stream()
 				.sorted(Comparator.comparing(Usuario::getPuntos).reversed()).collect(Collectors.toList());

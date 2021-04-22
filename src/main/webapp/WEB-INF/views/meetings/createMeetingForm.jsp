@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Crete Round'
 	rel='stylesheet'>
 
-<playtogether:layout pageName="meetings">
+<playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 	<body>
 		<div class="thirteen">
 			<h1>
@@ -25,7 +25,14 @@
 						<playtogether:inputField label="Fecha y hora" name="date" />
 						<playtogether:inputField label="Ciudad" name="city" />
 					</div>
-					
+					<div class="col-sm-12">
+						<label>Número de participantes</label><br> <select name="numberOfPlayers">
+							<c:forEach var="number" items="${numbers}">
+								<option value="${number}">${number}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<br>
 					<playtogether:inputField label="Dirección" name="address" />
 					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
 					<input type="hidden" name="sport" value="${sportId}"/>

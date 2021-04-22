@@ -8,7 +8,7 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<playtogether:layout pageName="championships">
+<playtogether:layout pageName="championships" invitaciones="${invitaciones}">
 	<body>
 		<div class="cardtitle">
 			<h1>

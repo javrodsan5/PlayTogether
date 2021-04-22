@@ -6,7 +6,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
  
-<playtogether:layout pageName="championships">
+<playtogether:layout pageName="championships" invitaciones="${invitaciones}">
 <div class="thirteen">
 <c:if test="${match['new']}">
 <h1>Crear partido</h1>

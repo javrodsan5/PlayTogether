@@ -81,6 +81,9 @@ public class PaypalController {
 	public String formPaymentJoinTeam(ModelMap model, Principal principal,
 			@PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId,
 			@RequestParam("invitationId") Integer invitationId) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Order order = new Order();
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		String teamName = this.championshipService.findTeamId(teamId).getName();
@@ -115,6 +118,9 @@ public class PaypalController {
 	@GetMapping("/pay/championship/{championshipId}")
 	public String formPaymentCreateTeam(ModelMap model, Principal principal,
 			@PathVariable("championshipId") Integer championshipId, @RequestParam("teamName") String teamName) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Order order = new Order();
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		order.setIntent("sale");
@@ -135,6 +141,9 @@ public class PaypalController {
 	@GetMapping("/pay/championship/add")
 	public String formPaymentCreateChampionship(ModelMap model, Principal principal,
 			@RequestParam("championshipId") Integer championshipId) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Order order = new Order();
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		order.setIntent("sale");
@@ -156,6 +165,11 @@ public class PaypalController {
 
 	@GetMapping("/pay/premium")
 	public String formPaymentPremium(ModelMap model, Principal principal) {
+		if(principal!=null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		}
 		Order order = new Order();
 		order.setIntent("sale");
 		order.setCurrency("EUR");
@@ -242,14 +256,19 @@ public class PaypalController {
 	}
 
 	@GetMapping(value = CANCEL_URL)
-	public String cancelPay(Principal principal) {
-
+	public String cancelPay(ModelMap model,Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		return "pay/cancel";
 	}
 
 	@GetMapping(value = SUCCESS_URL)
 	public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,
-			Principal principal) {
+			Principal principal,ModelMap model) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		try {
 			Payment payment = service.executePayment(paymentId, payerId);
 			System.out.println(payment.toJSON());

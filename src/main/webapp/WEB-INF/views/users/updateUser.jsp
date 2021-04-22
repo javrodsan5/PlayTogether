@@ -7,7 +7,7 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 
-<playtogether:layout pageName="registroPlaytogether">
+<playtogether:layout pageName="registroPlaytogether" invitaciones="${invitaciones}">
 	<jsp:body>
 	<div class="thirteen">
 	<h1>

@@ -12,7 +12,7 @@
 
 
 
-<playtogether:layout pageName="users">
+<playtogether:layout pageName="users" invitaciones="${invitaciones}">
 
 	<div class="thirteen">
 		<h1>

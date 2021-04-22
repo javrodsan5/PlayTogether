@@ -14,7 +14,7 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
-<playtogether:layout pageName="meetings">
+<playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 
 	<body>
 		<c:if test="${existe==true}">
