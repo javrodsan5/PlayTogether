@@ -27,6 +27,17 @@
 						<playtogether:inputField label="Ciudad" name="city" />
 					</div>
 
+					<div class="col-sm-12">
+						<label>Número de participantes</label><br> 
+						<select name="numberOfPlayers"> 
+							<c:forEach var="number" items="${numbers}">
+								<option value="${number}" ${numberPlayers == number ? 'selected="selected"' : ''}>${number}</option>
+							</c:forEach>
+						</select>
+						<br>
+						<h9 style="color: white;">${errorPlayers}</h9>
+					</div>
+					<br>
 					<playtogether:inputField label="Dirección" name="address" />
 					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
 					<input type="hidden" name="sport" value="${sportId}" />

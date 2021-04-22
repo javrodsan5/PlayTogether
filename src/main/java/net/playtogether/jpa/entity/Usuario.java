@@ -27,7 +27,6 @@ import lombok.Setter;
 @Getter
 public class Usuario extends NamedEntity {
 
-
 	@Email
 	@Column(name = "correo")
 	private String correo;
@@ -41,6 +40,9 @@ public class Usuario extends NamedEntity {
 	@Column(name = "phone")
 	@Pattern(regexp = "[0-9]{9}")
 	private String phone;
+	
+	@Column(name = "description")
+	private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Pay> payment;

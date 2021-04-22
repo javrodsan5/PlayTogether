@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.validation.Valid;
 
@@ -14,15 +16,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.Usuario;
+import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.MeetingService;
 import net.playtogether.jpa.service.SportService;
@@ -46,6 +51,8 @@ public class MeetingController {
 	@Autowired
 	InvitationService	invitationService;
 
+	@Autowired
+	ChatService 	chatService;
 
 	@InitBinder("meeting")
 	public void initMeetingBinder(final WebDataBinder dataBinder) {
@@ -73,6 +80,7 @@ public class MeetingController {
 				model.put("meeting", new Meeting());
 				model.put("sportId", sportId);
 				model.put("sport", this.sportService.findSportById(sportId));
+				model.put("numbers", IntStream.range(2, 51).boxed().collect(Collectors.toList()));
 				return "meetings/createMeetingForm";
 			}
 		} else {
@@ -81,11 +89,12 @@ public class MeetingController {
 	}
 
 	@PostMapping("/sports/{sportId}/meetings/add")
-	public String postCreationMeeting(@Valid final Meeting meeting, final BindingResult result, final ModelMap model, @PathVariable("sportId") final Integer sportId, final Principal principal) {
+	public String postCreationMeeting(@Valid final Meeting meeting, BindingResult result, final ModelMap model, @PathVariable("sportId") final Integer sportId, final Principal principal) {
 		Sport sport = this.sportService.findSportById(sportId);
 		if (result.hasErrors()) {
 			model.put("sport", sport);
 			model.put("sportId", sportId);
+			model.put("numbers", IntStream.range(2, 51).boxed().collect(Collectors.toList()));
 			return "meetings/createMeetingForm";
 		} else {
 			Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
@@ -94,11 +103,15 @@ public class MeetingController {
 			List<Usuario> participants = new ArrayList<>();
 			participants.add(usuario);
 			meeting.setParticipants(participants);
-			meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam() * 2);
+			//meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam() * 2);
 			meeting.setCreationDate(LocalDate.now());
 			this.meetingService.save(meeting);
 			usuario.setPuntos(usuario.getPuntos() + 7);
 			this.usuarioService.saveUsuarioAlreadyRegistered(usuario);
+
+			Chat chat = new Chat();
+			chat.setChatType(this.chatService.findChatTypeById(1)); //MEETING
+			chat.setMeeting(meeting);
 
 			return "redirect:/sports/" + sportId + "/meetings";
 		}
@@ -115,6 +128,8 @@ public class MeetingController {
 		if (meeting.getMeetingCreator().equals(usuario)) {
 			model.put("sport", this.sportService.findSportById(sportId));
 			model.put("meeting", meeting);
+			model.put("numberPlayers", meeting.getNumberOfPlayers());
+			model.put("numbers", IntStream.range(2, 51).boxed().collect(Collectors.toList()));
 			return "meetings/updateMeetingForm";
 		} else {
 			return "error-403";
@@ -124,14 +139,21 @@ public class MeetingController {
 
 	@PostMapping("/sports/{sportId}/meetings/{meetingId}/edit")
 	public String postUpdateMeeting(@Valid final Meeting meeting, final BindingResult result, final ModelMap model, @PathVariable("sportId") final Integer sportId, @PathVariable("meetingId") final Integer meetingId) {
+		Meeting meetingToUpdate = this.meetingService.findMeetingById(meetingId);
+		if(meeting.getNumberOfPlayers() < meetingToUpdate.getParticipants().size()) {
+			result.rejectValue("numberOfPlayers", "Actualmente se encuentra un número mayor de participantes.", "Actualmente se encuentra un número mayor de participantes.");
+			model.put("errorPlayers", "Actualmente se encuentra un número mayor de participantes.");
+		}
 		if (result.hasErrors()) {
 			model.put("sport", this.sportService.findSportById(sportId));
 			meeting.setId(meetingId);
 			model.put("meeting", meeting);
+			model.put("numbers", IntStream.range(2, 51).boxed().collect(Collectors.toList()));
+			model.put("numberPlayers", meeting.getNumberOfPlayers());
 			return "meetings/updateMeetingForm";
 		} else {
-			Meeting meetingToUpdate = this.meetingService.findMeetingById(meetingId);
-			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "numberOfPlayers", "meetingCreator", "participants", "creationDate");
+			
+			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "meetingCreator", "participants", "creationDate");
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
 			return "redirect:/sports/" + sportId + "/meetings";
@@ -184,6 +206,7 @@ public class MeetingController {
 		model.addAttribute("existe", b);
 		model.addAttribute("estaLlena", estaLlena);
 		model.addAttribute("logged_user", u);
+		model.addAttribute("chatId", this.chatService.findChatIdByMeetingId(meetingId));
 		
 
 		if (usuarios.stream().anyMatch(x -> u.equals(x))) {

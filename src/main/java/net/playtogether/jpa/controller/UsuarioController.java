@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.InvitationService;
+import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
 
@@ -39,6 +41,9 @@ public class UsuarioController {
 	
 	@Autowired
 	InvitationService invitationService;
+
+	@Autowired
+	ChatService chatService;
 
 	@InitBinder("usuario")
 	public void initUsuariotBinder(WebDataBinder dataBinder) {
@@ -105,12 +110,12 @@ public class UsuarioController {
 				int[] torneosPorMes = getEventoPorMes(torneosPorMesList);
 				String datos2 = Arrays.toString(quedadasPorMes);
 				String datos3 = Arrays.toString(torneosPorMes);
-				premium=true;
+				premium = true;
 				model.addAttribute("quedadasPorMes", datos2.replace(" ", ""));
 				model.addAttribute("torneosPorMes", datos3.replace(" ", ""));
-				model.addAttribute("tipoUsuario",premium);
-			}else {
-				model.addAttribute("tipoUsuario",premium);
+				model.addAttribute("tipoUsuario", premium);
+			} else {
+				model.addAttribute("tipoUsuario", premium);
 			}
 			return "users/userDetails";
 		}
@@ -269,7 +274,8 @@ public class UsuarioController {
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		List<Usuario> topUsuarios = usuarioService.findTopUsuarios().stream().limit(10).collect(Collectors.toList());
-		List<Usuario> todosUsuarios = usuarioService.findAll().stream().sorted(Comparator.comparing(Usuario::getPuntos).reversed()).collect(Collectors.toList());
+		List<Usuario> todosUsuarios = usuarioService.findAll().stream()
+				.sorted(Comparator.comparing(Usuario::getPuntos).reversed()).collect(Collectors.toList());
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
 		for (int i = 0; i < todosUsuarios.size(); i++) {
@@ -282,5 +288,25 @@ public class UsuarioController {
 		model.addAttribute("posicion", posicion);
 		model.addAttribute("topUsuarios", topUsuarios);
 		return "users/clasification";
+	}
+
+	@GetMapping("/myprofile/description")
+	public String initUpdateUsuarioDescription(ModelMap model, Principal principal) {
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
+
+		model.put("usuario", user);
+		return "users/updateUserDescription";
+	}
+
+	@PostMapping("/myprofile/description")
+	public String postUpdateUsuarioDescription(Usuario usuario, BindingResult result, ModelMap model,
+			Principal principal) {
+		Usuario usuarioToUpdate = this.usuarioService.findByUsername(principal.getName());
+
+		usuarioToUpdate.setDescription(usuario.getDescription());
+		this.usuarioService.saveUsuario(usuarioToUpdate);
+		model.addAttribute("message", "¡Descripción actualizada correctamente!");
+		return "redirect:/myprofile";
+
 	}
 }
