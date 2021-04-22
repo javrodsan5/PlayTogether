@@ -7,6 +7,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 	<body>
@@ -43,7 +44,8 @@
 							<td><c:out value="${meeting.address}" /></td>
 							<td><c:out value="${meeting.city}" /></td>
 							<td><c:out value="${meeting.description}" /></td>
-							<td><c:out value="${meeting.date}" /></td>
+							<td><fmt:parseDate value="${meeting.date }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+         			 <fmt:formatDate value = "${parsedDateTime}" pattern = "dd-MM-yyyy HH:mm"  /></td>
 							<td><center><c:out value="${meeting.participants.size()}/${meeting.numberOfPlayers}" /></center></td>
 							<td><spring:url value="/usuarios/{userId}" var="userdetails">
 													<spring:param name="userId" value="${meeting.meetingCreator.id}" />

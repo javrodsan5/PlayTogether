@@ -40,7 +40,9 @@ public class ChatController {
 	public String listMeetingMessages(@PathVariable("id") Integer id, ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
 		Chat chat = this.chatService.findChatById(id);
-
+		model.addAttribute("usuarioId", usuario.getId());
+		model.addAttribute("chat", chat);
+		model.addAttribute("typeId", chat.getChatType().getId());
 		Boolean isAuthorized = false;
 		String urlBack = "";
 
@@ -59,8 +61,6 @@ public class ChatController {
 		if (!isAuthorized) {
 			return "error-403";
 		} else {
-			model.addAttribute("messages", chat.getMessages());
-			model.addAttribute("chatId", id);
 			model.addAttribute("urlBack", urlBack);
 			ChatMessage message = new ChatMessage();
 			message.setChat(chat);
@@ -125,7 +125,10 @@ public class ChatController {
 	public String formNewMessage(@Valid final ChatMessage chatMessage, final BindingResult result,
 			@PathVariable("id") Integer id, final ModelMap model, Principal principal) {
 		String m = htmlEntities(chatMessage.getMessage());
-
+		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
+		model.addAttribute("usuarioId", usuario.getId());
+		Chat chat = this.chatService.findChatById(id);
+		model.addAttribute("chat", chat);
 		List<String> l = leerFichero("insultos.txt");
 		List<String> x = new ArrayList<String>();
 
@@ -137,7 +140,7 @@ public class ChatController {
 				x.add(l.get(i));
 			}
 		}
-		Chat chat = this.chatService.findChatById(id);
+		
 		chatMessage.setChat(chat);
 		String urlBack = "";
 		if (chat.getChatType().getId() == 1) { // MEETING
@@ -171,7 +174,7 @@ public class ChatController {
 			return "chat/ListMessages";
 
 		} else {
-			Usuario usuario = this.usuarioService.findByUsername(principal.getName());
+			
 			chatMessage.setDate(LocalDateTime.now());
 			chatMessage.setUsuario(usuario);
 			Integer lastMessageId = this.chatService.findLastMessageId();

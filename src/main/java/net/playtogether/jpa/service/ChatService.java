@@ -71,5 +71,17 @@ public class ChatService {
     public void deleteById(Integer id) {
         this.chatRepository.deleteById(id);
     }
+
+    @Transactional
+	public List<ChatMessage> findOwnMessages(Integer id, Integer chatId) {
+		
+		return this.chatRepository.findOwnMessages(id, chatId);
+	}
+
+    @Transactional
+	public List<ChatMessage> findNotMineMessages(Integer id, Integer chatId) {
+
+    	return this.chatRepository.findNotMineMessages(id, chatId);
+	}
     
 }
