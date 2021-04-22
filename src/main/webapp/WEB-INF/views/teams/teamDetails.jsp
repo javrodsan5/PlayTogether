@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <playtogether:layout pageName="users">
 
@@ -92,15 +93,16 @@
 				<c:if test="${leave && championship.matches.size() == 0}">
 				<center>
 					<a class="btn btn-danger" href="${fn:escapeXml(leaveTeam)}">Abandonar equipo</a>
-				</center>
+				
 				</c:if>
 				<c:if test="${leave}">
-					<button class="botonMeeting"
-					style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
+					<button class="btn btn-success"
+					
 					onclick="location.href='/chat/${chatId}/messages';"
 					type="button">
-					<b>Ver chat</b>
+					Ir al chat de equipo <i class="fa fa-weixin" aria-hidden="true"></i>
 					</button>
+					</center>
 				</c:if>
 			</div>
 			
@@ -126,7 +128,8 @@
 					<tr class="rowtable">
 						<td><c:out value="${match.team1}" /></td>
 						<td><c:out value="${match.team2}" /></td>
-						<td><c:out value="${match.dateTime}" /></td>
+						<td><fmt:parseDate value="${match.dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+         			 <fmt:formatDate value = "${parsedDateTime}" pattern = "dd-MM-yyyy HH:mm"  /></td>
 					</tr>
 				</c:forEach>
 			</table>

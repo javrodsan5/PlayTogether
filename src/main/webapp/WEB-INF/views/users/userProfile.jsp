@@ -8,6 +8,7 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <playtogether:layout pageName="profile">
@@ -44,7 +45,8 @@
 							<div class="data-details" style="margin-right: 22%">
 								<h5>Fecha de nacimiento</h5>
 								<h4>
-									<c:out value="${user.birthdate}" />
+									<fmt:parseDate value="${user.birthdate }" pattern="yyyy-MM-dd" var="parsedDateStart" type="both" />
+         			 <fmt:formatDate value = "${parsedDateStart}" pattern = "dd-MM-yyyy"  />
 								</h4>
 							</div>
 							<div class="data-details">

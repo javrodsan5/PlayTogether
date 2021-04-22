@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <playtogether:layout pageName="championships">
 	<body>
@@ -36,8 +37,13 @@
 						<tr class="rowtable">
 							<td><c:out value="${championship.city}" /></td>
 							<td><c:out value="${championship.description}" /></td>
-							<td><c:out value="${championship.startDate}" /></td>
-							<td><c:out value="${championship.finishDate}" /></td>
+							
+			
+							<td><fmt:parseDate value="${championship.startDate }" pattern="yyyy-MM-dd" var="parsedDateStart" type="both" />
+         			 <fmt:formatDate value = "${parsedDateStart}" pattern = "dd-MM-yyyy"  /></td>
+							<td><fmt:parseDate value="${championship.finishDate }" pattern="yyyy-MM-dd" var="parsedDateEnd" type="both" />
+          <fmt:formatDate 
+         value = "${parsedDateEnd}" pattern = "dd-MM-yyyy"  /></td>
 							<td><center>
 									<c:out
 										value="${championship.teams.size()} / ${championship.maxTeams}" />
