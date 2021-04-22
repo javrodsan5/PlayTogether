@@ -17,7 +17,7 @@
 			<div class="card">
 				<div class="row">
 					<c:forEach items="${sports}" var="sport">
-						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 sports-general-container">
 							<div class="card-flyer">
 								<div class="text-box">
 									<div class="image-box">
