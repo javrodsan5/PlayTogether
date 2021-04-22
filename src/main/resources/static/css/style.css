@@ -2679,3 +2679,39 @@ body {
 		flex: 100% !important;
 	}
 }
+
+@media ( max-width : 768px) and (min-width: 12.5em) {
+	.navigation-wrap {
+		position: absolute !important;
+		width: 100% !important;
+		height: 120px !important;
+		top: 0 !important;
+		left: 0 !important;
+		z-index: 1000 !important;
+		-webkit-transition: all 0.3s ease-out !important;
+		transition: all 0.3s ease-out !important;
+	}
+	
+	.navbar-nav {
+		position: relative !important;
+	}
+}	
+	
+@media ( max-width : 692px) and (min-width: 510px) {
+	.promo-box-container .title {
+		font-size: 20px !important;
+	}
+	
+
+}
+
+@media ( max-width : 510px) and (min-width: 12.5em) {
+	.promo-box-container .title {
+		font-size: 15px !important;
+	}
+	
+
+}
+
+
+
