@@ -6,9 +6,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<playtogether:layout pageName="championships" invitaciones="${invitaciones}">
+<playtogether:layout pageName="championships"
+	invitaciones="${invitaciones}">
 	<body>
 		<div class="cardtitle">
 			<h1>
@@ -20,13 +21,14 @@
 			<table id="championshipTable" class="table ">
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 15%;">Ciudad</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
-						<th class="guiz-awards-header-title" style="width: 15%;">Fecha
+						<th class="guiz-awards-header-title" style="width: 20%;">Dirección</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Fecha
 							Inicio</th>
-						<th class="guiz-awards-header-title" style="width: 15%;">Fecha
+						<th class="guiz-awards-header-title" style="width: 10%;">Fecha
 							Fin</th>
-						<th class="guiz-awards-header-title" style="width: 10%;">Equipos
+						<th class="guiz-awards-header-title" style="width: 5%;">Equipos
 							inscritos</th>
 						<th class="guiz-awards-header-title" style="width: 10%;">Creador</th>
 						<th class="guiz-awards-header-title" style="width: 20 !important%"></th>
@@ -37,13 +39,14 @@
 						<tr class="rowtable">
 							<td><c:out value="${championship.city}" /></td>
 							<td><c:out value="${championship.description}" /></td>
-							
-			
-							<td><fmt:parseDate value="${championship.startDate }" pattern="yyyy-MM-dd" var="parsedDateStart" type="both" />
-         			 <fmt:formatDate value = "${parsedDateStart}" pattern = "dd-MM-yyyy"  /></td>
-							<td><fmt:parseDate value="${championship.finishDate }" pattern="yyyy-MM-dd" var="parsedDateEnd" type="both" />
-          <fmt:formatDate 
-         value = "${parsedDateEnd}" pattern = "dd-MM-yyyy"  /></td>
+							<td><c:out value="${championship.address}" /></td>
+
+							<td><fmt:parseDate value="${championship.startDate }"
+									pattern="yyyy-MM-dd" var="parsedDateStart" type="both" /> <fmt:formatDate
+									value="${parsedDateStart}" pattern="dd-MM-yyyy" /></td>
+							<td><fmt:parseDate value="${championship.finishDate }"
+									pattern="yyyy-MM-dd" var="parsedDateEnd" type="both" /> <fmt:formatDate
+									value="${parsedDateEnd}" pattern="dd-MM-yyyy" /></td>
 							<td><center>
 									<c:out
 										value="${championship.teams.size()} / ${championship.maxTeams}" />

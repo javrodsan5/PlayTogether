@@ -114,22 +114,22 @@ VALUES(7, 'Polideportivo Los Caños', 'Sevilla', '2021/04/15 09:20:00', 'Mientra
 INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(1, 1);
 
 
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(1, 'Torneo ATP', 'Sevilla', 'Torneo oficial de la ATP', '2021/06/25 12:00:00', 8, '2021/06/15 11:00:00', 1, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(2, 'Torneo entre amigos', 'Sevilla', 'Torneo disputado entre amigos! Nos falta gente!', '2021/04/12 16:45:00', 16, '2021/04/06 18:45:00', 1, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(3, 'Torneo Oficial', 'Sevilla', 'Torneo con jugadores semiprofesionales. Apuntarse sólo jugadores con ranking ATP.', '2021/05/23 12:00:00', 16, '2021/05/15 14:00:00', 1, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(4, 'Torneo Pachanga', 'Sevilla', 'Torneo organizado para pasarlo bien con otras personas', '2021/05/15 12:00:00', 8, '2021/04/15 11:00:00', 1, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(5, 'Torneo para jugadores avanzados', 'Sevilla', 'Torneo organizado para jugadores avanzandos.', '2021/06/15 12:00:00', 8, '2021/05/15 11:00:00', 1, 4);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(6, 'Torneo Profesional', 'Sevilla', 'Sólo jugadores profesionales!', '2021/04/17 12:00:00', 16, '2021/04/16 11:00:00', 1, 4);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(7, 'Torneo Antonio SL', 'Sevilla', 'Torneo patrocinado por Antonio SL! Apuntaos!', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 2, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(8, 'Torneo US', 'Sevilla', 'Torneo para estudiantes de la US.', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 3, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(1, 'Torneo ATP', 'Polideportivo Marbella Vice', 'Sevilla', 'Torneo oficial de la ATP', '2021/06/25 12:00:00', 8, '2021/06/15 11:00:00', 1, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(2, 'Torneo entre amigos', 'SADUS Bermejales', 'Sevilla', 'Torneo disputado entre amigos! Nos falta gente!', '2021/04/12 16:45:00', 16, '2021/04/06 18:45:00', 1, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(3, 'Torneo Oficial', 'Polideportivo San Pablo', 'Sevilla', 'Torneo con jugadores semiprofesionales. Apuntarse sólo jugadores con ranking ATP.', '2021/05/23 12:00:00', 16, '2021/05/15 14:00:00', 1, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(4, 'Torneo Pachanga', 'Polideportivo Ciudad Jardin', 'Sevilla', 'Torneo organizado para pasarlo bien con otras personas', '2021/05/15 12:00:00', 8, '2021/04/15 11:00:00', 1, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(5, 'Torneo para jugadores avanzados', 'Club Santa Clara', 'Sevilla', 'Torneo organizado para jugadores avanzandos.', '2021/06/15 12:00:00', 8, '2021/05/15 11:00:00', 1, 4);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(6, 'Torneo Profesional', 'Polideportivo Los Caños', 'Sevilla', 'Sólo jugadores profesionales!', '2021/04/17 12:00:00', 16, '2021/04/16 11:00:00', 1, 4);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(7, 'Torneo Antonio SL', 'Polideportivo Los Caños', 'Sevilla', 'Torneo patrocinado por Antonio SL! Apuntaos!', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 2, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(8, 'Torneo US', 'Club Santa Clara', 'Sevilla', 'Torneo para estudiantes de la US.', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 3, 1);
 
 INSERT INTO statistics(id, sport_id, user_id) VALUES(1, 1, 1);
 INSERT INTO statistics(id, sport_id, user_id) VALUES(2, 2, 2);

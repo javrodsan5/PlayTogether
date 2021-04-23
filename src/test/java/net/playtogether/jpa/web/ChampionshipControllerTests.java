@@ -210,9 +210,9 @@ public class ChampionshipControllerTests {
 
 	// Test de crear torneo
 	@Test
-	@WithMockUser(username = "user", authorities = { "premium" }, password = "Usuar10")
+	@WithMockUser(username = "user", authorities = { "premium" }, password = "password")
 	void createChampionship() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("address", "Polideportivo Ciudad Jardin").param("city", "Sevilla").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 	}
@@ -221,7 +221,7 @@ public class ChampionshipControllerTests {
 	@Test
 	@WithMockUser(username = "user", authorities = { "premium" }, password = "password")
 	void createChampionshipWithErrors() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla1").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("address", "Polideportivo Ciudad Jardin").param("city", "Sevilla1").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 	}
@@ -230,7 +230,7 @@ public class ChampionshipControllerTests {
 	@Test
 	@WithMockUser(username = "user", authorities = { "usuario" }, password = "password")
 	void createChampionshipPaying() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("city", "Sevilla").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/add").param("address", "Polideportivo Ciudad Jardin").param("city", "Sevilla").param("name", "Torneo de ejemplo futbol").param("description", "Descripción sencilla del torneo").param("startDate", "2021-09-14").param("finishDate", "2021-09-16").param("sport", "1").param("maxTeams", "8")
 			.with(SecurityMockMvcRequestPostProcessors.csrf())).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
 	}
