@@ -309,4 +309,18 @@ public class UsuarioController {
 		return "redirect:/myprofile";
 
 	}
+
+	@GetMapping("/requestDeleteMyProfile")
+	public String requestDeleteMyProfile(ModelMap model, Principal principal) {
+		
+		model.addAttribute("confirmationDelete", true);
+		return userProfile(model, principal);
+}
+	
+	@GetMapping("/confirmationRequestDeleteMyProfile")
+	public String confirmationDeleteMyProfile(ModelMap model, Principal principal) {
+	
+		model.addAttribute("confirmatedDelete", true);
+		return userProfile(model, principal);
+}
 }
