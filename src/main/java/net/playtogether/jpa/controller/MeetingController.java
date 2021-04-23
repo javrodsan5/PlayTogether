@@ -5,6 +5,8 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -188,10 +190,13 @@ public class MeetingController {
 	}
 
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}")
-	public String meetingDetails(final ModelMap model, @PathVariable("meetingId") final Integer meetingId, final Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String meetingDetails(final ModelMap model, @PathVariable("meetingId") final Integer meetingId,
+			final Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
 		model.addAttribute("meeting", meeting);
 		Boolean b = true;
@@ -201,7 +206,7 @@ public class MeetingController {
 
 		if (meeting.getMeetingCreator().equals(u)) {
 			model.put("esCreador", true);
-			if(u.getUser().getAuthorities().stream().anyMatch(x->x.getAuthority().equals("premium"))) {
+			if (u.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
 				model.put("puedeEliminar", true);
 			}
 		}
@@ -219,9 +224,8 @@ public class MeetingController {
 		model.addAttribute("existe", b);
 		model.addAttribute("estaLlena", estaLlena);
 		model.addAttribute("logged_user", u);
-		model.addAttribute("hayParticipantes", meeting.getParticipants().size() >0);
+		model.addAttribute("hayParticipantes", meeting.getParticipants().size() > 0);
 		model.addAttribute("chatId", this.chatService.findChatIdByMeetingId(meetingId));
-		
 
 		if (usuarios.stream().anyMatch(x -> u.equals(x))) {
 			model.put("leave", true);
