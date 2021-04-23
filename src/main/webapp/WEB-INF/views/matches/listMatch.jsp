@@ -137,7 +137,8 @@
 														fijado fecha para el partido.</div>
 												</c:if>
 											</c:if>
-											${matches[0].dateTime}
+											<fmt:parseDate value="${matches[0].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime0" type="both" />
+         			 						<fmt:formatDate value = "${parsedDateTime0}" pattern = "dd-MM-yyyy HH:mm"  />
 										</caption>
 
 										<thead class="sr-only">
@@ -200,7 +201,8 @@
 														fijado fecha para el partido.</div>
 												</c:if>
 											</c:if>
-											${matches[1].dateTime}
+											<fmt:parseDate value="${matches[1].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime1" type="both" />
+         			 						<fmt:formatDate value = "${parsedDateTime1}" pattern = "dd-MM-yyyy HH:mm"  />
 										</caption>
 
 										<thead class="sr-only">
@@ -270,7 +272,8 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[2].dateTime}
+												<fmt:parseDate value="${matches[2].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime2" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime2}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 
 										</caption>
@@ -349,7 +352,8 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[0].dateTime}
+												<fmt:parseDate value="${matches[0].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime0" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime0}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 										</caption>
 										<thead class="sr-only">
@@ -411,7 +415,8 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[1].dateTime}
+												<fmt:parseDate value="${matches[1].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime1" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime1}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 										</caption>
 										<thead class="sr-only">
@@ -472,7 +477,8 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[2].dateTime}
+												<fmt:parseDate value="${matches[2].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime2" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime2}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 										</caption>
 										<thead class="sr-only">
@@ -534,7 +540,8 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[3].dateTime}
+												<fmt:parseDate value="${matches[3].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime3" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime3}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 										</caption>
 										<thead class="sr-only">
@@ -601,7 +608,8 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[4].dateTime}
+												<fmt:parseDate value="${matches[4].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime4" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime4}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 										</caption>
 
@@ -664,7 +672,8 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[5].dateTime}
+												<fmt:parseDate value="${matches[5].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime5" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime5}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 										</caption>
 
@@ -735,7 +744,8 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[6].dateTime}
+												<fmt:parseDate value="${matches[6].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime6" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime6}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 
 										</caption>
@@ -818,7 +828,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[0].dateTime}
+												<fmt:parseDate value="${matches[0].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime0" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime0}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -879,7 +890,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[1].dateTime}
+												<fmt:parseDate value="${matches[1].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime1" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime1}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -939,7 +951,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[2].dateTime}
+												<fmt:parseDate value="${matches[2].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime2" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime2}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1000,7 +1013,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[3].dateTime}
+												<fmt:parseDate value="${matches[3].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime3" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime3}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1061,7 +1075,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[4].dateTime}
+												<fmt:parseDate value="${matches[4].dateTime}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime4" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime4}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1121,7 +1136,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[5].dateTime}
+												<fmt:parseDate value="${matches[5].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime5" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime5}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1181,7 +1197,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[6].dateTime}
+												<fmt:parseDate value="${matches[6].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime6" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime6}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1241,7 +1258,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[7].dateTime}
+												<fmt:parseDate value="${matches[7].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime7" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime7}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1310,7 +1328,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[8].dateTime}
+												<fmt:parseDate value="${matches[8].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime8" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime8}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1371,7 +1390,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[9].dateTime}
+												<fmt:parseDate value="${matches[9].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime9" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime9}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1431,7 +1451,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[10].dateTime}
+												<fmt:parseDate value="${matches[10].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime10" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime10}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1492,7 +1513,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[11].dateTime}
+												<fmt:parseDate value="${matches[11].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime11" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime11}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1559,7 +1581,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[12].dateTime}
+												<fmt:parseDate value="${matches[12].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime12" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime12}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1621,7 +1644,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[13].dateTime}
+												<fmt:parseDate value="${matches[13].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime13" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime13}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1688,7 +1712,8 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[14].dateTime}
+												<fmt:parseDate value="${matches[14].dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime14" type="both" />
+         			 							<fmt:formatDate value = "${parsedDateTime14}" pattern = "dd-MM-yyyy HH:mm"  />
 												</c:if>
 
 											</caption>
