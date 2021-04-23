@@ -45,11 +45,5 @@ public class MeetingServiceTests {
 		 assertThat(meeting.getCity()).isEqualTo("Sevilla");
 	 }
 	 
-	 //Test de consultar quedadas por deporte
-	 @Test
-	 void findMeetingsBySportTest() {
-		 Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(1);
-		 assertThat(meetings.size()).isEqualTo(7);
-	 }
 
 }
