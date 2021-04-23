@@ -16,6 +16,8 @@ public class ChampionshipValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		Championship championship = (Championship) target;
 		String city = championship.getCity();
+		String address = championship.getAddress();
+
 		String description = championship.getDescription();
 
 		LocalDate startDate = championship.getStartDate();
@@ -41,6 +43,13 @@ public class ChampionshipValidator implements Validator {
 			errors.rejectValue("name", "Solo puede contener letras y números", "Solo puede contener letras y números");
 		}
 		
+		if (!StringUtils.hasLength(address) || address == null) {
+			errors.rejectValue("address", REQUIRED, REQUIRED);
+		}
+		
+		if (!address.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.' 'º/]*$")) {
+			errors.rejectValue("address", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'");
+		}
 	
 		if (!StringUtils.hasLength(description) || description == null) {
 			errors.rejectValue("description", REQUIRED, REQUIRED); 

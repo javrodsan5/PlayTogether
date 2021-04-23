@@ -10,7 +10,7 @@
 
 <playtogether:layout pageName="invitations">
 	<body>
-	
+
 		<c:if test="${joined}">
 			<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
 				<p>Ha aceptado la invitación</p>
@@ -18,14 +18,14 @@
 		</c:if>
 		<c:if test="${meetingIsFull}">
 			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
-				<p>La invitación ha sido rechazada y eliminada debido a que
-					la quedada ha alcanzado el límite de jugadores</p>
+				<p>La invitación ha sido rechazada y eliminada debido a que la
+					quedada ha alcanzado el límite de jugadores</p>
 			</div>
 		</c:if>
 		<c:if test="${teamIsFull}">
 			<div class="alert alert-danger" style="margin: 0% 20% 1% 20%">
-				<p>La invitación ha sido rechazada y eliminada debido a que
-					el equipo ha alcanzado el límite de jugadores</p>
+				<p>La invitación ha sido rechazada y eliminada debido a que el
+					equipo ha alcanzado el límite de jugadores</p>
 			</div>
 		</c:if>
 		<c:if test="${notJoined}">
@@ -35,14 +35,14 @@
 		</c:if>
 		<c:if test="${isInMeeting}">
 			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
-				<p>La invitación ha sido rechazada y eliminada debido a que
-					ya participa en la quedada</p>
+				<p>La invitación ha sido rechazada y eliminada debido a que ya
+					participa en la quedada</p>
 			</div>
 		</c:if>
 		<c:if test="${isInChampionshipTeam}">
 			<div class="alert alert-danger" style="margin: 0% 20% 1% 20%">
-				<p>La invitación ha sido rechazada y eliminada debido a que
-					ya participa en un equipo del mismo torneo</p>
+				<p>La invitación ha sido rechazada y eliminada debido a que ya
+					participa en un equipo del mismo torneo</p>
 			</div>
 		</c:if>
 		<c:if test="${noPermission}">
@@ -62,8 +62,8 @@
 				<strong>Invitaciones de quedadas</strong>
 			</h1>
 			<br />
-			<p>Aquí se muestran las invitaciones recibidas a futuras quedadas. 
-			Las invitaciones a quedadas pasadas se descartarán
+			<p>Aquí se muestran las invitaciones recibidas a futuras
+				quedadas. Las invitaciones a quedadas pasadas se descartarán
 				automáticamente</p>
 		</div>
 
@@ -133,9 +133,12 @@
 				</table>
 			</div>
 		</c:if>
-		<br><br><br><br>
-		 
-				<div class="">
+		<br>
+		<br>
+		<br>
+		<br>
+
+		<div class="">
 			<h1>
 				<strong>Invitaciones de torneos</strong>
 			</h1>
@@ -159,6 +162,7 @@
 						<tr class="rowtable">
 							<th class="">Nombre de torneo</th>
 							<th class="">Nombre de equipo</th>
+							<th class="">Dirección</th>
 							<th class="">Administrador de equipo</th>
 							<th class="">Aceptar</th>
 							<th class="">Rechazar</th>
@@ -178,6 +182,7 @@
 							<tr class="rowtable">
 								<td><a href="${fn:escapeXml(championshipDetail2Url)}"><b>${invitation.team.championship.name}</b></a></td>
 								<td><c:out value="${invitation.team.name}" /></td>
+								<td><c:out value="${invitation.team.championship.address}" /></td>
 								<td><c:out value="${invitation.team.user.user.username}" /></td>
 
 								<td><spring:url
@@ -208,12 +213,12 @@
 
 				</table>
 			</div>
-		</c:if> 
-		
-		
+		</c:if>
+
+
 	</body>
 </playtogether:layout>
 
-	
+
 
 </html>
