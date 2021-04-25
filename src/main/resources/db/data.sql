@@ -55,24 +55,24 @@ INSERT INTO users(username,password,enabled) VALUES ('antonio15','Usuar10',TRUE)
 INSERT INTO authorities(id,username,authority) VALUES (33,'antonio15','usuario');
 INSERT INTO authorities(id,username,authority) VALUES (34,'antonio15','premium');
 
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(1, 'Antonio', '1999-02-20', 'antonio@gmail.com', '654893274', 2, 10,'antonio98');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(2, 'Fernando', '1995-07-06', 'fernando1@gmail.com', '635897412', 1, 10,'fernando98');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(3, 'Marta', '1992-03-25', 'marta1@gmail.com', '954785123', 1, 10,'marta98');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(4, 'Antonio', '1999-02-20', 'antonio1@gmail.com', '654893270', 2,10,'antonio01');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(5, 'Antonio', '1999-02-20', 'antonio2@gmail.com', '654893271', 2,10,'antonio02');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(6, 'Antonio', '1999-02-20', 'antonio3@gmail.com', '654893272', 2,10,'antonio03');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(7, 'Antonio', '1999-02-20', 'antonio4@gmail.com', '654893273', 2,10,'antonio04');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(8, 'Antonio', '1999-02-20', 'antonio5@gmail.com', '654893574', 2,10,'antonio05');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(9, 'Antonio', '1999-02-20', 'antonio6@gmail.com', '654893275', 2,10,'antonio06');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(10, 'Antonio', '1999-02-20', 'antonio7@gmail.com', '654893276', 2,10,'antonio07');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(11, 'Antonio', '1999-02-20', 'antonio8@gmail.com', '654893277', 2,10,'antonio08');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(12, 'Antonio', '1999-02-20', 'antonio9@gmail.com', '654893278', 2,10,'antonio09');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(13, 'Antonio', '1999-02-20', 'antonio10@gmail.com', '654893279', 2,10,'antonio10');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(14, 'Antonio', '1999-02-20', 'antonio11@gmail.com', '654893214', 2,10,'antonio11');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(15, 'Antonio', '1999-02-20', 'antonio12@gmail.com', '654893224', 2,10,'antonio12');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(16, 'Antonio', '1999-02-20', 'antonio13@gmail.com', '654893234', 2,10,'antonio13');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(17, 'Antonio', '1999-02-20', 'antonio14@gmail.com', '654893244', 2,10,'antonio14');
-INSERT INTO usuarios(id, name, birthdate, correo, phone, type_id,puntos, username) VALUES(18, 'Antonio', '1999-02-20', 'antonio15@gmail.com', '654893254', 2,10,'antonio15');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(1, 'Antonio', '1999-02-20', 'antonio@gmail.com', 'Soy un gran aficionado a los deportes, tengo mucho tiempo libre.', '654893274', 2, 10,'antonio98');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(2, 'Fernando', '1995-07-06', 'fernando1@gmail.com', null, '635897412', 1, 10,'fernando98');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(3, 'Marta', '1992-03-25', 'marta1@gmail.com', 'Holi, me encanta hacer senderismo ¿Te vienes?', '954785123', 1, 10,'marta98');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(4, 'Antonio', '1999-02-20', 'antonio1@gmail.com', null, '654893270', 2,10,'antonio01');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(5, 'Antonio', '1999-02-20', 'antonio2@gmail.com', null, '654893271', 2,10,'antonio02');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(6, 'Antonio', '1999-02-20', 'antonio3@gmail.com', null, '654893272', 2,10,'antonio03');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(7, 'Antonio', '1999-02-20', 'antonio4@gmail.com', null,'654893273', 2,10,'antonio04');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(8, 'Antonio', '1999-02-20', 'antonio5@gmail.com', null, '654893574', 2,10,'antonio05');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(9, 'Antonio', '1999-02-20', 'antonio6@gmail.com', null, '654893275', 2,10,'antonio06');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(10, 'Antonio', '1999-02-20', 'antonio7@gmail.com', null, '654893276', 2,10,'antonio07');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(11, 'Antonio', '1999-02-20', 'antonio8@gmail.com', null, '654893277', 2,10,'antonio08');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(12, 'Antonio', '1999-02-20', 'antonio9@gmail.com', null, '654893278', 2,10,'antonio09');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(13, 'Antonio', '1999-02-20', 'antonio10@gmail.com', null, '654893279', 2,10,'antonio10');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(14, 'Antonio', '1999-02-20', 'antonio11@gmail.com', null, '654893214', 2,10,'antonio11');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(15, 'Antonio', '1999-02-20', 'antonio12@gmail.com', null, '654893224', 2,10,'antonio12');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(16, 'Antonio', '1999-02-20', 'antonio13@gmail.com', null, '654893234', 2,10,'antonio13');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(17, 'Antonio', '1999-02-20', 'antonio14@gmail.com', null, '654893244', 2,10,'antonio14');
+INSERT INTO usuarios(id, name, birthdate, correo, description, phone, type_id,puntos, username) VALUES(18, 'Antonio', '1999-02-20', 'antonio15@gmail.com', null, '654893254', 2,10,'antonio15');
 
 INSERT INTO sport_type(id, name) VALUES(1, 'Equipo');
 INSERT INTO sport_type(id, name) VALUES(2, 'Individual');
@@ -114,22 +114,22 @@ VALUES(7, 'Polideportivo Los Caños', 'Sevilla', '2021/04/15 09:20:00', 'Mientra
 INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(1, 1);
 
 
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(1, 'Torneo ATP', 'Sevilla', 'Torneo oficial de la ATP', '2021/06/25 12:00:00', 8, '2021/06/15 11:00:00', 1, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(2, 'Torneo entre amigos', 'Sevilla', 'Torneo disputado entre amigos! Nos falta gente!', '2021/04/12 16:45:00', 16, '2021/04/06 18:45:00', 1, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(3, 'Torneo Oficial', 'Sevilla', 'Torneo con jugadores semiprofesionales. Apuntarse sólo jugadores con ranking ATP.', '2021/05/23 12:00:00', 16, '2021/05/15 14:00:00', 1, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(4, 'Torneo Pachanga', 'Sevilla', 'Torneo organizado para pasarlo bien con otras personas', '2021/05/15 12:00:00', 8, '2021/04/15 11:00:00', 1, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(5, 'Torneo para jugadores avanzados', 'Sevilla', 'Torneo organizado para jugadores avanzandos.', '2021/06/15 12:00:00', 8, '2021/05/15 11:00:00', 1, 4);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(6, 'Torneo Profesional', 'Sevilla', 'Sólo jugadores profesionales!', '2021/04/17 12:00:00', 16, '2021/04/16 11:00:00', 1, 4);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(7, 'Torneo Antonio SL', 'Sevilla', 'Torneo patrocinado por Antonio SL! Apuntaos!', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 2, 1);
-INSERT INTO championships(id, name, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(8, 'Torneo US', 'Sevilla', 'Torneo para estudiantes de la US.', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 3, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(1, 'Torneo ATP', 'Polideportivo Marbella Vice', 'Sevilla', 'Torneo oficial de la ATP', '2021/06/25 12:00:00', 8, '2021/06/15 11:00:00', 1, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(2, 'Torneo entre amigos', 'SADUS Bermejales', 'Sevilla', 'Torneo disputado entre amigos! Nos falta gente!', '2021/04/12 16:45:00', 16, '2021/04/06 18:45:00', 1, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(3, 'Torneo Oficial', 'Polideportivo San Pablo', 'Sevilla', 'Torneo con jugadores semiprofesionales. Apuntarse sólo jugadores con ranking ATP.', '2021/05/23 12:00:00', 16, '2021/05/15 14:00:00', 1, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(4, 'Torneo Pachanga', 'Polideportivo Ciudad Jardin', 'Sevilla', 'Torneo organizado para pasarlo bien con otras personas', '2021/05/15 12:00:00', 8, '2021/04/15 11:00:00', 1, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(5, 'Torneo para jugadores avanzados', 'Club Santa Clara', 'Sevilla', 'Torneo organizado para jugadores avanzandos.', '2021/06/15 12:00:00', 8, '2021/05/15 11:00:00', 1, 4);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(6, 'Torneo Profesional', 'Polideportivo Los Caños', 'Sevilla', 'Sólo jugadores profesionales!', '2021/04/17 12:00:00', 16, '2021/04/16 11:00:00', 1, 4);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(7, 'Torneo Antonio SL', 'Polideportivo Los Caños', 'Sevilla', 'Torneo patrocinado por Antonio SL! Apuntaos!', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 2, 1);
+INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
+VALUES(8, 'Torneo US', 'Club Santa Clara', 'Sevilla', 'Torneo para estudiantes de la US.', '2021/05/15 12:00:00', 4, '2021/04/15 11:00:00', 3, 1);
 
 INSERT INTO statistics(id, sport_id, user_id) VALUES(1, 1, 1);
 INSERT INTO statistics(id, sport_id, user_id) VALUES(2, 2, 2);

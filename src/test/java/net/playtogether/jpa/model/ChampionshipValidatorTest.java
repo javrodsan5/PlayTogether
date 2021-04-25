@@ -42,6 +42,7 @@ public class ChampionshipValidatorTest {
 
 		championship.setName("Torneo");
 		championship.setCity("Sevilla");
+		championship.setAddress("Polideportivo Ciudad Jardin");
 		championship.setFinishDate(LocalDate.of(2022, 3, 4));
 		championship.setStartDate(LocalDate.of(2022, 2, 4));
 		championship.setSport(sport);
@@ -73,6 +74,7 @@ public class ChampionshipValidatorTest {
 
 		championship.setCity("Sevilla");
 		championship.setFinishDate(null);
+		championship.setAddress("Polideportivo Ciudad Jardin");
 		championship.setStartDate(LocalDate.of(2022, 2, 4));
 		championship.setSport(sport);
 		championship.setMaxTeams(8);
@@ -102,6 +104,7 @@ public class ChampionshipValidatorTest {
 		sport.setChampionships(new ArrayList<Championship>());
 
 		championship.setCity(null);
+		championship.setAddress("Polideportivo Ciudad Jardin");
 		championship.setFinishDate(LocalDate.of(2022, 3, 4));
 		championship.setStartDate(LocalDate.of(2022, 2, 4));
 		championship.setSport(sport);
@@ -132,6 +135,7 @@ public class ChampionshipValidatorTest {
 		sport.setChampionships(new ArrayList<Championship>());
 
 		championship.setCity("Sevilla");
+		championship.setAddress("Polideportivo Ciudad Jardin");
 		championship.setFinishDate(LocalDate.of(2022, 3, 4));
 		championship.setStartDate(null);
 		championship.setSport(sport);
@@ -145,6 +149,37 @@ public class ChampionshipValidatorTest {
 		assertThat(constraintViolations.size()).isEqualTo(1);
 		ConstraintViolation<Championship> violation = constraintViolations.iterator().next();
 		assertThat(violation.getPropertyPath().toString()).isEqualTo("startDate");
+		assertThat(violation.getMessage()).isEqualTo("must not be null");
+		
+	}
+	
+	@Test
+	void shouldNotValidateWhenAddressNull() {
+		LocaleContextHolder.setLocale(Locale.ENGLISH);
+		Championship championship = new  Championship();
+		
+		Sport sport = new Sport();
+
+		sport.setName("Surf");
+		sport.setSportType(new SportType());
+		sport.setMeetings(new ArrayList<Meeting>());
+		sport.setChampionships(new ArrayList<Championship>());
+
+		championship.setCity("Sevilla");
+		championship.setAddress(null);
+		championship.setFinishDate(LocalDate.of(2022, 3, 4));
+		championship.setStartDate(LocalDate.of(2022, 2, 4));
+		championship.setSport(sport);
+		championship.setMaxTeams(8);
+		championship.setDescription("hola es una prueba");
+		championship.setUser(new Usuario());
+
+	
+		Validator validator = createValidator();
+		Set<ConstraintViolation<Championship>> constraintViolations = validator.validate(championship);
+		assertThat(constraintViolations.size()).isEqualTo(1);
+		ConstraintViolation<Championship> violation = constraintViolations.iterator().next();
+		assertThat(violation.getPropertyPath().toString()).isEqualTo("address");
 		assertThat(violation.getMessage()).isEqualTo("must not be null");
 		
 	}

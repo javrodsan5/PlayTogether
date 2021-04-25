@@ -8,6 +8,12 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Caveat&display=swap"
+	rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
 
 
 
@@ -20,8 +26,7 @@
 		</h1>
 
 		<h2>
-			Tiene
-			<span class="pointsuser"><c:out value="${user.puntos}" /></span>
+			Tiene <span class="pointsuser"><c:out value="${user.puntos}" /></span>
 			puntos
 		</h2>
 
@@ -31,7 +36,8 @@
 		<c:if test="${tipoUsuario==false}">
 			<h3 class="alert alert-warning"
 				style="text-align: center; margin: 2% 15% 0px 15%">
-				<a href="/pay/premium">Suscríbete</a> al plan premium para poder visualizar las estadísticas de
+				<a href="/pay/premium">Suscríbete</a> al plan premium para poder
+				visualizar las estadísticas de
 				<c:out value="${user.name}" />
 			</h3>
 		</c:if>
@@ -55,24 +61,35 @@
 							<div class="data-details">
 								<h5>Fecha de nacimiento</h5>
 								<h4>
-									<c:out value="${user.birthdate}" />
+									<fmt:parseDate value="${user.birthdate }" pattern="yyyy-MM-dd" var="parsedDateStart" type="both" />
+         			 <fmt:formatDate value = "${parsedDateStart}" pattern = "dd-MM-yyyy"  />
 								</h4>
 							</div>
 						</div>
-						<button class="botonMeeting"
-							style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
+						<button class="btn btn-success"
+							style="    margin-left: 25%; margin-bottom:3%;"
 							onclick="location.href='/chat/0/${user.user.username}';"
 							type="button">
-							<b>Ver chat</b>
+							Ir al chat privado <i class="fa fa-weixin" aria-hidden="true"></i>
+					
 						</button>
 					</div>
 				</div>
 			</div>
 		</div>
 
+		<div class="charts" style="margin-top: 2%">
+			<c:if test="${user.description!=null && user.description!=''}">
+
+				<div class="paper blue">
+					<div class="top-tape"></div>
+					<p>
+						<c:out value="${user.description}" />
+					</p>
+				</div>
+		</c:if>
+		
 		<c:if test="${tipoUsuario==true }">
-			<div class="charts"
-				style="width: 50%; display: inline-block; margin-left: 5%; margin-right: 5%; float: right">
 				<br>
 				<center>
 					<div id="mensaje"></div>
@@ -84,14 +101,14 @@
 				<input type="hidden" id="myvar" value="${quedadasTorneos}">
 				<input type="hidden" id="myvar2" value="${quedadasPorMes}">
 				<input type="hidden" id="myvar3" value="${torneosPorMes}">
-			</div>
 		</c:if>
+		</div>
 		<script type="text/javascript">
-				var datos = document.getElementById("myvar").value;	
-				var datos2 = datos.replace('[',"");
-				var datos3 = datos2.replace(']',"");
-				var datos4 = datos3.replace(',',"");
-				var datos5 = datos4.replace(' ',"");
+			var datos = document.getElementById("myvar").value;	
+			var datos2 = datos.replace('[',"");
+			var datos3 = datos2.replace(']',"");
+			var datos4 = datos3.replace(' ',"");
+			var datos5 = datos4.split(",");
 				
 				var arr=[];
 		
@@ -119,11 +136,11 @@
 		              }]
 		              };
 		
-				var datosMes = document.getElementById("myvar2").value;	
+		        var datosMes = document.getElementById("myvar2").value;	
 				var datosMes2 = datosMes.replace('[',"");
 				var datosMes3 = datosMes2.replace(']',"");
-				var datosMes4 = datosMes3.replaceAll(',',"");
-				var datosMes5 = datosMes4.replace(' ',"");
+				var datosMes4 = datosMes3.replaceAll(' ',"");
+				var datosMes5 = datosMes4.split(',');
 		
 				var arr2=[];
 		
@@ -168,8 +185,8 @@
 		        var datosMesTorneo = document.getElementById("myvar3").value;	
 				var datosMesTorneo2 = datosMesTorneo.replace('[',"");
 				var datosMesTorneo3 = datosMesTorneo2.replace(']',"");
-				var datosMesTorneo4 = datosMesTorneo3.replaceAll(',',"");
-				var datosMesTorneo5 = datosMesTorneo4.replace(' ',"");
+				var datosMesTorneo4 = datosMesTorneo3.replaceAll(' ',"");
+				var datosMesTorneo5 = datosMesTorneo4.split(',');
 		
 				var arr3=[];
 		

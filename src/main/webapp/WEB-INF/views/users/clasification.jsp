@@ -20,10 +20,10 @@
 		</div>
 		<br>
 		<h2 class="alert alert-primary"
-			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la
-			posición ${posicion}!</h2>
+			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la posición ${posicion}!</h2>
 		<div class="cardlist">
-			<table class="table ">
+		<center>
+			<table class="table" style="width:50%">
 				<thead>
 					<tr class="rowtable">
 						<th class="guiz-awards-header-title" style="width: 33%;">Nombre</th>
@@ -39,6 +39,9 @@
 							<td><spring:url value="/usuarios/{usuarioId}"
 									var="usuario2Url">
 									<spring:param name="usuarioId" value="${usuario.id}" />
+								</spring:url> <a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
+										value="${usuario.user.username}" /></a></td>
+							<td><c:out value="${usuario.puntos}" /></td>
 
 								</spring:url><a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
 										value="${usuario.user.username}" /></a></td>
@@ -46,8 +49,8 @@
 						</tr>
 					</c:forEach>
 				</tbody>
-
 			</table>
+			</center>
 		</div>
 	</body>
 	</html>

@@ -11,6 +11,7 @@
 	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 	crossorigin="anonymous">
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 
 <playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
@@ -63,7 +64,8 @@
 
 				</div>
 				<h2>
-					<c:out value="${meeting.date}" />
+					<fmt:parseDate value="${meeting.date }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+         			 <fmt:formatDate value = "${parsedDateTime}" pattern = "dd-MM-yyyy HH:mm"  />
 				</h2>
 				<p class="summary">
 					<c:out value="${meeting.description}" />
@@ -167,8 +169,9 @@
 			<c:if test="${leave}">
 				<button class="botonMeeting"
 					style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
-					onclick="location.href='/chat/${chatId}/messages';" type="button">
-					<b>Ver chat</b>
+					onclick="location.href='/chat/${chatId}/messages';"
+					type="button">
+					<b>Ir al chat de la quedada  </b><i class="fa fa-weixin" style="font-size: 150%;" aria-hidden="true"></i>
 				</button>
 			</c:if>
 
