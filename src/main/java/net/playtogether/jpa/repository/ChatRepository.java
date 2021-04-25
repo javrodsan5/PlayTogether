@@ -27,4 +27,7 @@ public interface ChatRepository extends CrudRepository<Chat, Integer> {
 
     @Query("SELECT cm FROM ChatMessage cm WHERE cm.chat.id = ?2 AND cm.usuario.id = ?1")
 	public List<ChatMessage> findOwnMessages(Integer id, Integer chatId);
+
+    @Query("SELECT c FROM Chat c WHERE c.user1.id = ?1 OR c.user2.id = ?1")
+    public List<Chat> findMyPrivateChats(Integer id);
 }

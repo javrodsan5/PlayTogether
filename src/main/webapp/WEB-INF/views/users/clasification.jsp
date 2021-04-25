@@ -25,10 +25,11 @@
 			<table class="table" style="width:50%">
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 33%;">Nombre</th>
-						<th class="guiz-awards-header-title" style="width: 33%;">Nombre
+						<th class="guiz-awards-header-title" style="width: 30%;">Nombre</th>
+						<th class="guiz-awards-header-title" style="width: 30%;">Nombre
 							de usuario</th>
-						<th class="guiz-awards-header-title" style="width: 33%;">Puntos</th>
+						<th class="guiz-awards-header-title" style="width: 15%;">Puntos</th>
+						<th class="guiz-awards-header-title" style="width: 20%;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,7 +42,13 @@
 								</spring:url> <a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
 										value="${usuario.user.username}" /></a></td>
 							<td><c:out value="${usuario.puntos}" /></td>
-
+							<c:if test="${usuario.id != userId}">
+								<td><button class="btn btn-success"
+									onclick="location.href='/chat/0/${usuario.user.username}';"
+									type="button">
+									Chat <i class="fa fa-weixin" aria-hidden="true"></i>
+								</button></td>
+							</c:if>
 
 						</tr>
 					</c:forEach>

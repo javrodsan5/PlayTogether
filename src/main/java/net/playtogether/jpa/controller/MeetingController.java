@@ -207,6 +207,7 @@ public class MeetingController {
 		model.addAttribute("estaLlena", estaLlena);
 		model.addAttribute("logged_user", u);
 		model.addAttribute("chatId", this.chatService.findChatIdByMeetingId(meetingId));
+		model.addAttribute("userId", u.getId());
 		
 
 		if (usuarios.stream().anyMatch(x -> u.equals(x))) {
