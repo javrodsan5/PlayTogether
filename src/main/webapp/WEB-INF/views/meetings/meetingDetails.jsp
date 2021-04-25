@@ -108,8 +108,15 @@
 																class="fa fa-trash" style="color: red"></i></a>
 														</c:if>
 													</c:if>
-												</h2>
-											</div>
+												<c:if test="${participant.id != userId}">
+													<button class="btn btn-success"
+														${participant.id != meeting.meetingCreator.id ? 'style="margin-left: 60px"' : ''}
+														onclick="location.href='/chat/0/${participant.user.username}';"
+														type="button">
+														Chat <i class="fa fa-weixin" aria-hidden="true"></i>
+													</button>
+												</c:if>
+											</h2>
 										</div>
 									</div>
 								</center>

@@ -83,5 +83,15 @@ public class ChatService {
 
     	return this.chatRepository.findNotMineMessages(id, chatId);
 	}
+
+    @Transactional
+    public List<Chat> findMyPrivateChats(Integer id) {
+        return this.chatRepository.findMyPrivateChats(id);
+    }
+
+    @Transactional
+    public ChatMessage findLastMessageByChatId(Integer id) {
+        return this.findLastMessageByChatId(id);
+    }
     
 }

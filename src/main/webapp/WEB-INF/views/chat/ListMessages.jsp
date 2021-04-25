@@ -122,8 +122,8 @@
 		
 	
 			<div class="form-group" style="  margin-left: 50%; margin-top:2%;">
-				<button class="btn btn-success" style="font-size: 0.8em; " onclick="location.href='${urlBack}';" type="button">
-					<b>Volver</b>
+				<button class="btn btn-success" style="font-size: 0.8em; " onclick="location.href='/usuarios/${chat.user1.id == usuarioId ? chat.user2.id : chat.user1.id}';" type="button">
+					<b>Ir al perfil de ${chat.user1.id == usuarioId ? chat.user2.user.username : chat.user1.user.username}</b>
 				</button>
 			</div>
 			

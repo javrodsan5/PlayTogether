@@ -226,6 +226,7 @@ public class MeetingController {
 		model.addAttribute("logged_user", u);
 		model.addAttribute("hayParticipantes", meeting.getParticipants().size() > 0);
 		model.addAttribute("chatId", this.chatService.findChatIdByMeetingId(meetingId));
+		model.addAttribute("userId", u.getId());
 
 		if (usuarios.stream().anyMatch(x -> u.equals(x))) {
 			model.put("leave", true);

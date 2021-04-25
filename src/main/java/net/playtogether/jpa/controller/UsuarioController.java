@@ -287,6 +287,7 @@ public class UsuarioController {
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
 		model.addAttribute("topUsuarios", topUsuarios);
+		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}
 

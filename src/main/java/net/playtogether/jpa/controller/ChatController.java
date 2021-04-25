@@ -18,7 +18,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.ChatMessage;
@@ -27,7 +26,6 @@ import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
-@RequestMapping("/chat/{id}")
 public class ChatController {
 
 	@Autowired
@@ -36,7 +34,18 @@ public class ChatController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@GetMapping(value = "/messages")
+	@GetMapping(value = "/chats")
+	public String listPrivateChats(ModelMap model, Principal principal) {
+		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
+		List<Chat> chats = this.chatService.findMyPrivateChats(usuario.getId());
+
+		model.addAttribute("chats", chats);
+		model.addAttribute("principalUsername", principal.getName());
+
+		return "chat/ListChats";
+	}
+
+	@GetMapping(value = "/chat/{id}/messages")
 	public String listMeetingMessages(@PathVariable("id") Integer id, ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
 		Chat chat = this.chatService.findChatById(id);
@@ -69,7 +78,7 @@ public class ChatController {
 		}
 	}
 
-	@GetMapping(value = "/{username}")
+	@GetMapping(value = "/chat/{id}/{username}")
 	public String checkIfExistsIndividualChat(@PathVariable("username") String username, Principal principal) {
 		Usuario usuario1 = this.usuarioService.findByUsername(principal.getName());
 		Usuario usuario2 = this.usuarioService.findByUsername(username);
@@ -121,7 +130,7 @@ public class ChatController {
 		return l;
 	}
 
-	@PostMapping(value = "/messages/new")
+	@PostMapping(value = "/chat/{id}/messages/new")
 	public String formNewMessage(@Valid final ChatMessage chatMessage, final BindingResult result,
 			@PathVariable("id") Integer id, final ModelMap model, Principal principal) {
 		String m = htmlEntities(chatMessage.getMessage());

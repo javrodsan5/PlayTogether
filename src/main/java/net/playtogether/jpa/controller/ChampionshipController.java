@@ -636,6 +636,7 @@ public class ChampionshipController {
 		model.addAttribute("chatId", this.chatService.findChatIdByTeam1Id(teamId));
 
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
+		model.addAttribute("userId", usuario.getId());
 		List<Usuario> usuarios = team.getParticipants();
 
 		if (team.getUser().equals(usuario)
