@@ -7,7 +7,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="clasifications" invitaciones="${invitaciones}">
+<playtogether:layout pageName="clasifications"
+	invitaciones="${invitaciones}">
 	<body>
 		<div class="cardtitle">
 
@@ -49,7 +50,6 @@
 									Chat <i class="fa fa-weixin" aria-hidden="true"></i>
 								</button></td>
 							</c:if>
-
 						</tr>
 					</c:forEach>
 				</tbody>
