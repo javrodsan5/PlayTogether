@@ -7,7 +7,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="clasifications" invitaciones="${invitaciones}">
+<playtogether:layout pageName="clasifications"
+	invitaciones="${invitaciones}">
 	<body>
 		<div class="cardtitle">
 
@@ -42,7 +43,9 @@
 										value="${usuario.user.username}" /></a></td>
 							<td><c:out value="${usuario.puntos}" /></td>
 
-
+								</spring:url><a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
+										value="${usuario.user.username}" /></a></td>
+							<td><c:out value="${usuario.puntos}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>

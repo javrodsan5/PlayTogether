@@ -62,7 +62,7 @@
 						class="fa fa-user-plus"></i></a>
 				</li>
 			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
+			<sec:authorize access="hasAuthority('premium')">
 				<sec:authentication property="principal.username" var="principal" />
 
 				<li
@@ -76,27 +76,38 @@
 					<a class="nav-link" href="/clasification"><i
 						class="fa fa-sort-amount-asc"></i></a>
 				</li>
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.username" var="principal" />
 				<c:if test="${invitaciones!=0}">
-				<li
-					class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
-					<a class="nav-link" href="/myprofile"> Perfil <div class="wrapperNotif"><div class="circulo">${invitaciones} </div></div></a>
+					<li
+						class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
+						<a class="nav-link" href="/myprofile"> Perfil
+							<div class="wrapperNotif">
+								<div class="circulo">${invitaciones}</div>
+							</div>
+					</a>
 
-				</li>
-								<li
-					class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}">
-					<a class="nav-link" href="/myprofile"><div class="perfilNotif"><i class="fa fa-envelope"></i></div></a>
-				</li>
+					</li>
+					<li
+						class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}">
+						<a class="nav-link" href="/myprofile"><div class="perfilNotif">
+								<i class="fa fa-envelope"></i>
+							</div></a>
+					</li>
 				</c:if>
 				<c:if test="${invitaciones==0}">
-				<li
-					class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
-					<a class="nav-link" href="/myprofile"> Perfil <i class="fa fa-user-circle"></i></a>
+					<li
+						class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
+						<a class="nav-link" href="/myprofile"> Perfil <i
+							class="fa fa-user-circle"></i></a>
 
-				</li>
-								<li
-					class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}">
-					<a class="nav-link" href="/myprofile"><i class="fa fa-user-circle"></i></a>
-				</li>
+					</li>
+					<li
+						class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}">
+						<a class="nav-link" href="/myprofile"><i
+							class="fa fa-user-circle"></i></a>
+					</li>
 				</c:if>
 				<li
 					class="${name=='logout' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
@@ -108,6 +119,7 @@
 					<a class="nav-link" href="/logout"> <i class="fa fa-sign-out"></i></a>
 				</li>
 			</sec:authorize>
+
 		</ul>
 
 	</nav>
