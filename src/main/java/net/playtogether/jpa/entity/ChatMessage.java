@@ -28,7 +28,7 @@ public class ChatMessage extends BaseEntity {
     @Column(name = "date")
     private LocalDateTime date;
 
-    @Column(name = "message")
+    @Column(name = "message", length = 100000000)
     @NotBlank(message = "El mensaje es un campo requerido.")
     private String message;
 }
