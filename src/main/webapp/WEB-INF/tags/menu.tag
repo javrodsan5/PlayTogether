@@ -77,6 +77,9 @@
 						class="fa fa-sort-amount-asc"></i></a>
 				</li>
 
+			</sec:authorize>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.username" var="principal" />
 				<li
 					class="${name=='chats' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
 					<a class="nav-link" href="/chats">Mis chats <i class="fa fa-weixin"></i></a>
@@ -86,10 +89,6 @@
 					class="${name=='chats' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}">
 					<a class="nav-link" href="/chats"><i class="fa fa-weixin"></i></a>
 				</li>
-
-			</sec:authorize>
-			<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal.username" var="principal" />
 				<c:if test="${invitaciones!=0}">
 					<li
 						class="${name=='profile' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">

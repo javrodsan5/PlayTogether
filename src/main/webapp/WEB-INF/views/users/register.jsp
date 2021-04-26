@@ -23,10 +23,13 @@
 			<playtogether:inputField label="*Telefono" name="phone" />
 			<playtogether:inputField label="*Usuario" name="user.username" />
 			<playtogether:inputField label="*Contraseña" name="user.password"/>
-			<playtogether:inputField label="*Fecha Nacimiento" name="birthdate"
-				 />
+			<playtogether:inputField label="*Fecha Nacimiento" name="birthdate"/>
+			<form:checkbox path="accept" /><label style="margin-left: 5px;">Acepto los <a href="/terms-and-conditions"> Términos y condiciones</a> y la 
+			<a href="/cookies-policy">Política de cookies</a></label>
+			<br><h9 style="color: white; margin-left: 5px;">${errorAccept} </h9>
+
 			
-		
+		<br>
 		<div class="form-group">
 			<button class="botonMeeting" type="submit">
 			<b>Registrarme</b>

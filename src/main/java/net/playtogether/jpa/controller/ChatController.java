@@ -23,6 +23,7 @@ import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.ChatMessage;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChatService;
+import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
@@ -34,6 +35,9 @@ public class ChatController {
 	@Autowired
 	private UsuarioService usuarioService;
 
+	@Autowired
+	private InvitationService invitationService;
+
 	@GetMapping(value = "/chats")
 	public String listPrivateChats(ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
@@ -41,6 +45,12 @@ public class ChatController {
 
 		model.addAttribute("chats", chats);
 		model.addAttribute("principalUsername", principal.getName());
+
+		if(principal!=null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+    	}
 
 		return "chat/ListChats";
 	}
