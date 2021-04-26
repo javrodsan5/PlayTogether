@@ -35,13 +35,11 @@
 					</div>
 					<div class="form-group">
 						<button class="botonMeeting"
-							style="font-size: 0.8em; margin-left: 22.72em;"
 							onclick="location.href='/sports/${deporte}/championships';"
 							type="button">
 							<b>Volver a listado</b>
 						</button>
 					</div>
-					<br>
 				</div>
 
 

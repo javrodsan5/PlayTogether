@@ -43,17 +43,15 @@
 					<input type="hidden" name="sport" value="${sportId}" />
 					
 					<div class="form-group">
-						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; "type="submit">
-							<b>Editar</b>
+						<button class="botonMeeting" type="submit">
+							<b>Guardar</b>
 						</button>
 						<div class="form-group">
-						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${sportId}/meetings/${meeting.id}';" type="button">
+						<button class="botonMeeting" onclick="location.href='/sports/${sportId}/meetings/${meeting.id}';" type="button">
 							<b>Volver a quedada</b>
 						</button>
 					</div>
 					</div>
-					<br>
-					<br>
 				</form:form>
 			</div>
 		</div>

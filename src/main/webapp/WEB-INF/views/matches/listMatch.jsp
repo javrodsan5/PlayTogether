@@ -1959,7 +1959,6 @@
 		<div class="form-group">
 
 			<button class="botonMeeting"
-				style="display: block; font-size: 0.8em; width: 17%;"
 				onclick="location.href='/sports/${deporte}/championships/${championship}';"
 				type="button">
 				<b>Volver a torneo</b>

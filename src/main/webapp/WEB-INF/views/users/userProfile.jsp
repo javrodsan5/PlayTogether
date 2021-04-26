@@ -20,10 +20,10 @@
 		<h1>Datos de mi perfil</h1>
 		<c:if test="${confirmationDelete}">
 			<div class="card" style="margin: 1% 35% 1% 35%">
-				<div class="card-header" 
+				<div class="card-header"
 					style="background-color: #9ec1c1; font-family: 'Recursive', sans-serif; text-align: center">Confirmación
 					de eliminar perfil</div>
-				<div class="card-body" style="margin:auto;">
+				<div class="card-body" style="margin: auto;">
 					<h3 class="alert alert-warning" style="text-align: center">¿Estás
 						seguro de que quieres borrar tu perfil?</h3>
 					<center>
@@ -43,6 +43,10 @@
 				style="margin: 1% 30% 1% 30%; text-align: center">Hemos
 				recibido tu solicitud de eliminar tu perfil.</h3>
 		</c:if>
+		<h2>
+			Tienes <span class="pointsuser"><c:out value="${user.puntos}" /></span>
+			puntos
+		</h2>
 	</div>
 	<c:if test="${invitacionesQuedadas!=0 or invitacionesTorneos !=0}">
 		<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
@@ -118,17 +122,7 @@
 			</c:if>
 		</div>
 
-		</c:if>
-		<div style="margin: 1% 20% 1% 20%">
-			<h2>
-				Tienes
-				<span class="pointsuser"><c:out value="${user.puntos}" /></span>
-				puntos
-			</h2>
-		</div>
-
-
-	</div>
+	</c:if>
 	<body>
 		<div class="body-container" style="display: inline-block; width: 25%">
 

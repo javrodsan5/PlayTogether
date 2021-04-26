@@ -22,12 +22,15 @@
 			<playtogether:inputField label="*Correo" name="correo" />
 			<playtogether:inputField label="*Telefono" name="phone" />
 			<playtogether:inputField label="*Usuario" name="user.username" />
-			<playtogether:inputField label="*Contraseña" name="user.password"/>
-			<playtogether:inputField label="*Fecha Nacimiento" name="birthdate"/>
-			<label style="margin-left: 5px;"><form:checkbox path="accept" style="position: relative;"/>Acepto los <a href="/terms-and-conditions"> Términos y condiciones</a> y la 
-			<a href="/cookies-policy">Política de cookies</a></label>
-			<br><h9 style="color: white; margin-left: 5px;">${errorAccept} </h9>
-
+			<playtogether:inputField label="*Contraseña" name="user.password" />
+			<playtogether:inputField label="*Fecha Nacimiento" name="birthdate" />
+				<label style="width: 100%; margin-left: 5%">
+						<form:checkbox path="accept" style="width:auto"/>
+						Acepto los <a href="/terms-and-conditions"> Términos y condiciones</a> y la 
+						<a href="/cookies-policy">Política de cookies</a>
+				</label>
+			<br>
+			<h9 style="color: white; margin-left: 5px;">${errorAccept} </h9>
 			
 		<br>
 		<div class="form-group">
@@ -35,7 +38,6 @@
 			<b>Registrarme</b>
 			</button>
 		</div>
-		<br>
 			
 			</form:form>
 		</div>

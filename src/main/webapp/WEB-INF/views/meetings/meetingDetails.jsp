@@ -168,14 +168,12 @@
 				<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
 			</c:if>
 			<button class="botonMeeting"
-				style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
 				onclick="location.href='/sports/${meeting.sport.id}/meetings';"
 				type="button">
 				<b>Volver a listado</b>
 			</button>
 			<c:if test="${leave}">
 				<button class="botonMeeting"
-					style="font-size: 0.8em; margin: 0% 3% 0% 3%;"
 					onclick="location.href='/chat/${chatId}/messages';"
 					type="button">
 					<b>Ir al chat de la quedada  </b><i class="fa fa-weixin" style="font-size: 150%;" aria-hidden="true"></i>
@@ -184,7 +182,6 @@
 
 		</div>
 
-		<br>
 
 		<br>
 	</body>
