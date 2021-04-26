@@ -30,7 +30,9 @@
 					<c:forEach items="${chats}" var="chat">
 						<tr class="rowtable">
 							<td><c:out value="${chat.user1.user.username == principalUsername ? chat.user2.user.username : chat.user1.user.username}" /></td>
-							<td><b><c:out value="${chat.messages[chat.messages.size()-1].usuario.user.username == principalUsername ? 'Tú' : chat.messages[chat.messages.size()-1].usuario.user.username}:" /></b>
+							<td><b><c:out value="${chat.messages[chat.messages.size()-1].usuario.user.username == principalUsername ? 'Tú' 
+								: chat.messages[chat.messages.size()-1].usuario.user.username}${chat.messages[chat.messages.size()-1] == null ? 
+									'No habéis enviado ningún mensaje todavía' : ':'}" /></b>
                                 <c:out value="${chat.messages[chat.messages.size()-1].message}" /></td>
                             <td><button class="btn btn-success"
                                 style="    margin-left: 25%; margin-bottom:3%;"

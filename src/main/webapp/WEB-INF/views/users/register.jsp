@@ -24,7 +24,7 @@
 			<playtogether:inputField label="*Usuario" name="user.username" />
 			<playtogether:inputField label="*Contraseña" name="user.password"/>
 			<playtogether:inputField label="*Fecha Nacimiento" name="birthdate"/>
-			<form:checkbox path="accept" /><label style="margin-left: 5px;">Acepto los <a href="/terms-and-conditions"> Términos y condiciones</a> y la 
+			<label style="margin-left: 5px;"><form:checkbox path="accept" style="position: relative;"/>Acepto los <a href="/terms-and-conditions"> Términos y condiciones</a> y la 
 			<a href="/cookies-policy">Política de cookies</a></label>
 			<br><h9 style="color: white; margin-left: 5px;">${errorAccept} </h9>
 

@@ -96,6 +96,7 @@
 														class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
 													<c:if test="${puedeEliminar == true}">
 														<c:if test="${participant.id!=meeting.meetingCreator.id}">
+															<br>
 															<spring:url
 																value="/sports/{sportId}/meetings/{meetingId}/{userId}/delete"
 																var="deleteUserMeeting">
@@ -103,20 +104,19 @@
 																<spring:param name="meetingId" value="${meeting.id}" />
 																<spring:param name="userId" value="${participant.id}" />
 															</spring:url>
-															<a style="margin-left: 60px"
-																href="${fn:escapeXml(deleteUserMeeting)}"> <i
-																class="fa fa-trash" style="color: red"></i></a>
+															<a style="margin: 10px;"
+																href="${fn:escapeXml(deleteUserMeeting)}"> 
+																<i class="fa fa-trash" style="color: red"></i></a>
 														</c:if>
 													</c:if>
-												<c:if test="${participant.id != userId}">
-													<button class="btn btn-success"
-														${participant.id != meeting.meetingCreator.id ? 'style="margin-left: 60px"' : ''}
-														onclick="location.href='/chat/0/${participant.user.username}';"
-														type="button">
-														Chat <i class="fa fa-weixin" aria-hidden="true"></i>
-													</button>
-												</c:if>
-											</h2>
+													<c:if test="${participant.id != userId}">
+														<button class="btn btn-success"
+															onclick="location.href='/chat/0/${participant.user.username}';"
+															type="button">
+															Chat <i class="fa fa-weixin" aria-hidden="true"></i>
+														</button>
+													</c:if>
+												</h2>
 										</div>
 									</div>
 								</center>
