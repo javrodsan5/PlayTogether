@@ -43,12 +43,10 @@
 						</button>
 					</div>
 								<div class="form-group">
-						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${sport.id}/meetings';" type="button">
+						<button class="botonMeeting" onclick="location.href='/sports/${sport.id}/meetings';" type="button">
 							<b>Volver a listado</b>
 						</button>
 					</div>
-					<br>
-					<br>
 				</form:form>
 			</div>
 		</div>
