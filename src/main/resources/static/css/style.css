@@ -2866,9 +2866,9 @@ body {
 	max-width: 867px;
 	margin: 25px 10px;
 	height: calc(100% - 50px);
-	border: var(- -border);
+	border: 2px solid #ddd;
 	border-radius: 5px;
-	background: var(- -msger-bg);
+	background: #fff;
 	box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
 }
 
@@ -2876,7 +2876,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 	padding: 10px;
-	border-bottom: var(- -border);
+	border-bottom: 2px solid #ddd;
 	background: #6b89ab;
 	color: white;
 }
@@ -2924,7 +2924,7 @@ body {
 	max-width: 450px;
 	padding: 15px;
 	border-radius: 15px;
-	background: var(- -left-msg-bg);
+	background: #c7dec0;
 }
 
 .msg-info {
@@ -2952,7 +2952,7 @@ body {
 }
 
 .right-msg .msg-bubble {
-	background: var(- -right-msg-bg);
+	background: #579ffb;
 	color: #fff;
 	border-bottom-right-radius: 0;
 }
@@ -2964,7 +2964,7 @@ body {
 .msger-inputarea {
 	display: flex;
 	padding: 10px;
-	border-top: var(- -border);
+	border-top: 2px solid #ddd;
 	background: #eee;
 }
 
