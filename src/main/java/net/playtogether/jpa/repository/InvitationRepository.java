@@ -37,6 +37,10 @@ public interface InvitationRepository extends CrudRepository<Invitation, Integer
 	@Query("DELETE FROM Invitation i WHERE i.meeting.id = ?1")
 	void deleteInvitationsByMeetingId(Integer meetingId);
 
+	@Query("SELECT i FROM Invitation i WHERE (i.meeting.id IS NOT NULL AND i.meeting.meetingCreator.user.username =?1)")
+	Collection<Invitation> findMyMeetingInvitations(String username);
 
+	@Query("SELECT i FROM Invitation i WHERE (i.team.id IS NOT NULL AND i.team.user.user.username = ?1)")
+	Collection<Invitation> findMyChampionshipInvitations(String username);
 	
 }

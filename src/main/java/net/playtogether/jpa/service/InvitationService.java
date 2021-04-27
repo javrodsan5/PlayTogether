@@ -77,7 +77,13 @@ public class InvitationService {
 		
 	}
 
+	@Transactional(readOnly = true)
+	public Collection<Invitation> findMyMeetingInvitations(String username) {
+		return this.invitationRepository.findMyMeetingInvitations(username);
+	}
 
-
-	
+	@Transactional(readOnly = true)
+	public Collection<Invitation> findMyChampionshipInvitations(String username) {
+		return this.invitationRepository.findMyChampionshipInvitations(username);
+	}
 }
