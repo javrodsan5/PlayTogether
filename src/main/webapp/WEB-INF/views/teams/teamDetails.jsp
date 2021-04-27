@@ -51,6 +51,7 @@
 							de usuario</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Detalles
 							del jugador</th>
+						<th class="guiz-awards-header-title" style="width: 20%;"></th>
 					</tr>
 				</thead>
 				<c:forEach items="${team.participants}" var="participant">
@@ -63,6 +64,14 @@
 							<div class="boto">
 								<a href="${fn:escapeXml(userDetails)}">Ver detalles</a>
 							</div></td>
+						<c:if test="${participant.id != userId}">
+							<td><button class="btn btn-success"
+								style="margin-bottom:3%;"
+								onclick="location.href='/chat/0/${participant.user.username}';"
+								type="button">
+								Chat <i class="fa fa-weixin" aria-hidden="true"></i>
+							</button></td>
+						</c:if>	
 
 						<c:if
 							test="${puedeEliminar == true && participant.id!=team.user.id}">

@@ -54,14 +54,20 @@ public class UsuarioController {
 	public String initCreationForm(ModelMap model) {
 		Usuario usuario = new Usuario();
 		model.put("usuario", usuario);
+		model.put("accept", false);
 		return "users/register";
 	}
 
 	@PostMapping(value = "/registro")
-	public String processCreationForm(@Valid Usuario usuario, BindingResult result) {
+	public String processCreationForm(@Valid Usuario usuario, BindingResult result, ModelMap model) {
 
 		if (usuarioService.checkCorreoExists(usuario.getCorreo())) {
 			result.addError(new FieldError("usuario", "correo", "El correo ya está registrado"));
+		}
+
+		if(usuario.getAccept() == false) {
+			model.addAttribute("errorAccept", "Debe aceptar las condiciones.");
+			result.addError(new FieldError("usuario", ".", "."));
 		}
 
 		if (usuarioService.checkPhoneExists(usuario.getPhone())) {
@@ -287,6 +293,7 @@ public class UsuarioController {
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
 		model.addAttribute("topUsuarios", topUsuarios);
+		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}
 
@@ -309,4 +316,18 @@ public class UsuarioController {
 		return "redirect:/myprofile";
 
 	}
+
+	@GetMapping("/requestDeleteMyProfile")
+	public String requestDeleteMyProfile(ModelMap model, Principal principal) {
+		
+		model.addAttribute("confirmationDelete", true);
+		return userProfile(model, principal);
+}
+	
+	@GetMapping("/confirmationRequestDeleteMyProfile")
+	public String confirmationDeleteMyProfile(ModelMap model, Principal principal) {
+	
+		model.addAttribute("confirmatedDelete", true);
+		return userProfile(model, principal);
+}
 }

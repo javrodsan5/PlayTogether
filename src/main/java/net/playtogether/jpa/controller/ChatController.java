@@ -18,16 +18,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.ChatMessage;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.ChatService;
+import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
-@RequestMapping("/chat/{id}")
 public class ChatController {
 
 	@Autowired
@@ -36,7 +35,27 @@ public class ChatController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@GetMapping(value = "/messages")
+	@Autowired
+	private InvitationService invitationService;
+
+	@GetMapping(value = "/chats")
+	public String listPrivateChats(ModelMap model, Principal principal) {
+		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
+		List<Chat> chats = this.chatService.findMyPrivateChats(usuario.getId());
+
+		model.addAttribute("chats", chats);
+		model.addAttribute("principalUsername", principal.getName());
+
+		if(principal!=null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+    	}
+
+		return "chat/ListChats";
+	}
+
+	@GetMapping(value = "/chat/{id}/messages")
 	public String listMeetingMessages(@PathVariable("id") Integer id, ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
 		Chat chat = this.chatService.findChatById(id);
@@ -45,6 +64,11 @@ public class ChatController {
 		model.addAttribute("typeId", chat.getChatType().getId());
 		Boolean isAuthorized = false;
 		String urlBack = "";
+		if(principal!=null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+    	}
 
 		if (chat.getChatType().getId() == 1) { // MEETING
 			isAuthorized = chat.getMeeting().getParticipants().contains(usuario);
@@ -69,12 +93,16 @@ public class ChatController {
 		}
 	}
 
-	@GetMapping(value = "/{username}")
-	public String checkIfExistsIndividualChat(@PathVariable("username") String username, Principal principal) {
+	@GetMapping(value = "/chat/{id}/{username}")
+	public String checkIfExistsIndividualChat(ModelMap model,@PathVariable("username") String username, Principal principal) {
 		Usuario usuario1 = this.usuarioService.findByUsername(principal.getName());
 		Usuario usuario2 = this.usuarioService.findByUsername(username);
 		Integer chatId = this.chatService.findIndividualChatIdBetweenTwoUsers(usuario1.getId(), usuario2.getId());
-
+		if(principal!=null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+    	}
 		if (chatId == null) {
 			Chat chat = new Chat();
 			chat.setUser1(usuario1);
@@ -121,7 +149,7 @@ public class ChatController {
 		return l;
 	}
 
-	@PostMapping(value = "/messages/new")
+	@PostMapping(value = "/chat/{id}/messages/new")
 	public String formNewMessage(@Valid final ChatMessage chatMessage, final BindingResult result,
 			@PathVariable("id") Integer id, final ModelMap model, Principal principal) {
 		String m = htmlEntities(chatMessage.getMessage());

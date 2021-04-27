@@ -104,11 +104,11 @@
 		</c:if>
 		</div>
 		<script type="text/javascript">
-				var datos = document.getElementById("myvar").value;	
-				var datos2 = datos.replace('[',"");
-				var datos3 = datos2.replace(']',"");
-				var datos4 = datos3.replace(',',"");
-				var datos5 = datos4.replace(' ',"");
+			var datos = document.getElementById("myvar").value;	
+			var datos2 = datos.replace('[',"");
+			var datos3 = datos2.replace(']',"");
+			var datos4 = datos3.replace(' ',"");
+			var datos5 = datos4.split(",");
 				
 				var arr=[];
 		
@@ -136,11 +136,11 @@
 		              }]
 		              };
 		
-				var datosMes = document.getElementById("myvar2").value;	
+		        var datosMes = document.getElementById("myvar2").value;	
 				var datosMes2 = datosMes.replace('[',"");
 				var datosMes3 = datosMes2.replace(']',"");
-				var datosMes4 = datosMes3.replaceAll(',',"");
-				var datosMes5 = datosMes4.replace(' ',"");
+				var datosMes4 = datosMes3.replaceAll(' ',"");
+				var datosMes5 = datosMes4.split(',');
 		
 				var arr2=[];
 		
@@ -185,8 +185,8 @@
 		        var datosMesTorneo = document.getElementById("myvar3").value;	
 				var datosMesTorneo2 = datosMesTorneo.replace('[',"");
 				var datosMesTorneo3 = datosMesTorneo2.replace(']',"");
-				var datosMesTorneo4 = datosMesTorneo3.replaceAll(',',"");
-				var datosMesTorneo5 = datosMesTorneo4.replace(' ',"");
+				var datosMesTorneo4 = datosMesTorneo3.replaceAll(' ',"");
+				var datosMesTorneo5 = datosMesTorneo4.split(',');
 		
 				var arr3=[];
 		
