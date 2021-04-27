@@ -52,14 +52,14 @@
 		<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
 			<c:if test="${invitacionesQuedadas!=0 and invitacionesTorneos ==0}">
 				<c:if test="${invitacionesQuedadas==1}">
-					<h2>
+					<h2 style="text-align:center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitación a una quedada nueva
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesQuedadas!=1}">
-					<h2>
+					<h2 style="text-align:center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitaciones a quedadas nuevas
@@ -68,14 +68,14 @@
 			</c:if>
 			<c:if test="${invitacionesQuedadas==0 and invitacionesTorneos !=0}">
 				<c:if test="${invitacionesTorneos==1}">
-					<h2>
+					<h2 style="text-align:center;">
 						Tienes
 						<c:out value="${invitacionesTorneos}" />
 						invitación a un torneo nuevo
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesTorneos!=1}">
-					<h2>
+					<h2 style="text-align:center;">
 						Tienes
 						<c:out value="${invitacionesTorneos}" />
 						invitaciones a torneos nuevos
@@ -84,7 +84,7 @@
 			</c:if>
 			<c:if test="${invitacionesQuedadas!=0 and invitacionesTorneos !=0}">
 				<c:if test="${invitacionesTorneos==1 and invitacionesQuedadas==1}">
-					<h2>
+					<h2 style="text-align:center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitación a una quedada nueva y
@@ -93,7 +93,7 @@
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesTorneos!=1 and invitacionesQuedadas==1}">
-					<h2>
+					<h2 style="text-align:center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitación a una quedada nueva y
@@ -102,7 +102,7 @@
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesTorneos==1 and invitacionesQuedadas!=1}">
-					<h2>
+					<h2 style="text-align:center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitaciones a quedadas nuevas y
@@ -111,7 +111,7 @@
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesTorneos!=1 and invitacionesQuedadas!=1}">
-					<h2>
+					<h2 style="text-align:center;"> 
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitaciones a quedadas nuevas y

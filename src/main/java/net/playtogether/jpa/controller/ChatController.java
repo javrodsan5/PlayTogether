@@ -64,6 +64,11 @@ public class ChatController {
 		model.addAttribute("typeId", chat.getChatType().getId());
 		Boolean isAuthorized = false;
 		String urlBack = "";
+		if(principal!=null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+    	}
 
 		if (chat.getChatType().getId() == 1) { // MEETING
 			isAuthorized = chat.getMeeting().getParticipants().contains(usuario);
@@ -89,11 +94,15 @@ public class ChatController {
 	}
 
 	@GetMapping(value = "/chat/{id}/{username}")
-	public String checkIfExistsIndividualChat(@PathVariable("username") String username, Principal principal) {
+	public String checkIfExistsIndividualChat(ModelMap model,@PathVariable("username") String username, Principal principal) {
 		Usuario usuario1 = this.usuarioService.findByUsername(principal.getName());
 		Usuario usuario2 = this.usuarioService.findByUsername(username);
 		Integer chatId = this.chatService.findIndividualChatIdBetweenTwoUsers(usuario1.getId(), usuario2.getId());
-
+		if(principal!=null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+    	}
 		if (chatId == null) {
 			Chat chat = new Chat();
 			chat.setUser1(usuario1);
