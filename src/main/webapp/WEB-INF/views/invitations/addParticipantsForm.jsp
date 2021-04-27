@@ -128,13 +128,39 @@
 						</c:choose>
 					</table>
 				</div>
+				<div style="display: inline-block">
+					<table id="meetingTable" width=30% class="table table-striped">
+						<thead>
+							<tr class="rowtable" style="background-color: #9ec1c1;">
+								<th style="width: 10%;"></th>
+								<th style="width: 30%;">Nombre de usuario</th>
+								<th style="width: 30%;">Nombre</th>
+								<th style="width: 30%;">Fecha de nacimiento</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:set var="i" value="${1}" />
+							<c:forEach items="${championshipInvitations}" var="invitation">
+								<tr class="rowtable">
+									<td><c:out value="${i}" /></td>
+									<td><c:out value="${invitation.receiver.user.username}" /></td>
+									<td><c:out value="${invitation.receiver.name}" /></td>
+									<td><c:out value="${invitation.receiver.birthdate}" /></td>
+									<c:set var="i" value="${i+1}" />
+								</tr>
+							</c:forEach>
+						</tbody>
+
+					</table>
+				</div>
 			</body>
 		</playtogether:layout>
 	</c:if>
 
 
 	<c:if test="${meetingView == true}">
-		<playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
+		<playtogether:layout pageName="meetings"
+			invitaciones="${invitaciones}">
 			<body>
 				<div class="thirteen">
 					<h1>Invitar participantes a quedada</h1>
@@ -225,8 +251,8 @@
 					<table id="meetingTable" width=30% class="table table-striped">
 						<c:choose>
 							<c:when test="${meeting_participants.isEmpty()}">
-							<div class="alert alert-primary" style="margin: 0% 20% 5% 20%">
-								<p>Aún no hay participantes en la quedada</p>
+								<div class="alert alert-primary" style="margin: 0% 20% 5% 20%">
+									<p>Aún no hay participantes en la quedada</p>
 								</div>
 							</c:when>
 
@@ -253,6 +279,31 @@
 								</tbody>
 							</c:otherwise>
 						</c:choose>
+					</table>
+				</div>
+				<div style="display: inline-block">
+					<table id="meetingTable" width=30% class="table table-striped">
+						<thead>
+							<tr class="rowtable" style="background-color: #9ec1c1;">
+								<th style="width: 10%;"></th>
+								<th style="width: 30%;">Nombre de usuario</th>
+								<th style="width: 30%;">Nombre</th>
+								<th style="width: 30%;">Fecha de nacimiento</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:set var="i" value="${1}" />
+							<c:forEach items="${meetingInvitations}" var="invitation">
+								<tr class="rowtable">
+									<td><c:out value="${i}" /></td>
+									<td><c:out value="${invitation.receiver.user.username}" /></td>
+									<td><c:out value="${invitation.receiver.name}" /></td>
+									<td><c:out value="${invitation.receiver.birthdate}" /></td>
+									<c:set var="i" value="${i+1}" />
+								</tr>
+							</c:forEach>
+						</tbody>
+
 					</table>
 				</div>
 			</body>
