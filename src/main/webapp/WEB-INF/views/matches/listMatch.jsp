@@ -1774,6 +1774,10 @@
 		<br>
 		<br>
 		<div class="cardlist">
+		<center>
+		<h2 class="alert alert-info"
+			style="text-align: center;font-size: 20px;width: 90%;"> <i class="fa fa-info-circle"></i> Para que el resultado del partido se considere válido,
+			 deben coincidir los resultados aportados por cada equipo</h2></center>
 
 			<table id="matchTable" class="table">
 				<thead style="text-align: center">
