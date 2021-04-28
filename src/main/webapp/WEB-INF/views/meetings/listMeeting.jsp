@@ -9,13 +9,15 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 	<body>
-		<div class="cardtitle">
-			<h1>
+		<div class="cardtitle meeting-and-championship-list">
+			<h1 class="list-meeting-championship-title">
 				<strong>Quedadas de ${nombreDeporte}</strong>
 			</h1>
-			<br />
 		</div>
 		<c:if test="${limiteMes}">
 			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
@@ -25,17 +27,19 @@
 				</p>
 			</div>
 		</c:if>
-		<div class="cardlist">
+		<div class="cardlist meeting-and-championship-list">
+		  <div class="scroll_vertical" id="style_scroll">
 			<table id="meetingTable" class="table ">
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 20%;">Dirección</th>
+						<th class="guiz-awards-header-title" style="width: 18%;">Dirección</th>
 						<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
-						<th class="guiz-awards-header-title" style="width: 10%;">Fecha</th>
-						<th class="guiz-awards-header-title" style="width: 10%;">Participantes</th>
+						<th class="guiz-awards-header-title" style="width: 17%;">Fecha</th>
+						<th class="guiz-awards-header-title" style="width: 9%;">Participantes</th>
 						<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
-						<th class="guiz-awards-header-title" style="width: 20%;"></th>
+						<th class="guiz-awards-header-title" style="width: 4%;">Participación</th>
+						<th class="guiz-awards-header-title" style="width: 10%;"></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,14 +49,20 @@
 							<td><c:out value="${meeting.city}" /></td>
 							<td><c:out value="${meeting.description}" /></td>
 							<td><fmt:parseDate value="${meeting.date }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-         			 <fmt:formatDate value = "${parsedDateTime}" pattern = "dd-MM-yyyy HH:mm"  /></td>
+         			 			<fmt:formatDate value = "${parsedDateTime}" pattern = "dd-MM-yyyy HH:mm"  /></td>
 							<td><center><c:out value="${meeting.participants.size()}/${meeting.numberOfPlayers}" /></center></td>
 							<td><spring:url value="/usuarios/{userId}" var="userdetails">
 													<spring:param name="userId" value="${meeting.meetingCreator.id}" />
 												</spring:url>
 												<a href="${fn:escapeXml(userdetails)}">
 								<c:out value="${meeting.meetingCreator.user.username}" /></a></td>
-							<td><spring:url
+							<c:if test="${meeting.participants != null && meeting.participants.contains(usuario_logueado)}">
+								<td><center><i class="fa fa-check-circle" style="color: green;"></center></i></td>
+							</c:if>
+							<c:if test="${ meeting.participants == null || meeting.participants.contains(usuario_logueado)!=true }">
+								<td><center><i class="fa fa-times-circle" style="color: red; text-align: center !important;"></center></i></td>
+							</c:if>
+							<td><center><spring:url
 									value="/sports/{deporte}/meetings/{meetingId}"
 									var="meeting2Url">
 									<spring:param name="meetingId" value="${meeting.id}" />
@@ -60,18 +70,19 @@
 								</spring:url>
 								<div class="botoncito">
 									<a href="${fn:escapeXml(meeting2Url)}">Ver más</a>
-								</div></td>
+								</div></center></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 
 			</table>
+		  </div>
 		</div>
 		<div class="cardbutton">
 			<spring:url value="/sports/{deporte}/meetings/add" var="dateUrl">
 				<spring:param name="deporte" value="${deporte}" />
 			</spring:url>
-			<div class="botoncitocrear">
+			<div class="botoncito-crear-meeting">
 				<a id="createMeeting" href="${fn:escapeXml(dateUrl)}">Crear
 					quedada</a>
 			</div>

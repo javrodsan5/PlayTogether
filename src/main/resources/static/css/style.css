@@ -2804,6 +2804,11 @@ body {
 		min-width: 33% !important;
 		flex: 33% !important;
 	}
+	
+	.list-meeting-championship-title {
+		font-size: 180%;
+		vertical-align: middle !important;
+	}
 }
 
 @media ( min-width : 37.5em) and (max-width: 59.4em) {
@@ -2812,6 +2817,13 @@ body {
 		min-width: 50% !important;
 		flex: 50% !important;
 	}
+	
+	.botoncito-crear-meeting {
+		margin-left: 42% !important;
+		margin-right: 42% !important;
+		font-size: 92%;
+	}
+	
 }
 
 @media ( min-width : 12.5em) and (max-width: 37.5em) {
@@ -2820,6 +2832,13 @@ body {
 		min-width: 100% !important;
 		flex: 100% !important;
 	}
+	
+	.botoncito-crear-meeting {
+		margin-left: 39% !important;
+		margin-right: 39% !important;
+		font-size: 90%;
+	}
+	
 }
 
 @media ( max-width : 768px) and (min-width: 12.5em) {
@@ -2836,11 +2855,23 @@ body {
 	.navbar-nav {
 		position: relative !important;
 	}
+	
+	.botoncito-crear-meeting {
+		margin-left: 37% !important;
+		margin-right: 37% !important;
+		font-size: 85%;
+	}
 }
 
 @media ( max-width : 692px) and (min-width: 510px) {
 	.promo-box-container .title {
 		font-size: 20px !important;
+	}
+	
+	.botoncito-crear-meeting {
+		margin-left: 36% !important;
+		margin-right: 36% !important;
+		font-size: 84%;
 	}
 }
 
@@ -2997,3 +3028,40 @@ body {
 	background-color: #fcfcfe;
 	background-image: url("/images/fondo_chat2.png");
 }
+
+.meeting-and-championship-list {
+	margin-left: 8% !important;
+	margin-right: 8% !important;
+	padding: 1rem;
+}
+
+.meeting-and-championship-list td {
+	vertical-align: middle !important;
+}
+
+.meeting-and-championship-list td .botoncito {
+	margin: 0;
+}
+
+.list-meeting-championship-title {
+	vertical-align: middle !important;
+	padding: 0 !important;
+}
+
+.botoncito-crear-meeting {
+	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	margin-left: 44%;
+	margin-right: 44%;
+	border-radius: 1rem;
+	padding-top: 1%;
+	background-color: #17a2b8;
+	padding-bottom: 1%;
+}
+
+.botoncito-crear-meeting a {
+	color: white;
+}
+
+
+

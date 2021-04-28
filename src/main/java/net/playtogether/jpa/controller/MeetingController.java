@@ -176,6 +176,7 @@ public class MeetingController {
 	@GetMapping("/sports/{sportId}/meetings")
 	public String listMeetings(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			Principal principal) {
+		Usuario u = this.usuarioService.usuarioLogueado(principal.getName());
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
 				.size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
@@ -186,6 +187,7 @@ public class MeetingController {
 		model.addAttribute("meetings", meetings);
 		model.addAttribute("deporte", sportId);
 		model.addAttribute("nombreDeporte", sport.getName());
+		model.addAttribute("usuario_logueado", u);
 		return "meetings/listMeeting";
 	}
 
