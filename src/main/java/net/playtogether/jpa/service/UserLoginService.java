@@ -28,9 +28,6 @@ public class UserLoginService implements UserDetailsService {
     private PayService payService;
     
     @Autowired
-    private AuthoritiesService authoritiesService;
-
-    @Autowired
     private UsuarioService usuarioService;
 
     @Autowired

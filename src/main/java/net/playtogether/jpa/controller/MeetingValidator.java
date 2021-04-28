@@ -1,6 +1,7 @@
 package net.playtogether.jpa.controller;
 
-import java.time.LocalDateTime; 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
@@ -20,6 +21,11 @@ public class MeetingValidator implements Validator {
 		String description = meeting.getDescription();
 		String address = meeting.getAddress();
 		LocalDateTime date = meeting.getDate();
+		LocalDateTime now =  LocalDateTime.now();
+		long diff=0;
+		if(date!=null) {
+			diff = ChronoUnit.MONTHS.between(now, date);
+		}
 
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
@@ -60,6 +66,9 @@ public class MeetingValidator implements Validator {
 		} else if (date.isBefore(LocalDateTime.now())) {
 			errors.rejectValue("date", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");
+		}else if(diff>6) {
+			errors.rejectValue("date", "Sólo se pueden establecer fechas en un rango inferior a 6 meses.",
+					"Sólo se pueden establecer fechas en un rango inferior a 6 meses.");
 		}
 	}
 

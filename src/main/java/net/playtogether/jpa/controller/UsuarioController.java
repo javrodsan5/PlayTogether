@@ -50,8 +50,7 @@ public class UsuarioController {
 
 	@GetMapping(value = "/registro")
 	public String initCreationForm(ModelMap model) {
-		Usuario usuario = new Usuario();
-		model.put("usuario", usuario);
+		model.put("usuario", new Usuario());
 		model.put("accept", false);
 		return "users/register";
 	}
@@ -185,7 +184,7 @@ public class UsuarioController {
 		} else {
 
 			BeanUtils.copyProperties(usuario, usuarioToUpdate, "id", "user.username", "meetings", "teams", "type",
-					"statistics", "payment", "puntos");
+					"statistics", "payment", "puntos", "description");
 			this.usuarioService.saveUsuario(usuarioToUpdate);
 			model.addAttribute("message", "¡Cuenta actualizada correctamente!");
 			return "redirect:/myprofile";
