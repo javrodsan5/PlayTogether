@@ -907,7 +907,7 @@ table {
 	border-radius: 1rem !important;
 }
 
-.table tr {
+.table tr, .table-clasification tr {
 	border: none !important;
 	border-style: hidden;
 	border-top: none !important;
@@ -922,7 +922,7 @@ th {
 	border-top: none !important;
 }
 
-.table td, .table th {
+.table td, .table th, .table-clasification td, .table-clasification th {
 	padding: .75rem;
 	vertical-align: top;
 	border-top: none !important;
@@ -931,6 +931,24 @@ th {
 
 .table-striped tbody tr {
 	border-radius: 1rem !important;
+}
+
+
+
+.table-clasification tbody tr:nth-child(1) {
+    font-size: 250%;
+}
+
+.table-clasification tbody tr:nth-child(2) {
+    font-size: 200%;
+}
+
+.table-clasification tbody tr:nth-child(3) {
+    font-size: 150%;
+}
+
+.table-clasification tbody tr:nth-child(n+4) {
+	font-size: 110%;
 }
 
 .auxcard {
@@ -2879,6 +2897,7 @@ body {
 	.promo-box-container .title {
 		font-size: 15px !important;
 	}
+	
 }
 
 :root { 

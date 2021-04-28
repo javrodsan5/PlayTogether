@@ -23,19 +23,34 @@
 			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la posición ${posicion}!</h2>
 		<div class="cardlist">
 		<center>
-			<table class="table" style="width:50%">
+			<div class="scroll_vertical" id="style_scroll" style="height: 100%;">
+			<table class="table-clasification" style="width:75%; text-align: center;">
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 30%;">Nombre</th>
-						<th class="guiz-awards-header-title" style="width: 30%;">Nombre
+						<th class="guiz-awards-header-title" style="width: 15%;">Posición</th>
+						<th class="guiz-awards-header-title" style="width: 25%;">Nombre</th>
+						<th class="guiz-awards-header-title" style="width: 25%;">Nombre
 							de usuario</th>
 						<th class="guiz-awards-header-title" style="width: 15%;">Puntos</th>
-						<th class="guiz-awards-header-title" style="width: 20%;"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${topUsuarios}" var="usuario">
+					<c:forEach items="${topUsuarios}" var="usuario" varStatus="numero">
 						<tr class="rowtable">
+							<td style="text-align: center;">
+								<c:if test="${numero.count == 1}">
+									<img style="max-height: 55%; max-width: 55%;" src="/images/goldMedal.png" alt="1" />
+								</c:if>
+								<c:if test="${numero.count == 2}">
+									<img style="max-height: 47%; max-width: 47%;" src="/images/silverMedal.png" alt="2" />
+								</c:if>
+								<c:if test="${numero.count == 3}">
+									<img style="max-height: 38%; max-width: 38%;" src="/images/bronzeMedal.png" alt="3" />
+								</c:if>
+								<c:if test="${numero.count > 3}">
+									<c:out value="${numero.count}" />
+								</c:if>	
+							</td>
 							<td><c:out value="${usuario.name}" /></td>
 							<td><spring:url value="/usuarios/{usuarioId}"
 									var="usuario2Url">
@@ -43,17 +58,11 @@
 								</spring:url> <a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
 										value="${usuario.user.username}" /></a></td>
 							<td><c:out value="${usuario.puntos}" /></td>
-							<c:if test="${usuario.id != userId}">
-								<td><button class="btn btn-success"
-									onclick="location.href='/chat/0/${usuario.user.username}';"
-									type="button">
-									Chat <i class="fa fa-weixin" aria-hidden="true"></i>
-								</button></td>
-							</c:if>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			</div>
 			</center>
 		</div>
 	</body>
