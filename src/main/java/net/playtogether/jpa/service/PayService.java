@@ -54,7 +54,7 @@ public class PayService {
     }
 
     @Transactional
-    public List<Pay> findLastNotFinishedPayForChampionshipByUsername(String username, Integer championshipId) {
+    public Pay findLastNotFinishedPayForChampionshipByUsername(String username, Integer championshipId) {
         return this.payRepository.findLastNotFinishedPayForChampionshipByUsername(username, championshipId);
     }
     

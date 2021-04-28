@@ -1,7 +1,9 @@
 package net.playtogether.jpa.controller;
 
 import java.security.Principal;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.paypal.api.payments.Links;
@@ -37,6 +39,7 @@ import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.PayTypeService;
 import net.playtogether.jpa.service.PaypalService;
+import net.playtogether.jpa.service.TeamService;
 import net.playtogether.jpa.service.UserLoginService;
 import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
@@ -77,6 +80,9 @@ public class PaypalController {
 	public static final String SUCCESS_URL = "pay/success";
 	public static final String CANCEL_URL = "pay/cancel";
 
+	private final String messageTime = "Una vez que inicie el pago, si no se finaliza en 5 minutos, este se cancelará.";
+	private final Integer minutesToFinishPay = 1;
+
 	@GetMapping("/pay/championship/{championshipId}/team/{teamId}")
 	public String formPaymentJoinTeam(ModelMap model, Principal principal,
 			@PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId,
@@ -98,6 +104,7 @@ public class PaypalController {
 		model.addAttribute("teamId", teamId);
 		model.addAttribute("newChampionship", false);
 		model.addAttribute("teamName", teamName);
+		model.addAttribute("timeToDelete", messageTime);
 		if (invitationId != null) {
 			Invitation invitation = this.invitationService.findById(invitationId);
 			if (invitation == null) {
@@ -134,6 +141,7 @@ public class PaypalController {
 		model.addAttribute("newTeam", true);
 		model.addAttribute("teamName", teamName);
 		model.addAttribute("newChampionship", false);
+		model.addAttribute("timeToDelete", messageTime);
 
 		return "pay/createPaymentForm";
 	}
@@ -155,6 +163,7 @@ public class PaypalController {
 		model.addAttribute("payCham", true);
 		model.addAttribute("championshipId", championship.getId());
 		model.addAttribute("newChampionship", true);
+		model.addAttribute("timeToDelete", messageTime);
 		Pay pay = new Pay();
 		pay.setUser(this.usuarioService.findByUsername(principal.getName()));
 		pay.setChampionship(championship);
@@ -189,6 +198,7 @@ public class PaypalController {
 		model.addAttribute("order", order);
 		model.addAttribute("premium", true);
 		model.addAttribute("newChampionship", false);
+		model.addAttribute("timeToDelete", messageTime);
 
 		return "pay/createPaymentForm";
 	}
@@ -244,6 +254,7 @@ public class PaypalController {
 					pay.setPayType(payType);
 					Usuario usuario = usuarioService.findByUsername(principal.getName());
 					pay.setUser(usuario);
+					pay.setInitDate(LocalDateTime.now());
 					this.payService.save(pay);
 					return "redirect:" + link.getHref();
 				}
@@ -269,11 +280,14 @@ public class PaypalController {
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Pay pay = this.payService.findLastPayByUsername(principal.getName());
+		if(Duration.between(pay.getInitDate(), LocalDateTime.now()).getSeconds() / 60 >= minutesToFinishPay) {
+			return "pay/cancel";
+		}
 		try {
 			Payment payment = service.executePayment(paymentId, payerId);
 			System.out.println(payment.toJSON());
 			if (payment.getState().equals("approved")) {
-				Pay pay = this.payService.findLastPayByUsername(principal.getName());
 				pay.setDate(LocalDate.now());
 				payService.save(pay);
 				if (pay.getPayType().getName().equals("Premium")) {

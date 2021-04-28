@@ -26,6 +26,7 @@
 			</center>
 
 		</c:if>
+		<center><h3 class="text-warning">${timeToDelete}</h3></center>
 	</div>
 
 	<br>

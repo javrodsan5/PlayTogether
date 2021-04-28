@@ -86,6 +86,11 @@
                             Fecha de nacimiento
                         </p>
                     </li>
+                    <li type="disc">
+                        <p style="text-align: justify; text-justify: inter-word">
+                            Nombre de usuario (identificador indirecto)
+                        </p>
+                    </li>
                 </ul>
             </p>
             <br>
@@ -144,9 +149,10 @@
                 El usuario perteneciente al sistema tiene derecho a solicitar la rectificación de alguno de los datos aportados a este, así como la reclamación de algún 
                 uso no contemplado en el actual documento de estos datos personales o, como ya ha sido mencionado, ejercer su derecho al olvido.<br><br>
 
-                Para cualquier tipo de reclamación, se debe poner en contacto con el equipo de administración del sistema a partir de la dirección de correo 
-                playtogetherispp@gmail.com, enviando un correo detallando la información sobre la que reclama, así como lo que desea que se haga con ella. 
-                Para identificar al usuario, deberá indicar su nombre completo, su nombre de usuario y una fotografía de su DNI, que permita identificar al usuario reclamador.
+                Para cualquier tipo de reclamación, se debe poner en contacto con el equipo de administración del sistema a partir de la dirección de correo playtogetherispp@gmail.com, 
+                enviando un correo detallando la información sobre la que reclama, así como lo que desea que se haga con ella, o a través del botón habilitado para ello en la sección 
+                del perfil del usuario. Para identificar al usuario, deberá indicar su nombre completo, su nombre de usuario y una fotografía de su DNI, que permita identificar al usuario 
+                reclamador.
             </p><br><br>
 
             <h3>Pagos en el sistema</h3><br><br>
@@ -244,8 +250,6 @@
             </p><br>
 
             <p style="text-align: justify; text-justify: inter-word">
-                La web del sitio cuenta con un cifrado SSL que permite al usuario el envío seguro de sus datos personales a través de formularios.<br><br>
-
                 Los datos personales recogidos serán objeto de tratamiento automatizado e incorporados a los correspondientes ficheros del registro de actividad 
                 y de los que PlayTogether es titular.<br><br>
 

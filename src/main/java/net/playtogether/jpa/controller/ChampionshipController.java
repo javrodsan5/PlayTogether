@@ -1,8 +1,10 @@
 package net.playtogether.jpa.controller;
 
 import java.security.Principal;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -73,6 +75,8 @@ public class ChampionshipController {
 
 	private List<Usuario> users;
 
+	private final Integer minutesToFinishPay = 1;
+
 	@InitBinder("championship")
 	public void initChampionshipBinder(final WebDataBinder dataBinder) {
 		dataBinder.setValidator(new ChampionshipValidator());
@@ -140,18 +144,32 @@ public class ChampionshipController {
 		List<Championship> championships = new ArrayList<>(this.championshipService.listChampionshipsBySport(sportId));
 		Sport sport = this.sportService.findSportById(sportId);
 		List<Championship> championshipsToRemove = new ArrayList<>();
+		List<Championship> championshipsToDelete = new ArrayList<>();
 
 		for (Championship c : championships) {
 			Pay pay = this.payService.findLastFinishedPayForChampionshipByUsername(c.getUser().getUser().getUsername(),
 					c.getId());
 			if (pay == null && !c.getUser().getUser().getAuthorities().stream()
 					.anyMatch(x -> x.getAuthority().equals("premium"))) {
-				this.payService.deleteAll(this.payService.findLastNotFinishedPayForChampionshipByUsername(
-						c.getUser().getUser().getUsername(), c.getId()));
+				Pay incompleto = this.payService.findLastNotFinishedPayForChampionshipByUsername(
+					c.getUser().getUser().getUsername(), c.getId());
+
+				if(incompleto.getInitDate() == null) {
+					incompleto.setInitDate(LocalDateTime.now().minusHours(1L));
+				}
+
+				if (incompleto != null) {
+					if(Duration.between(incompleto.getInitDate(), LocalDateTime.now()).getSeconds() / 60 >= minutesToFinishPay) {
+						championshipsToDelete.add(c);
+						incompleto.setChampionship(null);
+						incompleto.setTeam(null);
+						this.payService.save(incompleto);
+					}
+				}
 				championshipsToRemove.add(c);
 			}
 		}
-		this.championshipService.deleteAll(championshipsToRemove);
+		this.championshipService.deleteAll(championshipsToDelete);
 		championships.removeAll(championshipsToRemove);
 
 		if (sport.getSportType().getName().equals("Equipo")) {
@@ -174,29 +192,33 @@ public class ChampionshipController {
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		List<Team> teams = this.championshipService.findTeamsByChampionshipId(championshipId);
 		List<Team> teamsToRemove = new ArrayList<>();
+		List<Team> teamsToDelete = new ArrayList<>();
 		Usuario user = this.userService.findByUsername(principal.getName());
-		if (!championship.getUser().equals(user)) {
-			for (Team t : teams) {
-				if (!t.getUser().equals(championship.getUser())) {
+		for (Team t : teams) {
+			if (!t.getUser().equals(championship.getUser())) {
 
-					Pay pay = this.payService.findLastFinishedPayForTeamByUsername(t.getUser().getUser().getUsername(),
-							t.getId());
-					if (pay == null && !t.getUser().getUser().getAuthorities().stream()
-							.anyMatch(x -> x.getAuthority().equals("premium"))) {
-						Pay incompleto = this.payService.findLastNotFinishedPayForTeamByUsername(
-								t.getUser().getUser().getUsername(), t.getId());
+				Pay pay = this.payService.findLastFinishedPayForTeamByUsername(t.getUser().getUser().getUsername(),
+						t.getId());
+				if (pay == null && !t.getUser().getUser().getAuthorities().stream()
+						.anyMatch(x -> x.getAuthority().equals("premium"))) {
+					Pay incompleto = this.payService.findLastNotFinishedPayForTeamByUsername(
+							t.getUser().getUser().getUsername(), t.getId());
 
-						if (incompleto != null) {
-							this.payService.delete(incompleto);
+					if (incompleto != null) {
+						if(Duration.between(incompleto.getInitDate(), LocalDateTime.now()).getSeconds() / 60 >= minutesToFinishPay) {
+							teamsToDelete.add(t);
+							incompleto.setChampionship(null);
+							incompleto.setTeam(null);
+							this.payService.save(incompleto);
 						}
-
-						teamsToRemove.add(t);
 					}
+
+					teamsToRemove.add(t);
 				}
 			}
 		}
 
-		this.teamService.deleteAll(teamsToRemove);
+		this.teamService.deleteAll(teamsToDelete);
 		teams.removeAll(teamsToRemove);
 		model.addAttribute("championship", championship);
 		Boolean b1 = true;
@@ -219,8 +241,9 @@ public class ChampionshipController {
 		}
 		model.addAttribute("crearEquipo", b1);
 		model.addAttribute("participarEquipo", b2);
-		model.addAttribute("hayEquipos", championship.getTeams().size()>0);
+		model.addAttribute("hayEquipos", teams.size()>0);
 		model.addAttribute("logged_user", user);
+		model.addAttribute("numTeams", teams.size());
 		
 		if (user.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
 			model.put("premium", true);

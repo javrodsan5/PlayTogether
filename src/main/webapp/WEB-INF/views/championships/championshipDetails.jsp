@@ -58,7 +58,7 @@
 		<h3 class="espacioIzqMovil">
 			Nº equipos inscritos:
 			<c:out
-				value="${championship.teams.size()} / ${championship.maxTeams}" />
+				value="${numTeams} / ${championship.maxTeams}" />
 		</h3>
 		<h3 class="espacioIzqMovil">
 			<c:out
