@@ -154,6 +154,14 @@
 				</c:forEach>
 			</table>
 		</div>
+		<br>
+			<div class="form-group">
+		<button class="botonTorneos"
+			onclick="location.href='/sports/${championship.sport.id}/championships/${championship.id}';"
+			type="button">
+			<b>Volver al torneo</b>
+		</button>
+	</div>
 	</body>
 
 </playtogether:layout>

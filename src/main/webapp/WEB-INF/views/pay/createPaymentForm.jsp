@@ -5,6 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <playtogether:layout pageName="championships" invitaciones="${invitaciones}">
 
@@ -158,6 +159,13 @@
 						</div>
 					</div>
 				</form:form>
+			</div>
+		</div>
+				<div class="cardbutton" style="padding-top:10px;">
+			<spring:url value="/sports" var="dateUrl">
+			</spring:url>
+			<div class="botoncito-crear-meeting">
+				<a id="createMeeting" href="${fn:escapeXml(dateUrl)}">Volver a la lista</a>
 			</div>
 		</div>
 	</center>
