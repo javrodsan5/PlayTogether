@@ -34,7 +34,6 @@
 					<tr class="rowtable">
 						<th class="guiz-awards-header-title" style="width: 18%;">Dirección</th>
 						<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
 						<th class="guiz-awards-header-title" style="width: 17%;">Fecha</th>
 						<th class="guiz-awards-header-title" style="width: 9%;">Participantes</th>
 						<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
@@ -47,7 +46,6 @@
 						<tr class="rowtable">
 							<td><c:out value="${meeting.address}" /></td>
 							<td><c:out value="${meeting.city}" /></td>
-							<td><c:out value="${meeting.description}" /></td>
 							<td><fmt:parseDate value="${meeting.date }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
          			 			<fmt:formatDate value = "${parsedDateTime}" pattern = "dd-MM-yyyy HH:mm"  /></td>
 							<td><center><c:out value="${meeting.participants.size()}/${meeting.numberOfPlayers}" /></center></td>
