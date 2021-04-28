@@ -1,9 +1,8 @@
 
 package net.playtogether.jpa.controller;
 
-import java.security.Principal;
+import java.security.Principal; 
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -212,8 +211,12 @@ public class MeetingController {
 				model.put("puedeEliminar", true);
 			}
 		}
-		if (!meeting.getParticipants().contains(u)) {
+		if (!usuarios.contains(u)) {
 			b = false;
+			
+		} else {
+			model.put("leave", true);
+
 		}
 		model.addAttribute("sport", meeting.getSport());
 		if (meeting.getNumberOfPlayers() <= meeting.getParticipants().size()) {
@@ -223,17 +226,13 @@ public class MeetingController {
 			estaLlena = true;
 			b = true;
 		}
-		
+
 		model.addAttribute("existe", b);
 		model.addAttribute("estaLlena", estaLlena);
 		model.addAttribute("logged_user", u);
 		model.addAttribute("hayParticipantes", meeting.getParticipants().size() > 0);
 		model.addAttribute("chatId", this.chatService.findChatIdByMeetingId(meetingId));
 		model.addAttribute("userId", u.getId());
-
-		if (usuarios.stream().anyMatch(x -> u.equals(x))) {
-			model.put("leave", true);
-		}
 
 		return "meetings/meetingDetails";
 	}
@@ -326,7 +325,7 @@ public class MeetingController {
 		Usuario deletedUser = this.userService.findUserById(userId);
 
 		model.addAttribute("meeting", meeting);
-		if (usuarios.stream().anyMatch(u -> usuario.equals(u))) {
+		if (usuarios.contains(usuario)) {
 			model.put("leave", true);
 		}
 

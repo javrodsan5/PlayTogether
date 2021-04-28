@@ -3063,5 +3063,6 @@ body {
 	color: white;
 }
 
-
-
+.alert{
+	margin: 20%;
+}
