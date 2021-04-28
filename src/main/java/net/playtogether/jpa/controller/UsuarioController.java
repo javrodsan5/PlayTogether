@@ -50,8 +50,7 @@ public class UsuarioController {
 
 	@GetMapping(value = "/registro")
 	public String initCreationForm(ModelMap model) {
-		Usuario usuario = new Usuario();
-		model.put("usuario", usuario);
+		model.put("usuario", new Usuario());
 		model.put("accept", false);
 		return "users/register";
 	}

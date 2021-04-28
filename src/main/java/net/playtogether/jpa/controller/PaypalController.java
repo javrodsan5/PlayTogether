@@ -1,8 +1,7 @@
 package net.playtogether.jpa.controller;
 
-import java.security.Principal;
+import java.security.Principal; 
 import java.time.LocalDate;
-import java.util.List;
 
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -28,7 +27,6 @@ import net.playtogether.jpa.entity.Order;
 import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.PayType;
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.AuthoritiesService;
 import net.playtogether.jpa.service.ChampionshipService;
@@ -37,7 +35,6 @@ import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.PayTypeService;
 import net.playtogether.jpa.service.PaypalService;
-import net.playtogether.jpa.service.UserLoginService;
 import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
 
@@ -68,8 +65,6 @@ public class PaypalController {
 	@Autowired
 	private UserTypeService userTypeService;
 
-	@Autowired
-	private UserLoginService userLoginService;
 
 	@Autowired
 	private ChatService chatService;
