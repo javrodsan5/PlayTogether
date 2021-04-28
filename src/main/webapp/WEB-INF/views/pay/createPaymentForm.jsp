@@ -27,6 +27,13 @@
 			</center>
 
 		</c:if>
+		<br>
+		<center><h1 class="text-danger">¡ATENCIÓN! </h1><h3 class="text-danger">${timeToDelete}</h3>
+			<c:if test="${newTeam == true}">
+				<br>
+				<h3 class="text-danger">Tampoco podrá crear otro equipo en el torneo ${championshipName} durante dicho periodo.</h3>
+			</c:if>
+		</center>
 	</div>
 
 	<br>

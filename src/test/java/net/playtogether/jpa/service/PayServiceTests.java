@@ -116,9 +116,9 @@ public class PayServiceTests {
 			 Usuario usuario = this.usuarioService.findUserById(3);
 			 Championship ch = this.championshipService.findChampionshipId(7);
 
-			 List<Pay> p = this.payService.findLastNotFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), ch.getId());
+			 Pay p = this.payService.findLastNotFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), ch.getId());
 			 
-			 assertThat(p.size()).isEqualTo(1);
+			 assertThat(p).isNotNull();
 		 }
 		 
 	//Find last NOT finished pay for team by username
@@ -127,9 +127,9 @@ public class PayServiceTests {
 			 Usuario usuario = this.usuarioService.findUserById(3);
 			 Team t = this.teamService.findTeamById(7);
 
-			 List<Pay> p = this.payService.findLastNotFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), t.getId());
+			 Pay p = this.payService.findLastNotFinishedPayForChampionshipByUsername(usuario.getUser().getUsername(), t.getId());
 			 
-			 assertThat(p.size()).isEqualTo(1);
+			 assertThat(p).isNotNull();
 		 }
 
 		 

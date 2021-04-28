@@ -1,6 +1,7 @@
 package net.playtogether.jpa.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,10 @@ public class Pay extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
     @Column(name = "date")
     private LocalDate date;
+
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:SS")
+    @Column(name = "init_date")
+    private LocalDateTime initDate;
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "championship_id")

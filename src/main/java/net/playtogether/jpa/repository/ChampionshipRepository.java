@@ -16,7 +16,7 @@ public interface ChampionshipRepository extends CrudRepository<Championship, Int
 
 	Collection<Championship> findAll();
 
-	@Query("SELECT lm FROM Championship lm WHERE lm.sport.id = ?1")
+	@Query("SELECT lm FROM Championship lm WHERE lm.sport.id = ?1 AND lm.finishDate >= CURRENT_TIMESTAMP ORDER BY lm.startDate")
 	Collection<Championship> listChampionshipsBySport(int sportId);
 	
 	@Query("Select t.participants From Team t where t.championship.id = ?1 ")
