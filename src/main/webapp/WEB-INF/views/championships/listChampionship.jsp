@@ -20,36 +20,20 @@
       <div class="scroll_vertical" id="style_scroll" style="height: 500px;">
 			<table id="championshipTable" class="table ">
 				<thead>
-					<tr class="rowtable">
+					<tr class="rowtable" >
 						<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Dirección</th>
 						<th class="guiz-awards-header-title" style="width: 10%;">Fecha
 							Inicio</th>
 						<th class="guiz-awards-header-title" style="width: 10%;">Fecha
 							Fin</th>
-						<th class="guiz-awards-header-title" style="width: 5%;">Equipos
+						<th class="guiz-awards-header-title" style="width: 11%; text-align: center;">Equipos
 							inscritos</th>
-						<th class="guiz-awards-header-title" style="width: 10%;">Creador</th>
-						<th class="guiz-awards-header-title" style="width: 20 !important%"></th>
+						<th class="guiz-awards-header-title" style="width: 10%; text-align: center;">Creador</th>
+						<th class="guiz-awards-header-title" style="width: 10%; text-align: center;">Participando</th>
+						<th class="guiz-awards-header-title" style="width: 8%; text-align: center;"></th>
 					</tr>
 				</thead>
-				<tbody>
-					<c:forEach items="${championships}" var="championship">
-						<tr class="rowtable">
-							<th class="guiz-awards-header-title" style="width: 15%;">Ciudad</th>
-							<th class="guiz-awards-header-title" style="width: 25%;">Dirección</th>
-							<th class="guiz-awards-header-title" style="width: 15%;">Fecha
-								Inicio</th>
-							<th class="guiz-awards-header-title" style="width: 15%;">Fecha
-								Fin</th>
-							<th class="guiz-awards-header-title" style="width: 5%;">Equipos
-								inscritos</th>
-							<th class="guiz-awards-header-title" style="width: 10%;">Creador</th>
-							<th class="guiz-awards-header-title" style="width: 5%;">Participación</th>
-							<th class="guiz-awards-header-title" style="width: 20% !important"></th>
-						</tr>
-					</thead>
 					<tbody>
 						<c:forEach items="${championships}" var="championship">
 							<tr class="rowtable">
@@ -66,21 +50,22 @@
 										<c:out
 											value="${championship.teams.size()} / ${championship.maxTeams}" />
 									</center></td>
-								<td><spring:url value="/usuarios/{userId}" var="userdetails">
+								<td><center><spring:url value="/usuarios/{userId}" var="userdetails">
 										<spring:param name="userId" value="${championship.user.id}" />
 									</spring:url> <a href="${fn:escapeXml(userdetails)}"> <c:out
-											value="${championship.user.user.username}" /></a></td>							
-								<td>
+											value="${championship.user.user.username}" /></a></center></td>							
+								<td style="text-align: center !important;">
 									<c:set var = "isInTeam" value = "${false}"/>
 									<c:forEach items="${championship.teams}" var="equiposLoggeado">			
 										<c:if test="${!isInTeam && equiposLoggeado != null && equiposLoggeado.participants != null}">
-											<c:set var = "isInTeam" value = "${equiposLoggeado.participants.contains(usuario_logueado)}"/>																			</c:if>						
+											<c:set var = "isInTeam" value = "${equiposLoggeado.participants.contains(usuario_logueado)}"/>	
+										</c:if>																		
 									</c:forEach>
 									<c:if test="${isInTeam}">
-										<center><i class="fa fa-check-circle" style="color: green;"></center></i>
+										<i class="fa fa-check-circle" style="color: green;">
 									</c:if>
 									<c:if test="${!isInTeam}">
-										<center><i class="fa fa-times-circle" style="color: red; text-align: center !important;"></center></i>
+										<i class="fa fa-times-circle" style="color: red;">
 									</c:if>
 								</td>
 								<td><spring:url
