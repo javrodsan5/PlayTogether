@@ -86,7 +86,6 @@
 					<div class="drop__container" id="drop-items">
 						<div class="scroll_vertical" id="style_scroll">
 							<c:forEach items="${meeting.participants}" var="participant">
-								<center>
 									<div class="drop__card">
 										<div class="drop__data">
 											<div>
@@ -94,11 +93,14 @@
 													<spring:url value="/usuarios/{userId}" var="userdetails">
 														<spring:param name="userId" value="${participant.id}" />
 													</spring:url>
-													<a href="${fn:escapeXml(userdetails)}"><span
-														class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
-														
-													<h5>${participant.puntos} ptos / ${participant.edadUsuario()} años</h5>
-													
+													<div style="display: flex">
+														<a href="${fn:escapeXml(userdetails)}"><span
+															class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}
+														</span></a> <a
+															style="margin-left: 20px; font-size: 25px; align-self: center">
+															${participant.edadUsuario()} años</a>
+													</div>
+
 
 													<c:if test="${puedeEliminar == true}">
 														<c:if test="${participant.id!=meeting.meetingCreator.id}">
@@ -115,18 +117,10 @@
 																class="fa fa-trash" style="color: red"></i></a>
 														</c:if>
 													</c:if>
-													<c:if test="${participant.id != userId}">
-														<button class="btn btn-success"
-															onclick="location.href='/chat/0/${participant.user.username}';"
-															type="button">
-															Chat <i class="fa fa-weixin" aria-hidden="true"></i>
-														</button>
-													</c:if>
 												</h2>
 											</div>
 										</div>
 									</div>
-								</center>
 							</c:forEach>
 						</div>
 					</div>

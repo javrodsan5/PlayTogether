@@ -7,6 +7,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <playtogether:layout pageName="users" invitaciones="${invitaciones}">
 
@@ -41,14 +43,15 @@
 
 				<h2>
 					Lista de componentes del equipo (Nº participantes:
-					<c:out value="${team.participants.size()}" />
-					)
+					<c:out value="${team.participants.size()} / ${team.teamSize} jugadores" />)
 				</h2>
 				<thead>
 					<tr class="rowtable">
 						<th class="guiz-awards-header-title" style="width: 10%;">Nombre</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Nombre de usuario</th>
+						<sec:authorize access="hasAuthority('premium')">
 						<th class="guiz-awards-header-title" style="width: 10%;">Puntos</th>
+						</sec:authorize>
 						<th class="guiz-awards-header-title" style="width: 10%;">Edad (años)</th>
 						<th class="guiz-awards-header-title" style="width: 20%;">Detalles del jugador</th>
 							

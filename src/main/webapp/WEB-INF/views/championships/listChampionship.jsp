@@ -11,12 +11,14 @@
 <playtogether:layout pageName="championships"
 	invitaciones="${invitaciones}">
 	<body>
-		<div class="cardtitle">
-			<h1>
-				<strong>Torneos de ${nombreDeporte}</strong>
-			</h1>
-			<br />
-		</div>
+		<center>
+			<div class="cardtitle">
+				<h1>
+					<strong>Torneos de ${nombreDeporte}</strong>
+				</h1>
+				<br />
+			</div>
+		</center>
 		<div class="cardlist">
 			<table id="championshipTable" class="table ">
 				<thead>

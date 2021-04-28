@@ -110,6 +110,7 @@
 										<a style="font-size: 17px"
 											href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
 									</c:if>
+									<h5>${team.participants.size()} / ${team.teamSize} jugadores</h5>
 								</div>
 							</div>
 						</div>
