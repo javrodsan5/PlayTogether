@@ -75,7 +75,7 @@ public class ChampionshipController {
 
 	private List<Usuario> users;
 
-	private final Integer minutesToFinishPay = 1;
+	private final Integer minutesToFinishPay = 5;
 
 	@InitBinder("championship")
 	public void initChampionshipBinder(final WebDataBinder dataBinder) {

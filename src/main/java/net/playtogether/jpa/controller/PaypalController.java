@@ -80,8 +80,8 @@ public class PaypalController {
 	public static final String SUCCESS_URL = "pay/success";
 	public static final String CANCEL_URL = "pay/cancel";
 
-	private final String messageTime = "Una vez que inicie el pago, si no se finaliza en 5 minutos, este se cancelará.";
-	private final Integer minutesToFinishPay = 1;
+	private final String messageTime = "Una vez que inicie el pago, si no se finaliza en 5 minutos, este se cancelará. ¡OJO! Si sale no podrá acceder de nuevo.";
+	private final Integer minutesToFinishPay = 5;
 
 	@GetMapping("/pay/championship/{championshipId}/team/{teamId}")
 	public String formPaymentJoinTeam(ModelMap model, Principal principal,
@@ -142,6 +142,7 @@ public class PaypalController {
 		model.addAttribute("teamName", teamName);
 		model.addAttribute("newChampionship", false);
 		model.addAttribute("timeToDelete", messageTime);
+		model.addAttribute("championshipName", championship.getName());
 
 		return "pay/createPaymentForm";
 	}
@@ -282,7 +283,9 @@ public class PaypalController {
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
 		Pay pay = this.payService.findLastPayByUsername(principal.getName());
 		if(Duration.between(pay.getInitDate(), LocalDateTime.now()).getSeconds() / 60 >= minutesToFinishPay) {
-			return "pay/cancel";
+			ModelMap m = new ModelMap();
+			model.addAttribute("timeOut", "El tiempo se ha agotado.");
+			return this.cancelPay(m, principal);
 		}
 		try {
 			Payment payment = service.executePayment(paymentId, payerId);
