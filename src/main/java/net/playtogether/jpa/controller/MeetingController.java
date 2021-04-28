@@ -5,8 +5,6 @@ import java.security.Principal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -15,10 +13,10 @@ import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -189,6 +187,7 @@ public class MeetingController {
 		return "meetings/listMeeting";
 	}
 
+	@CachePut(value = "meeting")
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}")
 	public String meetingDetails(final ModelMap model, @PathVariable("meetingId") final Integer meetingId,
 			final Principal principal) {

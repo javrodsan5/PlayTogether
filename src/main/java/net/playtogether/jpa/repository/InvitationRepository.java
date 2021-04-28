@@ -1,6 +1,7 @@
 package net.playtogether.jpa.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -42,5 +43,9 @@ public interface InvitationRepository extends CrudRepository<Invitation, Integer
 
 	@Query("SELECT i FROM Invitation i WHERE (i.team.id IS NOT NULL AND i.team.user.user.username = ?1)")
 	Collection<Invitation> findMyChampionshipInvitations(String username);
+	
+	@Query("SELECT i FROM Invitation i WHERE i.receiver.user.username = ?1 AND i.team.championship.finishDate >= CURRENT_TIMESTAMP")
+	List<Invitation> listInvitationsNotFinishedChamp(String username);
+	
 	
 }

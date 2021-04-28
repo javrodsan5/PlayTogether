@@ -3,6 +3,7 @@ package net.playtogether.jpa.controller;
 import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +27,7 @@ public class SportController {
 	@Autowired
 	InvitationService invitationService;
 	
-	
+	@CachePut(value="sports")
 	@GetMapping("/sports")
 	public String listSports(ModelMap model,Principal principal) {
 		if(principal!=null) {

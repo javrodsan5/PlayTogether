@@ -1,10 +1,10 @@
 package net.playtogether.jpa.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -85,5 +85,10 @@ public class InvitationService {
 	@Transactional(readOnly = true)
 	public Collection<Invitation> findMyChampionshipInvitations(String username) {
 		return this.invitationRepository.findMyChampionshipInvitations(username);
+	}
+	
+	@Transactional(readOnly = true)
+	public List<Invitation> listInvitationsNotFinishedChamp(String username) {
+		return this.invitationRepository.listInvitationsNotFinishedChamp(username);
 	}
 }

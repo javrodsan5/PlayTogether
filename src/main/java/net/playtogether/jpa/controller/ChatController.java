@@ -41,9 +41,8 @@ public class ChatController {
 	@GetMapping(value = "/chats")
 	public String listPrivateChats(ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
-		List<Chat> chats = this.chatService.findMyPrivateChats(usuario.getId());
 
-		model.addAttribute("chats", chats);
+		model.addAttribute("chats", this.chatService.findMyPrivateChats(usuario.getId()));
 		model.addAttribute("principalUsername", principal.getName());
 
 		if(principal!=null) {
