@@ -34,6 +34,7 @@
 
 			</div>
 			<h2>
+				<b>Creador:</b> <c:out value="${championship.user}" /><br>
 				<fmt:parseDate value="${championship.startDate }"
 					pattern="yyyy-MM-dd" var="parsedDateStart" type="both" />
 				<b>Inicio:</b>
@@ -46,6 +47,7 @@
 				<fmt:formatDate value="${parsedDateEnd}" pattern="dd-MM-yyyy" />
 				<br><br>
 				<b>Dirección:</b> <c:out value="${championship.address}" />
+		
 			</h2>
 			<p class="summary">
 				<c:out value="${championship.description}" />
@@ -110,6 +112,7 @@
 										<a style="font-size: 17px"
 											href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
 									</c:if>
+									<h5>${team.participants.size()} / ${team.teamSize} jugadores</h5>
 								</div>
 							</div>
 						</div>

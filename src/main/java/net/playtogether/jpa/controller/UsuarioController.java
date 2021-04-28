@@ -184,7 +184,7 @@ public class UsuarioController {
 		} else {
 
 			BeanUtils.copyProperties(usuario, usuarioToUpdate, "id", "user.username", "meetings", "teams", "type",
-					"statistics", "payment", "puntos");
+					"statistics", "payment", "puntos", "description");
 			this.usuarioService.saveUsuario(usuarioToUpdate);
 			model.addAttribute("message", "¡Cuenta actualizada correctamente!");
 			return "redirect:/myprofile";

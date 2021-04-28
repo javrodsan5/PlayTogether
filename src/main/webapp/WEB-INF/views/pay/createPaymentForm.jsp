@@ -95,7 +95,7 @@
 					<div class="rowWIV">
 						<div class="columnWIV light blank end">&nbsp;</div>
 						<div class="columnWIV light col-title">
-							<p>Invitar usuarios a tu quedada</p>
+							<p>Invitar usuarios a tu equipo o quedada</p>
 						</div>
 						<div class="columnWIV light blank">
 							<i class="fa fa-times cancel"></i>

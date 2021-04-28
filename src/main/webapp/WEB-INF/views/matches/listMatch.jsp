@@ -1849,132 +1849,121 @@
 
 		<br>
 		<br>
+
 		<div class="cardlist" align="center" style="margin-top: 5%">
-			<c:if test="${championshipObj.matches.size() > 0 }">
+		<center>
+    <c:if test="${championshipObj.matches.size() > 0 }">
+		<h2 class="alert alert-info"
+			style="text-align: center;font-size: 20px;width: 90%;"> <i class="fa fa-info-circle"></i> Para que el resultado del partido se considere válido,
+			 deben coincidir los resultados aportados por cada equipo</h2></center>
 
-				<div class="scroll_vertical" id="style_scroll">
+      <div class="scroll_vertical" id="style_scroll">
+			<table id="matchTable" class="table">
+				<thead style="text-align: center">
+					<tr class="rowtable">
+						<th style="width: 15%;">Fecha y hora</th>
+						<th style="width: 20%;">Equipo local</th>
+						<th style="width: 15%;">Resultado (Según equipo local)</th>
+						<th style="width: 20%;">Equipo visitante</th>
+						<th style="width: 20%;">Resultado (Según equipo
+							visitante)</th>
+						<th style="width: 5%;">Añadir/editar fecha</th>
+						<th style="width: 5%;">Añadir/editar resultado</th>
+					</tr>
+				</thead>
 
-					<table id="matchTable" class="table ">
-						<thead style="text-align: center">
-							<tr class="rowtable">
-								<th class="guiz-awards-header-title" style="width: 15%;">Fecha
-									y hora</th>
-								<th class="guiz-awards-header-title" style="width: 20%;">Equipo
-									local</th>
-								<th class="guiz-awards-header-title" style="width: 15%;">Resultado
-									(Según equipo local)</th>
-								<th class="guiz-awards-header-title" style="width: 20%;">Equipo
-									visitante</th>
-								<th class="guiz-awards-header-title" style="width: 20%;">Resultado
-									(Según equipo visitante)</th>
-								<th class="guiz-awards-header-title" style="width: 5%;">Añadir/editar
-									fecha</th>
-								<th class="guiz-awards-header-title" style="width: 5%;">Añadir/editar
-									resultado</th>
-							</tr>
-						</thead>
+				<tbody style="text-align: center">
+					<c:forEach items="${matches}" var="match">
+						<tr class="rowtable">
+						
+							<td><fmt:parseDate value="${match.dateTime }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+         			 <fmt:formatDate value = "${parsedDateTime}" pattern = "dd-MM-yyyy HH:mm"  /></td>
+							<td><c:out value="${match.team1.name}" /></td>
+							<td><c:out value="${match.puntos1} - ${match.puntos2}" /></td>
+							<td><c:out value="${match.team2.name}" /></td>
+							<td><c:out value="${match.puntos3} - ${match.puntos4}" /></td>
 
-						<tbody style="text-align: center">
-							<c:forEach items="${matches}" var="match">
-								<tr class="rowtable">
+							<td><c:if test="${match.dateTime == null}">
+									<c:if
+										test="${match.team1.participants.contains(usuarioLog) || match.team2.participants.contains(usuarioLog)}">
+										<c:if test="${match.ronda==rondaActual}">
+											<spring:url
+												value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
+												var="date2Url">
+												<spring:param name="championshipId" value="${championship}" />
+												<spring:param name="deporte" value="${deporte}" />
+												<spring:param name="matchId" value="${match.id}" />
+											</spring:url>
+											<div class="botoncitores1">
+												<a href="${fn:escapeXml(date2Url)}"><i
+													style="font-size: 33px" class="fa fa-plus-circle"
+													aria-hidden="true"></i></a>
+											</div>
+										</c:if>
+									</c:if>
+								</c:if> <c:if test="${match.dateTime != null }">
+									<c:if
+										test="${match.team1.participants.contains(usuarioLog) || match.team2.participants.contains(usuarioLog)}">
+										<c:if test="${match.ronda==rondaActual}">
+											<spring:url
+												value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
+												var="date2Url">
+												<spring:param name="championshipId" value="${championship}" />
+												<spring:param name="deporte" value="${deporte}" />
+												<spring:param name="matchId" value="${match.id}" />
+											</spring:url>
+											<div class="botoncitores1">
+												<a href="${fn:escapeXml(date2Url)}"><i
+													style="font-size: 33px" class="fa fa-pencil-square"
+													aria-hidden="true"></i></a>
+											</div>
+										</c:if>
+									</c:if>
+								</c:if></td>
+							<td><c:if test="${match.dateTime != null}">
+									<c:if test="${match.ronda==rondaActual}">
+										<c:if test="${match.team1.participants.contains(usuarioLog)}">
+										<spring:url
+											value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
+											var="result2Url">
+											<spring:param name="championshipId" value="${championship}" />
+											<spring:param name="deporte" value="${deporte}" />
+											<spring:param name="matchId" value="${match.id}" />
+											<spring:param name="team" value="team1" />
+										</spring:url>
+										<div class="botoncitores1">
+											<a href="${fn:escapeXml(result2Url)}"><i
+												style="font-size: 33px; display: inline;"
+												class="fa fa-pencil-square-o" aria-hidden="true"></i><i
+												class="fa fa-home" style="font-size: 33px; display: inline;"
+												aria-hidden="true"></i> </a>
+										</div>
+										</c:if>
+										<c:if test="${match.team2.participants.contains(usuarioLog)}">
+										<spring:url
+											value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
+											var="result2Url">
+											<spring:param name="championshipId" value="${championship}" />
+											<spring:param name="deporte" value="${deporte}" />
+											<spring:param name="matchId" value="${match.id}" />
+											<spring:param name="team" value="team2" />
+										</spring:url>
 
-									<td><fmt:parseDate value="${match.dateTime }"
-											pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-										<fmt:formatDate value="${parsedDateTime}"
-											pattern="dd-MM-yyyy HH:mm" /></td>
-									<td><c:out value="${match.team1.name}" /></td>
-									<td><c:out value="${match.puntos1} - ${match.puntos2}" /></td>
-									<td><c:out value="${match.team2.name}" /></td>
-									<td><c:out value="${match.puntos3} - ${match.puntos4}" /></td>
-
-									<td><c:if test="${match.dateTime == null}">
-											<c:if
-												test="${match.team1.participants.contains(usuarioLog) || match.team2.participants.contains(usuarioLog)}">
-												<c:if test="${match.ronda==rondaActual}">
-													<spring:url
-														value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
-														var="date2Url">
-														<spring:param name="championshipId"
-															value="${championship}" />
-														<spring:param name="deporte" value="${deporte}" />
-														<spring:param name="matchId" value="${match.id}" />
-													</spring:url>
-													<div class="botoncitores1">
-														<a href="${fn:escapeXml(date2Url)}"><i
-															style="font-size: 33px" class="fa fa-plus-circle"
-															aria-hidden="true"></i></a>
-													</div>
-												</c:if>
-											</c:if>
-										</c:if> <c:if test="${match.dateTime != null }">
-											<c:if
-												test="${match.team1.participants.contains(usuarioLog) || match.team2.participants.contains(usuarioLog)}">
-												<c:if test="${match.ronda==rondaActual}">
-													<spring:url
-														value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
-														var="date2Url">
-														<spring:param name="championshipId"
-															value="${championship}" />
-														<spring:param name="deporte" value="${deporte}" />
-														<spring:param name="matchId" value="${match.id}" />
-													</spring:url>
-													<div class="botoncitores1">
-														<a href="${fn:escapeXml(date2Url)}"><i
-															style="font-size: 33px" class="fa fa-pencil-square"
-															aria-hidden="true"></i></a>
-													</div>
-												</c:if>
-											</c:if>
-										</c:if></td>
-									<td><c:if test="${match.dateTime != null}">
-											<c:if test="${match.ronda==rondaActual}">
-												<c:if
-													test="${match.team1.participants.contains(usuarioLog)}">
-													<spring:url
-														value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
-														var="result2Url">
-														<spring:param name="championshipId"
-															value="${championship}" />
-														<spring:param name="deporte" value="${deporte}" />
-														<spring:param name="matchId" value="${match.id}" />
-														<spring:param name="team" value="team1" />
-													</spring:url>
-													<div class="botoncitores1">
-														<a href="${fn:escapeXml(result2Url)}"><i
-															style="font-size: 33px; display: inline;"
-															class="fa fa-pencil-square-o" aria-hidden="true"></i><i
-															class="fa fa-home"
-															style="font-size: 33px; display: inline;"
-															aria-hidden="true"></i> </a>
-													</div>
-												</c:if>
-												<c:if
-													test="${match.team2.participants.contains(usuarioLog)}">
-													<spring:url
-														value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
-														var="result2Url">
-														<spring:param name="championshipId"
-															value="${championship}" />
-														<spring:param name="deporte" value="${deporte}" />
-														<spring:param name="matchId" value="${match.id}" />
-														<spring:param name="team" value="team2" />
-													</spring:url>
-
-													<div class="botoncitores2">
-														<a href="${fn:escapeXml(result2Url)}"><i
-															style="font-size: 33px; display: inline;"
-															class="fa fa-pencil-square-o" aria-hidden="true"></i><i
-															style="font-size: 33px; display: inline;"
-															class="fa fa-plane" aria-hidden="true"></i></a>
-													</div>
-												</c:if>
-											</c:if>
+										<div class="botoncitores2">
+											<a href="${fn:escapeXml(result2Url)}"><i
+												style="font-size: 33px; display: inline;"
+												class="fa fa-pencil-square-o" aria-hidden="true"></i><i
+												style="font-size: 33px; display: inline;"
+												class="fa fa-plane" aria-hidden="true"></i></a>
+										</div>
 										</c:if>
 								</tr>
 								<div></div>
 							</c:forEach>
 						</tbody>
 					</table>
+        </div>
+          </c:if>
 				</div>
 			</c:if>
 		</div>
@@ -2028,8 +2017,6 @@
 						tercera ronda partidos</a>
 				</div>
 			</c:if>
-
-
 
 			<c:if test="${championshipObj.maxTeams>8}">
 				<c:if
