@@ -192,7 +192,7 @@ public class MeetingController {
 	@CachePut(value = "meeting")
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}")
 	public String meetingDetails(final ModelMap model, @PathVariable("meetingId") final Integer meetingId,
-			final Principal principal) {
+			final Principal principal,@PathVariable("sportId") final Integer sportId) {
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
 				.size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
@@ -204,7 +204,9 @@ public class MeetingController {
 		Boolean estaLlena = false;
 		Usuario u = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Usuario> usuarios = meeting.getParticipants();
-
+		if(sportId>20) {
+			return "error-500";
+		}
 		if (meeting.getMeetingCreator().equals(u) && meeting.getParticipants().contains(u)) {
 			model.put("esCreador", true);
 			if (u.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
@@ -264,7 +266,7 @@ public class MeetingController {
 
 		}
 
-		return this.meetingDetails(model, meetingId, principal);
+		return this.meetingDetails(model, meetingId, principal, invitacionesTorneos);
 	}
 
 	@GetMapping("/sports/{sportId}/meetings/{meetingId}/leave")
@@ -284,6 +286,9 @@ public class MeetingController {
 
 		usuarios.remove(usuario);
 		this.meetingService.save(meeting);
+		if(sportId>20) {
+			return "error-500";
+		}
 		if (meeting.getMeetingCreator().equals(usuario)) {
 			Integer puntos = usuario.getPuntos() - 7;
 			usuario.setPuntos(puntos);
@@ -325,6 +330,9 @@ public class MeetingController {
 		Usuario deletedUser = this.userService.findUserById(userId);
 
 		model.addAttribute("meeting", meeting);
+		if(sportId>20) {
+			return "error-500";
+		}
 		if (usuarios.stream().anyMatch(u -> usuario.equals(u))) {
 			model.put("leave", true);
 		}

@@ -91,6 +91,9 @@ public class ChampionshipController {
 
 	@GetMapping("/sports/{sportId}/championships/add")
 	public String initCreationChampionship(final ModelMap model, @PathVariable("sportId") final Integer sportId,Principal principal) {
+		if(sportId>20) {
+			return "error-500";
+		}
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
@@ -168,6 +171,9 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}")
 	public String championshipDetails(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		if(sportId>20) {
+			return "error-500";
+		}
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
@@ -315,6 +321,9 @@ public class ChampionshipController {
 	@GetMapping("/sports/{sportId}/championships/{championshipId}/matches")
 	public String listMatches(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
+		if(sportId>20) {
+			return "error-500";
+		}
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
@@ -1199,6 +1208,9 @@ public class ChampionshipController {
 	public String initAddDateMatch(final ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId,
 			@PathVariable("matchId") final Integer matchId, Principal principal) {
+		if(sportId>20) {
+			return "error-500";
+		}
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);

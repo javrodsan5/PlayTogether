@@ -63,7 +63,9 @@
 					</h1>
 
 				</div>
+				<h2><b>Creador:</b> <c:out value="${meeting.meetingCreator}" /></h2>
 				<h2>
+					<b>Fecha y hora: </b>
 					<fmt:parseDate value="${meeting.date }"
 						pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
 					<fmt:formatDate value="${parsedDateTime}"
