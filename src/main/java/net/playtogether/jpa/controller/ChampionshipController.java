@@ -158,6 +158,7 @@ public class ChampionshipController {
 			model.addAttribute("championships", championships);
 			model.addAttribute("deporte", sportId);
 			model.addAttribute("nombreDeporte", sport.getName());
+			model.addAttribute("usuario_logueado", this.userService.findByUsername(principal.getName()));
 			return "championships/listChampionship";
 		} else {
 			return "redirect:/sports";
