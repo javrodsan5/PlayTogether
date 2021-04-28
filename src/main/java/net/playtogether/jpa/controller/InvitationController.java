@@ -57,20 +57,17 @@ public class InvitationController {
 	@GetMapping("/invitations/team/{teamId}")
 	public String searchParticipants(final ModelMap model, @PathVariable("teamId") final Integer teamId,
 			Principal principal) {
-		
+
 		Collection<Invitation> misInvitacionesTorneos = this.invitationService
 				.findMyChampionshipInvitations(principal.getName());
 
-		// Championships
-		List<Invitation> championshipExpiredInvitations = misInvitacionesTorneos.stream()
-				.filter(i -> i.getTeam().getChampionship().getFinishDate().isBefore(LocalDate.now()))
-				.collect(Collectors.toList());
+		List<Invitation> championshipExpiredInvitations = invitationService
+				.listInvitationsNotFinishedChamp(principal.getName());
 		championshipExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
 		misInvitacionesTorneos.removeAll(championshipExpiredInvitations);
 
-		// Model
 		model.addAttribute("championshipInvitations", misInvitacionesTorneos);
-		
+
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
 				.size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
@@ -100,7 +97,7 @@ public class InvitationController {
 	@GetMapping("/invitations/team/{teamId}/send_invitation")
 	public String initSendInvitation(@RequestParam(value = "search", required = false) final String search,
 			final ModelMap model, @PathVariable("teamId") final Integer teamId, Principal principal) {
-		
+
 		Collection<Invitation> misInvitacionesTorneos = this.invitationService
 				.findMyChampionshipInvitations(principal.getName());
 
@@ -113,7 +110,7 @@ public class InvitationController {
 
 		// Model
 		model.addAttribute("championshipInvitations", misInvitacionesTorneos);
-		
+
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
 				.size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
@@ -178,7 +175,7 @@ public class InvitationController {
 	public String postSendInvitation(@ModelAttribute("selected_participant") final String selected_participant,
 			@PathVariable("teamId") final int teamId, final BindingResult result, final ModelMap model,
 			Principal principal) {
-		
+
 		Collection<Invitation> misInvitacionesTorneos = this.invitationService
 				.findMyChampionshipInvitations(principal.getName());
 
@@ -191,18 +188,18 @@ public class InvitationController {
 
 		// Model
 		model.addAttribute("championshipInvitations", misInvitacionesTorneos);
-		
+
 		Usuario participant = this.championshipService.findUsersById(Integer.parseInt(selected_participant));
 		Team team = this.championshipService.findTeamId(teamId);
 
 		if (!team.getUser().getUser().getUsername().equals(principal.getName())
 				|| (team.getParticipants().size() >= team.getTeamSize())) {
-			
+
 			Collection<Invitation> invitacionesEnviadas = this.invitationService
 					.findMyChampionshipInvitations(principal.getName());
-			
+
 			model.addAttribute("championshipInvitations", invitacionesEnviadas);
-			
+
 			return "redirect:/sports/" + team.getChampionship().getSport().getId() + "/championships/"
 					+ team.getChampionship().getId();
 		}
@@ -239,12 +236,12 @@ public class InvitationController {
 		model.put("teamSize", team.getTeamSize());
 		model.put("team", team);
 		model.put("teamView", true);
-		
+
 		Collection<Invitation> invitacionesEnviadas = this.invitationService
 				.findMyChampionshipInvitations(principal.getName());
-		
+
 		model.addAttribute("championshipInvitations", invitacionesEnviadas);
-		
+
 		return "invitations/addParticipantsForm";
 	}
 
@@ -442,18 +439,17 @@ public class InvitationController {
 	public String postSendInvitationMeeting(@ModelAttribute("selected_participant") final String selected_participant,
 			@PathVariable("meetingId") final int meetingId, final BindingResult result, final ModelMap model,
 			Principal principal) {
-		
+
 		// my invitation
-				Collection<Invitation> misInvitacionesQuedadas = this.invitationService
-						.findMyMeetingInvitations(principal.getName());
-				List<Invitation> meetingExpiredInvitations = misInvitacionesQuedadas.stream()
-						.filter(i -> i.getMeeting().getDate().isBefore(LocalDateTime.now())).collect(Collectors.toList());
-				meetingExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
-				misInvitacionesQuedadas.removeAll(meetingExpiredInvitations);
+		Collection<Invitation> misInvitacionesQuedadas = this.invitationService
+				.findMyMeetingInvitations(principal.getName());
+		List<Invitation> meetingExpiredInvitations = misInvitacionesQuedadas.stream()
+				.filter(i -> i.getMeeting().getDate().isBefore(LocalDateTime.now())).collect(Collectors.toList());
+		meetingExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
+		misInvitacionesQuedadas.removeAll(meetingExpiredInvitations);
 
-				// Model
-				model.put("meetingInvitations", misInvitacionesQuedadas);
-
+		// Model
+		model.put("meetingInvitations", misInvitacionesQuedadas);
 
 		Usuario participant = this.championshipService.findUsersById(Integer.parseInt(selected_participant));
 		Meeting meeting = this.meetingService.findMeetingById(meetingId);
@@ -498,11 +494,11 @@ public class InvitationController {
 		model.put("meetingSize", meeting.getNumberOfPlayers());
 		model.put("meeting", meeting);
 		model.put("meetingView", true);
-		
+
 		Collection<Invitation> invitacionesEnviadas = this.invitationService
 				.findMyMeetingInvitations(principal.getName());
 		model.put("meetingInvitations", invitacionesEnviadas);
-		
+
 		return "invitations/addParticipantsForm";
 	}
 
@@ -623,6 +619,5 @@ public class InvitationController {
 		model.addAttribute("championshipInvitations", invitacionesTorneos);
 		return "invitations/listInvitations";
 	}
-
 
 }

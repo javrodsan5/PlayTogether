@@ -3,7 +3,6 @@ package net.playtogether.jpa.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +21,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Championship;
-import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
@@ -279,20 +277,19 @@ public class UsuarioController {
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
 		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
-		List<Usuario> topUsuarios = usuarioService.findTopUsuarios().stream().limit(10).collect(Collectors.toList());
-		List<Usuario> todosUsuarios = usuarioService.findAll().stream()
-				.sorted(Comparator.comparing(Usuario::getPuntos).reversed()).collect(Collectors.toList());
+		List<Usuario> usuariosOrdenPuntos = usuarioService.findTopUsuarios();
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
-		for (int i = 0; i < todosUsuarios.size(); i++) {
-			if (todosUsuarios.get(i).equals(usuario)) {
+		Integer tam = usuariosOrdenPuntos.size();
+		for (int i = 0; i < tam; i++) {
+			if (usuariosOrdenPuntos.get(i).equals(usuario)) {
 				posicion = i + 1;
 				break;
 			}
 		}
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
-		model.addAttribute("topUsuarios", topUsuarios);
+		model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0,9));
 		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}
@@ -329,5 +326,5 @@ public class UsuarioController {
 	
 		model.addAttribute("confirmatedDelete", true);
 		return userProfile(model, principal);
-}
+	}
 }
