@@ -816,16 +816,6 @@ body {
 	margin-bottom: 1%;
 }
 
-.cardtitle {
-	text-align: center;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	margin-left: 35%;
-	margin-right: 35%;
-	border-radius: 1rem;
-	padding-top: 1%;
-	background-color: #17a2b8;
-}
-
 .cardtitle h1 {
 	color: rgb(58, 58, 58);
 	padding-top: 1%;
@@ -1370,6 +1360,18 @@ form input {
 
 /* === Responsive === */
 @media ( min-width : 1500px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 40%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
 		color: #FFF;
@@ -1470,10 +1472,9 @@ form input {
 	.equiposTorneo {
 		float: right;
 		margin-right: 50px;
+		width: 35%;
 	}
-	.equiposTorneo {
-		float: bottom;
-	}
+	
 	.espacioIzqMovil {
 		margin-left: 2%;
 	}
@@ -1519,6 +1520,18 @@ form input {
 
 @media ( max-width : 1499px) and (min-width: 992px) {
 	/* === Estandar === */
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 40%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
     color: #FFF;
@@ -1697,6 +1710,19 @@ form input {
 }
 
 @media ( max-width : 991px) and (min-width: 768px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 60%;
+    padding-bottom: 1%;
+    margin: auto;
+    
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
     color: #FFF;
@@ -1873,6 +1899,18 @@ form input {
 }
 
 @media ( max-width : 767px) and (min-width: 511px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 100%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
     color: #FFF;
@@ -2028,6 +2066,18 @@ form input {
 }
 
 @media ( max-width : 510px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 100%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
     color: #FFF;

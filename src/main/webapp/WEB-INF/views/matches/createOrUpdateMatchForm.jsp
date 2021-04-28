@@ -22,7 +22,6 @@
           <fmt:formatDate 
          value = "${parsedDateEnd}" pattern = "dd-MM-yyyy"  /></h2>
 	</div>
-	<div style="margin-left: 45px">
 		<div class="crearMeeting">
 			<form:form commandName="match" modelAttribute="match">
 				<div>
@@ -57,10 +56,10 @@
 							<playtogether:localDateTime label="Fecha realización"
 								name="dateTime" id="dateTime"></playtogether:localDateTime>
 						</div>
-						<label for="puntos1">Puntos Equipo 1 (Equipo 1)</label>
+						<label for="puntos1">Puntos de ${match.team1.name}</label>
 						<div class="${cssGroup}">
 							<div class="col-sm-10">
-								<select label="Puntos Equipo 1 (Equipo 1)" name="puntos1">
+								<select label="Puntos Equipo 1" name="puntos1">
 									<c:forEach var="puntos" items="${listaPuntos}">
 										<option value="${puntos}">${puntos}</option>
 									</c:forEach>
@@ -68,11 +67,11 @@
 							</div>
 							<br>
 						</div>
-						<label for="puntos2">Puntos Equipo 2 (Equipo 1)</label>
+						<label for="puntos2">Puntos de ${match.team2.name}</label>
 						<div class="${cssGroup}">
 							<div class="col-sm-10">
 
-								<select label="Puntos Equipo 2 (Equipo 1)" name="puntos2">
+								<select label="Puntos Equipo 2" name="puntos2">
 									<c:forEach var="puntos" items="${listaPuntos}">
 										<option value="${puntos}">${puntos}</option>
 									</c:forEach>
@@ -147,5 +146,4 @@
 				</div>
 			</form:form>
 		</div>
-	</div>
 </playtogether:layout>

@@ -14,7 +14,7 @@
 
 <playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 	<body>
-		<div class="cardtitle meeting-and-championship-list">
+		<div class="cardtitle">
 			<h1 class="list-meeting-championship-title">
 				<strong>Quedadas de ${nombreDeporte}</strong>
 			</h1>
@@ -28,7 +28,7 @@
 			</div>
 		</c:if>
 		<div class="cardlist meeting-and-championship-list">
-		  <div class="scroll_vertical" id="style_scroll">
+		  <div class="scroll_vertical" id="style_scroll" style="height: 500px">
 			<table id="meetingTable" class="table ">
 				<thead>
 					<tr class="rowtable">

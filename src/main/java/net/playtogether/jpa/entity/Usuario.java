@@ -1,6 +1,7 @@
 package net.playtogether.jpa.entity;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -41,7 +42,7 @@ public class Usuario extends NamedEntity {
 	@Column(name = "phone")
 	@Pattern(regexp = "[0-9]{9}")
 	private String phone;
-	
+
 	@Column(name = "description")
 	private String description;
 
@@ -60,15 +61,23 @@ public class Usuario extends NamedEntity {
 
 	@ManyToMany(mappedBy = "participants")
 	private List<Meeting> meetings;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
-	
+
 	@Column(name = "puntos")
 	private Integer puntos;
 
 	@Transient
 	private Boolean accept;
+
+	@Transient
+	public Integer edadUsuario() {
+		Period periodo = Period.between(birthdate, LocalDate.now());
+		Integer años = periodo.getYears();
+
+		return años;
+	}
 
 }

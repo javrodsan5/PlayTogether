@@ -22,7 +22,6 @@
           <fmt:formatDate 
          value = "${parsedDateEnd}" pattern = "dd-MM-yyyy"  /></h2>
 </div>
-<div style="margin-left: 45px">
 			<div class="crearMeeting">
 <form:form  commandName="match" modelAttribute="match">
 	<div>
@@ -46,12 +45,11 @@
 			
 			<div class="form-group">
 						<button class="botonMeeting" onclick="location.href='/sports/${championshipObj.sport.id}/championships/${championshipObj.id}/matches';" type="button">
-							<b>Volver a listado</b>
+							<b>Volver</b>
 						</button>
 					</div>
 		</div>
 	</div>
 </form:form>
-</div>
 </div>
 </playtogether:layout>

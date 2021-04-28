@@ -24,7 +24,7 @@ public class SportServiceTests {
 	@Test
 	void shouldFindAllSports() {
 		Collection<Sport> listSports = this.sportService.findAll();
-		assertThat(listSports.size()).isEqualTo(18);
+		assertThat(listSports.size()).isEqualTo(20);
 	}
 
 	// FIND SPORT BY NAME
@@ -47,6 +47,6 @@ public class SportServiceTests {
 			SportType st = new SportType();
 			st.setId(2);
 			Collection<Sport> listSports = this.sportService.findAllSportsByType(st);
-			assertThat(listSports.size()).isEqualTo(9);
+			assertThat(listSports.size()).isEqualTo(11);
 		}
 }

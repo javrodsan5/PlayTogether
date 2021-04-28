@@ -11,16 +11,31 @@
 <playtogether:layout pageName="championships"
 	invitaciones="${invitaciones}">
 	<body>
-		<div class="cardtitle">
-			<h1>
-				<strong>Torneos de ${nombreDeporte}</strong>
-			</h1>
-			<br />
-		</div>
+			<div class="cardtitle">
+				<h1>
+					<strong>Torneos de ${nombreDeporte}</strong>
+				</h1>
+			</div>
 		<div class="cardlist meeting-and-championship-list">
-			<div class="scroll_vertical" id="style_scroll" style="height: 500px;">
-				<table id="championshipTable" class="table ">
-					<thead>
+      <div class="scroll_vertical" id="style_scroll" style="height: 500px;">
+			<table id="championshipTable" class="table ">
+				<thead>
+					<tr class="rowtable">
+						<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Descripción</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Dirección</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Fecha
+							Inicio</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Fecha
+							Fin</th>
+						<th class="guiz-awards-header-title" style="width: 5%;">Equipos
+							inscritos</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Creador</th>
+						<th class="guiz-awards-header-title" style="width: 20 !important%"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${championships}" var="championship">
 						<tr class="rowtable">
 							<th class="guiz-awards-header-title" style="width: 15%;">Ciudad</th>
 							<th class="guiz-awards-header-title" style="width: 25%;">Dirección</th>

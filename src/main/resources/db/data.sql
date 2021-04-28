@@ -95,6 +95,8 @@ INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(15, '
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(16, 'Natación', 1, 2);
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(17, 'Karting', 1, 2);
 INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(18, 'Pilates', 1, 2);
+INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(19, 'Ruta Motera', 1, 2);
+INSERT INTO sports(id, name, number_of_players_in_team, sport_type) VALUES(20, 'Skate', 1, 2);
 
 INSERT INTO meetings(id, address, city, date, description, number_of_players,meeting_creator, sport_id, creation_date) 
 VALUES(1, 'Polideportivo Ciudad Jardin', 'Sevilla', '2021/06/15 11:00:00', 'Nos lo vamos a pasar genial! Apuntaos!', 2,1, 1, '2021/03/15');
