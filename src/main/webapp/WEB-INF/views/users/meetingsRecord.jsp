@@ -60,6 +60,12 @@
 				</table>
 			</c:if>
 		</div>
+		<br>
+				<div class="form-group">
+						<button class="botonMeeting" onclick="location.href='/myprofile';" type="button">
+							<b>Volver a perfil</b>
+						</button>
+					</div>
 	</body>
 	</html>
 </playtogether:layout>

@@ -136,7 +136,7 @@
 		<button class="botonTorneos"
 			onclick="location.href='/sports/${championship.sport.id}/championships';"
 			type="button">
-			<b>Torneos</b>
+			<b>Volver al listado</b>
 		</button>
 	</div>
 	<body>

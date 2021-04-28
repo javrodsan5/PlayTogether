@@ -125,7 +125,11 @@
           <button class="btn btn-success" style="font-size: 0.8em; " onclick="location.href='/usuarios/${chat.user1.id == usuarioId ? chat.user2.id : chat.user1.id}';" type="button">
             <b>Ir al perfil de ${chat.user1.id == usuarioId ? chat.user2.user.username : chat.user1.user.username}</b>
           </button>
+           <button class="btn btn-success" style="font-size: 0.8em;margin-left:10px; " onclick="location.href='/chats';" type="button">
+            <b>Ir a mis chats</b>
+          </button>
         </div>
+
       </c:if>
       <c:if test="${chat.chatType.id != 3}">
       <div class="form-group" style="  margin-left: 50%; margin-top:2%;">

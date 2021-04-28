@@ -96,6 +96,13 @@
 					torneo</a>
 			</div>
 		</div>
+				<div class="cardbutton" style="padding-top:10px;">
+			<spring:url value="/sports" var="dateUrl">
+			</spring:url>
+			<div class="botoncito-crear-meeting">
+				<a id="createMeeting" href="${fn:escapeXml(dateUrl)}">Volver a la lista</a>
+			</div>
+		</div>
 	</body>
 	</html>
 </playtogether:layout>
