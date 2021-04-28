@@ -209,7 +209,7 @@ public class MeetingControllerTests {
 
 		this.mockMvc
 			.perform(
-				MockMvcRequestBuilders.post("/sports/1/meetings/add").param("address", "Calle 1").param("city", "Sevilla").param("description", "aaaa").param("date", "2021-01-14 14:14").param("sport", "1").with(SecurityMockMvcRequestPostProcessors.csrf()))
+				MockMvcRequestBuilders.post("/sports/1/meetings/add").param("address", "Calle 1").param("city", "Sevilla").param("description", "aaaa").param("date", "2021/06/14 14:14").param("sport", "1").with(SecurityMockMvcRequestPostProcessors.csrf()))
 			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 	}

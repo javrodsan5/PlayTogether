@@ -7,6 +7,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <playtogether:layout pageName="users" invitaciones="${invitaciones}">
 
@@ -41,23 +43,27 @@
 
 				<h2>
 					Lista de componentes del equipo (Nº participantes:
-					<c:out value="${team.participants.size()}" />
-					)
+					<c:out value="${team.participants.size()} / ${team.teamSize} jugadores" />)
 				</h2>
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 20%;">Nombre</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Nombre
-							de usuario</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Detalles
-							del jugador</th>
-						<th class="guiz-awards-header-title" style="width: 20%;"></th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Nombre</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Nombre de usuario</th>
+						<sec:authorize access="hasAuthority('premium')">
+						<th class="guiz-awards-header-title" style="width: 10%;">Puntos</th>
+						</sec:authorize>
+						<th class="guiz-awards-header-title" style="width: 10%;">Edad (años)</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Detalles del jugador</th>
+							
+						<th class="guiz-awards-header-title" style="width: 10%;"></th>
 					</tr>
 				</thead>
 				<c:forEach items="${team.participants}" var="participant">
 					<tr class="rowtable">
 						<td><c:out value="${participant.name}" /></td>
 						<td><c:out value="${participant.user.username}" /></td>
+						<td><c:out value="${participant.puntos}" /></td>
+						<td><c:out value="${participant.edadUsuario()}" /></td>
 						<td><spring:url value="/usuarios/{userId}" var="userDetails">
 								<spring:param name="userId" value="${participant.id}" />
 							</spring:url>
@@ -148,6 +154,14 @@
 				</c:forEach>
 			</table>
 		</div>
+		<br>
+			<div class="form-group">
+		<button class="botonTorneos"
+			onclick="location.href='/sports/${championship.sport.id}/championships/${championship.id}';"
+			type="button">
+			<b>Volver al torneo</b>
+		</button>
+	</div>
 	</body>
 
 </playtogether:layout>

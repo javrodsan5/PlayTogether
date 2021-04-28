@@ -816,16 +816,6 @@ body {
 	margin-bottom: 1%;
 }
 
-.cardtitle {
-	text-align: center;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	margin-left: 35%;
-	margin-right: 35%;
-	border-radius: 1rem;
-	padding-top: 1%;
-	background-color: #17a2b8;
-}
-
 .cardtitle h1 {
 	color: rgb(58, 58, 58);
 	padding-top: 1%;
@@ -907,7 +897,7 @@ table {
 	border-radius: 1rem !important;
 }
 
-.table tr {
+.table tr, .table-clasification tr {
 	border: none !important;
 	border-style: hidden;
 	border-top: none !important;
@@ -922,7 +912,7 @@ th {
 	border-top: none !important;
 }
 
-.table td, .table th {
+.table td, .table th, .table-clasification td, .table-clasification th {
 	padding: .75rem;
 	vertical-align: top;
 	border-top: none !important;
@@ -931,6 +921,24 @@ th {
 
 .table-striped tbody tr {
 	border-radius: 1rem !important;
+}
+
+
+
+.table-clasification tbody tr:nth-child(1) {
+    font-size: 250%;
+}
+
+.table-clasification tbody tr:nth-child(2) {
+    font-size: 200%;
+}
+
+.table-clasification tbody tr:nth-child(3) {
+    font-size: 150%;
+}
+
+.table-clasification tbody tr:nth-child(n+4) {
+	font-size: 110%;
 }
 
 .auxcard {
@@ -1370,6 +1378,18 @@ form input {
 
 /* === Responsive === */
 @media ( min-width : 1500px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 40%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
 		color: #FFF;
@@ -1470,10 +1490,9 @@ form input {
 	.equiposTorneo {
 		float: right;
 		margin-right: 50px;
+		width: 35%;
 	}
-	.equiposTorneo {
-		float: bottom;
-	}
+	
 	.espacioIzqMovil {
 		margin-left: 2%;
 	}
@@ -1519,6 +1538,18 @@ form input {
 
 @media ( max-width : 1499px) and (min-width: 992px) {
 	/* === Estandar === */
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 40%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
     color: #FFF;
@@ -1697,6 +1728,19 @@ form input {
 }
 
 @media ( max-width : 991px) and (min-width: 768px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 60%;
+    padding-bottom: 1%;
+    margin: auto;
+    
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
     color: #FFF;
@@ -1873,6 +1917,18 @@ form input {
 }
 
 @media ( max-width : 767px) and (min-width: 511px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 100%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
     color: #FFF;
@@ -2028,6 +2084,18 @@ form input {
 }
 
 @media ( max-width : 510px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 100%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
 	.botonMeeting {
 		padding: 5px 5px 5px 5px;
     color: #FFF;
@@ -2879,6 +2947,7 @@ body {
 	.promo-box-container .title {
 		font-size: 15px !important;
 	}
+	
 }
 
 :root { 
@@ -3063,5 +3132,6 @@ body {
 	color: white;
 }
 
-
-
+.alert{
+	margin: 20%;
+}

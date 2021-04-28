@@ -63,7 +63,9 @@
 					</h1>
 
 				</div>
+				<h2><b>Creador:</b> <c:out value="${meeting.meetingCreator}" /></h2>
 				<h2>
+					<b>Fecha y hora: </b>
 					<fmt:parseDate value="${meeting.date }"
 						pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
 					<fmt:formatDate value="${parsedDateTime}"
@@ -86,7 +88,6 @@
 					<div class="drop__container" id="drop-items">
 						<div class="scroll_vertical" id="style_scroll">
 							<c:forEach items="${meeting.participants}" var="participant">
-								<center>
 									<div class="drop__card">
 										<div class="drop__data">
 											<div>
@@ -94,8 +95,15 @@
 													<spring:url value="/usuarios/{userId}" var="userdetails">
 														<spring:param name="userId" value="${participant.id}" />
 													</spring:url>
-													<a href="${fn:escapeXml(userdetails)}"><span
-														class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
+													<div style="display: flex">
+														<a href="${fn:escapeXml(userdetails)}"><span
+															class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}
+														</span></a> <a
+															style="margin-left: 20px; font-size: 25px; align-self: center">
+															${participant.edadUsuario()} años</a>
+													</div>
+
+
 													<c:if test="${puedeEliminar == true}">
 														<c:if test="${participant.id!=meeting.meetingCreator.id}">
 															<br>
@@ -107,21 +115,14 @@
 																<spring:param name="userId" value="${participant.id}" />
 															</spring:url>
 															<a style="margin: 10px;"
-																href="${fn:escapeXml(deleteUserMeeting)}"> 
-																<i class="fa fa-trash" style="color: red"></i></a>
+																href="${fn:escapeXml(deleteUserMeeting)}"> <i
+																class="fa fa-trash" style="color: red"></i></a>
 														</c:if>
 													</c:if>
-													<c:if test="${participant.id != userId}">
-														<button class="btn btn-success"
-															onclick="location.href='/chat/0/${participant.user.username}';"
-															type="button">
-															Chat <i class="fa fa-weixin" aria-hidden="true"></i>
-														</button>
-													</c:if>
 												</h2>
+											</div>
 										</div>
 									</div>
-								</center>
 							</c:forEach>
 						</div>
 					</div>
@@ -175,13 +176,13 @@
 				<b>Volver a listado</b>
 			</button>
 			<c:if test="${leave}">
-      <c:if test="${meeting.participants.size()>1}">
-				<button class="botonMeeting"
-					onclick="location.href='/chat/${chatId}/messages';"
-					type="button">
-					<b>Ir al chat de la quedada  </b><i class="fa fa-weixin" style="font-size: 150%;" aria-hidden="true"></i>
-				</button>
-      </c:if>
+				<c:if test="${meeting.participants.size()>1}">
+					<button class="botonMeeting"
+						onclick="location.href='/chat/${chatId}/messages';" type="button">
+						<b>Ir al chat de la quedada </b><i class="fa fa-weixin"
+							style="font-size: 150%;" aria-hidden="true"></i>
+					</button>
+				</c:if>
 			</c:if>
 
 		</div>

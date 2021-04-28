@@ -1,5 +1,6 @@
 package net.playtogether.jpa.controller;
 
+
 import java.security.Principal;
 import java.time.Duration;
 import java.time.LocalDate;
@@ -30,7 +31,6 @@ import net.playtogether.jpa.entity.Order;
 import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.PayType;
 import net.playtogether.jpa.entity.Team;
-import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.AuthoritiesService;
 import net.playtogether.jpa.service.ChampionshipService;
@@ -71,8 +71,6 @@ public class PaypalController {
 	@Autowired
 	private UserTypeService userTypeService;
 
-	@Autowired
-	private UserLoginService userLoginService;
 
 	@Autowired
 	private ChatService chatService;
