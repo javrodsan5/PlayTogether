@@ -3,7 +3,6 @@ package net.playtogether.jpa.controller;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -206,7 +205,7 @@ public class MeetingController {
 		Usuario u = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Usuario> usuarios = meeting.getParticipants();
 
-		if (meeting.getMeetingCreator().equals(u)) {
+		if (meeting.getMeetingCreator().equals(u) && meeting.getParticipants().contains(u)) {
 			model.put("esCreador", true);
 			if (u.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
 				model.put("puedeEliminar", true);
