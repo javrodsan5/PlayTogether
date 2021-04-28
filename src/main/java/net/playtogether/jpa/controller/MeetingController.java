@@ -3,6 +3,7 @@ package net.playtogether.jpa.controller;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -222,6 +223,7 @@ public class MeetingController {
 			estaLlena = true;
 			b = true;
 		}
+		
 		model.addAttribute("existe", b);
 		model.addAttribute("estaLlena", estaLlena);
 		model.addAttribute("logged_user", u);

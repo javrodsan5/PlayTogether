@@ -22,10 +22,8 @@
 			<div class="crearMeeting">
 				<form:form modelAttribute="meeting" commandName="meeting"
 					id="survey-form">
-					<div style="display: inline-flex;">
 						<playtogether:inputField label="Fecha y hora" name="date" />
 						<playtogether:inputField label="Ciudad" name="city" />
-					</div>
 
 					<div class="col-sm-12">
 						<label>Número de participantes</label><br> 

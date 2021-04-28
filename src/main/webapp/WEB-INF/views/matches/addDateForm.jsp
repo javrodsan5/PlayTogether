@@ -22,7 +22,6 @@
           <fmt:formatDate 
          value = "${parsedDateEnd}" pattern = "dd-MM-yyyy"  /></h2>
 </div>
-<div style="margin-left: 45px">
 			<div class="crearMeeting">
 <form:form  commandName="match" modelAttribute="match">
 	<div>
@@ -52,6 +51,5 @@
 		</div>
 	</div>
 </form:form>
-</div>
 </div>
 </playtogether:layout>

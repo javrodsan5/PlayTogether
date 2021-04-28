@@ -96,6 +96,10 @@
 													</spring:url>
 													<a href="${fn:escapeXml(userdetails)}"><span
 														class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}</span></a>
+														
+													<h5>${participant.puntos} ptos / ${participant.edadUsuario()} años</h5>
+													
+
 													<c:if test="${puedeEliminar == true}">
 														<c:if test="${participant.id!=meeting.meetingCreator.id}">
 															<br>
@@ -107,8 +111,8 @@
 																<spring:param name="userId" value="${participant.id}" />
 															</spring:url>
 															<a style="margin: 10px;"
-																href="${fn:escapeXml(deleteUserMeeting)}"> 
-																<i class="fa fa-trash" style="color: red"></i></a>
+																href="${fn:escapeXml(deleteUserMeeting)}"> <i
+																class="fa fa-trash" style="color: red"></i></a>
 														</c:if>
 													</c:if>
 													<c:if test="${participant.id != userId}">
@@ -119,6 +123,7 @@
 														</button>
 													</c:if>
 												</h2>
+											</div>
 										</div>
 									</div>
 								</center>
@@ -175,13 +180,13 @@
 				<b>Volver a listado</b>
 			</button>
 			<c:if test="${leave}">
-      <c:if test="${meeting.participants.size()>1}">
-				<button class="botonMeeting"
-					onclick="location.href='/chat/${chatId}/messages';"
-					type="button">
-					<b>Ir al chat de la quedada  </b><i class="fa fa-weixin" style="font-size: 150%;" aria-hidden="true"></i>
-				</button>
-      </c:if>
+				<c:if test="${meeting.participants.size()>1}">
+					<button class="botonMeeting"
+						onclick="location.href='/chat/${chatId}/messages';" type="button">
+						<b>Ir al chat de la quedada </b><i class="fa fa-weixin"
+							style="font-size: 150%;" aria-hidden="true"></i>
+					</button>
+				</c:if>
 			</c:if>
 
 		</div>

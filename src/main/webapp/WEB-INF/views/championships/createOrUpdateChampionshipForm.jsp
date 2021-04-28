@@ -11,15 +11,11 @@
 	<div class="thirteen">
 		<h1>Crear un torneo</h1>
 	</div>
-	<div style="margin-left: 45px">
 		<div class="crearMeeting">
 			<form:form commandName="championship" modelAttribute="championship">
 				<div>
-					<div style="display: inline-flex;">
-						<playtogether:inputField label="Fecha Inicio" name="startDate" />
-						<playtogether:inputField label="Fecha Fin" name="finishDate" />
-
-					</div>
+					<playtogether:inputField label="Fecha Inicio" name="startDate" />
+					<playtogether:inputField label="Fecha Fin" name="finishDate" />
 					<playtogether:inputField label="Nombre" name="name" />
 					<playtogether:inputField label="Ciudad" name="city" />
 					<playtogether:inputField label="Descripción" name="description" />
@@ -45,5 +41,4 @@
 
 			</form:form>
 		</div>
-	</div>
 </playtogether:layout>
