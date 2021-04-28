@@ -17,14 +17,13 @@
 				<c:out value="${sport.name}" />
 			</h1>
 		</div>
-		<div style="margin-left: 45px">
 			<div class="crearMeeting">
 				<form:form modelAttribute="meeting" commandName="meeting"
 					id="survey-form">
-					<div style="display: inline-flex;">
+	
 						<playtogether:inputField label="Fecha y hora" name="date" />
 						<playtogether:inputField label="Ciudad" name="city" />
-					</div>
+					
 					<div class="col-sm-12">
 						<label>Número de participantes</label><br> <select name="numberOfPlayers">
 							<c:forEach var="number" items="${numbers}">
@@ -34,7 +33,7 @@
 					</div>
 					<br>
 					<playtogether:inputField label="Dirección" name="address" />
-					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
+					<playtogether:inputField label="Descripción" name="description" />
 					<input type="hidden" name="sport" value="${sportId}"/>
 
 					<div class="form-group">
@@ -49,7 +48,6 @@
 					</div>
 				</form:form>
 			</div>
-		</div>
 
 	</body>
 </playtogether:layout>

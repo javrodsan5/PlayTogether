@@ -34,10 +34,10 @@
 				<form:input class="form-control" path="${name}"/>
 			</c:if>
 			<c:if test="${label=='Fecha Inicio'}">
-				<form:input class="form-control" path="${name}" type="date" style="width: 115%;" />
+				<form:input class="form-control" path="${name}" type="date" style="width: 100%;" />
 			</c:if>
 			<c:if test="${label=='Fecha Fin'}">
-				<form:input class="form-control" path="${name}" type="date" style="width: 115%;" />
+				<form:input class="form-control" path="${name}" type="date" style="width: 100%;" />
 			</c:if>
 			<c:if test="${label=='Fecha Nacimiento'}">
 				<form:input class="form-control" path="${name}" type="date" />
@@ -46,7 +46,7 @@
 				<form:input class="form-control" path="${name}" type="date" />
 			</c:if>
 			<c:if test="${label=='Fecha y hora'}">
-				<form:input class="form-control" name="${name}" path="${name}" type="datetime-local" style="width:110%;"/>
+				<form:input class="form-control" name="${name}" path="${name}" type="datetime-local" style="width:100%;"/>
 			</c:if>
 			<c:if test="${label=='Fecha'}">
 				<form:input class="form-control" path="${name}" type="date" />

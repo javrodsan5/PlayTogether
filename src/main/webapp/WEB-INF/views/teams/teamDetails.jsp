@@ -46,18 +46,21 @@
 				</h2>
 				<thead>
 					<tr class="rowtable">
-						<th class="guiz-awards-header-title" style="width: 20%;">Nombre</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Nombre
-							de usuario</th>
-						<th class="guiz-awards-header-title" style="width: 20%;">Detalles
-							del jugador</th>
-						<th class="guiz-awards-header-title" style="width: 20%;"></th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Nombre</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Nombre de usuario</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Puntos</th>
+						<th class="guiz-awards-header-title" style="width: 10%;">Edad (años)</th>
+						<th class="guiz-awards-header-title" style="width: 20%;">Detalles del jugador</th>
+							
+						<th class="guiz-awards-header-title" style="width: 10%;"></th>
 					</tr>
 				</thead>
 				<c:forEach items="${team.participants}" var="participant">
 					<tr class="rowtable">
 						<td><c:out value="${participant.name}" /></td>
 						<td><c:out value="${participant.user.username}" /></td>
+						<td><c:out value="${participant.puntos}" /></td>
+						<td><c:out value="${participant.edadUsuario()}" /></td>
 						<td><spring:url value="/usuarios/{userId}" var="userDetails">
 								<spring:param name="userId" value="${participant.id}" />
 							</spring:url>
