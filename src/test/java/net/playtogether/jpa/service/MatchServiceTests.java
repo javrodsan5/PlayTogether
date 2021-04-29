@@ -132,7 +132,7 @@ public class MatchServiceTests {
 	@Test
 	void findTeamsByChampionshipId() throws Exception {
 		Collection<Team> teams = this.matchService.findTeams(1);
-		assertThat(teams.size()).isEqualTo(11);
+		assertThat(teams.size()).isEqualTo(8);
 	}
 
 	@Test
