@@ -3,6 +3,8 @@ package net.playtogether.jpa.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,9 +24,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
+import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.InvitationService;
+import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
@@ -43,6 +47,9 @@ public class UsuarioController {
 	@Autowired
 	ChatService chatService;
 
+	@Autowired
+	PayService payService;
+	
 	@InitBinder("usuario")
 	public void initUsuariotBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new UsuarioValidator());
@@ -220,6 +227,24 @@ public class UsuarioController {
 		model.addAttribute("meetings", meetings);
 
 		return "users/meetingsRecord";
+	}
+	
+	@GetMapping("/myprofile/paysRecord")
+	public String paysRecord(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
+		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
+		List<Pay> pays = usuario.getPayment().stream().filter(p->p.getDate()!=null).limit(10).collect(Collectors.toList());
+		pays.sort(Comparator.comparing(Pay::getDate));
+		Collections.reverse(pays);
+		if (pays.size() <= 0) {
+			model.put("noRecords", true);
+		}
+		model.addAttribute("pays", pays);
+		
+
+		return "users/paysRecord";
 	}
 
 	public int[] getEventoPorMes(List<Integer> eventoList) {
