@@ -30,7 +30,7 @@
 				<table id="userMeetingsTable" class="table ">
 					<thead>
 						<tr class="rowtable">
-							<th class="guiz-awards-header-title" style="width: 15%;">Fecha</th>
+							<th class="guiz-awards-header-title" style="width: 15%;">Fecha del pago</th>
 							<th class="guiz-awards-header-title" style="width: 10%;">Cantidad</th>
 							<th class="guiz-awards-header-title" style="width: 75%;">Pago
 								para:</th>
