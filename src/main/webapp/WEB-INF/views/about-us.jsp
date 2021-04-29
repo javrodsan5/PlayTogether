@@ -75,26 +75,26 @@
 				<div>
 					<p style="text-align: justify; text-justify: inter-word">
 						Somos un equipo formado por 12 personas con distintas
-						habilidades en el ámbito de la programación, cuyo Project Manager
+						habilidades en el ámbito de la programación, cuyo jefe de proyecto
 						es Javier Rodríguez Santiago y que está subdividido en dos equipos
 						diferentes: Un subequipo formado por 6 personas especializado en
 						el desarrollo BackEnd y el Testing y que tiene a Carlos Santos
-						Tirado como Team Manager, y un subequipo formado por 6 personas
-						especializado en el FrontEnd y el Testing, con Manuel Bueno Gómez
-						como Team Manager.
+						Tirado como jefe de equipo, y un subequipo formado por 6 personas
+						especializado en el FrontEnd y el Testing, con Fernando Calvo Durán
+						como jefe de equipo.
 				</div>
 				<h1>Equipo BackEnd</h1>
 				<div class="row">
 					<div class="column">
 						<img class="logoInicial" src="/images/javiCircle.png" alt="Javier">
 						<p>Javier Rodríguez Santiago</p>
-						<p>Project Manager</p>
+						<p>Jefe de proyecto</p>
 					</div>
 					<div class="column">
 						<img class="logoInicial" src="/images/carlosCircle.png"
 							alt="Carlos">
 						<p>Carlos Santos Tirado</p>
-						<p>Team Manager</p>
+						<p>Jefe de equipo</p>
 					</div>
 					<div class="column">
 						<img class="logoInicial" src="/images/guerreroCircle.png"
@@ -125,7 +125,7 @@
 						<img class="logoInicial" src="/images/manuelCircle.png"
 							alt="Manuel">
 						<p>Manuel Bueno Gómez</p>
-						<p>Team Manager</p>
+						<p>Programador</p>
 					</div>
 					<div class="column">
 						<img class="logoInicial" src="/images/alejandroCircle.png"
@@ -152,7 +152,7 @@
 							<img class="logoInicial" src="/images/fernandoCircle.png"
 								alt="Fernando">
 							<p>Fernando Calvo Durán</p>
-							<p>Programador</p>
+							<p>Jefe de equipo</p>
 						</div>
 						<div class="column">
 							<img class="logoInicial" src="/images/pabloCircle.png"

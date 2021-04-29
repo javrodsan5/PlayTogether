@@ -1,5 +1,6 @@
 package net.playtogether.jpa.repository;
 
+
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -9,5 +10,4 @@ public interface ChatMessageRepository extends CrudRepository<ChatMessage, Integ
 
     @Query("SELECT MAX(cm.id) from ChatMessage cm")
     public Integer findLastId();
-
 }

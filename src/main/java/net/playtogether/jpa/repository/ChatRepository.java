@@ -30,4 +30,6 @@ public interface ChatRepository extends CrudRepository<Chat, Integer> {
 
     @Query("SELECT c FROM Chat c WHERE c.user1.id = ?1 OR c.user2.id = ?1")
     public List<Chat> findMyPrivateChats(Integer id);
+
+    List<Chat> findAll();
 }

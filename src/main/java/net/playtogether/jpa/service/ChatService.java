@@ -94,4 +94,8 @@ public class ChatService {
         return this.findLastMessageByChatId(id);
     }
     
+    @Transactional
+    public List<Chat> findAll() {
+        return this.chatRepository.findAll();
+    }
 }
