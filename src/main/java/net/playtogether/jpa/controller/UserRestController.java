@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import net.playtogether.jpa.service.InvitationService;
 
  
- 
 @Controller
 @RequestMapping("/")
 public class UserRestController {
