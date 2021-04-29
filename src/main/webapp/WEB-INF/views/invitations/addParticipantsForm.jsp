@@ -166,7 +166,7 @@
 					<h1>Invitar participantes a quedada</h1>
 					<h2>(Máximo ${meetingSize} participantes)</h2>
 				</div>
-				<div class="crearMeeting">
+				<div class="crearMeeting send-invitation-form">
 
 					<c:if test="${limitedMeetingSize==true}">
 						<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
@@ -215,13 +215,11 @@
 						</div>
 					</c:if>
 
-					<form:form id="survey-form"
+					<form:form id="survey-form" class="search-user-form"
 						action="/invitations/meeting/${meeting.id}/send_invitation"
 						method="GET" style="padding:0rem 0rem; width:60%">
 						<center>
 							<div>
-								<br>
-
 								<div class="col-sm-10">
 									<input type="text" class="form-control" name="search" required
 										placeholder="Introduzca el nombre" style="width: 90%"><br>
@@ -247,8 +245,9 @@
 
 				</div>
 
-				<div style="display: inline-block">
-					<table id="meetingTable" width=30% class="table table-striped">
+
+				<div class="invitation-table scroll_vertical" id="style_scroll">
+					<table id="meetingTable" class="table">
 						<c:choose>
 							<c:when test="${meeting_participants.isEmpty()}">
 								<div class="alert alert-primary" style="margin: 0% 20% 5% 20%">
@@ -258,7 +257,7 @@
 
 							<c:otherwise>
 								<thead>
-									<tr class="rowtable" style="background-color: #9ec1c1;">
+									<tr class="rowtable">
 										<th style="width: 10%;"></th>
 										<th style="width: 30%;">Nombre de usuario</th>
 										<th style="width: 30%;">Nombre</th>
@@ -281,10 +280,11 @@
 						</c:choose>
 					</table>
 				</div>
-				<div style="display: inline-block">
-					<table id="meetingTable" width=30% class="table table-striped">
+
+				<div class="invitation-table scroll_vertical" id="style_scroll">
+					<table id="meetingTable" class="table">
 						<thead>
-							<tr class="rowtable" style="background-color: #9ec1c1;">
+							<tr class="rowtable">
 								<th style="width: 10%;"></th>
 								<th style="width: 30%;">Nombre de usuario</th>
 								<th style="width: 30%;">Nombre</th>

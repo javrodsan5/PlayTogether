@@ -3137,15 +3137,34 @@ body {
 }
 
 
-
-.searchUserForm {
-
-
-	margin-top: 2em;
-	margin-bottom: 2em;
+.send-invitation-form {
+	margin-top: 1.5em;	
+	
 }
 
-.search-user-meeting-championship {
-	margin: 0 !important;
+.search-user-form {
+	border-radius: 1em;
+}
+
+.search-user-form .col-sm-10 {
+	height: 3.8em !important;
+	padding-top: 1.7em;
+}
+
+.search-user-form .form-group {
+	margin-bottom: 0em;
+}
+
+.search-user-form .form-group button {
+	background-color: #40c980;
+	margin-top: 1.5em;
+}
+
+.invitation-table {
+	margin-top: 0.1em;
+	margin-left: 2.5%;
+	margin-right: 2.5%;
+	display: inline-block;
+	height: 23em;
 }
 
