@@ -47,7 +47,7 @@
 			<sec:authorize access="!isAuthenticated()">
 				<li
 					class="${name=='login' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}"><a
-					class="nav-link" href="/login">Login <i class="fa fa-sign-in"></i></a></li>
+					class="nav-link" href="/login">Iniciar sesión <i class="fa fa-sign-in"></i></a></li>
 				<li
 					class="${name=='login' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active mobile' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 mobile'}"><a
 					class="nav-link" href="/login"> <i class="fa fa-sign-in"></i></a></li>
@@ -67,7 +67,7 @@
 
 				<li
 					class="${name=='clasifications' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
-					<a class="nav-link" href="/clasification">Clasificacion <i
+					<a class="nav-link" href="/clasification">Clasificación <i
 						class="fa fa-sort-amount-asc"></i></a>
 				</li>
 
@@ -121,7 +121,7 @@
 				</c:if>
 				<li
 					class="${name=='logout' ? 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 active desktop' : 'nav-item pl-4 pl-md-0 ml-0 ml-md-4 desktop'}">
-					<a class="nav-link" href="/logout"> Logout <i
+					<a class="nav-link" href="/logout"> Cerrar sesión <i
 						class="fa fa-sign-out"></i></a>
 				</li>
 				<li
