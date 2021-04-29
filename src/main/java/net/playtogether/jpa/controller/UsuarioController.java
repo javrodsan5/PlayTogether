@@ -351,4 +351,18 @@ public class UsuarioController {
 		model.addAttribute("confirmatedDelete", true);
 		return userProfile(model, principal);
 	}
+	
+	@GetMapping("/requestDataMyProfile")
+	public String requestDataMyProfile(ModelMap model, Principal principal) {
+		
+		model.addAttribute("confirmationData", true);
+		return userProfile(model, principal);
+}
+	
+	@GetMapping("/confirmationRequestDataMyProfile")
+	public String confirmationRequestDataMyProfile(ModelMap model, Principal principal) {
+	
+		model.addAttribute("confirmatedData", true);
+		return userProfile(model, principal);
+	}
 }

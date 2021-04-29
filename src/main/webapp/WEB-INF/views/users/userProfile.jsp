@@ -26,7 +26,8 @@
 				<div class="card-body" style="margin: auto;">
 					<h3 class="alert alert-warning" style="text-align: center">¿Estás
 						seguro de que quieres borrar tu perfil?</h3>
-					<center>
+
+					<div align="center">
 						<div style="display: inline-block;">
 							<a class="btn btn-primary"
 								href="/confirmationRequestDeleteMyProfile">Sí</a>
@@ -34,9 +35,35 @@
 						<div style="display: inline-block;">
 							<a class="btn btn-primary" href="/myprofile">No</a>
 						</div>
+					</div>
 				</div>
-				</center>
 			</div>
+		</c:if>
+		<c:if test="${confirmationData}">
+			<div class="card" style="margin: 1% 35% 1% 35%">
+				<div class="card-header"
+					style="background-color: #9ec1c1; font-family: 'Recursive', sans-serif; text-align: center">Confirmación
+					de solicitar tus datos</div>
+				<div class="card-body" style="margin: auto;">
+					<h3 class="alert alert-warning" style="text-align: center">¿Quieres
+						solicitar tus datos?</h3>
+
+					<div align="center">
+						<div style="display: inline-block;">
+							<a class="btn btn-primary"
+								href="/confirmationRequestDataMyProfile">Sí</a>
+						</div>
+						<div style="display: inline-block;">
+							<a class="btn btn-primary" href="/myprofile">No</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:if>
+		<c:if test="${confirmatedData}">
+			<h3 class="alert alert-success"
+				style="margin: 1% 30% 1% 30%; text-align: center">Hemos
+				recibido tu solicitud de petición de datos.</h3>
 		</c:if>
 		<c:if test="${confirmatedDelete}">
 			<h3 class="alert alert-success"
@@ -52,14 +79,14 @@
 		<div class="alert alert-primary" style="margin: 1% 20% 1% 20%">
 			<c:if test="${invitacionesQuedadas!=0 and invitacionesTorneos ==0}">
 				<c:if test="${invitacionesQuedadas==1}">
-					<h2 style="text-align:center;">
+					<h2 style="text-align: center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitación a una quedada nueva
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesQuedadas!=1}">
-					<h2 style="text-align:center;">
+					<h2 style="text-align: center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitaciones a quedadas nuevas
@@ -68,14 +95,14 @@
 			</c:if>
 			<c:if test="${invitacionesQuedadas==0 and invitacionesTorneos !=0}">
 				<c:if test="${invitacionesTorneos==1}">
-					<h2 style="text-align:center;">
+					<h2 style="text-align: center;">
 						Tienes
 						<c:out value="${invitacionesTorneos}" />
 						invitación a un torneo nuevo
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesTorneos!=1}">
-					<h2 style="text-align:center;">
+					<h2 style="text-align: center;">
 						Tienes
 						<c:out value="${invitacionesTorneos}" />
 						invitaciones a torneos nuevos
@@ -84,7 +111,7 @@
 			</c:if>
 			<c:if test="${invitacionesQuedadas!=0 and invitacionesTorneos !=0}">
 				<c:if test="${invitacionesTorneos==1 and invitacionesQuedadas==1}">
-					<h2 style="text-align:center;">
+					<h2 style="text-align: center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitación a una quedada nueva y
@@ -93,7 +120,7 @@
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesTorneos!=1 and invitacionesQuedadas==1}">
-					<h2 style="text-align:center;">
+					<h2 style="text-align: center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitación a una quedada nueva y
@@ -102,7 +129,7 @@
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesTorneos==1 and invitacionesQuedadas!=1}">
-					<h2 style="text-align:center;">
+					<h2 style="text-align: center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitaciones a quedadas nuevas y
@@ -111,7 +138,7 @@
 					</h2>
 				</c:if>
 				<c:if test="${invitacionesTorneos!=1 and invitacionesQuedadas!=1}">
-					<h2 style="text-align:center;"> 
+					<h2 style="text-align: center;">
 						Tienes
 						<c:out value="${invitacionesQuedadas}" />
 						invitaciones a quedadas nuevas y
@@ -178,14 +205,9 @@
 							<br> <a class="btn btn-primary"
 								href="${fn:escapeXml(editUser2Url)}">Editar</a> <br> <br>
 							<a href="/invitations/listInvitations" class="btn btn-primary">Ver
-								invitaciones</a> 
-								
-								<br> <br> <a
-								href="/myprofile/paysRecord" class="btn btn-primary">Historial
-								de pagos</a>
-								
-								<br> <br> <a
-								href="/myprofile/meetingsRecord" class="btn btn-primary">Historial
+								invitaciones</a> <br> <br> <a href="/myprofile/paysRecord"
+								class="btn btn-primary">Historial de pagos</a> <br> <br>
+							<a href="/myprofile/meetingsRecord" class="btn btn-primary">Historial
 								de quedadas</a>
 
 							<spring:url value="/myprofile/championshipsRecord"
@@ -196,7 +218,8 @@
 								href="${fn:escapeXml(championshipRecord2Url)}">Historial de
 								torneos</a> <br> <br> <a class="btn btn-primary"
 								href="/requestDeleteMyProfile">Solicitar borrar mi perfil</a> <br>
-							<br>
+							<br> <a class="btn btn-primary" href="/requestDataMyProfile">Solicitar
+								datos de mi perfil</a> <br> <br>
 						</center>
 
 					</div>
