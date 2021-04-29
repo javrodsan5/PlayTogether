@@ -166,7 +166,7 @@
 					<h1>Invitar participantes a quedada</h1>
 					<h2>(Máximo ${meetingSize} participantes)</h2>
 				</div>
-				<div class="crearMeeting" style="display: inline-block">
+				<div class="crearMeeting">
 
 					<c:if test="${limitedMeetingSize==true}">
 						<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
