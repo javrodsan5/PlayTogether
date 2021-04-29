@@ -3,8 +3,8 @@ package net.playtogether.jpa.service;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,8 @@ import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.entity.Usuario;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class InvitationServiceTests {
@@ -25,9 +27,6 @@ public class InvitationServiceTests {
 	
 	@Autowired
 	private ChampionshipService	championshipService;
-	
-	@Autowired
-	private MeetingService meetingService;
 
 	// SAVE INVITATION
 	@Test
@@ -39,7 +38,7 @@ public class InvitationServiceTests {
 
 		this.invitationService.save(invitation);
 		Long countAfter = this.invitationService.countInvitations();
-		Assertions.assertThat(countBefore).isEqualTo(countAfter);
+		assertThat(countBefore).isEqualTo(countAfter);
 	}
 	
 	// DELETE INVITATION
@@ -53,7 +52,7 @@ public class InvitationServiceTests {
 
 		this.invitationService.delete(invitation.getId());
 		Long countAfter = this.invitationService.countInvitations();
-		Assertions.assertThat(countBefore).isEqualTo(countAfter);
+		assertThat(countBefore).isEqualTo(countAfter);
 	}
 	
 	// FIND INVITATION BY ID
@@ -63,7 +62,7 @@ public class InvitationServiceTests {
 		this.invitationService.save(invitation1);
 		
 		Invitation invitation2 = this.invitationService.findById(invitation1.getId());
-		Assertions.assertThat(invitation2.equals(invitation1));
+		assertThat(invitation2.equals(invitation1));
 	}
 
 	// FIND CHAMPIONSHIP INVITATION BY USER_NAME
@@ -93,7 +92,7 @@ public class InvitationServiceTests {
 		this.invitationService.save(invitation);
 		
 		Collection<Invitation> invitations = this.invitationService.findChampionshipInvitationsByUsername(u.getUser().getUsername());
-		Assertions.assertThat(invitations.contains(invitation));
+		assertThat(invitations.contains(invitation));
 
 	}
 	
@@ -127,7 +126,7 @@ public class InvitationServiceTests {
 
 		boolean b = this.invitationService.isNotInvitedYetToChampionshipTeam(t.getId(), u.getId());
 		
-		Assertions.assertThat(b == true);
+		assertThat(b == true);
 
 	}
 	
@@ -160,50 +159,32 @@ public class InvitationServiceTests {
 		this.invitationService.save(invitation);
 		
 		Collection<Invitation> invitations = this.invitationService.findMeetingInvitationsByUsername(u.getName());
-		Assertions.assertThat(invitations.contains(invitation));
+		assertThat(invitations.contains(invitation));
 
 	}
-	
-	/*
-	// BOOLEAN USER IS NOT INVITED TO MEETING YET
+
 	@Test
-	void shouldValidateUserIsNotInvitedToMeetingYet() throws Exception {
-		User user = new User();
-		user.setUsername("user1");
-		user.setPassword("password");
-		user.setEnabled(true);
-		
-		Usuario u = new Usuario();
-		u.setId(1);
-		u.setName("Usuario1");
-		u.setCorreo("correo@correo.com");
-		u.setUser(user);
-		u.setBirthdate(LocalDate.of(1999, 3, 16));
-		u.setPhone("123456789");
-		u.setPayment(null);
-		u.setStatistics(null);
-		u.setType(null);
-		u.setTeams(null);
-		u.setMeetings(null);
-		
-		Meeting m = new Meeting();
-		m.setId(1);
-		m.setAddress("Bami");
-		m.setCity("Sevilla");
-		m.setDate(LocalDateTime.of(2021, 06, 12, 12, 00));
-		m.setParticipants(new ArrayList<User>());
-		m.setDescription("Una partidata");
-		m.setNumberOfPlayers(2);
-		this.meetingService.save(m);
-		
-		Invitation invitation = new Invitation();
-		invitation.setMeeting(m);
-		this.invitationService.save(invitation);
-
-		boolean b = this.invitationService.isNotInvitedYetToMeeting(m.getId(), u.getId());
-		
-		Assertions.assertThat(b == true);
+	void listInvitationsNotFinishedChamp() throws Exception {
+		List<Invitation> l = this.invitationService.listInvitationsNotFinishedChamp("antonio98");
+		assertThat(l.size()).isEqualTo(0);
 	}
-	*/
+
+	@Test
+	void findMyChampionshipInvitations() throws Exception {
+		Collection<Invitation> l = this.invitationService.findMyChampionshipInvitations("antonio98");
+		assertThat(l.size()).isEqualTo(0);
+	}
+
+	@Test
+	void findMyMeetingInvitations() throws Exception {
+		Collection<Invitation> l = this.invitationService.findMyMeetingInvitations("antonio98");
+		assertThat(l.size()).isEqualTo(1);
+	}
+
+	@Test
+	void isNotInvitedYetToMeeting() throws Exception {
+		Boolean b = this.invitationService.isNotInvitedYetToMeeting(1, 1);
+		assertThat(b).isTrue();
+	}
 
 }
