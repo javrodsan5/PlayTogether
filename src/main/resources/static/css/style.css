@@ -3135,3 +3135,189 @@ body {
 .botoncito-crear-meeting a {
 	color: white;
 }
+
+.alert{
+	margin: 20%;
+}
+
+
+.send-invitation-form {
+	margin-top: 1.8em;	
+}
+
+.search-user-form {
+	border-radius: 1em;
+}
+
+.invitation-select {
+	margin-top: 1.1em;
+	font-size: 90%;
+}
+
+.search-user-form .col-sm-10 {
+	height: 3.9em !important;
+	padding-top: 2em;
+}
+
+.search-user-form .form-group {
+	margin-bottom: 0em;
+	padding-top: 2.1em;	
+	height: 6.5em;
+}
+
+.search-person-button {
+	margin-right: 4em;
+	display: inline-block;
+}
+
+.return-search-person-button {
+	display: inline-block;	
+}
+
+.search-user-form .form-group button {
+	background-color: #41ba6f;
+	width: 100%;
+}
+
+.invitation-tables-complete-block {
+	width: 100%;
+}
+
+.table-title-block {
+	padding: 0.3em;
+	margin: 0.7em;
+	margin-right: 1.7%;
+	margin-left: 1.7%;	
+	width: 44%;
+	min-width: 44%;
+	max-width: 44%;
+	display: inline-block;
+}
+
+.invitation-table-title {
+	background-color: #e0ebeb;
+	width: 100%;
+
+	padding-top: 0.6em;
+	padding-bottom: 0.5em;
+}
+
+.invitation-table {
+	width: 100%;
+	height: 23em;
+	padding: 0;
+}
+
+.invitation-table th {
+	vertical-align: middle !important;
+}
+
+@media ( max-width : 55em) and (min-width: 48em) {
+	
+	.invitation-search-title h1 {
+		font-size: 200%;
+	}
+	
+	.invitation-search-title h2 {
+		font-size: 145%;
+	}
+	
+	.invitation-select {
+		font-size: 83%;
+	}
+	
+	.invitation-table-title h3 {
+		font-size: 150%;
+	}
+	
+	.invitation-table th {
+		font-size: 88%;
+	}
+	
+	.invitation-table td {
+		font-size: 88%;
+	}
+	
+}
+
+@media ( max-width : 48em) {
+		
+	.invitation-search-title h1 {
+		font-size: 145%;
+	}
+	
+	.invitation-search-title h2 {
+		font-size: 105%;
+	}
+	
+	.search-user-form .col-sm-10 {
+		padding-top: 2.2em;
+	}
+	
+	.invitation-select {
+		font-size: 75%;
+		margin-top: 1em;
+	}
+	
+	.search-user-form .form-control {
+		height: 2em;
+	}
+	
+	.search-person-button {
+    	margin-right: 1em;
+	}
+	
+	.search-user-form .form-group b {
+		font-size: 78%;
+	}
+	
+	.cardtitle .invitation-table-title {
+		font-size: 110%;
+	}
+
+	.invitation-table-title h3 {
+		font-size: 110%;
+	}
+	
+	.invitation-table th {
+		font-size: 80%;
+	}
+	
+	.invitation-table td {
+		font-size: 80%;
+	}
+	
+	.table-title-block {
+		min-width: 85%;
+		height: 15em;
+		margin-bottom: 2em;
+	}
+	
+	.invitation-table {
+		height: 14em;
+	} 
+	
+}
+
+@media ( max-width : 36em) {
+		
+	.search-user-form input {
+		max-width: 13.44em;
+		font-size: 93%;
+	}
+	
+	.invitation-select {
+		font-size: 65%;
+		margin-top: 2em;
+	}
+		
+	.search-person-button {
+    	margin-right: 5%;
+	}
+	
+	.search-user-form .form-group b {
+		font-size: 70%;
+	}
+	
+	
+}

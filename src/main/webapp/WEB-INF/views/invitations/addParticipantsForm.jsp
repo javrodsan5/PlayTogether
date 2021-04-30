@@ -13,11 +13,11 @@
 	<c:if test="${teamView == true}">
 		<playtogether:layout pageName="teams" invitaciones="${invitaciones}">
 			<body>
-				<div class="thirteen">
+				<div class="thirteen invitation-search-title">
 					<h1>Invitar participantes al equipo ${team.name}</h1>
 					<h2>(Máximo ${teamSize} participantes)</h2>
 				</div>
-				<div class="crearMeeting" style="display: inline-block">
+				<div class="crearMeeting send-invitation-form">
 
 					<c:if test="${limitedTeamSize==true}">
 						<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
@@ -66,92 +66,111 @@
 						</div>
 					</c:if>
 
-					<form:form id="survey-form"
+					<form:form id="survey-form" class="search-user-form"
 						action="/invitations/team/${teamId}/send_invitation" method="GET"
 						style="padding:0rem 0rem; width:60%">
 						<center>
 							<div>
-								<br>
 								<div class="col-sm-10">
 									<input type="text" class="form-control" name="search" required
-										placeholder="Introduzca el nombre" style="width: 90%"><br>
-									<br>
+										placeholder="Introduzca el nombre" style="width: 90%">
 								</div>
 								<div class="form-group">
-									<button class="btn btn-success" type="submit"
-										style="margin-right: 10%">
-										<b>Buscar</b>
-									</button>
-									<button class="btn btn-success"
-										onclick="location.href='/sports/${team.championship.sport.id}/championships/${team.championship.id}';"
-										type="button">
-										<b>Volver a torneo</b>
-									</button>
+									<div class="search-person-button">
+										<button class="btn btn-success" type="submit"
+											style="margin-right: 10%">
+											<b>Buscar</b>
+										</button>
+									</div>
+									<div class="return-search-person-button">
+										<button class="btn btn-success"
+											onclick="location.href='/sports/${team.championship.sport.id}/championships/${team.championship.id}';"
+											type="button">
+											<b>Volver a torneo</b>
+										</button>
+									</div>
 								</div>
-								<br>
 							</div>
 						</center>
 					</form:form>
 				</div>
 
-				<div style="display: inline-block">
-					<table id="meetingTable" width=40% class="table table-striped">
-						<c:choose>
-							<c:when test="${team_participants.isEmpty()}">
-								<div class="alert alert-primary" style="margin: 0% 20% 5% 20%">
-									<p>Aún no hay participantes en el equipo</p>
-								</div>
-							</c:when>
+				<div class="invitation-tables-complete-block">
+					<div class="table-title-block">
+						<div class="cardtitle invitation-table-title">
+							<h3 class="list-meeting-championship-title">
+								Participantes
+							</h3>
+						</div>
+						
+						<div class="invitation-table scroll_vertical" id="style_scroll">
+							<table id="meetingTable" class="table">
+								<c:choose>
+									<c:when test="${team_participants.isEmpty()}">
+										<div class="alert alert-primary" style="margin: 0% 20% 5% 20%">
+											<p>Aún no hay participantes en el equipo</p>
+										</div>
+									</c:when>
+		
+									<c:otherwise>
+										<thead>
+											<tr class="rowtable"">
+												<th style="width: 10%;"></th>
+												<th style="width: 30%;">Nombre de usuario</th>
+												<th style="width: 30%;">Nombre</th>
+												<th style="width: 30%;">Fecha de nacimiento</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:set var="i" value="${1}" />
+											<c:forEach items="${team_participants}" var="user">
+												<tr class="rowtable">
+													<td><c:out value="${i}" /></td>
+													<td><c:out value="${user.user.username}" /></td>
+													<td><c:out value="${user.name}" /></td>
+													<td><c:out value="${user.birthdate}" /></td>
+													<c:set var="i" value="${i+1}" />
+												</tr>
+											</c:forEach>
+										</tbody>
+									</c:otherwise>
+								</c:choose>
+							</table>
+						</div>
+					</div>
 
-							<c:otherwise>
-								<thead>
-									<tr class="rowtable" style="background-color: #9ec1c1;">
-										<th style="width: 10%;"></th>
-										<th style="width: 30%;">Nombre de usuario</th>
-										<th style="width: 30%;">Nombre</th>
-										<th style="width: 30%;">Fecha de nacimiento</th>
-									</tr>
-								</thead>
-								<tbody>
-									<c:set var="i" value="${1}" />
-									<c:forEach items="${team_participants}" var="user">
-										<tr class="rowtable">
-											<td><c:out value="${i}" /></td>
-											<td><c:out value="${user.user.username}" /></td>
-											<td><c:out value="${user.name}" /></td>
-											<td><c:out value="${user.birthdate}" /></td>
-											<c:set var="i" value="${i+1}" />
-										</tr>
-									</c:forEach>
-								</tbody>
-							</c:otherwise>
-						</c:choose>
-					</table>
-				</div>
-				<div style="display: inline-block">
-					<table id="meetingTable" width=30% class="table table-striped">
-						<thead>
-							<tr class="rowtable" style="background-color: #9ec1c1;">
-								<th style="width: 10%;"></th>
-								<th style="width: 30%;">Nombre de usuario</th>
-								<th style="width: 30%;">Nombre</th>
-								<th style="width: 30%;">Fecha de nacimiento</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:set var="i" value="${1}" />
-							<c:forEach items="${championshipInvitations}" var="invitation">
+					<div class="table-title-block">
+						<div class="cardtitle invitation-table-title">
+							<h3 class="list-meeting-championship-title">
+								Invitaciones
+							</h3>
+						</div>
+						
+						<div class="invitation-table scroll_vertical" id="style_scroll">
+						<table id="meetingTable" class="table">
+							<thead>
 								<tr class="rowtable">
-									<td><c:out value="${i}" /></td>
-									<td><c:out value="${invitation.receiver.user.username}" /></td>
-									<td><c:out value="${invitation.receiver.name}" /></td>
-									<td><c:out value="${invitation.receiver.birthdate}" /></td>
-									<c:set var="i" value="${i+1}" />
+									<th style="width: 10%;"></th>
+									<th style="width: 30%;">Nombre de usuario</th>
+									<th style="width: 30%;">Nombre</th>
+									<th style="width: 30%;">Fecha de nacimiento</th>
 								</tr>
-							</c:forEach>
-						</tbody>
-
-					</table>
+							</thead>
+							<tbody>
+								<c:set var="i" value="${1}" />
+								<c:forEach items="${championshipInvitations}" var="invitation">
+									<tr class="rowtable">
+										<td><c:out value="${i}" /></td>
+										<td><c:out value="${invitation.receiver.user.username}" /></td>
+										<td><c:out value="${invitation.receiver.name}" /></td>
+										<td><c:out value="${invitation.receiver.birthdate}" /></td>
+										<c:set var="i" value="${i+1}" />
+									</tr>
+								</c:forEach>
+							</tbody>
+	
+						</table>
+					</div>
 				</div>
 			</body>
 		</playtogether:layout>
@@ -162,11 +181,11 @@
 		<playtogether:layout pageName="meetings"
 			invitaciones="${invitaciones}">
 			<body>
-				<div class="thirteen">
+				<div class="thirteen invitation-search-title">
 					<h1>Invitar participantes a quedada</h1>
 					<h2>(Máximo ${meetingSize} participantes)</h2>
 				</div>
-				<div class="crearMeeting" style="display: inline-block">
+				<div class="crearMeeting send-invitation-form">
 
 					<c:if test="${limitedMeetingSize==true}">
 						<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
@@ -215,50 +234,91 @@
 						</div>
 					</c:if>
 
-					<form:form id="survey-form"
+					<form:form id="survey-form" class="search-user-form"
 						action="/invitations/meeting/${meeting.id}/send_invitation"
 						method="GET" style="padding:0rem 0rem; width:60%">
 						<center>
 							<div>
-								<br>
-
 								<div class="col-sm-10">
 									<input type="text" class="form-control" name="search" required
-										placeholder="Introduzca el nombre" style="width: 90%"><br>
-									<br>
+										placeholder="Introduzca el nombre" style="width: 90%">
 								</div>
 								<div class="form-group">
-									<button class="btn btn-success" type="submit"
-										style="margin-right: 10%">
-										<b>Buscar</b>
-									</button>
-									<button class="btn btn-success"
-										onclick="location.href='/sports/${meeting.sport.id}/meetings/${meeting.id}';"
-										type="button">
-										<b>Volver a quedada</b>
-									</button>
+									<div class="search-person-button">
+										<button class="btn btn-success" type="submit"
+											style="margin-right: 10%">
+											<b>Buscar</b>
+										</button>
+									</div>
+									<div class="return-search-person-button">
+										<button class="btn btn-success"
+											onclick="location.href='/sports/${meeting.sport.id}/meetings/${meeting.id}';"
+											type="button">
+											<b>Volver a quedada</b>
+										</button>
+									</div>
 								</div>
 
-								<br>
 							</div>
 						</center>
-
 					</form:form>
-
 				</div>
-
-				<div style="display: inline-block">
-					<table id="meetingTable" width=30% class="table table-striped">
-						<c:choose>
-							<c:when test="${meeting_participants.isEmpty()}">
-								<div class="alert alert-primary" style="margin: 0% 20% 5% 20%">
-									<p>Aún no hay participantes en la quedada</p>
-								</div>
-							</c:when>
-
-							<c:otherwise>
+				
+				<div class="invitation-tables-complete-block">
+					<div class="table-title-block">
+						<div class="cardtitle invitation-table-title">
+							<h3 class="list-meeting-championship-title">
+								Participantes
+							</h3>
+						</div>
+	
+						<div class="invitation-table scroll_vertical" id="style_scroll">
+							<table id="meetingTable" class="table">
+								<c:choose>
+									<c:when test="${meeting_participants.isEmpty()}">
+										<div class="alert alert-primary" style="margin: 0% 20% 5% 20%">
+											<p>Aún no hay participantes en la quedada</p>
+										</div>
+									</c:when>
+		
+									<c:otherwise>
+										<thead>
+											<tr class="rowtable">
+												<th style="width: 10%;"></th>
+												<th style="width: 30%;">Nombre de usuario</th>
+												<th style="width: 30%;">Nombre</th>
+												<th style="width: 30%;">Fecha de nacimiento</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:set var="i" value="${1}" />
+											<c:forEach items="${meeting_participants}" var="user">
+												<tr class="rowtable">
+													<td><c:out value="${i}" /></td>
+													<td><c:out value="${user.user.username}" /></td>
+													<td><c:out value="${user.name}" /></td>
+													<td><c:out value="${user.birthdate}" /></td>
+													<c:set var="i" value="${i+1}" />
+												</tr>
+											</c:forEach>
+										</tbody>
+									</c:otherwise>
+								</c:choose>
+							</table>
+						</div>
+					</div>
+					
+					<div class="table-title-block">
+						<div class="cardtitle invitation-table-title">
+							<h3 class="list-meeting-championship-title">
+								Invitaciones
+							</h3>
+						</div>
+						
+						<div class="invitation-table scroll_vertical" id="style_scroll">
+							<table id="meetingTable" class="table">
 								<thead>
-									<tr class="rowtable" style="background-color: #9ec1c1;">
+									<tr class="rowtable">
 										<th style="width: 10%;"></th>
 										<th style="width: 30%;">Nombre de usuario</th>
 										<th style="width: 30%;">Nombre</th>
@@ -267,44 +327,20 @@
 								</thead>
 								<tbody>
 									<c:set var="i" value="${1}" />
-									<c:forEach items="${meeting_participants}" var="user">
+									<c:forEach items="${meetingInvitations}" var="invitation">
 										<tr class="rowtable">
 											<td><c:out value="${i}" /></td>
-											<td><c:out value="${user.user.username}" /></td>
-											<td><c:out value="${user.name}" /></td>
-											<td><c:out value="${user.birthdate}" /></td>
+											<td><c:out value="${invitation.receiver.user.username}" /></td>
+											<td><c:out value="${invitation.receiver.name}" /></td>
+											<td><c:out value="${invitation.receiver.birthdate}" /></td>
 											<c:set var="i" value="${i+1}" />
 										</tr>
 									</c:forEach>
 								</tbody>
-							</c:otherwise>
-						</c:choose>
-					</table>
-				</div>
-				<div style="display: inline-block">
-					<table id="meetingTable" width=30% class="table table-striped">
-						<thead>
-							<tr class="rowtable" style="background-color: #9ec1c1;">
-								<th style="width: 10%;"></th>
-								<th style="width: 30%;">Nombre de usuario</th>
-								<th style="width: 30%;">Nombre</th>
-								<th style="width: 30%;">Fecha de nacimiento</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:set var="i" value="${1}" />
-							<c:forEach items="${meetingInvitations}" var="invitation">
-								<tr class="rowtable">
-									<td><c:out value="${i}" /></td>
-									<td><c:out value="${invitation.receiver.user.username}" /></td>
-									<td><c:out value="${invitation.receiver.name}" /></td>
-									<td><c:out value="${invitation.receiver.birthdate}" /></td>
-									<c:set var="i" value="${i+1}" />
-								</tr>
-							</c:forEach>
-						</tbody>
-
-					</table>
+		
+							</table>
+						</div>
+					</div>
 				</div>
 			</body>
 		</playtogether:layout>
