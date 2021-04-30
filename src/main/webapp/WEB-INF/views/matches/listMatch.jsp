@@ -120,7 +120,7 @@
 				<div class="tournament-bracket tournament-bracket--rounded">
 					<div
 						class="tournament-bracket__round tournament-bracket__round--semifinals">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Semifinales</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
 								<div class="tournament-bracket__match" tabindex="0">
@@ -262,7 +262,7 @@
 
 					<div
 						class="tournament-bracket__round tournament-bracket__round--gold">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Final</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
 								<div class="tournament-bracket__match" tabindex="0">
@@ -344,7 +344,7 @@
 				<div class="tournament-bracket tournament-bracket--rounded">
 					<div
 						class="tournament-bracket__round tournament-bracket__round--quarterfinals">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Cuartos
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Cuartos
 							de final</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
@@ -613,7 +613,7 @@
 					</div>
 					<div
 						class="tournament-bracket__round tournament-bracket__round--semifinals">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Semifinales</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
 								<div class="tournament-bracket__match" tabindex="0">
@@ -755,7 +755,7 @@
 
 					<div
 						class="tournament-bracket__round tournament-bracket__round--gold">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Final</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
 								<div class="tournament-bracket__match" tabindex="0">
@@ -842,7 +842,7 @@
 
 						<div
 							class="tournament-bracket__round tournament-bracket__round--roundOf16">
-							<h3 class="tournament-bracket__round-title alert alert-primary">Octavos
+							<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:10%">Octavos
 								de final</h3>
 							<ul class="tournament-bracket__list">
 								<li class="tournament-bracket__item">
@@ -1366,7 +1366,7 @@
 
 						<div
 							class="tournament-bracket__round tournament-bracket__round--quarterfinals">
-							<h3 class="tournament-bracket__round-title alert alert-primary">Cuartos
+							<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:10%">Cuartos
 								de final</h3>
 							<ul class="tournament-bracket__list">
 								<li class="tournament-bracket__item">
@@ -1632,7 +1632,7 @@
 						</div>
 						<div
 							class="tournament-bracket__round tournament-bracket__round--semifinals">
-							<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+							<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:10%">Semifinales</h3>
 							<ul class="tournament-bracket__list">
 								<li class="tournament-bracket__item">
 									<div class="tournament-bracket__match" tabindex="0">
@@ -1769,7 +1769,7 @@
 
 						<div
 							class="tournament-bracket__round tournament-bracket__round--gold">
-							<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+							<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:10%" >Final</h3>
 							<ul class="tournament-bracket__list">
 								<li class="tournament-bracket__item">
 									<div class="tournament-bracket__match" tabindex="0">
@@ -1849,17 +1849,22 @@
 
 		<br>
 		<br>
+		<br>
+		<div class="cardlist" align="center" style="margin-top: 7%">
+			<c:if test="${championshipObj.matches.size() == 0 }">
+				<h2 class="alert alert-warning"
+					style="text-align: center; font-size: 20px; width: 50%; margin: auto">
+					No existen partidos aún para este torneo</h2>
+			</c:if>
 
-		<div class="cardlist" align="center" style="margin-top: 5%">
 			<c:if test="${championshipObj.matches.size() > 0 }">
-				<center>
-					<h2 class="alert alert-info"
-						style="text-align: center; font-size: 20px; width: 90%;">
-						<i class="fa fa-info-circle"></i> Para que el resultado del
-						partido se considere válido, deben coincidir los resultados
-						aportados por cada equipo
-					</h2>
-				</center>
+				<h2 class="alert alert-info"
+					style="text-align: center; font-size: 20px; width: 90%; margin: 0%">
+					<i class="fa fa-info-circle"></i> Para que el resultado del partido
+					se considere válido, deben coincidir los resultados aportados por
+					cada equipo
+				</h2>
+				<br>
 
 				<div class="scroll_vertical" id="style_scroll">
 					<table id="matchTable" class="table">

@@ -2147,6 +2147,10 @@ form input {
 		font-weight: 500;
 		transition: all 200ms linear;
 	}
+	
+	.alert-primary-clasification {
+	font-size: 1em;
+	}
 }
 
 body {

@@ -119,7 +119,7 @@ INSERT INTO meetings_participants(meetings_id, participants_id) VALUES(1, 1);
 INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(1, 'Torneo ATP', 'Polideportivo Marbella Vice', 'Sevilla', 'Torneo oficial de la ATP', '2021/06/25 12:00:00', 8, '2021/06/15 11:00:00', 1, 1);
 INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
-VALUES(2, 'Torneo entre amigos', 'SADUS Bermejales', 'Sevilla', 'Torneo disputado entre amigos! Nos falta gente!', '2021/04/12 16:45:00', 16, '2021/04/06 18:45:00', 1, 1);
+VALUES(2, 'Torneo entre amigos', 'SADUS Bermejales', 'Sevilla', 'Torneo disputado entre amigos! Nos falta gente!', '2022/04/12 16:45:00', 16, '2022/04/06 18:45:00', 1, 1);
 INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
 VALUES(3, 'Torneo Oficial', 'Polideportivo San Pablo', 'Sevilla', 'Torneo con jugadores semiprofesionales. Apuntarse sólo jugadores con ranking ATP.', '2021/05/23 12:00:00', 16, '2021/05/15 14:00:00', 1, 1);
 INSERT INTO championships(id, name, address, city, description, finish_date, max_teams, start_date, sport_id, owner) 
@@ -253,3 +253,9 @@ INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALU
 INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(29, 2, null, 22, null, null);
 INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(30, 2, null, 23, null, null);
 INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(31, 2, null, 24, null, null);
+INSERT INTO chat(id, chat_type_id, meeting_id, team_id, user1_id, user2_id) VALUES(32, 3, null, null, 5, 6);
+
+-- Chats individual usuario.id5 y usuario.id6 equipos -->
+INSERT INTO chat_message(id, date, message, chat_id, user_id) VALUES(1, '2021/04/15 11:00:00', 'Hola, ¿este finde tenis no?', 32, 6);
+INSERT INTO chat_message(id, date, message, chat_id, user_id) VALUES(2, '2021/04/15 16:00:00', '¡Si! Por supuesto. Invita a tus amigos si quieres', 32, 5);
+INSERT INTO chat_message(id, date, message, chat_id, user_id) VALUES(3, '2021/04/16 10:00:00', 'Vale', 32, 6);
