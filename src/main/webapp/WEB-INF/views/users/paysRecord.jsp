@@ -22,11 +22,12 @@
 		</div>
 		<div class="cardlist">
 			<c:if test="${noRecords}">
-				<div class="alert alert-danger" style="margin: 0% 20% 1% 20%">
+				<div class="alert alert-danger" style="margin: 0% 20% 10% 20%;">
 					<p>Todavía no has realizado ningun pago.</p>
 				</div>
 			</c:if>
 			<c:if test="${noRecords == null}">
+				<div class="scroll_vertical" id="style_scroll" style="height: 500px;">
 				<table id="userMeetingsTable" class="table ">
 					<thead>
 						<tr class="rowtable">
@@ -59,6 +60,7 @@
 					</tbody>
 
 				</table>
+				</div>
 			</c:if>
 		</div>
 		<br>

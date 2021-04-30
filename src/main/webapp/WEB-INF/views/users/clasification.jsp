@@ -25,7 +25,7 @@
 			- 10 puntos por ganar un torneo.<br><br>
 			Si abandonas un torneo o una quedada perderás los puntos ganados.</h2></center>
 		<br>
-		<h2 class="alert alert-primary"
+		<h2 class="alert alert-primary alert-primary-clasification"
 			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la posición ${posicion}!</h2>
 		<div class="cardlist">
 		<center>
