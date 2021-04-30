@@ -160,14 +160,14 @@
 						<center>
 							<div class="col-sm-10">
 								<h5 style="color: white;">Nombre - Usuario:</h5>
-								<div class="select">
-									<select name="selected_participant">
-										<c:forEach var="item" items="${searched_users}">
-											<option value="${item.id}">${item.name}-
-												${item.user.username}</option>
-										</c:forEach>
-									</select>
-								</div>
+							</div>
+							<div class="select invitation-select">
+								<select name="selected_participant">
+									<c:forEach var="item" items="${searched_users}">
+										<option value="${item.id}">${item.name}-
+											${item.user.username}</option>
+									</c:forEach>
+								</select>
 							</div>
 							<div class="form-group">
 								<div class="search-person-button">
@@ -176,7 +176,7 @@
 										<b>Invitar</b>
 									</button>
 								</div>
-								<div class="search-person-button">
+								<div class="return-search-person-button">
 									<button class="btn btn-success"
 										onclick="location.href='/invitations/meeting/${meetingId}';"
 										type="button">
