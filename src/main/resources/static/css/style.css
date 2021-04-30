@@ -3145,6 +3145,11 @@ body {
 	border-radius: 1em;
 }
 
+.invitation-select {
+	margin-top: 1.1em;
+	font-size: 90%;
+}
+
 .search-user-form .col-sm-10 {
 	height: 3.9em !important;
 	padding-top: 2em;
@@ -3213,6 +3218,10 @@ body {
 		font-size: 145%;
 	}
 	
+	.invitation-select {
+		font-size: 83%;
+	}
+	
 	.invitation-table-title h3 {
 		font-size: 150%;
 	}
@@ -3228,7 +3237,6 @@ body {
 }
 
 @media ( max-width : 48em) {
-
 		
 	.invitation-search-title h1 {
 		font-size: 145%;
@@ -3240,6 +3248,11 @@ body {
 	
 	.search-user-form .col-sm-10 {
 		padding-top: 2.2em;
+	}
+	
+	.invitation-select {
+		font-size: 75%;
+		margin-top: 1em;
 	}
 	
 	.search-user-form .form-control {
@@ -3287,6 +3300,11 @@ body {
 	.search-user-form input {
 		max-width: 13.44em;
 		font-size: 93%;
+	}
+	
+	.invitation-select {
+		font-size: 65%;
+		margin-top: 2em;
 	}
 		
 	.search-person-button {
