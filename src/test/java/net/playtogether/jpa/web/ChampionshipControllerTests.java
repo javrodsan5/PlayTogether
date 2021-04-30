@@ -1,6 +1,7 @@
 
 package net.playtogether.jpa.web;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -71,6 +72,7 @@ public class ChampionshipControllerTests {
 	private User user;
 
 	private User user2;
+
 
 	@BeforeEach
 	void setup() {
@@ -329,9 +331,8 @@ public class ChampionshipControllerTests {
 	@WithMockUser(value = "user1", authorities = "usuario")
 	void getTeam() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/1/teams/3"))
-		.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
-		.andExpect(MockMvcResultMatchers.view().name("redirect:/championships/1/teams/3"));
-
+				.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+				.andExpect(MockMvcResultMatchers.view().name("redirect:/championships/1/teams/3"));
 
 	}
 
@@ -379,4 +380,91 @@ public class ChampionshipControllerTests {
 				.andExpect(MockMvcResultMatchers.view().name("teams/teamDetails"));
 	}
 
+	@Test
+	@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+	void teamsDetails() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/championships/8/teams/8"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("teams/teamDetails"));
+	}
+
+	@Test
+	@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+	void postCreationMatchWithNoParameters() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/championships/8/match/add"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("matches/createOrUpdateMatchForm"));
+	}
+
+	@Test
+	@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+	void postCreationMatchWithLaterDateThanEndChampionship() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/sports/1/championships/8/match/add")
+						.param("dateTime", "2060-04-05T12:00").with(SecurityMockMvcRequestPostProcessors.csrf()))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("matches/createOrUpdateMatchForm"));
+	}
+
+	@Test
+	@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+	void postCreationMatchWithPastDate() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/sports/1/championships/8/match/add")
+						.param("dateTime", "2021-04-30T12:00").with(SecurityMockMvcRequestPostProcessors.csrf()))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("matches/createOrUpdateMatchForm"));
+	}
+
+	@Test
+	@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+	void postCreationMatchWithTeam1EqualsTeam2() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/sports/1/championships/8/match/add")
+						.param("dateTime", "2021-06-15T12:00").param("team1", "1").param("team2", "1")
+						.with(SecurityMockMvcRequestPostProcessors.csrf()))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("matches/createOrUpdateMatchForm"));
+	}
+
+	@Test
+	@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+	void postCreationMatchWithTeamNull() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/sports/1/championships/8/match/add")
+						.param("dateTime", "2021-06-15T12:00").param("team1", "").param("team2", "1")
+						.with(SecurityMockMvcRequestPostProcessors.csrf()))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("matches/createOrUpdateMatchForm"));
+	}
+
+	@Test
+	@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+	void postCreationMatchCorrectly() throws Exception {
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.post("/sports/1/championships/8/match/add").param("championship", "8")
+						.param("dateTime", "2021-06-15T12:00").param("team1", "1").param("team2", "2")
+						.with(SecurityMockMvcRequestPostProcessors.csrf()))
+				.andExpect(MockMvcResultMatchers.status().is3xxRedirection())
+				.andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/championships/8/matches"));
+	}
+
+	//no consigo que salte el catch de la linea 421 
+	@Test
+	@WithMockUser(username = "user2", authorities = { "usuario" }, password = "password")
+	void matchDetailsNotFoundUser() throws Exception {
+		Principal principal = new Principal() {
+
+	        @Override
+	        public String getName() {
+	            return null;
+	        }
+
+	    };
+		this.mockMvc
+				.perform(MockMvcRequestBuilders.get("/sports/1/championships/8/match/1/result/1").principal(principal)
+						.with(SecurityMockMvcRequestPostProcessors.csrf()))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("matches/listMatch"));
+	}
 }
