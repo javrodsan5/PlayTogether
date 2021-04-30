@@ -323,8 +323,8 @@ public class ChampionshipController {
 				model.addAttribute("errorSelector", "No hay equipos disponibles para este torneo.");
 
 			} else if (match.getTeam1().getId() == match.getTeam2().getId()) {
-				errors.rejectValue("team1", "La fecha debe ser posterior a la actual.",
-						"La fecha debe ser posterior a la actual.");
+				errors.rejectValue("team1", "No puede enfrentarse un equipo a sí mismo.",
+						"No puede enfrentarse un equipo a sí mismo.");
 				model.addAttribute("errorSelector", "No puedes seleccionar el mismo equipo dos veces.");
 			}
 		}
