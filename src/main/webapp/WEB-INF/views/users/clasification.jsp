@@ -17,8 +17,8 @@
 		</div>
 		<br>
 		<center>
-		<h2 class="alert alert-info"
-			style="text-align: center;font-size: 20px;width: 50%;"> <i class="fa fa-info-circle"></i> Puedes ganar puntos de las siguientes formas:<br><br>
+		<h2 class="alert alert-info alert-info-clasificacion"
+			style="text-align: center;font-size: 20px;width: 50%; margin-top: 0;"> <i class="fa fa-info-circle"></i> Puedes ganar puntos de las siguientes formas:<br><br>
 			- 7 puntos por creación de quedada o equipo.<br>
 			- 5 puntos por unirse a una quedada o equipo.<br>
 			- 5 puntos por pasar de ronda en un torneo.<br>
