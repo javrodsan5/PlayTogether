@@ -52,7 +52,7 @@ public class MeetingServiceTests {
 	 @Test
 	 void findListMeetingBySport() throws Exception {
 		Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(1);
-		assertThat(meetings.size()).isEqualTo(4);
+		assertThat(meetings.size()).isEqualTo(3);
 	 }
 
 	 @Test
