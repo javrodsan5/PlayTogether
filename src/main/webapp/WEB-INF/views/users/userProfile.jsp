@@ -70,6 +70,12 @@
 				style="margin: 1% 30% 1% 30%; text-align: center">Hemos
 				recibido tu solicitud de eliminar tu perfil.</h3>
 		</c:if>
+		
+		<c:if test="${incidenceCorrect}">
+			<h3 class="alert alert-success"
+				style="margin: 1% 30% 1% 30%; text-align: center">Se ha enviado su incidencia. Contactaremos lo antes posible con usted. Muchas gracias!</h3>
+		</c:if>
+		
 		<h2>
 			Tienes <span class="pointsuser"><c:out value="${user.puntos}" /></span>
 			puntos
@@ -220,6 +226,11 @@
 								href="/requestDeleteMyProfile">Solicitar borrar mi perfil</a> <br>
 							<br> <a class="btn btn-primary" href="/requestDataMyProfile">Solicitar
 								datos de mi perfil</a> <br> <br>
+								
+								<spring:url value="/myprofile/incidence" var="incidenceUrl">
+						</spring:url>
+						<a class="btn btn-primary"
+								href="${fn:escapeXml(incidenceUrl)}">Enviar incidencia</a> <br> <br>
 						</center>
 
 					</div>

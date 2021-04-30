@@ -40,7 +40,7 @@ public class UsuarioController {
 
 	@Autowired
 	UserTypeService userTypeService;
-	
+
 	@Autowired
 	InvitationService invitationService;
 
@@ -49,7 +49,7 @@ public class UsuarioController {
 
 	@Autowired
 	PayService payService;
-	
+
 	@InitBinder("usuario")
 	public void initUsuariotBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new UsuarioValidator());
@@ -69,7 +69,7 @@ public class UsuarioController {
 			result.addError(new FieldError("usuario", "correo", "El correo ya está registrado"));
 		}
 
-		if(usuario.getAccept() == false) {
+		if (usuario.getAccept() == false) {
 			model.addAttribute("errorAccept", "Debe aceptar las condiciones.");
 			result.addError(new FieldError("usuario", ".", "."));
 		}
@@ -97,9 +97,11 @@ public class UsuarioController {
 	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId, Principal principal) {
 		Usuario usuario = this.usuarioService.findUserById(userId);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		boolean premium = false;
 		if (usuario.getId().equals(user.getId())) {
 
@@ -133,11 +135,13 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile")
 	public String userProfile(final ModelMap model, Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
-		model.addAttribute("invitacionesQuedadas",invitacionesQuedadas);
-		model.addAttribute("invitacionesTorneos",invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
+		model.addAttribute("invitacionesQuedadas", invitacionesQuedadas);
+		model.addAttribute("invitacionesTorneos", invitacionesTorneos);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
 		Integer quedadas = user.getMeetings().size();
@@ -160,9 +164,11 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/edit")
 	public String initUpdateUsuario(ModelMap model, Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.put("usuario", user);
 
@@ -201,9 +207,11 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/championshipsRecord")
 	public String championshipsRecord(final ModelMap model, Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Championship> championships = usuario.getTeams().stream().map(t -> t.getChampionship()).distinct()
 				.collect(Collectors.toList());
@@ -216,9 +224,11 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/meetingsRecord")
 	public String meetingsRecord(final ModelMap model, Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Meeting> meetings = usuario.getMeetings().stream().limit(10).collect(Collectors.toList());
 		if (meetings.size() <= 0) {
@@ -228,21 +238,23 @@ public class UsuarioController {
 
 		return "users/meetingsRecord";
 	}
-	
+
 	@GetMapping("/myprofile/paysRecord")
 	public String paysRecord(final ModelMap model, Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
-		List<Pay> pays = usuario.getPayment().stream().filter(p->p.getDate()!=null).limit(10).collect(Collectors.toList());
+		List<Pay> pays = usuario.getPayment().stream().filter(p -> p.getDate() != null).limit(10)
+				.collect(Collectors.toList());
 		pays.sort(Comparator.comparing(Pay::getDate));
 		Collections.reverse(pays);
 		if (pays.size() <= 0) {
 			model.put("noRecords", true);
 		}
 		model.addAttribute("pays", pays);
-		
 
 		return "users/paysRecord";
 	}
@@ -298,9 +310,11 @@ public class UsuarioController {
 
 	@GetMapping("/clasification")
 	public String usersClasification(ModelMap model, Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		List<Usuario> usuariosOrdenPuntos = usuarioService.findTopUsuarios();
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
@@ -313,7 +327,7 @@ public class UsuarioController {
 		}
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
-		model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0,10));
+		model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
 		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}
@@ -340,29 +354,51 @@ public class UsuarioController {
 
 	@GetMapping("/requestDeleteMyProfile")
 	public String requestDeleteMyProfile(ModelMap model, Principal principal) {
-		
+
 		model.addAttribute("confirmationDelete", true);
 		return userProfile(model, principal);
-}
-	
+	}
+
 	@GetMapping("/confirmationRequestDeleteMyProfile")
 	public String confirmationDeleteMyProfile(ModelMap model, Principal principal) {
-	
+
 		model.addAttribute("confirmatedDelete", true);
 		return userProfile(model, principal);
 	}
-	
+
 	@GetMapping("/requestDataMyProfile")
 	public String requestDataMyProfile(ModelMap model, Principal principal) {
-		
+
 		model.addAttribute("confirmationData", true);
 		return userProfile(model, principal);
-}
-	
+	}
+
 	@GetMapping("/confirmationRequestDataMyProfile")
 	public String confirmationRequestDataMyProfile(ModelMap model, Principal principal) {
-	
+
 		model.addAttribute("confirmatedData", true);
 		return userProfile(model, principal);
 	}
+
+	@GetMapping("/myprofile/incidence")
+	public String initIncidence(ModelMap model, Principal principal) {
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		model.put("usuario", user);
+
+		return "users/incidenceUser";
+
+	}
+
+	@GetMapping("/myprofile/incidence/accepted")
+	public String initIncidenceAccepted(ModelMap model, Principal principal) {
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		model.put("usuario", user);
+		
+		model.addAttribute("incidenceCorrect", true);
+		return userProfile(model, principal);
+
+	}
+
+
+
 }
