@@ -5,6 +5,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 
 
+
 <%@ attribute name="pageName" required="true"%>
 <%@ attribute name="invitaciones" required="false" rtexprvalue="true" %>
 <%@ attribute name="customScript" required="false" fragment="true"%>
@@ -39,7 +40,7 @@
 		src="/images/logo_opt.png" alt="Logo app"></a> <b><i
 		style="display: inline-block" class="title_logo">PlayTogether</i></b>
 	<a href="/about-us" style="padding-left: 200px; display: inline-block; color: white"><b>Acerca de nosotros</b></a>
-	<a href="/terms-and-conditions" style="padding-left: 200px; display: inline-block; color: white"><b>Terminos y condiciones</b></a>
-	<a href="/cookies-policy" style="padding-left: 200px; display: inline-block; color: white"><b>Politica de cookies</b></a>
+	<a href="/terms-and-conditions" style="padding-left: 200px; display: inline-block; color: white"><b>Términos y condiciones</b></a>
+	<a href="/cookies-policy" style="padding-left: 200px; display: inline-block; color: white"><b>Política de cookies</b></a>
 </footer>
 </html>
