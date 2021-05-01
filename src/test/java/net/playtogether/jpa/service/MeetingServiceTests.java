@@ -46,7 +46,7 @@ public class MeetingServiceTests {
 	 @Test
 	 void findMeetingThisMonthToUser() throws Exception {
 		Collection<Meeting> meetings = this.meetingService.findMeetingThisMonthToUser(1);
-		assertThat(meetings.size()).isEqualTo(1);
+		assertThat(meetings.size()).isEqualTo(0);
 	 }
 
 	 @Test
