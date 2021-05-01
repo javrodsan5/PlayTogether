@@ -798,6 +798,8 @@ public class ChampionshipController {
 							
 								Team ganadorPartido1  = this.championshipService.getGanadorPartido(partido1);
 								Team ganadorPartido2 = this.championshipService.getGanadorPartido(partido2);
+								ganadorPartido1.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+								ganadorPartido2.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
 
 								Match m = new Match();
 								m.setChampionship(championship);
@@ -845,6 +847,11 @@ public class ChampionshipController {
 							ganadorPartido2 = this.championshipService.getGanadorPartido(partido2); 
 							ganadorPartido3 = this.championshipService.getGanadorPartido(partido3); 
 							ganadorPartido4 = this.championshipService.getGanadorPartido(partido4); 
+							
+							ganadorPartido1.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido2.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido3.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido4.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
 
 
 							Match m = new Match();
@@ -897,6 +904,8 @@ public class ChampionshipController {
 						Match partido8 = matches1ronda.get(7);
 						Team ganadorPartido7;
 						Team ganadorPartido8;
+						
+						
 
 						if (this.championshipService.coincideResultados(partido1) && this.championshipService.coincideResultados(partido2) 
 								&& this.championshipService.coincideResultados(partido3) && this.championshipService.coincideResultados(partido4)
@@ -913,6 +922,15 @@ public class ChampionshipController {
 							ganadorPartido6 = this.championshipService.getGanadorPartido(partido6); 
 							ganadorPartido7 = this.championshipService.getGanadorPartido(partido7); 
 							ganadorPartido8 = this.championshipService.getGanadorPartido(partido8); 
+							
+							ganadorPartido1.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido2.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido3.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido4.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido5.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido6.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido7.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido8.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
 
 						
 							Match m = new Match();
@@ -1035,6 +1053,10 @@ public class ChampionshipController {
 							
 							ganadorPartido1 = this.championshipService.getGanadorPartido(partido1); 
 							ganadorPartido2 = this.championshipService.getGanadorPartido(partido2); 
+							
+							ganadorPartido1.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido2.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							
 							Match m = new Match();
 							m.setChampionship(championship);
 							m.setTeam1(ganadorPartido1);
@@ -1079,6 +1101,12 @@ public class ChampionshipController {
 							ganadorPartido2 = this.championshipService.getGanadorPartido(partido2); 
 							ganadorPartido3 = this.championshipService.getGanadorPartido(partido3); 
 							ganadorPartido4 = this.championshipService.getGanadorPartido(partido4); 
+							
+							ganadorPartido1.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido2.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido3.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido4.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+
 
 							Match m = new Match();
 							m.setChampionship(championship);
@@ -1183,6 +1211,9 @@ public class ChampionshipController {
 							
 							ganadorPartido1 = this.championshipService.getGanadorPartido(partido1); 
 							ganadorPartido2 = this.championshipService.getGanadorPartido(partido2); 
+							
+							ganadorPartido1.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
+							ganadorPartido2.getParticipants().forEach(u -> u.setPuntos(u.getPuntos() + 5));
 
 							Match m = new Match();
 							m.setChampionship(championship);

@@ -147,12 +147,18 @@
             <h3>Derechos</h3><br><br>
             <p style="text-align: justify; text-justify: inter-word">
                 El usuario perteneciente al sistema tiene derecho a solicitar la rectificación de alguno de los datos aportados a este, así como la reclamación de algún 
-                uso no contemplado en el actual documento de estos datos personales o, como ya ha sido mencionado, ejercer su derecho al olvido.<br><br>
-
-                Para cualquier tipo de reclamación, se debe poner en contacto con el equipo de administración del sistema a partir de la dirección de correo playtogetherispp@gmail.com, 
-                enviando un correo detallando la información sobre la que reclama, así como lo que desea que se haga con ella, o a través del botón habilitado para ello en la sección 
-                del perfil del usuario. Para identificar al usuario, deberá indicar su nombre completo, su nombre de usuario y una fotografía de su DNI, que permita identificar al usuario 
-                reclamador.
+                uso no contemplado en el actual documento de estos datos personales, reclamar que se le envíen los datos que hay almacenados en el sistema pertenecientes 
+                al usuario o, como ya ha sido mencionado, ejercer su derecho al olvido.<br><br>
+                
+				Para cualquier tipo de reclamación, se debe poner en contacto con el equipo de administración del sistema a partir de la dirección de correo 
+				<b>playtogetherispp@gmail.com</b>, enviando un correo detallando la información sobre la que reclama. Para identificar al usuario, deberá indicar su nombre 
+				completo, su nombre de usuario y una fotografía de su DNI, que permita identificar al usuario reclamador.<br><br>
+				
+				Para reclamar el derecho al olvido, el usuario puede acceder al apartado <b>Mi Perfil</b> dentro de la aplicación, y acceder al botón <b>Solicitar borrar mi perfil</b>, 
+				a través del cual se enviará una notificación indicando que el usuario desea ser borrado por completo de la base de datos del sistema.<br><br>
+				
+				Por último, para solicitar la obtención de sus datos personales, el usuario puede acceder a la pestaña <b>Mi Perfil</b> y, a través del botón <b>Solicitar datos 
+				de mi perfil</b>, se enviará una notificación por la cual se reclamará obtener todos los datos relacionados con el usuario que existan en el sistema.
             </p><br><br>
 
             <h3>Pagos en el sistema</h3><br><br>

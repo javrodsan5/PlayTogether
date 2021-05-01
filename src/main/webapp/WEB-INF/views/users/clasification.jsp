@@ -21,8 +21,7 @@
 			style="text-align: center;font-size: 20px;width: 50%; margin-top: 0;"> <i class="fa fa-info-circle"></i> Puedes ganar puntos de las siguientes formas:<br><br>
 			- 7 puntos por creación de quedada o equipo.<br>
 			- 5 puntos por unirse a una quedada o equipo.<br>
-			- 5 puntos por pasar de ronda en un torneo.<br>
-			- 10 puntos por ganar un torneo.<br><br>
+			- 5 puntos por pasar de ronda en un torneo.<br><br>
 			Si abandonas un torneo o una quedada perderás los puntos ganados.</h2></center>
 		<br>
 		<h2 class="alert alert-primary alert-primary-clasification"
