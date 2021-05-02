@@ -3212,6 +3212,42 @@ body {
 	vertical-align: middle !important;
 }
 
+
+.carousel-inner img {
+	width: 100%;
+	height: auto;
+}
+
+@media (max-width : 120em) and (min-width : 80em) {
+	
+	.carousel-caption h3{
+		font-size: 250%;
+	}
+	
+	.carousel-caption p {
+		font-size: 150%;
+	}
+	
+}
+
+@media (max-width : 80em) and (min-width : 55em) {
+	
+
+	
+	.carousel-caption h3{
+		font-size: 180%;
+	}
+	
+	.carousel-caption p {
+		font-size: 108%;
+	}
+	
+	.carousel-caption .alert-primary {
+		margin-top: 15%;
+	}
+	
+}
+
 @media ( max-width : 55em) and (min-width: 48em) {
 	
 	.invitation-search-title h1 {
@@ -3237,7 +3273,21 @@ body {
 	.invitation-table td {
 		font-size: 88%;
 	}
+
+
+	.carousel-caption h3 {
+		font-size: 140%;
+	}
 	
+	.carousel-caption p {
+		font-size: 84%;
+	}
+	
+	.carousel-caption .alert-primary {
+		margin-top: 14%;
+	}
+	
+
 }
 
 @media ( max-width : 48em) {
@@ -3297,6 +3347,19 @@ body {
 		height: 14em;
 	} 
 	
+	
+	.carousel-caption h3 {
+		font-size: 100%;
+	}
+	
+	.carousel-caption p {
+		font-size: 60%;
+	}
+	
+	.carousel-caption .alert-primary {
+		margin-top: 12%;
+	}
+	
 }
 
 @media ( max-width : 36em) {
@@ -3320,4 +3383,17 @@ body {
 	}
 	
 	
+	.carousel-caption h3 {
+		font-size: 65%;
+	}
+	
+	.carousel-caption p {
+		font-size: 40%;
+	}
+	
+	.carousel-caption .alert-primary {
+		margin-top: 9%;
+	}
+	
 }
+
