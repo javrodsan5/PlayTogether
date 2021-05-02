@@ -15,7 +15,7 @@ public interface MeetingRepository extends CrudRepository<Meeting, Integer> {
 	@Query("SELECT lm FROM Meeting lm WHERE lm.sport.id = ?1 AND lm.date>= CURRENT_TIMESTAMP ORDER BY lm.date")
 	Collection<Meeting> listMeetingsBySport(int sportId);
 	
-	@Query("SELECT lm FROM Meeting lm WHERE lm.meetingCreator.id = ?1 and Year(lm.creationDate) = Year(sysdate()) and Month(lm.creationDate) = Month(sysdate())")
+	@Query("SELECT lm FROM Meeting lm WHERE lm.meetingCreator.id = ?1 and Year(lm.creationDate) = Year(CURRENT_DATE) and Month(lm.creationDate) = Month(CURRENT_DATE)")
 	Collection<Meeting> findMeetingThisMonthToUser(int userId);
 	
 }
