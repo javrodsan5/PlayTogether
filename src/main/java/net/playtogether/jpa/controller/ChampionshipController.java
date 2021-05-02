@@ -170,6 +170,26 @@ public class ChampionshipController {
 				}
 				championshipsToRemove.add(c);
 			}
+			List<Team> teamsToRemove = new ArrayList<>();
+			List<Team> teams = c.getTeams();
+			for (Team t : teams) {
+				if (!t.getUser().equals(c.getUser())) {
+	
+					Pay pay1 = this.payService.findLastFinishedPayForTeamByUsername(t.getUser().getUser().getUsername(),
+							t.getId());
+					if (pay1 == null && !t.getUser().getUser().getAuthorities().stream()
+							.anyMatch(x -> x.getAuthority().equals("premium"))) {
+						Pay incompleto = this.payService.findLastNotFinishedPayForTeamByUsername(
+								t.getUser().getUser().getUsername(), t.getId());
+	
+						if (incompleto != null) {
+							teamsToRemove.add(t);
+						}					
+					}
+				}
+			}
+			teams.removeAll(teamsToRemove);
+			c.setTeams(teams);
 		}
 		this.championshipService.deleteAll(championshipsToDelete);
 		championships.removeAll(championshipsToRemove);
@@ -226,6 +246,7 @@ public class ChampionshipController {
 
 		this.teamService.deleteAll(teamsToDelete);
 		teams.removeAll(teamsToRemove);
+		championship.setTeams(teams);
 		model.addAttribute("championship", championship);
 		Boolean b1 = true;
 		Boolean b2 = true;
