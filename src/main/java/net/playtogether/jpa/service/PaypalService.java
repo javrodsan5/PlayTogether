@@ -1,6 +1,7 @@
 package net.playtogether.jpa.service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class PaypalService {
             String successUrl) throws PayPalRESTException{
         Amount amount = new Amount();
         amount.setCurrency(currency);
-        amount.setTotal(new BigDecimal(total).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString());
+        amount.setTotal(new BigDecimal(total).setScale(2,  RoundingMode.HALF_EVEN).toString());
 
         Transaction transaction = new Transaction();
         transaction.setDescription(description);
