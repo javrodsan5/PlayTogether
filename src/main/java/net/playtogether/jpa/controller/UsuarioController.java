@@ -327,7 +327,11 @@ public class UsuarioController {
 		}
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
-		model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
+		if(usuariosOrdenPuntos.size()>10) {
+			model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
+			}else {
+				model.addAttribute("topUsuarios", usuariosOrdenPuntos);
+			}
 		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}

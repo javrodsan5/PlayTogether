@@ -116,7 +116,7 @@ public class MeetingController {
 			Chat chat = new Chat();
 			chat.setChatType(this.chatService.findChatTypeById(1)); // MEETING
 			chat.setMeeting(meeting);
-
+			this.chatService.saveChat(chat);
 			return "redirect:/sports/" + sportId + "/meetings";
 		}
 
