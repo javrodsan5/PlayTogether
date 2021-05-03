@@ -397,7 +397,7 @@ public class ChampionshipController {
 		if (championship.getMatches().size() == 3 && championship.getMaxTeams() == 4) {
 			Match ultPartido = this.championshipService.getUltimoPartido(championship);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
-					&& ultPartido.getPuntos4() != null) {
+					&& ultPartido.getPuntos4() != null && this.championshipService.coincideResultados(ultPartido)) {
 				Team ganador = this.championshipService.getGanadorPartido(ultPartido);
 				model.addAttribute("nombreGanador", ganador.getName());
 			}
@@ -406,7 +406,7 @@ public class ChampionshipController {
 		if (championship.getMatches().size() == 7 && championship.getMaxTeams() == 8) {
 			Match ultPartido = this.championshipService.getUltimoPartido(championship);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
-					&& ultPartido.getPuntos4() != null) {
+					&& ultPartido.getPuntos4() != null && this.championshipService.coincideResultados(ultPartido)) {
 				Team ganador = this.championshipService.getGanadorPartido(ultPartido);
 				model.addAttribute("nombreGanador", ganador.getName());
 					 
@@ -418,7 +418,7 @@ public class ChampionshipController {
 		if (championship.getMatches().size() == 15 && championship.getMaxTeams() == 16) {
 			Match ultPartido = this.championshipService.getUltimoPartido(championship);
 			if (ultPartido.getPuntos1() != null && ultPartido.getPuntos2() != null && ultPartido.getPuntos3() != null
-					&& ultPartido.getPuntos4() != null) {
+					&& ultPartido.getPuntos4() != null && this.championshipService.coincideResultados(ultPartido)) {
 				Team ganador = this.championshipService.getGanadorPartido(ultPartido);
 				model.addAttribute("nombreGanador", ganador.getName());
 			}

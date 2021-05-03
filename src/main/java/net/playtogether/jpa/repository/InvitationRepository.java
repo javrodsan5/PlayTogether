@@ -46,6 +46,12 @@ public interface InvitationRepository extends CrudRepository<Invitation, Integer
 	
 	@Query("SELECT i FROM Invitation i WHERE i.receiver.user.username = ?1 AND i.team.championship.finishDate >= CURRENT_TIMESTAMP")
 	List<Invitation> listInvitationsNotFinishedChamp(String username);
+
+	@Query("SELECT i FROM Invitation i WHERE (i.meeting.id IS NOT NULL AND i.meeting.meetingCreator.user.username =?1 AND i.meeting.id = ?2)")
+	Collection<Invitation> findMyMeetingInvitationsMeeting(String name, Integer meetingId);
+
+	@Query("SELECT i FROM Invitation i WHERE (i.team.id IS NOT NULL AND i.team.user.user.username = ?1 AND i.team.id = ?2)")
+	Collection<Invitation> findMyChampionshipInvitationsTeam(String name, Integer teamId);
 	
 	
 }

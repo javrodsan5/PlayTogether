@@ -59,7 +59,7 @@ public class InvitationController {
 			Principal principal) {
 
 		Collection<Invitation> misInvitacionesTorneos = this.invitationService
-				.findMyChampionshipInvitations(principal.getName());
+				.findMyChampionshipInvitationsTeam(principal.getName(), teamId);
 
 		List<Invitation> championshipExpiredInvitations = invitationService
 				.listInvitationsNotFinishedChamp(principal.getName());
@@ -99,7 +99,7 @@ public class InvitationController {
 			final ModelMap model, @PathVariable("teamId") final Integer teamId, Principal principal) {
 
 		Collection<Invitation> misInvitacionesTorneos = this.invitationService
-				.findMyChampionshipInvitations(principal.getName());
+				.findMyChampionshipInvitationsTeam(principal.getName(), teamId);
 
 		// Championships
 		List<Invitation> championshipExpiredInvitations = misInvitacionesTorneos.stream()
@@ -177,7 +177,7 @@ public class InvitationController {
 			Principal principal) {
 
 		Collection<Invitation> misInvitacionesTorneos = this.invitationService
-				.findMyChampionshipInvitations(principal.getName());
+				.findMyChampionshipInvitationsTeam(principal.getName(), teamId);
 
 		// Championships
 		List<Invitation> championshipExpiredInvitations = misInvitacionesTorneos.stream()
@@ -335,7 +335,7 @@ public class InvitationController {
 			Principal principal) {
 		// my invitation
 		Collection<Invitation> misInvitacionesQuedadas = this.invitationService
-				.findMyMeetingInvitations(principal.getName());
+				.findMyMeetingInvitationsMeeting(principal.getName(), meetingId);
 		List<Invitation> meetingExpiredInvitations = misInvitacionesQuedadas.stream()
 				.filter(i -> i.getMeeting().getDate().isBefore(LocalDateTime.now())).collect(Collectors.toList());
 		meetingExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
@@ -374,7 +374,7 @@ public class InvitationController {
 			final ModelMap model, @PathVariable("meetingId") final Integer meetingId, Principal principal) {
 		// my invitation
 		Collection<Invitation> misInvitacionesQuedadas = this.invitationService
-				.findMyMeetingInvitations(principal.getName());
+				.findMyMeetingInvitationsMeeting(principal.getName(), meetingId);
 		List<Invitation> meetingExpiredInvitations = misInvitacionesQuedadas.stream()
 				.filter(i -> i.getMeeting().getDate().isBefore(LocalDateTime.now())).collect(Collectors.toList());
 		meetingExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
@@ -442,7 +442,7 @@ public class InvitationController {
 
 		// my invitation
 		Collection<Invitation> misInvitacionesQuedadas = this.invitationService
-				.findMyMeetingInvitations(principal.getName());
+				.findMyMeetingInvitationsMeeting(principal.getName(), meetingId);
 		List<Invitation> meetingExpiredInvitations = misInvitacionesQuedadas.stream()
 				.filter(i -> i.getMeeting().getDate().isBefore(LocalDateTime.now())).collect(Collectors.toList());
 		meetingExpiredInvitations.stream().forEach(i -> this.invitationService.delete(i.getId()));
