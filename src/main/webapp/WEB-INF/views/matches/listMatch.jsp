@@ -1954,8 +1954,8 @@
 															aria-hidden="true"></i> </a>
 													</div>
 												</c:if>
-											</c:if>
-										</c:if> <c:if test="${match.team2.participants.contains(usuarioLog)}">
+											
+										 <c:if test="${match.team2.participants.contains(usuarioLog)}">
 											<spring:url
 												value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
 												var="result2Url">
@@ -1972,6 +1972,8 @@
 													style="font-size: 33px; display: inline;"
 													class="fa fa-plane" aria-hidden="true"></i></a>
 											</div>
+											</c:if>
+										</c:if>
 										</c:if>
 								</tr>
 								<div></div>

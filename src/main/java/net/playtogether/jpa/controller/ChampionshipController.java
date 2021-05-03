@@ -731,7 +731,7 @@ public class ChampionshipController {
 				if (championship.getMatches().size() > 0) {
 
 					model.addAttribute("yagenerado", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 				} else if ((Integer) championship.getTeams().size() == championship.getMaxTeams()) {
 
 					if (championship.getTeams().stream().allMatch(t -> t.getParticipants().size() == t.getTeamSize())) {
@@ -751,19 +751,19 @@ public class ChampionshipController {
 
 						
 						model.addAttribute("faltaParticipantes", true);
-						return "matches/listMatch";
+						return listMatches(model, sportId, championshipId, principal);
 					}
 				}
 
 				else {
 					
 					model.addAttribute("faltaEquipos", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 				}
 			} else {
 				
 				model.addAttribute("noParticipa", true);
-				return "matches/listMatch";
+				return listMatches(model, sportId, championshipId, principal);
 			}
 	
 	}
@@ -792,12 +792,12 @@ public class ChampionshipController {
 				if (championship.getMatches().size() == 0) {
 					
 					model.addAttribute("noprimera", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 					
 				} else if ((Integer) championship.getTeams().size() != championship.getMaxTeams()) {
 					
 					model.addAttribute("faltaEquipos", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 
 				} else if (championship.getMatches().stream()
 						.allMatch(m -> m.getPuntos1() != null && m.getPuntos2() != null && m.getPuntos3() != null
@@ -837,7 +837,7 @@ public class ChampionshipController {
 						} else {
 							
 							model.addAttribute("nocoinc", true);
-							return "matches/listMatch";
+							return listMatches(model, sportId, championshipId, principal);
 						}
 
 					}
@@ -894,7 +894,7 @@ public class ChampionshipController {
 						} else {
 							
 							model.addAttribute("nocoinc", true);
-							return "matches/listMatch";
+							return listMatches(model, sportId, championshipId, principal);
 						}
 
 							
@@ -985,27 +985,27 @@ public class ChampionshipController {
 						} else {
 							
 							model.addAttribute("nocoinc", true);
-							return "matches/listMatch";
+							return listMatches(model, sportId, championshipId, principal);
 						}
 
 
 					} else {
 						
 						model.addAttribute("yagenerada2", true);
-						return "matches/listMatch";
+						return listMatches(model, sportId, championshipId, principal);
 					}
 
 				} else {
 					
 					model.addAttribute("faltaresultados", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 
 				}
 
 			} else {
 				
 				model.addAttribute("noParticipa", true);
-				return "matches/listMatch";
+				return listMatches(model, sportId, championshipId, principal);
 			}
 	
 	}
@@ -1036,22 +1036,22 @@ public class ChampionshipController {
 				if (championship.getMatches().size() == 0) {
 					
 					model.addAttribute("noprimera", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 					
 				} else if (championship.getMaxTeams() == 8 && championship.getMatches().size() == 4) {
 					
 					model.addAttribute("nosegunda", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 					
 				} else if (championship.getMaxTeams() == 16 && championship.getMatches().size() == 8) {
 					
 					model.addAttribute("nosegunda", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 					
 				} else if ((Integer) championship.getTeams().size() != championship.getMaxTeams()) {
 					
 					model.addAttribute("faltaEquipos", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 
 				} else if (championship.getMatches().stream()
 						.allMatch(m -> m.getPuntos1() != null && m.getPuntos2() != null && m.getPuntos3() != null
@@ -1092,7 +1092,7 @@ public class ChampionshipController {
 						} else {
 							
 							model.addAttribute("nocoinc", true);
-							return "matches/listMatch";
+							return listMatches(model, sportId, championshipId, principal);
 						}
 
 					}
@@ -1147,25 +1147,25 @@ public class ChampionshipController {
 							} else {
 								
 								model.addAttribute("nocoinc", true);
-								return "matches/listMatch";
+								return listMatches(model, sportId, championshipId, principal);
 							}
 
 					} else {
 						
 						model.addAttribute("yagenerada3", true);
-						return "matches/listMatch";
+						return listMatches(model, sportId, championshipId, principal);
 					}
 				} else {
 					
 					model.addAttribute("faltaresultados", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 
 				}
 
 			} else {
 				
 				model.addAttribute("noParticipa", true);
-				return "matches/listMatch";
+				return listMatches(model, sportId, championshipId, principal);
 			}
 	
 	}
@@ -1195,22 +1195,22 @@ public class ChampionshipController {
 				if (championship.getMatches().size() == 0) {
 					
 					model.addAttribute("noprimera", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 					
 				} else if (championship.getMaxTeams() == 16 && championship.getMatches().size() == 8) {
 					
 					model.addAttribute("nosegunda", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 					
 				} else if (championship.getMaxTeams() == 16 && championship.getMatches().size() == 12) {
 					
 					model.addAttribute("notercera", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 					
 				} else if ((Integer) championship.getTeams().size() != championship.getMaxTeams()) {
 					
 					model.addAttribute("faltaEquipos", true);
-					return "matches/listMatch";
+					return listMatches(model, sportId, championshipId, principal);
 
 				} else if (championship.getMatches().stream()
 						.allMatch(m -> m.getPuntos1() != null && m.getPuntos2() != null && m.getPuntos3() != null
@@ -1248,7 +1248,7 @@ public class ChampionshipController {
 							} else {
 								
 								model.addAttribute("nocoinc", true);
-								return "matches/listMatch";
+								return listMatches(model, sportId, championshipId, principal);
 							}
 
 					}
@@ -1256,20 +1256,19 @@ public class ChampionshipController {
 					else {
 
 						model.addAttribute("yagenerada4", true);
-						return "matches/listMatch";
+						return listMatches(model, sportId, championshipId, principal);
 					}
 
 				} else {
 					
 					model.addAttribute("faltaresultados", true);
-					return "matches/listMatch";
-
+					return listMatches(model, sportId, championshipId, principal);
 				}
 
 			} else {
 				
 				model.addAttribute("noParticipa", true);
-				return "matches/listMatch";
+				return listMatches(model, sportId, championshipId, principal);
 			}
 		
 	}
@@ -1312,7 +1311,7 @@ public class ChampionshipController {
 				model.addAttribute("championship", championshipId);
 				model.addAttribute("noParticipaDate", true);
 				model.addAttribute("championshipObj", championship);
-				return "matches/listMatch";
+				return listMatches(model, sportId, championshipId, principal);
 			}
 		} else {
 			return "error-500";

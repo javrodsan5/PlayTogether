@@ -73,7 +73,7 @@
 		
 		<c:if test="${incidenceCorrect}">
 			<h3 class="alert alert-success"
-				style="margin: 1% 30% 1% 30%; text-align: center">Se ha enviado su incidencia. Contactaremos lo antes posible con usted. Muchas gracias!</h3>
+				style="margin: 1% 30% 1% 30%; text-align: center">Se ha enviado su incidencia. Contactaremos lo antes posible con usted. ¡Muchas gracias!</h3>
 		</c:if>
 		
 		<h2>
@@ -196,15 +196,17 @@
 									<c:out value="${user.phone}" />
 								</h4>
 							</div>
-							<div class="data-details">
+							
+						</div>
+						<div class="profile-data">
+						<div class="data-details">
 								<h5>Correo electrónico</h5>
 								<h4>
 									<c:out value="${user.correo}"></c:out>
 								</h4>
 
 							</div>
-						</div>
-
+	</div>
 						<spring:url value="/myprofile/edit" var="editUser2Url">
 						</spring:url>
 						<center>
