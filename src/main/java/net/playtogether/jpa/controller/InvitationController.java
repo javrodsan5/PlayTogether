@@ -496,7 +496,7 @@ public class InvitationController {
 		model.put("meetingView", true);
 
 		Collection<Invitation> invitacionesEnviadas = this.invitationService
-				.findMyMeetingInvitations(principal.getName());
+				.findMyMeetingInvitationsMeeting(principal.getName(), meetingId);
 		model.put("meetingInvitations", invitacionesEnviadas);
 
 		return "invitations/addParticipantsForm";
