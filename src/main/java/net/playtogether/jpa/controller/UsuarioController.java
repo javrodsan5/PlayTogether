@@ -327,11 +327,11 @@ public class UsuarioController {
 		}
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
-		if(usuariosOrdenPuntos.size()>10) {
+		if (usuariosOrdenPuntos.size() > 10) {
 			model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
-			}else {
-				model.addAttribute("topUsuarios", usuariosOrdenPuntos);
-			}
+		} else {
+			model.addAttribute("topUsuarios", usuariosOrdenPuntos);
+		}
 		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}
@@ -397,12 +397,10 @@ public class UsuarioController {
 	public String initIncidenceAccepted(ModelMap model, Principal principal) {
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.put("usuario", user);
-		
+
 		model.addAttribute("incidenceCorrect", true);
 		return userProfile(model, principal);
 
 	}
-
-
 
 }

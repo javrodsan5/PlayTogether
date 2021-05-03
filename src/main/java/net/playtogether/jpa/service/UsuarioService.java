@@ -1,7 +1,5 @@
 package net.playtogether.jpa.service;
 
-import java.time.LocalDate;
-import java.time.Period;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

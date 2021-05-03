@@ -1,4 +1,3 @@
-
 package net.playtogether.jpa.controller;
 
 import java.security.Principal;
@@ -196,7 +195,7 @@ public class InvitationController {
 				|| (team.getParticipants().size() >= team.getTeamSize())) {
 
 			Collection<Invitation> invitacionesEnviadas = this.invitationService
-					.findMyChampionshipInvitations(principal.getName());
+					.findMyChampionshipInvitationsTeam(principal.getName(), teamId);
 
 			model.addAttribute("championshipInvitations", invitacionesEnviadas);
 
@@ -238,7 +237,7 @@ public class InvitationController {
 		model.put("teamView", true);
 
 		Collection<Invitation> invitacionesEnviadas = this.invitationService
-				.findMyChampionshipInvitations(principal.getName());
+				.findMyChampionshipInvitationsTeam(principal.getName(), teamId);
 
 		model.addAttribute("championshipInvitations", invitacionesEnviadas);
 
@@ -457,7 +456,7 @@ public class InvitationController {
 		if (!meeting.getMeetingCreator().getUser().getUsername().equals(principal.getName())
 				|| (meeting.getParticipants().size() >= meeting.getNumberOfPlayers())) {
 			Collection<Invitation> invitacionesEnviadas = this.invitationService
-					.findMyMeetingInvitations(principal.getName());
+					.findMyMeetingInvitationsMeeting(principal.getName(), meetingId);
 			model.put("meetingInvitations", invitacionesEnviadas);
 			return "redirect:/sports/" + meeting.getSport().getId() + "/meetings/" + meetingId;
 		}

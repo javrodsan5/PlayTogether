@@ -13,13 +13,12 @@ public class TeamService {
 
 	TeamRepository teamRepository;
 
-	public TeamService(TeamRepository teamRepository){
-		this.teamRepository=teamRepository;
+	public TeamService(TeamRepository teamRepository) {
+		this.teamRepository = teamRepository;
 	}
 
-	
-	@Transactional(readOnly=true)
-	public Team findTeamById(int id){
+	@Transactional(readOnly = true)
+	public Team findTeamById(int id) {
 		return teamRepository.findById(id).orElse(null);
 	}
 
@@ -28,10 +27,9 @@ public class TeamService {
 		this.teamRepository.delete(team);
 	}
 
-
 	@Transactional
 	public void deleteAll(List<Team> teams) {
 		this.teamRepository.deleteAll(teams);
 	}
-	
+
 }

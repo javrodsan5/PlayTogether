@@ -51,17 +51,17 @@ public class ChampionshipService {
 	public Collection<Championship> listChampionshipsBySport(int sportId) {
 		return championshipRepository.listChampionshipsBySport(sportId);
 	}
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public Usuario findUsersById(Integer id) throws DataAccessException {
 		return this.teamRepository.findUserById(id);
 	}
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public List<Team> findTeamsByChampionshipId(Integer id) throws DataAccessException {
 		return this.teamRepository.findTeamsByChampionshipId(id);
 	}
-	
+
 	@Transactional
 	public Integer countTeams() {
 		return (int) this.teamRepository.count();
@@ -105,9 +105,10 @@ public class ChampionshipService {
 
 	@Transactional
 	public Match getUltimoPartido(Championship championship) {
-		List<Match> matches = championship.getMatches().stream().sorted(Comparator.comparing(Match::getId)).collect(Collectors.toList());
-		
-		switch (championship.getMaxTeams()){
+		List<Match> matches = championship.getMatches().stream().sorted(Comparator.comparing(Match::getId))
+				.collect(Collectors.toList());
+
+		switch (championship.getMaxTeams()) {
 		case 4:
 			return matches.get(2);
 		case 8:
@@ -117,20 +118,18 @@ public class ChampionshipService {
 		default:
 			return null;
 		}
-		
-		
+
 	}
 
 	@Transactional
 	public Team getGanadorPartido(Match partido) {
-		if (partido.getPuntos1() == partido.getPuntos3()
-				&& partido.getPuntos2() == partido.getPuntos4()) {
+		if (partido.getPuntos1() == partido.getPuntos3() && partido.getPuntos2() == partido.getPuntos4()) {
 			if (partido.getPuntos1() > partido.getPuntos2()) {
 				return partido.getTeam1();
 			} else {
 				return partido.getTeam2();
 			}
-		}else {
+		} else {
 			return null;
 		}
 	}
@@ -140,15 +139,15 @@ public class ChampionshipService {
 		return this.championshipRepository.findAll().stream().anyMatch(c -> c.getId().equals(championshipId));
 
 	}
-	
+
 	@Transactional
 	public Boolean coincideResultados(Match match) {
 		Boolean res = true;
-		
-		if(match.getPuntos1() != match.getPuntos3() || match.getPuntos2() != match.getPuntos4()) {
+
+		if (match.getPuntos1() != match.getPuntos3() || match.getPuntos2() != match.getPuntos4()) {
 			res = false;
 		}
-		
+
 		return res;
 
 	}

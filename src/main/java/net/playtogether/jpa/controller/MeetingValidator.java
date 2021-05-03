@@ -12,7 +12,6 @@ import net.playtogether.jpa.entity.Meeting;
 public class MeetingValidator implements Validator {
 
 	private static final String REQUIRED = "Campo requerido.";
-	
 
 	@Override
 	public void validate(Object target, Errors errors) {
@@ -21,18 +20,19 @@ public class MeetingValidator implements Validator {
 		String description = meeting.getDescription();
 		String address = meeting.getAddress();
 		LocalDateTime date = meeting.getDate();
-		LocalDateTime now =  LocalDateTime.now();
-		long diff=0;
-		if(date!=null) {
+		LocalDateTime now = LocalDateTime.now();
+		long diff = 0;
+		if (date != null) {
 			diff = ChronoUnit.MONTHS.between(now, date);
 		}
 
 		if (!StringUtils.hasLength(city)) {
 			errors.rejectValue("city", REQUIRED, REQUIRED);
 		}
-		
+
 		if (!city.matches("^[a-zA-ZñÑáéíóúÁÉÍÓÚ.' ']*$")) {
-			errors.rejectValue("city", "La ciudad introducida no puede contener caracteres especiales ni números", "La ciudad introducida no puede contener caracteres especiales ni números.");
+			errors.rejectValue("city", "La ciudad introducida no puede contener caracteres especiales ni números",
+					"La ciudad introducida no puede contener caracteres especiales ni números.");
 		}
 
 		if (!StringUtils.hasLength(address) || address == null) {
@@ -42,18 +42,19 @@ public class MeetingValidator implements Validator {
 			errors.rejectValue("address", "La dirección debe contener más de 3 caractéres",
 					"La dirección debe contener más de 3 caractéres");
 		}
-		
+
 		if (!address.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.' 'º/]*$")) {
-			errors.rejectValue("address", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'");
+			errors.rejectValue("address", "Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'",
+					"Debe ser una dirección válida. Ej: 'C/ Azafrán nº7'");
 		}
-		
-		
+
 		if (!StringUtils.hasLength(description) || description == null) {
 			errors.rejectValue("description", REQUIRED, REQUIRED);
-		} 
-		
+		}
+
 		if (!description.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.,;+!¡¿?' ']*$")) {
-			errors.rejectValue("description", "Debe contener solo letras y números", "Debe contener solo letras y números");
+			errors.rejectValue("description", "Debe contener solo letras y números",
+					"Debe contener solo letras y números");
 		}
 
 		if (description.length() >= 300) {
@@ -66,7 +67,7 @@ public class MeetingValidator implements Validator {
 		} else if (date.isBefore(LocalDateTime.now())) {
 			errors.rejectValue("date", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");
-		}else if(diff>6) {
+		} else if (diff > 6) {
 			errors.rejectValue("date", "Sólo se pueden establecer fechas en un rango inferior a 6 meses.",
 					"Sólo se pueden establecer fechas en un rango inferior a 6 meses.");
 		}
@@ -76,5 +77,5 @@ public class MeetingValidator implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return Meeting.class.isAssignableFrom(clazz);
 	}
-	
+
 }

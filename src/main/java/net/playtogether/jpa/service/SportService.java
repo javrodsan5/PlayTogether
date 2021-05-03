@@ -15,29 +15,29 @@ import net.playtogether.jpa.repository.SportRepository;
 public class SportService {
 
 	private SportRepository sportRepository;
-	
+
 	@Autowired
 	public SportService(SportRepository sportRepository) {
 		this.sportRepository = sportRepository;
 	}
 
-	@Transactional(readOnly=true)
-	public Collection<Sport> findAll() throws DataAccessException{
+	@Transactional(readOnly = true)
+	public Collection<Sport> findAll() throws DataAccessException {
 		return sportRepository.findAll();
-	}	
-	
-	@Transactional(readOnly=true)
+	}
+
+	@Transactional(readOnly = true)
 	public Sport findSportByName(String name) throws DataAccessException {
 		return sportRepository.findSportByName(name);
 	}
 
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public Collection<Sport> findAllSportsByType(SportType sportType) throws DataAccessException {
 		return sportRepository.findAllSportsByType(sportType);
 
 	}
 
-	@Transactional(readOnly=true)
+	@Transactional(readOnly = true)
 	public Sport findSportById(Integer id) throws DataAccessException {
 		return sportRepository.findSportById(id);
 	}

@@ -14,26 +14,27 @@ import net.playtogether.jpa.service.UsuarioService;
 
 @Controller
 public class SportController {
-	
+
 	public static final String SPORTS_LISTING = "sports/sportListing";
 
-	
 	@Autowired
 	SportService sportService;
 
 	@Autowired
 	UsuarioService userService;
-	
+
 	@Autowired
 	InvitationService invitationService;
-	
-	@CachePut(value="sports")
+
+	@CachePut(value = "sports")
 	@GetMapping("/sports")
-	public String listSports(ModelMap model,Principal principal) {
-		if(principal!=null) {
-			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String listSports(ModelMap model, Principal principal) {
+		if (principal != null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+					.size();
+			Integer invitacionesTorneos = this.invitationService
+					.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		}
 		model.addAttribute("sports", sportService.findAll());
 		return SPORTS_LISTING;
