@@ -91,4 +91,14 @@ public class InvitationService {
 	public List<Invitation> listInvitationsNotFinishedChamp(String username) {
 		return this.invitationRepository.listInvitationsNotFinishedChamp(username);
 	}
+
+	public Collection<Invitation> findMyMeetingInvitationsMeeting(String name, Integer meetingId) {
+		
+		return this.invitationRepository.findMyMeetingInvitationsMeeting(name, meetingId);
+	}
+
+	public Collection<Invitation> findMyChampionshipInvitationsTeam(String name, Integer teamId) {
+		// TODO Auto-generated method stub
+		return this.invitationRepository.findMyChampionshipInvitationsTeam(name, teamId);
+	}
 }
