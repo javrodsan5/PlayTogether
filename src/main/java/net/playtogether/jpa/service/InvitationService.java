@@ -98,7 +98,7 @@ public class InvitationService {
 	}
 
 	public Collection<Invitation> findMyChampionshipInvitationsTeam(String name, Integer teamId) {
-		// TODO Auto-generated method stub
+		
 		return this.invitationRepository.findMyChampionshipInvitationsTeam(name, teamId);
 	}
 }

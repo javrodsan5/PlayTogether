@@ -196,7 +196,7 @@ public class InvitationController {
 				|| (team.getParticipants().size() >= team.getTeamSize())) {
 
 			Collection<Invitation> invitacionesEnviadas = this.invitationService
-					.findMyChampionshipInvitations(principal.getName());
+					.findMyChampionshipInvitationsTeam(principal.getName(), teamId);
 
 			model.addAttribute("championshipInvitations", invitacionesEnviadas);
 
@@ -238,7 +238,7 @@ public class InvitationController {
 		model.put("teamView", true);
 
 		Collection<Invitation> invitacionesEnviadas = this.invitationService
-				.findMyChampionshipInvitations(principal.getName());
+				.findMyChampionshipInvitationsTeam(principal.getName(), teamId);
 
 		model.addAttribute("championshipInvitations", invitacionesEnviadas);
 
