@@ -8,14 +8,13 @@ import net.playtogether.jpa.entity.Team;
 
 public class TeamValidator implements Validator {
 
-
 	private static final String REQUIRED = "Campo requerido.";
 
 	@Override
 	public void validate(Object target, Errors errors) {
 		Team team = (Team) target;
 		String name = team.getName();
-		
+
 		Boolean res = !StringUtils.hasLength(name);
 
 		if (res) {

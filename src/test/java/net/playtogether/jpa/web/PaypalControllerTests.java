@@ -231,11 +231,4 @@ public class PaypalControllerTests {
         this.mockMvc.perform(MockMvcRequestBuilders.get("/pay/cancel"))
         .andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.view().name("pay/cancel"));
     }
-
-	@Test
-	@WithMockUser(value = "user1", authorities="usuario")
-    void testSuccessPay() throws Exception {
-        this.mockMvc.perform(MockMvcRequestBuilders.get("/pay/success?paymentId=1&PayerID=1"))
-        .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
-    }
 }

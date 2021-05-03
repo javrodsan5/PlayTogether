@@ -82,6 +82,4 @@ public class UsuarioService {
 	public List<Usuario> findTopUsuarios(){
 		return usuarioRepository.findTopUsuarios();
 	}
-	
-	
 }

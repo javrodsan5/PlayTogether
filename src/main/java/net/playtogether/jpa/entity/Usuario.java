@@ -1,6 +1,7 @@
 package net.playtogether.jpa.entity;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -27,7 +29,7 @@ import lombok.Setter;
 @Getter
 public class Usuario extends NamedEntity {
 
-
+	@NotNull
 	@Email
 	@Column(name = "correo")
 	private String correo;
@@ -41,6 +43,9 @@ public class Usuario extends NamedEntity {
 	@Column(name = "phone")
 	@Pattern(regexp = "[0-9]{9}")
 	private String phone;
+
+	@Column(name = "description")
+	private String description;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<Pay> payment;
@@ -57,12 +62,23 @@ public class Usuario extends NamedEntity {
 
 	@ManyToMany(mappedBy = "participants")
 	private List<Meeting> meetings;
-	
+
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "username", referencedColumnName = "username")
 	private User user;
-	
+
 	@Column(name = "puntos")
 	private Integer puntos;
+
+	@Transient
+	private Boolean accept;
+
+	@Transient
+	public Integer edadUsuario() {
+		Period periodo = Period.between(birthdate, LocalDate.now());
+		Integer años = periodo.getYears();
+
+		return años;
+	}
 
 }

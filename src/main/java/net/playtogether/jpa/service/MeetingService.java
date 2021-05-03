@@ -10,34 +10,35 @@ import net.playtogether.jpa.repository.MeetingRepository;
 
 @Service
 public class MeetingService {
-	
+
 	MeetingRepository meetingRepository;
-	
-	public MeetingService(MeetingRepository meetingRepository){
-		this.meetingRepository=meetingRepository;
+
+	public MeetingService(MeetingRepository meetingRepository) {
+		this.meetingRepository = meetingRepository;
 	}
+
 	@Transactional()
-	public void save(Meeting meeting)  {
+	public void save(Meeting meeting) {
 		meetingRepository.save(meeting);
 	}
-	
-	@Transactional(readOnly=true)
-	public Collection<Meeting> listMeetings(){
+
+	@Transactional(readOnly = true)
+	public Collection<Meeting> listMeetings() {
 		return meetingRepository.findAll();
 	}
-	
-	@Transactional(readOnly=true)
-	public Meeting findMeetingById(int id){
+
+	@Transactional(readOnly = true)
+	public Meeting findMeetingById(int id) {
 		return meetingRepository.findById(id).orElse(null);
 	}
-	
-	@Transactional(readOnly=true)
-	public Collection<Meeting> listMeetingsBySport(int sportId){
+
+	@Transactional(readOnly = true)
+	public Collection<Meeting> listMeetingsBySport(int sportId) {
 		return meetingRepository.listMeetingsBySport(sportId);
 	}
-	
-	@Transactional(readOnly=true)
-	public Collection<Meeting> findMeetingThisMonthToUser(int userId){
+
+	@Transactional(readOnly = true)
+	public Collection<Meeting> findMeetingThisMonthToUser(int userId) {
 		return meetingRepository.findMeetingThisMonthToUser(userId);
 	}
 

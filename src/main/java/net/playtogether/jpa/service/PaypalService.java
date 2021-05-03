@@ -34,7 +34,7 @@ public class PaypalService {
             String successUrl) throws PayPalRESTException{
         Amount amount = new Amount();
         amount.setCurrency(currency);
-        amount.setTotal(new BigDecimal(total).setScale(2, BigDecimal.ROUND_HALF_EVEN).toString());
+        amount.setTotal(new BigDecimal(total).setScale(2,  RoundingMode.HALF_EVEN).toString());
 
         Transaction transaction = new Transaction();
         transaction.setDescription(description);
@@ -63,7 +63,7 @@ public class PaypalService {
         payment.setId(paymentId);
         PaymentExecution paymentExecute = new PaymentExecution();
         paymentExecute.setPayerId(payerId);
-        return payment.execute(apiContext, paymentExecute);
-    }
+		return payment.execute(apiContext, paymentExecute);
+	}
 
 }

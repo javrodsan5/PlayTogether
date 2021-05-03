@@ -135,7 +135,7 @@ public class UsuarioServiceTests {
 	@Test
 	void shouldFindChampionShipByIdUserAndYear() throws Exception {
 		List<Integer> championship = this.usuarioService.findChampionshipByMonth(1, 2021);
-		Assertions.assertThat(championship.size()).isEqualTo(6);
+		Assertions.assertThat(championship.size()).isEqualTo(5);
 	}
 
 }

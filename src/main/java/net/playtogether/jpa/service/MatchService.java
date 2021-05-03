@@ -11,42 +11,41 @@ import net.playtogether.jpa.repository.MatchRepository;
 
 @Service
 public class MatchService {
-	
+
 	MatchRepository matchRepository;
-	
-	public MatchService(MatchRepository matchRepository){
-		this.matchRepository=matchRepository;
+
+	public MatchService(MatchRepository matchRepository) {
+		this.matchRepository = matchRepository;
 	}
+
 	@Transactional()
-	public void save(Match match)  {
+	public void save(Match match) {
 		matchRepository.save(match);
 	}
-	
-	@Transactional(readOnly=true)
-	public Collection<Match> listMatches(){
+
+	@Transactional(readOnly = true)
+	public Collection<Match> listMatches() {
 		return matchRepository.findAll();
 	}
-	
-	@Transactional(readOnly=true)
-	public Match findMatchById(int id){
+
+	@Transactional(readOnly = true)
+	public Match findMatchById(int id) {
 		return matchRepository.findById(id).orElse(null);
 	}
-	
-	@Transactional(readOnly=true)
-	public Collection<Match> listMatchesByChampionship(int championshipId){
+
+	@Transactional(readOnly = true)
+	public Collection<Match> listMatchesByChampionship(int championshipId) {
 		return matchRepository.listMatchesByChampionship(championshipId);
 	}
-	
-	@Transactional(readOnly=true)
-	public Collection<Team> findTeams(Integer championshipId){
+
+	@Transactional(readOnly = true)
+	public Collection<Team> findTeams(Integer championshipId) {
 		return matchRepository.findTeams(championshipId);
 	}
-	
-	@Transactional(readOnly=true)
-	public Collection<Match> findMatchesByTeamId(Integer teamId){
+
+	@Transactional(readOnly = true)
+	public Collection<Match> findMatchesByTeamId(Integer teamId) {
 		return matchRepository.findMatchesByTeaId(teamId);
 	}
-	
-	
 
 }

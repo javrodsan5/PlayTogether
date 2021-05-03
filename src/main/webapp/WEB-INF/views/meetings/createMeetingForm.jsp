@@ -9,7 +9,7 @@
 <link href='https://fonts.googleapis.com/css?family=Crete Round'
 	rel='stylesheet'>
 
-<playtogether:layout pageName="meetings">
+<playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 	<body>
 		<div class="thirteen">
 			<h1>
@@ -17,17 +17,23 @@
 				<c:out value="${sport.name}" />
 			</h1>
 		</div>
-		<div style="margin-left: 45px">
 			<div class="crearMeeting">
 				<form:form modelAttribute="meeting" commandName="meeting"
 					id="survey-form">
-					<div style="display: inline-flex;">
+	
 						<playtogether:inputField label="Fecha y hora" name="date" />
 						<playtogether:inputField label="Ciudad" name="city" />
-					</div>
 					
+					<div class="col-sm-12">
+						<label>Número de participantes</label><br> <select name="numberOfPlayers">
+							<c:forEach var="number" items="${numbers}">
+								<option value="${number}">${number}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<br>
 					<playtogether:inputField label="Dirección" name="address" />
-					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
+					<playtogether:inputField label="Descripción" name="description" />
 					<input type="hidden" name="sport" value="${sportId}"/>
 
 					<div class="form-group">
@@ -36,15 +42,12 @@
 						</button>
 					</div>
 								<div class="form-group">
-						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/sports/${sport.id}/meetings';" type="button">
+						<button class="botonMeeting" onclick="location.href='/sports/${sport.id}/meetings';" type="button">
 							<b>Volver a listado</b>
 						</button>
 					</div>
-					<br>
-					<br>
 				</form:form>
 			</div>
-		</div>
 
 	</body>
 </playtogether:layout>

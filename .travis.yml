@@ -11,7 +11,7 @@ before_install:
   - mysql -e 'GRANT ALL privileges ON `playtogetherdb`.* TO "user"@"%";'
   - mysql -e 'FLUSH PRIVILEGES;'
   - sudo apt-get install jq
-  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar $(curl https://api.github.com/repos/codacy/codacy-coverage-reporter/releases/latest | jq -r .assets[0].browser_download_url)
+  - wget -O ~/codacy-coverage-reporter-assembly-latest.jar https://github.com/codacy/codacy-coverage-reporter/releases/download/2.0.2/codacy-coverage-reporter-2.0.2-assembly.jar
 install:
   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script: mvn test -B

@@ -5,8 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-<playtogether:layout pageName="championships">
+<playtogether:layout pageName="championships" invitaciones="${invitaciones}">
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 		rel="stylesheet" />
@@ -26,6 +27,13 @@
 			</center>
 
 		</c:if>
+		<br>
+		<center><h1 class="text-danger">¡ATENCIÓN! </h1><h3 class="text-danger">${timeToDelete}</h3>
+			<c:if test="${newTeam == true}">
+				<br>
+				<h3 class="text-danger">Tampoco podrá crear otro equipo en el torneo ${championshipName} durante dicho periodo.</h3>
+			</c:if>
+		</center>
 	</div>
 
 	<br>
@@ -95,7 +103,7 @@
 					<div class="rowWIV">
 						<div class="columnWIV light blank end">&nbsp;</div>
 						<div class="columnWIV light col-title">
-							<p>Invitar usuarios a tu quedada</p>
+							<p>Invitar usuarios a tu equipo o quedada</p>
 						</div>
 						<div class="columnWIV light blank">
 							<i class="fa fa-times cancel"></i>
@@ -158,6 +166,13 @@
 						</div>
 					</div>
 				</form:form>
+			</div>
+		</div>
+				<div class="cardbutton" style="padding-top:10px;">
+			<spring:url value="/sports" var="dateUrl">
+			</spring:url>
+			<div class="botoncito-crear-meeting">
+				<a id="createMeeting" href="${fn:escapeXml(dateUrl)}">Volver a la lista</a>
 			</div>
 		</div>
 	</center>

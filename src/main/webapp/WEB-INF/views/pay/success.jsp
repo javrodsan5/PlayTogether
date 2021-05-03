@@ -7,7 +7,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="pay">
+<playtogether:layout pageName="pay" invitaciones="${invitaciones}">
 		<center>
 		<h1 style= "font-size: 65px">¡GRACIAS!</h1>
 		<i class="fa fa-check success" style="font-size: 10rem"></i>

@@ -14,16 +14,16 @@
 </style>
 
 <html>
-<playtogether:layout pageName="welcome">
+<playtogether:layout pageName="welcome" invitaciones="${invitaciones}">
 	<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<title>Playtogether</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<title>Playtogether</title>
 	</head>
 	<body>
-		<div id="demo" class="carousel slide" data-ride="carousel">
+		<div id="demo" class="carousel slide" data-ride="carousel" style="margin-bottom: 2.5em;">
 			<ul class="carousel-indicators">
 				<li data-target="#demo" data-slide-to="0" class="active"></li>
 				<li data-target="#demo" data-slide-to="1"></li>
@@ -40,7 +40,7 @@
 						<p class="alert alert-primary">Con PlayTogether no importa donde te encuentres, siempre es buen momento para realizar deporte</p>
 					</div>
 				</div>
-				<div class="carousel-item">
+				<div class="carousel-item" style="padding-top: 3.5em; margin-bottom: 2.5em;">
 					<img src="/images/home14.png" alt="Foto2" width="1100" height="500">
 					<div class="carousel-caption">
 						<h3>Compite sin límites</h3>

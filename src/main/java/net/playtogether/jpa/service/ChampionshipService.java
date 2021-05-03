@@ -1,7 +1,9 @@
 package net.playtogether.jpa.service;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import net.playtogether.jpa.entity.Championship;
+import net.playtogether.jpa.entity.Match;
 import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.repository.ChampionshipRepository;
@@ -48,17 +51,17 @@ public class ChampionshipService {
 	public Collection<Championship> listChampionshipsBySport(int sportId) {
 		return championshipRepository.listChampionshipsBySport(sportId);
 	}
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public Usuario findUsersById(Integer id) throws DataAccessException {
 		return this.teamRepository.findUserById(id);
 	}
-	
-	@Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public List<Team> findTeamsByChampionshipId(Integer id) throws DataAccessException {
 		return this.teamRepository.findTeamsByChampionshipId(id);
 	}
-	
+
 	@Transactional
 	public Integer countTeams() {
 		return (int) this.teamRepository.count();
@@ -98,6 +101,55 @@ public class ChampionshipService {
 	@Transactional(readOnly = true)
 	public Collection<Usuario> findParticipantsChampionship(int championshipId) throws DataAccessException {
 		return this.championshipRepository.findParticipantsChampionship(championshipId);
+	}
+
+	@Transactional
+	public Match getUltimoPartido(Championship championship) {
+		List<Match> matches = championship.getMatches().stream().sorted(Comparator.comparing(Match::getId))
+				.collect(Collectors.toList());
+
+		switch (championship.getMaxTeams()) {
+		case 4:
+			return matches.get(2);
+		case 8:
+			return matches.get(6);
+		case 16:
+			return matches.get(14);
+		default:
+			return null;
+		}
+
+	}
+
+	@Transactional
+	public Team getGanadorPartido(Match partido) {
+		if (partido.getPuntos1() == partido.getPuntos3() && partido.getPuntos2() == partido.getPuntos4()) {
+			if (partido.getPuntos1() > partido.getPuntos2()) {
+				return partido.getTeam1();
+			} else {
+				return partido.getTeam2();
+			}
+		} else {
+			return null;
+		}
+	}
+
+	@Transactional
+	public Boolean existeChampionship(Integer championshipId) {
+		return this.championshipRepository.findAll().stream().anyMatch(c -> c.getId().equals(championshipId));
+
+	}
+
+	@Transactional
+	public Boolean coincideResultados(Match match) {
+		Boolean res = true;
+
+		if (match.getPuntos1() != match.getPuntos3() || match.getPuntos2() != match.getPuntos4()) {
+			res = false;
+		}
+
+		return res;
+
 	}
 
 }

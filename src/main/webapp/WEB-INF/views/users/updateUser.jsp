@@ -7,7 +7,7 @@
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 <%@page contentType="text/html;charset=UTF-8" language="java"%>
 
-<playtogether:layout pageName="registroPlaytogether">
+<playtogether:layout pageName="registroPlaytogether" invitaciones="${invitaciones}">
 	<jsp:body>
 	<div class="thirteen">
 	<h1>
@@ -35,11 +35,10 @@
 			</button>
 		</div>
 		<div class="form-group">
-						<button class="botonMeeting" style="font-size: 0.8em; margin-left: 22.72em; " onclick="location.href='/myprofile';" type="button">
+						<button class="botonMeeting" onclick="location.href='/myprofile';" type="button">
 							<b>Volver a perfil</b>
 						</button>
 					</div>
-		<br>
 			
 			</form:form>
 		</div>

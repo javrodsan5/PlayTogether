@@ -38,7 +38,6 @@
 						<b>Entrar</b>
 					</button>
 			</div>
-			<br>
 		</form:form>
 		</div>
 	</jsp:body>

@@ -97,6 +97,45 @@ select {
 	color: #ffffff;
 }
 
+:root { 
+	-tape-gray: #dbd8be; 
+	-tape-edge-gray: #b7b49d; 
+	-transparent: rgba(255, 255, 255, 0);
+}
+
+.blue { 
+	-paper-color: #d5e0f9; 
+	-paper-dark: #c2d0ea; 
+	-shadow-size: 3px; 
+	-transparent: rgba(213, 224, 249, 0);
+}
+
+.paper {
+	position: relative;
+	background: #b9b9e8;
+	min-width: 250px;
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Caveat", cursive;
+	font-size: 2rem;
+	box-shadow: var(- -shadow-size) var(- -shadow-size) 2px
+		var(- -paper-dark);
+	margin: 0% 10% 5% 10%;
+}
+
+.top-tape {
+	position: absolute;
+	height: 4vmin;
+	top: -5px;
+	width: 110%;
+	background-color: #f1f0f0;
+	border-right: 1px dotted var(- -tape-edge-gray);
+	border-left: 1px dotted var(- -tape-edge-gray);
+	opacity: 0.5;
+}
+
 .promo-box-container {
 	position: relative;
 	margin: auto;
@@ -286,6 +325,13 @@ p {
 	color: #676767;
 }
 
+.paper p {
+	font-family: 'Caveat', cursive;
+	text-align: center;
+	font-size: 25px;
+	color: black;
+}
+
 #mensaje {
 	display: flex;
 	font-family: Helvetica, Arial, sans-serif;
@@ -463,22 +509,9 @@ form {
 	padding: 0.25rem;
 }
 
-.form-group .botonMeeting {
-	padding: 10px 10px 10px 15px;
-	float: left;
-	color: #FFF;
-	background-color: #4bc970;
-	font-size: 18px;
-	text-align: center;
-	font-style: normal;
-	border-radius: 5px;
-	width: 100%;
-	border: 1px solid #3ac162;
-	border-width: 1px 1px 3px;
-	box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
-	margin-bottom: 10px;
-	margin-left: 42%;
-	width: 20%;
+.botonesMeeting {
+	margin: 0 auto 1.25rem auto;
+	padding: 0.25rem;
 }
 
 label {
@@ -576,7 +609,7 @@ body {
 	padding: 1em;
 	position: relative;
 	float: right;
-	height: 100%;
+	height: auto;
 	width: 60%;
 	z-index: 0;
 }
@@ -666,7 +699,7 @@ body {
 @media screen and (max-width: 700px) {
 	/* --- Card1 ---- */
 	.Card1Meeting {
-		max-width: 100%;
+		width: 90%;
 		height: 400px;
 		height: auto;
 	}
@@ -682,6 +715,44 @@ body {
 	.Card1Meeting .description p {
 		margin-bottom: 1em;
 	}
+	.equiposTorneo {
+		float: bottom;
+	}
+	.espacioIzqMovil {
+		margin-left: 2%;
+	}
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
 }
 
 .drop {
@@ -689,12 +760,6 @@ body {
 	align-items: center;
 	justify-content: center;
 	margin-top: 5%;
-}
-
-.drop__container {
-	row-gap: 1rem;
-	padding: 2rem;
-	box-shadow: 4px 4px 16px #e1e1e1;
 }
 
 .drop__info {
@@ -749,16 +814,6 @@ body {
 	margin-right: 15%;
 	transition: 0.3s;
 	margin-bottom: 1%;
-}
-
-.cardtitle {
-	text-align: center;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-	margin-left: 35%;
-	margin-right: 35%;
-	border-radius: 1rem;
-	padding-top: 1%;
-	background-color: #17a2b8;
 }
 
 .cardtitle h1 {
@@ -842,7 +897,7 @@ table {
 	border-radius: 1rem !important;
 }
 
-.table tr {
+.table tr, .table-clasification tr {
 	border: none !important;
 	border-style: hidden;
 	border-top: none !important;
@@ -857,7 +912,7 @@ th {
 	border-top: none !important;
 }
 
-.table td, .table th {
+.table td, .table th, .table-clasification td, .table-clasification th {
 	padding: .75rem;
 	vertical-align: top;
 	border-top: none !important;
@@ -866,6 +921,24 @@ th {
 
 .table-striped tbody tr {
 	border-radius: 1rem !important;
+}
+
+
+
+.table-clasification tbody tr:nth-child(1) {
+    font-size: 250%;
+}
+
+.table-clasification tbody tr:nth-child(2) {
+    font-size: 200%;
+}
+
+.table-clasification tbody tr:nth-child(3) {
+    font-size: 150%;
+}
+
+.table-clasification tbody tr:nth-child(n+4) {
+	font-size: 110%;
 }
 
 .auxcard {
@@ -963,6 +1036,31 @@ form input {
 	float: right;
 	border: none;
 	padding-right: 0;
+}
+
+.perfilNotif {
+	display: inline;
+	color: red;
+}
+
+.wrapperNotif {
+	display: inline-block;
+}
+
+.numeroNotif {
+	display: inline;
+}
+
+.circulo {
+	background: #ff0000;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	line-height: 1.6em;
+	margin-right: 5px;
+	text-align: center;
+	width: 1.6em;
 }
 
 .navbar-toggler:active, .navbar-toggler:focus {
@@ -1280,6 +1378,39 @@ form input {
 
 /* === Responsive === */
 @media ( min-width : 1500px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 40%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
+	.botonMeeting {
+		padding: 5px 5px 5px 5px;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 18px;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgb(255 255 255/ 10%) inset;
+		margin: 1% 25% 0% 25%;
+		width: -webkit-fill-available;
+	}
+	.charts {
+		width: 50%;
+		display: inline-block;
+		margin-left: 5%;
+		margin-right: 5%;
+		float: right;
+	}
 	.navigation-wrap {
 		position: fixed;
 		width: 100%;
@@ -1356,10 +1487,90 @@ form input {
 	.mobile {
 		display: none;
 	}
+	.equiposTorneo {
+		float: right;
+		margin-right: 50px;
+		width: 35%;
+	}
+	
+	.espacioIzqMovil {
+		margin-left: 2%;
+	}
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.rightDesktop {
+		float: bottom;
+	}
+	.editarInvitar {
+		margin-bottom: 1%;
+	}
 }
 
 @media ( max-width : 1499px) and (min-width: 992px) {
 	/* === Estandar === */
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 40%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
+	.botonMeeting {
+		padding: 5px 5px 5px 5px;
+    color: #FFF;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgb(255 255 255 / 10%) inset;
+    margin: 1% 25% 0% 25%;
+    width: -webkit-fill-available;
+	}
+	.charts {
+		width: 50%;
+		display: inline-block;
+		margin-left: 5%;
+		margin-right: 5%;
+		float: right;
+	}
 	.navigation-wrap {
 		position: fixed;
 		width: 100%;
@@ -1455,9 +1666,101 @@ form input {
 	.mobile {
 		display: none;
 	}
+	.Card1Meeting {
+		width: 90%;
+		height: 400px;
+		height: auto;
+	}
+	.Card1Meeting .photo {
+		float: none;
+		height: 400px;
+		width: 100%;
+	}
+	.Card1Meeting .description {
+		float: inherit;
+		width: 100%;
+	}
+	.Card1Meeting .description p {
+		margin-bottom: 1em;
+	}
+	.equiposTorneo {
+		float: bottom;
+	}
+	.espacioIzqMovil {
+		margin-left: 2%;
+	}
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.editarInvitar {
+		margin-top: 1%;
+		margin-bottom: 1%;
+	}
 }
 
 @media ( max-width : 991px) and (min-width: 768px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 60%;
+    padding-bottom: 1%;
+    margin: auto;
+    
+}
+
+	.botonMeeting {
+		padding: 5px 5px 5px 5px;
+    color: #FFF;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgb(255 255 255 / 10%) inset;
+    margin: 1% 25% 0% 25%;
+    width: -webkit-fill-available;
+	}
+	.charts {
+		width: 100%;
+		display: inline-block;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
 	.end {
 		display: none;
 	}
@@ -1552,9 +1855,149 @@ form input {
 	.mobile {
 		display: none;
 	}
+	.Card1Meeting {
+		width: 90%;
+		height: 400px;
+		height: auto;
+	}
+	.Card1Meeting .photo {
+		float: none;
+		height: 400px;
+		width: 100%;
+	}
+	.Card1Meeting .description {
+		float: inherit;
+		width: 100%;
+	}
+	.Card1Meeting .description p {
+		margin-bottom: 1em;
+	}
+	.equiposTorneo {
+		float: bottom;
+	}
+	.espacioIzqMovil {
+		margin-left: 2%;
+	}
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.editarInvitar {
+		margin-top: 1%;
+		margin-bottom: 1%;
+	}
 }
 
 @media ( max-width : 767px) and (min-width: 511px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 100%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
+	.botonMeeting {
+		padding: 5px 5px 5px 5px;
+    color: #FFF;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgb(255 255 255 / 10%) inset;
+    margin: 1% 25% 0% 25%;
+    width: -webkit-fill-available;
+	}
+	.Card1Meeting {
+		width: 90%;
+		height: 400px;
+		height: auto;
+	}
+	.Card1Meeting .photo {
+		float: none;
+		height: 400px;
+		width: 100%;
+	}
+	.Card1Meeting .description {
+		float: inherit;
+		width: 100%;
+	}
+	.Card1Meeting .description p {
+		margin-bottom: 1em;
+	}
+	.equiposTorneo {
+		float: bottom;
+	}
+	.espacioIzqMovil {
+		margin-left: 2%;
+	}
+	.botonTorneos {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #4bc970;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border: 1px solid #3ac162;
+		border-width: 1px 1px 3px;
+		box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
+	.botonPartidosTorneo {
+		padding: 10px 10px 10px 15px;
+		float: left;
+		color: #FFF;
+		background-color: #FF7F50;
+		font-size: 80%;
+		text-align: center;
+		font-style: normal;
+		border-radius: 5px;
+		width: 100%;
+		border-width: 1px 1px 3px;
+		margin-bottom: 10px;
+		margin-left: 42%;
+		width: 20%;
+	}
 	.table-container {
 		padding: 15px;
 		max-width: 600px;
@@ -1634,9 +2077,43 @@ form input {
 		font-weight: 500;
 		transition: all 200ms linear;
 	}
+	.editarInvitar {
+		margin-top: 2%;
+		margin-bottom: 2%;
+	}
 }
 
 @media ( max-width : 510px) {
+	
+	.cardtitle {
+	text-align: center;
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
+    border-radius: 1rem;
+    padding-top: 1%;
+    background-color: #17a2b8;
+    width: 100%;
+    padding-bottom: 1%;
+    margin: auto;
+}
+
+	.botonMeeting {
+		padding: 5px 5px 5px 5px;
+    color: #FFF;
+    background-color: #4bc970;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5%;
+    border: 1px solid #3ac162;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgb(255 255 255 / 10%) inset;
+    margin: 1% 25% 0% 25%;
+    width: -webkit-fill-available;
+	}
+	.editarInvitar {
+		margin-top: 2%;
+		margin-bottom: 1%;
+	}
 	.rowWIV {
 		border-bottom: 1px solid #d9d9d9;
 	}
@@ -1670,6 +2147,10 @@ form input {
 		font-weight: 500;
 		transition: all 200ms linear;
 	}
+	
+	.alert-primary-clasification {
+	font-size: 1em;
+	}
 }
 
 body {
@@ -1686,7 +2167,7 @@ body {
 
 .body-container {
 	width: 1000px;
-	margin: 5%;
+	margin: 2% 2% 0% 8%;
 	min-height: 200px;
 }
 
@@ -1891,75 +2372,6 @@ body {
 	margin-top: 100px;
 	color: #363b6d;
 	margin-left: 20px;
-}
-
-@media screen and (max-width: 1000px) {
-	.body-container {
-		width: 100%;
-		padding: 50px 10px 0 10px;
-	}
-	.dashboard .grid-container {
-		grid-gap: 0 10px;
-	}
-	.dashboard .grid-container .grid-area {
-		margin-bottom: 10px;
-	}
-	.dashboard .grid-container .edit-profile .header h1 {
-		width: 100%;
-		text-align: left;
-		margin-left: 10px;
-	}
-	.dashboard .grid-container .matchs .display-matchs {
-		margin: 70px 10px 20px 10px;
-	}
-	.dashboard .grid-container .profile .profile-data {
-		margin-top: 0;
-	}
-	.dashboard .grid-container .profile .profile-data .data-details {
-		margin-left: 20%;
-	}
-}
-
-@media screen and (max-width: 750px) {
-	.dashboard .grid-container {
-		display: flex;
-		flex-direction: column;
-	}
-	.dashboard .grid-container .profile {
-		height: 532px;
-	}
-	.dashboard .grid-container .profile .img:before {
-		width: 200%;
-		top: 50%;
-		height: 50%;
-	}
-	.dashboard .grid-container .profile .img:after {
-		width: 200%;
-		top: 71%;
-		height: 50%;
-	}
-	.dashboard .grid-container .matchs .header:before {
-		transform: rotate(4deg) skewX(0deg);
-	}
-	.dashboard .grid-container .matchs .header:after {
-		transform: rotate(4deg) skewX(0deg);
-	}
-	.dashboard .grid-container .edit-profile {
-		height: auto;
-	}
-}
-
-@media screen and (max-width: 550px) {
-	.dashboard .grid-container .profile .img:before {
-		width: 200%;
-		top: 60%;
-		height: 50%;
-	}
-	.dashboard .grid-container .profile .img:after {
-		width: 200%;
-		top: 80%;
-		height: 50%;
-	}
 }
 
 *, *::before, *::after {
@@ -2450,10 +2862,538 @@ body {
 	display: none
 }
 
-.pointsuser{
-    border-radius: 0.2rem;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%);
-    padding: 0.2rem;
-    background-color: darkseagreen;
-    color: white;
+.pointsuser {
+	border-radius: 0.2rem;
+	box-shadow: 0 4px 8px 0 rgb(0 0 0/ 20%);
+	padding: 0.2rem;
+	background-color: darkseagreen;
+	color: white;
 }
+
+@media ( min-width : 59.4em) and (max-width: 78.2em) {
+	.sports-general-container {
+		width: 33% !important;
+		min-width: 33% !important;
+		flex: 33% !important;
+	}
+	
+	.list-meeting-championship-title {
+		font-size: 180%;
+		vertical-align: middle !important;
+	}
+}
+
+@media ( min-width : 37.5em) and (max-width: 59.4em) {
+	.sports-general-container {
+		width: 50% !important;
+		min-width: 50% !important;
+		flex: 50% !important;
+	}
+	
+	.botoncito-crear-meeting {
+		margin-left: 42% !important;
+		margin-right: 42% !important;
+		font-size: 92%;
+	}
+	
+}
+
+@media ( min-width : 12.5em) and (max-width: 37.5em) {
+	.sports-general-container {
+		width: 100% !important;
+		min-width: 100% !important;
+		flex: 100% !important;
+	}
+	
+	.botoncito-crear-meeting {
+		margin-left: 39% !important;
+		margin-right: 39% !important;
+		font-size: 90%;
+	}
+	
+}
+
+@media ( max-width : 768px) and (min-width: 12.5em) {
+	.navigation-wrap {
+		position: absolute !important;
+		width: 100% !important;
+		height: 120px !important;
+		top: 0 !important;
+		left: 0 !important;
+		z-index: 1000 !important;
+		-webkit-transition: all 0.3s ease-out !important;
+		transition: all 0.3s ease-out !important;
+	}
+	.navbar-nav {
+		position: relative !important;
+	}
+	
+	.botoncito-crear-meeting {
+		margin-left: 37% !important;
+		margin-right: 37% !important;
+		font-size: 85%;
+	}
+}
+
+@media ( max-width : 692px) and (min-width: 510px) {
+	.promo-box-container .title {
+		font-size: 20px !important;
+	}
+	
+	.botoncito-crear-meeting {
+		margin-left: 36% !important;
+		margin-right: 36% !important;
+		font-size: 84%;
+	}
+}
+
+@media ( max-width : 510px) and (min-width: 12.5em) {
+	.promo-box-container .title {
+		font-size: 15px !important;
+	}
+	
+}
+
+:root { 
+	-body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+	-msger-bg: #fff; 
+	-border: 2px solid #ddd; 
+	-left-msg-bg: #c7dec0; 
+	-right-msg-bg: #579ffb;
+}
+
+.msger {
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: space-between;
+	width: 100%;
+	max-width: 867px;
+	margin: 25px 10px;
+	height: calc(100% - 50px);
+	border: 2px solid #ddd;
+	border-radius: 5px;
+	background: #fff;
+	box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+}
+
+.msger-header {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+	border-bottom: 2px solid #ddd;
+	background: #6b89ab;
+	color: white;
+}
+
+.msger-chat {
+	flex: 1;
+	overflow-y: auto;
+	padding: 10px;
+}
+
+.msger-chat::-webkit-scrollbar {
+	width: 6px;
+}
+
+.msger-chat::-webkit-scrollbar-track {
+	background: #ddd;
+}
+
+.msger-chat::-webkit-scrollbar-thumb {
+	background: #bdbdbd;
+}
+
+.msg {
+	display: flex;
+	align-items: flex-end;
+	margin-bottom: 10px;
+}
+
+.msg:last-of-type {
+	margin: 0;
+}
+
+.msg-img {
+	width: 50px;
+	height: 50px;
+	margin-right: 10px;
+	background: #ddd;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	border-radius: 50%;
+}
+
+.msg-bubble {
+	max-width: 450px;
+	padding: 15px;
+	border-radius: 15px;
+	background: #c7dec0;
+}
+
+.msg-info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.msg-info-name {
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+.msg-info-time {
+	font-size: 0.85em;
+}
+
+.left-msg .msg-bubble {
+	border-bottom-left-radius: 0;
+}
+
+.right-msg {
+	flex-direction: row-reverse;
+}
+
+.right-msg .msg-bubble {
+	background: #579ffb;
+	color: #fff;
+	border-bottom-right-radius: 0;
+}
+
+.right-msg .msg-img {
+	margin: 0 0 0 10px;
+}
+
+.msger-inputarea {
+	display: flex;
+	padding: 10px;
+	border-top: 2px solid #ddd;
+	background: #eee;
+}
+
+.msger-inputarea * {
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+	font-size: 1em;
+}
+
+.msger-input {
+	flex: 1;
+	background: #ddd;
+}
+
+.msger-send-btn {
+	margin-left: 10px;
+	background: rgb(0, 196, 65);
+	color: #fff;
+	font-weight: bold;
+	cursor: pointer;
+	transition: background 0.23s;
+}
+
+.msger-send-btn:hover {
+	background: rgb(0, 180, 50);
+}
+
+.msger-chat {
+	background-color: #fcfcfe;
+	background-image: url("/images/fondo_chat2.png");
+}
+
+.meeting-and-championship-list {
+	margin-left: 8% !important;
+	margin-right: 8% !important;
+	padding: 1rem;
+}
+
+.meeting-and-championship-list td {
+	vertical-align: middle !important;
+}
+
+.meeting-and-championship-list td .botoncito {
+	margin: 0;
+}
+
+.list-meeting-championship-title {
+	vertical-align: middle !important;
+	padding: 0 !important;
+}
+
+.botoncito-crear-meeting {
+	text-align: center;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	margin-left: 44%;
+	margin-right: 44%;
+	border-radius: 1rem;
+	padding-top: 1%;
+	background-color: #17a2b8;
+	padding-bottom: 1%;
+}
+
+.botoncito-crear-meeting a {
+	color: white;
+}
+
+.alert{
+	margin: 20%;
+}
+
+
+.send-invitation-form {
+	margin-top: 1.8em;	
+}
+
+.search-user-form {
+	border-radius: 1em;
+}
+
+.invitation-select {
+	margin-top: 1.1em;
+	font-size: 90%;
+}
+
+.search-user-form .col-sm-10 {
+	height: 3.9em !important;
+	padding-top: 2em;
+}
+
+.search-user-form .form-group {
+	margin-bottom: 0em;
+	padding-top: 2.1em;	
+	height: 6.5em;
+}
+
+.search-person-button {
+	margin-right: 4em;
+	display: inline-block;
+}
+
+.return-search-person-button {
+	display: inline-block;	
+}
+
+.search-user-form .form-group button {
+	background-color: #41ba6f;
+	width: 100%;
+}
+
+.invitation-tables-complete-block {
+	width: 100%;
+}
+
+.table-title-block {
+	padding: 0.3em;
+	margin: 0.7em;
+	margin-right: 1.7%;
+	margin-left: 1.7%;	
+	width: 44%;
+	min-width: 44%;
+	max-width: 44%;
+	display: inline-block;
+}
+
+.invitation-table-title {
+	background-color: #e0ebeb;
+	width: 100%;
+
+	padding-top: 0.6em;
+	padding-bottom: 0.5em;
+}
+
+.invitation-table {
+	width: 100%;
+	height: 23em;
+	padding: 0;
+}
+
+.invitation-table th {
+	vertical-align: middle !important;
+}
+
+
+.carousel-inner img {
+	width: 100%;
+	height: auto;
+}
+
+@media (max-width : 120em) and (min-width : 80em) {
+	
+	.carousel-caption h3{
+		font-size: 250%;
+	}
+	
+	.carousel-caption p {
+		font-size: 150%;
+	}
+	
+}
+
+@media (max-width : 80em) and (min-width : 55em) {
+	
+
+	
+	.carousel-caption h3{
+		font-size: 180%;
+	}
+	
+	.carousel-caption p {
+		font-size: 108%;
+	}
+	
+	.carousel-caption .alert-primary {
+		margin-top: 15%;
+	}
+	
+}
+
+@media ( max-width : 55em) and (min-width: 48em) {
+	
+	.invitation-search-title h1 {
+		font-size: 200%;
+	}
+	
+	.invitation-search-title h2 {
+		font-size: 145%;
+	}
+	
+	.invitation-select {
+		font-size: 83%;
+	}
+	
+	.invitation-table-title h3 {
+		font-size: 150%;
+	}
+	
+	.invitation-table th {
+		font-size: 88%;
+	}
+	
+	.invitation-table td {
+		font-size: 88%;
+	}
+
+
+	.carousel-caption h3 {
+		font-size: 140%;
+	}
+	
+	.carousel-caption p {
+		font-size: 84%;
+	}
+	
+	.carousel-caption .alert-primary {
+		margin-top: 14%;
+	}
+	
+
+}
+
+@media ( max-width : 48em) {
+		
+	.invitation-search-title h1 {
+		font-size: 145%;
+	}
+	
+	.invitation-search-title h2 {
+		font-size: 105%;
+	}
+	
+	.search-user-form .col-sm-10 {
+		padding-top: 2.2em;
+	}
+	
+	.invitation-select {
+		font-size: 75%;
+		margin-top: 1em;
+	}
+	
+	.search-user-form .form-control {
+		height: 2em;
+	}
+	
+	.search-person-button {
+    	margin-right: 1em;
+	}
+	
+	.search-user-form .form-group b {
+		font-size: 78%;
+	}
+	
+	.cardtitle .invitation-table-title {
+		font-size: 110%;
+	}
+
+	.invitation-table-title h3 {
+		font-size: 110%;
+	}
+	
+	.invitation-table th {
+		font-size: 80%;
+	}
+	
+	.invitation-table td {
+		font-size: 80%;
+	}
+	
+	.table-title-block {
+		min-width: 85%;
+		height: 15em;
+		margin-bottom: 2em;
+	}
+	
+	.invitation-table {
+		height: 14em;
+	} 
+	
+	
+	.carousel-caption h3 {
+		font-size: 100%;
+	}
+	
+	.carousel-caption p {
+		font-size: 60%;
+	}
+	
+	.carousel-caption .alert-primary {
+		margin-top: 12%;
+	}
+	
+}
+
+@media ( max-width : 36em) {
+		
+	.search-user-form input {
+		max-width: 13.44em;
+		font-size: 93%;
+	}
+	
+	.invitation-select {
+		font-size: 65%;
+		margin-top: 2em;
+	}
+		
+	.search-person-button {
+    	margin-right: 5%;
+	}
+	
+	.search-user-form .form-group b {
+		font-size: 70%;
+	}
+	
+	
+	.carousel-caption h3 {
+		font-size: 65%;
+	}
+	
+	.carousel-caption p {
+		font-size: 40%;
+	}
+	
+	.carousel-caption .alert-primary {
+		margin-top: 9%;
+	}
+	
+}
+

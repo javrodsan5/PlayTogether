@@ -7,9 +7,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="pay">
+<playtogether:layout pageName="pay" invitaciones="${invitaciones}">
 	<center>
 		<h1 style= "font-size: 65px">Se ha cancelado el pago</h1>
+		<h3 class="text-danger">${timeOut}</h3>
 		<i class="fa fa-times cancel" style="font-size: 10rem"></i>
 		<br>
 		<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">

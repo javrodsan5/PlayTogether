@@ -11,19 +11,19 @@ public class InvitationValidator implements Validator {
 	@Override
 	public void validate(Object target, Errors errors) {
 		Invitation invitation = (Invitation) target;
-		
+
 		Usuario receiver = invitation.getReceiver();
 
-	    if (receiver == null) {
-	    	errors.rejectValue("selected_participant", "Debe elegir un usuario al que invitar", "Debe elegir un usuario al que invitar");
-	    }
-	    
+		if (receiver == null) {
+			errors.rejectValue("selected_participant", "Debe elegir un usuario al que invitar",
+					"Debe elegir un usuario al que invitar");
+		}
+
 	}
 
 	@Override
 	public boolean supports(Class<?> clazz) {
 		return Invitation.class.isAssignableFrom(clazz);
 	}
-	
 
 }

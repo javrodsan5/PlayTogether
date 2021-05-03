@@ -3,6 +3,7 @@ package net.playtogether.jpa.controller;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,8 +24,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
+import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
+import net.playtogether.jpa.service.InvitationService;
+import net.playtogether.jpa.service.PayService;
+import net.playtogether.jpa.service.ChatService;
 import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
 
@@ -36,6 +41,15 @@ public class UsuarioController {
 	@Autowired
 	UserTypeService userTypeService;
 
+	@Autowired
+	InvitationService invitationService;
+
+	@Autowired
+	ChatService chatService;
+
+	@Autowired
+	PayService payService;
+
 	@InitBinder("usuario")
 	public void initUsuariotBinder(WebDataBinder dataBinder) {
 		dataBinder.setValidator(new UsuarioValidator());
@@ -43,16 +57,21 @@ public class UsuarioController {
 
 	@GetMapping(value = "/registro")
 	public String initCreationForm(ModelMap model) {
-		Usuario usuario = new Usuario();
-		model.put("usuario", usuario);
+		model.put("usuario", new Usuario());
+		model.put("accept", false);
 		return "users/register";
 	}
 
 	@PostMapping(value = "/registro")
-	public String processCreationForm(@Valid Usuario usuario, BindingResult result) {
+	public String processCreationForm(@Valid Usuario usuario, BindingResult result, ModelMap model) {
 
 		if (usuarioService.checkCorreoExists(usuario.getCorreo())) {
 			result.addError(new FieldError("usuario", "correo", "El correo ya está registrado"));
+		}
+
+		if (usuario.getAccept() == false) {
+			model.addAttribute("errorAccept", "Debe aceptar las condiciones.");
+			result.addError(new FieldError("usuario", ".", "."));
 		}
 
 		if (usuarioService.checkPhoneExists(usuario.getPhone())) {
@@ -78,6 +97,11 @@ public class UsuarioController {
 	public String userDetails(final ModelMap model, @PathVariable("userId") final Integer userId, Principal principal) {
 		Usuario usuario = this.usuarioService.findUserById(userId);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		boolean premium = false;
 		if (usuario.getId().equals(user.getId())) {
 
@@ -98,12 +122,12 @@ public class UsuarioController {
 				int[] torneosPorMes = getEventoPorMes(torneosPorMesList);
 				String datos2 = Arrays.toString(quedadasPorMes);
 				String datos3 = Arrays.toString(torneosPorMes);
-				premium=true;
+				premium = true;
 				model.addAttribute("quedadasPorMes", datos2.replace(" ", ""));
 				model.addAttribute("torneosPorMes", datos3.replace(" ", ""));
-				model.addAttribute("tipoUsuario",premium);
-			}else {
-				model.addAttribute("tipoUsuario",premium);
+				model.addAttribute("tipoUsuario", premium);
+			} else {
+				model.addAttribute("tipoUsuario", premium);
 			}
 			return "users/userDetails";
 		}
@@ -111,6 +135,13 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile")
 	public String userProfile(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
+		model.addAttribute("invitacionesQuedadas", invitacionesQuedadas);
+		model.addAttribute("invitacionesTorneos", invitacionesTorneos);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.addAttribute("user", user);
 		Integer quedadas = user.getMeetings().size();
@@ -133,7 +164,11 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/edit")
 	public String initUpdateUsuario(ModelMap model, Principal principal) {
-
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Usuario user = this.usuarioService.findByUsername(principal.getName());
 		model.put("usuario", user);
 
@@ -162,7 +197,7 @@ public class UsuarioController {
 		} else {
 
 			BeanUtils.copyProperties(usuario, usuarioToUpdate, "id", "user.username", "meetings", "teams", "type",
-					"statistics", "payment", "puntos");
+					"statistics", "payment", "puntos", "description");
 			this.usuarioService.saveUsuario(usuarioToUpdate);
 			model.addAttribute("message", "¡Cuenta actualizada correctamente!");
 			return "redirect:/myprofile";
@@ -172,6 +207,11 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/championshipsRecord")
 	public String championshipsRecord(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Championship> championships = usuario.getTeams().stream().map(t -> t.getChampionship()).distinct()
 				.collect(Collectors.toList());
@@ -184,6 +224,11 @@ public class UsuarioController {
 
 	@GetMapping("/myprofile/meetingsRecord")
 	public String meetingsRecord(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
 		List<Meeting> meetings = usuario.getMeetings().stream().limit(10).collect(Collectors.toList());
 		if (meetings.size() <= 0) {
@@ -192,6 +237,26 @@ public class UsuarioController {
 		model.addAttribute("meetings", meetings);
 
 		return "users/meetingsRecord";
+	}
+
+	@GetMapping("/myprofile/paysRecord")
+	public String paysRecord(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
+		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
+		List<Pay> pays = usuario.getPayment().stream().filter(p -> p.getDate() != null).limit(10)
+				.collect(Collectors.toList());
+		pays.sort(Comparator.comparing(Pay::getDate));
+		Collections.reverse(pays);
+		if (pays.size() <= 0) {
+			model.put("noRecords", true);
+		}
+		model.addAttribute("pays", pays);
+
+		return "users/paysRecord";
 	}
 
 	public int[] getEventoPorMes(List<Integer> eventoList) {
@@ -245,19 +310,97 @@ public class UsuarioController {
 
 	@GetMapping("/clasification")
 	public String usersClasification(ModelMap model, Principal principal) {
-		List<Usuario> topUsuarios = usuarioService.findTopUsuarios().stream().limit(10).collect(Collectors.toList());
-		List<Usuario> todosUsuarios = usuarioService.findAll().stream().sorted(Comparator.comparing(Usuario::getPuntos).reversed()).collect(Collectors.toList());
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
+		List<Usuario> usuariosOrdenPuntos = usuarioService.findTopUsuarios();
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
-		for (int i = 0; i < todosUsuarios.size(); i++) {
-			if (todosUsuarios.get(i).equals(usuario)) {
+		Integer tam = usuariosOrdenPuntos.size();
+		for (int i = 0; i < tam; i++) {
+			if (usuariosOrdenPuntos.get(i).equals(usuario)) {
 				posicion = i + 1;
 				break;
 			}
 		}
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
-		model.addAttribute("topUsuarios", topUsuarios);
+		if (usuariosOrdenPuntos.size() > 10) {
+			model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
+		} else {
+			model.addAttribute("topUsuarios", usuariosOrdenPuntos);
+		}
+		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}
+
+	@GetMapping("/myprofile/description")
+	public String initUpdateUsuarioDescription(ModelMap model, Principal principal) {
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
+
+		model.put("usuario", user);
+		return "users/updateUserDescription";
+	}
+
+	@PostMapping("/myprofile/description")
+	public String postUpdateUsuarioDescription(Usuario usuario, BindingResult result, ModelMap model,
+			Principal principal) {
+		Usuario usuarioToUpdate = this.usuarioService.findByUsername(principal.getName());
+
+		usuarioToUpdate.setDescription(usuario.getDescription());
+		this.usuarioService.saveUsuario(usuarioToUpdate);
+		model.addAttribute("message", "¡Descripción actualizada correctamente!");
+		return "redirect:/myprofile";
+
+	}
+
+	@GetMapping("/requestDeleteMyProfile")
+	public String requestDeleteMyProfile(ModelMap model, Principal principal) {
+
+		model.addAttribute("confirmationDelete", true);
+		return userProfile(model, principal);
+	}
+
+	@GetMapping("/confirmationRequestDeleteMyProfile")
+	public String confirmationDeleteMyProfile(ModelMap model, Principal principal) {
+
+		model.addAttribute("confirmatedDelete", true);
+		return userProfile(model, principal);
+	}
+
+	@GetMapping("/requestDataMyProfile")
+	public String requestDataMyProfile(ModelMap model, Principal principal) {
+
+		model.addAttribute("confirmationData", true);
+		return userProfile(model, principal);
+	}
+
+	@GetMapping("/confirmationRequestDataMyProfile")
+	public String confirmationRequestDataMyProfile(ModelMap model, Principal principal) {
+
+		model.addAttribute("confirmatedData", true);
+		return userProfile(model, principal);
+	}
+
+	@GetMapping("/myprofile/incidence")
+	public String initIncidence(ModelMap model, Principal principal) {
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		model.put("usuario", user);
+
+		return "users/incidenceUser";
+
+	}
+
+	@GetMapping("/myprofile/incidence/accepted")
+	public String initIncidenceAccepted(ModelMap model, Principal principal) {
+		Usuario user = this.usuarioService.findByUsername(principal.getName());
+		model.put("usuario", user);
+
+		model.addAttribute("incidenceCorrect", true);
+		return userProfile(model, principal);
+
+	}
+
 }

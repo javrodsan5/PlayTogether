@@ -3,23 +3,17 @@ package net.playtogether.jpa.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
-import net.playtogether.jpa.entity.Authorities;
 import net.playtogether.jpa.entity.Pay;
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.entity.Usuario;
@@ -33,9 +27,6 @@ public class UserLoginService implements UserDetailsService {
     @Autowired
     private PayService payService;
     
-    @Autowired
-    private AuthoritiesService authoritiesService;
-
     @Autowired
     private UsuarioService usuarioService;
 

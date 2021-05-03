@@ -6,8 +6,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<playtogether:layout pageName="championships">
+<playtogether:layout pageName="championships"
+	invitaciones="${invitaciones}">
 	<body>
 		<div class="cardtitle">
 			<h1>
@@ -118,7 +120,7 @@
 				<div class="tournament-bracket tournament-bracket--rounded">
 					<div
 						class="tournament-bracket__round tournament-bracket__round--semifinals">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Semifinales</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
 								<div class="tournament-bracket__match" tabindex="0">
@@ -136,7 +138,11 @@
 														fijado fecha para el partido.</div>
 												</c:if>
 											</c:if>
-											${matches[0].dateTime}
+											<fmt:parseDate value="${matches[0].dateTime }"
+												pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime0"
+												type="both" />
+											<fmt:formatDate value="${parsedDateTime0}"
+												pattern="dd-MM-yyyy HH:mm" />
 										</caption>
 
 										<thead class="sr-only">
@@ -199,7 +205,11 @@
 														fijado fecha para el partido.</div>
 												</c:if>
 											</c:if>
-											${matches[1].dateTime}
+											<fmt:parseDate value="${matches[1].dateTime }"
+												pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime1"
+												type="both" />
+											<fmt:formatDate value="${parsedDateTime1}"
+												pattern="dd-MM-yyyy HH:mm" />
 										</caption>
 
 										<thead class="sr-only">
@@ -252,7 +262,7 @@
 
 					<div
 						class="tournament-bracket__round tournament-bracket__round--gold">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Final</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
 								<div class="tournament-bracket__match" tabindex="0">
@@ -269,8 +279,12 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[2].dateTime}
-												</c:if>
+												<fmt:parseDate value="${matches[2].dateTime }"
+													pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime2"
+													type="both" />
+												<fmt:formatDate value="${parsedDateTime2}"
+													pattern="dd-MM-yyyy HH:mm" />
+											</c:if>
 
 										</caption>
 										<thead class="sr-only">
@@ -326,11 +340,11 @@
 		</c:if>
 		<c:if test="${championshipObj.maxTeams==8}">
 			<br>
-			<div class="container" style="margin-left: 4%">
+			<div class="container">
 				<div class="tournament-bracket tournament-bracket--rounded">
 					<div
 						class="tournament-bracket__round tournament-bracket__round--quarterfinals">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Cuartos
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Cuartos
 							de final</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
@@ -348,8 +362,12 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[0].dateTime}
-												</c:if>
+												<fmt:parseDate value="${matches[0].dateTime }"
+													pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime0"
+													type="both" />
+												<fmt:formatDate value="${parsedDateTime0}"
+													pattern="dd-MM-yyyy HH:mm" />
+											</c:if>
 										</caption>
 										<thead class="sr-only">
 											<tr>
@@ -410,8 +428,12 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[1].dateTime}
-												</c:if>
+												<fmt:parseDate value="${matches[1].dateTime }"
+													pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime1"
+													type="both" />
+												<fmt:formatDate value="${parsedDateTime1}"
+													pattern="dd-MM-yyyy HH:mm" />
+											</c:if>
 										</caption>
 										<thead class="sr-only">
 											<tr>
@@ -471,8 +493,12 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[2].dateTime}
-												</c:if>
+												<fmt:parseDate value="${matches[2].dateTime }"
+													pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime2"
+													type="both" />
+												<fmt:formatDate value="${parsedDateTime2}"
+													pattern="dd-MM-yyyy HH:mm" />
+											</c:if>
 										</caption>
 										<thead class="sr-only">
 											<tr>
@@ -533,8 +559,12 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[3].dateTime}
-												</c:if>
+												<fmt:parseDate value="${matches[3].dateTime }"
+													pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime3"
+													type="both" />
+												<fmt:formatDate value="${parsedDateTime3}"
+													pattern="dd-MM-yyyy HH:mm" />
+											</c:if>
 										</caption>
 										<thead class="sr-only">
 											<tr>
@@ -583,7 +613,7 @@
 					</div>
 					<div
 						class="tournament-bracket__round tournament-bracket__round--semifinals">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Semifinales</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
 								<div class="tournament-bracket__match" tabindex="0">
@@ -600,8 +630,12 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[4].dateTime}
-												</c:if>
+												<fmt:parseDate value="${matches[4].dateTime }"
+													pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime4"
+													type="both" />
+												<fmt:formatDate value="${parsedDateTime4}"
+													pattern="dd-MM-yyyy HH:mm" />
+											</c:if>
 										</caption>
 
 										<thead class="sr-only">
@@ -663,8 +697,12 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[5].dateTime}
-												</c:if>
+												<fmt:parseDate value="${matches[5].dateTime }"
+													pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime5"
+													type="both" />
+												<fmt:formatDate value="${parsedDateTime5}"
+													pattern="dd-MM-yyyy HH:mm" />
+											</c:if>
 										</caption>
 
 										<thead class="sr-only">
@@ -717,7 +755,7 @@
 
 					<div
 						class="tournament-bracket__round tournament-bracket__round--gold">
-						<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+						<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:20%">Final</h3>
 						<ul class="tournament-bracket__list">
 							<li class="tournament-bracket__item">
 								<div class="tournament-bracket__match" tabindex="0">
@@ -734,8 +772,12 @@
 														style="margin: 1% 20% 1% 20%">Todavía no se ha
 														fijado fecha para el partido.</div>
 												</c:if>
-												${matches[6].dateTime}
-												</c:if>
+												<fmt:parseDate value="${matches[6].dateTime }"
+													pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime6"
+													type="both" />
+												<fmt:formatDate value="${parsedDateTime6}"
+													pattern="dd-MM-yyyy HH:mm" />
+											</c:if>
 
 										</caption>
 										<thead class="sr-only">
@@ -800,7 +842,7 @@
 
 						<div
 							class="tournament-bracket__round tournament-bracket__round--roundOf16">
-							<h3 class="tournament-bracket__round-title alert alert-primary">Octavos
+							<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:10%">Octavos
 								de final</h3>
 							<ul class="tournament-bracket__list">
 								<li class="tournament-bracket__item">
@@ -817,7 +859,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[0].dateTime}
+													<fmt:parseDate value="${matches[0].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime0"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime0}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -878,7 +924,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[1].dateTime}
+													<fmt:parseDate value="${matches[1].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime1"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime1}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -938,7 +988,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[2].dateTime}
+													<fmt:parseDate value="${matches[2].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime2"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime2}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -999,7 +1053,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[3].dateTime}
+													<fmt:parseDate value="${matches[3].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime3"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime3}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1060,7 +1118,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[4].dateTime}
+													<fmt:parseDate value="${matches[4].dateTime}"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime4"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime4}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1120,7 +1182,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[5].dateTime}
+													<fmt:parseDate value="${matches[5].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime5"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime5}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1180,7 +1246,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[6].dateTime}
+													<fmt:parseDate value="${matches[6].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime6"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime6}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1240,7 +1310,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[7].dateTime}
+													<fmt:parseDate value="${matches[7].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime7"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime7}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1292,7 +1366,7 @@
 
 						<div
 							class="tournament-bracket__round tournament-bracket__round--quarterfinals">
-							<h3 class="tournament-bracket__round-title alert alert-primary">Cuartos
+							<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:10%">Cuartos
 								de final</h3>
 							<ul class="tournament-bracket__list">
 								<li class="tournament-bracket__item">
@@ -1309,7 +1383,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[8].dateTime}
+													<fmt:parseDate value="${matches[8].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime8"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime8}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1370,7 +1448,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[9].dateTime}
+													<fmt:parseDate value="${matches[9].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime9"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime9}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1430,7 +1512,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[10].dateTime}
+													<fmt:parseDate value="${matches[10].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime10"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime10}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1491,7 +1577,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[11].dateTime}
+													<fmt:parseDate value="${matches[11].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime11"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime11}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1542,7 +1632,7 @@
 						</div>
 						<div
 							class="tournament-bracket__round tournament-bracket__round--semifinals">
-							<h3 class="tournament-bracket__round-title alert alert-primary">Semifinales</h3>
+							<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:10%">Semifinales</h3>
 							<ul class="tournament-bracket__list">
 								<li class="tournament-bracket__item">
 									<div class="tournament-bracket__match" tabindex="0">
@@ -1558,7 +1648,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[12].dateTime}
+													<fmt:parseDate value="${matches[12].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime12"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime12}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1620,7 +1714,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[13].dateTime}
+													<fmt:parseDate value="${matches[13].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime13"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime13}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 											</caption>
 											<thead class="sr-only">
@@ -1671,7 +1769,7 @@
 
 						<div
 							class="tournament-bracket__round tournament-bracket__round--gold">
-							<h3 class="tournament-bracket__round-title alert alert-primary">Final</h3>
+							<h3 class="tournament-bracket__round-title alert alert-primary" style="margin:10%" >Final</h3>
 							<ul class="tournament-bracket__list">
 								<li class="tournament-bracket__item">
 									<div class="tournament-bracket__match" tabindex="0">
@@ -1687,7 +1785,11 @@
 															style="margin: 1% 20% 1% 20%">Todavía no se ha
 															fijado fecha para el partido.</div>
 													</c:if>
-												${matches[14].dateTime}
+													<fmt:parseDate value="${matches[14].dateTime }"
+														pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime14"
+														type="both" />
+													<fmt:formatDate value="${parsedDateTime14}"
+														pattern="dd-MM-yyyy HH:mm" />
 												</c:if>
 
 											</caption>
@@ -1747,112 +1849,139 @@
 
 		<br>
 		<br>
-		<div class="cardlist">
+		<br>
+		<div class="cardlist" align="center" style="margin-top: 7%">
+			<c:if test="${championshipObj.matches.size() == 0 }">
+				<h2 class="alert alert-warning"
+					style="text-align: center; font-size: 20px; width: 50%; margin: auto">
+					No existen partidos aún para este torneo</h2>
+			</c:if>
 
-			<table id="matchTable" class="table">
-				<thead style="text-align: center">
-					<tr class="rowtable">
-						<th style="width: 15%;">Fecha y hora</th>
-						<th style="width: 20%;">Equipo local</th>
-						<th style="width: 15%;">Resultado (Según equipo local)</th>
-						<th style="width: 20%;">Equipo visitante</th>
-						<th style="width: 20%;">Resultado (Según equipo
-							visitante)</th>
-						<th style="width: 5%;">Añadir/editar fecha</th>
-						<th style="width: 5%;">Añadir/editar resultado</th>
-					</tr>
-				</thead>
+			<c:if test="${championshipObj.matches.size() > 0 }">
+				<h2 class="alert alert-info"
+					style="text-align: center; font-size: 20px; width: 90%; margin: 0%">
+					<i class="fa fa-info-circle"></i> Para que el resultado del partido
+					se considere válido, deben coincidir los resultados aportados por
+					cada equipo
+				</h2>
+				<br>
 
-				<tbody style="text-align: center">
-					<c:forEach items="${matches}" var="match">
-						<tr class="rowtable">
-							<td><c:out value="${match.dateTime}" /></td>
-							<td><c:out value="${match.team1.name}" /></td>
-							<td><c:out value="${match.puntos1} - ${match.puntos2}" /></td>
-							<td><c:out value="${match.team2.name}" /></td>
-							<td><c:out value="${match.puntos3} - ${match.puntos4}" /></td>
+				<div class="scroll_vertical" id="style_scroll">
+					<table id="matchTable" class="table">
+						<thead style="text-align: center">
+							<tr class="rowtable">
+								<th style="width: 15%;">Fecha y hora</th>
+								<th style="width: 20%;">Equipo local</th>
+								<th style="width: 15%;">Resultado (Según equipo local)</th>
+								<th style="width: 20%;">Equipo visitante</th>
+								<th style="width: 20%;">Resultado (Según equipo visitante)</th>
+								<th style="width: 5%;">Añadir/editar fecha</th>
+								<th style="width: 5%;">Añadir/editar resultado</th>
+							</tr>
+						</thead>
 
-							<td><c:if test="${match.dateTime == null}">
-									<c:if
-										test="${match.team1.participants.contains(usuarioLog) || match.team2.participants.contains(usuarioLog)}">
-										<c:if test="${match.ronda==rondaActual}">
+						<tbody style="text-align: center">
+							<c:forEach items="${matches}" var="match">
+								<tr class="rowtable">
+
+									<td><fmt:parseDate value="${match.dateTime }"
+											pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+										<fmt:formatDate value="${parsedDateTime}"
+											pattern="dd-MM-yyyy HH:mm" /></td>
+									<td><c:out value="${match.team1.name}" /></td>
+									<td><c:out value="${match.puntos1} - ${match.puntos2}" /></td>
+									<td><c:out value="${match.team2.name}" /></td>
+									<td><c:out value="${match.puntos3} - ${match.puntos4}" /></td>
+
+									<td><c:if test="${match.dateTime == null}">
+											<c:if
+												test="${match.team1.participants.contains(usuarioLog) || match.team2.participants.contains(usuarioLog)}">
+												<c:if test="${match.ronda==rondaActual}">
+													<spring:url
+														value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
+														var="date2Url">
+														<spring:param name="championshipId"
+															value="${championship}" />
+														<spring:param name="deporte" value="${deporte}" />
+														<spring:param name="matchId" value="${match.id}" />
+													</spring:url>
+													<div class="botoncitores1">
+														<a href="${fn:escapeXml(date2Url)}"><i
+															style="font-size: 33px" class="fa fa-plus-circle"
+															aria-hidden="true"></i></a>
+													</div>
+												</c:if>
+											</c:if>
+										</c:if> <c:if test="${match.dateTime != null }">
+											<c:if
+												test="${match.team1.participants.contains(usuarioLog) || match.team2.participants.contains(usuarioLog)}">
+												<c:if test="${match.ronda==rondaActual}">
+													<spring:url
+														value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
+														var="date2Url">
+														<spring:param name="championshipId"
+															value="${championship}" />
+														<spring:param name="deporte" value="${deporte}" />
+														<spring:param name="matchId" value="${match.id}" />
+													</spring:url>
+													<div class="botoncitores1">
+														<a href="${fn:escapeXml(date2Url)}"><i
+															style="font-size: 33px" class="fa fa-pencil-square"
+															aria-hidden="true"></i></a>
+													</div>
+												</c:if>
+											</c:if>
+										</c:if></td>
+									<td><c:if test="${match.dateTime != null}">
+											<c:if test="${match.ronda==rondaActual}">
+												<c:if
+													test="${match.team1.participants.contains(usuarioLog)}">
+													<spring:url
+														value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
+														var="result2Url">
+														<spring:param name="championshipId"
+															value="${championship}" />
+														<spring:param name="deporte" value="${deporte}" />
+														<spring:param name="matchId" value="${match.id}" />
+														<spring:param name="team" value="team1" />
+													</spring:url>
+													<div class="botoncitores1">
+														<a href="${fn:escapeXml(result2Url)}"><i
+															style="font-size: 33px; display: inline;"
+															class="fa fa-pencil-square-o" aria-hidden="true"></i><i
+															class="fa fa-home"
+															style="font-size: 33px; display: inline;"
+															aria-hidden="true"></i> </a>
+													</div>
+												</c:if>
+											
+										 <c:if test="${match.team2.participants.contains(usuarioLog)}">
 											<spring:url
-												value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
-												var="date2Url">
+												value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
+												var="result2Url">
 												<spring:param name="championshipId" value="${championship}" />
 												<spring:param name="deporte" value="${deporte}" />
 												<spring:param name="matchId" value="${match.id}" />
+												<spring:param name="team" value="team2" />
 											</spring:url>
-											<div class="botoncitores1">
-												<a href="${fn:escapeXml(date2Url)}"><i
-													style="font-size: 33px" class="fa fa-plus-circle"
-													aria-hidden="true"></i></a>
-											</div>
-										</c:if>
-									</c:if>
-								</c:if> <c:if test="${match.dateTime != null }">
-									<c:if
-										test="${match.team1.participants.contains(usuarioLog) || match.team2.participants.contains(usuarioLog)}">
-										<c:if test="${match.ronda==rondaActual}">
-											<spring:url
-												value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/date"
-												var="date2Url">
-												<spring:param name="championshipId" value="${championship}" />
-												<spring:param name="deporte" value="${deporte}" />
-												<spring:param name="matchId" value="${match.id}" />
-											</spring:url>
-											<div class="botoncitores1">
-												<a href="${fn:escapeXml(date2Url)}"><i
-													style="font-size: 33px" class="fa fa-pencil-square"
-													aria-hidden="true"></i></a>
-											</div>
-										</c:if>
-									</c:if>
-								</c:if></td>
-							<td><c:if test="${match.dateTime != null}">
-									<c:if test="${match.ronda==rondaActual}">
-										<c:if test="${match.team1.participants.contains(usuarioLog)}">
-										<spring:url
-											value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
-											var="result2Url">
-											<spring:param name="championshipId" value="${championship}" />
-											<spring:param name="deporte" value="${deporte}" />
-											<spring:param name="matchId" value="${match.id}" />
-											<spring:param name="team" value="team1" />
-										</spring:url>
-										<div class="botoncitores1">
-											<a href="${fn:escapeXml(result2Url)}"><i
-												style="font-size: 33px; display: inline;"
-												class="fa fa-pencil-square-o" aria-hidden="true"></i><i
-												class="fa fa-home" style="font-size: 33px; display: inline;"
-												aria-hidden="true"></i> </a>
-										</div>
-										</c:if>
-										<c:if test="${match.team2.participants.contains(usuarioLog)}">
-										<spring:url
-											value="/sports/{deporte}/championships/{championshipId}/match/{matchId}/result/{team}"
-											var="result2Url">
-											<spring:param name="championshipId" value="${championship}" />
-											<spring:param name="deporte" value="${deporte}" />
-											<spring:param name="matchId" value="${match.id}" />
-											<spring:param name="team" value="team2" />
-										</spring:url>
 
-										<div class="botoncitores2">
-											<a href="${fn:escapeXml(result2Url)}"><i
-												style="font-size: 33px; display: inline;"
-												class="fa fa-pencil-square-o" aria-hidden="true"></i><i
-												style="font-size: 33px; display: inline;"
-												class="fa fa-plane" aria-hidden="true"></i></a>
-										</div>
+											<div class="botoncitores2">
+												<a href="${fn:escapeXml(result2Url)}"><i
+													style="font-size: 33px; display: inline;"
+													class="fa fa-pencil-square-o" aria-hidden="true"></i><i
+													style="font-size: 33px; display: inline;"
+													class="fa fa-plane" aria-hidden="true"></i></a>
+											</div>
+											</c:if>
 										</c:if>
-									</c:if>
-								</c:if>
-						</tr>
-						<div></div>
-					</c:forEach>
-				</tbody>
-			</table>
+										</c:if>
+								</tr>
+								<div></div>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</c:if>
 		</div>
 
 		<c:if test="${championshipObj.matches.size() == 0 }">
@@ -1863,7 +1992,7 @@
 				<spring:param name="deporte" value="${deporte}" />
 				<spring:param name="championshipId" value="${championship}" />
 			</spring:url>
-			<div class="botoncitocrear">
+			<div class="botoncito-crear-meeting">
 				<a id="createMatch" href="${fn:escapeXml(dateUrl)}">Generar
 					primera ronda partidos</a>
 			</div>
@@ -1881,7 +2010,7 @@
 				<spring:param name="deporte" value="${deporte}" />
 				<spring:param name="championshipId" value="${championship}" />
 			</spring:url>
-			<div class="botoncitocrear">
+			<div class="botoncito-crear-meeting">
 				<a id="createMatch" href="${fn:escapeXml(dateUrl)}">Generar
 					segunda ronda partidos</a>
 			</div>
@@ -1899,13 +2028,11 @@
 					<spring:param name="deporte" value="${deporte}" />
 					<spring:param name="championshipId" value="${championship}" />
 				</spring:url>
-				<div class="botoncitocrear">
+				<div class="botoncito-crear-meeting">
 					<a id="createMatch" href="${fn:escapeXml(dateUrl)}">Generar
 						tercera ronda partidos</a>
 				</div>
 			</c:if>
-
-
 
 			<c:if test="${championshipObj.maxTeams>8}">
 				<c:if
@@ -1916,7 +2043,7 @@
 						<spring:param name="deporte" value="${deporte}" />
 						<spring:param name="championshipId" value="${championship}" />
 					</spring:url>
-					<div class="botoncitocrear">
+					<div class="botoncito-crear-meeting">
 						<a id="createMatch" href="${fn:escapeXml(dateUrl)}">Generar
 							cuarta ronda partidos</a>
 					</div>
@@ -1931,7 +2058,6 @@
 		<div class="form-group">
 
 			<button class="botonMeeting"
-				style="display: block; font-size: 0.8em; width: 17%;"
 				onclick="location.href='/sports/${deporte}/championships/${championship}';"
 				type="button">
 				<b>Volver a torneo</b>

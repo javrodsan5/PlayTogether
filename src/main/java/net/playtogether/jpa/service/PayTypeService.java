@@ -10,15 +10,15 @@ import net.playtogether.jpa.repository.PayTypeRepository;
 @Service
 public class PayTypeService {
 
-    private PayTypeRepository payTypeRepository;
+	private PayTypeRepository payTypeRepository;
 
-    public PayTypeService(PayTypeRepository payTypeRepository) {
-        this.payTypeRepository = payTypeRepository;
-    }
+	public PayTypeService(PayTypeRepository payTypeRepository) {
+		this.payTypeRepository = payTypeRepository;
+	}
 
-    @Transactional
-    public PayType findById(Integer id) {
-        return this.payTypeRepository.findById(id).orElse(null);
-    }
-    
+	@Transactional
+	public PayType findById(Integer id) {
+		return this.payTypeRepository.findById(id).orElse(null);
+	}
+
 }

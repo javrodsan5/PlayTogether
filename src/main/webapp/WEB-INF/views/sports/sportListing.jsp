@@ -7,7 +7,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
 
-<playtogether:layout pageName="sports">
+<playtogether:layout pageName="sports" invitaciones="${invitaciones}">
 
 <head>
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -17,7 +17,7 @@
 			<div class="card">
 				<div class="row">
 					<c:forEach items="${sports}" var="sport">
-						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+						<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 sports-general-container">
 							<div class="card-flyer">
 								<div class="text-box">
 									<div class="image-box">

@@ -12,10 +12,10 @@ import net.playtogether.jpa.entity.Meeting;
 public interface MeetingRepository extends CrudRepository<Meeting, Integer> {
 	Collection<Meeting> findAll();
 	
-	@Query("SELECT lm FROM Meeting lm WHERE lm.sport.id = ?1")
+	@Query("SELECT lm FROM Meeting lm WHERE lm.sport.id = ?1 AND lm.date>= CURRENT_TIMESTAMP ORDER BY lm.date")
 	Collection<Meeting> listMeetingsBySport(int sportId);
 	
 	@Query("SELECT lm FROM Meeting lm WHERE lm.meetingCreator.id = ?1 and Year(lm.creationDate) = Year(sysdate()) and Month(lm.creationDate) = Month(sysdate())")
 	Collection<Meeting> findMeetingThisMonthToUser(int userId);
-	
+
 }

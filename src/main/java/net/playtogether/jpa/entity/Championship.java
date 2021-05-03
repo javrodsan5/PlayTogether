@@ -41,6 +41,10 @@ public class Championship extends NamedEntity {
     @NotNull
     @Column(name = "city")
     private String city;
+    
+    @NotNull
+    @Column(name = "address")
+    private String address;
 
     @OneToMany(mappedBy = "championship")
     private List<Match> matches;

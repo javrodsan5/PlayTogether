@@ -209,7 +209,7 @@ public class MeetingControllerTests {
 
 		this.mockMvc
 			.perform(
-				MockMvcRequestBuilders.post("/sports/1/meetings/add").param("address", "Calle 1").param("city", "Sevilla").param("description", "aaaa").param("date", "2021-01-14 14:14").param("sport", "1").with(SecurityMockMvcRequestPostProcessors.csrf()))
+				MockMvcRequestBuilders.post("/sports/1/meetings/add").param("address", "Calle 1").param("city", "Sevilla").param("description", "aaaa").param("date", "2021/06/14 14:14").param("sport", "1").with(SecurityMockMvcRequestPostProcessors.csrf()))
 			.andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 	}
@@ -260,7 +260,7 @@ public class MeetingControllerTests {
 	@Test
 	void testProcessUpdateMeetingFormSuccess() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/meetings/1/edit").with(SecurityMockMvcRequestPostProcessors.csrf()).param("address", "Charco la Pava").param("city", "Sevilla").param("date", "2021-06-12T12:00").param("id", "1")
-			.param("description", "Cambio de planes")).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/meetings"));
+			.param("description", "Cambio de planes").param("numberOfPlayers", "10")).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/meetings"));
 	}
 
 	@WithMockUser(value = "user1", authorities = "usuario")
@@ -268,7 +268,7 @@ public class MeetingControllerTests {
 	void testProcessUpdateMeetingFormErrors() throws Exception {
 		this.mockMvc
 			.perform(MockMvcRequestBuilders.post("/sports/1/meetings/1/edit").with(SecurityMockMvcRequestPostProcessors.csrf()).param("address", "Charco la Pava").param("city", "Sevilla").param("date", "").param("id", "1").param("description",
-				"Cambio de planes"))
+				"Cambio de planes").param("numberOfPlayers", "10"))
 			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeHasErrors("meeting")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("meeting", "date"))
 			.andExpect(MockMvcResultMatchers.view().name("meetings/updateMeetingForm"));
 	}

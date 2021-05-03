@@ -5,8 +5,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="playtogether" tagdir="/WEB-INF/tags"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<playtogether:layout pageName="championships">
+<playtogether:layout pageName="championships" invitaciones="${invitaciones}"> 
 	<div class="thirteen">
 		<c:if test="${match['new']}">
 			<h1>Crear partido</h1>
@@ -15,10 +16,12 @@
 			<h1>Indicar resultado de partido</h1>
 		</c:if>
 		<br>
-		<h2>El torneo comienza el ${championshipObj.startDate} y finaliza
-			el ${championshipObj.finishDate}</h2>
+		<h2>El torneo comienza el <fmt:parseDate value="${championshipObj.startDate }" pattern="yyyy-MM-dd" var="parsedDateStart" type="both" />
+          <fmt:formatDate 
+         value = "${parsedDateStart}" pattern = "dd-MM-yyyy"  /> y finaliza el <fmt:parseDate value="${championshipObj.finishDate }" pattern="yyyy-MM-dd" var="parsedDateEnd" type="both" />
+          <fmt:formatDate 
+         value = "${parsedDateEnd}" pattern = "dd-MM-yyyy"  /></h2>
 	</div>
-	<div style="margin-left: 45px">
 		<div class="crearMeeting">
 			<form:form commandName="match" modelAttribute="match">
 				<div>
@@ -53,10 +56,10 @@
 							<playtogether:localDateTime label="Fecha realización"
 								name="dateTime" id="dateTime"></playtogether:localDateTime>
 						</div>
-						<label for="puntos1">Puntos Equipo 1 (Equipo 1)</label>
+						<label for="puntos1">Puntos de ${match.team1.name}</label>
 						<div class="${cssGroup}">
 							<div class="col-sm-10">
-								<select label="Puntos Equipo 1 (Equipo 1)" name="puntos1">
+								<select label="Puntos Equipo 1" name="puntos1">
 									<c:forEach var="puntos" items="${listaPuntos}">
 										<option value="${puntos}">${puntos}</option>
 									</c:forEach>
@@ -64,11 +67,11 @@
 							</div>
 							<br>
 						</div>
-						<label for="puntos2">Puntos Equipo 2 (Equipo 1)</label>
+						<label for="puntos2">Puntos de ${match.team2.name}</label>
 						<div class="${cssGroup}">
 							<div class="col-sm-10">
 
-								<select label="Puntos Equipo 2 (Equipo 1)" name="puntos2">
+								<select label="Puntos Equipo 2" name="puntos2">
 									<c:forEach var="puntos" items="${listaPuntos}">
 										<option value="${puntos}">${puntos}</option>
 									</c:forEach>
@@ -92,7 +95,7 @@
 							<playtogether:localDateTime label="Fecha realización"
 								name="dateTime" id="dateTime"></playtogether:localDateTime>
 						</div>
-						<label for="puntos3">Puntos Equipo 1 (Equipo 2)</label>
+						<label for="puntos3">Puntos de ${match.team1.name}</label>
 						<div class="${cssGroup}">
 							<div class="col-sm-10">
 								<select label="Puntos Equipo 1 (Equipo 2)" name="puntos3">
@@ -103,7 +106,7 @@
 							</div>
 							<br>
 						</div>
-						<label for="puntos4">Puntos Equipo 2 (Equipo 2)</label>
+						<label for="puntos4">Puntos de ${match.team2.name}</label>
 						<div class="${cssGroup}">
 							<div class="col-sm-10">
 								<select label="Puntos Equipo 2 (Equipo 2)" name="puntos4">
@@ -134,16 +137,13 @@
 
 						<div class="form-group">
 							<button class="botonMeeting"
-								style="display: block; font-size: 0.8em; margin-left: 22.72em;"
 								onclick="location.href='/sports/${championshipObj.sport.id}/championships/${championshipObj.id}/matches';"
 								type="button">
 								<b>Volver a listado</b>
 							</button>
 						</div>
 					</div>
-					<br>
 				</div>
 			</form:form>
 		</div>
-	</div>
 </playtogether:layout>

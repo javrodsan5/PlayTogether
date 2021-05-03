@@ -33,6 +33,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sports/*/meetings/**").hasAnyAuthority("usuario", "premium")
 		.antMatchers("/sports/*/championships/**").hasAnyAuthority("usuario", "premium")
 		.antMatchers("/championships/**").hasAnyAuthority("usuario", "premium")
+		.antMatchers("/chat/**").authenticated()
+		.antMatchers("/chats").authenticated()
 
 		.anyRequest().permitAll()
 		.and().csrf().disable()
