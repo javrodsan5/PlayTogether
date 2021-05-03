@@ -1456,7 +1456,7 @@ public class ChampionshipController {
 
 			if (usuarios.size() == 0) {		
 				
-				this.chatService.deleteById(chatId);
+				//this.chatService.deleteById(chatId);
 				teamService.delete(team);
 				invitationService.deleteInvitationsByTeamId(teamId);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
