@@ -78,7 +78,7 @@ public class MeetingController {
 				model.addAttribute("deporte", sportId);
 				model.addAttribute("nombreDeporte", sport.getName());
 				model.addAttribute("limiteMes", true);
-				return "meetings/listMeeting";
+				return listMeetings(model, sportId, principal);
 			} else {
 				model.put("meeting", new Meeting());
 				model.put("sportId", sportId);
