@@ -39,8 +39,8 @@
 	<a class="navbar-brand"><img style="display: inline-block"
 		src="/images/logo_opt.png" alt="Logo app"></a> <b><i
 		style="display: inline-block" class="title_logo">PlayTogether</i></b>
-	<a href="/about-us" style="padding-left: 200px; display: inline-block; color: white"><b>Acerca de nosotros</b></a>
-	<a href="/terms-and-conditions" style="padding-left: 200px; display: inline-block; color: white"><b>Términos y condiciones</b></a>
-	<a href="/cookies-policy" style="padding-left: 200px; display: inline-block; color: white"><b>Política de cookies</b></a>
+	<a href="/about-us" style="margin-left: 200px; display: inline-block; color: white"><b>Acerca de nosotros</b></a>
+	<a href="/terms-and-conditions" style="margin-left: 200px; display: inline-block; color: white"><b>Términos y condiciones</b></a>
+	<a href="/cookies-policy" style="margin-left: 200px; display: inline-block; color: white"><b>Política de cookies</b></a>
 </footer>
 </html>
