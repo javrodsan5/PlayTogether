@@ -1476,6 +1476,10 @@ public class ChampionshipController {
 			this.userService.saveUsuario(usuario);
 
 			if (usuarios.size() == 0) {
+				Integer chatId = this.chatService.findChatIdByTeam1Id(teamId);
+				if(chatId != null) {
+				this.chatService.deleteById(chatId);
+				}
 				invitationService.deleteInvitationsByTeamId(teamId);
 				teamService.delete(team);
 				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
