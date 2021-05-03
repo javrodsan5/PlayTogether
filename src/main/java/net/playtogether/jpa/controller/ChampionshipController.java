@@ -1447,6 +1447,7 @@ public class ChampionshipController {
 		payService.deleteTeamUser(usuario.getId(), teamId);
 		usuarios.remove(usuario);		
 
+		Integer chatId = this.chatService.findChatIdByTeam1Id(teamId);	
 		this.championshipService.save(team);
 		if (team.getUser().equals(usuario)) {
 			Integer puntos = usuario.getPuntos() - 7;
@@ -1454,7 +1455,7 @@ public class ChampionshipController {
 			this.userService.saveUsuario(usuario);
 
 			if (usuarios.size() == 0) {		
-				Integer chatId = this.chatService.findChatIdByTeam1Id(teamId);	
+				
 				this.chatService.deleteById(chatId);
 				teamService.delete(team);
 				invitationService.deleteInvitationsByTeamId(teamId);
