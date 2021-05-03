@@ -77,15 +77,15 @@ public class ChampionshipValidator implements Validator {
 		}
 		
 
-		else if (startDate.isBefore(LocalDate.now())) {
+		else if (startDate != null && startDate.isBefore(LocalDate.now())) {
 			errors.rejectValue("startDate", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");
 		}
 		
-		 else if (finishDate.isBefore(LocalDate.now())) {
+		 else if (finishDate != null && finishDate.isBefore(LocalDate.now())) {
 			errors.rejectValue("finishDate", "La fecha debe ser posterior a la actual.",
 					"La fecha debe ser posterior a la actual.");
-		} else if (finishDate.isBefore(startDate)) {
+		} else if (finishDate !=null && startDate!= null && finishDate.isBefore(startDate)) {
 			errors.rejectValue("finishDate", "La fecha debe ser posterior a la de inicio.",
 					"La fecha debe ser posterior a la de inicio.");
 		}

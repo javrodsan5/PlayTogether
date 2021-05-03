@@ -48,21 +48,22 @@
 					<div class="profile grid-area" style="border: grey 1px solid">
 						<div class="img">
 							<img src="/images/avatar.png">
-
+							<h5 class="username" style="font-size: 24px">
+								<c:out value="${user.user.username}" />
+							</h5>
+						</div>
+						<center>
 							<h3>
 								<c:out value="${user.name}" />
 							</h3>
-							<h5 class="username">
-								<c:out value="${user.user.username}" />
-							</h5>
-
-						</div>
+						</center>
 						<div class="profile-data">
-							<div class="data-details">
+							<div class="data-details" style="margin-right: 22%">
 								<h5>Fecha de nacimiento</h5>
 								<h4>
-									<fmt:parseDate value="${user.birthdate }" pattern="yyyy-MM-dd" var="parsedDateStart" type="both" />
-         			 <fmt:formatDate value = "${parsedDateStart}" pattern = "dd-MM-yyyy"  />
+									<fmt:parseDate value="${user.birthdate }" pattern="yyyy-MM-dd"
+										var="parsedDateStart" type="both" />
+									<fmt:formatDate value="${parsedDateStart}" pattern="dd-MM-yyyy" />
 								</h4>
 							</div>
 						</div>

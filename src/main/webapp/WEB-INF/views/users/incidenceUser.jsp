@@ -31,7 +31,7 @@
 				id="add-usuario-form">
 			
 			<label for="descripcion">Descripción:</label>
-			<textarea placeholder="Descríbanos el problema..." name="description"  maxlength="300" minlength="5" style="width: 100%" /></textarea>
+			<textarea placeholder="Descríbanos el problema..." name="description"  maxlength="300" minlength="5" required="true" style="width: 100%" ></textarea>
 			
 			
 					<div class="ocultar">

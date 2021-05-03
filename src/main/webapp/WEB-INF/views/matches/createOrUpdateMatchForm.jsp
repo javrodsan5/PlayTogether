@@ -95,7 +95,7 @@
 							<playtogether:localDateTime label="Fecha realización"
 								name="dateTime" id="dateTime"></playtogether:localDateTime>
 						</div>
-						<label for="puntos3">Puntos Equipo 1 (Equipo 2)</label>
+						<label for="puntos3">Puntos de ${match.team1.name}</label>
 						<div class="${cssGroup}">
 							<div class="col-sm-10">
 								<select label="Puntos Equipo 1 (Equipo 2)" name="puntos3">
@@ -106,7 +106,7 @@
 							</div>
 							<br>
 						</div>
-						<label for="puntos4">Puntos Equipo 2 (Equipo 2)</label>
+						<label for="puntos4">Puntos de ${match.team2.name}</label>
 						<div class="${cssGroup}">
 							<div class="col-sm-10">
 								<select label="Puntos Equipo 2 (Equipo 2)" name="puntos4">
