@@ -22,7 +22,7 @@
 			+ 7 puntos por creación de quedada o equipo.<br>
 			+ 5 puntos por unirse a una quedada o equipo.<br>
 			+ 5 puntos por pasar de ronda en un torneo.<br><br>
-			Si abandonas un torneo o una quedada perderás los puntos ganados.</h2></center>
+			Si abandonas un torneo o una quedada perderás esos puntos ganados.</h2></center>
 		<br>
 		<h2 class="alert alert-primary alert-primary-clasification"
 			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la posición ${posicion}!</h2>

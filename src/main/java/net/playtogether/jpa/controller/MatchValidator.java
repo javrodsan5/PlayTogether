@@ -2,7 +2,6 @@ package net.playtogether.jpa.controller;
 
 import java.time.LocalDateTime;
 
-
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
@@ -25,16 +24,13 @@ public class MatchValidator implements Validator {
 		}
 
 		if (team2 == null) {
-				errors.rejectValue("team2", REQUIRED, REQUIRED);
+			errors.rejectValue("team2", REQUIRED, REQUIRED);
 
 		}
 		if (dateTime == null) {
 			errors.rejectValue("dateTime", REQUIRED, REQUIRED);
-		} 
-		
-		
-		
-		
+		}
+
 	}
 
 	@Override

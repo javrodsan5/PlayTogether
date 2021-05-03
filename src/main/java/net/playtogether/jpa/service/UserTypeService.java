@@ -9,14 +9,14 @@ import net.playtogether.jpa.repository.UserTypeRepository;
 
 @Service
 public class UserTypeService {
-	
+
 	private UserTypeRepository userTypeRepository;
-	
+
 	@Autowired
 	public UserTypeService(UserTypeRepository userTypeRepository) {
 		this.userTypeRepository = userTypeRepository;
 	}
-	
+
 	@Transactional(readOnly = true)
 	public UserType findUserTypeById(Integer id) {
 		return userTypeRepository.findById(id).orElse(null);

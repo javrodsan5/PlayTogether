@@ -119,6 +119,7 @@ public class ChatController {
 		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
 		model.addAttribute("usuarioId", usuario.getId());
 		Chat chat = this.chatService.findChatById(id);
+		
 		model.addAttribute("chat", chat);
 		List<String> l = MetodosAux.leerFichero("insultos.txt");
 		List<String> x = new ArrayList<String>();
@@ -135,8 +136,14 @@ public class ChatController {
 		chatMessage.setChat(chat);
 		String urlBack = "";
 		if (chat.getChatType().getId() == 1) { // MEETING
+			if(!chat.getMeeting().getParticipants().contains(usuario)) {
+				return "redirect:/chats";
+			}
 			urlBack = "/sports/"+chat.getMeeting().getSport().getId()+"/meetings/"+chat.getMeeting().getId();
 		} else if (chat.getChatType().getId() == 2) { // TEAM
+			if(!chat.getTeam().getParticipants().contains(usuario)) {
+				return "redirect:/chats";
+			}
 			urlBack = "/championships/"+chat.getTeam().getChampionship().getId()+"/teams/"+chat.getTeam().getId();
 		} else { // INDIVIDUAL
 			Integer idUser = chat.getUser1().getUser().getUsername().equals(principal.getName()) ? chat.getUser2().getId() : chat.getUser1().getId();

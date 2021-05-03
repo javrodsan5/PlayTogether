@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import net.playtogether.jpa.entity.User;
 import net.playtogether.jpa.repository.UserRepository;
+
 @Service
 public class UserService {
 
@@ -26,17 +27,17 @@ public class UserService {
 		user.setEnabled(true);
 		userRepository.save(user);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public User findUserByUsername(String username) {
 		return userRepository.findUserByUsername(username);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public Optional<User> findUser(String username) {
 		return userRepository.findById(username);
 	}
-	
+
 	@Transactional(readOnly = true)
 	public List<User> findAll() {
 		return (List<User>) userRepository.findAll();

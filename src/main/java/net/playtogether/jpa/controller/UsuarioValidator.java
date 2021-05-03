@@ -71,7 +71,6 @@ public class UsuarioValidator implements Validator {
 		String phone = usuario.getPhone();
 		String username = usuario.getUser().getUsername();
 		String password = usuario.getUser().getPassword();
-		String description = usuario.getDescription();
 		LocalDate fechaNac = usuario.getBirthdate();
 
 		if (nombre == null || !StringUtils.hasLength(nombre) || nombre.length() > 50) {

@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController {
-	
+
 	@GetMapping(value = "/login")
-	public String login(Principal principal){
-        if(principal != null) {
-            return "redirect:/sports";
-        } else {
-            return "users/login";
-        }
-    }
+	public String login(Principal principal) {
+		if (principal != null) {
+			return "redirect:/sports";
+		} else {
+			return "users/login";
+		}
+	}
 }

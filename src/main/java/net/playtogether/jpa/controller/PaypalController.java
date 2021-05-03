@@ -1,11 +1,9 @@
 package net.playtogether.jpa.controller;
 
-
 import java.security.Principal;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import com.paypal.api.payments.Links;
 import com.paypal.api.payments.Payment;
@@ -39,8 +37,6 @@ import net.playtogether.jpa.service.InvitationService;
 import net.playtogether.jpa.service.PayService;
 import net.playtogether.jpa.service.PayTypeService;
 import net.playtogether.jpa.service.PaypalService;
-import net.playtogether.jpa.service.TeamService;
-import net.playtogether.jpa.service.UserLoginService;
 import net.playtogether.jpa.service.UserTypeService;
 import net.playtogether.jpa.service.UsuarioService;
 
@@ -71,7 +67,6 @@ public class PaypalController {
 	@Autowired
 	private UserTypeService userTypeService;
 
-
 	@Autowired
 	private ChatService chatService;
 
@@ -85,9 +80,11 @@ public class PaypalController {
 	public String formPaymentJoinTeam(ModelMap model, Principal principal,
 			@PathVariable("championshipId") Integer championshipId, @PathVariable("teamId") Integer teamId,
 			@RequestParam("invitationId") Integer invitationId) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Order order = new Order();
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		String teamName = this.championshipService.findTeamId(teamId).getName();
@@ -123,9 +120,11 @@ public class PaypalController {
 	@GetMapping("/pay/championship/{championshipId}")
 	public String formPaymentCreateTeam(ModelMap model, Principal principal,
 			@PathVariable("championshipId") Integer championshipId, @RequestParam("teamName") String teamName) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Order order = new Order();
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		order.setIntent("sale");
@@ -148,9 +147,11 @@ public class PaypalController {
 	@GetMapping("/pay/championship/add")
 	public String formPaymentCreateChampionship(ModelMap model, Principal principal,
 			@RequestParam("championshipId") Integer championshipId) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Order order = new Order();
 		Championship championship = this.championshipService.findChampionshipId(championshipId);
 		order.setIntent("sale");
@@ -173,10 +174,12 @@ public class PaypalController {
 
 	@GetMapping("/pay/premium")
 	public String formPaymentPremium(ModelMap model, Principal principal) {
-		if(principal!=null) {
-			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-			Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-			model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+		if (principal != null) {
+			Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+					.size();
+			Integer invitacionesTorneos = this.invitationService
+					.findChampionshipInvitationsByUsername(principal.getName()).size();
+			model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		}
 		Order order = new Order();
 		order.setIntent("sale");
@@ -240,7 +243,7 @@ public class PaypalController {
 							this.championshipService.save(team);
 
 							Chat chat = new Chat();
-							chat.setChatType(this.chatService.findChatTypeById(2)); //TEAM
+							chat.setChatType(this.chatService.findChatTypeById(2)); // TEAM
 							chat.setTeam(team);
 							this.chatService.saveChat(chat);
 
@@ -266,21 +269,25 @@ public class PaypalController {
 	}
 
 	@GetMapping(value = CANCEL_URL)
-	public String cancelPay(ModelMap model,Principal principal) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+	public String cancelPay(ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		return "pay/cancel";
 	}
 
 	@GetMapping(value = SUCCESS_URL)
 	public String successPay(@RequestParam("paymentId") String paymentId, @RequestParam("PayerID") String payerId,
-			Principal principal,ModelMap model) {
-		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName()).size();
-		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName()).size();
-		model.addAttribute("invitaciones",invitacionesQuedadas+invitacionesTorneos);
+			Principal principal, ModelMap model) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		Pay pay = this.payService.findLastPayByUsername(principal.getName());
-		if(Duration.between(pay.getInitDate(), LocalDateTime.now()).getSeconds() / 60 >= minutesToFinishPay) {
+		if (Duration.between(pay.getInitDate(), LocalDateTime.now()).getSeconds() / 60 >= minutesToFinishPay) {
 			ModelMap m = new ModelMap();
 			model.addAttribute("timeOut", "El tiempo se ha agotado.");
 			return this.cancelPay(m, principal);
@@ -293,9 +300,9 @@ public class PaypalController {
 				payService.save(pay);
 				if (pay.getPayType().getName().equals("Premium")) {
 					Usuario user = this.usuarioService.findByUsername(principal.getName());
-					user.setType(this.userTypeService.findUserTypeById(2)); //PREMIUM
+					user.setType(this.userTypeService.findUserTypeById(2)); // PREMIUM
 					this.usuarioService.saveUsuarioAlreadyRegistered(user);
-					if(!user.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
+					if (!user.getUser().getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("premium"))) {
 						Authorities au = new Authorities();
 						au.setAuthority("premium");
 						au.setUser(user.getUser());
