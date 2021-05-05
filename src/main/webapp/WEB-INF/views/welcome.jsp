@@ -9,20 +9,12 @@
 /* Make the image fully responsive */
 .carousel-inner img {
 	width: 100%;
-	height: 100%;
+	height: auto;
 }
 </style>
 
-<html>
 <playtogether:layout pageName="welcome" invitaciones="${invitaciones}">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
-		<title>Playtogether</title>
-	</head>
-	<body>
+
 		<div id="demo" class="carousel slide" data-ride="carousel" style="margin-bottom: 2.5em;">
 			<ul class="carousel-indicators">
 				<li data-target="#demo" data-slide-to="0" class="active"></li>
@@ -83,7 +75,4 @@
 			</a>
 		</div>
 
-	</body>
-
 </playtogether:layout>
-</html>

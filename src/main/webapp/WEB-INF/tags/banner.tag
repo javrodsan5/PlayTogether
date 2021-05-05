@@ -4,9 +4,7 @@
 
 <%@ attribute name="customScript" required="false" fragment="true"%>
 
-<!doctype html>
-<html>
-<body>
+
 	<div class="promo-box-container">
 		<a href="#" target="_blank" rel="noopener"> <span
 			class="linkspanner"></span>
@@ -20,7 +18,3 @@
 		</p>
 		<div class="right-triangle"> </div>
 	</div>
-
-
-</body>
-</html>

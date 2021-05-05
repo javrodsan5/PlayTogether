@@ -9,10 +9,6 @@
 
 <playtogether:layout pageName="sports" invitaciones="${invitaciones}">
 
-<head>
-<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-</head>
-	<body>
 		<div id="cards_landscape_wrap-2">
 			<div class="card">
 				<div class="row">
@@ -60,5 +56,4 @@
 				</div>
 			</div>
 		</div>
-	</body>
 </playtogether:layout>
