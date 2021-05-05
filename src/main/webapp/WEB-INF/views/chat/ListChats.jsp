@@ -10,7 +10,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <playtogether:layout pageName="chats" invitaciones="${invitaciones}">
-	<body>
 		<div class="cardtitle">
 			<h1>
 				<strong>Chats privados</strong>
@@ -58,6 +57,3 @@
 			</div>
 		</c:if>
 </playtogether:layout>
-
-</body>
-</html>
