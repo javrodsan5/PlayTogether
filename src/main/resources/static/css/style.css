@@ -2920,7 +2920,7 @@ body {
 @media ( max-width : 768px) and (min-width: 12.5em) {
 	.navigation-wrap {
 		width: 100% !important;
-		height: 5.625em !important;
+		height: 7.5em !important;
 		-webkit-transition: all 0.3s ease-out !important;
 		transition: all 0.3s ease-out !important;
 	}
@@ -3276,11 +3276,11 @@ body {
 
 
 	.carousel-caption h3 {
-		font-size: 140%;
+		font-size: 150%;
 	}
 	
 	.carousel-caption p {
-		font-size: 84%;
+		font-size: 100%;
 	}
 	
 	.carousel-caption .alert-primary {
@@ -3349,11 +3349,11 @@ body {
 	
 	
 	.carousel-caption h3 {
-		font-size: 100%;
+		font-size: 140%;
 	}
 	
 	.carousel-caption p {
-		font-size: 60%;
+		font-size: 90%;
 	}
 	
 	.carousel-caption .alert-primary {
@@ -3384,11 +3384,11 @@ body {
 	
 	
 	.carousel-caption h3 {
-		font-size: 65%;
+		font-size: 120%;
 	}
 	
 	.carousel-caption p {
-		font-size: 40%;
+		font-size: 75%;
 	}
 	
 	.carousel-caption .alert-primary {
