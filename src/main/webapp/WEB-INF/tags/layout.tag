@@ -21,27 +21,26 @@
 	</div>
 
 	<div style="margin-top: 1px; height: calc(100% - 5.625em); padding: 1px;">
-		<sec:authorize access="!hasAuthority('premium')">
-			<c:if test="${pageName!='welcome'}">
+		<c:if test="${pageName=='welcome'}">
+			<div style="margin-top: 4.5%; margin-bottom: 2%; min-height: calc(100% - 8em); padding: 1px;">
+				<jsp:doBody />
+			</div>
+		</c:if>
+		
+		<c:if test="${pageName!='welcome'}">
+			<sec:authorize access="!hasAuthority('premium')">
 				<playtogether:banner></playtogether:banner>
 				<div style="margin-top: 3em; margin-bottom: 3em; min-height: calc(100% - 20em); padding: 1px;">
 					<jsp:doBody />
 				</div>
-			</c:if>
-			<c:if test="${pageName=='welcome'}">
+			</sec:authorize>
+			
+			<sec:authorize access="hasAuthority('premium')">
 				<div style="margin-top: 3em; margin-bottom: 3em; min-height: calc(100% - 5em); padding: 1px;">
 					<jsp:doBody />
 				</div>
-			
-			</c:if>
-		</sec:authorize>
-		
-		<sec:authorize access="hasAuthority('premium')">
-			<div style="margin-top: 3em; margin-bottom: 3em; min-height: calc(100% - 5em); padding: 1px;">
-				<jsp:doBody />
-			</div>
-		</sec:authorize>
-		
+			</sec:authorize>
+		</c:if>
 
 		
 		
