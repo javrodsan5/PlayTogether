@@ -215,6 +215,8 @@
 							<a href="/invitations/listInvitations" class="btn btn-primary">Ver
 								invitaciones</a> <br> <br> <a href="/myprofile/paysRecord"
 								class="btn btn-primary">Historial de pagos</a> <br> <br>
+							<a href="/myprofile/teamsRecord" class="btn btn-primary">Ver
+								equipos activos</a> <br> <br>
 							<a href="/myprofile/meetingsRecord" class="btn btn-primary">Historial
 								de quedadas</a>
 
