@@ -12,7 +12,7 @@
 	<body>
 		<div class="cardtitle">
 			<h1>
-				<strong>Top 10 usuarios de PlayTogether </strong>
+				<strong>Clasificación de usuarios de PlayTogether </strong>
 			</h1>
 		</div>
 		<br>
@@ -22,10 +22,11 @@
 			+ 7 puntos por creación de quedada o equipo.<br>
 			+ 5 puntos por unirse a una quedada o equipo.<br>
 			+ 5 puntos por pasar de ronda en un torneo.<br><br>
-			Si abandonas un torneo o una quedada perderás esos puntos ganados.</h2></center>
+			Si abandonas un torneo o una quedada perderás esos puntos ganados.<br><br>
+			A continuación, se mostrará el Top 3 y dos usuarios por arriba y abajo de su posición como mínimo.</h2></center>
 		<br>
 		<h2 class="alert alert-primary alert-primary-clasification"
-			style="text-align: center; margin: 0px 35% 0px 35%">¡Estás en la posición ${posicion}!</h2>
+			style="text-align: center; margin: 0px 35% 0px 35%">${puesto}</h2>
 		<div class="cardlist">
 		<center>
 			<div class="scroll_vertical" id="style_scroll" style="height: 100%;">
@@ -40,6 +41,7 @@
 					</tr>
 				</thead>
 				<tbody>
+					<c:set var="i" value="${posicion-2}" />
 					<c:forEach items="${topUsuarios}" var="usuario" varStatus="numero">
 						<tr class="rowtable">
 							<td style="text-align: center;">
@@ -52,17 +54,77 @@
 								<c:if test="${numero.count == 3}">
 									<img style="max-height: 38%; max-width: 38%;" src="/images/bronzeMedal.png" alt="3" />
 								</c:if>
-								<c:if test="${numero.count > 3}">
-									<c:out value="${numero.count}" />
-								</c:if>	
-							</td>
-							<td><c:out value="${usuario.name}" /></td>
-							<td><spring:url value="/usuarios/{usuarioId}"
-									var="usuario2Url">
-									<spring:param name="usuarioId" value="${usuario.id}" />
-								</spring:url> <a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
-										value="${usuario.user.username}" /></a></td>
-							<td><c:out value="${usuario.puntos}" /></td>
+								<c:if test="${isTop10}">
+									<c:if test="${numero.count > 3}">
+										<c:if test="${numero.count == posicion}">
+											<c:out value="${numero.count}" />
+										</c:if>
+										<c:if test="${numero.count != posicion}">
+											<c:out value="${numero.count}" />
+										</c:if>
+									</c:if>	
+								</c:if>
+								<c:if test="${!isTop10}">
+									<c:if test="${numero.count == 4}">
+										<c:out value="..." />
+									</c:if>	
+									<c:if test="${numero.count > 4}">
+										<c:if test="${i == posicion}">
+											<c:out value="${i}" />
+										</c:if>
+										<c:if test="${i != posicion}">
+											<c:out value="${i}" />
+										</c:if>
+										<c:set var="i" value="${i+1}" />
+																			
+									</c:if>	
+								</c:if>
+								</td>
+								<c:if test="${isTop10}">
+									<c:if test="${numero.count == posicion}">
+											<td><c:out value="${usuario.name}" /></td>
+										</c:if>
+										<c:if test="${numero.count != posicion}">
+											<td><c:out value="${numero.count}" /></td>
+										</c:if>
+									<td><spring:url value="/usuarios/{usuarioId}"
+											var="usuario2Url">
+											<spring:param name="usuarioId" value="${usuario.id}" />
+										</spring:url> <a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
+												value="${usuario.user.username}" /></a></td>
+										<c:if test="${numero.count == posicion}">
+											<td><c:out value="${usuario.puntos}" /></td>
+										</c:if>
+										<c:if test="${numero.count != posicion}">
+											<c:out value="${usuario.puntos}" />
+										</c:if>
+									
+								</c:if>
+								<c:if test="${!isTop10}">
+									<c:if test="${numero.count == 4}">
+										<td><c:out value="..." /></td>
+									</c:if>	
+									<c:if test="${numero.count != 4}">
+										<td><c:out value="${usuario.name}" /></td>
+									</c:if>	
+									<c:if test="${numero.count == 4}">
+										<td><c:out value="..." /></td>
+									</c:if>	
+									<c:if test="${numero.count != 4}">
+										<td><spring:url value="/usuarios/{usuarioId}"
+											var="usuario2Url">
+											<spring:param name="usuarioId" value="${usuario.id}" />
+										</spring:url> <a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
+												value="${usuario.user.username}" /></a></td>
+									
+									</c:if>	
+									<c:if test="${numero.count == 4}">
+										<td><c:out value="..." /></td>
+									</c:if>	
+									<c:if test="${numero.count != 4}">
+										<td><c:out value="${usuario.puntos}" /></td>
+									</c:if>
+								</c:if>
 						</tr>
 					</c:forEach>
 				</tbody>
