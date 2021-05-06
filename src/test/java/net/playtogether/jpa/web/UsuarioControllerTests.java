@@ -300,14 +300,27 @@ public class UsuarioControllerTests {
 
 	}
 	
-//	// Test de clasificación de usuarios
-//	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
-//	@Test
-//	void getClasification() throws Exception {
-//		this.mockMvc.perform(MockMvcRequestBuilders.get("/clasification"))
-//				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
-//				.andExpect(MockMvcResultMatchers.view().name("users/clasification"))
-//				.andExpect(MockMvcResultMatchers.model().attributeExists("topUsuarios"));
-//
-//	}
+	// Test de clasificación de usuarios
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getClasification() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/clasification"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/clasification"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("topUsuarios"));
+
+	}
+	
+	// Test de GetMapping de historial de equipos activos en los que participa un usuario
+	@WithMockUser(username = "user1", authorities = "usuario", password = "password")
+	@Test
+	void getTeamRecord() throws Exception {
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/myprofile/teamsRecord"))
+				.andExpect(MockMvcResultMatchers.status().is2xxSuccessful())
+				.andExpect(MockMvcResultMatchers.view().name("users/teamRecord"))
+				.andExpect(MockMvcResultMatchers.model().attributeExists("teams"));
+
+	}
+	
+	
 }

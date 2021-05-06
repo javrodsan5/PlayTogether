@@ -1,6 +1,7 @@
 package net.playtogether.jpa.controller;
 
 import java.security.Principal;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Pay;
+import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.InvitationService;
@@ -401,6 +403,23 @@ public class UsuarioController {
 		model.addAttribute("incidenceCorrect", true);
 		return userProfile(model, principal);
 
+	}
+	
+	@GetMapping("/myprofile/teamsRecord")
+	public String teamsRecord(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
+		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
+		List<Team> teams = usuario.getTeams().stream().filter(t -> t.getChampionship().getFinishDate().isAfter(LocalDate.now())).distinct()
+				.collect(Collectors.toList());
+		if (teams.size() <= 0) {
+			model.put("noRecords", true);
+		}
+		model.addAttribute("teams", teams);
+		return "users/teamRecord";
 	}
 
 }

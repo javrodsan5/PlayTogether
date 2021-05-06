@@ -3360,6 +3360,15 @@ body {
 		margin-top: 12%;
 	}
 	
+	
+	.mis-equipos {
+		font-size: 70%;
+	}
+	
+	.mis-equipos th {
+		size: 70%;
+	}
+	
 }
 
 @media ( max-width : 36em) {
@@ -3405,6 +3414,15 @@ body {
 	
 	.navigation-wrap {
 		height: 7.5em !important;
+	}
+	
+	
+	.mis-equipos {
+		font-size: 63%;
+	}
+	
+	.mis-equipos th {
+		font-size: 60%;
 	}
 }
 
