@@ -327,10 +327,33 @@ public class UsuarioController {
 				break;
 			}
 		}
+		if(posicion == usuariosOrdenPuntos.size()) {
+			model.addAttribute("puesto", "Estás en última posición.");
+		} else if(posicion == usuariosOrdenPuntos.size()-1) {
+			model.addAttribute("puesto", "Estás en penúltima posición.");
+		} else {
+			model.addAttribute("puesto", "¡Estás en la posición "+posicion+"!");
+		}
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
 		if (usuariosOrdenPuntos.size() > 10) {
-			model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
+			List<Usuario> usuariosTop = usuariosOrdenPuntos.subList(0, 3);
+			Integer posPrincipal = usuariosOrdenPuntos.indexOf(usuario);
+			Boolean isTop10 = false;
+			if(!usuariosOrdenPuntos.subList(0, 10).contains(usuario)) {
+				Integer posMenos3Principal = usuariosOrdenPuntos.subList(10, 13).contains(usuario) ? usuariosOrdenPuntos.indexOf(usuario)-3 : usuariosOrdenPuntos.indexOf(usuario)-3;
+				Integer posMas3Principal = posPrincipal+3 >= usuariosOrdenPuntos.size() ? usuariosOrdenPuntos.size()-1 : posPrincipal+2;
+				usuariosTop.addAll(usuariosOrdenPuntos.subList(posMenos3Principal, posMas3Principal+1));
+				model.addAttribute("topUsuarios", usuariosTop);
+			} else {
+				isTop10 = true;
+				if(usuariosOrdenPuntos.indexOf(usuario) == 9 || usuariosOrdenPuntos.indexOf(usuario) == 8) {
+					model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, usuariosOrdenPuntos.indexOf(usuario)+3));
+				} else {
+					model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
+				}
+			}
+			model.addAttribute("isTop10", isTop10);
 		} else {
 			model.addAttribute("topUsuarios", usuariosOrdenPuntos);
 		}
