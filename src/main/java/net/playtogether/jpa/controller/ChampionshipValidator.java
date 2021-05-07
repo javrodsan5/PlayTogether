@@ -54,7 +54,7 @@ public class ChampionshipValidator implements Validator {
 			errors.rejectValue("description", REQUIRED, REQUIRED);
 		}
 
-		if (!description.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.!¡¿?' ']*$") || description == null) {
+		if (!description.matches("^[a-zA-Z0-9ñÑáéíóúÁÉÍÓÚ.,!¡¿?' ']*$") || description == null) {
 			errors.rejectValue("description", "Solo puede contener letras y números",
 					"Solo puede contener letras y números");
 		}

@@ -71,6 +71,7 @@
 					<fmt:formatDate value="${parsedDateTime}"
 						pattern="dd-MM-yyyy HH:mm" />
 				</h2>
+				<h2><b>Categoría:</b> <c:out value="${meeting.category.name}" /></h2>
 				<p class="summary">
 					<c:out value="${meeting.description}" />
 				</p>
@@ -171,7 +172,7 @@
 				<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
 			</c:if>
 			<button class="botonMeeting"
-				onclick="location.href='/sports/${meeting.sport.id}/meetings';"
+				onclick="location.href='/sports/${meeting.sport.id}/meetings?category=Todas';"
 				type="button">
 				<b>Volver a listado</b>
 			</button>

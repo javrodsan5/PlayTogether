@@ -27,6 +27,11 @@
 				</p>
 			</div>
 		</c:if>
+		<br>
+		<div style="display: inline-flex; margin-left: 10%;">
+			<p>Filtar por categoría: </p><a href="/sports/${deporte}/meetings?category=Todas"><p>Todas</p></a> <c:out value="	|	" /> <a href="/sports/${deporte}/meetings?category=Principiante"><p>Principiante</p></a> <c:out value=" | " />
+			<a href="/sports/${deporte}/meetings?category=Intermedio"><p>Intermedio</p></a> <c:out value=" | " /> <a href="/sports/${deporte}/meetings?category=Avanzado"><p>Avanzado</p></a>
+		</div>
 		<div class="cardlist meeting-and-championship-list">
 			<c:if test="${meetings != null && meetings.size() <= 3 && meetings.size() > 0}">
 				<div class="scroll_vertical" id="style_scroll" style="height: 20em">
@@ -37,6 +42,7 @@
 								<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
 								<th class="guiz-awards-header-title" style="width: 17%;">Fecha</th>
 								<th class="guiz-awards-header-title" style="width: 9%;">Participantes</th>
+								<th class="guiz-awards-header-title" style="width: 9%;">Categoría</th>
 								<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
 								<th class="guiz-awards-header-title" style="width: 4%;">Participación</th>
 								<th class="guiz-awards-header-title" style="width: 10%;"></th>
@@ -55,6 +61,7 @@
 											<c:out
 												value="${meeting.participants.size()}/${meeting.numberOfPlayers}" />
 										</center></td>
+									<td><c:out value="${meeting.category.name}" /></td>
 									<td><spring:url value="/usuarios/{userId}"
 											var="userdetails">
 											<spring:param name="userId"

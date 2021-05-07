@@ -3,7 +3,10 @@ package net.playtogether.jpa.controller;
 import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -39,7 +42,11 @@ public class ChatController {
 	public String listPrivateChats(ModelMap model, Principal principal) {
 		Usuario usuario = this.usuarioService.findByUsername(principal.getName());
 
-		model.addAttribute("chats", this.chatService.findMyPrivateChats(usuario.getId()));
+		List<Chat> chats = this.chatService.findMyPrivateChats(usuario.getId()).stream().sorted(Comparator.comparing(Chat::getDateTimeLastMessage)).collect(Collectors.toList());
+
+		Collections.reverse(chats);
+
+		model.addAttribute("chats", chats);
 		model.addAttribute("principalUsername", principal.getName());
 
 		if(principal!=null) {

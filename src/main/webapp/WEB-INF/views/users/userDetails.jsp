@@ -58,12 +58,10 @@
 							</h3>
 						</center>
 						<div class="profile-data">
-							<div class="data-details" style="margin-right: 22%">
-								<h5>Fecha de nacimiento</h5>
+							<div class="data-details" style="margin-right: 40%">
+								<h5>Edad</h5>
 								<h4>
-									<fmt:parseDate value="${user.birthdate }" pattern="yyyy-MM-dd"
-										var="parsedDateStart" type="both" />
-									<fmt:formatDate value="${parsedDateStart}" pattern="dd-MM-yyyy" />
+									<c:out value="${edad} años" />
 								</h4>
 							</div>
 						</div>
