@@ -4,11 +4,11 @@ project:
   teamId: '11'
   identities:
     github:
-      url: 'https://github.com/conmarred/ISPP-11'
+      url: 'https://github.com/javrodsan5/ISPP-11'
     heroku:
       url: 'https://playtogether-sprint-2.herokuapp.com/'
     travis:
-      url: 'https://www.travis-ci.com/github/conmarred/ISPP-11'
+      url: 'https://www.travis-ci.com/github/javrodsan5/ISPP-11'
   members:
     member1:
       name: 'Javier'
