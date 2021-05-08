@@ -77,7 +77,7 @@
 				<spring:param name="championshipId" value="${championship.id}" />
 			</spring:url>
 			<a href="${fn:escapeXml(createTeam)}"
-				class="btn btn-danger rightDesktop">Crear equipo</a>
+				class="btn btn-danger rightDesktop" style="margin-top: 1em;" >Crear equipo</a>
 		</c:if>
 		<c:if test="${hayEquipos==true}">
 			<div class="scroll_vertical" id="style_scroll">
@@ -128,22 +128,22 @@
 	</div>
 
 
-
-	<spring:url
-		value="/sports/{deporte}/championships/{championshipId}/matches"
-		var="dateUrl">
-		<spring:param name="deporte" value="${championship.sport.id}" />
-		<spring:param name="championshipId" value="${championship.id}" />
-	</spring:url>
-	<a class="botonPartidosTorneo" href="${fn:escapeXml(dateUrl)}">Partidos</a>
-
-	<div class="form-group">
-		<button class="botonTorneos"
-			onclick="location.href='/sports/${championship.sport.id}/championships';"
-			type="button">
-			<b>Volver al listado</b>
-		</button>
+	<div class="botonesMeeting" style="height: 9em;">
+		<spring:url
+			value="/sports/{deporte}/championships/{championshipId}/matches"
+			var="dateUrl">
+			<spring:param name="deporte" value="${championship.sport.id}" />
+			<spring:param name="championshipId" value="${championship.id}" />
+		</spring:url>
+		<a class="botonPartidosTorneo" style="margin-top: 3.5em; margin-left: 40%; margin-right: 40%; min-width: 6em;" href="${fn:escapeXml(dateUrl)}"><b>Partidos</b></a>
+	
+		<div class="form-group" >
+			<button class="botonTorneos" style=" min-width: 6em;  margin-left: 40%; margin-right: 40%;"
+				onclick="location.href='/sports/${championship.sport.id}/championships';"
+				type="button">
+				<b>Volver al listado</b>
+			</button>
+		</div>
 	</div>
-	<body>
-	</html>
+
 </playtogether:layout>

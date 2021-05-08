@@ -25,7 +25,7 @@
 											</h4>
 											<br> <br> <br> <br>
 											<div class="frame">
-												<spring:url value="/sports/{sportId}/meetings"
+												<spring:url value="/sports/{sportId}/meetings?category=Todas"
 													var="meetingUrl">
 													<spring:param name="sportId" value="${sport.id}" />
 												</spring:url>

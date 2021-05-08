@@ -56,12 +56,7 @@
 								</c:if>
 								<c:if test="${isTop10}">
 									<c:if test="${numero.count > 3}">
-										<c:if test="${numero.count == posicion}">
-											<c:out value="${numero.count}" />
-										</c:if>
-										<c:if test="${numero.count != posicion}">
-											<c:out value="${numero.count}" />
-										</c:if>
+										<c:out value="${numero.count}" />
 									</c:if>	
 								</c:if>
 								<c:if test="${!isTop10}">
@@ -69,35 +64,20 @@
 										<c:out value="..." />
 									</c:if>	
 									<c:if test="${numero.count > 4}">
-										<c:if test="${i == posicion}">
-											<c:out value="${i}" />
-										</c:if>
-										<c:if test="${i != posicion}">
-											<c:out value="${i}" />
-										</c:if>
+										<c:out value="${i}" />
 										<c:set var="i" value="${i+1}" />
 																			
 									</c:if>	
 								</c:if>
 								</td>
 								<c:if test="${isTop10}">
-									<c:if test="${numero.count == posicion}">
-											<td><c:out value="${usuario.name}" /></td>
-										</c:if>
-										<c:if test="${numero.count != posicion}">
-											<td><c:out value="${numero.count}" /></td>
-										</c:if>
+									<td><c:out value="${numero.count}" /></td>
 									<td><spring:url value="/usuarios/{usuarioId}"
 											var="usuario2Url">
 											<spring:param name="usuarioId" value="${usuario.id}" />
 										</spring:url> <a class="" href="${fn:escapeXml(usuario2Url)}"><c:out
 												value="${usuario.user.username}" /></a></td>
-										<c:if test="${numero.count == posicion}">
-											<td><c:out value="${usuario.puntos}" /></td>
-										</c:if>
-										<c:if test="${numero.count != posicion}">
-											<c:out value="${usuario.puntos}" />
-										</c:if>
+										<td><c:out value="${usuario.puntos}" /></td>
 									
 								</c:if>
 								<c:if test="${!isTop10}">

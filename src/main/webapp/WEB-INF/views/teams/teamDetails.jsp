@@ -13,7 +13,7 @@
 <playtogether:layout pageName="users" invitaciones="${invitaciones}">
 
 	<body>
-		<div class="cardtitle">
+		<div class="cardtitle" style="margin-bottom: 2em;">
 			<h1>
 				<strong>Detalles del equipo ${team.name}</strong>
 			</h1>
@@ -33,7 +33,12 @@
 					<p>No se puede eliminar al creador del equipo</p>
 				</div>
 			</c:if>
-			<c:out value="${eliminado}" />
+
+			<c:if test="${eliminado}">
+				<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
+					<p>Se ha eliminado el jugador correctamente.</p>
+				</div>
+			</c:if>
 			<c:if test="${loggedUserIsNotTheTeamOwner}">
 				<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
 					<p>No tienes permisos para hacer esto.</p>

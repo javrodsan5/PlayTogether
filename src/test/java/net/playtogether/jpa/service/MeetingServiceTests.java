@@ -67,6 +67,7 @@ public class MeetingServiceTests {
 		meeting.setNumberOfPlayers(8);
 		meeting.setParticipants(new ArrayList<>());
 		meeting.setSport(this.sportService.findSportById(2));
+		meeting.setCategory(this.meetingService.findCategoryById(1));
 
 		this.meetingService.save(meeting);
 

@@ -815,7 +815,7 @@ body {
 
 .cardlist {
 	margin-left: 15%;
-	margin-top: 2%;
+	margin-top: 0.1%;
 	margin-right: 15%;
 	transition: 0.3s;
 	margin-bottom: 1%;
@@ -3106,6 +3106,7 @@ body {
 	margin-left: 8% !important;
 	margin-right: 8% !important;
 	padding: 1rem;
+	padding-top: 0.3em;
 }
 
 .meeting-and-championship-list td {
@@ -3424,5 +3425,20 @@ body {
 	.mis-equipos th {
 		font-size: 60%;
 	}
+}
+
+
+.list-filter {
+	margin-left: 10%;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+}
+
+.list-filter div {
+	display: inline-block;
+}
+
+.list-filter p, .list-filter a  {
+		margin-bottom: 0.2em;
 }
 

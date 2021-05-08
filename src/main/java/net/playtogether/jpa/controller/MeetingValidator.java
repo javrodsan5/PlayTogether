@@ -8,6 +8,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import net.playtogether.jpa.entity.Meeting;
+import net.playtogether.jpa.entity.MeetingCategory;
 
 public class MeetingValidator implements Validator {
 

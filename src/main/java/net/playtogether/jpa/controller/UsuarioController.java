@@ -2,6 +2,7 @@ package net.playtogether.jpa.controller;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -131,6 +132,7 @@ public class UsuarioController {
 			} else {
 				model.addAttribute("tipoUsuario", premium);
 			}
+			model.addAttribute("edad", Period.between(usuario.getBirthdate(), LocalDate.now()).getYears());
 			return "users/userDetails";
 		}
 	}
@@ -161,6 +163,8 @@ public class UsuarioController {
 		String datos3 = Arrays.toString(torneosPorMes);
 		model.addAttribute("quedadasPorMes", datos2.replace(" ", ""));
 		model.addAttribute("torneosPorMes", datos3.replace(" ", ""));
+		
+		model.addAttribute("edad", Period.between(user.getBirthdate(), LocalDate.now()).getYears());
 		return "users/userProfile";
 	}
 

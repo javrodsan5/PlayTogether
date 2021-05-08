@@ -71,6 +71,7 @@
 					<fmt:formatDate value="${parsedDateTime}"
 						pattern="dd-MM-yyyy HH:mm" />
 				</h2>
+				<h2><b>Categoría:</b> <c:out value="${meeting.category.name}" /></h2>
 				<p class="summary">
 					<c:out value="${meeting.description}" />
 				</p>
@@ -135,7 +136,7 @@
 						</spring:url>
 
 						<a href="${fn:escapeXml(leaveMeeting)}">
-							<button class="btn btn-danger" style="margin-top: 5%;">
+							<button class="btn btn-danger" style="margin-top: 5%; margin-left: 1em;">
 								<b>Abandonar quedada</b>
 							</button>
 						</a>
@@ -145,7 +146,7 @@
 			</c:if>
 
 		</div>
-		<div class="editarInvitar">
+		<div class="editarInvitar" style="margin-left: auto; margin-right: auto; width: 9.4em; margin-top: 5em; margin-bottom: 0;">
 
 			<c:if test="${esCreador==true}">
 				<spring:url value="/sports/{sportId}/meetings/{meetingId}/edit"
@@ -154,24 +155,24 @@
 					<spring:param name="sportId" value="${sport.id}" />
 				</spring:url>
 
-				<a class="btn btn-primary" href="${fn:escapeXml(meetingUpdateUrl)}">Editar</a>
+				<a class="btn btn-primary" href="${fn:escapeXml(meetingUpdateUrl)}"><b>Editar</b></a>
 			</c:if>
 			<c:if
 				test="${meeting.meetingCreator == logged_user && !estaLlena && puedeEliminar && meeting.participants.contains(meeting.meetingCreator)}">
 				<td><spring:url value="/invitations/meeting/{meetingId}"
 						var="searchPeopleUrl">
 						<spring:param name="meetingId" value="${meeting.id}" />
-					</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(searchPeopleUrl)}">Invitar</a>
+					</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(searchPeopleUrl)}"><b>Invitar</b></a>
 			</c:if>
 		</div>
-		<div class="botonesMeeting">
+		<div class="botonesMeeting">		
 			<c:if test="${existe==false && estaLlena==false}">
 				<spring:url value="/meetings/${meeting.id}/join" var="joinUrl">
 				</spring:url>
-				<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger">Participar</a>
+				<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger botonMeeting"><b>Participar</b></a>
 			</c:if>
 			<button class="botonMeeting"
-				onclick="location.href='/sports/${meeting.sport.id}/meetings';"
+				onclick="location.href='/sports/${meeting.sport.id}/meetings?category=Todas';"
 				type="button">
 				<b>Volver a listado</b>
 			</button>

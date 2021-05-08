@@ -28,6 +28,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import net.playtogether.jpa.entity.Authorities;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
+import net.playtogether.jpa.entity.MeetingCategory;
 import net.playtogether.jpa.entity.Sport;
 import net.playtogether.jpa.entity.SportType;
 import net.playtogether.jpa.entity.User;
@@ -69,6 +70,10 @@ public class MeetingControllerTests {
 
 	@BeforeEach
 	void setup() {
+		MeetingCategory category = new MeetingCategory();
+		category.setId(1);
+		category.setName("Principiante");
+
 		this.testMeeting1 = new Meeting();
 		this.testMeeting1.setId(1);
 		this.testMeeting1.setAddress("Bami");
@@ -77,6 +82,7 @@ public class MeetingControllerTests {
 		this.testMeeting1.setParticipants(new ArrayList<Usuario>());
 		this.testMeeting1.setDescription("Una partidata");
 		this.testMeeting1.setNumberOfPlayers(2);
+		this.testMeeting1.setCategory(category);
 
 		this.testMeeting2 = new Meeting();
 		this.testMeeting2.setId(2);
@@ -85,6 +91,7 @@ public class MeetingControllerTests {
 		this.testMeeting2.setDate(LocalDateTime.of(2021, 06, 23, 18, 16));
 		this.testMeeting2.setParticipants(new ArrayList<Usuario>());
 		this.testMeeting2.setDescription("Partido de tenis");
+		this.testMeeting2.setCategory(category);
 
 		Sport s = new Sport();
 		SportType st = new SportType();
@@ -157,6 +164,7 @@ public class MeetingControllerTests {
 		this.testMeeting3.setMeetingCreator(u);
 		this.testMeeting3.setDescription("Una partidata");
 		this.testMeeting3.setNumberOfPlayers(2);
+		this.testMeeting3.setCategory(category);
 
 		BDDMockito.given(this.meetingService.findMeetingById(1)).willReturn(this.testMeeting1);
 		BDDMockito.given(this.sportService.findSportById(1)).willReturn(s);
@@ -167,13 +175,14 @@ public class MeetingControllerTests {
 		BDDMockito.given(this.usuarioService.usuarioLogueado(this.user.getUsername())).willReturn(u);
 		BDDMockito.given(this.usuarioService.usuarioLogueado(this.user2.getUsername())).willReturn(u2);
 		BDDMockito.given(this.usuarioService.findUserById(2)).willReturn(u2);
+		BDDMockito.given(this.meetingService.findCategoryById(1)).willReturn(category);
 	}
 
 	// Test de consultar quedadas
 	@Test
 	@WithMockUser(value = "user1", authorities = "usuario")
 	void listMeetings() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/meetings")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/meetings?category=Todas")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 		Collection<Meeting> meetingEntities = this.meetingRepository.findAll();
 		Assertions.assertThat(meetingEntities.size()).isEqualTo(7);
@@ -184,7 +193,7 @@ public class MeetingControllerTests {
 	@WithMockUser(value = "user1", authorities = "usuario")
 	@Test
 	void listMeetingsNegative() throws Exception {
-		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/meetings")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
+		this.mockMvc.perform(MockMvcRequestBuilders.get("/sports/1/meetings?category=Todas")).andExpect(MockMvcResultMatchers.status().is2xxSuccessful());
 
 		Collection<Meeting> meetingEntities = this.meetingRepository.findAll();
 		Assertions.assertThat(meetingEntities.size()).isNotEqualTo(4);
@@ -260,7 +269,7 @@ public class MeetingControllerTests {
 	@Test
 	void testProcessUpdateMeetingFormSuccess() throws Exception {
 		this.mockMvc.perform(MockMvcRequestBuilders.post("/sports/1/meetings/1/edit").with(SecurityMockMvcRequestPostProcessors.csrf()).param("address", "Charco la Pava").param("city", "Sevilla").param("date", "2021-06-12T12:00").param("id", "1")
-			.param("description", "Cambio de planes").param("numberOfPlayers", "10")).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/meetings"));
+			.param("description", "Cambio de planes").param("numberOfPlayers", "10").param("category.id", "1")).andExpect(MockMvcResultMatchers.status().is3xxRedirection()).andExpect(MockMvcResultMatchers.view().name("redirect:/sports/1/meetings"));
 	}
 
 	@WithMockUser(value = "user1", authorities = "usuario")
@@ -268,7 +277,7 @@ public class MeetingControllerTests {
 	void testProcessUpdateMeetingFormErrors() throws Exception {
 		this.mockMvc
 			.perform(MockMvcRequestBuilders.post("/sports/1/meetings/1/edit").with(SecurityMockMvcRequestPostProcessors.csrf()).param("address", "Charco la Pava").param("city", "Sevilla").param("date", "").param("id", "1").param("description",
-				"Cambio de planes").param("numberOfPlayers", "10"))
+				"Cambio de planes").param("numberOfPlayers", "10").param("category.id", "1"))
 			.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.model().attributeHasErrors("meeting")).andExpect(MockMvcResultMatchers.model().attributeHasFieldErrors("meeting", "date"))
 			.andExpect(MockMvcResultMatchers.view().name("meetings/updateMeetingForm"));
 	}
