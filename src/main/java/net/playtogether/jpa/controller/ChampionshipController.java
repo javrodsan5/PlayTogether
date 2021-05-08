@@ -1536,7 +1536,7 @@ public class ChampionshipController {
 				Integer puntos = deletedUser.getPuntos() - 5;
 				deletedUser.setPuntos(puntos);
 				this.userService.saveUsuario(deletedUser);
-				model.put("eliminado", "Se ha eliminado el jugador correctamente.");
+				model.put("eliminado", true);
 				return "teams/teamDetails";
 			} else {
 				model.put("userToDeleteIsTeamOwner", true);

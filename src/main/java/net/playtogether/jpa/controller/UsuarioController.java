@@ -163,6 +163,8 @@ public class UsuarioController {
 		String datos3 = Arrays.toString(torneosPorMes);
 		model.addAttribute("quedadasPorMes", datos2.replace(" ", ""));
 		model.addAttribute("torneosPorMes", datos3.replace(" ", ""));
+		
+		model.addAttribute("edad", Period.between(user.getBirthdate(), LocalDate.now()).getYears());
 		return "users/userProfile";
 	}
 

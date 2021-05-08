@@ -179,7 +179,8 @@
 								<h4>
 									<fmt:parseDate value="${user.birthdate }" pattern="yyyy-MM-dd"
 										var="parsedDateStart" type="both" />
-									<fmt:formatDate value="${parsedDateStart}" pattern="dd-MM-yyyy" />
+									<fmt:formatDate value="${parsedDateStart}" pattern="dd-MM-yyyy" /><br>
+									(${edad} años)
 								</h4>
 							</div>
 							<div class="data-details">
