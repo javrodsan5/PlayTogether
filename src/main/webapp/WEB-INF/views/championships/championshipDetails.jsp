@@ -19,6 +19,11 @@
 			</h5>
 		</div>
 	</c:if>
+	<c:if test="${refund == true}">
+		<div class="alert alert-primary" style="margin: 0% 20% 1% 20%">
+			<h5>Se está procesando su devolución de 2€. Lo recibirá en un plazo máximo de 72 horas.</h5>
+		</div>
+	</c:if>
 
 	<div class="Card1Meeting">
 		<div class="photo"
