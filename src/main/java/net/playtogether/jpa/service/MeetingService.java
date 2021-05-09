@@ -63,8 +63,8 @@ public class MeetingService {
 	}
 
 	@Transactional
-	public List<Meeting> findByCategory(String category) {
-		return this.meetingRepository.findMeetingsByCategory(category);
+	public List<Meeting> findByCategory(Integer idSport, String category) {
+		return this.meetingRepository.findMeetingsByCategory(idSport, category);
 	}
 
 }

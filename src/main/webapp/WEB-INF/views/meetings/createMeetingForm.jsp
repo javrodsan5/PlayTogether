@@ -33,9 +33,9 @@
 					</div>
 					<br>
 					<div class="col-sm-12">
-						<label>Categoría</label><br> <select name="category">
-							<c:forEach var="category" items="${categories}">
-								<option value="${category}">${category.name}</option>
+						<label>Categoría</label><br> <select name="category.id">
+							<c:forEach var="categ" items="${categories}">
+								<option value="${categ.id}">${categ.name}</option>
 							</c:forEach>
 						</select>
 					</div>

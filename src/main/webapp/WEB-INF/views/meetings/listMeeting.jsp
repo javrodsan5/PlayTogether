@@ -110,6 +110,7 @@
 							<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
 							<th class="guiz-awards-header-title" style="width: 17%;">Fecha</th>
 							<th class="guiz-awards-header-title" style="width: 9%;">Participantes</th>
+							<th class="guiz-awards-header-title" style="width: 9%;">Categoría</th>
 							<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
 							<th class="guiz-awards-header-title" style="width: 4%;">Participación</th>
 							<th class="guiz-awards-header-title" style="width: 10%;"></th>
@@ -128,6 +129,7 @@
 										<c:out
 											value="${meeting.participants.size()}/${meeting.numberOfPlayers}" />
 									</center></td>
+								<td><c:out value="${meeting.category.name}" /></td>
 								<td><spring:url value="/usuarios/{userId}"
 										var="userdetails">
 										<spring:param name="userId"
@@ -171,6 +173,7 @@
 							<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
 							<th class="guiz-awards-header-title" style="width: 17%;">Fecha</th>
 							<th class="guiz-awards-header-title" style="width: 9%;">Participantes</th>
+							<th class="guiz-awards-header-title" style="width: 9%;">Categoría</th>
 							<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
 							<th class="guiz-awards-header-title" style="width: 4%;">Participación</th>
 							<th class="guiz-awards-header-title" style="width: 10%;"></th>
@@ -189,6 +192,7 @@
 										<c:out
 											value="${meeting.participants.size()}/${meeting.numberOfPlayers}" />
 									</center></td>
+								<td><c:out value="${meeting.category.name}" /></td>
 								<td><spring:url value="/usuarios/{userId}"
 										var="userdetails">
 										<spring:param name="userId"
