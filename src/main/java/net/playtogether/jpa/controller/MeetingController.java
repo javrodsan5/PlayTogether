@@ -112,6 +112,7 @@ public class MeetingController {
 			meeting.setParticipants(participants);
 			// meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam() * 2);
 			meeting.setCreationDate(LocalDate.now());
+			meeting.setCategory(this.meetingService.findCategoryById(meeting.getCategory().getId()));
 			this.meetingService.save(meeting);
 			usuario.setPuntos(usuario.getPuntos() + 7);
 			this.usuarioService.saveUsuarioAlreadyRegistered(usuario);
@@ -120,7 +121,7 @@ public class MeetingController {
 			chat.setChatType(this.chatService.findChatTypeById(1)); // MEETING
 			chat.setMeeting(meeting);
 			this.chatService.saveChat(chat);
-			return "redirect:/sports/" + sportId + "/meetings";
+			return "redirect:/sports/" + sportId + "/meetings?category=Todas";
 		}
 
 	}
@@ -174,7 +175,7 @@ public class MeetingController {
 			meetingToUpdate.setCategory(this.meetingService.findCategoryById(meeting.getCategory().getId()));
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
-			return "redirect:/sports/" + sportId + "/meetings";
+			return "redirect:/sports/" + sportId + "/meetings?category=Todas";
 		}
 
 	}
@@ -192,7 +193,7 @@ public class MeetingController {
 		if(category.equals("Todas")) {
 			meetings = this.meetingService.listMeetingsBySport(sportId);
 		} else if(category.equals("Principiante") || category.equals("Intermedio") || category.equals("Avanzado")) {
-			meetings = this.meetingService.findByCategory(category);
+			meetings = this.meetingService.findByCategory(sportId, category);
 		} else {
 			return "error-404";
 		}
