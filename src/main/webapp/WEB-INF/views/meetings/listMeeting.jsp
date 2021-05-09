@@ -27,16 +27,18 @@
 		</div>
 	</c:if>
 	<br>
-	<div class="list-filter" >
-		<div><p>Filtrar por categoría: </p></div>
-		<div><a href="/sports/${deporte}/meetings?category=Todas"><p>Todas</p></a></div>
-		<div> <c:out value="	|	" /></div>
-		<div> <a href="/sports/${deporte}/meetings?category=Principiante"><p>Principiante</p></a></div>
-		<div> <c:out value=" | " /></div>
-		<div><a href="/sports/${deporte}/meetings?category=Intermedio"><p>Intermedio</p></a></div>
-		<div> <c:out value=" | " /></div>
-		<div> <a href="/sports/${deporte}/meetings?category=Avanzado"><p>Avanzado</p></a></div>
-	</div>
+	<c:if test="${meetings != null && meetings.size() > 0}">
+		<div class="list-filter" >
+			<div><p>Filtrar por categoría: </p></div>
+			<div><a href="/sports/${deporte}/meetings?category=Todas"><p>Todas</p></a></div>
+			<div> <c:out value="	|	" /></div>
+			<div> <a href="/sports/${deporte}/meetings?category=Principiante"><p>Principiante</p></a></div>
+			<div> <c:out value=" | " /></div>
+			<div><a href="/sports/${deporte}/meetings?category=Intermedio"><p>Intermedio</p></a></div>
+			<div> <c:out value=" | " /></div>
+			<div> <a href="/sports/${deporte}/meetings?category=Avanzado"><p>Avanzado</p></a></div>
+		</div>
+	</c:if>
 	<div class="cardlist meeting-and-championship-list">
 		<c:if test="${meetings != null && meetings.size() <= 3 && meetings.size() > 0}">
 			<div class="scroll_vertical" id="style_scroll" style="height: 20em">
@@ -165,67 +167,8 @@
 			</div>
 		</c:if>
 		<c:if test="${meetings != null && meetings.size() == 0}">
-			<div class="scroll_vertical" id="style_scroll" style="height: 10em">
-				<table id="meetingTable" class="table ">
-					<thead>
-						<tr class="rowtable">
-							<th class="guiz-awards-header-title" style="width: 18%;">Dirección</th>
-							<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
-							<th class="guiz-awards-header-title" style="width: 17%;">Fecha</th>
-							<th class="guiz-awards-header-title" style="width: 9%;">Participantes</th>
-							<th class="guiz-awards-header-title" style="width: 9%;">Categoría</th>
-							<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
-							<th class="guiz-awards-header-title" style="width: 4%;">Participación</th>
-							<th class="guiz-awards-header-title" style="width: 10%;"></th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${meetings}" var="meeting">
-							<tr class="rowtable">
-								<td><c:out value="${meeting.address}" /></td>
-								<td><c:out value="${meeting.city}" /></td>
-								<td><fmt:parseDate value="${meeting.date }"
-										pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
-									<fmt:formatDate value="${parsedDateTime}"
-										pattern="dd-MM-yyyy HH:mm" /></td>
-								<td><center>
-										<c:out
-											value="${meeting.participants.size()}/${meeting.numberOfPlayers}" />
-									</center></td>
-								<td><c:out value="${meeting.category.name}" /></td>
-								<td><spring:url value="/usuarios/{userId}"
-										var="userdetails">
-										<spring:param name="userId"
-											value="${meeting.meetingCreator.id}" />
-									</spring:url> <a href="${fn:escapeXml(userdetails)}"> <c:out
-											value="${meeting.meetingCreator.user.username}" /></a></td>
-								<c:if
-									test="${meeting.participants != null && meeting.participants.contains(usuario_logueado)}">
-									<td style="text-align: center"><i
-										class="fa fa-check-circle" style="color: green;"> </i></td>
-								</c:if>
-								<c:if
-									test="${ meeting.participants == null || meeting.participants.contains(usuario_logueado)!=true }">
-									<td style="text-align: center"><i
-										class="fa fa-times-circle"
-										style="color: red; text-align: center !important;"> </i></td>
-								</c:if>
-								<td><center>
-										<spring:url value="/sports/{deporte}/meetings/{meetingId}"
-											var="meeting2Url">
-											<spring:param name="meetingId" value="${meeting.id}" />
-											<spring:param name="deporte" value="${deporte}" />
-										</spring:url>
-										<div class="botoncito">
-											<a href="${fn:escapeXml(meeting2Url)}">Ver más</a>
-										</div>
-									</center></td>
-							</tr>
-						</c:forEach>
-					</tbody>
-
-				</table>
-			</div>
+			<h3 class="alert alert-warning"
+				style="margin: 1em 35% 4em 35%; text-align: center">No hay quedadas aún.</h3>
 		</c:if>
 	</div>
 	<div class="cardbutton">
