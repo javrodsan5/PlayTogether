@@ -169,81 +169,9 @@
 					</table>
 				</div>
 			</c:if>
-				<c:if test="${championships != null && championships.size() == 0}">
-				<div class="scroll_vertical" id="style_scroll" style="height: 10em;">
-					<table id="championshipTable" class="table ">
-						<thead>
-							<tr class="rowtable">
-								<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
-								<th class="guiz-awards-header-title" style="width: 20%;">Dirección</th>
-								<th class="guiz-awards-header-title" style="width: 10%;">Fecha
-									Inicio</th>
-								<th class="guiz-awards-header-title" style="width: 10%;">Fecha
-									Fin</th>
-								<th class="guiz-awards-header-title"
-									style="width: 11%; text-align: center;">Equipos inscritos</th>
-								<th class="guiz-awards-header-title"
-									style="width: 10%; text-align: center;">Creador</th>
-								<th class="guiz-awards-header-title"
-									style="width: 10%; text-align: center;">Participando</th>
-								<th class="guiz-awards-header-title"
-									style="width: 8%; text-align: center;"></th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${championships}" var="championship">
-								<tr class="rowtable">
-									<td><c:out value="${championship.city}" /></td>
-									<td><c:out value="${championship.address}" /></td>
-
-									<td><fmt:parseDate value="${championship.startDate }"
-											pattern="yyyy-MM-dd" var="parsedDateStart" type="both" /> <fmt:formatDate
-											value="${parsedDateStart}" pattern="dd-MM-yyyy" /></td>
-									<td><fmt:parseDate value="${championship.finishDate }"
-											pattern="yyyy-MM-dd" var="parsedDateEnd" type="both" /> <fmt:formatDate
-											value="${parsedDateEnd}" pattern="dd-MM-yyyy" /></td>
-									<td><center>
-											<c:out
-												value="${championship.teams.size()} / ${championship.maxTeams}" />
-										</center></td>
-									<td><center>
-											<spring:url value="/usuarios/{userId}" var="userdetails">
-												<spring:param name="userId" value="${championship.user.id}" />
-											</spring:url>
-											<a href="${fn:escapeXml(userdetails)}"> <c:out
-													value="${championship.user.user.username}" /></a>
-										</center></td>
-									<td style="text-align: center !important;"><c:set
-											var="isInTeam" value="${false}" /> <c:forEach
-											items="${championship.teams}" var="equiposLoggeado">
-											<c:if
-												test="${!isInTeam && equiposLoggeado != null && equiposLoggeado.participants != null}">
-												<c:set var="isInTeam"
-													value="${equiposLoggeado.participants.contains(usuario_logueado)}" />
-											</c:if>
-										</c:forEach> <c:if test="${isInTeam}">
-											<i class="fa fa-check-circle" style="color: green;">
-										</c:if> <c:if test="${!isInTeam}">
-											<i class="fa fa-times-circle" style="color: red;">
-										</c:if></td>
-									<td><spring:url
-											value="/sports/{deporte}/championships/{championshipId}"
-											var="championship2Url">
-											<spring:param name="championshipId"
-												value="${championship.id}" />
-											<spring:param name="deporte" value="${deporte}" />
-
-										</spring:url>
-										<div class="botoncito">
-											<a class="" href="${fn:escapeXml(championship2Url)}">Ver
-												más</a>
-										</div></td>
-								</tr>
-							</c:forEach>
-						</tbody>
-
-					</table>
-				</div>
+			<c:if test="${championships != null && championships.size() == 0}">
+				<h3 class="alert alert-warning"
+					style="margin: 2em 35% 4em 35%; text-align: center">No hay torneos aún.</h3>
 			</c:if>
 		</div>
 		<div class="cardbutton">
