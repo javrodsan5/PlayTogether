@@ -202,6 +202,7 @@ public class MeetingController {
 		model.addAttribute("deporte", sportId);
 		model.addAttribute("nombreDeporte", sport.getName());
 		model.addAttribute("usuario_logueado", u);
+		model.addAttribute("selectCategory", category);
 		return "meetings/listMeeting";
 	}
 

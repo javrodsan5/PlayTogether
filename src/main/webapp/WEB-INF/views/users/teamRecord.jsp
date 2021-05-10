@@ -41,7 +41,7 @@
 					<tbody>
 						<c:forEach items="${teams}" var="team">
 							<spring:url
-								value="/championships/{championshipId}/teams/teamId"
+								value="/championships/{championshipId}/teams/{teamId}"
 								var="teamDetail2Url">
 								<spring:param name="championshipId" value="${team.championship.id}" />
 								<spring:param name="teamId" value="${team.id}" />
@@ -54,7 +54,7 @@
 
 								<td>
 									<div class="botoncito" style="margin-left: 0;">
-										<a href="${fn:escapeXml(meeting2Url)}">Ver más</a>
+										<a href="${fn:escapeXml(teamDetail2Url)}">Ver más</a>
 									</div>
 								</td>
 

@@ -3442,3 +3442,9 @@ body {
 		margin-bottom: 0.2em;
 }
 
+.category {
+	background-color: #17a2b8; 
+	color: white;
+	border-radius: 5px;
+}
+

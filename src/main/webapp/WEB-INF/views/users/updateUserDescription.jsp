@@ -18,7 +18,7 @@
 	<form:form modelAttribute="usuario" class="form-horizontal"
 				id="add-usuario-form">
 		
-			<textarea placeholder="Defínete para el resto de usuarios..."  name="description" maxlength="150" style="width:100%"/></textarea>
+			<textarea placeholder="Defínete para el resto de usuarios..."  name="description" maxlength="150" style="width:100%"/>${usuario.description}</textarea>
 			
 					<div class="ocultar">
 			<playtogether:inputField label="Usuario" name="user" />
