@@ -27,18 +27,16 @@
 		</div>
 	</c:if>
 	<br>
-	<c:if test="${meetings != null && meetings.size() > 0}">
-		<div class="list-filter" >
-			<div><p>Filtrar por categoría: </p></div>
-			<div><a href="/sports/${deporte}/meetings?category=Todas"><p>Todas</p></a></div>
-			<div> <c:out value="	|	" /></div>
-			<div> <a href="/sports/${deporte}/meetings?category=Principiante"><p>Principiante</p></a></div>
-			<div> <c:out value=" | " /></div>
-			<div><a href="/sports/${deporte}/meetings?category=Intermedio"><p>Intermedio</p></a></div>
-			<div> <c:out value=" | " /></div>
-			<div> <a href="/sports/${deporte}/meetings?category=Avanzado"><p>Avanzado</p></a></div>
-		</div>
-	</c:if>
+	<div class="list-filter" >
+		<div><p>Filtrar por categoría: </p></div>
+		<div><a href="/sports/${deporte}/meetings?category=Todas"><p ${selectCategory == 'Todas' ? 'class="category"' : ''}">Todas</p></a></div>
+		<div> <c:out value="	|	" /></div>
+		<div> <a href="/sports/${deporte}/meetings?category=Principiante"><p ${selectCategory == 'Principiante' ? 'class="category"' : ''}">Principiante</p></a></div>
+		<div> <c:out value=" | " /></div>
+		<div><a href="/sports/${deporte}/meetings?category=Intermedio"><p ${selectCategory == 'Intermedio' ? 'class="category"' : ''}">Intermedio</p></a></div>
+		<div> <c:out value=" | " /></div>
+		<div> <a href="/sports/${deporte}/meetings?category=Avanzado"><p ${selectCategory == 'Avanzado' ? 'class="category"' : ''}">Avanzado</p></a></div>
+	</div>
 	<div class="cardlist meeting-and-championship-list">
 		<c:if test="${meetings != null && meetings.size() <= 3 && meetings.size() > 0}">
 			<div class="scroll_vertical" id="style_scroll" style="height: 20em">

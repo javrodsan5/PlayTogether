@@ -332,9 +332,9 @@ public class UsuarioController {
 			}
 		}
 		if(posicion == usuariosOrdenPuntos.size()) {
-			model.addAttribute("puesto", "Estás en última posición.");
+			model.addAttribute("puesto", "Estás en última posición");
 		} else if(posicion == usuariosOrdenPuntos.size()-1) {
-			model.addAttribute("puesto", "Estás en penúltima posición.");
+			model.addAttribute("puesto", "Estás en penúltima posición");
 		} else {
 			model.addAttribute("puesto", "¡Estás en la posición "+posicion+"!");
 		}
