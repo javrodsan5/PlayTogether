@@ -13,13 +13,12 @@
 <playtogether:layout pageName="users" invitaciones="${invitaciones}">
 
 	<body>
-		<div class="cardtitle">
+		<div class="cardtitle" style="margin-bottom: 2.5em;">
 
 			<h1>
 				<strong>Tu historial de torneos</strong>
 			</h1>
 			<br />
-
 		</div>
 		<div class="cardlist">
 			<c:if test="${noRecords}">

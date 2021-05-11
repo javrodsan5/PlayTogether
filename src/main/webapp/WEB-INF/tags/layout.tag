@@ -12,8 +12,8 @@
 
 <!doctype html>
 <html>
+<div><playtogether:htmlHeader /></div>
 
-<playtogether:htmlHeader />
 <body id="real-body">
 
 	<div class="navigation-wrap bg start-header" style="height: 5.625em; margin-bottom: 1px;">
