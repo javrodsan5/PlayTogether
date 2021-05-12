@@ -19,93 +19,93 @@
 		</div>
 
 		<c:if test="${noParticipa}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡No participas en el torneo para poder crear partidos!</p>
 			</div>
 		</c:if>
 		<c:if test="${noParticipaDate}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡No participas en el partido para añadir una fecha de
 					realización!</p>
 			</div>
 		</c:if>
 		<c:if test="${faltaEquipos}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡Faltan equipos por unirse para generar la primera ronda de
 					partidos!</p>
 			</div>
 		</c:if>
 		<c:if test="${yagenerado}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡La primera ronda ya está generada!</p>
 			</div>
 		</c:if>
 		<c:if test="${noprimera}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡Aún no se ha generado la primera ronda!</p>
 			</div>
 		</c:if>
 		<c:if test="${faltaresultados}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡No se puede generar una ronda sin los resultados de la
 					anterior!</p>
 			</div>
 		</c:if>
 
 		<c:if test="${nocoinc}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡No se puede generar una ronda sin que los resultados de
 					todos los partidos coincidan!</p>
 			</div>
 		</c:if>
 
 		<c:if test="${yagenerada2}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡La segunda ronda ya está generada!</p>
 			</div>
 		</c:if>
 
 		<c:if test="${yagenerada3}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡La tercera ronda ya está generada!</p>
 			</div>
 		</c:if>
 
 		<c:if test="${yagenerada4}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡La cuarta ronda ya está generada!</p>
 			</div>
 		</c:if>
 
 		<c:if test="${nosegunda}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡Aún no se ha generado la segunda ronda!</p>
 			</div>
 		</c:if>
 		<c:if test="${notercera}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡Aún no se ha generado la tercera ronda!</p>
 			</div>
 		</c:if>
 		<c:if test="${noUser}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>No se encontró al usuario deseado.</p>
 			</div>
 		</c:if>
 		<c:if test="${noTeam}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡No perteneces a este equipo!</p>
 			</div>
 		</c:if>
 		<c:if test="${faltaParticipantes}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger" style="margin: 2% 20% 1% 20%">
 				<p>¡Los equipos no están completos (Faltan jugadores)!</p>
 			</div>
 		</c:if>
 
 
 		<c:if test="${nombreGanador != null}">
-			<div class="alert alert-success" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-success" style="margin: 2% 20% 1% 20%">
 				<h1>
 					<b> ¡ <c:out value="${nombreGanador}" /> ha ganado el torneo!
 						¡Enhorabuena!
