@@ -18,22 +18,26 @@
 
 	<body>
 		<c:if test="${existe==true}">
-			<div class="alert alert-primary" style="margin: 1% 35% 1% 35%">
+			<div class="alert alert-primary"
+				style="margin: 0% 0% 1% 25%; width: 50%;">
 				<p>¡Ya estás participando en esta quedada!</p>
 			</div>
 		</c:if>
 		<c:if test="${eliminado==true}">
-			<div class="alert alert-primary" style="margin: 1% 35% 1% 35%">
+			<div class="alert alert-primary"
+				style="margin: 1% 25% 1% 25%; width: fit-content;">
 				<p>Has eliminado a este jugador correctamente.</p>
 			</div>
 		</c:if>
 		<c:if test="${estaLlena==true && existe==false}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger"
+				style="margin: 1% 20% 1% 20%; width: fit-content;">
 				<p>La quedada a la que intenta unirse está completa.</p>
 			</div>
 		</c:if>
 		<c:if test="${userToDeleteIsMeetingCreator}">
-			<div class="alert alert-danger" style="margin: 1% 20% 1% 20%">
+			<div class="alert alert-danger"
+				style="margin: 1% 20% 1% 20%; width: fit-content;">
 				<p>No se puede eliminar al creador de la quedada.</p>
 			</div>
 		</c:if>
@@ -63,7 +67,10 @@
 					</h1>
 
 				</div>
-				<h2><b>Creador:</b> <c:out value="${meeting.meetingCreator}" /></h2>
+				<h2>
+					<b>Creador:</b>
+					<c:out value="${meeting.meetingCreator}" />
+				</h2>
 				<h2>
 					<b>Fecha y hora: </b>
 					<fmt:parseDate value="${meeting.date }"
@@ -71,7 +78,10 @@
 					<fmt:formatDate value="${parsedDateTime}"
 						pattern="dd-MM-yyyy HH:mm" />
 				</h2>
-				<h2><b>Categoría:</b> <c:out value="${meeting.category.name}" /></h2>
+				<h2>
+					<b>Categoría:</b>
+					<c:out value="${meeting.category.name}" />
+				</h2>
 				<p class="summary">
 					<c:out value="${meeting.description}" />
 				</p>
@@ -89,41 +99,41 @@
 					<div class="drop__container" id="drop-items">
 						<div class="scroll_vertical" id="style_scroll">
 							<c:forEach items="${meeting.participants}" var="participant">
-									<div class="drop__card">
-										<div class="drop__data">
-											<div>
-												<h2 class="drop__name">
-													<spring:url value="/usuarios/{userId}" var="userdetails">
-														<spring:param name="userId" value="${participant.id}" />
-													</spring:url>
-													<div style="display: flex">
-														<a href="${fn:escapeXml(userdetails)}"><span
-															class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}
-														</span></a> <a
-															style="margin-left: 20px; font-size: 25px; align-self: center">
-															${participant.edadUsuario()} años</a>
-													</div>
+								<div class="drop__card">
+									<div class="drop__data">
+										<div>
+											<h2 class="drop__name" style="display: flex">
+												<spring:url value="/usuarios/{userId}" var="userdetails">
+													<spring:param name="userId" value="${participant.id}" />
+												</spring:url>
+												<div style="display: flex">
+													<a href="${fn:escapeXml(userdetails)}"><span
+														class="glyphicon glyphicon-user" aria-hidden="true">${participant.name}
+													</span></a> <a
+														style="margin-left: 20px; font-size: 25px; align-self: center">
+														${participant.edadUsuario()} años</a>
+												</div>
 
 
-													<c:if test="${puedeEliminar == true}">
-														<c:if test="${participant.id!=meeting.meetingCreator.id}">
-															<br>
-															<spring:url
-																value="/sports/{sportId}/meetings/{meetingId}/{userId}/delete"
-																var="deleteUserMeeting">
-																<spring:param name="sportId" value="${meeting.sport.id}" />
-																<spring:param name="meetingId" value="${meeting.id}" />
-																<spring:param name="userId" value="${participant.id}" />
-															</spring:url>
-															<a style="margin: 10px;"
-																href="${fn:escapeXml(deleteUserMeeting)}"> <i
-																class="fa fa-trash" style="color: red"></i></a>
-														</c:if>
+												<c:if test="${puedeEliminar == true}">
+													<c:if test="${participant.id!=meeting.meetingCreator.id}">
+														<br>
+														<spring:url
+															value="/sports/{sportId}/meetings/{meetingId}/{userId}/delete"
+															var="deleteUserMeeting">
+															<spring:param name="sportId" value="${meeting.sport.id}" />
+															<spring:param name="meetingId" value="${meeting.id}" />
+															<spring:param name="userId" value="${participant.id}" />
+														</spring:url>
+														<a style="margin: 10px;"
+															href="${fn:escapeXml(deleteUserMeeting)}"> <i
+															class="fa fa-trash" style="color: red"></i></a>
 													</c:if>
-												</h2>
-											</div>
+												</c:if>
+											</h2>
 										</div>
 									</div>
+								</div>
 							</c:forEach>
 						</div>
 					</div>
@@ -136,7 +146,8 @@
 						</spring:url>
 
 						<a href="${fn:escapeXml(leaveMeeting)}">
-							<button class="btn btn-danger" style="margin-top: 5%; margin-left: 1em;">
+							<button class="btn btn-danger"
+								style="margin-top: 5%; margin-left: 1em;">
 								<b>Abandonar quedada</b>
 							</button>
 						</a>
@@ -146,7 +157,8 @@
 			</c:if>
 
 		</div>
-		<div class="editarInvitar" style="margin-left: auto; margin-right: auto; width: 9.4em; margin-top: 5em; margin-bottom: 0;">
+		<div class="editarInvitar"
+			style="margin-left: auto; margin-right: auto; width: 9.4em; margin-top: 5em; margin-bottom: 0;">
 
 			<c:if test="${esCreador==true}">
 				<spring:url value="/sports/{sportId}/meetings/{meetingId}/edit"
@@ -165,11 +177,12 @@
 					</spring:url> <a class="btn btn-primary" href="${fn:escapeXml(searchPeopleUrl)}"><b>Invitar</b></a>
 			</c:if>
 		</div>
-		<div class="botonesMeeting">		
+		<div class="botonesMeeting">
 			<c:if test="${existe==false && estaLlena==false}">
 				<spring:url value="/meetings/${meeting.id}/join" var="joinUrl">
 				</spring:url>
-				<a href="${fn:escapeXml(joinUrl)}" class="btn btn-danger botonMeeting"><b>Participar</b></a>
+				<a href="${fn:escapeXml(joinUrl)}"
+					class="btn btn-danger botonMeeting"><b>Participar</b></a>
 			</c:if>
 			<button class="botonMeeting"
 				onclick="location.href='/sports/${meeting.sport.id}/meetings?category=Todas';"

@@ -69,7 +69,7 @@
 
 		<c:if test="${meetingInvitations.size()==0}">
 			<h3 class="alert alert-warning"
-				style="margin: 1em 35% 0px 35%; text-align: center">No tienes
+				style="margin: 0% 20% 1% 20%; text-align: center; width: fit-content;">No tienes
 				invitaciones aún.</h3>
 		</c:if>
 
@@ -150,7 +150,7 @@
 
 		<c:if test="${championshipInvitations.size()==0}">
 			<h3 class="alert alert-warning"
-				style="margin: 1em 35% 1.5em 35%; text-align: center">No tienes
+				style="margin: 0% 20% 1% 20%; text-align: center; width: fit-content;">No tienes
 				invitaciones aún.</h3>
 		</c:if>
 
