@@ -236,7 +236,7 @@
 
 					<form:form id="survey-form" class="search-user-form"
 						action="/invitations/meeting/${meeting.id}/send_invitation"
-						method="GET" style="padding:0rem 0rem; width:60%">
+						method="GET" style="padding:0rem 0rem;">
 						<center>
 							<div>
 								<div class="col-sm-10">

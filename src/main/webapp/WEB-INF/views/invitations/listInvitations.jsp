@@ -81,7 +81,7 @@
 					<thead>
 						<tr class="rowtable">
 							<th class="">Anfitrión</th>
-							<th class="">Más información</th>
+							<th class="">Más info</th>
 							<th class="">Aceptar</th>
 							<th class="">Rechazar</th>
 						</tr>
@@ -101,7 +101,8 @@
 
 								<td>
 									<div class="botoncito" style="margin-left: 0%;">
-										<a href="${fn:escapeXml(meetingDetail2Url)}">Ver más</a>
+										<a href="${fn:escapeXml(meetingDetail2Url)}"><i
+											class="fa fa-info"></i></a>
 									</div>
 								</td>
 								<td><spring:url
@@ -161,8 +162,6 @@
 					<thead>
 						<tr class="rowtable">
 							<th class="">Nombre de torneo</th>
-							<th class="">Nombre de equipo</th>
-							<th class="">Dirección</th>
 							<th class="">Administrador de equipo</th>
 							<th class="">Aceptar</th>
 							<th class="">Rechazar</th>
@@ -181,8 +180,6 @@
 							</spring:url>
 							<tr class="rowtable">
 								<td><a href="${fn:escapeXml(championshipDetail2Url)}"><b>${invitation.team.championship.name}</b></a></td>
-								<td><c:out value="${invitation.team.name}" /></td>
-								<td><c:out value="${invitation.team.championship.address}" /></td>
 								<td><c:out value="${invitation.team.user.user.username}" /></td>
 
 								<td><spring:url

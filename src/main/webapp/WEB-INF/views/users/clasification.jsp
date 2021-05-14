@@ -17,8 +17,8 @@
 		</div>
 		<br>
 		<center>
-			<h2 class="alert alert-info alert-info-clasificacion"
-				style="text-align: center; font-size: 20px; width: 50%; margin-top: 0;">
+			<div class="alert alert-info alert-info-clasificacion"
+				style="text-align: center; font-size: 20px; margin-top: 0;">
 				<i class="fa fa-info-circle"></i> Puedes ganar puntos de las
 				siguientes formas:<br> <br> + 7 puntos por creación de
 				quedada o equipo.<br> + 5 puntos por unirse a una quedada o
@@ -26,7 +26,7 @@
 				<br> Si abandonas un torneo o una quedada perderás esos puntos
 				ganados.<br> <br> A continuación, se mostrará el Top 3 y
 				dos usuarios por arriba y abajo de su posición como mínimo.
-			</h2>
+			</div>
 		</center>
 		<br>
 		<h2 class="alert alert-primary alert-primary-clasification"
@@ -35,7 +35,7 @@
 			<center>
 				<div class="scroll_vertical" id="style_scroll" style="height: 100%;">
 					<table class="table-clasification"
-						style="width: 75%; text-align: center;">
+						style="width: 100%; text-align: center;">
 						<thead>
 							<tr class="rowtable">
 								<th class="guiz-awards-header-title" style="width: 15%;">Posición</th>
@@ -83,12 +83,6 @@
 
 									</c:if>
 									<c:if test="${!isTop10}">
-										<c:if test="${numero.count == 4}">
-											<td><c:out value="..." /></td>
-										</c:if>
-										<c:if test="${numero.count != 4}">
-											<td><c:out value="${usuario.name}" /></td>
-										</c:if>
 										<c:if test="${numero.count == 4}">
 											<td><c:out value="..." /></td>
 										</c:if>

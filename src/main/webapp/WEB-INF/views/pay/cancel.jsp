@@ -9,13 +9,13 @@
 
 <playtogether:layout pageName="pay" invitaciones="${invitaciones}">
 	<center>
-		<h1 style= "font-size: 65px">Se ha cancelado el pago</h1>
+		<h1 style= "font-size: 2rem">Se ha cancelado el pago</h1>
 		<h3 class="text-danger">${timeOut}</h3>
 		<i class="fa fa-times cancel" style="font-size: 10rem"></i>
 		<br>
 		<div class="alert alert-danger" style="margin: 0% 20% 5% 20%">
-		<h4>Si ha surgido algún problema, vuelva a intentarlo.</h4>
-		<h4>En caso de que el problema persista, contacte a esta dirección de correo: playtogetherispp@gmail.com</h4>
+		<h5>Si ha surgido algún problema, vuelva a intentarlo.</h5>
+		<h5>En caso de que el problema persista, contacte a esta dirección de correo: playtogetherispp@gmail.com</h5>
 		</div>
 	</center>
 </playtogether:layout>

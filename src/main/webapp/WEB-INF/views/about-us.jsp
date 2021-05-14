@@ -17,7 +17,7 @@
 	<body>
 		<img class="logoLanding" src="<s:url value="/images/logo.png" />" />
 		<h1>Descripción del proyecto</h1>
-		<div class="divLandingPage">
+		<div class="divLandingPage" style="margin: 2% 10% 2% 10%">
 			<p style="text-align: justify; text-justify: inter-word">
 				El objetivo principal del proyecto es desarrollar un sistema
 				de información que permita a los usuarios encontrar personas con

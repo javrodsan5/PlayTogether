@@ -18,7 +18,6 @@
 			</h1>
 		</div>
 
-		<div style="margin-left: 45px">
 			<div class="crearMeeting">
 				<form:form modelAttribute="meeting" commandName="meeting"
 					id="survey-form">
@@ -59,7 +58,6 @@
 					</div>
 					</div>
 				</form:form>
-			</div>
 		</div>
 
 	</body>
