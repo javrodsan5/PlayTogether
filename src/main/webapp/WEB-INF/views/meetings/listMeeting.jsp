@@ -166,7 +166,7 @@
 		</c:if>
 		<c:if test="${meetings != null && meetings.size() == 0}">
 			<h3 class="alert alert-warning"
-				style="margin: 0% 0% 0% 20%; text-align: center; width: 60%;">No hay quedadas aún.</h3>
+				style="margin: 0% 0% 0% 20%; text-align: center;">No hay quedadas aún.</h3>
 		</c:if>
 	</div>
 	<div class="cardbutton">

@@ -18,7 +18,7 @@
 	</div>
 	<c:if test="${chats.size()==0}">
 		<div class="alert alert-warning" align="center"
-			style="margin: 3% 4% 0% 25%; width: 50%;">
+			style="margin: 3% 15% 0% 15%;">
 			<h5>No tienes ningún chat aún.</h5>
 		</div>
 	</c:if>

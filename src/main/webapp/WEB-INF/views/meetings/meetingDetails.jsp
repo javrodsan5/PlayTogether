@@ -17,9 +17,10 @@
 <playtogether:layout pageName="meetings" invitaciones="${invitaciones}">
 
 	<body>
+		<center>
 		<c:if test="${existe==true}">
 			<div class="alert alert-primary"
-				style="margin: 0% 0% 1% 25%; width: 50%;">
+				style="margin: 1% 25% 1% 25%; width: 50%;">
 				<p>¡Ya estás participando en esta quedada!</p>
 			</div>
 		</c:if>
@@ -54,6 +55,7 @@
 				<p>Ha aceptado la invitación</p>
 			</div>
 		</c:if>
+		</center>
 		<div class="Card1Meeting">
 			<div class="photo"
 				style="background-image: url(/images/sportsImages/${sport.id}.jpg);"></div>
@@ -144,13 +146,14 @@
 							<spring:param name="sportId" value="${meeting.sport.id}" />
 							<spring:param name="meetingId" value="${meeting.id}" />
 						</spring:url>
-
+						<center>
 						<a href="${fn:escapeXml(leaveMeeting)}">
 							<button class="btn btn-danger"
 								style="margin-top: 5%; margin-left: 1em;">
 								<b>Abandonar quedada</b>
 							</button>
 						</a>
+						</center>
 					</c:if>
 
 				</div>

@@ -119,7 +119,6 @@ select {
 	position: relative;
 	background: #b9b9e8;
 	min-width: 250px;
-	height: 200px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -1192,6 +1191,7 @@ form input {
 	margin-left: auto;
 	margin-right: auto;
 	width: 100%;
+	min-width: 80px;
 }
 
 .logoLanding {
@@ -1199,12 +1199,6 @@ form input {
 	margin-left: auto;
 	margin-right: auto;
 	width: 15%;
-}
-
-.divLandingPage {
-	padding-top: 30px;
-	padding-right: 300px;
-	padding-left: 300px;
 }
 
 .column {
@@ -1541,7 +1535,7 @@ form input {
 	}
 }
 
-@media ( max-width : 1499px) and (min-width: 992px) {
+@media ( max-width : 1500px) and (min-width: 992px) {
 	/* === Estandar === */
 	
 	.cardtitle {
@@ -1728,7 +1722,7 @@ form input {
 	}
 }
 
-@media ( max-width : 991px) and (min-width: 768px) {
+@media ( max-width : 992px) and (min-width: 768px) {
 	
 	.cardtitle {
 	text-align: center;
@@ -1913,7 +1907,7 @@ form input {
 	}
 }
 
-@media ( max-width : 767px) and (min-width: 511px) {
+@media ( max-width : 768px) and (min-width: 511px) {
 	
 	.cardtitle {
 	text-align: center;
@@ -2069,9 +2063,95 @@ form input {
 		margin-top: 2%;
 		margin-bottom: 2%;
 	}
+	
+	.alert {
+	margin: 3% 10% 0% 10% !important;
+	}
+	.alert h5 {
+	font-size: 15px;
+	}
+	.column {
+	width: 50%;
+	padding: 45px;
+	display: inline-block;
+	text-align: center;
+}
+.cardlist{
+	margin-left: 0% !important;
+	margin-right: 0% !important;
+	}
+	
+	.card {
+	margin: 2% 10% 2% 10% !important;
+	}
 }
 
-@media ( max-width : 510px) {
+@media ( max-width : 511px) {
+
+	.h1 {
+	font-size: 20px !important;
+	}
+
+	.botoncito {
+	width: auto !important;
+	}
+
+	.card {
+	margin: 2% 0% 2% 0% !important;
+	}
+
+	.body-container {
+	display: inline-block;
+	width: 100% !important;
+	margin: 2% 0% 2% 0% !important;
+	}
+
+	.grid-container {
+	width: 100% !important;
+	}
+
+	.table-clasification tbody tr:nth-child(1) {
+    font-size: 100% !important;
+	}
+
+	.table-clasification tbody tr:nth-child(2) {
+    font-size: 100% !important;
+	}
+
+	.table-clasification tbody tr:nth-child(3) {
+    font-size: 100% !important;
+	}
+
+	.table-clasification tbody tr:nth-child(n+4) {
+	font-size: 100% !important;
+	}
+
+	.cardlist{
+	margin-left: 0% !important;
+	margin-right: 0% !important;
+	}
+
+	.column {
+	width: 100%;
+	padding: 45px;
+	display: inline-block;
+	text-align: center;
+}
+
+	.divLandingPage {
+	margin: 5% 0% 5% 0% !important;
+	}
+
+	.card {
+	padding: 0 !important;
+	}
+
+	.alert {
+	margin: 3% 0% 0% 0% !important;
+}
+	.alert h5 {
+	font-size: 15px;
+}
 	
 	.cardtitle {
 	text-align: center;
@@ -3334,7 +3414,7 @@ body {
 	}
 	
 	.table-title-block {
-		min-width: 85%;
+		min-width: 100%;
 		height: 15em;
 		margin-bottom: 2em;
 	}
