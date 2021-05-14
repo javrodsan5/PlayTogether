@@ -39,17 +39,16 @@
 	</div>
 	<div class="cardlist meeting-and-championship-list">
 		<c:if test="${meetings != null && meetings.size() <= 3 && meetings.size() > 0}">
-			<div class="scroll_vertical" id="style_scroll" style="height: 20em">
 				<table id="meetingTable" class="table ">
 					<thead>
 						<tr class="rowtable">
 							<th class="guiz-awards-header-title" style="width: 18%;">Dirección</th>
 							<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
 							<th class="guiz-awards-header-title" style="width: 17%;">Fecha</th>
-							<th class="guiz-awards-header-title" style="width: 9%;">Participantes</th>
-							<th class="guiz-awards-header-title" style="width: 9%;">Categoría</th>
-							<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
-							<th class="guiz-awards-header-title" style="width: 4%;">Participación</th>
+							<th class="guiz-awards-header-title column-hide" style="width: 9%;">Participantes</th>
+							<th class="guiz-awards-header-title column-hide" style="width: 9%;">Categoría</th>
+							<th class="guiz-awards-header-title column-hide" style="width: 10%;">Anfitrión</th>
+							<th class="guiz-awards-header-title" style="width: 4%; text-align: center;">Participación</th>
 							<th class="guiz-awards-header-title" style="width: 10%;"></th>
 						</tr>
 					</thead>
@@ -62,12 +61,12 @@
 										pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
 									<fmt:formatDate value="${parsedDateTime}"
 										pattern="dd-MM-yyyy HH:mm" /></td>
-								<td><center>
+								<td class="column-hide"><center>
 										<c:out
 											value="${meeting.participants.size()}/${meeting.numberOfPlayers}" />
 									</center></td>
-								<td><c:out value="${meeting.category.name}" /></td>
-								<td><spring:url value="/usuarios/{userId}"
+								<td class="column-hide"><c:out value="${meeting.category.name}" /></td>
+								<td class="column-hide"><spring:url value="/usuarios/{userId}"
 										var="userdetails">
 										<spring:param name="userId"
 											value="${meeting.meetingCreator.id}" />
@@ -99,20 +98,18 @@
 					</tbody>
 
 				</table>
-			</div>
 		</c:if>
 		<c:if test="${meetings != null && meetings.size() > 3}">
-			<div class="scroll_vertical" id="style_scroll" style="height: 20em">
 				<table id="meetingTable" class="table ">
 					<thead>
 						<tr class="rowtable">
 							<th class="guiz-awards-header-title" style="width: 18%;">Dirección</th>
 							<th class="guiz-awards-header-title" style="width: 10%;">Ciudad</th>
 							<th class="guiz-awards-header-title" style="width: 17%;">Fecha</th>
-							<th class="guiz-awards-header-title" style="width: 9%;">Participantes</th>
-							<th class="guiz-awards-header-title" style="width: 9%;">Categoría</th>
-							<th class="guiz-awards-header-title" style="width: 10%;">Anfitrión</th>
-							<th class="guiz-awards-header-title" style="width: 4%;">Participación</th>
+							<th class="guiz-awards-header-title column-hide" style="width: 9%;">Participantes</th>
+							<th class="guiz-awards-header-title column-hide" style="width: 9%;">Categoría</th>
+							<th class="guiz-awards-header-title column-hide" style="width: 10%;">Anfitrión</th>
+							<th class="guiz-awards-header-title" style="width: 4%; text-align: center;">Participación</th>
 							<th class="guiz-awards-header-title" style="width: 10%;"></th>
 						</tr>
 					</thead>
@@ -125,12 +122,12 @@
 										pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
 									<fmt:formatDate value="${parsedDateTime}"
 										pattern="dd-MM-yyyy HH:mm" /></td>
-								<td><center>
+								<td class="column-hide"><center>
 										<c:out
 											value="${meeting.participants.size()}/${meeting.numberOfPlayers}" />
 									</center></td>
-								<td><c:out value="${meeting.category.name}" /></td>
-								<td><spring:url value="/usuarios/{userId}"
+								<td class="column-hide"><c:out value="${meeting.category.name}" /></td>
+								<td class="column-hide"><spring:url value="/usuarios/{userId}"
 										var="userdetails">
 										<spring:param name="userId"
 											value="${meeting.meetingCreator.id}" />
@@ -162,7 +159,6 @@
 					</tbody>
 
 				</table>
-			</div>
 		</c:if>
 		<c:if test="${meetings != null && meetings.size() == 0}">
 			<h3 class="alert alert-warning"

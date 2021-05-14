@@ -2872,10 +2872,48 @@ body {
 		flex: 50% !important;
 	}
 	
+	.meeting-and-championship-list {
+		padding: 0.5em;
+		margin-left: 2% !important;
+		margin-right: 2% !important;
+	}
+	
+	.meeting-and-championship-list th {
+		font-size: 70%;
+		padding-left: 0.2em !important;
+		padding-right: 0.2em !important;
+		width: 10% !important;
+	}
+
+	.meeting-and-championship-list td {
+		font-size: 70%;
+		padding-left: 0.2em !important;
+		padding-right: 0.2em !important;
+	}
+	
+	.meeting-and-championship-list td .botoncito {
+		width: 90% !important;
+		height: 100% !important;
+		padding-top: 0.4em;
+		padding-bottom: 0.4em;
+	}
+	
 	.botoncito-crear-meeting {
 		margin-left: 42% !important;
 		margin-right: 42% !important;
 		font-size: 92%;
+	}
+	
+	.cardtitle h1 {
+		font-size: 200%;
+	}
+	
+	.list-filter p  {
+		font-size: 95%;
+	}
+	
+	.list-filter a {
+		font-size: 90%;
 	}
 	
 }
@@ -2887,10 +2925,57 @@ body {
 		flex: 100% !important;
 	}
 	
+	.meeting-and-championship-list {
+		padding: 0;
+		margin-left: 2% !important;
+		margin-right: 2% !important;
+	}
+	
+	.meeting-and-championship-list th {
+		font-size: 60%;
+		padding-left: 0.2em !important;
+		padding-right: 0.2em !important;
+		width: 10% !important;
+	}
+
+	.meeting-and-championship-list td {
+		font-size: 60%;
+		padding-left: 0.2em !important;
+		padding-right: 0.2em !important;
+	}
+	
+	.meeting-and-championship-list td .botoncito {
+		width: 90% !important;
+		height: 100% !important;
+		padding-top: 0.4em;
+		padding-bottom: 0.4em;
+	}
+	
+	.meeting-and-championship-list .column-hide {
+		display: none;
+	}
+	
 	.botoncito-crear-meeting {
 		margin-left: 39% !important;
 		margin-right: 39% !important;
 		font-size: 90%;
+	}
+	
+	.cardtitle h1 {
+		font-size: 150%;
+	}
+	
+	.list-filter p  {
+		font-size: 65%;
+	}
+	
+	.list-filter a {
+		font-size: 85%;
+	}
+	
+	.team-record {
+		margin-left: 2% !important;
+		margin-right: 2% !important;
 	}
 	
 }
@@ -3081,18 +3166,26 @@ body {
 }
 
 .meeting-and-championship-list {
-	margin-left: 8% !important;
-	margin-right: 8% !important;
+	margin-top: 2em;
+	margin-left: 8%;
+	margin-right: 8%;
 	padding: 1rem;
 	padding-top: 0.3em;
 }
 
+.meeting-and-championship-list th {
+	vertical-align: middle !important;
+	padding: 1% !important;
+}
+
 .meeting-and-championship-list td {
 	vertical-align: middle !important;
+	padding: 1% !important;
 }
 
 .meeting-and-championship-list td .botoncito {
 	margin: 0;
+	vertical-align: middle !important;
 }
 
 .list-meeting-championship-title {
@@ -3455,7 +3548,7 @@ body {
 	}
 	
 	.mis-equipos th {
-		font-size: 60%;
+		font-size: 90%;
 	}
 	
 	

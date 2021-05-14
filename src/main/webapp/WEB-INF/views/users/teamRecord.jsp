@@ -21,7 +21,7 @@
 			<br />
 
 		</div>
-		<div class="cardlist" style="margin-left:18%; margin-right: 18%; ">
+		<div class="cardlist team-record" style="margin-left:18%; margin-right: 18%; ">
 			<c:if test="${noRecords}">
 				<div class="alert alert-danger" style="margin: 0% 20% 1% 20%">
 					<p>No participa en ningún equipo.</p>
