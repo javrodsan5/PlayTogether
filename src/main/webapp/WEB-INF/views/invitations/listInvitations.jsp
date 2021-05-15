@@ -56,20 +56,19 @@
 			</div>
 		</c:if>
 
-		<div class="">
+		<div>
 			<br>
 			<h1>
 				<strong>Invitaciones de quedadas</strong>
 			</h1>
-			<br />
-			<p>Aquí se muestran las invitaciones recibidas a futuras
+			<p class="parrafoInvitaciones">Aquí se muestran las invitaciones recibidas a futuras
 				quedadas. Las invitaciones a quedadas pasadas se descartarán
 				automáticamente</p>
 		</div>
 
 		<c:if test="${meetingInvitations.size()==0}">
-			<h3 class="alert alert-warning"
-				style="margin: 0% 20% 1% 20%; text-align: center; width: fit-content;">No tienes
+			<h3 class="alertInvitacion"
+				style="text-align: center; width: fit-content;">No tienes
 				invitaciones aún.</h3>
 		</c:if>
 
@@ -139,19 +138,18 @@
 		<br>
 		<br>
 
-		<div class="">
+		<div>
 			<h1>
 				<strong>Invitaciones de torneos</strong>
 			</h1>
-			<br />
-			<p>Aquí se muestran las invitaciones recibidas a futuros torneos
+			<p class="parrafoInvitaciones">Aquí se muestran las invitaciones recibidas a futuros torneos
 				o en progreso. Las invitaciones a torneos pasados se descartarán
 				automáticamente</p>
 		</div>
 
 		<c:if test="${championshipInvitations.size()==0}">
-			<h3 class="alert alert-warning"
-				style="margin: 0% 20% 1% 20%; text-align: center; width: fit-content;">No tienes
+			<h3 class="alertInvitacion"
+				style="text-align: center; width: fit-content;">No tienes
 				invitaciones aún.</h3>
 		</c:if>
 
