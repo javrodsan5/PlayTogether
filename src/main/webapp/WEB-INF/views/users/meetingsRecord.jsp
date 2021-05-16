@@ -27,13 +27,12 @@
 				</div>
 			</c:if>
 			<c:if test="${noRecords == null}">
-				<table id="userMeetingsTable" class="table ">
+				<table id="userMeetingsTable" class="table " style="width: 75%; margin-left: 13%;">
 					<thead>
 						<tr class="rowtable">
 							<th class="guiz-awards-header-title" style="width: 33%;">Dirección</th>
 							<th class="guiz-awards-header-title" style="width: 33%;">Fecha</th>
-							<th class="guiz-awards-header-title"
-								style="width: 33 !important%">Más información</th>
+							<th class="guiz-awards-header-title" style="width: 33%;"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -50,7 +49,7 @@
 
 									</spring:url>
 									<div class="botoncito" style="margin-left: 0%">
-										<a class="" href="${fn:escapeXml(meeting2Url)}">Ver más</a>
+										<a class="" href="${fn:escapeXml(meeting2Url)}"><i class="fa fa-eye"></i></a>
 									</div></td>
 
 							</tr>

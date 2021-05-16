@@ -20,7 +20,7 @@
 			</h1>
 			<br />
 		</div>
-		<div class="cardlist">
+		<div class="cardlist championship-records">
 			<c:if test="${noRecords}">
 				<div class="alert alert-danger" style="margin: 0% 20% 1% 20%">
 					<p>Todavía no has participado en ningún torneo.</p>

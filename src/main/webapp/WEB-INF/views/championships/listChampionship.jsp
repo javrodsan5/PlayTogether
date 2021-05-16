@@ -82,8 +82,7 @@
 
 										</spring:url>
 										<div class="botoncito">
-											<a class="" href="${fn:escapeXml(championship2Url)}">Ver
-												más</a>
+											<a class="" href="${fn:escapeXml(championship2Url)}"><i class="fa fa-eye"></i></a>
 										</div></td>
 								</tr>
 							</c:forEach>
@@ -156,8 +155,7 @@
 
 										</spring:url>
 										<div class="botoncito">
-											<a class="" href="${fn:escapeXml(championship2Url)}">Ver
-												más</a>
+											<a class="" href="${fn:escapeXml(championship2Url)}"><i class="fa fa-eye"></i></a>
 										</div></td>
 								</tr>
 							</c:forEach>

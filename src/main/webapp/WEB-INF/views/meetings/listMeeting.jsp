@@ -90,7 +90,7 @@
 											<spring:param name="deporte" value="${deporte}" />
 										</spring:url>
 										<div class="botoncito">
-											<a href="${fn:escapeXml(meeting2Url)}">Ver más</a>
+											<a href="${fn:escapeXml(meeting2Url)}"><i class="fa fa-eye"></i></a>
 										</div>
 									</center></td>
 							</tr>
@@ -151,7 +151,7 @@
 											<spring:param name="deporte" value="${deporte}" />
 										</spring:url>
 										<div class="botoncito">
-											<a href="${fn:escapeXml(meeting2Url)}">Ver más</a>
+											<a href="${fn:escapeXml(meeting2Url)}"><i class="fa fa-eye"></i></a>
 										</div>
 									</center></td>
 							</tr>
