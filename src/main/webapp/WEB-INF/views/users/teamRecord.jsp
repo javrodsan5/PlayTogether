@@ -31,11 +31,10 @@
 				<table id="userChampionshipTable" class="table mis-equipos">
 					<thead>
 						<tr class="rowtable">
-							<th class="guiz-awards-header-title" style="width: 20%;">Equipo</th>
-							<th class="guiz-awards-header-title" style="width: 20%;">Torneo</th>
-							<th class="guiz-awards-header-title" style="width: 20%;">Ciudad</th>
-							<th class="guiz-awards-header-title" style="width: 20%;">Anfitrión</th>
-							<th class="guiz-awards-header-title" style="width: 20%;">Ver más</th>
+							<th class="guiz-awards-header-title" style="width: 25%;">Equipo</th>
+							<th class="guiz-awards-header-title" style="width: 25%;">Torneo</th>
+							<th class="guiz-awards-header-title desktop" style="width: 25%;">Ciudad</th>
+							<th class="guiz-awards-header-title" style="width: 25%;">Anfitrión</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -47,16 +46,17 @@
 								<spring:param name="teamId" value="${team.id}" />
 							</spring:url>
 							<tr class="rowtable">
-								<td><c:out value="${team.name}" /></td>
-								<td><c:out value="${team.championship.name}" /></td>
-								<td><c:out value="${team.championship.city}" /></td>
-								<td><c:out value="${team.championship.user}" /></td>
-
-								<td>
-									<div class="botoncito" style="margin-left: 0;">
-										<a href="${fn:escapeXml(teamDetail2Url)}">Ver más</a>
-									</div>
-								</td>
+								<td><a href="${fn:escapeXml(teamDetail2Url)}"><c:out value="${team.name}" /></a></td>
+								<td><spring:url value="/sports/{sportId}/championships/{championshipId}" var="championshipDetails">
+												<spring:param name="sportId" value="${team.championship.sport.id}" />
+												<spring:param name="championshipId" value="${team.championship.id}" />
+											</spring:url>
+											<a href="${fn:escapeXml(championshipDetails)}"><c:out value="${team.championship.name}" /></a></td>
+								<td class="desktop"><c:out value="${team.championship.city}" /></td>
+								<td><spring:url value="/usuarios/{userId}" var="userdetails">
+												<spring:param name="userId" value="${team.championship.user.id}" />
+											</spring:url>
+											<a href="${fn:escapeXml(userdetails)}"><c:out value="${team.championship.user.user.username}" /></a></td>
 
 							</tr>
 						</c:forEach>

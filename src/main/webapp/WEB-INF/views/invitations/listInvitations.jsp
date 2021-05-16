@@ -95,8 +95,11 @@
 							</spring:url>
 
 							<tr class="rowtable">
-								<td><c:out
-										value="${invitation.meeting.meetingCreator.user.username}" /></td>
+								<td><spring:url value="/usuarios/{userId}" var="userdetails">
+												<spring:param name="userId" value="${invitation.meeting.meetingCreator.id}" />
+											</spring:url>
+											<a href="${fn:escapeXml(userdetails)}"><c:out
+										value="${invitation.meeting.meetingCreator.user.username}" /></a></td>
 
 								<td>
 									<div class="botoncito" style="margin-left: 0%;">
@@ -178,7 +181,10 @@
 							</spring:url>
 							<tr class="rowtable">
 								<td><a href="${fn:escapeXml(championshipDetail2Url)}"><b>${invitation.team.championship.name}</b></a></td>
-								<td><c:out value="${invitation.team.user.user.username}" /></td>
+								<td><spring:url value="/usuarios/{userId}" var="userdetails">
+												<spring:param name="userId" value="${invitation.meeting.meetingCreator.id}" />
+											</spring:url>
+											<a href="${fn:escapeXml(userdetails)}"><c:out value="${invitation.team.user.user.username}" /></a></td>
 
 								<td><spring:url
 										value="/invitations/championshipInvitations/{invitationId}/?accepted=true"
