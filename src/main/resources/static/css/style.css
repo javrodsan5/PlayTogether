@@ -2978,6 +2978,11 @@ body {
 		padding-top: 0.4em;
 		padding-bottom: 0.4em;
 	}
+	.meeting-and-championship-records {
+		padding: 0.5em;
+		margin-left: 2% !important;
+		margin-right: 2% !important;
+	}
 	.botoncito-crear-meeting {
 		margin-left: 42% !important;
 		margin-right: 42% !important;
@@ -3025,6 +3030,11 @@ body {
 	.meeting-and-championship-list .column-hide {
 		display: none;
 	}
+	.meeting-and-championship-records {
+		padding: 0.5em;
+		margin-left: 2% !important;
+		margin-right: 2% !important;
+	}
 	.botoncito-crear-meeting {
 		margin-left: 39% !important;
 		margin-right: 39% !important;
@@ -3042,6 +3052,9 @@ body {
 	.team-record {
 		margin-left: 2% !important;
 		margin-right: 2% !important;
+	}
+	.championship-records {
+		font-size: 70%;
 	}
 }
 
