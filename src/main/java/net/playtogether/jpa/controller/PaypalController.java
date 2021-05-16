@@ -212,8 +212,8 @@ public class PaypalController {
 			@RequestParam("invitationId") Integer invitationId, @RequestParam("isInvitation") Boolean isInvitation) {
 		try {
 			Payment payment = service.createPayment(Double.valueOf(order.getPrice()), order.getCurrency(),
-					order.getMethod(), order.getIntent(), order.getDescription(), "http://localhost:8080/" + CANCEL_URL,
-					"http://localhost:8080/" + SUCCESS_URL);
+					order.getMethod(), order.getIntent(), order.getDescription(), "http://playtogether-ppl.herokuapp.com/" + CANCEL_URL,
+					"http://playtogether-ppl.herokuapp.com/" + SUCCESS_URL);
 			for (Links link : payment.getLinks()) {
 				if (link.getRel().equals("approval_url")) {
 					Pay pay = new Pay();
