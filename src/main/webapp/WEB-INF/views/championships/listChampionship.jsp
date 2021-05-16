@@ -165,7 +165,7 @@
 			</c:if>
 			<c:if test="${championships != null && championships.size() == 0}">
 				<h3 class="alert alert-warning"
-					style="margin: 5% 0% 0% 20%%; text-align: center;">No hay torneos aún.</h3>
+					style="margin: 5% 10% 0% 10%; text-align: center;">No hay torneos aún.</h3>
 			</c:if>
 		</div>
 		<div class="cardbutton">

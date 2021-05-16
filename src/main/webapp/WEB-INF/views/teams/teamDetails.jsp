@@ -55,16 +55,17 @@
 					</h4>
 					<thead>
 						<tr class="rowtable">
-							<th class="guiz-awards-header-title" style="width: 10%; style="font-size: 80%;">Nombre</th>
+							<th class="guiz-awards-header-title" style="width: 20%; style="font-size: 80%;">Nombre</th>
 							<th class="guiz-awards-header-title" style="width: 20%;style="font-size: 80%;">Nombre
 								de usuario</th>
 							<sec:authorize access="hasAuthority('premium')">
 								<th class="guiz-awards-header-title" style="width: 10%;">Puntos</th>
 							</sec:authorize>
-							<th class="guiz-awards-header-title" style="width: 10%;">Edad
+							<th class="guiz-awards-header-title" style="width: 20%;">Edad
 								(años)</th>
-
-							<th class="guiz-awards-header-title" style="width: 10%;"></th>
+							<c:if test="${participant.id != userId}">
+								<th class="guiz-awards-header-title" style="width: 10%;"></th>
+							</c:if>
 						</tr>
 					</thead>
 					<c:forEach items="${team.participants}" var="participant">
@@ -74,7 +75,9 @@
 									<spring:param name="userId" value="${participant.id}" />
 								</spring:url> <a href="${fn:escapeXml(userDetails)}"><c:out
 										value="${participant.user.username}" /></a></td>
+							<sec:authorize access="hasAuthority('premium')">
 							<td><c:out value="${participant.puntos}" /></td>
+							</sec:authorize>
 							<td><c:out value="${participant.edadUsuario()}" /></td>
 
 							<c:if test="${participant.id != userId}">

@@ -28,21 +28,22 @@
 			</c:if>
 			<c:if test="${noRecords == null}">
 				<div class="scroll_vertical" id="style_scroll" style="height: 500px;">
+				<center>
 				<table id="userMeetingsTable" class="table ">
 					<thead>
 						<tr class="rowtable">
-							<th class="guiz-awards-header-title" style="width: 15%;">Fecha del pago</th>
-							<th class="guiz-awards-header-title" style="width: 10%;">Cantidad</th>
-							<th class="guiz-awards-header-title" style="width: 75%;">Pago
+							<th class="guiz-awards-header-title" style="width: 25%;">Fecha</th>
+							<th class="guiz-awards-header-title" style="width: 15%;">Cantidad</th>
+							<th class="guiz-awards-header-title" style="width: 60%;">Pago
 								para:</th>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${pays}" var="pay">
 							<tr class="rowtable">
-								<td><c:out value="${pay.date}" /></td>
-								<td><c:out value="${pay.amount}" />€</td>
-								<td><c:if
+								<td class="guiz-awards-header-data"><c:out value="${pay.date}" /></td>
+								<td class="guiz-awards-header-data"><c:out value="${pay.amount}" />€</td>
+								<td class="guiz-awards-header-data"><c:if
 										test="${pay.team.id != null && pay.payType.id == 2 }">
          			 			Participar en equipo:"<c:out value="${pay.team.name}" />", en el torneo: "<c:out
 											value="${pay.championship.name}" />"
@@ -60,6 +61,7 @@
 					</tbody>
 
 				</table>
+				</center>
 				</div>
 			</c:if>
 		</div>
