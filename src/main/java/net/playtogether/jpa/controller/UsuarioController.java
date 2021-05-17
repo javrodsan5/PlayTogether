@@ -322,6 +322,7 @@ public class UsuarioController {
 				.size();
 		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		List<Usuario> usuariosOrdenPuntos = usuarioService.findTopUsuarios();
+		usuariosOrdenPuntos.sort(Comparator.comparing(Usuario::getPuntos));
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
 		Integer tam = usuariosOrdenPuntos.size();
@@ -340,27 +341,27 @@ public class UsuarioController {
 		}
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
+		Boolean isTop10 = true;
 		if (usuariosOrdenPuntos.size() > 10) {
 			List<Usuario> usuariosTop = usuariosOrdenPuntos.subList(0, 3);
 			Integer posPrincipal = usuariosOrdenPuntos.indexOf(usuario);
-			Boolean isTop10 = false;
 			if(!usuariosOrdenPuntos.subList(0, 10).contains(usuario)) {
 				Integer posMenos3Principal = usuariosOrdenPuntos.subList(10, 13).contains(usuario) ? usuariosOrdenPuntos.indexOf(usuario)-3 : usuariosOrdenPuntos.indexOf(usuario)-3;
 				Integer posMas3Principal = posPrincipal+3 >= usuariosOrdenPuntos.size() ? usuariosOrdenPuntos.size()-1 : posPrincipal+2;
 				usuariosTop.addAll(usuariosOrdenPuntos.subList(posMenos3Principal, posMas3Principal+1));
 				model.addAttribute("topUsuarios", usuariosTop);
+				isTop10 = false;
 			} else {
-				isTop10 = true;
 				if(usuariosOrdenPuntos.indexOf(usuario) == 9 || usuariosOrdenPuntos.indexOf(usuario) == 8) {
 					model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, usuariosOrdenPuntos.indexOf(usuario)+3));
 				} else {
 					model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
 				}
 			}
-			model.addAttribute("isTop10", isTop10);
 		} else {
 			model.addAttribute("topUsuarios", usuariosOrdenPuntos);
 		}
+		model.addAttribute("isTop10", isTop10);
 		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}
