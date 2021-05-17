@@ -100,7 +100,7 @@ public class ChampionshipServiceTests {
 	@Test
 	void shouldFindListChampionshipsBySport() throws Exception {
 		Collection<Championship> championships = this.championshipService.listChampionshipsBySport(2);
-		Assertions.assertThat(championships.size()).isEqualTo(1);
+		Assertions.assertThat(championships.size()).isEqualTo(0);
 	}
 	
 	

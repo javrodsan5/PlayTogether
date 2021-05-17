@@ -1,6 +1,8 @@
 package net.playtogether.jpa.controller;
 
 import java.security.Principal;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import net.playtogether.jpa.entity.Championship;
 import net.playtogether.jpa.entity.Meeting;
 import net.playtogether.jpa.entity.Pay;
+import net.playtogether.jpa.entity.Team;
 import net.playtogether.jpa.entity.UserType;
 import net.playtogether.jpa.entity.Usuario;
 import net.playtogether.jpa.service.InvitationService;
@@ -129,6 +132,7 @@ public class UsuarioController {
 			} else {
 				model.addAttribute("tipoUsuario", premium);
 			}
+			model.addAttribute("edad", Period.between(usuario.getBirthdate(), LocalDate.now()).getYears());
 			return "users/userDetails";
 		}
 	}
@@ -159,6 +163,8 @@ public class UsuarioController {
 		String datos3 = Arrays.toString(torneosPorMes);
 		model.addAttribute("quedadasPorMes", datos2.replace(" ", ""));
 		model.addAttribute("torneosPorMes", datos3.replace(" ", ""));
+		
+		model.addAttribute("edad", Period.between(user.getBirthdate(), LocalDate.now()).getYears());
 		return "users/userProfile";
 	}
 
@@ -316,6 +322,8 @@ public class UsuarioController {
 				.size();
 		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
 		List<Usuario> usuariosOrdenPuntos = usuarioService.findTopUsuarios();
+		usuariosOrdenPuntos.sort(Comparator.comparing(Usuario::getPuntos));
+		Collections.reverse(usuariosOrdenPuntos);
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
 		Integer tam = usuariosOrdenPuntos.size();
@@ -325,13 +333,36 @@ public class UsuarioController {
 				break;
 			}
 		}
+		if(posicion == usuariosOrdenPuntos.size()) {
+			model.addAttribute("puesto", "Estás en última posición");
+		} else if(posicion == usuariosOrdenPuntos.size()-1) {
+			model.addAttribute("puesto", "Estás en penúltima posición");
+		} else {
+			model.addAttribute("puesto", "¡Estás en la posición "+posicion+"!");
+		}
 		model.addAttribute("puntos", usuario.getPuntos());
 		model.addAttribute("posicion", posicion);
+		Boolean isTop10 = true;
 		if (usuariosOrdenPuntos.size() > 10) {
-			model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
+			List<Usuario> usuariosTop = usuariosOrdenPuntos.subList(0, 3);
+			Integer posPrincipal = usuariosOrdenPuntos.indexOf(usuario);
+			if(!usuariosOrdenPuntos.subList(0, 10).contains(usuario)) {
+				Integer posMenos3Principal = usuariosOrdenPuntos.subList(10, 13).contains(usuario) ? usuariosOrdenPuntos.indexOf(usuario)-3 : usuariosOrdenPuntos.indexOf(usuario)-3;
+				Integer posMas3Principal = posPrincipal+3 >= usuariosOrdenPuntos.size() ? usuariosOrdenPuntos.size()-1 : posPrincipal+2;
+				usuariosTop.addAll(usuariosOrdenPuntos.subList(posMenos3Principal, posMas3Principal+1));
+				model.addAttribute("topUsuarios", usuariosTop);
+				isTop10 = false;
+			} else {
+				if(usuariosOrdenPuntos.indexOf(usuario) == 9 || usuariosOrdenPuntos.indexOf(usuario) == 8) {
+					model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, usuariosOrdenPuntos.indexOf(usuario)+3));
+				} else {
+					model.addAttribute("topUsuarios", usuariosOrdenPuntos.subList(0, 10));
+				}
+			}
 		} else {
 			model.addAttribute("topUsuarios", usuariosOrdenPuntos);
 		}
+		model.addAttribute("isTop10", isTop10);
 		model.addAttribute("userId", usuario.getId());
 		return "users/clasification";
 	}
@@ -401,6 +432,23 @@ public class UsuarioController {
 		model.addAttribute("incidenceCorrect", true);
 		return userProfile(model, principal);
 
+	}
+	
+	@GetMapping("/myprofile/teamsRecord")
+	public String teamsRecord(final ModelMap model, Principal principal) {
+		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
+				.size();
+		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
+				.size();
+		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
+		Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
+		List<Team> teams = usuario.getTeams().stream().filter(t -> t.getChampionship().getFinishDate().isAfter(LocalDate.now())).distinct()
+				.collect(Collectors.toList());
+		if (teams.size() <= 0) {
+			model.put("noRecords", true);
+		}
+		model.addAttribute("teams", teams);
+		return "users/teamRecord";
 	}
 
 }

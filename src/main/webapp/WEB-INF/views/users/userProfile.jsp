@@ -19,7 +19,7 @@
 	<div class="thirteen">
 		<h1>Datos de mi perfil</h1>
 		<c:if test="${confirmationDelete}">
-			<div class="card" style="margin: 1% 35% 1% 35%">
+			<div class="card" style="margin: 1% 20% 1% 20%">
 				<div class="card-header"
 					style="background-color: #9ec1c1; font-family: 'Recursive', sans-serif; text-align: center">Confirmación
 					de eliminar perfil</div>
@@ -40,7 +40,7 @@
 			</div>
 		</c:if>
 		<c:if test="${confirmationData}">
-			<div class="card" style="margin: 1% 35% 1% 35%">
+			<div class="card" style="margin: 1% 20% 1% 20%">
 				<div class="card-header"
 					style="background-color: #9ec1c1; font-family: 'Recursive', sans-serif; text-align: center">Confirmación
 					de solicitar tus datos</div>
@@ -62,18 +62,18 @@
 		</c:if>
 		<c:if test="${confirmatedData}">
 			<h3 class="alert alert-success"
-				style="margin: 1% 30% 1% 30%; text-align: center">Hemos
+				style="margin: 1% 20% 1% 20%; text-align: center">Hemos
 				recibido tu solicitud de petición de datos.</h3>
 		</c:if>
 		<c:if test="${confirmatedDelete}">
 			<h3 class="alert alert-success"
-				style="margin: 1% 30% 1% 30%; text-align: center">Hemos
+				style="margin: 1% 20% 1% 20%; text-align: center">Hemos
 				recibido tu solicitud de eliminar tu perfil.</h3>
 		</c:if>
 		
 		<c:if test="${incidenceCorrect}">
 			<h3 class="alert alert-success"
-				style="margin: 1% 30% 1% 30%; text-align: center">Se ha enviado su incidencia. Contactaremos lo antes posible con usted. ¡Muchas gracias!</h3>
+				style="margin: 1% 20% 1% 20%; text-align: center">Se ha enviado su incidencia. Contactaremos lo antes posible con usted. ¡Muchas gracias!</h3>
 		</c:if>
 		
 		<h2>
@@ -179,7 +179,8 @@
 								<h4>
 									<fmt:parseDate value="${user.birthdate }" pattern="yyyy-MM-dd"
 										var="parsedDateStart" type="both" />
-									<fmt:formatDate value="${parsedDateStart}" pattern="dd-MM-yyyy" />
+									<fmt:formatDate value="${parsedDateStart}" pattern="dd-MM-yyyy" /><br>
+									(${edad} años)
 								</h4>
 							</div>
 							<div class="data-details">
@@ -215,6 +216,8 @@
 							<a href="/invitations/listInvitations" class="btn btn-primary">Ver
 								invitaciones</a> <br> <br> <a href="/myprofile/paysRecord"
 								class="btn btn-primary">Historial de pagos</a> <br> <br>
+							<a href="/myprofile/teamsRecord" class="btn btn-primary">Ver
+								equipos activos</a> <br> <br>
 							<a href="/myprofile/meetingsRecord" class="btn btn-primary">Historial
 								de quedadas</a>
 

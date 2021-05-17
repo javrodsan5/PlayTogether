@@ -56,20 +56,19 @@
 			</div>
 		</c:if>
 
-		<div class="">
+		<div>
 			<br>
 			<h1>
 				<strong>Invitaciones de quedadas</strong>
 			</h1>
-			<br />
-			<p>Aquí se muestran las invitaciones recibidas a futuras
+			<p class="parrafoInvitaciones">Aquí se muestran las invitaciones recibidas a futuras
 				quedadas. Las invitaciones a quedadas pasadas se descartarán
 				automáticamente</p>
 		</div>
 
 		<c:if test="${meetingInvitations.size()==0}">
-			<h3 class="alert alert-warning"
-				style="margin: 0px 35% 0px 35%; text-align: center">No tienes
+			<h3 class="alertInvitacion"
+				style="text-align: center; width: fit-content;">No tienes
 				invitaciones aún.</h3>
 		</c:if>
 
@@ -81,7 +80,7 @@
 					<thead>
 						<tr class="rowtable">
 							<th class="">Anfitrión</th>
-							<th class="">Más información</th>
+							<th class="">Más info</th>
 							<th class="">Aceptar</th>
 							<th class="">Rechazar</th>
 						</tr>
@@ -96,12 +95,16 @@
 							</spring:url>
 
 							<tr class="rowtable">
-								<td><c:out
-										value="${invitation.meeting.meetingCreator.user.username}" /></td>
+								<td><spring:url value="/usuarios/{userId}" var="userdetails">
+												<spring:param name="userId" value="${invitation.meeting.meetingCreator.id}" />
+											</spring:url>
+											<a href="${fn:escapeXml(userdetails)}"><c:out
+										value="${invitation.meeting.meetingCreator.user.username}" /></a></td>
 
 								<td>
 									<div class="botoncito" style="margin-left: 0%;">
-										<a href="${fn:escapeXml(meetingDetail2Url)}">Ver más</a>
+										<a href="${fn:escapeXml(meetingDetail2Url)}"><i
+											class="fa fa-info"></i></a>
 									</div>
 								</td>
 								<td><spring:url
@@ -138,19 +141,18 @@
 		<br>
 		<br>
 
-		<div class="">
+		<div>
 			<h1>
 				<strong>Invitaciones de torneos</strong>
 			</h1>
-			<br />
-			<p>Aquí se muestran las invitaciones recibidas a futuros torneos
+			<p class="parrafoInvitaciones">Aquí se muestran las invitaciones recibidas a futuros torneos
 				o en progreso. Las invitaciones a torneos pasados se descartarán
 				automáticamente</p>
 		</div>
 
 		<c:if test="${championshipInvitations.size()==0}">
-			<h3 class="alert alert-warning"
-				style="margin: 0px 35% 0px 35%; text-align: center">No tienes
+			<h3 class="alertInvitacion"
+				style="text-align: center; width: fit-content;">No tienes
 				invitaciones aún.</h3>
 		</c:if>
 
@@ -161,8 +163,6 @@
 					<thead>
 						<tr class="rowtable">
 							<th class="">Nombre de torneo</th>
-							<th class="">Nombre de equipo</th>
-							<th class="">Dirección</th>
 							<th class="">Administrador de equipo</th>
 							<th class="">Aceptar</th>
 							<th class="">Rechazar</th>
@@ -181,9 +181,10 @@
 							</spring:url>
 							<tr class="rowtable">
 								<td><a href="${fn:escapeXml(championshipDetail2Url)}"><b>${invitation.team.championship.name}</b></a></td>
-								<td><c:out value="${invitation.team.name}" /></td>
-								<td><c:out value="${invitation.team.championship.address}" /></td>
-								<td><c:out value="${invitation.team.user.user.username}" /></td>
+								<td><spring:url value="/usuarios/{userId}" var="userdetails">
+												<spring:param name="userId" value="${invitation.meeting.meetingCreator.id}" />
+											</spring:url>
+											<a href="${fn:escapeXml(userdetails)}"><c:out value="${invitation.team.user.user.username}" /></a></td>
 
 								<td><spring:url
 										value="/invitations/championshipInvitations/{invitationId}/?accepted=true"

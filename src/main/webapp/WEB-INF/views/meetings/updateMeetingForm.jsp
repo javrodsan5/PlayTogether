@@ -18,7 +18,6 @@
 			</h1>
 		</div>
 
-		<div style="margin-left: 45px">
 			<div class="crearMeeting">
 				<form:form modelAttribute="meeting" commandName="meeting"
 					id="survey-form">
@@ -36,6 +35,14 @@
 						<h9 style="color: white;">${errorPlayers}</h9>
 					</div>
 					<br>
+					<div class="col-sm-12">
+						<label>Categoría</label><br> <select name="category.id">
+							<c:forEach var="categ" items="${categories}">
+								<option value="${categ.id}" ${categoryId == categ.id ? 'selected="selected"' : ''}>${categ.name}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<br>
 					<playtogether:inputField label="Dirección" name="address" />
 					<playtogether:inputField label="Descripción" name="description"></playtogether:inputField>
 					<input type="hidden" name="sport" value="${sportId}" />
@@ -45,13 +52,12 @@
 							<b>Guardar</b>
 						</button>
 						<div class="form-group">
-						<button class="botonMeeting" onclick="location.href='/sports/${sportId}/meetings/${meeting.id}';" type="button">
+						<button class="botonMeeting" onclick="location.href='/sports/${sportId}/meetings/${meeting.id}?category=Todas';" type="button">
 							<b>Volver a quedada</b>
 						</button>
 					</div>
 					</div>
 				</form:form>
-			</div>
 		</div>
 
 	</body>

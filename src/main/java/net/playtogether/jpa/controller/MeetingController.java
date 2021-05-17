@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import net.playtogether.jpa.entity.Chat;
 import net.playtogether.jpa.entity.Meeting;
@@ -78,12 +79,13 @@ public class MeetingController {
 				model.addAttribute("deporte", sportId);
 				model.addAttribute("nombreDeporte", sport.getName());
 				model.addAttribute("limiteMes", true);
-				return listMeetings(model, sportId, principal);
+				return listMeetings(model, sportId, principal, "Todas");
 			} else {
 				model.put("meeting", new Meeting());
 				model.put("sportId", sportId);
 				model.put("sport", this.sportService.findSportById(sportId));
 				model.put("numbers", IntStream.range(2, 51).boxed().collect(Collectors.toList()));
+				model.put("categories", this.meetingService.listCategories());
 				return "meetings/createMeetingForm";
 			}
 		} else {
@@ -99,6 +101,7 @@ public class MeetingController {
 			model.put("sport", sport);
 			model.put("sportId", sportId);
 			model.put("numbers", IntStream.range(2, 51).boxed().collect(Collectors.toList()));
+			model.put("categories", this.meetingService.listCategories());
 			return "meetings/createMeetingForm";
 		} else {
 			Usuario usuario = this.usuarioService.usuarioLogueado(principal.getName());
@@ -109,6 +112,7 @@ public class MeetingController {
 			meeting.setParticipants(participants);
 			// meeting.setNumberOfPlayers(sport.getNumberOfPlayersInTeam() * 2);
 			meeting.setCreationDate(LocalDate.now());
+			meeting.setCategory(this.meetingService.findCategoryById(meeting.getCategory().getId()));
 			this.meetingService.save(meeting);
 			usuario.setPuntos(usuario.getPuntos() + 7);
 			this.usuarioService.saveUsuarioAlreadyRegistered(usuario);
@@ -117,7 +121,7 @@ public class MeetingController {
 			chat.setChatType(this.chatService.findChatTypeById(1)); // MEETING
 			chat.setMeeting(meeting);
 			this.chatService.saveChat(chat);
-			return "redirect:/sports/" + sportId + "/meetings";
+			return "redirect:/sports/" + sportId + "/meetings?category=Todas";
 		}
 
 	}
@@ -137,6 +141,8 @@ public class MeetingController {
 			model.put("meeting", meeting);
 			model.put("numberPlayers", meeting.getNumberOfPlayers());
 			model.put("numbers", IntStream.range(2, 51).boxed().collect(Collectors.toList()));
+			model.put("categories", this.meetingService.listCategories());
+			model.put("categoryId", meeting.getCategory().getId());
 			return "meetings/updateMeetingForm";
 		} else {
 			return "error-403";
@@ -159,33 +165,44 @@ public class MeetingController {
 			model.put("meeting", meeting);
 			model.put("numbers", IntStream.range(2, 51).boxed().collect(Collectors.toList()));
 			model.put("numberPlayers", meeting.getNumberOfPlayers());
+			model.put("categories", this.meetingService.listCategories());
+			model.put("categoryId", meetingToUpdate.getCategory().getId());
 			return "meetings/updateMeetingForm";
 		} else {
 
 			BeanUtils.copyProperties(meeting, meetingToUpdate, "id", "sport", "meetingCreator", "participants",
 					"creationDate");
+			meetingToUpdate.setCategory(this.meetingService.findCategoryById(meeting.getCategory().getId()));
 			this.meetingService.save(meetingToUpdate);
 			model.addAttribute("message", "¡Quedada actualizada correctamente!");
-			return "redirect:/sports/" + sportId + "/meetings";
+			return "redirect:/sports/" + sportId + "/meetings?category=Todas";
 		}
 
 	}
 
 	@GetMapping("/sports/{sportId}/meetings")
 	public String listMeetings(final ModelMap model, @PathVariable("sportId") final Integer sportId,
-			Principal principal) {
+			Principal principal, @RequestParam("category") String category) {
 		Usuario u = this.usuarioService.usuarioLogueado(principal.getName());
 		Integer invitacionesQuedadas = this.invitationService.findMeetingInvitationsByUsername(principal.getName())
 				.size();
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
 				.size();
 		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
-		Collection<Meeting> meetings = this.meetingService.listMeetingsBySport(sportId);
+		Collection<Meeting> meetings = new ArrayList<>();
+		if(category.equals("Todas")) {
+			meetings = this.meetingService.listMeetingsBySport(sportId);
+		} else if(category.equals("Principiante") || category.equals("Intermedio") || category.equals("Avanzado")) {
+			meetings = this.meetingService.findByCategory(sportId, category);
+		} else {
+			return "error-404";
+		}
 		Sport sport = this.sportService.findSportById(sportId);
 		model.addAttribute("meetings", meetings);
 		model.addAttribute("deporte", sportId);
 		model.addAttribute("nombreDeporte", sport.getName());
 		model.addAttribute("usuario_logueado", u);
+		model.addAttribute("selectCategory", category);
 		return "meetings/listMeeting";
 	}
 

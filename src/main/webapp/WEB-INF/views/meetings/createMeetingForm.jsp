@@ -32,6 +32,14 @@
 						</select>
 					</div>
 					<br>
+					<div class="col-sm-12">
+						<label>Categoría</label><br> <select name="category.id">
+							<c:forEach var="categ" items="${categories}">
+								<option value="${categ.id}">${categ.name}</option>
+							</c:forEach>
+						</select>
+					</div>
+					<br>
 					<playtogether:inputField label="Dirección" name="address" />
 					<playtogether:inputField label="Descripción" name="description" />
 					<input type="hidden" name="sport" value="${sportId}"/>
@@ -42,7 +50,7 @@
 						</button>
 					</div>
 								<div class="form-group">
-						<button class="botonMeeting" onclick="location.href='/sports/${sport.id}/meetings';" type="button">
+						<button class="botonMeeting" onclick="location.href='/sports/${sport.id}/meetings?category=Todas';" type="button">
 							<b>Volver a listado</b>
 						</button>
 					</div>

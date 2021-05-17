@@ -14,7 +14,6 @@
 	integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
 	crossorigin="anonymous">
 
-<div class="navigation-wrap bg start-header">
 	<nav class="navbar navbar-expand-md">
 
 		<a class="navbar-brand"><img src="/images/logo_opt.png"
@@ -133,4 +132,3 @@
 		</ul>
 
 	</nav>
-</div>

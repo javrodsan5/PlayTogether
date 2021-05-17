@@ -22,7 +22,7 @@
             Al aceptar los términos y condiciones de la Política de Privacidad 
             respecto al almacenamiento y tratamiento de los datos de carácter personal del usuario, recogidos en el RGPD (Reglamento General de Protección de Datos), 
             permite a Playtogether, SL, provista con NIF: B-12365232 a recabar la información pertinente por la navegación del concurrente sitio 
-            Web <a href="https://playtogether-sprint2.herokuapp.com/">https://playtogether-sprint2.herokuapp.com/</a>.<br><br>
+            Web <a href="https://playtogether-sprint2.herokuapp.com/">https://playtogether-sprint3.herokuapp.com/</a>.<br><br>
             
             Con la confirmación de aceptación del presente documento, el usuario garantiza el cumplimiento de la normativa vigente en materia de protección de datos personales, 
             reflejada en la Ley Orgánica 3/2018, de 5 de diciembre, de Protección de Datos Personales y de Garantía de Derechos Digitales (LOPD GDD). 

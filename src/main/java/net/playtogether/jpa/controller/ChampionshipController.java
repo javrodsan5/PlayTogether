@@ -10,6 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.TitlePaneLayout;
 import javax.validation.Valid;
 
 import org.springframework.beans.BeanUtils;
@@ -215,7 +216,7 @@ public class ChampionshipController {
 
 	@CachePut(value = "torneo")
 	@GetMapping("/sports/{sportId}/championships/{championshipId}")
-	public String championshipDetails(final ModelMap model, @PathVariable("sportId") final Integer sportId,
+	public String championshipDetails(ModelMap model, @PathVariable("sportId") final Integer sportId,
 			@PathVariable("championshipId") final Integer championshipId, Principal principal) {
 		if (sportId > 20) {
 			return "error-500";
@@ -231,6 +232,13 @@ public class ChampionshipController {
 		List<Team> teamsToDelete = new ArrayList<>();
 		Usuario user = this.userService.findByUsername(principal.getName());
 		for (Team t : teams) {
+			if(this.payService.findLastFinishedPayForTeamByUsername(principal.getName(), t.getId()) != null && !t.getParticipants().contains(user)) {
+				model.addAttribute("button", "/sports/"+sportId+"/championships/"+championshipId);
+				model.addAttribute("messageButton", "Ir al torneo");
+				model.addAttribute("title", "Ha sido eliminado del equipo " + t.getName());
+				this.payService.deleteTeamUser(user.getId(), t.getId());
+				return "pay/refund";
+			}
 			if (!t.getUser().equals(championship.getUser())) {
 
 				Pay pay = this.payService.findLastFinishedPayForTeamByUsername(t.getUser().getUser().getUsername(),
@@ -1464,12 +1472,29 @@ public class ChampionshipController {
 		model.addAttribute("team", team);
 		model.addAttribute("matches", matchesTeam);
 
+		String retrn = "redirect:/championships/" + championshipId + "/teams/" + teamId;
+		String buttonReturn = "/championships/" + championshipId + "/teams/" + teamId;
+		String messageButton = "Volver al equipo";
+
 		List<Usuario> usuarios = team.getParticipants();
 		Usuario usuario = userService.usuarioLogueado(principal.getName());
-		payService.deleteTeamUser(usuario.getId(), teamId);
 		usuarios.remove(usuario);
 
 		this.championshipService.save(team);
+
+		if(this.payService.findLastFinishedPayForTeamByUsername(principal.getName(), teamId) != null) {
+			if(usuarios.size() == 0) {
+				buttonReturn = "/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
+				messageButton = "Volver al torneo";
+			}
+			model.addAttribute("title", "Ha abandonado el equipo " + team.getName());
+			model.put("button", buttonReturn);
+			model.put("messageButton", messageButton);
+			retrn = "pay/refund";
+		} else if(usuarios.size() == 0){
+			retrn = "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
+		}
+
 		if (team.getUser().equals(usuario)) {
 			Integer puntos = usuario.getPuntos() - 7;
 			usuario.setPuntos(puntos);
@@ -1478,8 +1503,6 @@ public class ChampionshipController {
 			if (usuarios.size() == 0) {
 				invitationService.deleteInvitationsByTeamId(teamId);
 				teamService.delete(team);
-				return "redirect:/sports/" + championship.getSport().getId() + "/championships/" + championshipId;
-
 			} else {
 				team.setUser(usuarios.get(0));
 				this.championshipService.save(team);
@@ -1493,7 +1516,8 @@ public class ChampionshipController {
 			usuario.setPuntos(puntos);
 			this.userService.saveUsuario(usuario);
 		}
-		return "redirect:/championships/" + championshipId + "/teams/" + teamId;
+		payService.deleteTeamUser(usuario.getId(), teamId);
+		return retrn;
 
 	}
 
@@ -1536,7 +1560,7 @@ public class ChampionshipController {
 				Integer puntos = deletedUser.getPuntos() - 5;
 				deletedUser.setPuntos(puntos);
 				this.userService.saveUsuario(deletedUser);
-				model.put("eliminado", "Se ha eliminado el jugador correctamente.");
+				model.put("eliminado", true);
 				return "teams/teamDetails";
 			} else {
 				model.put("userToDeleteIsTeamOwner", true);

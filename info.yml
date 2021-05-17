@@ -6,7 +6,7 @@ project:
     github:
       url: 'https://github.com/javrodsan5/ISPP-11'
     heroku:
-      url: 'https://playtogether-sprint-2.herokuapp.com/'
+      url: 'https://playtogether-sprint-3.herokuapp.com/'
     travis:
       url: 'https://www.travis-ci.com/github/javrodsan5/ISPP-11'
   members:
