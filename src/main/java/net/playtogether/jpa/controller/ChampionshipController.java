@@ -1501,6 +1501,9 @@ public class ChampionshipController {
 			this.userService.saveUsuario(usuario);
 
 			if (usuarios.size() == 0) {
+				if(this.chatService.findChatIdByTeam1Id(teamId)!=null) {
+					this.chatService.deleteById(this.chatService.findChatIdByTeam1Id(teamId));
+				}
 				invitationService.deleteInvitationsByTeamId(teamId);
 				teamService.delete(team);
 			} else {
