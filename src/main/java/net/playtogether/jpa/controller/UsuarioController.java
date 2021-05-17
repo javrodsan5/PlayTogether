@@ -321,7 +321,7 @@ public class UsuarioController {
 		Integer invitacionesTorneos = this.invitationService.findChampionshipInvitationsByUsername(principal.getName())
 				.size();
 		model.addAttribute("invitaciones", invitacionesQuedadas + invitacionesTorneos);
-		List<Usuario> usuariosOrdenPuntos = usuarioService.findTopUsuarios();
+		List<Usuario> usuariosOrdenPuntos = usuarioService.findTopUsuarios().stream().sorted(Comparator.comparing(Usuario::getPuntos)).collect(Collectors.toList());
 		Usuario usuario = usuarioService.usuarioLogueado(principal.getName());
 		Integer posicion = 0;
 		Integer tam = usuariosOrdenPuntos.size();
